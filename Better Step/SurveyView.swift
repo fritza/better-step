@@ -12,9 +12,6 @@ This exercise asks you to respond to questions from a standard assessment of how
 """
 
 struct SurveyView: View {
-    private let imageScale: CGFloat = 0.6
-    @State private  var isProceeding = false
-
     var body: some View {
         GenericInstructionView(titleText: "DASI Survey",
                                bodyText: surveyNarrative, sfBadgeName: "checkmark.square",
