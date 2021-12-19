@@ -13,12 +13,11 @@ struct Better_StepApp: App {
         WindowGroup {
             TabView {
                 SurveyView()
-//                Text("Survey Tab")
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
-                Text("Walk Tab")
+                WalkView()
                     .tabItem {
                         Image(systemName: "figure.walk")
                         Text("Walk")
