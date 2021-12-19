@@ -11,7 +11,32 @@ import SwiftUI
 struct Better_StepApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                SurveyView()
+//                Text("Survey Tab")
+                    .tabItem {
+                        Image(systemName: "checkmark.square")
+                        Text("Survey")
+                    }
+                Text("Walk Tab")
+                    .tabItem {
+                        Image(systemName: "figure.walk")
+                        Text("Walk")
+                    }
+                Text("Reporting Tab")
+                    .tabItem {
+                        Image(systemName: "doc.text")
+                        Text("Report")
+                    }
+                Text("Setup Tab")
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Setup")
+                    }
+            }
+            .font(.headline)
         }
     }
 }
+
+
