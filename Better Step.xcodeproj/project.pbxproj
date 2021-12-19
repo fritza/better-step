@@ -15,6 +15,7 @@
 		1F0B676D276FA6CA00011A7E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F0B676F276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09B276FAB3C0026D28B /* SurveyView.swift */; };
+		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITests.swift; sourceTree = "<group>"; };
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1F60B09B276FAB3C0026D28B /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
+				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
+				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
 			);
