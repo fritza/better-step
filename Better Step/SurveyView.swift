@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-let surveyNarrativeString = """
-This exercise will assess your stride and pace though a short (six-minute) walk. An alarm sound to signal the beginning and the end of the exercise.
-
-Tap “Proceed" when you are ready
+let surveyNarrative = """
+This exercise asks you to respond to questions from a standard assessment of how free you are in your daily life.
 """
 
 struct SurveyView: View {
@@ -19,7 +17,7 @@ struct SurveyView: View {
 
     var body: some View {
         GenericInstructionView(titleText: "DASI Survey",
-                               bodyText: surveyNarrativeString, sfBadgeName: "checkmark.square",
+                               bodyText: surveyNarrative, sfBadgeName: "checkmark.square",
         proceedTitle: "Go ahead on") {
 
         }

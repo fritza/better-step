@@ -40,9 +40,9 @@ struct GenericInstructionView: View {
                     Spacer()
                     Image(systemName: sfBadgeName)
                         .resizable()
+                        .scaledToFit()
                         .foregroundColor(.accentColor)
                         .frame(
-                            width: proxy.size.width * imageScale,
                             height: proxy.size.width * imageScale, alignment: .center)
                     Spacer()
                     Text(bodyText)
