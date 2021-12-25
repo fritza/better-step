@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct Better_StepApp: App {
+    var setupEnvironment: Configurations {
+        Configurations(startingEmail: "Joe@user.net", duration: 2)
+    }
+
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -27,7 +31,11 @@ struct Better_StepApp: App {
                         Image(systemName: "doc.text")
                         Text("Report")
                     }
-                Text("Setup Tab")
+                SetupView()
+                    .environmentObject(
+                        self.setupEnvironment
+//                        Configurations(startingEmail: "fritza@mac.com", duration: 6)
+                    )
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setup")
