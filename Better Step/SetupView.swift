@@ -16,7 +16,7 @@ final class Configurations: ObservableObject, CustomStringConvertible {
     var description: String {
         let emailString = emailAddress
         let durationString = String(describing: durationInMinutes)
-       return "Configurations(email: \(emailString), duration: \(durationString))"
+        return "Configurations(email: \(emailString), duration: \(durationString))"
     }
 
     init(startingEmail: String, duration: Int) {
@@ -28,45 +28,29 @@ final class Configurations: ObservableObject, CustomStringConvertible {
 private enum ControlFocus: String {
     case emailField
     case durationStepper
+
 }
 
-
 struct SetupView: View {
+    // FIXME: text field row can't track focus.
+
     @EnvironmentObject var config: Configurations
     @FocusState private var controlFocus: ControlFocus?
-
     var body: some View {
         NavigationView {
-            Form {
-                Section("All of them") {
-                    Stepper("Duration (\(config.durationInMinutes)):",
-                            value: $config.durationInMinutes,
-                            in: Configurations.durationRange,
-                            step: 1)
-                        .focused($controlFocus, equals: .durationStepper)
+            VStack {
+                Form {
+                    Section("All of them") {
+                        Stepper("Duration (\(config.durationInMinutes)):",
+                                value: $config.durationInMinutes,
+                                in: Configurations.durationRange,
+                                step: 1,
+                                onEditingChanged: { _ in
+                            controlFocus = nil
+                        })
 
-                    HStack {
-                        Text("Email:")
-                        HStack {
-                            TextField("IGNORED 1",
-                                      text: $config.emailAddress,
-                                      prompt: Text("reporting address"))
-                                .onSubmit(of: .text) {
-                                    // Some kind of update.
-                                }
-                            Button(action: { config.emailAddress = "" }) {
-                                Image(systemName: "multiply.circle.fill")
-                                    .renderingMode(.template)
-                                    .foregroundColor(.gray)
-                                    .opacity(0.5)
-                            }
-                            .padding([.trailing], 0)
-                        }
-                        .focused($controlFocus, equals: .emailField)
-
+                        EmailFormView(title: "Stand & Deliver:")
                     }
-//                    .keyboardType(.emailAddress)
-
                 }
             }
             .navigationTitle("Configuration")
@@ -82,9 +66,9 @@ struct SetupView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack {
-            SetupView()
+            SetupView.init()
                 .environmentObject(config)
-                .frame(height: .infinity)
+            //                .frame(height: .infinity)
         }
     }
 }

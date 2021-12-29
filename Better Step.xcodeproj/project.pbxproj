@@ -14,6 +14,8 @@
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F0B676D276FA6CA00011A7E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F0B676F276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
+		1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
+		1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A92777D00300E510AE /* DurationStepper.swift */; };
 		1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09B276FAB3C0026D28B /* SurveyView.swift */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
@@ -49,6 +51,8 @@
 		1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Better StepUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITests.swift; sourceTree = "<group>"; };
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
+		1F1701A92777D00300E510AE /* DurationStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationStepper.swift; sourceTree = "<group>"; };
 		1F60B09B276FAB3C0026D28B /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
+				1F1701A92777D00300E510AE /* DurationStepper.swift */,
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
 				1F60B0A3276FCF690026D28B /* SetupView.swift */,
 				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
@@ -275,7 +281,9 @@
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
+				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
+				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
@@ -456,7 +464,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -485,7 +493,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
