@@ -16,11 +16,13 @@ struct Better_StepApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                SurveyView()
+                DASIQuestionView(id: 9)
+//                SurveyView()
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
+                    .environmentObject(DASIReport(forSubject: "DON'T MAKE IMMUTABLE"))
                 WalkView()
                     .tabItem {
                         Image(systemName: "figure.walk")

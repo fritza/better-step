@@ -21,6 +21,10 @@
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
+		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
+		1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */; };
+		1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
+		1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,10 @@
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
+		1FFB30E2277BE8390099AE5E /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
+		1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
+		1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,14 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
-				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
+				1FFB30DF277BE5090099AE5E /* Model */,
+				1FFB30DE277BE4FA0099AE5E /* Views */,
 				1F1701A92777D00300E510AE /* DurationStepper.swift */,
-				1F60B0A1276FCE410026D28B /* ReportView.swift */,
-				1F60B0A3276FCF690026D28B /* SetupView.swift */,
-				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
-				1F60B09F276FBD1B0026D28B /* WalkView.swift */,
-				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
-				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
 			);
@@ -146,6 +149,31 @@
 				1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */,
 			);
 			path = "Better StepUITests";
+			sourceTree = "<group>";
+		};
+		1FFB30DE277BE4FA0099AE5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
+				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
+				1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */,
+				1F60B0A1276FCE410026D28B /* ReportView.swift */,
+				1F60B0A3276FCF690026D28B /* SetupView.swift */,
+				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
+				1F60B09F276FBD1B0026D28B /* WalkView.swift */,
+				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
+				1F0B6753276FA6C900011A7E /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1FFB30DF277BE5090099AE5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
+				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */,
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
 			);
@@ -278,13 +307,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
+				1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
+				1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
 			);
