@@ -33,8 +33,12 @@ final class ViewChoice: Identifiable {
 
 struct YesNoView: View {
     var choiceViews: [ViewChoice]
-    init(_ titles: [String]) {
+    let completion: (ViewChoice) -> Void
+
+    init(_ titles: [String],
+         completion: @escaping (ViewChoice) -> Void) {
         choiceViews = ViewChoice.choices(from: titles)
+        self.completion = completion
     }
 
     let gutterHeight: CGFloat = 8
@@ -62,14 +66,17 @@ struct YesNoView: View {
                     VStack(alignment: .center) {
                         ForEach(choiceViews) {
                             cView in
-                            YesNoButton(choice: cView, size: context.size)
+                            YesNoButton(
+                                choice: cView,
+                                size: context.size,
+                                completion: completion)
                         }
                     }
                 }
                 Spacer()
             }
+
         }
-        .frame(width: .infinity, alignment: .center)
     }
 }
 
@@ -78,6 +85,9 @@ struct YesNoView_Previews: PreviewProvider {
         "Yes", "No"
         ]
     static var previews: some View {
-        YesNoView(choices)
+        YesNoView(choices) {
+            _ in
+            print("Beep! YNView")
+        }
     }
 }

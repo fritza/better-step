@@ -34,43 +34,26 @@ struct DASIQuestionView: View {
     }
 
     var body: some View {
-        VStack(spacing: 32) {
-            Spacer()
-            Text(DASIQuestion.with(id: questionID).text)
-                .font(.title)
-                .fontWeight(.semibold)
-            Spacer(minLength: 40)
+        VStack(alignment: .center, spacing: 20)
+        {
+            GeometryReader { proxy in
+                Text(DASIQuestion.with(id: questionID).text)
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .frame(width: proxy.size.width)
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+            Spacer(minLength: 20)
 
-            // TODO: A Yes/No view.
-            Button {
-                thisAnswer = .yes
-                report.respondToQuestion(questionID, with: .yes)
-            } label: {
-                HStack {
-                    if (thisAnswer == .yes) {
-                        Image(systemName: "checkmark")
-                    }
-                    Spacer()
-                    Text("Yes")
-                }
-                .font(.title2)
-                .frame(width: Self.yesNoWidth)
+            // FIXME: No way to add a checkmark.
+            YesNoView(["Yes", "No"]) {
+                choice in
+                self.thisAnswer = (choice.id == 0) ? .yes : .no
+                self.report
+                    .respondToQuestion(
+                        self.questionID,
+                        with: self.thisAnswer)
             }
-            Button {
-                thisAnswer = .no
-                report.respondToQuestion(questionID, with: .no)
-            } label: {
-                HStack {
-                    if (thisAnswer == .no) {
-                        Image(systemName: "checkmark")
-                    }
-                    Spacer()
-                    Text("No")
-                }
-                .font(.title2)
-                .frame(width: Self.yesNoWidth)
-            }
-            Spacer()
 
             HStack {
                 Button {
@@ -89,14 +72,14 @@ struct DASIQuestionView: View {
                     }
                 } label: { Text("Next") }
             }
-
         }
+        .padding()
     }
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(id: 3)
+        DASIQuestionView(id: 9)
             .padding()
             .environmentObject(DASIReport(forSubject: "ABCD"))
     }

@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct YesNoButton: View {
+    // FIXME: "choiceView" is a bad name for a ViewChoice
     let choiceView: ViewChoice
     let contextSize: CGSize
+    let completion: ((ViewChoice) -> Void)?
 
     static let buttonHeight: CGFloat = 48
     static let buttonWidthFactor: CGFloat = 0.9
@@ -24,13 +26,16 @@ struct YesNoButton: View {
     }
 
     init(choice: ViewChoice,
-         size: CGSize) {
+         size: CGSize,
+         completion: ( (ViewChoice) -> Void)? ) {
         choiceView = choice
         contextSize = size
+        self.completion = completion
     }
 
     var body: some View {
         Button {
+            completion?(choiceView)
             print("ho")
         } label: {
             Text(choiceView.title)
@@ -51,7 +56,9 @@ struct YesNoButton_Previews: PreviewProvider {
     }()
     static var previews: some View {
         YesNoButton(choice: Self.choice,
-                    size: CGSize(width: 300, height: 56)
-        )
+                    size: CGSize(width: 300, height: 56)) {
+            _ in
+            print("Beep! YNButton")
+        }
     }
 }
