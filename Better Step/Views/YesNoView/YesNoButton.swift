@@ -12,13 +12,15 @@ struct YesNoButton: View {
     let contextSize: CGSize
 
     static let buttonHeight: CGFloat = 48
+    static let buttonWidthFactor: CGFloat = 0.9
 
     func buttonSize() -> CGSize {
         return Self.buttonSize(within: contextSize)
     }
 
     static func buttonSize(within boundSize: CGSize) -> CGSize {
-        CGSize(width: 0.75 * boundSize.width, height: buttonHeight)
+        CGSize(width: buttonWidthFactor * boundSize.width,
+               height: buttonHeight)
     }
 
     init(choice: ViewChoice,

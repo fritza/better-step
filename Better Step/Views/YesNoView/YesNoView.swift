@@ -56,8 +56,9 @@ struct YesNoView: View {
             HStack {
                 Spacer()
                 ZStack {
-                    YesNoFrameView(boundingSize: context.size,
-                                   count: choiceViews.count)
+//                    YesNoFrameView(
+//                        boundingSize: context.size,
+//                        count: choiceViews.count)
                     VStack(alignment: .center) {
                         ForEach(choiceViews) {
                             cView in
