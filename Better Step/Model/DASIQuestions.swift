@@ -34,6 +34,15 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
 
     static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
     static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
+
+    func equivalentViewChoices() -> [ViewChoice] {
+        var retval = [ViewChoice]()
+        for (n, label) in ["Yes", "No"].enumerated() {
+            let element = ViewChoice(n+1, label)
+            retval.append(element)
+        }
+        return retval
+    }
 }
 
 struct DASIResponse: Identifiable, Codable, Comparable {
