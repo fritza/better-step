@@ -27,6 +27,9 @@
 		1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */; };
 		1FFB30EB277F89C90099AE5E /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30EA277F89C90099AE5E /* YesNoButton.swift */; };
 		1FFB30ED277F8A190099AE5E /* YesNoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */; };
+		1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31052787892B0099AE5E /* MinutePublisher.swift */; };
+		1FFB31082787991A0099AE5E /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31072787991A0099AE5E /* TimerView.swift */; };
+		1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoView.swift; sourceTree = "<group>"; };
 		1FFB30EA277F89C90099AE5E /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
 		1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoFrameView.swift; sourceTree = "<group>"; };
+		1FFB31052787892B0099AE5E /* MinutePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutePublisher.swift; sourceTree = "<group>"; };
+		1FFB31072787991A0099AE5E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = "Better Step/Views/TimerView.swift"; sourceTree = SOURCE_ROOT; };
+		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1FFB31072787991A0099AE5E /* TimerView.swift */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
 				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
 				1FFB30E9277F89A70099AE5E /* YesNoView */,
@@ -175,7 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
+				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
+				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,8 +333,11 @@
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
+				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
+				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
+				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FFB30EB277F89C90099AE5E /* YesNoButton.swift in Sources */,
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
