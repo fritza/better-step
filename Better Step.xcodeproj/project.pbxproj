@@ -74,7 +74,7 @@
 		1FFB30EA277F89C90099AE5E /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
 		1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoFrameView.swift; sourceTree = "<group>"; };
 		1FFB31052787892B0099AE5E /* MinutePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutePublisher.swift; sourceTree = "<group>"; };
-		1FFB31072787991A0099AE5E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = "Better Step/Views/TimerView.swift"; sourceTree = SOURCE_ROOT; };
+		1FFB31072787991A0099AE5E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = "Better Step/Views/New Group/TimerView.swift"; sourceTree = SOURCE_ROOT; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,7 +164,7 @@
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1FFB31072787991A0099AE5E /* TimerView.swift */,
+				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
 				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
 				1FFB30E9277F89A70099AE5E /* YesNoView */,
@@ -182,9 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
-				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
-				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +195,16 @@
 				1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */,
 			);
 			path = YesNoView;
+			sourceTree = "<group>";
+		};
+		1FFB310B27879BC80099AE5E /* Walking */ = {
+			isa = PBXGroup;
+			children = (
+				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
+				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
+				1FFB31072787991A0099AE5E /* TimerView.swift */,
+			);
+			path = Walking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
