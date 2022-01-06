@@ -129,7 +129,6 @@
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FFB30DF277BE5090099AE5E /* Model */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
-				1F1701A92777D00300E510AE /* DurationStepper.swift */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
 			);
@@ -164,6 +163,7 @@
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F1701A92777D00300E510AE /* DurationStepper.swift */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
 				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
