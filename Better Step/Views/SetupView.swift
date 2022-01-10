@@ -36,6 +36,11 @@ struct SetupView: View {
 
     @EnvironmentObject var config: Configurations
     @FocusState private var controlFocus: ControlFocus?
+
+    @AppStorage("reportAsMagnitude") var asMagnitude = false
+    @AppStorage("walkDuration") var duration = 6
+    @AppStorage("reportingEmail") var email = ""
+
     var body: some View {
         NavigationView {
             VStack {
@@ -49,7 +54,15 @@ struct SetupView: View {
                             controlFocus = nil
                         })
 
-                        EmailFormView(title: "Stand & Deliver:")
+                    }
+                    Section("Reporting") {
+                        Toggle("Report magnitude",
+                               isOn: $asMagnitude)
+                            .border(.green)
+                        // FIXME: need a binding for the email
+                        EmailFormView(title: "Email",
+                                      address: $email)
+//                            .border(.blue)
                     }
                 }
             }

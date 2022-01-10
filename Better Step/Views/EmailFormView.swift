@@ -9,15 +9,18 @@ import SwiftUI
 //import Combine
 
 struct EmailFormView: View {
-//    @FocusState private var amSelected: Bool
-//    @Binding var addressContent: EmailClient
-    @EnvironmentObject var config: Configurations
+    @FocusState private var amSelected: Bool
+    @Binding var emailAddress: String
     let title: String
     let keyboardType: UIKeyboardType
 
-    init(title: String, keyboard: UIKeyboardType = .emailAddress) {
+    init(title: String,
+         keyboard: UIKeyboardType = .emailAddress,
+         address: Binding<String>) {
         self.title = title
         self.keyboardType = keyboard
+        self._emailAddress = address
+        //        self.$emailAddress = address
     }
 
     var body: some View {
@@ -26,32 +29,44 @@ struct EmailFormView: View {
                 Text(title)
                     .frame(width: proxy.size.width * 0.25,
                            alignment: .leading)
-                TextField("IGNORED 1",
-                          text: $config.emailAddress,
-                          prompt: Text("reporting address"))
-                    .keyboardType(.emailAddress)
-                Button(action: { config.emailAddress = "" }) {
-                    Image(systemName: "multiply.circle.fill")
-                        .renderingMode(.template)
-                        .foregroundColor(.gray)
-                        .opacity(0.5)
+                ZStack(alignment: .trailing) {
+                    TextField("IGNORED 1",
+                              text: self.$emailAddress,
+                              prompt: Text("reporting address"))
+                        .keyboardType(.emailAddress)
+                        .textFieldStyle(.roundedBorder)
+//                        .focused($amSelected)
+                    Button(action: {
+                        self.emailAddress = ""
+
+                    }) {
+                        Image(systemName: "multiply.circle.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(.gray)
+                            .opacity(0.5)
+                    }
+//                    .focused($amSelected)
+                    .padding([.trailing], 2)
                 }
-                .padding([.trailing], 0)
             }
         }
     }
 }
 
-struct EmailFormView_Previews: PreviewProvider {
-    static let config: Configurations = {
-        return Configurations(startingEmail: "", duration: 2)
-    }()
+final class AddressHolder: ObservableObject {
+    @AppStorage("emailAddress") var email: String = ""
+}
 
+struct EmailFormView_Previews: PreviewProvider {
+    static var addrHold = AddressHolder()
     static var previews: some View {
         VStack {
-            EmailFormView(title: "Report:")
-                .frame(width: 360, height: 60)
-                .environmentObject(config)
-        }
+            EmailFormView(
+                title: "Report:",
+                address: addrHold.$email)
+                .frame(height: 80)
+            Text("stored = \(addrHold.email)")
+            Spacer()
+        }.padding()
     }
 }
