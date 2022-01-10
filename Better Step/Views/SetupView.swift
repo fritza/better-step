@@ -43,11 +43,11 @@ struct SetupView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+//            VStack {
                 Form {
-                    Section("All of them") {
-                        Stepper("Duration (\(config.durationInMinutes)):",
-                                value: $config.durationInMinutes,
+                    Section("Walk") {
+                        Stepper("Duration (\(self.duration)):",
+                                value: $duration,
                                 in: Configurations.durationRange,
                                 step: 1,
                                 onEditingChanged: { _ in
@@ -65,9 +65,9 @@ struct SetupView: View {
 //                            .border(.blue)
                     }
                 }
-            }
+//            }
             .navigationTitle("Configuration")
-            .padding()
+//            .padding()
         }
     }
 }
