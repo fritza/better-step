@@ -16,10 +16,13 @@ struct Better_StepApp: App {
 
     static var commonReport = DASIReport(forSubject: "AppLevelReport")
 
+    #warning("Does not save any document(s)")
+
     var body: some Scene {
         DocumentGroup(newDocument: { DASIReportDocument() } )
          { config in
             TabView {
+                /*
                 DASIQuestionView(
                     question:
                         DASIQuestion.with(id: 1))
@@ -27,6 +30,13 @@ struct Better_StepApp: App {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
+                 */
+                SurveyView()
+                    .tabItem {
+                    Image(systemName: "checkmark.square")
+                    Text("Survey")
+                }
+
                     .environmentObject(config.document)
                 WalkView()
                     .tabItem {

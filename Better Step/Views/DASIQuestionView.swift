@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// FIXME: Senter the action/proceed button
+//        When Next is absent, it shifts over to the right.
+
 struct DASIQuestionView: View {
     static let yesNoWidth: CGFloat = 80
 

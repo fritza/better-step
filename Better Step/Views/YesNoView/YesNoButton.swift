@@ -34,16 +34,12 @@ struct YesNoButton: View {
     }
 
     var body: some View {
-        Button {
-            completion?(choiceView)
-            print("ho")
-        } label: {
-            Text(choiceView.title)
-        }
-        .frame(
-            width: buttonSize().width,
-            height: buttonSize().height)
-        .background(Color.black.opacity(0.05))
+        Button { completion?(choiceView) }
+    label: { Text(choiceView.title) }
+    .frame(
+        width: buttonSize().width,
+        height: buttonSize().height)
+    .background(Color.black.opacity(0.05))
     }
 }
 
