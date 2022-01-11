@@ -10,20 +10,21 @@ import SwiftUI
 struct GenericInstructionView: View {
     private let imageScale: CGFloat = 0.6
 
-    let titleText: String
+    let titleText: String?
     let bodyText: String
     let sfBadgeName: String
-    var proceedTitle: String
+    var proceedTitle: String?
 
     // And then we'll have to decide how to handle the "proceed" action
-    let proceedClosure: () -> Void
+    let proceedClosure: (() -> Void)?
 
-    init(titleText: String,
+    init(titleText: String? = nil,
          bodyText: String,
          sfBadgeName: String,
-         proceedTitle: String = "Proceed",
-         proceedClosure: @escaping () -> Void) {
-       ( self.titleText, self.bodyText, self.sfBadgeName, self.proceedTitle, self.proceedTitle) =
+         proceedTitle: String? = nil,
+         proceedClosure: ( () -> Void)? = nil) {
+       ( self.titleText, self.bodyText, self.sfBadgeName,
+         self.proceedTitle, self.proceedTitle) =
         ( titleText, bodyText, sfBadgeName, proceedTitle, proceedTitle)
         self.proceedClosure = proceedClosure
     }
@@ -34,10 +35,13 @@ struct GenericInstructionView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Text(titleText)
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                    Spacer()
+//                    Spacer()
+                    if let tText = titleText {
+                        Text(tText)
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                        Spacer()
+                    }
                     Image(systemName: sfBadgeName)
                         .resizable()
                         .scaledToFit()
@@ -49,8 +53,10 @@ struct GenericInstructionView: View {
                         .font(.body)
                     Spacer()
 
-                    Button(proceedTitle) {
-                        proceedClosure()
+                    if let title = proceedTitle {
+                        Button(title) {
+                            proceedClosure?()
+                        }
                     }
                 }
                 Spacer()
@@ -62,11 +68,18 @@ struct GenericInstructionView: View {
 
 struct GenericInstructionView_Previews: PreviewProvider {
     static var previews: some View {
-        GenericInstructionView(titleText: "Survey",
-                               bodyText: "Just do what we tell you and nobody gets hurt.",
-                               sfBadgeName: "trash.slash",
-                               proceedTitle: "Go!") {
-            // do something
-        }
+        GenericInstructionView(
+            titleText: "Survey",
+            bodyText: "Just do what we tell you and nobody gets hurt.",
+            sfBadgeName: "trash.slash",
+            proceedTitle: "Go!") { // do something
+            }
+            VStack {
+                Spacer()
+                GenericInstructionView(
+//            titleText: "Hollow Survey",
+            bodyText: "This view has neither title or action.",
+            sfBadgeName: "trash.slash")
+                }
     }
 }

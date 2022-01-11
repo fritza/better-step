@@ -10,34 +10,58 @@ import SwiftUI
 struct DASIQuestionView: View {
     static let yesNoWidth: CGFloat = 80
 
-    @EnvironmentObject var report: DASIReport
-    @State var questionID: Int
-    @State var thisAnswer: AnswerState
+//    @Binding var report: DASIReport
+//    @State private var thisAnswer: AnswerState
+
+    // Remember question.id starts from 1
+    private var thisAnswer: AnswerState {
+        report.responseForQuestion(id: thisQuestion.id)
+    }
+
+    @State private var thisQuestion: DASIQuestion
+    @EnvironmentObject var myDocument: DASIReportDocument
+    var report: DASIReport { myDocument.report }
+    private var questionID: Int { thisQuestion.id }
+
+    private func recordAnswer(as newAnswer: AnswerState) {
+        report.didRespondToQuestion(
+            id: thisQuestion.id,
+            with: newAnswer)
+    }
     // How do we sync it with the report?
 
     var yesLabel: Label<Text, Image> {
+        // Question IDs are one-based.
+        // resopnseForQuestion takes a one-based ID
         Label("Yes", systemImage:
                 (report.responseForQuestion(id: questionID) == .yes) ?
               "checkmark" : "")
     }
 
     var noLabel: Label<Text, Image> {
+        // Question IDs are one-based.
+        // resopnseForQuestion takes a one-based ID
         Label("No", systemImage:
                 (report.responseForQuestion(id: questionID) == .no) ?
               "checkmark" : "")
     }
 
-    init(id: Int) {
-        self.questionID = id
-        self.thisAnswer = .unknown
-        // FIXME: Get the actual, current report value.
+    init(question: DASIQuestion) {
+        self.thisQuestion = question
+//        thisAnswer = report.responseForQuestion(id: question.id)
+    }
+
+    func prepareForQuestion(_ newCurrentQuestion: DASIQuestion) {
+        thisQuestion = newCurrentQuestion
     }
 
     var body: some View {
         VStack(alignment: .center, spacing: 20)
         {
             GeometryReader { proxy in
-                Text(DASIQuestion.with(id: questionID).text)
+                Text(
+//                    DASIQuestion.with(id: questionID).text)
+                    thisQuestion.text)
                     .font(.title)
                     .fontWeight(.semibold)
                     .frame(width: proxy.size.width)
@@ -48,29 +72,46 @@ struct DASIQuestionView: View {
             // FIXME: No way to add a checkmark.
             YesNoView(["Yes", "No"]) {
                 choice in
-                self.thisAnswer = (choice.id == 0) ? .yes : .no
-                self.report
-                    .respondToQuestion(
-                        self.questionID,
-                        with: self.thisAnswer)
+                let usersAnswer: AnswerState = (choice.id == 0) ? .yes : .no
+                self.recordAnswer(as: usersAnswer)
+                if let nextQueston = thisQuestion.next {
+                    prepareForQuestion(nextQueston)
+                }
+                else {
+                    // The response is valid,
+                    // but we've run out of questions.
+                    // figure out how to bail to the initial screen (or a done screen)
+                }
             }
 
+
             HStack {
-                Button {
-                    if questionID > 0 {
-                        questionID -= 1
-                        thisAnswer = report.responseForQuestion(id: questionID)
-//                        thisAnswer = .unknown
+                if let prevQueston = thisQuestion.previous {
+                    // Permit previous question any time that .previous is valid.
+                    Button {
+                        if let pq = thisQuestion.previous {
+                            prepareForQuestion(pq)
+                        }
                     }
-                } label: { Text("Back") }
+                label: { Text("Back") }
+                }
                 Spacer()
                 Button {
-                    if questionID < 11 {
-                        questionID += 1
-                        thisAnswer = report.responseForQuestion(id: questionID)
-//                        thisAnswer = .unknown
+#warning("Do something for Cancel.")
+                }
+                label: { Text("Cancel") }
+                Spacer()
+                if let nextQuestion = thisQuestion.next,
+                   thisAnswer != .unknown {
+                    // Permit next question only when there is an answer, and the question has been responded to.
+                    Button {
+                        // Record current answer
+//                        recordAnswer()
+                        // Load next state
+                        prepareForQuestion(nextQuestion)
                     }
-                } label: { Text("Next") }
+                label: { Text("Next") }
+                }
             }
         }
         .padding()
@@ -79,8 +120,10 @@ struct DASIQuestionView: View {
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(id: 9)
+        DASIQuestionView(
+            question: DASIQuestion.with(id: 9)
+        )
             .padding()
-            .environmentObject(DASIReport(forSubject: "ABCD"))
+//            .environmentObject(DASIReport(forSubject: "ABCD"))
     }
 }

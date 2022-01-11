@@ -13,12 +13,19 @@ This exercise asks you to respond to questions from a standard assessment of how
 
 struct SurveyView: View {
     var body: some View {
-        GenericInstructionView(titleText: "DASI Survey",
-                               bodyText: surveyNarrative, sfBadgeName: "checkmark.square",
-        proceedTitle: "Go ahead on") {
-
+        NavigationView {
+            VStack {
+                GenericInstructionView(
+                    bodyText: surveyNarrative, sfBadgeName: "checkmark.square")
+                    .navigationTitle("DASI Survey")
+                    .padding(32)
+                Button("Proceed!") {
+                    NavigationLink("Proceed", destination: {
+                        DASIQuestionView(question: DASIQuestion.with(id: 1))
+                    })
+                }
+            }
         }
-        .padding(32)
     }
 }
 
