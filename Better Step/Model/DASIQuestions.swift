@@ -7,6 +7,9 @@
 
 import Foundation
 
+// Question IDs run from 1 ... 12
+// Array IDs run from 0..<12.
+
 enum AnswerState: String, Codable, Equatable {
     case unknown, yes, no
 }
@@ -14,34 +17,43 @@ enum AnswerState: String, Codable, Equatable {
 struct DASIQuestion: Identifiable, Codable, Comparable {
     let id: Int
     let text: String
-    let identifier: String
     let score: Double
+    let identifier: String  // Not used
 
+    // WARNING: the ID is 1-based
     static let questions: [DASIQuestion] = {
         guard let dasiURL = Bundle.main.url(
             forResource: "DASIQuestions", withExtension: "json") else {
             preconditionFailure("Could not find DASIQuestions.json")
         }
         let dasiData = try! Data(contentsOf: dasiURL)
-        return try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
+        let retval =  try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
+        return retval
     }()
-
-    static func with(id index: Int) -> DASIQuestion {
-        precondition((0..<questions.count).contains(index),
-                     "Question index \(index) out of bounds.")
-        return questions[index]
+    #warning("Check index versus ID.")
+    static func with(id questionID: Int) -> DASIQuestion {
+        return questions[questionID-1]
     }
 
     static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
     static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
+}
 
-    func equivalentViewChoices() -> [ViewChoice] {
-        var retval = [ViewChoice]()
-        for (n, label) in ["Yes", "No"].enumerated() {
-            let element = ViewChoice(n+1, label)
-            retval.append(element)
+extension DASIQuestion {
+    var next: DASIQuestion? {
+        let proposed = id + 1
+        guard proposed < Self.questions.count else {
+            return nil
         }
-        return retval
+        return Self.with(id: proposed)
+    }
+
+    var previous: DASIQuestion? {
+        let proposed = id - 1
+        guard proposed >= 1 else {
+            return nil
+        }
+        return Self.with(id: proposed)
     }
 }
 
@@ -63,50 +75,4 @@ struct DASIResponse: Identifiable, Codable, Comparable {
 
     static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
     static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
-}
-
-// A DASI report is an array of all DASI responses, verify it'e all IDs, all consecutive.
-
-final class DASIReport: ObservableObject, Codable {
-    let subjectID: String
-    public private(set) var timestamp: Date
-    public private(set) var answers: [DASIResponse]
-
-    init(forSubject subjectID: String) {
-        self.subjectID = subjectID
-        timestamp = Date()
-        answers = DASIResponse.emptyResponses
-    }
-
-    var score: Double {
-        guard !answers.isEmpty else { return 0.0 }
-        let retval = answers.reduce(0.0) { sum, response in
-            return sum + response.score
-        }
-        return retval
-    }
-
-    func responseForQuestion(id: Int) -> AnswerState {
-        guard let theResponse = answers.first(where: { $0.id == id }) else {
-            return .unknown
-        }
-        return theResponse.response
-    }
-
-    func respondToQuestion(_ questionID: Int,
-                           with state: AnswerState) {
-        let newResponse = DASIResponse(id: questionID,
-                                       response: state)
-        answers.removeAll { $0 == newResponse }
-        answers.append(newResponse)
-        answers.sort()
-
-        timestamp = Date()
-    }
-
-    func resetQuestion(id questionID: Int) {
-        answers.removeAll { $0.id == questionID }
-    }
-
-    func reset() { answers.removeAll() }
 }
