@@ -9,20 +9,25 @@ import SwiftUI
 
 @main
 struct Better_StepApp: App {
+
     var setupEnvironment: Configurations {
         Configurations(startingEmail: "Joe@user.net", duration: 2)
     }
 
+    static var commonReport = DASIReport(forSubject: "AppLevelReport")
+
     var body: some Scene {
-        WindowGroup {
+        DocumentGroup(newDocument: { DASIReportDocument() } )
+         { config in
             TabView {
-                DASIQuestionView(id: 9)
-//                SurveyView()
+                DASIQuestionView(
+                    question:
+                        DASIQuestion.with(id: 1))
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
-                    .environmentObject(DASIReport(forSubject: "DON'T MAKE IMMUTABLE"))
+                    .environmentObject(config.document)
                 WalkView()
                     .tabItem {
                         Image(systemName: "figure.walk")
