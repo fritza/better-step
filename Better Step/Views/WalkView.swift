@@ -19,8 +19,8 @@ struct WalkView: View {
         // FIXME: The figure does not conform to the image aspect ratio.
         GenericInstructionView(titleText: "Walking Test",
                                bodyText: walkingNarrative, sfBadgeName: "figure.walk",
-        proceedTitle: "Boogie on down the line") {
-
+        proceedTitle: "Proceed") {
+            
         }
         .padding(32)
     }
