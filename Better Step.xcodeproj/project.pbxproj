@@ -23,6 +23,7 @@
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA0508278CE2BF00E908EB /* DASIReport.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
+		1FF3543A278F70B9000894B8 /* DASIReportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF35439278F70B9000894B8 /* DASIReportDocument.swift */; };
 		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */; };
 		1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
@@ -71,6 +72,7 @@
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1FEA0508278CE2BF00E908EB /* DASIReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReport.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
+		1FF35439278F70B9000894B8 /* DASIReportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportDocument.swift; sourceTree = "<group>"; };
 		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
 		1FFB30E2277BE8390099AE5E /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		1FFB30DF277BE5090099AE5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FF35439278F70B9000894B8 /* DASIReportDocument.swift */,
 				1FEA0508278CE2BF00E908EB /* DASIReport.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */,
+				1FF3543A278F70B9000894B8 /* DASIReportDocument.swift in Sources */,
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
