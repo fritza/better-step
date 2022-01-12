@@ -38,7 +38,6 @@ struct SurveyView: View {
                 NavigationLink(
                     destination: {
                         () -> AnyView in
-                        print("Destination DASI:", wrappedShowing)
                         return AnyView(DASIQuestionView(
                             question: DASIQuestion.with(id: 1))
                         .environmentObject(wrappedShowing)
@@ -46,7 +45,6 @@ struct SurveyView: View {
                         }()
                     ,
                     isActive: {
-                        print("NavLink value =", wrappedShowing)
                         let retval = $wrappedShowing.isSet
                         return retval
                         }(),
@@ -55,8 +53,6 @@ struct SurveyView: View {
 
                 Button("Proceed (root)", action: {
                     wrappedShowing.isSet = true
-                    print("ROOT PROCEED TAPPED",
-                          "setting value is now", wrappedShowing.isSet)
                 })
                 Spacer()
             }

@@ -19,7 +19,6 @@ struct DASIQuestionView: View {
 
     // Remember question.id starts from 1
     private var thisAnswer: AnswerState {
-        print(#function, "isActive =", showingQuestions)
         return report.responseForQuestion(id: thisQuestion.id)
     }
 
@@ -84,9 +83,9 @@ struct DASIQuestionView: View {
                     prepareForQuestion(nextQueston)
                 }
                 else {
+                    showingQuestions.isSet = false
                     // The response is valid,
                     // but we've run out of questions.
-                    // figure out how to bail to the initial screen (or a done screen)
                 }
             }
 
@@ -143,11 +142,13 @@ struct DASIQuestionView: View {
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
+    static let bearer = BoolBearer(initially: false)
     static var previews: some View {
         DASIQuestionView(
             question: DASIQuestion.with(id: 9)
         )
             .padding()
-//            .environmentObject(DASIReport(forSubject: "ABCD"))
+            .environmentObject(bearer)
+            .environmentObject(DASIReportDocument())
     }
 }
