@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 import UniformTypeIdentifiers
+import CodableCSV
 
 /*
  What I want to know:
@@ -16,6 +17,7 @@ import UniformTypeIdentifiers
  But I need to access the document based on the user ID.
  */
 
+// MARK: - DASIReportDocument
 final class DASIReportDocument: ReferenceFileDocument, ObservableObject
 //, Codable
 {
@@ -29,7 +31,7 @@ final class DASIReportDocument: ReferenceFileDocument, ObservableObject
         case noReadableReport
     }
 
-    static var readableContentTypes: [UTType] = [.data]
+    static var readableContentTypes: [UTType] = [.commaSeparatedText]
     @Published var report: DASIReport
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
@@ -74,7 +76,7 @@ final class DASIReportDocument: ReferenceFileDocument, ObservableObject
 }
 
 // A DASI report is an array of all DASI responses, verify it'e all IDs, all consecutive.
-
+// MARK: - DASIReport
 final class DASIReport: ObservableObject, Codable {
     var subjectID: String?
     public private(set) var timestamp: Date
@@ -119,4 +121,35 @@ final class DASIReport: ObservableObject, Codable {
     }
 
     func reset() { answers.removeAll() }
+}
+
+// MARK: - CSV
+extension DASIReport {
+    /// Generate a `Data` containing the CSV encoding of this report.
+    ///
+    /// Uses the `CodableCSV` package to be found on GitHub. The data set is too small to consider `CSVEncoder`.
+    /// - Returns: `Data`, the CSV encoding of `self`.
+    /// - throws: There are 4 `try` points in the function, all thrown in the creation or use of `CSVWriter`.
+    func writeToCSVData() throws -> Data {
+        let writer = try CSVWriter() {
+            config in
+            config.headers = ["Number", "Response"]
+            config.delimiters = (field: ",",
+                                 row: "\r\n")
+        }
+        for element in answers {
+            try writer.write(
+                row: [ String(element.id),
+                       "\(element.response)" ] )
+        }
+        try writer.endEncoding()
+        let retval = try writer.data()
+
+        #if DEBUG
+        let verification = String(data: retval, encoding: .utf8)
+        print(verification ?? "\(#function): can’t recover a String from output)")
+        #endif
+
+        return retval
+    }
 }

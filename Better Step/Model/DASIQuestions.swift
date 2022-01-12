@@ -10,8 +10,15 @@ import Foundation
 // Question IDs run from 1 ... 12
 // Array IDs run from 0..<12.
 
-enum AnswerState: String, Codable, Equatable {
+enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
     case unknown, yes, no
+    var description: String {
+        switch self {
+        case .no:       return "N"
+        case .unknown:  return "•"
+        case .yes:      return "Y"
+        }
+    }
 }
 
 struct DASIQuestion: Identifiable, Codable, Comparable {
@@ -57,7 +64,7 @@ extension DASIQuestion {
     }
 }
 
-struct DASIResponse: Identifiable, Codable, Comparable {
+struct DASIResponse: Identifiable, Codable {
     let id: Int
     let response: AnswerState
 
@@ -73,6 +80,13 @@ struct DASIResponse: Identifiable, Codable, Comparable {
         return retval
     }()
 
+}
+
+extension DASIResponse: Comparable, CustomStringConvertible {
     static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
     static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
+
+    var description: String {
+        response == .yes ? "Y" : "N"
+    }
 }
