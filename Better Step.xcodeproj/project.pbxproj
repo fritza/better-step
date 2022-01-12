@@ -22,6 +22,7 @@
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA0508278CE2BF00E908EB /* DASIReport.swift */; };
+		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */; };
 		1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
@@ -86,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +230,9 @@
 			dependencies = (
 			);
 			name = "Better Step";
+			packageProductDependencies = (
+				1FF35437278F61FB000894B8 /* CodableCSV */,
+			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
 			productType = "com.apple.product-type.application";
@@ -300,6 +305,9 @@
 				Base,
 			);
 			mainGroup = 1F0B6745276FA6C900011A7E;
+			packageReferences = (
+				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -689,6 +697,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FF35437278F61FB000894B8 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1F0B6746276FA6C900011A7E /* Project object */;
 }

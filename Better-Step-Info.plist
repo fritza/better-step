@@ -9,6 +9,8 @@
 			<string>DASI Survey</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array/>
 		</dict>
 	</array>
 </dict>
