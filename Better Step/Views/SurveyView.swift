@@ -11,16 +11,20 @@ let surveyNarrative = """
 This exercise asks you to respond to questions from a standard assessment of how free you are in your daily life.
 """
 
-struct SurveyView: View {
-    func callToActionLink(buttonTitle: String,
-                          linkLabel: String) -> some View
-    {
-        NavigationLink(destination: {
-            DASIQuestionView(question: DASIQuestion.with(id: 1))
-        }) {
-            Text(buttonTitle)
-        }
+final class BoolBearer: ObservableObject, CustomStringConvertible {
+    @Published var isSet: Bool
+
+    init(initially: Bool = false) {
+        isSet = initially
     }
+
+    var description: String {
+        "BoolBearer (\(isSet))"
+    }
+}
+
+struct SurveyView: View {
+    @StateObject private var wrappedShowing = BoolBearer(initially: false)
 
     var body: some View {
         NavigationView {
@@ -31,9 +35,33 @@ struct SurveyView: View {
                     .navigationTitle("DASI Survey")
                     .padding(32)
 
-                callToActionLink(buttonTitle: "Proceed",
-                                   linkLabel: "Proceed to Survey")
+                NavigationLink(
+                    destination: {
+                        () -> AnyView in
+                        print("Destination DASI:", wrappedShowing)
+                        return AnyView(DASIQuestionView(
+                            question: DASIQuestion.with(id: 1))
+                        .environmentObject(wrappedShowing)
+                                       )
+                        }()
+                    ,
+                    isActive: {
+                        print("NavLink value =", wrappedShowing)
+                        let retval = $wrappedShowing.isSet
+                        return retval
+                        }(),
+                    label: { EmptyView() }
+                )
+
+                Button("Proceed (root)", action: {
+                    wrappedShowing.isSet = true
+                    print("ROOT PROCEED TAPPED",
+                          "setting value is now", wrappedShowing.isSet)
+                })
                 Spacer()
+            }
+            .onDisappear {
+                print("root view is disappearing:", wrappedShowing.isSet)
             }
         }
     }

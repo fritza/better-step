@@ -22,15 +22,6 @@ struct Better_StepApp: App {
         DocumentGroup(newDocument: { DASIReportDocument() } )
          { config in
             TabView {
-                /*
-                DASIQuestionView(
-                    question:
-                        DASIQuestion.with(id: 1))
-                    .tabItem {
-                        Image(systemName: "checkmark.square")
-                        Text("Survey")
-                    }
-                 */
                 SurveyView()
                     .tabItem {
                     Image(systemName: "checkmark.square")

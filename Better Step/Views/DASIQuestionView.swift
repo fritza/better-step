@@ -11,6 +11,7 @@ import SwiftUI
 //        When Next is absent, it shifts over to the right.
 
 struct DASIQuestionView: View {
+    @EnvironmentObject var showingQuestions: BoolBearer
     static let yesNoWidth: CGFloat = 80
 
 //    @Binding var report: DASIReport
@@ -18,11 +19,13 @@ struct DASIQuestionView: View {
 
     // Remember question.id starts from 1
     private var thisAnswer: AnswerState {
-        report.responseForQuestion(id: thisQuestion.id)
+        print(#function, "isActive =", showingQuestions)
+        return report.responseForQuestion(id: thisQuestion.id)
     }
 
     @State private var thisQuestion: DASIQuestion
     @EnvironmentObject var myDocument: DASIReportDocument
+
     var report: DASIReport { myDocument.report }
     private var questionID: Int { thisQuestion.id }
 
@@ -89,7 +92,7 @@ struct DASIQuestionView: View {
 
 
             HStack {
-                if let prevQueston = thisQuestion.previous {
+                if thisQuestion.previous != nil {
                     // Permit previous question any time that .previous is valid.
                     Button {
                         if let pq = thisQuestion.previous {
@@ -100,9 +103,27 @@ struct DASIQuestionView: View {
                 }
                 Spacer()
                 Button {
-#warning("Do something for Cancel.")
+                    showingQuestions.isSet = false
                 }
                 label: { Text("Cancel") }
+
+                /* ********************************************
+                 Is there any advantage in making Next and Back into NavigationLinks
+                 which can be de/activated with NavigationLink.init(_:tag:selection:destination:)
+                 this initializer doesn't display a UI, it just triggers the
+                 destination if selection matches the tag value.
+                 ^ Spoke too soon. SwiftUI derives the label view contents
+                 from the title.
+
+                 Am I supposed to do some kind of submit (see .onSubmit modifier) event
+                 and then rewrite the document contents? That's bad news if you have
+                 10,000 lines.
+
+                 (BTW: you could iterate the file with URL.lines and
+                 inject a new line. But that requires hauling the whole thing in and
+                 writing it out.)
+                 */
+
                 Spacer()
                 if let nextQuestion = thisQuestion.next,
                    thisAnswer != .unknown {
