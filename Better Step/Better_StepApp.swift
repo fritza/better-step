@@ -27,7 +27,9 @@ struct Better_StepApp: App {
                     Image(systemName: "checkmark.square")
                     Text("Survey")
                 }
-
+                // TODO: Or make the document a Binding?
+                //       Add to the SurveyView params,
+                //       initialize with config.$dociment
                     .environmentObject(config.document)
                 WalkView()
                     .tabItem {

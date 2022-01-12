@@ -10,8 +10,10 @@ import Foundation
 // Question IDs run from 1 ... 12
 // Array IDs run from 0..<12.
 
+// MARK: - AnswerState
 enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
     case unknown, yes, no
+
     var description: String {
         switch self {
         case .no:       return "N"
@@ -19,8 +21,18 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
         case .yes:      return "Y"
         }
     }
+
+    init?(described: String) {
+        switch described {
+        case "N":   self = .no
+        case "•":   self = .unknown
+        case "Y":   self = .yes
+        default :   return nil
+        }
+    }
 }
 
+// MARK: - DASIQuestion
 struct DASIQuestion: Identifiable, Codable, Comparable {
     let id: Int
     let text: String
@@ -64,6 +76,7 @@ extension DASIQuestion {
     }
 }
 
+// MARK: - DASIResponse
 struct DASIResponse: Identifiable, Codable {
     let id: Int
     let response: AnswerState
@@ -79,14 +92,18 @@ struct DASIResponse: Identifiable, Codable {
 
         return retval
     }()
-
 }
 
+// MARK: - String representation
 extension DASIResponse: Comparable, CustomStringConvertible {
     static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
     static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
 
+    var csvStrings: [String] {
+        [ String(id), "\(response)" ]
+    }
+
     var description: String {
-        response == .yes ? "Y" : "N"
+        csvStrings.joined(separator: ",")
     }
 }

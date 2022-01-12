@@ -73,16 +73,12 @@ extension DASIReport {
     /// - Returns: `Data`, the CSV encoding of `self`.
     /// - throws: There are 4 `try` points in the function, all thrown in the creation or use of `CSVWriter`.
     func writeToCSVData() throws -> Data {
-        let writer = try CSVWriter() {
-            config in
-            config.headers = ["Number", "Response"]
-            config.delimiters = (field: ",",
-                                 row: "\r\n")
+        let writer = try CSVWriter() { config in
+            config.headers    = ["Number", "Response"]
+            config.delimiters = (field: ",", row: "\r\n")
         }
         for element in answers {
-            try writer.write(
-                row: [ String(element.id),
-                       "\(element.response)" ] )
+            try writer.write( row: element.csvStrings )
         }
         try writer.endEncoding()
         let retval = try writer.data()
