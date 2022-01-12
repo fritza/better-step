@@ -24,11 +24,11 @@ final class DASIReportDocument: ReferenceFileDocument, ObservableObject
         case noReadableReport
     }
 
-    static var readableContentTypes: [UTType] = [.commaSeparatedText]
+    static var readableContentTypes = [UTType.commaSeparatedText]
     @Published var report: DASIReport
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = try JSONEncoder().encode(report)
+        let data = try report.writeToCSVData()
         let retval: FileWrapper =  FileWrapper(regularFileWithContents: data)
         return retval
     }
