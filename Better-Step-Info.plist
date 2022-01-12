@@ -10,7 +10,9 @@
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
-			<array/>
+			<array>
+				<string>public.delimited-values-text</string>
+			</array>
 		</dict>
 	</array>
 </dict>

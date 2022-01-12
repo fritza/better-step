@@ -24,6 +24,35 @@ final class DASIReport: ObservableObject, Codable {
     public private(set) var timestamp: Date
     public private(set) var answers: [DASIResponse]
 
+    init(data: Data) throws {
+        let reader = try CSVReader(input: data) { configuration in
+            configuration.delimiters = (field: ",", row: "\r\n")
+            configuration.headerStrategy = .firstLine
+        }
+        // Assuming the first line is a header and I have to discard it.
+        var answerList: [DASIResponse] = []
+        while let record = try reader.readRecord() {
+            guard let numberField = record["Number"],
+                  let recordNumber = Int(numberField) else {
+                      throw DASIReportDocument.Errors.missingDASIHeader("Number")
+                  }
+            guard let responseField = record["Response"],
+                  let response = AnswerState(described: responseField) else {
+                      throw DASIReportDocument.Errors.missingDASIHeader("Response")
+                  }
+            let element = DASIResponse(id: recordNumber, response: response)
+            answerList.append(element)
+        }
+        precondition(answerList.count == 12,
+                     "Expected the doc file to have 12 answers, has \(answerList.count)")
+
+        self.answers = answerList
+        // TODO: What to do with the timestamp?
+        // The survey doesn't really need it.
+        // SUGGESTION: Bootleg a line in the report for subject ID and ISO-8601
+        self.timestamp = Date()
+    }
+
     init(forSubject subjectID: String? = nil) {
         self.subjectID = subjectID
         timestamp = Date()
