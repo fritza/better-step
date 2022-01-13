@@ -12,14 +12,26 @@ This exercise asks you to respond to questions from a standard assessment of how
 """
 
 final class BoolBearer: ObservableObject, CustomStringConvertible {
-    @Published var isSet: Bool
+    @Published var showGreeting  : Bool
+    @Published var showQuestions : Bool
+    @Published var showCompletion: Bool
+    func ask()      { (showQuestions, showGreeting, showCompletion) = (true, false, false) }
+    func greet()    { (showGreeting, showQuestions, showCompletion) = (true, false, false) }
+    func complete() { (showCompletion, showGreeting, showQuestions) = (true, false, false) }
+
+//    @Published var isSet: Bool
 
     init(initially: Bool = false) {
-        isSet = initially
+//        isSet = initially
+
+        (showGreeting, showQuestions, showCompletion) = (true, false, false)
     }
 
     var description: String {
-        "BoolBearer (\(isSet))"
+        var status = "Completed"
+        if showGreeting { status = "Greeting" }
+        else if showQuestions { status = "Questions" }
+        return "BoolBearer (\(status))"
     }
 }
 
@@ -45,19 +57,21 @@ struct SurveyView: View {
                         }()
                     ,
                     isActive: {
-                        let retval = $wrappedShowing.isSet
+                        let retval = $wrappedShowing.showQuestions
                         return retval
                         }(),
                     label: { EmptyView() }
                 )
 
                 Button("Proceed (root)", action: {
-                    wrappedShowing.isSet = true
+//                    wrappedShowing.isSet = true
+                    wrappedShowing.ask()
                 })
                 Spacer()
             }
             .onDisappear {
-                print("root view is disappearing:", wrappedShowing.isSet)
+                print("root view is disappearing:", wrappedShowing
+                )
             }
         }
     }

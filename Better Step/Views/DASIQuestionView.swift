@@ -11,7 +11,10 @@ import SwiftUI
 //        When Next is absent, it shifts over to the right.
 
 struct DASIQuestionView: View {
+    @State private var thisQuestion: DASIQuestion
     @EnvironmentObject var showingQuestions: BoolBearer
+    @EnvironmentObject var myDocument: DASIReportDocument
+
     static let yesNoWidth: CGFloat = 80
 
 //    @Binding var report: DASIReport
@@ -22,8 +25,6 @@ struct DASIQuestionView: View {
         return report.responseForQuestion(id: thisQuestion.id)
     }
 
-    @State private var thisQuestion: DASIQuestion
-    @EnvironmentObject var myDocument: DASIReportDocument
 
     var report: DASIReport { myDocument.report }
     private var questionID: Int { thisQuestion.id }
@@ -83,7 +84,9 @@ struct DASIQuestionView: View {
                     prepareForQuestion(nextQueston)
                 }
                 else {
-                    showingQuestions.isSet = false
+                    // FIXME: Should be complete()
+                    showingQuestions.greet()
+//                    showingQuestions.isSet = false
                     // The response is valid,
                     // but we've run out of questions.
                 }
@@ -102,7 +105,8 @@ struct DASIQuestionView: View {
                 }
                 Spacer()
                 Button {
-                    showingQuestions.isSet = false
+                    showingQuestions.greet()
+//                    showingQuestions.isSet = false
                 }
                 label: { Text("Cancel") }
 
