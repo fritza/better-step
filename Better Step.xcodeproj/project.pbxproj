@@ -24,6 +24,15 @@
 		1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA0508278CE2BF00E908EB /* DASIReport.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543A278F70B9000894B8 /* DASIReportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF35439278F70B9000894B8 /* DASIReportDocument.swift */; };
+		1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */; };
+		1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
+		1FF354412790A99E000894B8 /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
+		1FF354442790D1F5000894B8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF354432790D1F5000894B8 /* Collections */; };
+		1FF354462790D1F5000894B8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF354452790D1F5000894B8 /* DequeModule */; };
+		1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF354472790D1F5000894B8 /* OrderedCollections */; };
+		1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544A2791FCFF000894B8 /* CoreMotion.swift */; };
+		1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544C27920A1C000894B8 /* Configuration.swift */; };
+		1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */; };
 		1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
@@ -73,6 +82,13 @@
 		1FEA0508278CE2BF00E908EB /* DASIReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReport.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1FF35439278F70B9000894B8 /* DASIReportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportDocument.swift; sourceTree = "<group>"; };
+		1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFileCoordinator.swift; sourceTree = "<group>"; };
+		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
+		1FF354402790A99E000894B8 /* XYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYZ.swift; sourceTree = "<group>"; };
+		1FF3544A2791FCFF000894B8 /* CoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotion.swift; sourceTree = "<group>"; };
+		1FF3544C27920A1C000894B8 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		1FF3544E27920A3B000894B8 /* config-mini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "config-mini.plist"; sourceTree = "<group>"; };
+		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
 		1FFB30E2277BE8390099AE5E /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
@@ -89,7 +105,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF354442790D1F5000894B8 /* Collections in Frameworks */,
 				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
+				1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */,
+				1FF354462790D1F5000894B8 /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,10 +153,15 @@
 			isa = PBXGroup;
 			children = (
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
+				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1FF3543D2790A958000894B8 /* Storage */,
 				1FFB30DF277BE5090099AE5E /* Model */,
+				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
+				1FF3544C27920A1C000894B8 /* Configuration.swift */,
+				1FF3544E27920A3B000894B8 /* config-mini.plist */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
 			);
 			path = "Better Step";
@@ -168,6 +192,31 @@
 			path = "Better StepUITests";
 			sourceTree = "<group>";
 		};
+		1FF3543D2790A958000894B8 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */,
+				1FF354402790A99E000894B8 /* XYZ.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		1FF354492791FCD1000894B8 /* Accelerometry */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
+			);
+			path = Accelerometry;
+			sourceTree = "<group>";
+		};
+		1FF3544F27921191000894B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF35439278F70B9000894B8 /* DASIReportDocument.swift */,
+				1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */,
 				1FEA0508278CE2BF00E908EB /* DASIReport.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
@@ -235,6 +285,9 @@
 			name = "Better Step";
 			packageProductDependencies = (
 				1FF35437278F61FB000894B8 /* CodableCSV */,
+				1FF354432790D1F5000894B8 /* Collections */,
+				1FF354452790D1F5000894B8 /* DequeModule */,
+				1FF354472790D1F5000894B8 /* OrderedCollections */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -310,6 +363,7 @@
 			mainGroup = 1F0B6745276FA6C900011A7E;
 			packageReferences = (
 				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+				1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -360,19 +414,25 @@
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
+				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */,
+				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
+				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FFB30EB277F89C90099AE5E /* YesNoButton.swift in Sources */,
+				1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */,
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
+				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
 				1FFB30ED277F8A190099AE5E /* YesNoFrameView.swift in Sources */,
+				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +773,14 @@
 				minimumVersion = 0.6.7;
 			};
 		};
+		1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -720,6 +788,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */;
 			productName = CodableCSV;
+		};
+		1FF354432790D1F5000894B8 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		1FF354452790D1F5000894B8 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		1FF354472790D1F5000894B8 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

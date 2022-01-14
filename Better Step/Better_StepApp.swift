@@ -16,21 +16,14 @@ struct Better_StepApp: App {
 
     static var commonReport = DASIReport(forSubject: "AppLevelReport")
 
-    #warning("Does not save any document(s)")
-
     var body: some Scene {
-        DocumentGroup(newDocument: { DASIReportDocument() } )
-         { config in
+        WindowGroup {
             TabView {
                 SurveyView()
                     .tabItem {
-                    Image(systemName: "checkmark.square")
-                    Text("Survey")
-                }
-                // TODO: Or make the document a Binding?
-                //       Add to the SurveyView params,
-                //       initialize with config.$dociment
-                    .environmentObject(config.document)
+                        Image(systemName: "checkmark.square")
+                        Text("Survey")
+                    }
                 WalkView()
                     .tabItem {
                         Image(systemName: "figure.walk")
@@ -44,15 +37,15 @@ struct Better_StepApp: App {
                 SetupView()
                     .environmentObject(
                         self.setupEnvironment
-//                        Configurations(startingEmail: "fritza@mac.com", duration: 6)
+                        //                        Configurations(startingEmail: "fritza@mac.com", duration: 6)
                     )
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setup")
                     }
             }
-            .font(.headline)
         }
+
     }
 }
 

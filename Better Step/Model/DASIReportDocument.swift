@@ -45,26 +45,6 @@ final class DASIReportDocument: ReferenceFileDocument, ObservableObject
         report = DASIReport()
     }
 
-//    snap
-/*
-    init(configuration: FileDocumentReadConfiguration) throws {
-        // Accept content type
-        let (fileType, wrapper) = (configuration.contentType, configuration.file)
-        guard Self.readableContentTypes.contains(fileType) else {
-            throw Errors.wrongDataType(fileType)
-        }
-
-        // What was this for?
-        guard wrapper.isRegularFile,
-        let data = wrapper.regularFileContents else {
-            throw Errors.noReadableReport
-        }
-
-        let retval = try JSONDecoder().decode(DASIReport.self,
-                                              from: data)
-        report = retval
-    }
- */
     /// `ReferenceFileDocument` conformance. yield `DASIReport` from the file from the configuration.
     /// - Parameter configuration: `FileDocumentReadConfiguration` received from the OS designating the data file to read.
     /// - throws: `Errors.wrongDataType` upon wrong file type, non-regular file, not readable, errors from the `DASIReport`initializer.

@@ -58,7 +58,6 @@ struct SetupView: View {
                     Section("Reporting") {
                         Toggle("Report magnitude",
                                isOn: $asMagnitude)
-                            .border(.green)
                         // FIXME: need a binding for the email
                         EmailFormView(title: "Email",
                                       address: $email)

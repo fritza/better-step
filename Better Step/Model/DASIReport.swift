@@ -119,4 +119,9 @@ extension DASIReport {
 
         return retval
     }
+
+    func writeTo(url: URL) throws {
+        // Doesn't this need something that will collect
+        //
+    }
 }
