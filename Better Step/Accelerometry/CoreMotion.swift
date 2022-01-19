@@ -58,13 +58,13 @@ final class MotionManager {
 
         Self.shared = self
     }
-
-
+}
 
 
     // MARK: Life Cycle
     /// Start accelerometer collection
     func startAccelerometer() {
+        /*
         let params = Configuration.shared.accelerometer
         accelerometryStarted = Date()
 
@@ -104,7 +104,7 @@ final class MotionManager {
         simulatedSource?.resume()
         #endif
     }
-
+*/
 }
 
 
