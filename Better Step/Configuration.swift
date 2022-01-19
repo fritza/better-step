@@ -6,22 +6,27 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct Accelerometry: Decodable {
     @AppStorage("walkDuration") var durationInMinutes = 6
 
-    static let walkDurationSecondsKey = "walk duration"
+//    static let walkDurationSecondsKey = "walk duration"
 
     let frequency: Double
     let instructionAvailable: String
     let instructionNotAvailable: String
+
+    enum CodingKeys: String, CodingKey {
+        case frequency, instructionAvailable, instructionNotAvailable
+    }
 
     func instruction(available: Bool) -> String {
         let workingString = (available ?
         instructionAvailable : instructionNotAvailable) as NSString
         let retval = workingString
             .replacingOccurrences(of: "$MIN$",
-                                  with: duration.spelled)
+                                  with: durationInSeconds.spelled)
         return retval
     }
 
@@ -86,10 +91,15 @@ struct Configuration: Decodable {
 }
 
 import Messages
-struct Mailing: Decodable {
-    let recipientEmail: String
-    let subject: String
-    let body: String
+final class Mailing: Decodable {
+    @AppStorage("emailAddress")
+    var recipientEmail: String = "NOBODY@EXAMPLE.COM"
+    var subject: String = ""
+    var body: String = ""
+
+    enum CodingKeys: String, CodingKey {
+        case subject, body
+    }
 
     /// Fill the subject, recipient, and body of a mail composer
     /// - note: Clients are expected to add attachments themselves.
@@ -101,7 +111,8 @@ struct Mailing: Decodable {
                   for subjectID: String) {
         mailer.setSubject(subject.replacingOccurrences(
             of: "%subjectID%", with: subjectID))
-        mailer.setToRecipients([Defaults.recipientEmail.value() ?? "NOBODY@EXAMPLE.COM"])
+        mailer.setToRecipients([recipientEmail])
+//        mailer.setToRecipients([Defaults.recipientEmail.value() ?? "NOBODY@EXAMPLE.COM"])
         mailer.setMessageBody(self.body(
             for: subjectID), isHTML: false)
     }
