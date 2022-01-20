@@ -8,6 +8,11 @@
 import Foundation
 import CoreMotion
 
+// FIXME: Figure out how to collect for a new subject.
+//        That is, you may not be killing this app before a second subject arrives to take a new test. The loop-exhaustion process forecloses a restart in-place.
+//  Can you replace `.shared`?
+
+// FIXME: "Availability" is too cute.
 protocol Availability {
     var cmManager: CMMotionManager { get }
     var availPath: KeyPath<CMMotionManager, Bool> { get }
@@ -19,12 +24,16 @@ extension Availability {
     var available: Bool  { cmManager[keyPath: availPath ] }
 }
 
+// FIXME: "Availability" is too cute.
+/// Mapping of `CMMotionManager` device-motion status to `MotionManager`.
 struct DeviceState: Availability {
     private(set) var availPath: KeyPath<CMMotionManager, Bool> = \.isDeviceMotionAvailable
     private(set) var activePath: KeyPath<CMMotionManager, Bool> = \.isDeviceMotionActive
     private(set) var cmManager: CMMotionManager
 }
 
+// FIXME: "Availability" is too cute.
+/// Mapping of `CMMotionManager` accelerometry status to `MotionManager`.
 struct AccelerometerState: Availability {
     private(set) var availPath: KeyPath<CMMotionManager, Bool> = \.isAccelerometerAvailable
     private(set) var activePath: KeyPath<CMMotionManager, Bool> = \.isAccelerometerActive
@@ -34,6 +43,9 @@ struct AccelerometerState: Availability {
 
 
 final class MotionManager {
+    /// Access to the singleton `MotionManager`.
+    ///
+    /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
     static private(set) var shared: MotionManager! = {
         MotionManager()
     }()
@@ -48,7 +60,8 @@ final class MotionManager {
     var accAvailable    : Bool { accState   .available }
     var accActive       : Bool { accState   .active    }
 
-    var stream: AsyncStream<CMAccelerometerData>!
+    typealias CMDataStream = AsyncStream<CMAccelerometerData>
+    var stream: CMDataStream!
 
     private init() {
         let cmManager = CMMotionManager()
@@ -60,6 +73,9 @@ final class MotionManager {
         Self.shared = self
     }
 
+    /// Commence the Core Motion feed of accelerometer events.
+    ///
+    /// Events are handled by creating an `AsyncStream`  around `startAccelerometerUpdates`.
     func startAccelerometry() {
         stream = AsyncStream {
             continuation in
@@ -68,32 +84,41 @@ final class MotionManager {
                 )
             continuation.onTermination = {
                 @Sendable _ in
-                self.motionManager.stopAccelerometerUpdates()
+                self.stopAccelerometer()
             }
+            // TODO: Obviates stopAccelerometer in cancelUpdates?
+            // At least be on the lookout in case repeated stop calls cause problems.
         }
     }
 
-    func stopAccelerometer() {
-        // You can't cancel a stream.
-        // It doesn't have an asynchronous context
-        // around it.
+    /// Halt Core Motion reports on accelerometry.
+    ///
+    /// Not intended for external use; use `.cancelUpdates()` instead.
+    private func stopAccelerometer() {
         motionManager.stopAccelerometerUpdates()
-        // TODO: Does that in fact exhaust the stream?
-        //       Or does it simply hang the for-await
-        //       for new data?
     }
 
     var isCancelled: Bool = false
 }
 
 extension MotionManager {
+    /// Halt the `CMAccelerometerData` stream by signaling the loop that it has been canceled.
+    ///
+    /// Use this instead of `.stopAccelerometer()` to terminate the stream. This function does call `.stopAccelerometer()`, but maybe shouldn't — see **Note**.
+    ///
+    /// - note: The call to `stopAccelerometer()` may be redundant of the `.onTermination` action in `startAccelerometry()`
     func cancelUpdates() {
         isCancelled = true
+        stopAccelerometer()
     }
 
+    /// Convenience: a closure that satisfies `CMAccelerometerHandler`, to handle incoming accelerometry events.
+    ///
+    /// The usual examples put the closure right in the call to `.startAccelerometerUpdates`, but this is more readable at that site.
     static func makeHandler(
-        _ continuation: AsyncStream<CMAccelerometerData>.Continuation)
-    -> (CMAccelerometerData?, Error?)->Void
+        _ continuation: CMDataStream.Continuation)
+    -> CMAccelerometerHandler
+    // (CMAccelerometerData?, Error?)->Void
     {
         return {
             (aData: CMAccelerometerData?, error: Error?) -> Void in
