@@ -23,6 +23,7 @@
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA0508278CE2BF00E908EB /* DASIReport.swift */; };
 		1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B342799D54100E319ED /* AccelerationWriter.swift */; };
+		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543A278F70B9000894B8 /* DASIReportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF35439278F70B9000894B8 /* DASIReportDocument.swift */; };
 		1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */; };
@@ -83,6 +84,7 @@
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1FEA0508278CE2BF00E908EB /* DASIReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReport.swift; sourceTree = "<group>"; };
 		1FF11B342799D54100E319ED /* AccelerationWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationWriter.swift; sourceTree = "<group>"; };
+		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1FF35439278F70B9000894B8 /* DASIReportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportDocument.swift; sourceTree = "<group>"; };
 		1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFileCoordinator.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 				1FFB31072787991A0099AE5E /* TimerView.swift */,
 				1F60B09F276FBD1B0026D28B /* WalkView.swift */,
+				1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */,
 			);
 			path = Walking;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FFB30EB277F89C90099AE5E /* YesNoButton.swift in Sources */,
+				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */,
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,

@@ -25,7 +25,7 @@ struct TimerView: View {
                 minutes: minutePub.minutes,
                 seconds: minutePub.seconds)
             )
-                .font(.system(size: 40, weight:.thin, design: .default))
+//                .font(.system(size: 40, weight:.thin, design: .default))
                 .monospacedDigit()
             Spacer()
         }
