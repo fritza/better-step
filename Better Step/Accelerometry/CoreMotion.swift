@@ -48,7 +48,7 @@ final class MotionManager {
     var accAvailable    : Bool { accState   .available }
     var accActive       : Bool { accState   .active    }
 
-    var stream: AsyncStream<AccelerometerItem>!
+    var stream: AsyncStream<CMAccelerometerData>!
 
     private init() {
         let cmManager = CMMotionManager()
@@ -77,8 +77,7 @@ final class MotionManager {
 
 extension MotionManager {
     static func makeHandler(
-        _ closedContinuaion: AsyncStream<AccelerometerItem>.Continuation)
-    // FIXME: Provide CMAccelerometerData, not AccelerometerItem
+        _ closedContinuaion: AsyncStream<CMAccelerometerData>.Continuation)
     -> (CMAccelerometerData?, Error?)->Void
     {
         return {
@@ -90,7 +89,7 @@ extension MotionManager {
             guard let aData = aData else {
                 fatalError("\(#function):\(#line) - no error, but no data.")
             }
-            closedContinuaion.yield(AccelerometerItem(aData))
+            closedContinuaion.yield(aData)
         }
     }
 }
