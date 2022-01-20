@@ -17,7 +17,8 @@ struct TimerView: View {
     @State var isFinished: Bool = false
     
     let formatter = MinSecFormatter(showMinutes: true)
-    
+
+    // MARK: Body
     var body: some View {
         HStack {
             Spacer()
@@ -25,7 +26,6 @@ struct TimerView: View {
                 minutes: minutePub.minutes,
                 seconds: minutePub.seconds)
             )
-//                .font(.system(size: 40, weight:.thin, design: .default))
                 .monospacedDigit()
             Spacer()
         }
@@ -38,6 +38,7 @@ struct TimerView: View {
     }
 }
 
+// MARK: - Preview
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
         TimerView(
