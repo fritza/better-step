@@ -73,15 +73,34 @@ final class MotionManager {
         }
     }
 
+    func stopAccelerometer() {
+        // You can't cancel a stream.
+        // It doesn't have an asynchronous context
+        // around it.
+        motionManager.stopAccelerometerUpdates()
+        // TODO: Does that in fact exhaust the stream?
+        //       Or does it simply hang the for-await
+        //       for new data?
+    }
+
+    var isCancelled: Bool = false
 }
 
 extension MotionManager {
+    func cancelUpdates() {
+        isCancelled = true
+    }
+
     static func makeHandler(
-        _ closedContinuaion: AsyncStream<CMAccelerometerData>.Continuation)
+        _ continuation: AsyncStream<CMAccelerometerData>.Continuation)
     -> (CMAccelerometerData?, Error?)->Void
     {
         return {
             (aData: CMAccelerometerData?, error: Error?) -> Void in
+            guard !Self.shared.isCancelled else {
+                continuation.finish(); return
+            }
+
             if let error = error {
                 print(#function, "- got unhandled error:", error)
                 return
@@ -89,7 +108,7 @@ extension MotionManager {
             guard let aData = aData else {
                 fatalError("\(#function):\(#line) - no error, but no data.")
             }
-            closedContinuaion.yield(aData)
+            continuation.yield(aData)
         }
     }
 }
