@@ -234,7 +234,6 @@
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
 				1F60B0A3276FCF690026D28B /* SetupView.swift */,
 				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
-				1F60B09F276FBD1B0026D28B /* WalkView.swift */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 			);
@@ -269,6 +268,7 @@
 				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
 				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 				1FFB31072787991A0099AE5E /* TimerView.swift */,
+				1F60B09F276FBD1B0026D28B /* WalkView.swift */,
 			);
 			path = Walking;
 			sourceTree = "<group>";

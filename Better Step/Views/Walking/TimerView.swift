@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/// View that displays a time interval in minutes and seconds, supplied by a `MinutePublisher`.
+///
+/// **See also**
+/// * `MinutePublisher`
+/// * `MinSecFormatter`
 struct TimerView: View {
     @StateObject var minutePub: MinutePublisher
     @State var isFinished: Bool = false
