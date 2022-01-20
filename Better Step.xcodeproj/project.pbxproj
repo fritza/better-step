@@ -199,6 +199,15 @@
 			path = "Better StepUITests";
 			sourceTree = "<group>";
 		};
+		1FF11B3A279A173D00E319ED /* DASI */ = {
+			isa = PBXGroup;
+			children = (
+				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
+				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
+			);
+			path = DASI;
+			sourceTree = "<group>";
+		};
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,11 +240,10 @@
 				1F1701A92777D00300E510AE /* DurationStepper.swift */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
-				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
+				1FF11B3A279A173D00E319ED /* DASI */,
 				1FFB30E9277F89A70099AE5E /* YesNoView */,
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
 				1F60B0A3276FCF690026D28B /* SetupView.swift */,
-				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 			);
