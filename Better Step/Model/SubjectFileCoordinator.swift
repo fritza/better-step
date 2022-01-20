@@ -11,6 +11,7 @@ import Collections
 
 enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
+    case cantCreateFileAt(URL)
 }
 
 
@@ -31,6 +32,19 @@ extension FileManager {
     func directoryExists(atURL url: URL) -> Bool {
         let (exists, directory) = somethingExists(atURL: url)
         return exists && directory
+    }
+
+    func deleteAndCreate(at url: URL) throws {
+        if fileExists(atURL: url) {
+            // Discard any existing file.
+            try removeItem(at: url)
+        }
+        guard createFile(
+            atPath: url.path,
+            contents: nil, attributes: nil) else {
+                throw FileStorageErrors
+                    .cantCreateFileAt(url)
+        }
     }
 }
 
