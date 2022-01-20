@@ -13,16 +13,41 @@ This exercise will assess your stride and pace though a short (six-minute) walk.
 Tap “Proceed" when you are ready
 """
 
+final class WalkingSequence: ObservableObject, CustomStringConvertible {
+    var description: String {
+        "WalkingSequence(progress: \(showProgress), countdown: \(showCountdown))"}
+
+    @Published var showProgress: Bool
+    @Published var showCountdown: Bool
+
+    init() {
+        showProgress = false; showCountdown = false
+    }
+}
+
 
 struct WalkView: View {
+    @StateObject private var sequencer = WalkingSequence()
+
     var body: some View {
         // FIXME: The figure does not conform to the image aspect ratio.
-        GenericInstructionView(titleText: "Walking Test",
-                               bodyText: walkingNarrative, sfBadgeName: "figure.walk",
-        proceedTitle: "Proceed") {
-            
+        NavigationView {
+            GenericInstructionView(
+                titleText: "Walking Test",
+                bodyText: walkingNarrative, sfBadgeName: "figure.walk",
+                proceedTitle: "Proceed") {
+
+                }
+                .padding(32)
+            NavigationLink(
+                destination: {
+                    AnyView(WalkProgressView())
+                        .environmentObject(sequencer)
+                }(),
+                isActive: $sequencer.showCountdown,
+                label: { EmptyView()}
+            )
         }
-        .padding(32)
     }
 }
 

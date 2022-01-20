@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WalkProgressView: View {
+    @EnvironmentObject var sequencer: WalkingSequence
     @AppStorage("walkDuration") var durationInMinutes = 6
 
     var body: some View {
@@ -27,7 +28,7 @@ struct WalkProgressView: View {
             Button("Cancel") {
                 print("stopping")
                 MotionManager.shared.cancelUpdates()
-                // TODO: pop out to the main display
+                sequencer.showProgress = false
             }
         }
     }
