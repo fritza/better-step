@@ -44,6 +44,7 @@ final class AccelerationWriter {
         let itemStream = stream
             .map { AccelerometerItem($0) }
             .map(\.csv)
+            .map { $0 + "\r\n" }
             .compactMap { $0.data(using: .utf8) }
         do {
             let outHandle = try  FileHandle(
