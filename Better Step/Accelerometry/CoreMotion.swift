@@ -48,6 +48,8 @@ final class MotionManager {
     var accAvailable    : Bool { accState   .available }
     var accActive       : Bool { accState   .active    }
 
+    var stream: AsyncStream<AccelerometerItem>!
+
     private init() {
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = 0.001
@@ -55,56 +57,40 @@ final class MotionManager {
 
         deviceState = DeviceState(cmManager: cmManager)
         accState = AccelerometerState(cmManager: cmManager)
-
         Self.shared = self
     }
-}
 
-
-    // MARK: Life Cycle
-    /// Start accelerometer collection
-    func startAccelerometer() {
-        /*
-        let params = Configuration.shared.accelerometer
-        accelerometryStarted = Date()
-
-        #if !SUPPRESS_CM
-        assert(motionManager != nil)
-        motionManager
-            .accelerometerUpdateInterval = 1.0/params.frequency
-
-        motionManager
-            .startAccelerometerUpdates(to: opQueue) {
-                accData, error in
-                if let error = error {
-                    print(#function, "error in accelerometer data:", error)
-                    return
-                }
-                guard let accData = accData else {
-                    print(#function, "no data!")
-                    return
-                }
-                let item = AccelerometerItem(accelerometry: accData)
-                Report.current.append(accelerometry: item)
+    func startAccelerometry() {
+        stream = AsyncStream {
+            continuation in
+            motionManager.startAccelerometerUpdates(
+                to: .main, withHandler: Self.makeHandler(continuation)
+                )
+            continuation.onTermination = {
+                @Sendable _ in
+                self.motionManager.stopAccelerometerUpdates()
+            }
         }
-        #else
-        // SUPPRESS: Core Motion not available for this build
-        simulatedSource = DispatchSource.makeTimerSource()
-        simulatedSource?.schedule(
-            wallDeadline: DispatchWallTime.now(),
-            repeating: DispatchTimeInterval.milliseconds(100))
-
-        // 10 times a second instead of 30 or 60.
-        simulatedSource?.setEventHandler {
-            let item = AccelerometerItem(
-                timestamp: Date().timeIntervalSince(self.accelerometryStarted!),
-                x: 1.0, y: 2.0, z: 3.0)
-            Report.current.append(accelerometry: item)
-        }
-        simulatedSource?.resume()
-        #endif
     }
-*/
+
 }
 
-
+extension MotionManager {
+    static func makeHandler(
+        _ closedContinuaion: AsyncStream<AccelerometerItem>.Continuation)
+    // FIXME: Provide CMAccelerometerData, not AccelerometerItem
+    -> (CMAccelerometerData?, Error?)->Void
+    {
+        return {
+            (aData: CMAccelerometerData?, error: Error?) -> Void in
+            if let error = error {
+                print(#function, "- got unhandled error:", error)
+                return
+            }
+            guard let aData = aData else {
+                fatalError("\(#function):\(#line) - no error, but no data.")
+            }
+            closedContinuaion.yield(AccelerometerItem(aData))
+        }
+    }
+}

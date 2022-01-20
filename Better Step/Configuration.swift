@@ -11,8 +11,6 @@ import MessageUI
 struct Accelerometry: Decodable {
     @AppStorage("walkDuration") var durationInMinutes = 6
 
-//    static let walkDurationSecondsKey = "walk duration"
-
     let frequency: Double
     let instructionAvailable: String
     let instructionNotAvailable: String

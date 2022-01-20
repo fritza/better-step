@@ -34,7 +34,7 @@ struct AccelerometerItem: Codable, Timestamped, XYZ  {
         (self.timestamp, self.x, self.y, self.z) = (timestamp, x, y, z)
     }
 
-    init(accelerometry: CMAccelerometerData) {
+    init(_ accelerometry: CMAccelerometerData) {
         let acc = accelerometry.acceleration
         self.init(timestamp: accelerometry.timestamp,
                   x: acc.x, y: acc.y, z: acc.z)
