@@ -9,7 +9,6 @@ import SwiftUI
 import CoreGraphics
 
 struct SubsecondHandView: View {
-    @State var normalizedAngle: CGFloat
     @EnvironmentObject var timer: WrappedTimer
 
     func midpoint(within proxy: GeometryProxy) -> CGPoint {
@@ -21,8 +20,9 @@ struct SubsecondHandView: View {
         GeometryReader { proxy in
             Rectangle()
                 .rotation(
-                    Angle(degrees: 180.0 + (timer.fractionalSeconds * 360.0)),
-                          anchor: UnitPoint(x: 0.5, y: 0.05))
+                    Angle(
+                        degrees: 180.0 + (timer.fractionalSeconds * 360.0)),
+                    anchor: UnitPoint(x: 0.5, y: 0.05))
                 .offset(midpoint(within: proxy))
                 .frame(width: 2.0, height: proxy.size.short/2.0, alignment: .center)
         }
@@ -36,7 +36,7 @@ struct SubsecondHandView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        SubsecondHandView(normalizedAngle: 0.4)
+        SubsecondHandView()
             .foregroundColor(.red)
             .frame(width: 100, height: 100, alignment: .center)
             .border(.green, width: 0.5)
