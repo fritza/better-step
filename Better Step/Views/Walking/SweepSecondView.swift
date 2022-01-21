@@ -17,42 +17,21 @@ extension CGSize {
     }
 }
 
-func isolation() -> AnyPublisher<Timer.TimerPublisher.Output, Never> {
-    let tp = Timer.publish(every: 1, tolerance: 0.01, on: .main, in: .default, options: nil)
-        .autoconnect()
-        .eraseToAnyPublisher()
-    return tp
-}
-
-final class WrappedTimer: ObservableObject {
-    let publisher: AnyPublisher<Timer.TimerPublisher.Output, Never>
-    @Published var seconds: TimeInterval
-    @Published var downSeconds: TimeInterval
-    let startDate: Date
-
-//    public let secondsSubject: CurrentValueSubject<TimeInterval, Never>
-
-    static var cancellables: Set<AnyCancellable> = []
-    init(_ limit: TimeInterval) {
-        seconds = 0
-        downSeconds = limit
-        publisher = isolation()
-        startDate = Date()
-
-//        secondsSubject = CurrentValueSubject<TimeInterval, Never>(5)
-//
-//        publisher
-//            .sink { date in
-//                self.secondsSubject.send(date.timeIntervalSince(self.startDate))
-//            }
-//            .store(in: &Self.cancellables)
-    }
-
-}
-
 struct SweepSecondView: View {
-    @State var seconds: Int
+    @State var seconds: Double
+    @State var fractions: Double
+    static var cancellables: Set<AnyCancellable> = []
     @EnvironmentObject var timer: WrappedTimer
+
+    init(seconds: TimeInterval) {
+        self.seconds = seconds
+        self.fractions = seconds - seconds.rounded(.towardZero)
+
+        timer.$fractionalSeconds.sink { frac in
+            self.fractions = frac
+        }
+        .store(in: &Self.cancellables)
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -63,22 +42,23 @@ struct SweepSecondView: View {
                     .frame(width: proxy.size.short * 0.95,
                            height: proxy.size.short * 0.95,
                            alignment: .center)
+                SubsecondHandView(
+                    normalizedAngle:
+                        timer.fractionalSeconds)
                 Text("\(seconds)")
                     .font(.system(size: proxy.size.short * 0.6, weight: .semibold, design: .default))
             }
         }
-        //        .onReceive(timer.secondsSubject) { interval in
-        //            seconds = Int(round(interval))
-        //        }
     }
 }
 
 struct SweepSecondView_Previews: PreviewProvider {
+    static func previewWrappedTimer() -> WrappedTimer {
+        return WrappedTimer(5)
+    }
     static var previews: some View {
-        //        HStack {Spacer()
         SweepSecondView(seconds: 5)
             .frame(width: 300)
-            .environmentObject(WrappedTimer(5))
-        //            Spacer()}
+            .environmentObject(previewWrappedTimer())
     }
 }
