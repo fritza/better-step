@@ -8,20 +8,19 @@
 import Foundation
 import Combine
 
-func isolation() -> AnyPublisher<Timer.TimerPublisher.Output, Never> {
-    let tp = Timer.publish(every: 0.01, tolerance: 0.005, on: .main, in: .default, options: nil)
-        .autoconnect()
-        .eraseToAnyPublisher()
-    return tp
-}
-
 final class WrappedTimer: ObservableObject {
+    let originalTimePublisher: Timer.TimerPublisher
     let timePublisher: AnyPublisher<Timer.TimerPublisher.Output, Never>
+
     @Published var seconds: TimeInterval
     @Published var fractionalSeconds: TimeInterval
     @Published var integerSeconds: Int
     @Published var downSeconds: Int
+
+    @Published var expired: Bool
+
     let startDate: Date
+    let endDate: Date
     let countdownInterval: TimeInterval
 
     static var cancellables: Set<AnyCancellable> = []
@@ -30,20 +29,35 @@ final class WrappedTimer: ObservableObject {
         (seconds, integerSeconds, fractionalSeconds) = (0, 0, 0)
         downSeconds = Int(limit.rounded(.down))
         countdownInterval = limit
-        timePublisher = isolation()
         startDate = Date()
+        endDate = startDate.addingTimeInterval(limit)
+        expired = false
+        let original = Timer.publish(every: 0.01, tolerance: 0.005,
+                                              on: .main, in: .default, options: nil)
+        originalTimePublisher = original
+        timePublisher = original.autoconnect().eraseToAnyPublisher()
 
         setUpCombine()
     }
 
+    var timerCancellable: AnyCancellable?
+
     func setUpCombine() {
-        timePublisher.sink { date in
+        timerCancellable = timePublisher.sink { [self] date in
             self.seconds = date.timeIntervalSince(self.startDate)
             self.integerSeconds = Int(self.seconds.rounded(.towardZero))
             self.fractionalSeconds = self.seconds - Double(self.integerSeconds)
             self.downSeconds = Int(self.countdownInterval - Double(self.integerSeconds))
+
+            if Date() >= endDate { haltTimer(); return }
         }
-        .store(in: &Self.cancellables)
+        timerCancellable!
+            .store(in: &Self.cancellables)
+    }
+
+    func haltTimer() {
+        expired = true
+        timerCancellable?.cancel()
     }
 }
 
