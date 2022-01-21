@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 func isolation() -> AnyPublisher<Timer.TimerPublisher.Output, Never> {
-    let tp = Timer.publish(every: 1, tolerance: 0.01, on: .main, in: .default, options: nil)
+    let tp = Timer.publish(every: 0.01, tolerance: 0.005, on: .main, in: .default, options: nil)
         .autoconnect()
         .eraseToAnyPublisher()
     return tp
@@ -20,7 +20,7 @@ final class WrappedTimer: ObservableObject {
     @Published var seconds: TimeInterval
     @Published var fractionalSeconds: TimeInterval
     @Published var integerSeconds: Int
-    @Published var downSeconds: TimeInterval
+    @Published var downSeconds: Int
     let startDate: Date
     let countdownInterval: TimeInterval
 
@@ -28,7 +28,7 @@ final class WrappedTimer: ObservableObject {
 
     init(_ limit: TimeInterval) {
         (seconds, integerSeconds, fractionalSeconds) = (0, 0, 0)
-        downSeconds = limit
+        downSeconds = Int(limit.rounded(.down))
         countdownInterval = limit
         timePublisher = isolation()
         startDate = Date()
@@ -41,7 +41,7 @@ final class WrappedTimer: ObservableObject {
             self.seconds = date.timeIntervalSince(self.startDate)
             self.integerSeconds = Int(self.seconds.rounded(.towardZero))
             self.fractionalSeconds = self.seconds - Double(self.integerSeconds)
-            self.downSeconds = self.seconds - self.countdownInterval
+            self.downSeconds = Int(self.countdownInterval - Double(self.integerSeconds))
         }
         .store(in: &Self.cancellables)
     }
