@@ -49,71 +49,17 @@ enum Voice {
                 AVSpeechSynthesisVoice(language: "en-US")!
     }
 
-    static func stop(now: Bool = false) {
-        DispatchQueue.main.async {
-            speakerObject.stop(now: now)
-        }
+    /// Pronounce a `String` in this voice.
+    ///
+    /// Implemented in terms of `TimeSpeaker.say(_:with:)`
+    /// - Parameter str: The text to pronounce
+    /// - Returns: The reason (finished or cancelled) the speech stopped.
+    func say(_ str: String) async -> ReasonStoppedSpeaking {
+        await TimeSpeaker.shared.say(str, with: self)
     }
 }
 
-class _CountdownSpeaker: NSObject, AVSpeechSynthesizerDelegate {
-    weak var delegate: CountdownSpeakerDelegate?
-
-    static let voice: AVSpeechSynthesisVoice? = {
-        return AVSpeechSynthesisVoice(identifier: "en-US")
-    }()
-    static let speechSynthesizer = AVSpeechSynthesizer()
-
-    override init() {
-        super.init()
-        _CountdownSpeaker.speechSynthesizer.delegate = self
-    }
-
-    func say(_ string: String, in voice: Voice,
-             delayByMS delay: Int = 0) async {
-        if delay == 0 {
-            voice.say(string)
-            delegate?.countdownSpeakerDidStartSaying(string)
-        }
-        else {
-            let hesitation = DispatchSource.makeTimerSource(
-                flags: [], queue: DispatchQueue.main)
-            let deadline =  DispatchWallTime.now()
-                + DispatchTimeInterval.milliseconds(delay)
-            hesitation.schedule(wallDeadline: deadline)
-            hesitation.setEventHandler {
-                self.say(string, in: voice)
-            }
-            hesitation.resume()
-        }
-    }
-
-    func stop(now: Bool) {
-        let when: AVSpeechBoundary = now ? .immediate : .word
-        _CountdownSpeaker.speechSynthesizer.pauseSpeaking(at: when)
-    }
-
-
-    // MARK: Speech delegate
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        delegate?
-            .countdownSpeakerDidFinishSaying(
-                utterance.speechString)
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        delegate?
-            .countdownSpeakerDidStartSaying(utterance.speechString)
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-    }
- }
-
+/// The reason an utterance stopped: finished, canceled, or error.
 enum ReasonStoppedSpeaking {
     case complete
     case canceled
@@ -124,16 +70,18 @@ enum ReasonStoppedSpeaking {
 ///
 /// This is where the completion callbacks are collected and transmitted to the async continuation as the return value.
 final class TimeSpeaker: NSObject {
-    @EnvironmentObject var timer: WrappedTimer
-    // I'd like to be able to put in the "get-ready" and "can-halt" instructions.
+    /// Singleton speaker
+    static let shared = TimeSpeaker()
 
-    let voiceSynthesizer: AVSpeechSynthesizer
-    var speechContinuation: CheckedContinuation<ReasonStoppedSpeaking, Never>?
+    // TODO: I'd like to be able to put in the "get-ready" and "can-halt" instructions.
+
+    private let voiceSynthesizer: AVSpeechSynthesizer
+    private var speechContinuation: CheckedContinuation<ReasonStoppedSpeaking, Never>!
 
     override init() {
         voiceSynthesizer = AVSpeechSynthesizer()
-        voiceSynthesizer.delegate = self
         super.init()
+        voiceSynthesizer.delegate = self
     }
 }
 
@@ -144,6 +92,7 @@ extension TimeSpeaker: AVSpeechSynthesizerDelegate {
     /// - bug: Should check for cancellation.
     func say(_ string: String, with voice: Voice) async -> ReasonStoppedSpeaking {
         await withCheckedContinuation { (continuation: CheckedContinuation<ReasonStoppedSpeaking,Never>) -> Void in
+            guard !Task.isCancelled else { continuation.resume(returning: .canceled); return }
             self.speechContinuation = continuation
             self.voiceSynthesizer.speak(utterance(with: voice, saying: string))
 
@@ -172,11 +121,11 @@ extension TimeSpeaker: AVSpeechSynthesizerDelegate {
 
     ///`AVSpeechSynthesizerDelegate` method at completion.
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        self.speechContinuation?.resume(returning: .complete)
+        self.speechContinuation.resume(returning: .complete)
     }
 
     ///`AVSpeechSynthesizerDelegate` method at cancellation.
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        self.speechContinuation?.resume(returning: .canceled)
+        self.speechContinuation.resume(returning: .canceled)
     }
 }
