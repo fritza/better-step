@@ -10,10 +10,17 @@ import Combine
 import SwiftUI
 import AVFoundation
 
-
+/// rate, pitch, and synthesis of a particular style of speech.
+///
+/// - `.routine`: Ordinary speech
+/// - `.clipped`: Time-specific speech, such as "start walking"
+/// - `.instructional`: Narrative of the next task
+///
+/// - note: At this writing,` .routine `and `.instructional` are the same.
 enum Voice {
     case routine, clipped, instructional
 
+    /// The pace at which the utterance is spoken; `clipped` is a bit faster.
     var rate: Float {
         switch self {
         case .routine: return 0.45
@@ -22,6 +29,7 @@ enum Voice {
         }
     }
 
+    /// The pitch of the speech: `clipped` is a bit higher
     var pitch: Float {
         switch self {
         case .routine: return 1.0
@@ -30,66 +38,15 @@ enum Voice {
         }
     }
 
+    /// The speech synthesizer for this voice
+    ///
+    /// - note: Which voice `self` is has no effect at this writing.
     var voice: AVSpeechSynthesisVoice {
         let language = Locale.current.identifier
         // The US voice is guaranteed, so forced unwrap is okay (or fatal)
         return
             AVSpeechSynthesisVoice(language: language) ??
                 AVSpeechSynthesisVoice(language: "en-US")!
-    }
-
-    func utterance(saying str: String) -> AVSpeechUtterance {
-        let retval = AVSpeechUtterance(string: str)
-        retval.rate = rate
-        retval.pitchMultiplier = pitch
-        retval.voice = voice
-        return retval
-    }
-
-//    func say(_ str: String) {
-//        DispatchQueue.main
-//            .async {
-//                CountdownSpeaker
-//                    .voiceSynthesizer
-//                    .speak(
-//                        self.utterance(saying: str))
-//        }
-//    }
-
-    typealias SpeechContinuation = CheckedContinuation<Void, Never>
-    static var speechContinuation: SpeechContinuation?
-    func say(_ str: String) async {
-        await withCheckedContinuation { (continuation: SpeechContinuation) in
-            Self.speechContinuation = continuation
-            CountdownSpeaker.voiceSynthesizer.speak(self.utterance(saying: str))
-        }
-    }
-}
-
-protocol CountdownSpeakerDelegate: AnyObject {
-    func countdownSpeakerDidFinishSaying(_ string: String)
-    func countdownSpeakerDidStartSaying(_ string: String)
-}
-
-enum CountdownSpeaker {
-    static var voiceSynthesizer: AVSpeechSynthesizer {
-        return _CountdownSpeaker.speechSynthesizer
-    }
-
-    static let speakerObject: _CountdownSpeaker = {
-        return _CountdownSpeaker()
-    }()
-
-    static var delegate: CountdownSpeakerDelegate? {
-        get { return speakerObject.delegate }
-        set { speakerObject.delegate = newValue }
-    }
-
-    static func say(_ string: String, in voice: Voice,
-                    delayByMS delay: Int = 0) {
-        DispatchQueue.main.async {
-            speakerObject.say(string, in: voice, delayByMS: delay)
-        }
     }
 
     static func stop(now: Bool = false) {
@@ -163,6 +120,9 @@ enum ReasonStoppedSpeaking {
     case error(Error)
 }
 
+/// Interface between client code and `AVSpeechSynthesizer`
+///
+/// This is where the completion callbacks are collected and transmitted to the async continuation as the return value.
 final class TimeSpeaker: NSObject {
     @EnvironmentObject var timer: WrappedTimer
     // I'd like to be able to put in the "get-ready" and "can-halt" instructions.
@@ -178,14 +138,26 @@ final class TimeSpeaker: NSObject {
 }
 
 extension TimeSpeaker: AVSpeechSynthesizerDelegate {
-    func say(_ string: String, with voice: Voice) async {
+    /// Pronounce a string at a given pitch and speed.
+    ///
+    /// - returns: `ReasonStoppedSpeaking`, whether the speech finished by completion or cancellation.
+    /// - bug: Should check for cancellation.
+    func say(_ string: String, with voice: Voice) async -> ReasonStoppedSpeaking {
         await withCheckedContinuation { (continuation: CheckedContinuation<ReasonStoppedSpeaking,Never>) -> Void in
             self.speechContinuation = continuation
             self.voiceSynthesizer.speak(utterance(with: voice, saying: string))
+
+            // As I understand it, then, the return value comes from the
+            // continuation calls in the delegate callbacks.
         }
     }
 
-    func utterance(with voice: Voice, saying str: String) -> AVSpeechUtterance {
+    /// Create a synthesizer "utterance," or text tagged with voice, rate and pitch.
+    /// - Parameters:
+    ///   - voice: A `Voice` supplying the parameters for the speech fragment.
+    ///   - str: The text to pronounce.
+    /// - Returns: An iinitialized `AVSpeechUtterance` for the text and manner.
+    private func utterance(with voice: Voice, saying str: String) -> AVSpeechUtterance {
         let retval = AVSpeechUtterance(string: str)
         retval.rate = voice.rate
         retval.pitchMultiplier = voice.pitch
@@ -193,14 +165,17 @@ extension TimeSpeaker: AVSpeechSynthesizerDelegate {
         return retval
     }
 
+    ///`AVSpeechSynthesizerDelegate` method at start of pronouncing the utterance.
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        // Nothing to return with.
+        // Nothing to do.
     }
 
+    ///`AVSpeechSynthesizerDelegate` method at completion.
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         self.speechContinuation?.resume(returning: .complete)
     }
 
+    ///`AVSpeechSynthesizerDelegate` method at cancellation.
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         self.speechContinuation?.resume(returning: .canceled)
     }
