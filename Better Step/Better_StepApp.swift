@@ -14,7 +14,7 @@ struct Better_StepApp: App {
         Configurations(startingEmail: "Joe@user.net", duration: 2)
     }
 
-    static var commonReport = DASIReport(forSubject: "AppLevelReport")
+    static var commonReport = DASIReportContents(forSubject: "AppLevelReport")
 
     var body: some Scene {
         WindowGroup {
@@ -25,11 +25,13 @@ struct Better_StepApp: App {
                         Text("Survey")
                     }
                 WalkView()
+                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "figure.walk")
                         Text("Walk")
                     }
                 Text("Reporting Tab")
+                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "doc.text")
                         Text("Report")
@@ -39,6 +41,7 @@ struct Better_StepApp: App {
                         self.setupEnvironment
                         //                        Configurations(startingEmail: "fritza@mac.com", duration: 6)
                     )
+                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setup")

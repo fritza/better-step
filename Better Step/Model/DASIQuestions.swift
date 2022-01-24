@@ -34,7 +34,7 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
 
 // MARK: - DASIQuestion
 struct DASIQuestion: Identifiable, Codable, Comparable {
-    let id: Int
+    var id: QuestionID
     let text: String
     let score: Double
     let identifier: String  // Not used
@@ -50,8 +50,8 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
         return retval
     }()
     #warning("Check index versus ID.")
-    static func with(id questionID: Int) -> DASIQuestion {
-        return questions[questionID-1]
+    static func with(id questionID: QuestionID) -> DASIQuestion {
+        return questions[questionID.index]
     }
 
     static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }

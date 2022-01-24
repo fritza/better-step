@@ -13,7 +13,7 @@ import SwiftUI
 struct DASIQuestionView: View {
     @State private var thisQuestion: DASIQuestion
     @EnvironmentObject var showingQuestions: BoolBearer
-    @EnvironmentObject var myDocument: DASIReportDocument
+    @EnvironmentObject var reportContents: DASIReportContents
 
     static let yesNoWidth: CGFloat = 80
 
@@ -26,7 +26,7 @@ struct DASIQuestionView: View {
     }
 
 
-    var report: DASIReport { myDocument.report }
+    var report: DASIReportContents { myDocument.report }
     private var questionID: Int { thisQuestion.id }
 
     private func recordAnswer(as newAnswer: AnswerState) {
