@@ -14,41 +14,6 @@ enum FileStorageErrors: Error {
     case cantCreateFileAt(URL)
 }
 
-
-extension FileManager {
-    func somethingExists(atURL url: URL)
-    -> (exists: Bool, isDirectory: Bool) {
-        var isDirectory: ObjCBool = false
-        let result = self.fileExists(atPath: url.path,
-                                   isDirectory: &isDirectory)
-        return (exists: result, isDirectory: isDirectory.boolValue)
-    }
-
-    func fileExists(atURL url: URL) -> Bool {
-        let (exists, directory) = somethingExists(atURL: url)
-        return exists && !directory
-    }
-
-    func directoryExists(atURL url: URL) -> Bool {
-        let (exists, directory) = somethingExists(atURL: url)
-        return exists && directory
-    }
-
-    func deleteAndCreate(at url: URL) throws {
-        if fileExists(atURL: url) {
-            // Discard any existing file.
-            try removeItem(at: url)
-        }
-        guard createFile(
-            atPath: url.path,
-            contents: nil, attributes: nil) else {
-                throw FileStorageErrors
-                    .cantCreateFileAt(url)
-        }
-    }
-}
-
-
 final class SubjectFileCoordinator {
     enum FlatFiles: String {
         case dasiReportFile = "DASI.csv"
@@ -184,7 +149,7 @@ extension SubjectFileCoordinator {
 // Not so much for DASI, but certainly the accelerometry.
 }
 
-final class AccelerometerFileSink {
+final actor AccelerometerFileSink {
     let highWatermark = 100
     let lowWatermark  = 100
     let dequeSize     = 1_000

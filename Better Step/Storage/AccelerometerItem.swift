@@ -8,19 +8,6 @@
 import Foundation
 import CoreMotion
 
-private let _pointThree: NumberFormatter = {
-    let retval = NumberFormatter()
-    retval.minimumIntegerDigits = 1
-    retval .minimumFractionDigits = 3
-    retval.maximumFractionDigits  = 3
-    return retval
-}()
-
-extension BinaryFloatingPoint {
-    var pointThree: String {
-        _pointThree.string(from: self as! NSNumber)!
-    }
-}
 
 struct AccelerometerItem: Codable, Timestamped, XYZ  {
     let x, y, z: Double

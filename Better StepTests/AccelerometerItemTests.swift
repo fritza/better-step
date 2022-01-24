@@ -9,20 +9,6 @@ import XCTest
 import CoreMotion
 @testable import Better_Step
 
-let _pointThree: NumberFormatter = {
-    let retval = NumberFormatter()
-    retval.minimumIntegerDigits = 1
-    retval .minimumFractionDigits = 3
-    retval.maximumFractionDigits  = 3
-    return retval
-}()
-
-extension BinaryFloatingPoint {
-    var pointThree: String {
-        _pointThree.string(from: self as! NSNumber)!
-    }
-}
-
 class BinaryFormatTests: XCTestCase {
     func testPointThree() {
         let expected = [

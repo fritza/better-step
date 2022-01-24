@@ -8,15 +8,6 @@
 import SwiftUI
 import Combine
 
-extension CGSize {
-    var short: CGFloat {
-        [width, height].min()!
-    }
-    var long: CGFloat {
-        [width, height].max()!
-    }
-}
-
 struct SweepSecondView: View {
     @EnvironmentObject var timer: WrappedTimer
 

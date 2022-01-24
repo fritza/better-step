@@ -22,7 +22,18 @@ extension BinaryInteger {
     }
 }
 
+private let _pointThree: NumberFormatter = {
+    let retval = NumberFormatter()
+    retval.minimumIntegerDigits = 1
+    retval .minimumFractionDigits = 3
+    retval.maximumFractionDigits  = 3
+    return retval
+}()
+
 extension BinaryFloatingPoint {
+    var pointThree: String {
+        _pointThree.string(from: self as! NSNumber)!
+    }
     /// Render a `BinaryFloatingPoint` (_e.g._`Double`) as a spelled-out `String`
     var spelled: String {
         let asSeconds = Int(Double(self).rounded())
