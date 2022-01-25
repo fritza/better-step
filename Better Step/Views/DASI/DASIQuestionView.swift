@@ -22,15 +22,13 @@ struct DASIQuestionView: View {
 
     // Remember question.id starts from 1
     private var thisAnswer: AnswerState {
-        return report.responseForQuestion(id: thisQuestion.id)
+        return reportContents.responseForQuestion(id: thisQuestion.id)
     }
 
-
-    var report: DASIReportContents { myDocument.report }
-    private var questionID: Int { thisQuestion.id }
+    private var questionID: QuestionID { thisQuestion.id }
 
     private func recordAnswer(as newAnswer: AnswerState) {
-        report.didRespondToQuestion(
+        reportContents.didRespondToQuestion(
             id: thisQuestion.id,
             with: newAnswer)
     }
@@ -40,7 +38,7 @@ struct DASIQuestionView: View {
         // Question IDs are one-based.
         // resopnseForQuestion takes a one-based ID
         Label("Yes", systemImage:
-                (report.responseForQuestion(id: questionID) == .yes) ?
+                (reportContents.responseForQuestion(id: questionID) == .yes) ?
               "checkmark" : "")
     }
 
@@ -48,13 +46,13 @@ struct DASIQuestionView: View {
         // Question IDs are one-based.
         // resopnseForQuestion takes a one-based ID
         Label("No", systemImage:
-                (report.responseForQuestion(id: questionID) == .no) ?
+                (reportContents.responseForQuestion(id: questionID) == .no) ?
               "checkmark" : "")
     }
 
     init(question: DASIQuestion) {
         self.thisQuestion = question
-//        thisAnswer = report.responseForQuestion(id: question.id)
+//        thisAnswer = reportContents.responseForQuestion(id: question.id)
     }
 
     func prepareForQuestion(_ newCurrentQuestion: DASIQuestion) {
@@ -149,10 +147,10 @@ struct DASIQuestionView_Previews: PreviewProvider {
     static let bearer = BoolBearer(initially: false)
     static var previews: some View {
         DASIQuestionView(
-            question: DASIQuestion.with(id: 9)
+            question: DASIQuestion.with(id: QuestionID(rawValue: 9))
         )
             .padding()
             .environmentObject(bearer)
-            .environmentObject(DASIReportDocument())
+            .environmentObject(DASIReportContents(forSubject: "ABCDE"))
     }
 }
