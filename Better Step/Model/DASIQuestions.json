@@ -2,61 +2,49 @@
     {
 		"id": 1,
         "text": "Can you take care of yourself (eating, dressing, bathing or using the toilet)?",
-        "identifier": "self-care",
         "score": 2.75 },
     {
 		"id": 2,
         "text": "Can you walk indoors, such as around your house?",
-        "identifier": "walk-indoors",
         "score": 1.75 },
     {
 		"id": 3,
         "text": "Can you walk a block or two on level ground?",
-        "identifier": "walk-outdoors",
         "score": 2.75 },
     {
 		"id": 4,
         "text": "Can you climb a flight of stairs or walk up a hill?",
-        "identifier": "climb-stairs",
         "score": 5.5 },
     {
 		"id": 5,
         "text": "Can you run a short distance?",
-        "identifier": "short-run",
         "score": 8.0 },
     {
 		"id": 6,
         "text": "Can you do light work around the house, such as dusting or washing dishes?",
-        "identifier": "housework-light",
         "score": 2.7 },
     {
 		"id": 7,
         "text": "Can you do moderate work around the house, such as vacuuming, sweeping floors or carrying in groceries?",
-        "identifier": "housework-moderate",
         "score": 3.5 },
     {
 		"id": 8,
         "text": "Can you do heavy work around the house, such as scrubbing floors or lifting and moving heavy furniture?",
-        "identifier": "housework-heavy",
         "score": 8.0 },
     {
 		"id": 9,
         "text": "Can you do yard work, such as raking leaves, weeding or pushing a power mower?",
-        "identifier": "yard-work",
         "score": 4.5 },
     {
 		"id": 10,
         "text": "Can you have sexual relations?",
-        "identifier": "sex",
         "score": 5.25 },
     {
 		"id": 11,
         "text": "Can you participate in moderate recreational activities, such as golf, bowling, dancing, doubles tennis or throwing a baseball or football?",
-        "identifier": "sports-moderate",
         "score": 6.0 },
     {
 		"id": 12,
         "text": "Can you participate in strenuous sports, such as swimming, singles tennis, football, basketball or skiing?",
-        "identifier": "sports-strenuous",
         "score": 7.5 }
 ]

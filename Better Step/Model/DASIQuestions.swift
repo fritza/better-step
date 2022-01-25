@@ -37,7 +37,6 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
     var id: QuestionID
     let text: String
     let score: Double
-    let identifier: String  // Not used
 
     // WARNING: the ID is 1-based
     static let questions: [DASIQuestion] = {
@@ -49,7 +48,7 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
         let retval =  try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
         return retval
     }()
-    #warning("Check index versus ID.")
+
     static func with(id questionID: QuestionID) -> DASIQuestion {
         return questions[questionID.index]
     }
@@ -60,16 +59,14 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
 
 extension DASIQuestion {
     var next: DASIQuestion? {
-        let proposed = id + 1
-        guard proposed < Self.questions.count else {
-            return nil
-        }
+        guard let proposed = id.succ,
+              proposed.index < Self.questions.count else { return nil }
         return Self.with(id: proposed)
     }
 
     var previous: DASIQuestion? {
-        let proposed = id - 1
-        guard proposed >= 1 else {
+        guard let proposed = id.pred,
+              proposed.isValid else {
             return nil
         }
         return Self.with(id: proposed)
