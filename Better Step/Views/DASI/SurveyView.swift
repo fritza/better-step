@@ -52,9 +52,8 @@ struct SurveyView: View {
                         () -> AnyView in
                         return AnyView(DASIQuestionView(
                             question: DASIQuestion.with(id: QuestionID(rawValue: 1)))
-                        .environmentObject(wrappedShowing)
-                        }()
-                    ,
+                                        .environmentObject(wrappedShowing))
+                                       }(),
                     isActive: {
                         let retval = $wrappedShowing.showQuestions
                         return retval
