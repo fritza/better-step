@@ -7,41 +7,41 @@
 
 import Foundation
 import Combine
+import UniformTypeIdentifiers
 
-/// The ID of a question. Its rawValue is that ID, _not_ its position in a question array.
-struct QuestionID: RawRepresentable, Equatable, Comparable, Codable, Hashable, CustomStringConvertible {
-    static func < (lhs: QuestionID, rhs: QuestionID) -> Bool {
-        lhs.rawValue < rhs.rawValue
-    }
-    static func == (lhs: QuestionID, rhs: QuestionID) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
+/*
+ # Theory behind DASI reporting.
 
-    let rawValue: Int
-    init(rawValue: Int) { self.rawValue = rawValue }
-    init(index: Int) { self.rawValue = index + 1 }
-    var index: Int { self.rawValue - 1 }
+ # Primitive data structures
 
-    func offset(by offset: Int) -> QuestionID? {
-        let nextRawValue = rawValue + offset
-        guard nextRawValue >= 0 else { return nil }
-        return QuestionID(rawValue: nextRawValue)
-    }
+ * Questions as such: Text, ID, and scoring.
+    * struct `DASIQuestion`
+    * The literature identifies questions by 1-based serials, meaning the ID is one more than the index in an array of questions.
+    * Read from `DASIQuestions.json`
+    * The list is an immutable global: DASIQuestion.questions.
+    * THIS IS AN ARRAY, zero-indexed, and it is public.
+    * TO DO: hide .questions and expose a subscript by QuestionID. static with(id:) should be a subscript.
+    * TO DO: Remove the "identifier" property, which is in the .plist data, and a codable part of the struct.
 
-    var pred: QuestionID? {
-        self.offset(by: -1)
-    }
-    var succ: QuestionID? {
-        self.offset(by:  1)
-    }
+    * Indexed by QuestionID:
 
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(rawValue)
-    }
+ WHAT IS DASIReport, and why is it no longer in the build order?
+ */
 
-    var description: String { "Qid: \(rawValue)" }
-    var isValid: Bool { rawValue >= 1 }
+enum DASIReportErrors: Error {
+    case wrongDataType(UTType)
+    case notRegularFile
+    case noReadableReport
+    case missingDASIHeader(String)
+    case wrongNumberOfResponseElements(Int, Int)
 }
+
+
+/*
+ Deleted DASIReport.swift and DASIReportDocument.swift.
+
+ Moved coding notes and DASIReportErrors to DASIReportContents.swift
+ */
 
 // TODO: answers should never be empty.
 //       if you need to empty it,

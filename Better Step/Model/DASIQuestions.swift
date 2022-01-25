@@ -46,6 +46,9 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
         }
         let dasiData = try! Data(contentsOf: dasiURL)
         let retval =  try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
+
+        // Client code must set the upper bound for question indices to the number of elements read.
+        QuestionID.questionCount = retval.count
         return retval
     }()
 
