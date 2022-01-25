@@ -29,7 +29,6 @@
 		1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FD45691279F40B600B5429A /* DASIReportContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIReportContents.swift */; };
 		1FD45695279F589A00B5429A /* DASIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45694279F589900B5429A /* DASIResponse.swift */; };
-		1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA0508278CE2BF00E908EB /* DASIReport.swift */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
 		1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B342799D54100E319ED /* AccelerationWriter.swift */; };
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
@@ -457,7 +456,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FEA0509278CE2BF00E908EB /* DASIReport.swift in Sources */,
 				1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */,
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,

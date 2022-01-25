@@ -72,35 +72,3 @@ extension DASIQuestion {
         return Self.with(id: proposed)
     }
 }
-
-// MARK: - DASIResponse
-struct DASIResponse: Identifiable, Codable {
-    let id: Int
-    let response: AnswerState
-
-    var score: Double {
-        let question = DASIQuestion.with(id: self.id)
-        return (response == .yes) ? question.score : 0
-    }
-
-    static let emptyResponses: [DASIResponse] = {
-        let retval =  DASIQuestion.questions
-            .map { DASIResponse(id: $0.id, response: .unknown) }
-
-        return retval
-    }()
-}
-
-// MARK: - String representation
-extension DASIResponse: Comparable, CustomStringConvertible {
-    static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
-    static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
-
-    var csvStrings: [String] {
-        [ String(id), "\(response)" ]
-    }
-
-    var description: String {
-        csvStrings.joined(separator: ",")
-    }
-}

@@ -51,9 +51,8 @@ struct SurveyView: View {
                     destination: {
                         () -> AnyView in
                         return AnyView(DASIQuestionView(
-                            question: DASIQuestion.with(id: 1))
+                            question: DASIQuestion.with(id: QuestionID(rawValue: 1)))
                         .environmentObject(wrappedShowing)
-                                       )
                         }()
                     ,
                     isActive: {

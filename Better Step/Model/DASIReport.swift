@@ -12,10 +12,41 @@ import UniformTypeIdentifiers
 import CodableCSV
 
 /*
+ # Theory behind DASI reporting.
+
+ # Primitive data structures
+
+ * Questions as such: Text, ID, and scoring.
+    * struct `DASIQuestion`
+    * The literature identifies questions by 1-based serials, meaning the ID is one more than the index in an array of questions.
+    * Read from `DASIQuestions.json`
+    * The list is an immutable global: DASIQuestion.questions.
+    * THIS IS AN ARRAY, zero-indexed, and it is public.
+    * TO DO: hide .questions and expose a subscript by QuestionID. static with(id:) should be a subscript.
+    * TO DO: Remove the "identifier" property, which is in the .plist data, and a codable part of the struct.
+
+    * Indexed by QuestionID:
+
+ WHAT IS DASIReport, and why is it no longer in the build order?
+ */
+
+
+enum DASIReportErrors: Error {
+    case wrongDataType(UTType)
+    case notRegularFile
+    case noReadableReport
+    case missingDASIHeader(String)
+    case wrongNumberOfResponseElements(Int, Int)
+}
+
+
+/*
  What I want to know:
  I don't have the user ID immediately upon opening
  But I need to access the document based on the user ID.
  */
+
+@available(*, unavailable, message: "Use DASIReportContents instead")
 
 // A DASI report is an array of all DASI responses, verify it'e all IDs, all consecutive.
 // MARK: - DASIReport
@@ -33,14 +64,17 @@ final class DASIReport: ObservableObject, Codable {
         var answerList: [DASIResponse] = []
         while let record = try reader.readRecord() {
             guard let numberField = record["Number"],
-                  let recordNumber = Int(numberField) else {
-                      throw DASIReportDocument.Errors.missingDASIHeader("Number")
+                  let recordNumber = Int(numberField)
+            else {
+                      throw DASIReportErrors.missingDASIHeader("Number")
                   }
             guard let responseField = record["Response"],
                   let response = AnswerState(described: responseField) else {
-                      throw DASIReportDocument.Errors.missingDASIHeader("Response")
+                      throw DASIReportErrors.missingDASIHeader("Response")
                   }
-            let element = DASIResponse(id: recordNumber, response: response)
+
+            let recordID = QuestionID(rawValue: recordNumber)
+            let element = DASIResponse(id: recordID, response: response)
             answerList.append(element)
         }
         precondition(answerList.count == 12,
@@ -56,7 +90,9 @@ final class DASIReport: ObservableObject, Codable {
     init(forSubject subjectID: String? = nil) {
         self.subjectID = subjectID
         timestamp = Date()
-        answers = DASIResponse.emptyResponses
+        answers = []
+        #warning("Get a DASIReport answer list if needed")
+        //DASIResponse.emptyResponses
     }
 
     var score: Double {
@@ -67,7 +103,7 @@ final class DASIReport: ObservableObject, Codable {
         return retval
     }
 
-    func responseForQuestion(id: Int) -> AnswerState {
+    func responseForQuestion(id: QuestionID) -> AnswerState {
         guard let theResponse = answers.first(where: {
             // Question ID starts from 1
             $0.id == id }) else {
@@ -76,7 +112,7 @@ final class DASIReport: ObservableObject, Codable {
         return theResponse.response
     }
 
-    func didRespondToQuestion(id questionID: Int,
+    func didRespondToQuestion(id questionID: QuestionID,
                            with state: AnswerState) {
         let newResponse = DASIResponse(id: questionID,
                                        response: state)
@@ -87,7 +123,11 @@ final class DASIReport: ObservableObject, Codable {
         timestamp = Date()
     }
 
-    func resetQuestion(id questionID: Int) {
+    /* ***************************************************
+     OBSOLETE IN FAVOR OF DASIREPORTCONTENTS
+       *************************************************** */
+
+    func resetQuestion(id questionID: QuestionID) {
         answers.removeAll { $0.id == questionID }
     }
 

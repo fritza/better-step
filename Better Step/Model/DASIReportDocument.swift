@@ -5,24 +5,33 @@
 //  Created by Fritz Anderson on 1/12/22.
 //
 
+
+/* *******************************
+
+ REMOVED FROM THE BUILD ORDER
+
+ ******************************* */
+
 import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 import CodableCSV
+//
+//enum DASIReportErrors: Error {
+//    case wrongDataType(UTType)
+//    case notRegularFile
+//    case noReadableReport
+//    case missingDASIHeader(String)
+//    case wrongNumberOfResponseElements(Int, Int)
+//}
+
 
 // MARK: - DASIReportDocument
+@available(*, unavailable, message: "Use DASIReportContents instead")
 final class DASIReportDocument: ReferenceFileDocument, ObservableObject
 //, Codable
 {
     typealias Snapshot = DASIReport
-
-    enum Errors: Error {
-        case wrongDataType(UTType)
-        case notRegularFile
-        case noReadableReport
-        case missingDASIHeader(String)
-        case wrongNumberOfResponseElements(Int, Int)
-    }
 
     static var readableContentTypes = [UTType.commaSeparatedText]
     @Published var report: DASIReport
@@ -54,7 +63,7 @@ final class DASIReportDocument: ReferenceFileDocument, ObservableObject
               wrapper.isRegularFile,
 
               let data = wrapper.regularFileContents else {
-                  throw Errors.wrongDataType(fileType)
+                  throw DASIReportErrors.wrongDataType(fileType)
               }
         report = try DASIReport(data: data)
     }
