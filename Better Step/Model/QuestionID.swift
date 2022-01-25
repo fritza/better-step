@@ -95,10 +95,8 @@ struct QuestionID: RawRepresentable, Codable,
     ///
     /// If not, the ID does not correspond to a known question. Its `index` would point beyond the bounds of a question array.
     var isValid: Bool {
-        let retval = (1..<Self.questionCount)
+        let retval = (1...Self.questionCount)
             .contains(rawValue)
-        assert(retval == (self.index < Self.questionCount))
-        assert(retval == (self.index >= 0))
         return retval
     }
 }
