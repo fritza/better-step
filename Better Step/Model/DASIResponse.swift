@@ -19,13 +19,11 @@ struct DASIResponse: Identifiable, Codable {
     /// - Parameters:
     ///   - id: The ID for this questin (wrapped 1-base index)
     ///   - response: `yes`, `no`, or `unknown`
-    ///   - timestamp: The time at which this value was created, therefore the time of a response was made. This is defaulted to the current time. The `timestamp` is maintained automatically, you should not need to pass this parameter.
     init(id: QuestionID,
-         response: AnswerState = .unknown,
-         timestamp: Date = Date()) {
+         response: AnswerState = .unknown) {
         self.id = id
         self.response = response
-        self.timestamp = timestamp
+        self.timestamp = Date()
     }
 
     /// The score the current response to thie question contributes to the overall score for the instrument.
@@ -39,11 +37,10 @@ struct DASIResponse: Identifiable, Codable {
     ///   - response: `yes`, `no`, or `unknown`.
     ///   - stamp: The time at which this was called, therefore the time a value was last generated. You are expected not to touch this parameter
     /// - Returns: A new `DASIRseponse` reflecting the new answer state.
-    func withResponse(_ response: AnswerState,
-                      at stamp: Date = Date()) -> DASIResponse {
+    func withResponse(_ response: AnswerState) -> DASIResponse {
         DASIResponse(id: id,
-                     response: response,
-                     timestamp: stamp)
+                     response: response)
+        // Timestamp updates in init()
     }
 }
 
@@ -57,12 +54,14 @@ extension DASIResponse: Comparable, CustomStringConvertible {
     /// Format the ID and response attributes into an array of `String`. Callers are expected to concatenate this array with global attributes: the subject ID and lhe time the CSV file was created.
     ///
     /// **See also** `DASIReportContents.CSVDASIRecords`
-    ///
-    /// - bug: Should the reported DASI record use the time-answered, or each of them carrying the same timestamp?
     var csvStrings: [String] {
-        [String(describing: id),
-         String(describing: response)
-         ]
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = .withInternetDateTime
+        return [
+            isoFormatter.string(from: timestamp),
+            String(describing: id),
+            String(describing: response)
+        ]
     }
 
     /// `CustomStringConvertible` adoption

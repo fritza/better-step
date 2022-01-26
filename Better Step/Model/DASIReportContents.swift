@@ -72,6 +72,7 @@ The `String` returned by `csvDASIRecords` can be converted to `Data`, and writte
  * `DASIReportDocument
 */
 
+// MARK: - DASIReportErrors
 enum DASIReportErrors: Error {
     case wrongDataType(UTType)
     case notRegularFile
@@ -87,25 +88,21 @@ enum DASIReportErrors: Error {
  Moved coding notes and DASIReportErrors to DASIReportContents.swift
  */
 
-// TODO: answers should never be empty.
-//       if you need to empty it,
-//       repopulate it with unresponded
-
+// MARK: - DASIReportContents
 final class DASIReportContents: ObservableObject {
     var subjectID: String?
     public private(set) var answers: [DASIResponse]
-//    public private(set) var timestamp: Date
 
     /// Create `DASIReportContents` starting from the subject's ID.
     /// - parameter subjectID: The study's identifier for the subject.
     init(forSubject subjectID: String? = nil) {
         self.subjectID = subjectID
-//        self.timestamp = Date()
         self.answers   = DASIQuestion
             .questions
             .map { DASIResponse(id: $0.id, response: .unknown) }
     }
 
+    // MARK: Responses
     /// The user's response to a question.
     ///
     /// Think of this as the inverse of `didRespondToQuestion(id:with:)`
@@ -134,6 +131,7 @@ final class DASIReportContents: ObservableObject {
             answers[questionID.index]
             = answers[questionID.index]
                 .withResponse(state)
+            // Timestamp updates in withResponse(_:)
         }
 
     /// The `QuestionID`s of all responses that are still `.unknown`
@@ -149,6 +147,7 @@ final class DASIReportContents: ObservableObject {
     func resetQuestion(id: QuestionID) {
         let newValue = answers[id.index]
             .withResponse(.unknown)
+        // Timestamp updates in init()
         answers[id.index] = newValue
     }
 
@@ -156,20 +155,17 @@ final class DASIReportContents: ObservableObject {
     func reset() {
         let result = answers.map {
             $0.withResponse(.unknown)
+            // Timestamp updates in init()
         }
         self.answers = result
     }
 
+    // MARK: CSV formatting
     /// All DASI responses formatted into multiple lines of `csv`.
     ///
     /// The line delimiter, per Microsoft spec, is "`\r\n`".
     var csvDASIRecords: String {
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = .withInternetDateTime
-
-        #warning("Is the per-record timestamp time of setting the value, orof generating this report?")
-        let prefix = [subjectID ?? "n/a", isoFormatter.string(from: Date())
-                      ]
+        let prefix = [subjectID ?? "n/a"]
         // Array of the CSV strings for the answers.
         let eachLine = answers
             .flatMap {
