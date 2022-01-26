@@ -151,6 +151,6 @@ struct DASIQuestionView_Previews: PreviewProvider {
         )
             .padding()
             .environmentObject(bearer)
-            .environmentObject(DASIReportContents(forSubject: "ABCDE"))
+            .environmentObject(DASIReportContents())
     }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 import Collections
 
 final class SubjectFileCoordinator {
+    @AppStorage(AppStorageKeys.subjectID.rawValue) var sid: String = "NA"
+
     // TODO: zip the output directory
     // TODO: Validate ready-to-zip
     //       Both files exist
@@ -33,7 +35,7 @@ final class SubjectFileCoordinator {
     // Interesting Idea: Put the subject ID into UserDefaults.
     // Should we be picking up the magnitude setting?
 
-    @AppStorage("reportAsMagnitude") var asMagnitude = false
+    @AppStorage(AppStorageKeys.reportAsMagnitude.rawValue) var asMagnitude = false
 }
 
 extension SubjectFileCoordinator {

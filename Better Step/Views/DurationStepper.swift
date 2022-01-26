@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+
 struct DurationStepper: View {
+    @AppStorage(AppStorageKeys.walkInMinutes.rawValue)
+    var minuteDuration = 6
     @EnvironmentObject var config: Configurations
 
     var body: some View {
         Stepper("Duration (\(config.durationInMinutes)):",
-                value: $config.durationInMinutes,
+                value: $minuteDuration,
                 in: Configurations.durationRange,
                 step: 1
 //                ,

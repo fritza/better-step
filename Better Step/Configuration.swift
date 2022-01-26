@@ -9,7 +9,7 @@ import SwiftUI
 import MessageUI
 
 struct Accelerometry: Decodable {
-    @AppStorage("walkDuration") var durationInMinutes = 6
+    @AppStorage(AppStorageKeys.walkInMinutes.rawValue) var durationInMinutes = 6
 
     let frequency: Double
     let instructionAvailable: String
@@ -90,7 +90,7 @@ struct Configuration: Decodable {
 
 import Messages
 final class Mailing: Decodable {
-    @AppStorage("emailAddress")
+    @AppStorage(AppStorageKeys.reportingEmail.rawValue)
     var recipientEmail: String = "NOBODY@EXAMPLE.COM"
     var subject: String = ""
     var body: String = ""

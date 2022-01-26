@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UniformTypeIdentifiers
+import SwiftUI
 
 /**
  # Theory behind DASI reporting.
@@ -90,13 +91,12 @@ enum DASIReportErrors: Error {
 
 // MARK: - DASIReportContents
 final class DASIReportContents: ObservableObject {
-    var subjectID: String?
+   @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = "NA"
+
     public private(set) var answers: [DASIResponse]
 
-    /// Create `DASIReportContents` starting from the subject's ID.
-    /// - parameter subjectID: The study's identifier for the subject.
-    init(forSubject subjectID: String? = nil) {
-        self.subjectID = subjectID
+    /// Create `DASIReportContents`
+    init() {
         self.answers   = DASIQuestion
             .questions
             .map { DASIResponse(id: $0.id, response: .unknown) }
@@ -142,6 +142,9 @@ final class DASIReportContents: ObservableObject {
             .map(\.id)
     }
 
+    /// Whether the DASI report is complete, there being no `unknown` responses
+    var isReadyToPublish: Bool { self.emptyResponseIDs.isEmpty }
+
     /// Set the response to one question to `.unknown`.
     /// - Parameter id: The question to withdraw.
     func resetQuestion(id: QuestionID) {
@@ -165,7 +168,7 @@ final class DASIReportContents: ObservableObject {
     ///
     /// The line delimiter, per Microsoft spec, is "`\r\n`".
     var csvDASIRecords: String {
-        let prefix = [subjectID ?? "n/a"]
+        let prefix = [subjectID]
         // Array of the CSV strings for the answers.
         let eachLine = answers
             .flatMap {

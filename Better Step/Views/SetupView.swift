@@ -37,9 +37,9 @@ struct SetupView: View {
     @EnvironmentObject var config: Configurations
     @FocusState private var controlFocus: ControlFocus?
 
-    @AppStorage("reportAsMagnitude") var asMagnitude = false
-    @AppStorage("walkDuration") var duration = 6
-    @AppStorage("reportingEmail") var email = ""
+    @AppStorage(AppStorageKeys.reportAsMagnitude.rawValue) var asMagnitude = false
+    @AppStorage(AppStorageKeys.walkInMinutes.rawValue) var duration = 6
+    @AppStorage(AppStorageKeys.reportingEmail.rawValue) var email = ""
 
     var body: some View {
         NavigationView {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WalkCountdownView: View {
     @EnvironmentObject var sequencer: WalkingSequence
-    @AppStorage("walkDuration") var durationInMinutes = 6
+    @AppStorage(AppStorageKeys.walkInMinutes.rawValue) var durationInMinutes = 6
 
     var body: some View {
         GeometryReader { proxy in
