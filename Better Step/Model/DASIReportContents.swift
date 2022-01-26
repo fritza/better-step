@@ -91,7 +91,7 @@ enum DASIReportErrors: Error {
 
 // MARK: - DASIReportContents
 final class DASIReportContents: ObservableObject {
-   @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = "NA"
+   @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = ""
 
     public private(set) var answers: [DASIResponse]
 

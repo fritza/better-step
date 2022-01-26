@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+@available(*, unavailable, message: "Use AppStorage or document environment objects.")
 final class Configurations: ObservableObject, CustomStringConvertible {
-    @Published var emailAddress: String
-    @Published var durationInMinutes: Int
-
-    static let durationRange = (1...10)
+    var emailAddress: String
+    var durationInMinutes: Int
+//    @Published var emailAddress: String
+//    @Published var durationInMinutes: Int
 
     var description: String {
         let emailString = emailAddress
@@ -20,8 +21,8 @@ final class Configurations: ObservableObject, CustomStringConvertible {
     }
 
     init(startingEmail: String, duration: Int) {
-        emailAddress = startingEmail
-        durationInMinutes = duration
+        emailAddress      = "" // startingEmail
+        durationInMinutes = 6 // duration
     }
 }
 
@@ -34,7 +35,6 @@ private enum ControlFocus: String {
 struct SetupView: View {
     // FIXME: text field row can't track focus.
 
-    @EnvironmentObject var config: Configurations
     @FocusState private var controlFocus: ControlFocus?
 
     @AppStorage(AppStorageKeys.reportAsMagnitude.rawValue) var asMagnitude = false
@@ -48,7 +48,7 @@ struct SetupView: View {
                     Section("Walk") {
                         Stepper("Duration (\(self.duration)):",
                                 value: $duration,
-                                in: Configurations.durationRange,
+                                in: AppStorageKeys.dasiWalkRange,
                                 step: 1,
                                 onEditingChanged: { _ in
                             controlFocus = nil
@@ -72,15 +72,9 @@ struct SetupView: View {
 }
 
 struct SetupView_Previews: PreviewProvider {
-    static let config: Configurations = {
-        return Configurations(startingEmail: "", duration: 9)
-    }()
-
     static var previews: some View {
         VStack {
-            SetupView.init()
-                .environmentObject(config)
-            //                .frame(height: .infinity)
+            SetupView()
         }
     }
 }

@@ -17,6 +17,8 @@ enum AppStorageKeys: String {
     case subjectID      // Is the right place?
     // We'd rather set it each time, right?
     // FIXME: Clear subjectID when transmitted
+
+    static let dasiWalkRange = (1...10)
 }
 
 
@@ -31,21 +33,13 @@ struct Better_StepApp: App {
 
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
 
-    var setupEnvironment: Configurations {
-        Configurations(startingEmail: "Joe@user.net", duration: 2)
-    }
-
-    // FIXME: Draw this from the settings.
-    //        AppStorage for subject ID and duration.
-    static var commonReport = DASIReportContents()
-
     var body: some Scene {
         WindowGroup {
             TabView {
 
                 // MARK: - DASI
                 SurveyView()
-                    .environmentObject(Self.commonReport)
+                    .environmentObject(DASIReportContents())
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
@@ -53,7 +47,7 @@ struct Better_StepApp: App {
 
                 // MARK: - Timed Walk
                 WalkView()
-                    .environmentObject(Self.commonReport)
+//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "figure.walk")
                         Text("Walk")
@@ -61,7 +55,7 @@ struct Better_StepApp: App {
 
                 // MARK: - Reporting
                 Text("Reporting Tab")
-                    .environmentObject(Self.commonReport)
+//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "doc.text")
                         Text("Report")
@@ -69,10 +63,10 @@ struct Better_StepApp: App {
 
                 // MARK: - Setup
                 SetupView()
-                    .environmentObject(
-                        self.setupEnvironment
-                    )
-                    .environmentObject(Self.commonReport)
+//                    .environmentObject(
+//                        self.setupEnvironment
+//                    )
+//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setup")

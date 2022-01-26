@@ -10,7 +10,7 @@ import SwiftUI
 import Collections
 
 final class SubjectFileCoordinator {
-    @AppStorage(AppStorageKeys.subjectID.rawValue) var sid: String = "NA"
+    @AppStorage(AppStorageKeys.subjectID.rawValue) var sid: String = ""
 
     // TODO: zip the output directory
     // TODO: Validate ready-to-zip
