@@ -143,19 +143,21 @@ final class DASIReportContents: ObservableObject {
         self.answers = result
     }
 
-    var CSVDASIRecords: String {
+    var csvDASIRecords: String {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = .withInternetDateTime
 
         #warning("Is the per-record timestamp time of setting the value, orof generating this report?")
         let prefix = [subjectID ?? "n/a", isoFormatter.string(from: Date())
                       ]
+        // Array of the CSV strings for the answers.
         let eachLine = answers
             .flatMap {
                 prefix + $0.csvStrings
             }
+
         let allLines = eachLine
-            .joined(separator: ",")
+            .joined(separator: "\r\n")
         return allLines
     }
 }
