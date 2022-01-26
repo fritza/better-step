@@ -35,7 +35,9 @@ struct Better_StepApp: App {
         Configurations(startingEmail: "Joe@user.net", duration: 2)
     }
 
-    static var commonReport = DASIReportContents(forSubject: "AppLevelReport")
+    // FIXME: Draw this from the settings.
+    //        AppStorage for subject ID and duration.
+    static var commonReport = DASIReportContents()
 
     var body: some Scene {
         WindowGroup {
@@ -43,6 +45,7 @@ struct Better_StepApp: App {
 
                 // MARK: - DASI
                 SurveyView()
+                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
