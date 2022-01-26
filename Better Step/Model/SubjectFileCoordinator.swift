@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 import Collections
 
-enum FileStorageErrors: Error {
-    case plainFileAtURL(URL)
-    case cantCreateFileAt(URL)
-}
-
 final class SubjectFileCoordinator {
     // TODO: zip the output directory
     // TODO: Validate ready-to-zip
