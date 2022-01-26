@@ -92,11 +92,12 @@ enum DASIReportErrors: Error {
 //       repopulate it with unresponded
 
 final class DASIReportContents: ObservableObject {
-    // TODO: Make a collection
     var subjectID: String?
-//    public private(set) var timestamp: Date
     public private(set) var answers: [DASIResponse]
+//    public private(set) var timestamp: Date
 
+    /// Create `DASIReportContents` starting from the subject's ID.
+    /// - parameter subjectID: The study's identifier for the subject.
     init(forSubject subjectID: String? = nil) {
         self.subjectID = subjectID
 //        self.timestamp = Date()
@@ -105,6 +106,11 @@ final class DASIReportContents: ObservableObject {
             .map { DASIResponse(id: $0.id, response: .unknown) }
     }
 
+    /// The user's response to a question.
+    ///
+    /// Think of this as the inverse of `didRespondToQuestion(id:with:)`
+    /// - Parameter id: The `QuestionID` identifiying the response of concern.
+    /// - Returns: The `AnswerState` for that question, `.yes`, `.no`, or `.unknown`.
     func responseForQuestion(id: QuestionID) -> AnswerState {
         precondition(id.isValid)
 
@@ -116,6 +122,12 @@ final class DASIReportContents: ObservableObject {
         return theResponse.response
     }
 
+    /// Record the user's response to a  question.
+    ///
+    /// Think of this as the inverse of `responseForQuestion(id:)`
+    /// - Parameters:
+    ///   - questionID: The ID of the `DASIResponse` being answered.
+    ///   - state: The user's response.
     func didRespondToQuestion(
         id questionID: QuestionID,
         with state: AnswerState) {
@@ -124,18 +136,23 @@ final class DASIReportContents: ObservableObject {
                 .withResponse(state)
         }
 
+    /// The `QuestionID`s of all responses that are still `.unknown`
+    /// - note: The survey is not resdy to commit before this array is empty.
     var emptyResponseIDs: [QuestionID] {
        return answers
             .filter { $0.response == .unknown }
             .map(\.id)
     }
 
+    /// Set the response to one question to `.unknown`.
+    /// - Parameter id: The question to withdraw.
     func resetQuestion(id: QuestionID) {
         let newValue = answers[id.index]
             .withResponse(.unknown)
         answers[id.index] = newValue
     }
 
+    /// Set all responses to `.unknown`
     func reset() {
         let result = answers.map {
             $0.withResponse(.unknown)
@@ -143,6 +160,9 @@ final class DASIReportContents: ObservableObject {
         self.answers = result
     }
 
+    /// All DASI responses formatted into multiple lines of `csv`.
+    ///
+    /// The line delimiter, per Microsoft spec, is "`\r\n`".
     var csvDASIRecords: String {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = .withInternetDateTime
@@ -159,5 +179,15 @@ final class DASIReportContents: ObservableObject {
         let allLines = eachLine
             .joined(separator: "\r\n")
         return allLines
+    }
+
+    /// All DASI responses, in `.csv` format, encoded into `Data`.
+    /// - throws: `fatalError` if the `string`-to-`Data` reduction fails.
+    var csvData: Data {
+        guard let retval = csvDASIRecords
+                .data(using: .utf8) else {
+                    fatalError()
+                }
+        return retval
     }
 }
