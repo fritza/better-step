@@ -32,14 +32,15 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
     }
 }
 
+// Verified consistent with DASIQuestions in the MinutePublisher.playground/Response\ decoding.
 // MARK: - DASIQuestion
-struct DASIQuestion: Identifiable, Codable, Comparable {
-    var id: QuestionID
-    let text: String
-    let score: Double
+public struct DASIQuestion: Identifiable, Codable, Comparable {
+    public var id: QuestionID
+    public let text: String
+    public let score: Double
 
     // WARNING: the ID is 1-based
-    static let questions: [DASIQuestion] = {
+    public static let questions: [DASIQuestion] = {
         guard let dasiURL = Bundle.main.url(
             forResource: "DASIQuestions", withExtension: "json") else {
             preconditionFailure("Could not find DASIQuestions.json")
@@ -52,22 +53,22 @@ struct DASIQuestion: Identifiable, Codable, Comparable {
         return retval
     }()
 
-    static func with(id questionID: QuestionID) -> DASIQuestion {
+    public static func with(id questionID: QuestionID) -> DASIQuestion {
         return questions[questionID.index]
     }
 
-    static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
-    static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
+    public static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
+    public static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
 }
 
 extension DASIQuestion {
-    var next: DASIQuestion? {
+    public var next: DASIQuestion? {
         guard let proposed = id.succ,
               proposed.index < Self.questions.count else { return nil }
         return Self.with(id: proposed)
     }
 
-    var previous: DASIQuestion? {
+    public var previous: DASIQuestion? {
         guard let proposed = id.pred,
               proposed.isValid else {
             return nil
