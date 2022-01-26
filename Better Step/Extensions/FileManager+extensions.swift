@@ -9,7 +9,7 @@ import Foundation
 
 extension FileManager {
     // TODO: Should ~Exist be async?
-    func somethingExists(atURL url: URL)
+    public func somethingExists(atURL url: URL)
     -> (exists: Bool, isDirectory: Bool) {
         var isDirectory: ObjCBool = false
         let result = self.fileExists(
@@ -18,17 +18,17 @@ extension FileManager {
         return (exists: result, isDirectory: isDirectory.boolValue)
     }
 
-    func fileExists(atURL url: URL) -> Bool {
+    public func fileExists(atURL url: URL) -> Bool {
         let (exists, directory) = somethingExists(atURL: url)
         return exists && !directory
     }
 
-    func directoryExists(atURL url: URL) -> Bool {
+    public func directoryExists(atURL url: URL) -> Bool {
         let (exists, directory) = somethingExists(atURL: url)
         return exists && directory
     }
 
-    func deleteAndCreate(at url: URL) throws {
+    public func deleteAndCreate(at url: URL) throws {
         if fileExists(atURL: url) {
             // Discard any existing file.
             try removeItem(at: url)
@@ -41,7 +41,7 @@ extension FileManager {
         }
     }
 
-    var applicationDocsDirectory: URL {
+    public var applicationDocsDirectory: URL {
         let url = self
             .urls(for: .documentDirectory,
                      in: .userDomainMask)
@@ -53,6 +53,7 @@ extension FileManager {
 
 extension FileManager {
 
+    #if FOR_BETTER_ST
     /// URL for a reporting csv file (per subject/run, per purpose.
     ///
     /// If no file exists at that URL, and if `creating`, create an empty file at that location.
@@ -82,12 +83,13 @@ extension FileManager {
         }
         return retval
     }
+    #endif
     
     /// The URL for a directory _within_ the os-standard Documents directory for this app, uniquely named per data set (collected for a particuler subject)
     /// - parameters:
     ///     - subject: The subject Id for whom the data in this directory is collected.
     ///     - creating: If `true`, the subject's directory will be created.
-    func directoryURLForSubjectID(_ subject: String,
+    public func directoryURLForSubjectID(_ subject: String,
                        creating: Bool = false) throws -> URL {
         let expectedURL = self.applicationDocsDirectory
             .appendingPathComponent(subject, isDirectory: true)

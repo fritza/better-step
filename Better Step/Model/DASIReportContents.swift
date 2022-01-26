@@ -9,24 +9,68 @@ import Foundation
 import Combine
 import UniformTypeIdentifiers
 
-/*
+/**
  # Theory behind DASI reporting.
 
- # Primitive data structures
+ ## Primitive data structures
+
+ ### struct DASIQuestion
 
  * Questions as such: Text, ID, and scoring.
-    * struct `DASIQuestion`
-    * The literature identifies questions by 1-based serials, meaning the ID is one more than the index in an array of questions.
-    * Read from `DASIQuestions.json`
-    * The list is an immutable global: DASIQuestion.questions.
-    * THIS IS AN ARRAY, zero-indexed, and it is public.
-    * TO DO: hide .questions and expose a subscript by QuestionID. static with(id:) should be a subscript.
-    * TO DO: Remove the "identifier" property, which is in the .plist data, and a codable part of the struct.
+ * The literature identifies questions by 1-based serials: The ID is one more than the index in a _sorted_ `Array` of questions.
+ * Read from `DASIQuestions.json`
+ * The list is an immutable global: DASIQuestion.questions.
+ * THIS IS AN ARRAY, zero-indexed, and it is public.
+ * TO DO: hide .questions and expose a subscript by QuestionID. static with(id:) should be a subscript.
+ * TO DO: Remove the "identifier" property, which is in the .plist data, and a codable part of the struct.
 
-    * Indexed by QuestionID:
+ ### struct DASIResponse
 
- WHAT IS DASIReport, and why is it no longer in the build order?
- */
+ Joins a question (referenced by ID), a response (`AnswerState`) and a time stamp representing which questionj was answered, how, and when  for a **single question**,  It knows how to order itself, and convert itself to a comma-separated string for use in assembling full rows in the output CSV file.
+
+### struct DASIReportContents
+
+An `ObservableObject` intended to be the environmentObject for the DASI project. It takes the Subject ID and initializes its `[DASIResponse]` array of `answers`.
+
+ It serves as the façade for the user's responses to the questions.
+
+ * `responseForQuestion(id:)` - yelds the answer (yes/no/unknown) for the question under that ID.
+ * `didRespondToQuestion(id:with:) `- replaces the `answers` element for that ID with one with a new `AnswerState`.
+ * `emptyResponseIDs` - list of IDs for questions that are as yet `unknown`.
+ * `resetQuestion(id:)`  - sets the identified response to `unknown`
+ * `reset()` - reset all responses to `unknown`.
+ * `csvDASIRecords` - scans all responses, prepares the `csv` representation of each, and returns a `String` containing them delimited by CSV newlines (`\r\n`, per Microsoft's specifications.)
+
+The `String` returned by `csvDASIRecords` can be converted to `Data`, and written out to disk.
+
+
+ ### QuestionID
+ This insulates the 1-based IDs from the 0-based `Array` induces.
+
+ * RawRepresentable
+ * Codable
+ * Hashable
+ * Strideable
+ * CustomStringConvertible
+
+ **Using `QuestionID**
+
+ These types use `QuestionID` to refer to questions and responses.
+
+ * `DASIQuestion`
+ * `DASIResponse`
+ * `DASIReportContents`
+
+ * `DASIQuestionView`
+ * `SurveyView`
+
+ * `QuestionIDTests`
+
+ ## Obsolete — removed
+ 
+ * `DASIReport`
+ * `DASIReportDocument
+*/
 
 enum DASIReportErrors: Error {
     case wrongDataType(UTType)
@@ -86,10 +130,10 @@ final class DASIReportContents: ObservableObject {
             .map(\.id)
     }
 
-    func resetQuestion(questionID: QuestionID) {
-        let newValue = answers[questionID.index]
+    func resetQuestion(id: QuestionID) {
+        let newValue = answers[id.index]
             .withResponse(.unknown)
-        answers[questionID.index] = newValue
+        answers[id.index] = newValue
     }
 
     func reset() {
@@ -103,6 +147,7 @@ final class DASIReportContents: ObservableObject {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = .withInternetDateTime
 
+        #warning("Is the per-record timestamp time of setting the value, orof generating this report?")
         let prefix = [subjectID ?? "n/a", isoFormatter.string(from: Date())
                       ]
         let eachLine = answers

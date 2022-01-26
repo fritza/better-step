@@ -36,6 +36,9 @@
 		1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
 		1FF1330B27A05FD3004D6647 /* QuestionID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1330A27A05FD3004D6647 /* QuestionID.swift */; };
 		1FF1330E27A07973004D6647 /* QuestionIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1330C27A07213004D6647 /* QuestionIDTests.swift */; };
+		1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1331027A09979004D6647 /* ZIPFoundation */; };
+		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
+		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */; };
 		1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
@@ -108,6 +111,8 @@
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1330A27A05FD3004D6647 /* QuestionID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionID.swift; sourceTree = "<group>"; };
 		1FF1330C27A07213004D6647 /* QuestionIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionIDTests.swift; sourceTree = "<group>"; };
+		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
+		1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMExtensionsTests.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFileCoordinator.swift; sourceTree = "<group>"; };
 		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
@@ -137,6 +142,7 @@
 				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
 				1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */,
 				1FF354462790D1F5000894B8 /* DequeModule in Frameworks */,
+				1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +212,8 @@
 		1F0B6761276FA6CA00011A7E /* Better StepTests */ = {
 			isa = PBXGroup;
 			children = (
+				1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */,
+				1FF1331227A0BE78004D6647 /* DASIReportTests.swift */,
 				1FF1330C27A07213004D6647 /* QuestionIDTests.swift */,
 				1FF3545227977302000894B8 /* AccelerometerItemTests.swift */,
 				1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */,
@@ -338,6 +346,7 @@
 				1FF354432790D1F5000894B8 /* Collections */,
 				1FF354452790D1F5000894B8 /* DequeModule */,
 				1FF354472790D1F5000894B8 /* OrderedCollections */,
+				1FF1331027A09979004D6647 /* ZIPFoundation */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -414,6 +423,7 @@
 			packageReferences = (
 				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 				1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -502,6 +512,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */,
+				1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */,
 				1FF1330E27A07973004D6647 /* QuestionIDTests.swift in Sources */,
 				1FF354552799D47A000894B8 /* AccelerometerItemTests.swift in Sources */,
 				1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */,
@@ -589,7 +601,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG FOR_BETTER_ST";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -643,6 +655,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = FOR_BETTER_ST;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -829,6 +842,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
 		1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dehesa/CodableCSV";
@@ -848,6 +869,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1FF1331027A09979004D6647 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		1FF35437278F61FB000894B8 /* CodableCSV */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */;
