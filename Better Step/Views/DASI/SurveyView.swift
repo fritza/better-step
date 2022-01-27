@@ -50,14 +50,17 @@ struct SurveyView: View {
                 NavigationLink(
                     destination: {
                         () -> AnyView in
-                        return AnyView(DASIQuestionView(
-                            question: DASIQuestion.with(id: QuestionID(rawValue: 1)))
-                                        .environmentObject(wrappedShowing))
-                                       }(),
+                        return AnyView(
+                            DASIQuestionView(
+                                question: DASIQuestion
+                                    .with(id: QuestionID(1)))
+                                .environmentObject(wrappedShowing))
+
+                    }(),
                     isActive: {
                         let retval = $wrappedShowing.showQuestions
                         return retval
-                        }(),
+                    }(),
                     label: { EmptyView() }
                 )
 

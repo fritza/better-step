@@ -6,7 +6,7 @@
 //
 
 import XCTest
-
+/*
 class Better_StepUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
@@ -30,3 +30,4 @@ class Better_StepUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+*/

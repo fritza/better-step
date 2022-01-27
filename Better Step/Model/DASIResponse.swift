@@ -45,11 +45,17 @@ struct DASIResponse: Identifiable, Codable {
 }
 
 // MARK: - String representation
-extension DASIResponse: Comparable, CustomStringConvertible {
+extension DASIResponse: Comparable, Hashable, CustomStringConvertible {
     /// `Equatable` adoption
     static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
     /// `Comparable` adoption
     static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(timestamp)
+        hasher.combine(response)
+    }
 
     /// Format the ID and response attributes into an array of `String`. Callers are expected to concatenate this array with global attributes: the subject ID and lhe time the CSV file was created.
     ///

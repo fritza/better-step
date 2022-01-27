@@ -151,7 +151,7 @@ struct DASIQuestionView_Previews: PreviewProvider {
     static let bearer = BoolBearer(initially: false)
     static var previews: some View {
         DASIQuestionView(
-            question: DASIQuestion.with(id: QuestionID(rawValue: 9))
+            question: DASIQuestion.with(id: QuestionID(9))
         )
             .padding()
             .environmentObject(bearer)

@@ -12,8 +12,6 @@
 		1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6758276FA6CA00011A7E /* Preview Assets.xcassets */; };
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
-		1F0B676D276FA6CA00011A7E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
-		1F0B676F276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
 		1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A92777D00300E510AE /* DurationStepper.swift */; };
 		1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09B276FAB3C0026D28B /* SurveyView.swift */; };
@@ -22,6 +20,9 @@
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1F8A064B27A3401700477379 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
+		1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
+		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
+		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
@@ -140,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8A065027A3528E00477379 /* Algorithms in Frameworks */,
 				1FF354442790D1F5000894B8 /* Collections in Frameworks */,
 				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
 				1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */,
@@ -350,6 +352,7 @@
 				1FF354452790D1F5000894B8 /* DequeModule */,
 				1FF354472790D1F5000894B8 /* OrderedCollections */,
 				1FF1331027A09979004D6647 /* ZIPFoundation */,
+				1F8A064F27A3528E00477379 /* Algorithms */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -427,6 +430,7 @@
 				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 				1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -528,8 +532,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F0B676F276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift in Sources */,
-				1F0B676D276FA6CA00011A7E /* Better_StepUITests.swift in Sources */,
+				1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */,
+				1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +850,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
@@ -873,6 +885,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F8A064F27A3528E00477379 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
 		1FF1331027A09979004D6647 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;

@@ -7,6 +7,7 @@
 
 import XCTest
 
+/*
 class Better_StepUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -40,3 +41,4 @@ class Better_StepUITests: XCTestCase {
         }
     }
 }
+*/

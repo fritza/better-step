@@ -29,7 +29,7 @@ class QuestionIDTests: XCTestCase {
 
     func testInitialization () {
         for (input, expect, _) in rawInput_expected {
-            let sample = QuestionID(rawValue: input)
+            let sample = QuestionID(input)
             XCTAssertEqual(sample.rawValue,
                            expect, "rawValue from ID")
         }
@@ -46,15 +46,15 @@ class QuestionIDTests: XCTestCase {
         QuestionID.questionCount = itemCount
 
         for (input, _, shouldBeValid) in rawInput_expected {
-            let sample = QuestionID(rawValue: input)
+            let sample = QuestionID(input)
             XCTAssertEqual(sample.isValid, shouldBeValid, "Validity from rawValue")
         }
     }
 
     func testDistance() {
-        let lhs = QuestionID(rawValue: 1)
+        let lhs = QuestionID(1)
         for n in distances {
-            let sample = QuestionID(rawValue: n)
+            let sample = QuestionID(n)
             let epectedDistance =  n - 1
             let compDistance = lhs.distance(to: sample)
             XCTAssertEqual(compDistance, epectedDistance)
@@ -64,16 +64,16 @@ class QuestionIDTests: XCTestCase {
     func testIncrement() {
         // Take distance[n] as the raw value
         // Add 1.
-        // Turn into a QuestionID(rawValue: )
+        // Turn into a QuestionID()
         // expected is
 
         let toBeIncremented: [QuestionID] =
         distances
-            .map { QuestionID(rawValue: $0) }
+            .map { QuestionID($0) }
 
         let blindlyIncremented: [QuestionID] =
         distances
-            .map { QuestionID(rawValue: $0 + 1)
+            .map { QuestionID($0 + 1)
             }
         let expectedIncremented: [QuestionID?] = blindlyIncremented
             .map { qid in
@@ -91,11 +91,11 @@ class QuestionIDTests: XCTestCase {
     func testDecrement() {
         let toBeDecremented: [QuestionID] =
         distances
-            .map { QuestionID(rawValue: $0) }
+            .map { QuestionID($0) }
 
         let blindlyDecremented: [QuestionID] =
         distances
-            .map { QuestionID(rawValue: $0 + 1)
+            .map { QuestionID($0 + 1)
             }
         let expecteDecremented: [QuestionID?] = blindlyDecremented
             .map { qid in
@@ -112,7 +112,7 @@ class QuestionIDTests: XCTestCase {
 
     func testQIDLoop() {
         var loopCount = 0
-        let range = QuestionID(rawValue: 1) ... QuestionID(rawValue: itemCount)
+        let range = QuestionID(1) ... QuestionID(itemCount)
         for qid in range {
             XCTAssert(qid.isValid, "at raw value \(qid.rawValue) - loop should generate correct QueueIDs")
             loopCount += 1

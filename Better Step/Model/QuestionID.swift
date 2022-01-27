@@ -34,6 +34,9 @@ public struct QuestionID: RawRepresentable, Codable,
 
     public let rawValue: Int
     public init(rawValue: Int) { self.rawValue = rawValue }
+    public init(_ value: Int) {
+        self.init(rawValue: value)
+    }
 
     /// Initialize from the equivalend index into a  `Collection`.
     ///
@@ -59,7 +62,7 @@ public struct QuestionID: RawRepresentable, Codable,
     /// `Strideable`: The `QuestionID` the given `rawValue` before or after `self`.
     /// - warning: This does not guarantee the result is valid ((within  `(1...self.questionCount)`. To identify out-or-bounds results use `checkedAdance(by:)`, which returns `nil` if the result woild be out-of-bounds.
     public func advanced(by n: Int) -> QuestionID {
-        return QuestionID(rawValue: self.rawValue + 1)
+        return QuestionID(self.rawValue + 1)
     }
 
     /// `Strideable`: the amount by which  `self` must be advanced to match `other`.
