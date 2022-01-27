@@ -27,12 +27,11 @@ struct DASIQuestionView: View {
 
     private var questionID: QuestionID { thisQuestion.id }
 
-    private func recordAnswer(as newAnswer: AnswerState) {
-        reportContents.didRespondToQuestion(
-            id: thisQuestion.id,
-            with: newAnswer)
-    }
-    // How do we sync it with the report?
+//    private func recordAnswer(as newAnswer: AnswerState) {
+//        reportContents.didRespondToQuestion(
+//            id: thisQuestion.id,
+//            with: newAnswer)
+//    }
 
     var yesLabel: Label<Text, Image> {
         // Question IDs are one-based.
@@ -77,7 +76,12 @@ struct DASIQuestionView: View {
             YesNoView(["Yes", "No"]) {
                 choice in
                 let usersAnswer: AnswerState = (choice.id == 0) ? .yes : .no
-                self.recordAnswer(as: usersAnswer)
+                reportContents
+                    .didRespondToQuestion(
+                        id: thisQuestion.id,
+                        with: usersAnswer)
+
+//                self.recordAnswer(as: usersAnswer)
                 if let nextQueston = thisQuestion.next {
                     prepareForQuestion(nextQueston)
                 }

@@ -59,18 +59,16 @@ struct YesNoView: View {
         GeometryReader { context in
             HStack {
                 Spacer()
-                ZStack {
-//                    YesNoFrameView(
-//                        boundingSize: context.size,
-//                        count: choiceViews.count)
-                    VStack(alignment: .center) {
-                        ForEach(choiceViews) {
-                            cView in
-                            YesNoButton(
-                                choice: cView,
-                                size: context.size,
-                                completion: completion)
-                        }
+                VStack(alignment: .center) {
+                    ForEach(choiceViews) {
+                        cView in
+                        YesNoButton(
+                            choice: cView,
+                            size: context.size,
+                            completion: completion)
+                            .mask {
+                                RoundedRectangle(cornerRadius: 14, style: .circular)
+                            }
                     }
                 }
                 Spacer()
@@ -80,14 +78,18 @@ struct YesNoView: View {
     }
 }
 
+
 struct YesNoView_Previews: PreviewProvider {
     static let choices: [String] = [
         "Yes", "No"
-        ]
+    ]
     static var previews: some View {
-        YesNoView(choices) {
-            _ in
-            print("Beep! YNView")
+        VStack {
+            YesNoView(choices) {
+                _ in
+                print("Beep! YNView")
+            }
+            Spacer()
         }
     }
 }
