@@ -38,23 +38,24 @@ class DASIResponseTests: XCTestCase {
             .response
     }
 
-    func partsByAnswer() -> (yes    : Set<DASIResponse>,
-                             no     : Set<DASIResponse>,
-                             unknown: Set<DASIResponse>) {
-        var yesSet    : Set<DASIResponse> = []
-        var noSet     : Set<DASIResponse> = []
-        var unknownSet: Set<DASIResponse> = []
+    func partsByAnswer() -> (
+        yes    : Set<DASIResponse>,
+        no     : Set<DASIResponse>,
+        unknown: Set<DASIResponse>) {
+            var yesSet: Set<DASIResponse> = []
+            var noSet : Set<DASIResponse> = []
+            var unknownSet: Set<DASIResponse> = []
 
-        for element in responses {
-            switch element.response {
-            case .yes: yesSet    .insert(element)
-            case .no : noSet     .insert(element)
-            default  : unknownSet.insert(element)
+            for element in responses {
+                switch element.response {
+                case .yes: yesSet    .insert(element)
+                case .no : noSet     .insert(element)
+                default  : unknownSet.insert(element)
+                }
             }
-        }
 
-        return (yes: yesSet, no: noSet, unknown: unknownSet)
-    }
+            return (yes: yesSet, no: noSet, unknown: unknownSet)
+        }
 
     func testIndexing() {
         let (y, n, u) = partsByAnswer()
@@ -94,6 +95,24 @@ class DASIResponseTests: XCTestCase {
                 return left.id < right.id
             }
         XCTAssert(seemsSorted, "Sorting DASIResponse by id should work; check the < operator.")
+    }
+
+    func testQuestionIndexing() {
+        var toBeSorted = responses
+        toBeSorted.shuffle()
+        for ident in Self.allQIDs {
+            let toCheck = responses
+                .first { resp in
+                    resp.id == ident
+                }
+            XCTAssertNotNil(toCheck, "Should be able to find an ID in an unordered container")
+            if let toCheck = toCheck {
+                XCTAssertEqual(
+                    toCheck.response,
+                    expectedAnswerAt(ident),
+                    "Loose test for actually findin the expected DASIResponse")
+            }
+        }
     }
 
     override func tearDownWithError() throws {
