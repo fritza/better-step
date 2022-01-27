@@ -167,22 +167,23 @@ final class DASIReportContents: ObservableObject {
     /// All DASI responses formatted into multiple lines of `csv`.
     ///
     /// The line delimiter, per Microsoft spec, is "`\r\n`".
-    var csvDASIRecords: String {
+    public var csvDASIRecords: String {
         let prefix = [subjectID]
-        // Array of the CSV strings for the answers.
-        let eachLine = answers
-            .flatMap {
-                prefix + $0.csvStrings
+        // per-response array of arrays of response fields
+        let allLines = answers
+            .map { (record: DASIResponse) -> String in
+                let recordStrings = record.csvStrings
+                let retval = (prefix + recordStrings)
+                    .joined(separator: ",")
+                return retval
             }
-
-        let allLines = eachLine
             .joined(separator: "\r\n")
         return allLines
     }
 
     /// All DASI responses, in `.csv` format, encoded into `Data`.
     /// - throws: `fatalError` if the `string`-to-`Data` reduction fails.
-    var csvData: Data {
+    public var csvData: Data {
         guard let retval = csvDASIRecords
                 .data(using: .utf8) else {
                     fatalError()

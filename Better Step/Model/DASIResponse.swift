@@ -54,6 +54,9 @@ extension DASIResponse: Comparable, CustomStringConvertible {
     /// Format the ID and response attributes into an array of `String`. Callers are expected to concatenate this array with global attributes: the subject ID and lhe time the CSV file was created.
     ///
     /// **See also** `DASIReportContents.CSVDASIRecords`
+    /// - note: ISO-8601 formatting is time-consuming,
+    ///         but it'll be 16 times, once per run. No need to make
+    ///         it `async`.
     var csvStrings: [String] {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = .withInternetDateTime
