@@ -129,7 +129,6 @@
 		1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
 		1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoView.swift; sourceTree = "<group>"; };
 		1FFB30EA277F89C90099AE5E /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
-		1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoFrameView.swift; sourceTree = "<group>"; };
 		1FFB31052787892B0099AE5E /* MinutePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutePublisher.swift; sourceTree = "<group>"; };
 		1FFB31072787991A0099AE5E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = "Better Step/Views/Walking/TimerView.swift"; sourceTree = SOURCE_ROOT; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
@@ -306,7 +305,6 @@
 			children = (
 				1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */,
 				1FFB30EA277F89C90099AE5E /* YesNoButton.swift */,
-				1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */,
 			);
 			path = YesNoView;
 			sourceTree = "<group>";

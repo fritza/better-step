@@ -10,6 +10,7 @@ import SwiftUI
 
 // TODO: Generic over some kind of response view (different labels, different response types).
 
+// MARK: - ViewChoice (button config)
 final class ViewChoice: Identifiable {
     let id: Int
     let title: String
@@ -30,7 +31,7 @@ final class ViewChoice: Identifiable {
 }
 
 
-
+// MARK: - YesNoView
 struct YesNoView: View {
     var viewConfig: [ViewChoice]
     let completion: (ViewChoice) -> Void
@@ -64,7 +65,7 @@ struct YesNoView: View {
     }
 }
 
-
+// MARK: - Preview
 struct YesNoView_Previews: PreviewProvider {
     static let choices: [String] = [
         "Yes", "No"
@@ -76,12 +77,7 @@ struct YesNoView_Previews: PreviewProvider {
         VStack {
             YesNoView(choices) {
                 vchoice in
-                if vchoice.title == "Yes" {
-                    hitYes = true
-                }
-                else {
-                    hitYes = false
-                }
+                hitYes = vchoice.title == "Yes"
                 print("Beep! YNView")
             }
             Spacer()

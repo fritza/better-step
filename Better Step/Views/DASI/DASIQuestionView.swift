@@ -10,6 +10,7 @@ import SwiftUI
 // FIXME: Senter the action/proceed button
 //        When Next is absent, it shifts over to the right.
 
+// MARK: - DASIQuestionView
 struct DASIQuestionView: View {
     @State private var thisQuestion: DASIQuestion
     @EnvironmentObject var showingQuestions: BoolBearer
@@ -27,28 +28,6 @@ struct DASIQuestionView: View {
 
     private var questionID: QuestionID { thisQuestion.id }
 
-//    private func recordAnswer(as newAnswer: AnswerState) {
-//        reportContents.didRespondToQuestion(
-//            id: thisQuestion.id,
-//            with: newAnswer)
-//    }
-
-    var yesLabel: Label<Text, Image> {
-        // Question IDs are one-based.
-        // resopnseForQuestion takes a one-based ID
-        Label("Yes", systemImage:
-                (reportContents.responseForQuestion(id: questionID) == .yes) ?
-              "checkmark" : "")
-    }
-
-    var noLabel: Label<Text, Image> {
-        // Question IDs are one-based.
-        // resopnseForQuestion takes a one-based ID
-        Label("No", systemImage:
-                (reportContents.responseForQuestion(id: questionID) == .no) ?
-              "checkmark" : "")
-    }
-
     init(question: DASIQuestion) {
         self.thisQuestion = question
 //        thisAnswer = reportContents.responseForQuestion(id: question.id)
@@ -58,12 +37,13 @@ struct DASIQuestionView: View {
         thisQuestion = newCurrentQuestion
     }
 
+    // MARK: Body
     var body: some View {
         VStack(alignment: .center, spacing: 20)
         {
+            // MARK: Display instructions
             GeometryReader { proxy in
                 Text(
-//                    DASIQuestion.with(id: questionID).text)
                     thisQuestion.text)
                     .font(.title)
                     .fontWeight(.semibold)
@@ -73,6 +53,7 @@ struct DASIQuestionView: View {
             Spacer(minLength: 20)
 
             // FIXME: No way to add a checkmark.
+            // MARK: Yes/No buttons
             YesNoView(["Yes", "No"]) {
                 choice in
                 let usersAnswer: AnswerState = (choice.id == 0) ? .yes : .no
@@ -94,8 +75,9 @@ struct DASIQuestionView: View {
                 }
             }
 
-
+            // MARK: Cancel/Next/Back buttons
             HStack {
+                // MARK: Back button
                 if thisQuestion.previous != nil {
                     // Permit previous question any time that .previous is valid.
                     Button {
@@ -108,28 +90,16 @@ struct DASIQuestionView: View {
                 Spacer()
                 Button {
                     showingQuestions.greet()
-//                    showingQuestions.isSet = false
                 }
                 label: { Text("Cancel") }
+                Spacer()
 
                 /* ********************************************
                  Is there any advantage in making Next and Back into NavigationLinks
                  which can be de/activated with NavigationLink.init(_:tag:selection:destination:)
-                 this initializer doesn't display a UI, it just triggers the
-                 destination if selection matches the tag value.
-                 ^ Spoke too soon. SwiftUI derives the label view contents
-                 from the title.
-
-                 Am I supposed to do some kind of submit (see .onSubmit modifier) event
-                 and then rewrite the document contents? That's bad news if you have
-                 10,000 lines.
-
-                 (BTW: you could iterate the file with URL.lines and
-                 inject a new line. But that requires hauling the whole thing in and
-                 writing it out.)
                  */
 
-                Spacer()
+                // MARK: Next button
                 if let nextQuestion = thisQuestion.next,
                    thisAnswer != .unknown {
                     // Permit next question only when there is an answer, and the question has been responded to.
@@ -147,6 +117,7 @@ struct DASIQuestionView: View {
     }
 }
 
+// MARK: - Previews
 struct DASIQuestionView_Previews: PreviewProvider {
     static let bearer = BoolBearer(initially: false)
     static var previews: some View {

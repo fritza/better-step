@@ -8,7 +8,8 @@
 import SwiftUI
 
 
-
+// MARK: - Frame/color modifier
+fileprivate
 struct Sizing: ViewModifier {
     let boundSize: CGSize
 //    let proxy: GeometryProxy
@@ -28,6 +29,7 @@ struct Sizing: ViewModifier {
     }
 }
 
+// MARK: Link to View
 extension View {
     func bounding(proxy: GeometryProxy,
                   color: Color? = nil) -> some View {
@@ -35,6 +37,7 @@ extension View {
     }
 }
 
+// MARK: - YesNoButton
 struct YesNoButton: View {
     // FIXME: "choiceView" is a bad name for a ViewChoice
     //    let choiceView: ViewChoice
@@ -54,6 +57,7 @@ struct YesNoButton: View {
         self.completion = completion
     }
 
+    // MARK: body
     var body: some View {
         GeometryReader { proxy in
             Button(
@@ -64,9 +68,9 @@ struct YesNoButton: View {
                     Text(self.title)
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .bounding(proxy: proxy,
-                                  color: Color.black
-                                    .opacity(0.1))
+                        .bounding(
+                            proxy: proxy,
+                            color: Color.black.opacity(0.1))
                         .mask {
                             RoundedRectangle(cornerRadius: 12)
                         }
@@ -76,6 +80,7 @@ struct YesNoButton: View {
     }
 }
 
+// MARK: - Previews
 struct YesNoButton_Previews: PreviewProvider {
     static let choices: [String] = [
                 "Yes", "No"
@@ -85,7 +90,7 @@ struct YesNoButton_Previews: PreviewProvider {
     }()
     static var previews: some View {
         ZStack {
-            YesNoButton(id: 1, title: "YES!") {
+            YesNoButton(id: 1, title: "Seldom") {
                 btn in
                 print("Beep! button \(btn.title)")
 //                btn.spe
