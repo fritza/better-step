@@ -7,8 +7,20 @@
 
 import SwiftUI
 
-// FIXME: Senter the action/proceed button
+// FIXME: Center the action/proceed button
 //        When Next is absent, it shifts over to the right.
+
+/*
+ TODO for finishing up DASI
+
+ Find a way to progress from last answer to a farewell screen
+
+ Write the DASI file.
+ Note that DASI is domplete:
+    To user
+    To app for a completion condition.
+
+ */
 
 // MARK: - DASIQuestionView
 struct DASIQuestionView: View {
@@ -41,7 +53,7 @@ struct DASIQuestionView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 20)
         {
-            // MARK: Display instructions
+            // MARK: Displaying instructions
             GeometryReader { proxy in
                 Text(
                     thisQuestion.text)
