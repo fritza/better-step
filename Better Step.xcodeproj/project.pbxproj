@@ -57,7 +57,6 @@
 		1FFB30E6277BF1E90099AE5E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
 		1FFB30E8277CD3EE0099AE5E /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E7277CD3EE0099AE5E /* YesNoView.swift */; };
 		1FFB30EB277F89C90099AE5E /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30EA277F89C90099AE5E /* YesNoButton.swift */; };
-		1FFB30ED277F8A190099AE5E /* YesNoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30EC277F8A190099AE5E /* YesNoFrameView.swift */; };
 		1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31052787892B0099AE5E /* MinutePublisher.swift */; };
 		1FFB31082787991A0099AE5E /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31072787991A0099AE5E /* TimerView.swift */; };
 		1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
@@ -505,7 +504,6 @@
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
-				1FFB30ED277F8A190099AE5E /* YesNoFrameView.swift in Sources */,
 				1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,

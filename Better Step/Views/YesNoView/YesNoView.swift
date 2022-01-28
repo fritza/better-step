@@ -32,12 +32,12 @@ final class ViewChoice: Identifiable {
 
 
 struct YesNoView: View {
-    var choiceViews: [ViewChoice]
+    var viewConfig: [ViewChoice]
     let completion: (ViewChoice) -> Void
 
     init(_ titles: [String],
          completion: @escaping (ViewChoice) -> Void) {
-        choiceViews = ViewChoice.choices(from: titles)
+        viewConfig = ViewChoice.choices(from: titles)
         self.completion = completion
     }
 
@@ -46,34 +46,20 @@ struct YesNoView: View {
         return (CGFloat(buttonCount + 1) * YesNoButton.buttonHeight)
     }
 
-    func outerSize(within boundSize: CGSize,
-                   buttonCount: Int) -> CGSize {
-        let buttonSize = YesNoButton.buttonSize(within: boundSize)
-        return CGSize(
-            width: buttonSize.width,
-            height: CGFloat(buttonCount) * buttonSize.height)
-    }
-
-
     var body: some View {
         GeometryReader { context in
-            HStack {
-                Spacer()
-                VStack(alignment: .center) {
-                    ForEach(choiceViews) {
-                        cView in
-                        YesNoButton(
-                            choice: cView,
-                            size: context.size,
-                            completion: completion)
-                            .mask {
-                                RoundedRectangle(cornerRadius: 14, style: .circular)
-                            }
+            VStack(alignment: .center) {
+                ForEach(0..<viewConfig.count)
+                { index in
+                    YesNoButton(
+                        id: index,
+                        title: viewConfig[index]
+                            .title)
+                    { btn in
+                        print("Chose \(btn.id)")
                     }
                 }
-                Spacer()
             }
-
         }
     }
 }
@@ -83,13 +69,24 @@ struct YesNoView_Previews: PreviewProvider {
     static let choices: [String] = [
         "Yes", "No"
     ]
+
+    static var hitYes = false
+
     static var previews: some View {
         VStack {
             YesNoView(choices) {
-                _ in
+                vchoice in
+                if vchoice.title == "Yes" {
+                    hitYes = true
+                }
+                else {
+                    hitYes = false
+                }
                 print("Beep! YNView")
             }
             Spacer()
         }
+        .frame(width: .infinity, height: 120, alignment: .center)
+        .padding()
     }
 }

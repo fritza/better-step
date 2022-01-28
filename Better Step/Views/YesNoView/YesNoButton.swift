@@ -7,54 +7,90 @@
 
 import SwiftUI
 
+
+
+struct Sizing: ViewModifier {
+    let boundSize: CGSize
+//    let proxy: GeometryProxy
+    let color: Color?
+    init(proxy: GeometryProxy,
+         color: Color?) {
+        self.boundSize = proxy.size
+        self.color = color
+    }
+
+    func body(content: Content) -> some View {
+        content.frame(
+            width: boundSize.width,
+            height: boundSize.height,
+            alignment: .center)
+            .background(color)
+    }
+}
+
+extension View {
+    func bounding(proxy: GeometryProxy,
+                  color: Color? = nil) -> some View {
+        modifier(Sizing(proxy: proxy, color: color))
+    }
+}
+
 struct YesNoButton: View {
     // FIXME: "choiceView" is a bad name for a ViewChoice
-    let choiceView: ViewChoice
-    let contextSize: CGSize
-    let completion: ((ViewChoice) -> Void)?
+    //    let choiceView: ViewChoice
+    //    let contextSize: CGSize
+
+    let id: Int
+    let title: String
+    let completion: ((YesNoButton) -> Void)?
 
     static let buttonHeight: CGFloat = 48
     static let buttonWidthFactor: CGFloat = 0.9
 
-    func buttonSize() -> CGSize {
-        return Self.buttonSize(within: contextSize)
-    }
-
-    static func buttonSize(within boundSize: CGSize) -> CGSize {
-        CGSize(width: buttonWidthFactor * boundSize.width,
-               height: buttonHeight)
-    }
-
-    init(choice: ViewChoice,
-         size: CGSize,
-         completion: ( (ViewChoice) -> Void)? ) {
-        choiceView = choice
-        contextSize = size
+    init(id: Int, title: String,
+         completion: ( (YesNoButton) -> Void)? ) {
+        self.id = id
+        self.title = title
         self.completion = completion
     }
 
     var body: some View {
-        Button { completion?(choiceView) }
-    label: { Text(choiceView.title) }
-    .frame(
-        width: buttonSize().width,
-        height: buttonSize().height)
-    .background(Color.black.opacity(0.05))
+        GeometryReader { proxy in
+            Button(
+                action: {
+                    completion?(self)
+                },
+                label: {
+                    Text(self.title)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .bounding(proxy: proxy,
+                                  color: Color.black
+                                    .opacity(0.1))
+                        .mask {
+                            RoundedRectangle(cornerRadius: 12)
+                        }
+                })
+                .bounding(proxy: proxy)
+        }
     }
 }
 
 struct YesNoButton_Previews: PreviewProvider {
     static let choices: [String] = [
-        "Yes", "No"
-        ]
-    static let choice: ViewChoice = {
+                "Yes", "No"
+            ]
+            static let choice: ViewChoice = {
         ViewChoice(5, "Maybe")
     }()
     static var previews: some View {
-        YesNoButton(choice: Self.choice,
-                    size: CGSize(width: 300, height: 56)) {
-            _ in
-            print("Beep! YNButton")
+        ZStack {
+            YesNoButton(id: 1, title: "YES!") {
+                btn in
+                print("Beep! button \(btn.title)")
+//                btn.spe
+            }
         }
+        .frame(width: 300, height: 60, alignment: .center)
     }
 }

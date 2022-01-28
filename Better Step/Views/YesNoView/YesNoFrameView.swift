@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 
 struct YesNoFrameView: View {
     let boundingSize: CGSize
@@ -36,3 +36,4 @@ struct YesNoFrameView_Previews: PreviewProvider {
                        count: 2)
     }
 }
+*/
