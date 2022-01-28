@@ -65,6 +65,7 @@ struct EmailFormView_Previews: PreviewProvider {
                 title: "Report:",
                 address: addrHold.$email)
                 .frame(height: 80)
+            Button("DAMMIT") { print("dammit") }
             Text("stored = \(addrHold.email)")
             Spacer()
         }.padding()

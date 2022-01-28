@@ -32,47 +32,52 @@ enum AppStorageKeys: String {
 struct Better_StepApp: App {
 
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
+    let globals = GlobalState()
 
     var body: some Scene {
         WindowGroup {
-            TabView {
-
-                // MARK: - DASI
-                SurveyView()
-                    .environmentObject(DASIReportContents())
-                    .tabItem {
-                        Image(systemName: "checkmark.square")
-                        Text("Survey")
-                    }
-
-                // MARK: - Timed Walk
-                WalkView()
-//                    .environmentObject(Self.commonReport)
-                    .tabItem {
-                        Image(systemName: "figure.walk")
-                        Text("Walk")
-                    }
-
-                // MARK: - Reporting
-                Text("Reporting Tab")
-//                    .environmentObject(Self.commonReport)
-                    .tabItem {
-                        Image(systemName: "doc.text")
-                        Text("Report")
-                    }
-
-                // MARK: - Setup
-                SetupView()
-//                    .environmentObject(
-//                        self.setupEnvironment
-//                    )
-//                    .environmentObject(Self.commonReport)
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("Setup")
-                    }
-            }
+            OnboardView()
+                .environmentObject(globals)
+//            TabView {
+//
+//                // MARK: - DASI
+//                SurveyView()
+//                    .environmentObject(DASIReportContents())
+//                    .tabItem {
+//                        Image(systemName: "checkmark.square")
+//                        Text("Survey")
+//                    }
+//
+//                // MARK: - Timed Walk
+//                WalkView()
+////                    .environmentObject(Self.commonReport)
+//                    .tabItem {
+//                        Image(systemName: "figure.walk")
+//                        Text("Walk")
+//                    }
+//
+//                // MARK: - Reporting
+//                Text("Reporting Tab")
+////                    .environmentObject(Self.commonReport)
+//                    .tabItem {
+//                        Image(systemName: "doc.text")
+//                        Text("Report")
+//                    }
+//
+//                // MARK: - Setup
+//                SetupView()
+////                    .environmentObject(
+////                        self.setupEnvironment
+////                    )
+////                    .environmentObject(Self.commonReport)
+//                    .tabItem {
+//                        Image(systemName: "gear")
+//                        Text("Setup")
+//                    }
+//            }
+//                .environmentObject(globals)
         }
+
 
     }
 }

@@ -14,7 +14,7 @@ You have completed the survey portion of this exercise.
 """
 
 fileprivate var nextSteps: String {
-    if GlobalState.readyToReport {
+    if GlobalState.current.allTasksFinished {
         return "\nPlease proceed to the “Report” view to submit your information to the team."
     }
     else {
@@ -22,15 +22,14 @@ fileprivate var nextSteps: String {
     }
 }
 
-// FIXME: - Make the instructions dynamic
-//          depending on whether all parts have completed.
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View {
+    @EnvironmentObject private var globalState: GlobalState
+
     var instructions: String {
         completionText + nextSteps
     }
-
 
     var body: some View {
         NavigationView {
@@ -40,7 +39,7 @@ struct DASICompleteView: View {
                 sfBadgeName: "checkmark.square")
         }
         .onAppear{
-            GlobalState.dasi.complete()
+            globalState.complete(.dasi)
         }
     }
 }
