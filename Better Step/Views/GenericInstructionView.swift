@@ -51,6 +51,7 @@ struct GenericInstructionView: View {
                     Spacer()
                     Text(bodyText)
                         .font(.body)
+                        .padding()
                     Spacer()
 
                     if let title = proceedTitle {

@@ -43,8 +43,9 @@ struct SurveyView: View {
             VStack {
                 Spacer()
                 GenericInstructionView(
+                    titleText: "DASI Survey",
                     bodyText: surveyNarrative, sfBadgeName: "checkmark.square")
-                    .navigationTitle("DASI Survey")
+//                    .navigationTitle("DASI Survey")
                     .padding(32)
 
                 NavigationLink(
