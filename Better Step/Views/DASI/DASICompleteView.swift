@@ -8,27 +8,39 @@
 import SwiftUI
 
 fileprivate let completionText = """
-BUG: There should be a Back button.
+BUG: Need a Back button and condition on the status
 
 You have completed the survey portion of this exercise.
-
-When you're ready, select the tab (below) marked "Walk" to proceed to the walking portion.
-
-- or -
-
-If you've already completed your walk, proceed to the "Report" view to submit your information to the team.
 """
+
+fileprivate var nextSteps: String {
+    if GlobalState.readyToReport {
+        return "\nPlease proceed to the “Report” view to submit your information to the team."
+    }
+    else {
+        return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
+    }
+}
+
 // FIXME: - Make the instructions dynamic
 //          depending on whether all parts have completed.
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View {
+    var instructions: String {
+        completionText + nextSteps
+    }
+
+
     var body: some View {
         NavigationView {
             GenericInstructionView(
                 titleText: "Survey Complete",
-                bodyText: completionText,
+                bodyText: instructions, // + completionText,
                 sfBadgeName: "checkmark.square")
+        }
+        .onAppear{
+            GlobalState.dasi.complete()
         }
     }
 }
