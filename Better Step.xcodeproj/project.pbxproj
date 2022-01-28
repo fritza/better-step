@@ -24,6 +24,7 @@
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
 		1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
+		1F8A065627A478B400477379 /* STGlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* STGlobalState.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
@@ -100,6 +101,7 @@
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
+		1F8A065527A478B400477379 /* STGlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STGlobalState.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1F8A065527A478B400477379 /* STGlobalState.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
 				1FFB30DF277BE5090099AE5E /* Model */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
@@ -500,6 +503,7 @@
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
+				1F8A065627A478B400477379 /* STGlobalState.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FFB30E5277BF0FD0099AE5E /* DASIQuestionView.swift in Sources */,
