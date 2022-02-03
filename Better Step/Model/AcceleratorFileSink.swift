@@ -92,7 +92,7 @@ final actor AccelerometerFileSink {
         }
     }
 
-    func flushToFile() async throws
+    private func flushToFile() async throws
     {
         let queueContents = Array(acceleratorQueue)
         acceleratorQueue.removeAll()
