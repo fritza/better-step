@@ -74,21 +74,26 @@ final actor AccelerometerFileSink {
     }
 
     func close() async throws {
-        await flushToFile()
+        try await flushToFile()
         try writeHandle.close()
     }
 
-    func append(record: AccelerometerItem) async {
-        acceleratorQueue.append(record)
-        await flushToFile()
+    func append(record: AccelerometerItem) {
+        Task {
+            acceleratorQueue.append(record)
+            try await flushToFile()
+        }
     }
 
-    func append(records: [AccelerometerItem]) async {
-        acceleratorQueue.append(contentsOf: records)
-        await flushToFile()
+    func append(records: [AccelerometerItem]) throws {
+        Task {
+            acceleratorQueue.append(contentsOf: records)
+            try await flushToFile()
+        }
     }
 
-    func flushToFile() async {
+    func flushToFile() async throws
+    {
         let queueContents = Array(acceleratorQueue)
         acceleratorQueue.removeAll()
 
@@ -97,21 +102,8 @@ final actor AccelerometerFileSink {
             .map { $0 + "\r\n"}
             .joined(separator: "\r\n")
         let csvData = csvs.data(using: .utf8)!
-        writeHandle.write(csvData)
+        try writeHandle.write(contentsOf: csvData)
     }
-
-    private func transmitRecords() async {
-        // Wait for enough records (writingWatermark) to accumulate
-        // Serialize each.
-        // Aggregate into lines
-        // Write it out.
-        // wait for that to finish
-        // wait for the acceleratorQueue to fill up again.
-
-        // NOTE: There must be a flush for < writingWatermark at the end.
-    }
-
-
 }
 
 
