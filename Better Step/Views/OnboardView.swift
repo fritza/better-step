@@ -13,62 +13,56 @@ struct OnboardView: View {
         case elsewhere
     }
 
-//    @State private var subjectID: String
-    @FocusState var keyboardIsLive: WhereFocused?
-    @EnvironmentObject var globalState: GlobalState
     @AppStorage(AppStorageKeys.subjectID.rawValue) var appStoredUserID: String = ""
 
+    @State var localSubjectID: String = "fer"
+    @State var fieldHasContent: Bool  = true
+
     init() {
-        // FIXME: There has to be a better way to set this.
+//        let defaults = UserDefaults.standard
+//        let storedID = defaults.string(forKey: AppStorageKeys.subjectID.rawValue) ?? ""
+//        let isEmpty = storedID.isEmpty
+        self.localSubjectID = ""
+        self.fieldHasContent = true
     }
 
     var body: some View {
-        GeometryReader { proxy in
+        NavigationView {
             VStack {
-                Text("Step Test")
-                    .font(.largeTitle)
-                Spacer()
-
+                // TODO:  The HStack should probably
+                //        be the view, without a VStack.
                 HStack {
-                    Text("Start by entering the ID for the next subject.")
                     Spacer()
-                }
-                Spacer()
-
-                HStack {
-                    Text("Subject ID:")
-                    Spacer()
+                    Text("Subject ID:").font(.title3)
+                    Spacer(minLength: 24)
                     TextField("Subject ID:",
-                              text: $globalState.subjectID)
-                        .keyboardType(.default)
-                        .frame(width: proxy.size.width * 0.6)
-                        .focused($keyboardIsLive, equals: .field)
+                              text: self.$localSubjectID)
+                        .textFieldStyle(.roundedBorder)
+                        .onChange(of: self.localSubjectID) { newValue in
+                            fieldHasContent = !newValue.isEmpty
+                        }
+                        .frame(width: 200)
+                    Spacer()
+                }
+                if fieldHasContent {
+                    NavigationLink("Accept", destination: {
+                        Text("ActiveButton Pushed")
+                    })
+                }
+                else {
+                    Text("Accept")
+                        .foregroundColor(.gray)
                 }
                 Spacer()
-
-                Button("Submit") {
-                    // Shouln't need to reset globalState as the text edit updated it already.
-//                    globalState.clear(newUserID: subjectID)
-                    keyboardIsLive = nil
-                }
-                .focused($keyboardIsLive, equals: .elsewhere)
-                Spacer()
-                Text("Globals: ")
-                +
-                Text(globalState.subjectID)
-                    .fontWeight(.semibold)
-
-//                Spacer(minLength: 5)
+                Text(localSubjectID).fontWeight(.medium)
             }
-            .onSubmit(of: .text) {
-                keyboardIsLive = .elsewhere
-                // Shouln't need to reset globalState as the text edit updated it already.
-//                globalState.clear(newUserID: subjectID)
-            }
-            .onAppear {
-                keyboardIsLive = .elsewhere
-            }
-            .padding()
+        }
+        .onAppear {
+            localSubjectID = appStoredUserID
+            fieldHasContent = localSubjectID.isEmpty
+        }
+        .onDisappear {
+            appStoredUserID = localSubjectID
         }
     }
 }
@@ -76,8 +70,7 @@ struct OnboardView: View {
 struct OnboardView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardView()
-            .frame(width: .infinity, height: 300)
+            .frame(width: .infinity)//, height: 300)
             .padding()
-            .environmentObject(GlobalState())
     }
 }
