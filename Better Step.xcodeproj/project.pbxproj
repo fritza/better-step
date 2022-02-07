@@ -243,8 +243,8 @@
 		1FF11B3A279A173D00E319ED /* DASI */ = {
 			isa = PBXGroup;
 			children = (
-				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1FFB30E4277BF0FD0099AE5E /* DASIQuestionView.swift */,
+				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
 			);
 			path = DASI;
