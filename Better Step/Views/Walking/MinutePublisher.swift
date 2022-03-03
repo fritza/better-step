@@ -48,6 +48,7 @@ final class MinutePublisher: ObservableObject {
     @Published var minutes: Int = 0
     @Published var seconds: Int = 0
     @Published var fraction: Double = 0.0
+    @Published var minuteColonSecond: String = ""
 
     // MARK: Initialization
 
@@ -116,6 +117,27 @@ final class MinutePublisher: ObservableObject {
             .removeDuplicates()
             .sink { minutes in
                 self.minutes = minutes
+            }
+            .store(in: &cancellables)
+
+        // Emit mm:ss
+        commonPublisher
+            .map { (commonSeconds: TimeInterval) -> (m: Int, s: Int) in
+                let dblMin = (commonSeconds / 60.0).rounded(.towardZero)
+                let dblSec = (commonSeconds.rounded(.towardZero)).truncatingRemainder(dividingBy: 60.0)
+                return (m: Int(dblMin), s: Int(dblSec))
+            }
+            .map { msPair -> String in
+                let (m, s) = msPair
+                let mString = String(m)
+                var sString = String(s)
+                if sString.count < 2 { sString = "0" + sString }
+
+                return "\(mString):\(sString)"
+            }
+            .removeDuplicates()
+            .sink {
+                self.minuteColonSecond = $0
             }
             .store(in: &cancellables)
     }
