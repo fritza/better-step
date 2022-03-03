@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+/// A `View` that displays a circle containing a sweep-second hand and a digit, representing a countdown in seconds.
 struct SweepSecondView: View {
     @EnvironmentObject var timer: WrappedTimer
 
