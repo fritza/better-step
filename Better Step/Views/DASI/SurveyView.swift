@@ -11,6 +11,9 @@ let surveyNarrative = """
 This exercise asks you to respond to questions from a standard assessment of how free you are in your daily life.
 """
 
+
+
+
 final class BoolBearer: ObservableObject, CustomStringConvertible {
     @Published var showGreeting  : Bool
     @Published var showQuestions : Bool
@@ -35,6 +38,10 @@ final class BoolBearer: ObservableObject, CustomStringConvertible {
     }
 }
 
+/// A `View` that greets the user, describes the DASI survey and selects the presentation of the `DASIQuestionView`.
+///
+///The state of the survey, is part of the `@State` of this view. When changed, a new `View` will appear to display and collect the next question.
+///
 struct SurveyView: View {
     @StateObject private var wrappedShowing = BoolBearer(initially: false)
 
