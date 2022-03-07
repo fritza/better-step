@@ -40,3 +40,15 @@ extension BinaryFloatingPoint {
         return asSeconds.spelled
     }
 }
+
+private let isoFormatter: ISO8601DateFormatter = {
+    let retval = ISO8601DateFormatter()
+    retval.formatOptions = .withInternetDateTime
+    return retval
+}()
+
+extension Date {
+    public var iso: String {
+        isoFormatter.string(from: self)
+    }
+}

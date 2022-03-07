@@ -67,7 +67,7 @@ extension DASIResponse: Comparable, Hashable, CustomStringConvertible {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = .withInternetDateTime
         return [
-            isoFormatter.string(from: timestamp),
+            timestamp.iso,
             String(describing: id),
             String(describing: response)
         ]

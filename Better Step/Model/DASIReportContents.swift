@@ -164,30 +164,33 @@ final class DASIReportContents: ObservableObject {
     }
 
     // MARK: CSV formatting
-    /// All DASI responses formatted into multiple lines of `csv`.
-    ///
-    /// The line delimiter, per Microsoft spec, is "`\r\n`".
-    public var csvDASIRecords: String {
-        let prefix = [subjectID]
-        // per-response array of arrays of response fields
-        let allLines = answers
-            .map { (record: DASIResponse) -> String in
-                let recordStrings = record.csvStrings
-                let retval = (prefix + recordStrings)
-                    .joined(separator: ",")
-                return retval
-            }
-            .joined(separator: "\r\n")
-        return allLines
-    }
 
-    /// All DASI responses, in `.csv` format, encoded into `Data`.
-    /// - throws: `fatalError` if the `string`-to-`Data` reduction fails.
-    public var csvData: Data {
-        guard let retval = csvDASIRecords
-                .data(using: .utf8) else {
-                    fatalError()
-                }
-        return retval
+    /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
+    var csvLine: String? {
+        let okayResponseValues: Set<AnswerState> = [.no, .yes]
+        let usableResponses = answers
+            .filter {
+                okayResponseValues.contains($0.response)
+            }
+        // TODO: Consider whether < answers.count is an error.
+        guard let firstUsable = usableResponses.first
+        else { return nil }
+
+        let firstTimestamp = firstUsable.timestamp.iso
+
+        let numberedResponses = usableResponses
+            .map {
+                String(describing: $0.id)
+                + ","
+                + String(describing: $0.response)
+            }
+
+        let components: [String] =
+        [subjectID] + [firstTimestamp] + numberedResponses
+
+        assert(components.count == 2+DASIQuestion.questions.count,
+               "Expected \(2+DASIQuestion.questions.count) response items, got \(components.count)")
+
+        return components.joined(separator: ",")
     }
 }

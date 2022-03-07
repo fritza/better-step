@@ -11,9 +11,6 @@ let surveyNarrative = """
 This exercise asks you to respond to questions from a standard assessment of how free you are in your daily life.
 """
 
-
-
-
 final class BoolBearer: ObservableObject, CustomStringConvertible {
     @Published var showGreeting  : Bool
     @Published var showQuestions : Bool
