@@ -1,5 +1,5 @@
 //
-//  OnboardView.swift
+//  DASIOnboardView.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/28/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardView: View {
+struct DASIOnboardView: View {
     enum WhereFocused: Hashable {
         case field
         case elsewhere
@@ -66,7 +66,7 @@ struct OnboardView: View {
 
 struct OnboardView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardView()
+        DASIOnboardView()
             .frame(width: .infinity)//, height: 300)
             .padding()
     }

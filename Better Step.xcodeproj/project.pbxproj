@@ -17,7 +17,6 @@
 		1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D427D1450300568ADF /* ComplexModule */; };
 		1F1BD8D727D1450300568ADF /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D627D1450300568ADF /* Numerics */; };
 		1F1BD8D927D1450300568ADF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D827D1450300568ADF /* RealModule */; };
-		1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09B276FAB3C0026D28B /* SurveyView.swift */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -28,12 +27,13 @@
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
 		1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
 		1F8A065627A478B400477379 /* STGlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* STGlobalState.swift */; };
-		1F8A065827A4841400477379 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* OnboardView.swift */; };
+		1F8A065827A4841400477379 /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* DASIOnboardView.swift */; };
 		1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
 		1FA3B8BE27D69BFC0058F1AF /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BB27D69BFC0058F1AF /* YesNoView.swift */; };
 		1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
+		1FA3B8C227D69E360058F1AF /* DASICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C127D69E360058F1AF /* DASICardView.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
@@ -108,13 +108,14 @@
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065527A478B400477379 /* STGlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STGlobalState.swift; sourceTree = "<group>"; };
-		1F8A065727A4841400477379 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
+		1F8A065727A4841400477379 /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1F997DF827D13FC9002EFA17 /* SurveyRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyRootView.swift; sourceTree = "<group>"; };
 		1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyContainerView.swift; sourceTree = "<group>"; };
 		1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoStack.swift; sourceTree = "<group>"; };
 		1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
 		1FA3B8BB27D69BFC0058F1AF /* YesNoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoView.swift; sourceTree = "<group>"; };
 		1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
+		1FA3B8C127D69E360058F1AF /* DASICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICardView.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
@@ -254,6 +255,7 @@
 		1FF11B3A279A173D00E319ED /* DASI */ = {
 			isa = PBXGroup;
 			children = (
+				1FA3B8C127D69E360058F1AF /* DASICardView.swift */,
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
@@ -303,7 +305,7 @@
 				1F60B0A3276FCF690026D28B /* SetupView.swift */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
-				1F8A065727A4841400477379 /* OnboardView.swift */,
+				1F8A065727A4841400477379 /* DASIOnboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -522,18 +524,18 @@
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1FD45695279F589A00B5429A /* DASIResponse.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
-				1F8A065827A4841400477379 /* OnboardView.swift in Sources */,
+				1F8A065827A4841400477379 /* DASIOnboardView.swift in Sources */,
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
 				1F8A065627A478B400477379 /* STGlobalState.swift in Sources */,
+				1FA3B8C227D69E360058F1AF /* DASICardView.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
-				1F60B09C276FAB3C0026D28B /* SurveyView.swift in Sources */,
 				1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,

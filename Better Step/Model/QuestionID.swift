@@ -13,6 +13,12 @@ import Foundation
 
 // MARK: - QuestionID
 
+extension Int {
+    var qid: QuestionID {
+        QuestionID(self)
+    }
+}
+
 /// The ID of a question. Its `rawValue` is the 1-based ID, _not_ its position in a question array.
 ///
 /// `QuestionID`s come from storage as 1-based `Int`s. The `rawValue` is that 1-based index. Index `[Question]` with `self.index`.
@@ -169,6 +175,7 @@ enum DASIStages {
     /// Mutate `self` to the stage before it. Return to `nil` if there is no preceding stage.
     ///
     /// `.greeting` has no effect. `.completion` backs off to the last of the `QuestionID`s. .`presenting(question:)` backs off to the previous question, or to .greeting if the QuestionID is at the minimum.
+    @discardableResult
     mutating func goBack() -> DASIStages? {
         if !self.refersToQuestion { return nil }
 
@@ -180,6 +187,7 @@ enum DASIStages {
         }
         else { return nil }
     }
+    #warning("Why does goBack mutate, but goForward doesn't?")
 
     /// Mutate `self` to the stage after it. Return to `nil` if there is no suceeding stage.
     ///

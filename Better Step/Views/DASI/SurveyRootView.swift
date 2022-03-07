@@ -111,12 +111,6 @@ struct SurveyRootView: View {
     }
 }
 
-extension Int {
-    var qid: QuestionID {
-        QuestionID(self)
-    }
-}
-
 struct SurveyRootView_Previews: PreviewProvider {
     static var previews: some View {
         SurveyRootView(

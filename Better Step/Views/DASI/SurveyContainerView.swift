@@ -8,10 +8,10 @@
 import SwiftUI
 
 
-enum CardTags: String, CaseIterable, Equatable {
+enum DASICardTags: String, CaseIterable, Equatable {
     case landing, questions, completion
 
-    var next: CardTags {
+    var next: DASICardTags {
         guard let currentIndex = Self.allCases.firstIndex(of: self) else {
             fatalError()
         }
@@ -20,17 +20,65 @@ enum CardTags: String, CaseIterable, Equatable {
     }
 }
 
-final class ContentState: ObservableObject {
-    @Published var selected: CardTags?
+final class DASIContentState: ObservableObject {
+    @Published var selected: DASICardTags?
+
+    #warning("no protection from overflow in pageNum")
+    // Should detect .questions and number > max question count, then advance the tag.
+    // TODO: Should underflow go to landing?
     @Published var pageNum: Int
-    init(_ selection: CardTags = .landing) {
+
+    init(_ selection: DASICardTags = .landing) {
         selected = selection
         pageNum = 0
     }
+
+    /// Reflect the selection of the next page.
+    ///
+    /// At the end of the question pages, this should advance to `.completion`. There is no increment from `.completion`.
+    func increment() {
+        switch selected {
+        case .landing:
+            pageNum = 1
+            selected = .questions
+        case .questions:
+            if pageNum == DASIQuestion.count {
+                selected = .completion
+            }
+            else {
+                pageNum += 1
+            }
+        default:
+            assertionFailure("Attempt to go forward from state \(String(describing: selected))")
+            break
+        }
+    }
+
+    /// Reflect the selection of the previous page.
+    ///
+    /// From the start of the question pages, this should regress to `.landing`. There is no decrement from `.landing`.
+    func decrement() {
+        switch selected {
+        case .questions:
+            if pageNum == 1 {
+                selected = .landing
+            }
+            else {
+                pageNum -= 1
+            }
+        case .completion:
+            pageNum = DASIQuestion.count
+            selected = .questions
+        default:
+            assertionFailure("Attempt to go back from state \(String(describing: selected))")
+            break
+        }
+    }
+
 }
 
 struct SurveyContainerView: View {
-    @EnvironmentObject var contentEnvt: ContentState
+    @EnvironmentObject var contentEnvt: DASIContentState
 
     var body: some View {
         NavigationView {
@@ -42,15 +90,15 @@ struct SurveyContainerView: View {
                     assert(contentEnvt.selected != nil)
                     contentEnvt.selected = contentEnvt.selected?.next
                 }
-                NavigationLink(tag: CardTags.second,
+                NavigationLink(tag: DASICardTags.questions,
                                selection: $contentEnvt.selected,
                                destination: {
-                    QuestionView()
+                    DASIQuestionView()
                         .navigationBarBackButtonHidden(true)
                 },
                                label: {EmptyView()}
                 )
-                NavigationLink(tag: CardTags.first,
+                NavigationLink(tag: DASICardTags.landing,
                                selection: $contentEnvt.selected,
                                destination: {
                     DASIOnboardView()
@@ -58,10 +106,10 @@ struct SurveyContainerView: View {
                 },
                                label: {EmptyView()}
                 )
-                NavigationLink(tag: CardTags.third,
+                NavigationLink(tag: DASICardTags.completion,
                                selection: $contentEnvt.selected,
                                destination: {
-                    CardView()
+                    DASICardView()
                         .navigationBarBackButtonHidden(true)
                 },
                                label: {EmptyView()}
@@ -71,10 +119,10 @@ struct SurveyContainerView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
         SurveyContainerView()
-            .environmentObject(ContentState(.landing))
+            .environmentObject(DASIContentState(.landing))
     }
 }
 

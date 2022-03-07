@@ -36,16 +36,15 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            OnboardView()
+//            DASIOnboardView()
 //                .environmentObject(globals)
             TabView {
 
                 // MARK: - DASI
                 #if true
                 SurveyContainerView()
-                #else
-                SurveyView()
                     .environmentObject(DASIReportContents())
+                #else
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")

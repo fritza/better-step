@@ -188,8 +188,8 @@ final class DASIReportContents: ObservableObject {
         let components: [String] =
         [subjectID] + [firstTimestamp] + numberedResponses
 
-        assert(components.count == 2+DASIQuestion.questions.count,
-               "Expected \(2+DASIQuestion.questions.count) response items, got \(components.count)")
+        assert(components.count == 2+DASIQuestion.count,
+               "Expected \(2+DASIQuestion.count) response items, got \(components.count)")
 
         return components.joined(separator: ",")
     }

@@ -22,19 +22,21 @@ struct QuestionContentView: View {
 }
 
 struct DASIQuestionView: View {
-    @EnvironmentObject var envt: ContentState
-
+    @EnvironmentObject var envt: DASIContentState
+    @EnvironmentObject var reportContents: DASIReportContents
+    // FIXME: Verify that the report contents don't go away
+    // before it's time to report.
     var body: some View {
         VStack {
             HStack {
                 if envt.pageNum > 0 {
-                    Button("\(Image.init(systemName: "arrow.left")) Previous") {
+                    Button("\(Image(systemName: "arrow.left")) Previous") {
                         envt.pageNum -= 1
                     }
                 }
                 Spacer()
-                if envt.pageNum < DASIQuestion.questions.count-1 {
-                    Button("Next \(Image.init(systemName: "arrow.right"))") {
+                if envt.pageNum < DASIQuestion.count-1 {
+                    Button("Next \(Image(systemName: "arrow.right"))") {
                         envt.pageNum += 1
                     }
                 }
@@ -53,18 +55,25 @@ struct DASIQuestionView: View {
                 envt.selected = envt.selected?.next
             }
             Spacer()
-            YesNoStack(selectedButtonID: 1)
-                .frame(height: 130)
-                .padding()
+            YesNoStack(selectedButtonID: 1) {
+                answer in
+                // Record the response
+                reportContents.didRespondToQuestion(
+                    id: envt.pageNum.qid,
+                    with: answer)
+                    envt.pageNum += 1
+                    }
+                        .frame(height: 130)
+                        .padding()
         }
         .navigationTitle("DASI - \((envt.pageNum+1).description)")
     }
 }
 
-struct QuestionView_Previews: PreviewProvider {
+struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView()
-            .environmentObject(ContentState(.second))
+        DASIQuestionView()
+            .environmentObject(DASIContentState(.questions))
     }
 }
 

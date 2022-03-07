@@ -30,11 +30,22 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
         default :   return nil
         }
     }
+
+    init?(fromYNButtonNumber btnNum: Int) {
+        switch btnNum {
+        case 1: self = .yes
+        case 2: self = .no
+        default:
+            assertionFailure("Got y/n response of \(btnNum)")
+            return nil
+        }
+    }
 }
 
 // Verified consistent with DASIQuestions in the MinutePublisher.playground/Response\ decoding.
 // MARK: - DASIQuestion
 public struct DASIQuestion: Identifiable, Codable, Comparable {
+    // TODO: Consider making this into a Collection
     public var id: QuestionID
     public let text: String
     public let score: Double
@@ -43,8 +54,8 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
     public static let questions: [DASIQuestion] = {
         guard let dasiURL = Bundle.main.url(
             forResource: "DASIQuestions", withExtension: "json") else {
-            preconditionFailure("Could not find DASIQuestions.json")
-        }
+                preconditionFailure("Could not find DASIQuestions.json")
+            }
         let dasiData = try! Data(contentsOf: dasiURL)
         let retval =  try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
 
@@ -52,6 +63,8 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
         QuestionID.questionCount = retval.count
         return retval
     }()
+
+    public static var count: Int { questions.count }
 
     public static func with(id questionID: QuestionID) -> DASIQuestion {
         return questions[questionID.index]
@@ -64,7 +77,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
 extension DASIQuestion {
     public var next: DASIQuestion? {
         guard let proposed = id.succ,
-              proposed.index < Self.questions.count else { return nil }
+              proposed.index < Self.count else { return nil }
         return Self.with(id: proposed)
     }
 
