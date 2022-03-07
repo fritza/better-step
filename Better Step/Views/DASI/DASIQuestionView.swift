@@ -1,136 +1,71 @@
 //
 //  DASIQuestionView.swift
-//  Better Step
+//  CardSeries
 //
-//  Created by Fritz Anderson on 12/28/21.
+//  Created by Fritz Anderson on 3/4/22.
 //
 
 import SwiftUI
 
-// FIXME: Center the action/proceed button
-//        When Next is absent, it shifts over to the right.
-
-/*
- TODO for finishing up DASI
-
- Find a way to progress from last answer to a farewell screen
-
- Write the DASI file.
- Note that DASI is domplete:
-    To user
-    To app for a completion condition.
-
- */
-
-// MARK: - DASIQuestionView
-struct DASIQuestionView: View {
-    @State private var thisQuestion: DASIQuestion
-    @EnvironmentObject var showingQuestions: BoolBearer
-    @EnvironmentObject var reportContents: DASIReportContents
-
-    static let yesNoWidth: CGFloat = 80
-
-//    @Binding var report: DASIReport
-//    @State private var thisAnswer: AnswerState
-
-    // Remember question.id starts from 1
-    private var thisAnswer: AnswerState {
-        return reportContents.responseForQuestion(id: thisQuestion.id)
+struct QuestionContentView: View {
+    let content: String
+    let index: Int
+    var text: String {
+        DASIQuestion.with(id: QuestionID(index: index)).text
     }
-
-    private var questionID: QuestionID { thisQuestion.id }
-
-    init(question: DASIQuestion) {
-        self.thisQuestion = question
-//        thisAnswer = reportContents.responseForQuestion(id: question.id)
-    }
-
-    func prepareForQuestion(_ newCurrentQuestion: DASIQuestion) {
-        thisQuestion = newCurrentQuestion
-    }
-
-    // MARK: Body
     var body: some View {
-        VStack(alignment: .center, spacing: 20)
-        {
-            // MARK: Displaying instructions
-            GeometryReader { proxy in
-                Text(
-                    thisQuestion.text)
-                    .font(.title)
-                    .fontWeight(.semibold)
-                    .frame(width: proxy.size.width)
-                    .fixedSize(horizontal: true, vertical: false)
-            }
-            Spacer(minLength: 20)
+//        let template = DASIQuestion.with(id: QuestionID(index: index)
+//        Text(c ontent + " (\(index))")
+        Text(self.text)
+            .font(.title)
+    }
+}
 
-            // FIXME: No way to add a checkmark.
-            // MARK: Yes/No buttons
-            YesNoView(["Yes", "No"]) {
-                choice in
-                let usersAnswer: AnswerState = (choice.id == 0) ? .yes : .no
-                reportContents
-                    .didRespondToQuestion(id: thisQuestion.id, with: usersAnswer)
-                if let nextQueston = thisQuestion.next {
-                    prepareForQuestion(nextQueston)
-                }
-                else {
-                    // FIXME: Should be complete()
-                    showingQuestions.greet()
-                }
-            }
+struct DASIQuestionView: View {
+    @EnvironmentObject var envt: ContentState
 
-            // MARK: Cancel/Next/Back buttons
+    var body: some View {
+        VStack {
             HStack {
-                // MARK: Back button
-                if thisQuestion.previous != nil {
-                    // Permit previous question any time that .previous is valid.
-                    Button {
-                        if let pq = thisQuestion.previous {
-                            prepareForQuestion(pq)
-                        }
+                if envt.pageNum > 0 {
+                    Button("\(Image.init(systemName: "arrow.left")) Previous") {
+                        envt.pageNum -= 1
                     }
-                label: { Text("Back") }
                 }
                 Spacer()
-                Button {
-                    showingQuestions.greet()
-                }
-                label: { Text("Cancel") }
-                Spacer()
-
-                /* ********************************************
-                 Is there any advantage in making Next and Back into NavigationLinks
-                 which can be de/activated with NavigationLink.init(_:tag:selection:destination:)
-                 */
-
-                // MARK: Next button
-                if let nextQuestion = thisQuestion.next,
-                   thisAnswer != .unknown {
-                    // Permit next question only when there is an answer, and the question has been responded to.
-                    Button {
-                        // Record current answer
-//                        recordAnswer()
-                        // Load next state
-                        prepareForQuestion(nextQuestion)
+                if envt.pageNum < DASIQuestion.questions.count-1 {
+                    Button("Next \(Image.init(systemName: "arrow.right"))") {
+                        envt.pageNum += 1
                     }
-                label: { Text("Next") }
                 }
             }
+            .padding()
+
+            Spacer()
+            QuestionContentView(content: "Do you have difficulty rogering, filberting, and professional disportment?", index: envt.pageNum)
+                .padding()
+
+            Spacer()
+//            Text("Page: \(envt.pageNum)")
+//                .font(.largeTitle)
+//                .padding()
+            Button("-> Next Category") {
+                envt.selected = envt.selected?.next
+            }
+            Spacer()
+            YesNoStack(selectedButtonID: 1)
+                .frame(height: 130)
+                .padding()
         }
-        .padding()
+        .navigationTitle("DASI - \((envt.pageNum+1).description)")
     }
 }
 
-// MARK: - Previews
-struct DASIQuestionView_Previews: PreviewProvider {
-    static let bearer = BoolBearer(initially: false)
+struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(
-            question: DASIQuestion.with(id: QuestionID(9))
-        )
-            .padding()
-            .environmentObject(bearer)
-            .environmentObject(DASIReportContents())
+        QuestionView()
+            .environmentObject(ContentState(.second))
     }
 }
+
+

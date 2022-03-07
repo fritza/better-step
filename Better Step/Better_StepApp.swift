@@ -42,7 +42,7 @@ struct Better_StepApp: App {
 
                 // MARK: - DASI
                 #if true
-                SurveyRootView()
+                SurveyContainerView()
                 #else
                 SurveyView()
                     .environmentObject(DASIReportContents())

@@ -13,14 +13,16 @@ BUG: Need a Back button and condition on the status
 You have completed the survey portion of this exercise.
 """
 
-fileprivate var nextSteps: String {
-    if GlobalState.current.allTasksFinished {
-        return "\nPlease proceed to the “Report” view to submit your information to the team."
-    }
-    else {
-        return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
-    }
-}
+//fileprivate var nextSteps: String {
+//    if GlobalState.current.allTasksFinished {
+//        return "\nPlease proceed to the “Report” view to submit your information to the team."
+//    }
+//    else {
+//        return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
+//    }
+//}
+
+let nextSteps = "NON-GLOBAL nextSteps"
 
 // FIXME: Should there be a Back button?
 
@@ -39,7 +41,7 @@ struct DASICompleteView: View {
                 sfBadgeName: "checkmark.square")
         }
         .onAppear{
-            globalState.complete(.dasi)
+//            globalState.complete(.dasi)
         }
     }
 }

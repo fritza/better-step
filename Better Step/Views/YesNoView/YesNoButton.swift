@@ -25,7 +25,6 @@ struct Sizing: ViewModifier {
             width: boundSize.width,
             height: boundSize.height,
             alignment: .center)
-            .background(color)
     }
 }
 
@@ -34,6 +33,12 @@ extension View {
     func bounding(proxy: GeometryProxy,
                   color: Color? = nil) -> some View {
         modifier(Sizing(proxy: proxy, color: color))
+    }
+}
+
+extension String {
+    func asChecked(_ checked: Bool) -> String {
+        (checked ? "✓ " : "  ") + self
     }
 }
 
@@ -46,6 +51,7 @@ struct YesNoButton: View {
     let id: Int
     let title: String
     let completion: ((YesNoButton) -> Void)?
+    @State var isChecked = false
 
     static let buttonHeight: CGFloat = 48
     static let buttonWidthFactor: CGFloat = 0.9
@@ -65,37 +71,34 @@ struct YesNoButton: View {
                     completion?(self)
                 },
                 label: {
-                    Text(self.title)
+                    Text(self.title //.asChecked(isChecked)
+                    )
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .bounding(
-                            proxy: proxy,
-                            color: Color.black.opacity(0.1))
-                        .mask {
-                            RoundedRectangle(cornerRadius: 12)
-                        }
+                        .bounding(proxy: proxy)
                 })
                 .bounding(proxy: proxy)
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.roundedRectangle(radius: 12)
+                )
         }
     }
 }
 
 // MARK: - Previews
 struct YesNoButton_Previews: PreviewProvider {
-    static let choices: [String] = [
-                "Yes", "No"
-            ]
-            static let choice: ViewChoice = {
-        ViewChoice(5, "Maybe")
-    }()
     static var previews: some View {
-        ZStack {
+        HStack {
+//            Color(.red)
             YesNoButton(id: 1, title: "Seldom") {
                 btn in
+                btn.isChecked.toggle()
                 print("Beep! button \(btn.title)")
-//                btn.spe
             }
+
+//            Color.green
         }
-        .frame(width: 300, height: 60, alignment: .center)
+        .padding()
+        .frame(width: 300, height: 80, alignment: .center)
     }
 }

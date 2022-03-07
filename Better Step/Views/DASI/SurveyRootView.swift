@@ -48,12 +48,6 @@ struct ToyView: View {
 
 struct SurveyRootView: View {
     @StateObject var dasiState: DASIPresentation = DASIPresentation(stage: .greeting)
-    // = DASIPresentation(stage: .greeting)
-
-//    init(initialState: DASIStages = .greeting) {
-//        dasiState = DASIPresentation(stage: initialState)
-////        dasiState.stage = nil
-//    }
 
     var body: some View {
         NavigationView {
@@ -65,6 +59,7 @@ struct SurveyRootView: View {
 
                 NavigationLink(tag: DASIStages.greeting,
                                selection: $dasiState.stage) {
+                    
                     ToyView(label: "from greeting", destination: .completion)
                         .environmentObject(dasiState)
                 } label: { EmptyView() }
