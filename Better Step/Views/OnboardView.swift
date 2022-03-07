@@ -19,9 +19,6 @@ struct OnboardView: View {
     @State var fieldHasContent: Bool  = true
 
     init() {
-//        let defaults = UserDefaults.standard
-//        let storedID = defaults.string(forKey: AppStorageKeys.subjectID.rawValue) ?? ""
-//        let isEmpty = storedID.isEmpty
         self.localSubjectID = ""
         self.fieldHasContent = true
     }

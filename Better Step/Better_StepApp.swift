@@ -41,12 +41,16 @@ struct Better_StepApp: App {
             TabView {
 
                 // MARK: - DASI
+                #if true
+                SurveyRootView()
+                #else
                 SurveyView()
                     .environmentObject(DASIReportContents())
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
+                #endif
 
                 // MARK: - Timed Walk
                 WalkView()

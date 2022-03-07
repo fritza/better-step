@@ -70,20 +70,13 @@ struct DASIQuestionView: View {
                 choice in
                 let usersAnswer: AnswerState = (choice.id == 0) ? .yes : .no
                 reportContents
-                    .didRespondToQuestion(
-                        id: thisQuestion.id,
-                        with: usersAnswer)
-
-//                self.recordAnswer(as: usersAnswer)
+                    .didRespondToQuestion(id: thisQuestion.id, with: usersAnswer)
                 if let nextQueston = thisQuestion.next {
                     prepareForQuestion(nextQueston)
                 }
                 else {
                     // FIXME: Should be complete()
                     showingQuestions.greet()
-//                    showingQuestions.isSet = false
-                    // The response is valid,
-                    // but we've run out of questions.
                 }
             }
 

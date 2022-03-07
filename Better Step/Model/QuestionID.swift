@@ -30,9 +30,11 @@ import Foundation
 ///
 /// - warning: Client code that populates `Array`s of questions (`DASIQuestion.questions` at this writing)) _must_ assign the count to `QuestionID.questionCount`.
 public struct QuestionID: RawRepresentable, Codable,
-                   Hashable, Strideable,
-                   CustomStringConvertible,
-                   CustomDebugStringConvertible
+                          Comparable,
+                          Hashable, Strideable,
+                          CustomStringConvertible,
+                          CustomDebugStringConvertible,
+Identifiable
 {
     // MARK: Initialization
     public typealias Stride = Int
@@ -105,14 +107,18 @@ public struct QuestionID: RawRepresentable, Codable,
         lhs.rawValue == rhs.rawValue
     }
 
+    // MARK: Identifiable
+    public var id: Int { self.rawValue }
+
     // MARK: Hashable
     /// `Hashable`
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue)
     }
 
-    /// `CustonStringConvertibla`
-    public var description: String { "\(rawValue)" }
+
+    /// `CustomStringConvertible`
+    public var description: String { "QID(\(rawValue))" }
     public var debugDescription: String { "QuestionID(\(rawValue))" }
 
     /// Whether `self`'s `rawValue` faills within `(1...Self.questionCount)`
@@ -178,16 +184,27 @@ enum DASIStages {
     /// Mutate `self` to the stage after it. Return to `nil` if there is no suceeding stage.
     ///
     /// `.completion` has no effect. `.greeting` advances to the first of the `QuestionID`s. .`presenting(question:)` advances to the next `QuestionID`, or to `.completion` if the `QuestionID` is at the maximum.
-    mutating func goForward() -> DASIStages? {
-        if !self.refersToQuestion { return nil }
-
-        if case .presenting(let qid) = self  {
-            self = .presenting(
-                question: qid.advanced(by: 1))
-            return self
+    func goForward() -> DASIStages? {
+        switch self {
+        case .greeting:
+            return .presenting(question: 1.qid)
+        case .completion:
+            return nil
+        case let .presenting(question: qid) where qid >= QuestionID.max:
+            return .completion
+        case let .presenting(question: qid):
+            return .presenting(question: qid.succ!)
         }
-        else { return nil }
     }
+
+    @discardableResult
+    mutating func advance() -> DASIStages {
+        if let nextValue = self.goForward() {
+            self = nextValue
+        }
+        return self
+    }
+
 
     /// Set `self` to represent a given question.
     ///
@@ -214,6 +231,17 @@ enum DASIStages {
             self = .presenting(question: question)
         }
         return self
+    }
+}
+
+extension DASIStages: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .greeting: return "Greeting"
+        case .completion: return "Completion"
+        case .presenting(question: let q):
+            return "Presenting ID \(q)"
+        }
     }
 }
 
