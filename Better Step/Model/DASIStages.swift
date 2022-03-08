@@ -52,41 +52,52 @@ enum DASIStages {
     ///
     /// `.landing` has no effect. `.completion` backs off to the last of the `QuestionID`s. .`presenting(question:)` backs off to the previous question, or to .landing if the QuestionID is at the minimum.
     @discardableResult
-    mutating func goBack() -> DASIStages? {
-        if !self.refersToQuestion { return nil }
-
-        if case .presenting(let qid) = self  {
-            self = .presenting(
-                question:
-                    qid.advanced(by: -1))
-            return self
+    mutating func goBack() -> DASIStages {
+        let retval: DASIStages
+        switch self {
+        case .landing:
+            retval = .landing
+        case let .presenting(question: qid)
+            where qid == QuestionID.min:
+            retval = .landing
+        case let .presenting(question: qid):
+            retval = .presenting(question: qid.pred!)
+        case .completion:
+            retval = .presenting(question: QuestionID.max)
         }
-        else { return nil }
+        self = retval
+        return retval
     }
     #warning("Why does goBack mutate, but goForward doesn't?")
+    @discardableResult
+    mutating func retreat() -> DASIStages {
+        return self.goBack()
+    }
+
 
     /// Mutate `self` to the stage after it. Return to `nil` if there is no suceeding stage.
     ///
     /// `.completion` has no effect. `.landing` advances to the first of the `QuestionID`s. .`presenting(question:)` advances to the next `QuestionID`, or to `.completion` if the `QuestionID` is at the maximum.
-    func goForward() -> DASIStages? {
+    @discardableResult
+    mutating func goForward() -> DASIStages {
+        let retval: DASIStages
         switch self {
         case .landing:
-            return .presenting(question: 1.qid)
+            retval = .presenting(question: 1.qid)
         case .completion:
-            return nil
+            retval = .completion
         case let .presenting(question: qid) where qid >= QuestionID.max:
-            return .completion
+            retval = .completion
         case let .presenting(question: qid):
-            return .presenting(question: qid.succ!)
+            retval = .presenting(question: qid.succ!)
         }
+        self = retval
+        return retval
     }
 
     @discardableResult
     mutating func advance() -> DASIStages {
-        if let nextValue = self.goForward() {
-            self = nextValue
-        }
-        return self
+        return self.goForward()
     }
 
 
