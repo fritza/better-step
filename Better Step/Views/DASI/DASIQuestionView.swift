@@ -24,14 +24,16 @@ struct QuestionContentView: View {
 struct DASIQuestionView: View {
     @EnvironmentObject var envt: DASIContentState
     @EnvironmentObject var reportContents: DASIReportContents
-    var answerState: AnswerState {
-        guard let qid = envt.selected.questionID else {
-            return .unknown
-        }
-        let answer = reportContents
-            .responseForQuestion(id: qid)
-        return answer
-    }
+    @State var answerState: AnswerState
+
+//    {
+//        guard let qid = envt.selected.questionID else {
+//            return .unknown
+//        }
+//        let answer = reportContents
+//            .responseForQuestion(id: qid)
+//        return answer
+//    }
 
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
@@ -69,7 +71,8 @@ struct DASIQuestionView: View {
 
                 Spacer()
                 YesNoStack(
-                    state: self.answerState
+//                    state: self.answerState,
+                    boundState: self.$answerState
                 ) {
                     answer in
                     // Record the response
@@ -77,10 +80,14 @@ struct DASIQuestionView: View {
                             .questionID else { return }
                     reportContents.didRespondToQuestion(
                         id: qid, with: answer)
+                    self.answerState = .unknown
                     envt.increment()
                 }
                 .frame(height: 130)
                 .padding()
+
+                Text("Bound value = \(self.answerState.description)")
+
                 .navigationTitle(
                     "DASI - \((envt.questionID?.description ?? "Out of range"))"
                 )
@@ -91,8 +98,9 @@ struct DASIQuestionView: View {
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView()
+        DASIQuestionView(answerState: .yes)
             .environmentObject(DASIContentState(.presenting(question: 0.indexQID)))
+            .environmentObject(DASIReportContents())
     }
 }
 

@@ -22,12 +22,13 @@ struct YesNoStack: View {
     }
     var callback: AnswerVoid? = nil
 
-    init(state: AnswerState, completion: AnswerVoid?) {
-        self.currentAnswer = state
+    @Binding var boundState: AnswerState
+
+
+    init(boundState: Binding<AnswerState>, completion: AnswerVoid?) {
+        self._boundState = boundState
         self.callback = completion
     }
-
-
 
     func selectButton(id button: YesNoButton) {
         switch button.id {
@@ -36,6 +37,7 @@ struct YesNoStack: View {
         default: currentAnswer = .unknown
         }
         callback?(currentAnswer)
+        boundState = currentAnswer
     }
 
     var body: some View {
@@ -57,12 +59,20 @@ struct YesNoStack: View {
     }
 }
 
+final class YNUState: ObservableObject {
+    @State var answer: AnswerState = .no
+}
+
 struct YesNoStack_Previews: PreviewProvider {
+    static let ynuState = YNUState()
     @State static var last: String = "NONE"
     static var previews: some View {
         VStack {
-            YesNoStack(state: .no, completion: nil)
+            YesNoStack(boundState: ynuState.$answer,
+                       completion: nil)
             .frame(height: 160, alignment: .center)
+
+            Text("Bound state: \(ynuState.answer.description)")
         }
     }
 }

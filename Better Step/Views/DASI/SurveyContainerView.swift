@@ -65,7 +65,7 @@ struct SurveyContainerView: View {
                 NavigationLink(
                     isActive: $contentEnvt.refersToQuestion,
                     destination: {
-                        DASIQuestionView()
+                        DASIQuestionView(answerState: .unknown)
                             .navigationBarBackButtonHidden(true)
                     },
 
