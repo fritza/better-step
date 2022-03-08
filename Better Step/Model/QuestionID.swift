@@ -76,7 +76,10 @@ Identifiable
     /// `Strideable`: The `QuestionID` the given `rawValue` before or after `self`.
     /// - warning: This does not guarantee the result is valid ((within  `(1...self.questionCount)`. To identify out-or-bounds results use `checkedAdance(by:)`, which returns `nil` if the result woild be out-of-bounds.
     public func advanced(by n: Int) -> QuestionID {
-        return QuestionID(self.rawValue + 1)
+        let nextIndex = self.rawValue + n
+        if nextIndex < QuestionID.min.rawValue { return QuestionID.min }
+        if nextIndex > QuestionID.max.rawValue { return QuestionID.max}
+        return QuestionID(nextIndex)
     }
 
     /// `Strideable`: the amount by which  `self` must be advanced to match `other`.
@@ -85,19 +88,20 @@ Identifiable
     }
 
     /// `Strideable` **convenience**: Returns `advanced(by:)` if the result would be -in-bounds, `nil` if not.
-    public func checkedAdance(by n: Int) -> QuestionID? {
+    public func checkedAdvance(by n: Int) -> QuestionID? {
+        // TODO: This is as good as unchecked now
         let unchecked = self.advanced(by: n)
         return unchecked.isValid ? unchecked : nil
     }
 
     /// The `QuestionID` next preceding `self`. Returns `nil` if that result would be out-of-bounds.
     public var pred: QuestionID? {
-        return self.checkedAdance(by: -1)
+        return self.checkedAdvance(by: -1)
     }
 
     /// The `QuestionID` nect following `self`. Returns `nil` if that result would be out-of-bounds.
     public var succ: QuestionID? {
-        return self.checkedAdance(by:  1)
+        return self.checkedAdvance(by:  1)
     }
 
 

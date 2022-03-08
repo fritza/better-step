@@ -10,15 +10,15 @@ import SwiftUI
 
 
 struct YesNoStack: View {
-    typealias IntVoid = ((Int) -> Void)
+    typealias AnswerVoid = ((AnswerState) -> Void)
 
     @State var selectedButtonID: Int
 
-    var callback: IntVoid? = nil
+    var callback: AnswerVoid? = nil
 
     func selectButton(id button: YesNoButton) {
         selectedButtonID = button.id
-        callback?(button.id)
+        callback?((button.id == 1) ? .yes : .no)
     }
 
     var body: some View {

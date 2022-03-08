@@ -7,74 +7,45 @@
 
 import SwiftUI
 
-
-enum DASICardTags: String, CaseIterable, Equatable {
-    case landing, questions, completion
-
-    var next: DASICardTags {
-        guard let currentIndex = Self.allCases.firstIndex(of: self) else {
-            fatalError()
-        }
-        let nextIndex = (currentIndex+1) % Self.allCases.count
-        return Self.allCases[nextIndex]
-    }
-}
-
 final class DASIContentState: ObservableObject {
-    @Published var selected: DASICardTags?
+    @Published var selected: DASIStages!
 
     #warning("no protection from overflow in pageNum")
     // Should detect .questions and number > max question count, then advance the tag.
     // TODO: Should underflow go to landing?
-    @Published var pageNum: Int
+//    @Published var pageNum: Int
 
-    init(_ selection: DASICardTags = .landing) {
+    init(_ selection: DASIStages = .landing) {
         selected = selection
-        pageNum = 0
+        refersToQuestion = selection.refersToQuestion
     }
 
     /// Reflect the selection of the next page.
     ///
     /// At the end of the question pages, this should advance to `.completion`. There is no increment from `.completion`.
     func increment() {
-        switch selected {
-        case .landing:
-            pageNum = 1
-            selected = .questions
-        case .questions:
-            if pageNum == DASIQuestion.count {
-                selected = .completion
-            }
-            else {
-                pageNum += 1
-            }
-        default:
-            assertionFailure("Attempt to go forward from state \(String(describing: selected))")
-            break
-        }
+        selected.advance()
+        refersToQuestion = selected.refersToQuestion
+//        if let next = selected.goForward() {
+//            selected = next
+//            refersToQuestion = selected.refersToQuestion
+//        }
     }
 
     /// Reflect the selection of the previous page.
     ///
     /// From the start of the question pages, this should regress to `.landing`. There is no decrement from `.landing`.
     func decrement() {
-        switch selected {
-        case .questions:
-            if pageNum == 1 {
-                selected = .landing
-            }
-            else {
-                pageNum -= 1
-            }
-        case .completion:
-            pageNum = DASIQuestion.count
-            selected = .questions
-        default:
-            assertionFailure("Attempt to go back from state \(String(describing: selected))")
-            break
-        }
+        selected.retreat()
+        refersToQuestion = selected.refersToQuestion
+//        if let prev = selected.goBack() {
+//            selected = prev
+//            refersToQuestion = selected.refersToQuestion
+//        }
     }
 
+    @Published var refersToQuestion: Bool
+    var questionID: QuestionID? { selected.questionID }
 }
 
 struct SurveyContainerView: View {
@@ -84,21 +55,23 @@ struct SurveyContainerView: View {
         NavigationView {
             VStack {
                 Text(
-                    "SHOULD NOT APPEAR(\(contentEnvt.selected?.rawValue ?? "EMPTY"))"
+                    "SHOULD NOT APPEAR(\(contentEnvt.selected?.description ?? "EMPTY"))"
                 )
                 Button("RATS Next") {
                     assert(contentEnvt.selected != nil)
-                    contentEnvt.selected = contentEnvt.selected?.next
+//                    contentEnvt.selected =
+                    contentEnvt.selected?.advance()
                 }
-                NavigationLink(tag: DASICardTags.questions,
-                               selection: $contentEnvt.selected,
-                               destination: {
-                    DASIQuestionView()
-                        .navigationBarBackButtonHidden(true)
-                },
-                               label: {EmptyView()}
+                NavigationLink(
+                    isActive: $contentEnvt.refersToQuestion,
+                    destination: {
+                        DASIQuestionView()
+                            .navigationBarBackButtonHidden(true)
+                    },
+
+                    label: { EmptyView() }
                 )
-                NavigationLink(tag: DASICardTags.landing,
+                NavigationLink(tag: DASIStages.landing,
                                selection: $contentEnvt.selected,
                                destination: {
                     DASIOnboardView()
@@ -106,7 +79,7 @@ struct SurveyContainerView: View {
                 },
                                label: {EmptyView()}
                 )
-                NavigationLink(tag: DASICardTags.completion,
+                NavigationLink(tag: DASIStages.completion,
                                selection: $contentEnvt.selected,
                                destination: {
                     DASICompleteView()

@@ -115,7 +115,6 @@
 		1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
 		1FA3B8BB27D69BFC0058F1AF /* YesNoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoView.swift; sourceTree = "<group>"; };
 		1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
-		1FA3B8C127D69E360058F1AF /* DASICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICardView.swift; sourceTree = "<group>"; };
 		1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardBackBar.swift; sourceTree = "<group>"; };
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
@@ -258,7 +257,6 @@
 		1FF11B3A279A173D00E319ED /* DASI */ = {
 			isa = PBXGroup;
 			children = (
-				1FA3B8C127D69E360058F1AF /* DASICardView.swift */,
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */,

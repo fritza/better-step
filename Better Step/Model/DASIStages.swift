@@ -39,11 +39,15 @@ enum DASIStages {
         }
     }
     /// `false` iff the stage is `.landing` or `.completion`,
-    private var refersToQuestion: Bool {
+    var refersToQuestion: Bool {
         ![.landing, .completion].contains(self)
     }
 
     // MARK: Arithmetic
+
+    static let maxPresenting = DASIStages.presenting(question: QuestionID.max)
+    static let minPresenting = DASIStages.presenting(question: QuestionID.min)
+
     /// Mutate `self` to the stage before it. Return to `nil` if there is no preceding stage.
     ///
     /// `.landing` has no effect. `.completion` backs off to the last of the `QuestionID`s. .`presenting(question:)` backs off to the previous question, or to .landing if the QuestionID is at the minimum.
@@ -143,13 +147,13 @@ extension DASIStages: Comparable, Hashable {
         if lhs == rhs { return false }
 
         switch (lhs, rhs) {
-        case (.landing, _) :
-            // .landing == .landing already handled
-            return true
+            // (.landing, .landing) taken care first line
+        case (.landing, _)   : return true
+        case (_, .landing)   : return false
 
-        case (_, .completion):
-            // .completion == .completion already handled
-            return true
+            // (.completion, .completion) taken care first line
+        case (_, .completion): return true
+        case (.completion, _): return false
 
             // By here, both are SUPPOSED to be .presenting
         case (.presenting(question: let lhs),
@@ -157,8 +161,7 @@ extension DASIStages: Comparable, Hashable {
               return lhs < rhs
 
         default:
-            assertionFailure("\(#function): unhandled case")
-            return false
+            fatalError("\(#function): unhandled case")
         }
     }
 
@@ -172,4 +175,6 @@ extension DASIStages: Comparable, Hashable {
             hasher.combine(qid)
         }
     }
+
+
 }

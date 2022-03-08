@@ -15,7 +15,7 @@ struct QuestionContentView: View {
     }
     var body: some View {
 //        let template = DASIQuestion.with(id: QuestionID(index: index)
-//        Text(c ontent + " (\(index))")
+//        Text(content + " (\(index))")
         Text(self.text)
             .font(.title)
     }
@@ -28,50 +28,65 @@ struct DASIQuestionView: View {
     // before it's time to report.
     var body: some View {
         VStack {
-            ForwardBackBar(forward: envt.pageNum < DASIQuestion.count-1,
-                           back: envt.pageNum > 0,
+            ForwardBackBar(forward: envt.selected < DASIStages.maxPresenting,
+                           back: envt.selected > DASIStages.minPresenting,
                            action: { goingForward in
                 if goingForward {
                     envt.increment()
-//                    envt.pageNum += 1
                 }
                 else {
                     envt.decrement()
-//                    envt.pageNum -= 1
                 }
             })
                 .frame(height: 44)
                 .padding()
 
-            Spacer()
-            QuestionContentView(content: "Do you have difficulty rogering, filberting, and professional disportment?", index: envt.pageNum)
-                .padding()
+            if envt.selected.questionID == nil {
+                // It turned out that incrementing or decrementing
+                // the DASIContentState envt would still attempt to
+                // put up the QuestionContentView for a page
+                // that had no questionID.
+                //
+                // I'm not happy with this apparent hack.
+                EmptyView()
+            }
+            else {
+                Spacer()
+                QuestionContentView(
+                    content: "Do you have difficulty rogering, filberting, and professional disportment?",
+                    index:
+                        envt.selected.questionID!.index)
+                    .padding()
 
-            Spacer()
-            Button("-> Next Category") {
-                envt.selected = envt.selected?.next
+                Spacer()
+                Button("-> Next Category") {
+                    envt.selected.advance()
+//                    envt.selected = envt.selected.advance()
+                    //                envt.selected = envt.selected?.next
+                }
+                Spacer()
+                YesNoStack(selectedButtonID: 1) {
+                    answer in
+                    // Record the response
+                    reportContents.didRespondToQuestion(
+                        id: envt.selected.questionID!,
+                        with: answer)
+                    envt.increment()
+                }
+                .frame(height: 130)
+                .padding()
+                .navigationTitle(
+                    "DASI - \((envt.questionID?.description ?? "Out of range"))"
+                )
             }
-            Spacer()
-            YesNoStack(selectedButtonID: 1) {
-                answer in
-                // Record the response
-                reportContents.didRespondToQuestion(
-                    id: envt.pageNum.indexQID,
-                    with: answer)
-                envt.increment()
-//                envt.pageNum += 1
-            }
-            .frame(height: 130)
-            .padding()
         }
-        .navigationTitle("DASI - \((envt.pageNum+1).description)")
     }
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         DASIQuestionView()
-            .environmentObject(DASIContentState(.questions))
+            .environmentObject(DASIContentState(.presenting(question: 0.indexQID)))
     }
 }
 

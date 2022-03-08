@@ -63,7 +63,6 @@ The `String` returned by `csvDASIRecords` can be converted to `Data`, and writte
  * `DASIReportContents`
 
  * `DASIQuestionView`
- * `SurveyView`
 
  * `QuestionIDTests`
 
