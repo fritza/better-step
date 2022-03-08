@@ -20,29 +20,17 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
     // TODO: Add the forward/back bar.
 
     var body: some View {
-        NavigationView {
-            VStack {
-//                HStack {
-//                        Button("\(Image(systemName: "arrow.left")) Previous") {
-//                            envt.selected = .questions
-//                            envt.pageNum = DASIQuestion.count
-//                    }
-//                    Spacer()
-//                }.frame(height: 80)
-//                .background(Color.gray)
-
-                Spacer()
-                GenericInstructionView(
-                    titleText: "Activity Survey",
-                    bodyText: Self.instructions,
-                    sfBadgeName: "checkmark.square",
-                    proceedTitle: "Continue") {
-                        envt.increment()
-                    }
-                    .padding()
-            }
-//            .navigationTitle("DASI Survey")
-            .navigationBarHidden(true)
+        VStack {
+            Spacer()
+            GenericInstructionView(
+                titleText: "Activity Survey",
+                bodyText: Self.instructions,
+                sfBadgeName: "checkmark.square",
+                proceedTitle: "Continue") {
+                    envt.increment()
+                }
+                .padding()
+                .navigationBarHidden(true)
         }
         .onAppear{
         }

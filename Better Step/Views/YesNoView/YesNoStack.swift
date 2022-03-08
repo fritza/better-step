@@ -17,17 +17,15 @@ struct YesNoStack: View {
     typealias AnswerVoid = ((AnswerState) -> Void)
 
     @State var currentAnswer = AnswerState.unknown
-    var selectedButtonID: Int {
-        return currentAnswer.ynButtonNumber
-    }
-    var callback: AnswerVoid? = nil
-
     @Binding var boundState: AnswerState
+    let completion: ((AnswerState) -> Void)?
 
-
-    init(boundState: Binding<AnswerState>, completion: AnswerVoid?) {
+    init(boundState: Binding<AnswerState>
+         , completion: AnswerVoid?
+    )
+    {
         self._boundState = boundState
-        self.callback = completion
+        self.completion = completion
     }
 
     func selectButton(id button: YesNoButton) {
@@ -36,22 +34,19 @@ struct YesNoStack: View {
         case 2: currentAnswer  = .no
         default: currentAnswer = .unknown
         }
-        callback?(currentAnswer)
         boundState = currentAnswer
+        completion?(currentAnswer)
     }
 
     var body: some View {
         VStack {
             YesNoButton(
-                id: 1,
-                title: "Yes".asChecked(
-                    currentAnswer == .yes),
+                id: 1, title: "Yes",
                 completion: selectButton(id:)
             )
             Spacer(minLength: 24)
             YesNoButton(
-                id: 2,
-                title: "No".asChecked(currentAnswer == .no),
+                id: 2, title: "No",
                 completion: selectButton(id:))
             Spacer()
         }
@@ -68,11 +63,9 @@ struct YesNoStack_Previews: PreviewProvider {
     @State static var last: String = "NONE"
     static var previews: some View {
         VStack {
-            YesNoStack(boundState: ynuState.$answer,
-                       completion: nil)
+            YesNoStack(boundState: ynuState.$answer
+            , completion: nil)
             .frame(height: 160, alignment: .center)
-
-            Text("Bound state: \(ynuState.answer.description)")
         }
     }
 }

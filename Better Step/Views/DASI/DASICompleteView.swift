@@ -37,10 +37,12 @@ struct DASICompleteView: View {
     }
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 ForwardBackBar(forward: false, back: true, action: { _ in
+                    // expr envt.selected ?? "NO SEL"
                     envt.decrement()
+                    print()
                 })
                     .frame(height: 44)
                 Spacer()
@@ -51,7 +53,7 @@ struct DASICompleteView: View {
                     .padding()
             }
             .navigationBarHidden(true)
-        }
+//        }
         .onAppear{
             //            globalState.complete(.dasi)
         }

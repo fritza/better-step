@@ -26,14 +26,17 @@ struct DASIQuestionView: View {
     @EnvironmentObject var reportContents: DASIReportContents
     @State var answerState: AnswerState
 
-//    {
-//        guard let qid = envt.selected.questionID else {
-//            return .unknown
-//        }
-//        let answer = reportContents
-//            .responseForQuestion(id: qid)
-//        return answer
-//    }
+    func updateForNewBinding() {
+        if let nextID = envt.questionID {
+            self.answerState =
+            reportContents
+                .responseForQuestion(
+                    id: nextID)
+            print(#function, "exiting")
+        }
+        else { self.answerState = .unknown }
+    }
+
 
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
@@ -44,9 +47,11 @@ struct DASIQuestionView: View {
                            action: { goingForward in
                 if goingForward {
                     envt.increment()
+                    updateForNewBinding()
                 }
                 else {
                     envt.decrement()
+                    updateForNewBinding()
                 }
             })
                 .frame(height: 44)
@@ -64,27 +69,23 @@ struct DASIQuestionView: View {
             else {
                 Spacer()
                 QuestionContentView(
-                    content: "Do you have difficulty rogering, filberting, and professional disportment?",
+                    content: "Do you have difficulty?",
                     index:
                         envt.selected.questionID!.index)
                     .padding()
-
+                
                 Spacer()
                 YesNoStack(
-//                    state: self.answerState,
-                    boundState: self.$answerState
-                ) {
-                    answer in
-                    // Record the response
-                    guard let qid = envt.selected
-                            .questionID else { return }
-                    reportContents.didRespondToQuestion(
-                        id: qid, with: answer)
-                    self.answerState = .unknown
-                    envt.increment()
-                }
-                .frame(height: 130)
-                .padding()
+                    boundState: self.$answerState,
+                    completion: { state in
+                        reportContents.didRespondToQuestion(
+                            id: envt.questionID!, with: state)
+                        envt.increment()
+                        updateForNewBinding()
+                    }
+                )
+                    .frame(height: 130)
+                    .padding()
 
                 Text("Bound value = \(self.answerState.description)")
 
