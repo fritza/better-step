@@ -36,6 +36,7 @@
 		1FA3B8C227D69E360058F1AF /* DASICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C127D69E360058F1AF /* DASICardView.swift */; };
 		1FA3B8C427D6B0CA0058F1AF /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
+		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
@@ -119,6 +120,7 @@
 		1FA3B8C127D69E360058F1AF /* DASICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICardView.swift; sourceTree = "<group>"; };
 		1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardBackBar.swift; sourceTree = "<group>"; };
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
+		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF1330A27A05FD3004D6647 /* QuestionID.swift */,
+				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45694279F589900B5429A /* DASIResponse.swift */,
 				1FD45690279F40B600B5429A /* DASIReportContents.swift */,
 				1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */,
@@ -524,6 +527,7 @@
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
+				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1F1701AA2777D00300E510AE /* DurationStepper.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
