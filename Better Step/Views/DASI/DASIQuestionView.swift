@@ -24,6 +24,15 @@ struct QuestionContentView: View {
 struct DASIQuestionView: View {
     @EnvironmentObject var envt: DASIContentState
     @EnvironmentObject var reportContents: DASIReportContents
+    var answerState: AnswerState {
+        guard let qid = envt.selected.questionID else {
+            return .unknown
+        }
+        let answer = reportContents
+            .responseForQuestion(id: qid)
+        return answer
+    }
+
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
@@ -59,18 +68,15 @@ struct DASIQuestionView: View {
                     .padding()
 
                 Spacer()
-                Button("-> Next Category") {
-                    envt.selected.advance()
-//                    envt.selected = envt.selected.advance()
-                    //                envt.selected = envt.selected?.next
-                }
-                Spacer()
-                YesNoStack(selectedButtonID: 1) {
+                YesNoStack(
+                    state: self.answerState
+                ) {
                     answer in
                     // Record the response
+                    guard let qid = envt.selected
+                            .questionID else { return }
                     reportContents.didRespondToQuestion(
-                        id: envt.selected.questionID!,
-                        with: answer)
+                        id: qid, with: answer)
                     envt.increment()
                 }
                 .frame(height: 130)

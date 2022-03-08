@@ -40,6 +40,18 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
             return nil
         }
     }
+
+    var ynButtonNumber: Int {
+        switch self {
+
+        case .unknown:
+            return 0
+        case .yes:
+            return 1
+        case .no:
+            return 2
+        }
+    }
 }
 
 // Verified consistent with DASIQuestions in the MinutePublisher.playground/Response\ decoding.
