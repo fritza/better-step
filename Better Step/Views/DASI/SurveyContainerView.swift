@@ -109,7 +109,7 @@ struct SurveyContainerView: View {
                 NavigationLink(tag: DASICardTags.completion,
                                selection: $contentEnvt.selected,
                                destination: {
-                    DASICardView()
+                    DASICompleteView()
                         .navigationBarBackButtonHidden(true)
                 },
                                label: {EmptyView()}

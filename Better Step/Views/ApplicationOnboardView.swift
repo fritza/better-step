@@ -1,5 +1,5 @@
 //
-//  DASIOnboardView.swift
+//  ApplicationOnboardView.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/28/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DASIOnboardView: View {
+struct ApplicationOnboardView: View {
     enum WhereFocused: Hashable {
         case field
         case elsewhere
@@ -43,7 +43,12 @@ struct DASIOnboardView: View {
                 }
                 if fieldHasContent {
                     NavigationLink("Accept", destination: {
-                        Text("ActiveButton Pushed")
+
+                        SurveyContainerView()
+                            .environmentObject(DASIContentState(.landing))
+
+
+                        //                        Text("ActiveButton Pushed")
                     })
                 }
                 else {
@@ -66,7 +71,7 @@ struct DASIOnboardView: View {
 
 struct OnboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIOnboardView()
+        ApplicationOnboardView()
             .frame(width: .infinity)//, height: 300)
             .padding()
     }

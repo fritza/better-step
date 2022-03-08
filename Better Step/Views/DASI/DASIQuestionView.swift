@@ -28,29 +28,26 @@ struct DASIQuestionView: View {
     // before it's time to report.
     var body: some View {
         VStack {
-            HStack {
-                if envt.pageNum > 0 {
-                    Button("\(Image(systemName: "arrow.left")) Previous") {
-                        envt.pageNum -= 1
-                    }
+            ForwardBackBar(forward: envt.pageNum < DASIQuestion.count-1,
+                           back: envt.pageNum > 0,
+                           action: { goingForward in
+                if goingForward {
+                    envt.increment()
+//                    envt.pageNum += 1
                 }
-                Spacer()
-                if envt.pageNum < DASIQuestion.count-1 {
-                    Button("Next \(Image(systemName: "arrow.right"))") {
-                        envt.pageNum += 1
-                    }
+                else {
+                    envt.decrement()
+//                    envt.pageNum -= 1
                 }
-            }
-            .padding()
+            })
+                .frame(height: 44)
+                .padding()
 
             Spacer()
             QuestionContentView(content: "Do you have difficulty rogering, filberting, and professional disportment?", index: envt.pageNum)
                 .padding()
 
             Spacer()
-//            Text("Page: \(envt.pageNum)")
-//                .font(.largeTitle)
-//                .padding()
             Button("-> Next Category") {
                 envt.selected = envt.selected?.next
             }
@@ -59,12 +56,13 @@ struct DASIQuestionView: View {
                 answer in
                 // Record the response
                 reportContents.didRespondToQuestion(
-                    id: envt.pageNum.qid,
+                    id: envt.pageNum.indexQID,
                     with: answer)
-                    envt.pageNum += 1
-                    }
-                        .frame(height: 130)
-                        .padding()
+                envt.increment()
+//                envt.pageNum += 1
+            }
+            .frame(height: 130)
+            .padding()
         }
         .navigationTitle("DASI - \((envt.pageNum+1).description)")
     }

@@ -36,20 +36,25 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            DASIOnboardView()
-//                .environmentObject(globals)
+            //            ApplicationOnboardView()
+            //                .environmentObject(globals)
+
+#if true
+            SurveyContainerView()
+                .environmentObject(DASIReportContents())
+                .environmentObject(DASIContentState(.landing))
+#else
             TabView {
 
                 // MARK: - DASI
-                #if true
                 SurveyContainerView()
                     .environmentObject(DASIReportContents())
-                #else
+                    .environmentObject(DASIContentState(.landing))
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")
                     }
-                #endif
+
 
                 // MARK: - Timed Walk
                 WalkView()
@@ -78,7 +83,8 @@ struct Better_StepApp: App {
                         Text("Setup")
                     }
             }
-                .environmentObject(globals)
+            .environmentObject(globals)
+            #endif
         }
 
 

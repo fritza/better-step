@@ -17,6 +17,10 @@ extension Int {
     var qid: QuestionID {
         QuestionID(self)
     }
+
+    var indexQID: QuestionID {
+        QuestionID(index: self)
+    }
 }
 
 /// The ID of a question. Its `rawValue` is the 1-based ID, _not_ its position in a question array.
