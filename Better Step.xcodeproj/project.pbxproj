@@ -33,7 +33,6 @@
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
 		1FA3B8BE27D69BFC0058F1AF /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BB27D69BFC0058F1AF /* YesNoView.swift */; };
 		1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
-		1FA3B8C227D69E360058F1AF /* DASICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C127D69E360058F1AF /* DASICardView.swift */; };
 		1FA3B8C427D6B0CA0058F1AF /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
@@ -103,7 +102,6 @@
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
 		1F1701A92777D00300E510AE /* DurationStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationStepper.swift; sourceTree = "<group>"; };
-		1F60B09B276FAB3C0026D28B /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 				1FA3B8C127D69E360058F1AF /* DASICardView.swift */,
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
-				1F60B09B276FAB3C0026D28B /* SurveyView.swift */,
 				1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */,
 				1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */,
 			);
@@ -539,7 +536,6 @@
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
 				1F8A065627A478B400477379 /* STGlobalState.swift in Sources */,
-				1FA3B8C227D69E360058F1AF /* DASICardView.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
