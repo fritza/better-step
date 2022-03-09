@@ -8,10 +8,15 @@
 import SwiftUI
 
 fileprivate let completionText = """
-BUG: Need a Back button and condition on the status
-
 You have completed the survey portion of this exercise.
+"""
 
+fileprivate let startIncompleteText = """
+
+NOTE: You still have
+"""
+fileprivate let endIncompleteText = """
+ questions yet to answer.
 """
 
 fileprivate var nextSteps: String {
@@ -30,30 +35,37 @@ fileprivate var nextSteps: String {
 struct DASICompleteView: View {
     @EnvironmentObject private var globalState: GlobalState
     @EnvironmentObject var envt: DASIContentState
+    @EnvironmentObject var reportContents: DASIReportContents
 
 
     var instructions: String {
-        completionText + nextSteps
+        var retval = completionText + nextSteps
+        let empties = reportContents.unknownResponseIDs
+        if !empties.isEmpty {
+            let unknownListing = empties
+                .map { String($0) }
+                .joined(separator: ", ")
+
+            retval += startIncompleteText + "\(empties.count)" + endIncompleteText
+        }
+        return retval
     }
 
     var body: some View {
-//        NavigationView {
-            VStack {
-                ForwardBackBar(forward: false, back: true, action: { _ in
-                    // expr envt.selected ?? "NO SEL"
-                    envt.decrement()
-                    print()
-                })
-                    .frame(height: 44)
-                Spacer()
-                GenericInstructionView(
-                    titleText: "Survey Complete",
-                    bodyText: instructions, // + completionText,
-                    sfBadgeName: "checkmark.square")
-                    .padding()
-            }
-            .navigationBarHidden(true)
-//        }
+        VStack {
+            ForwardBackBar(forward: false, back: true, action: { _ in
+                // expr envt.selected ?? "NO SEL"
+                envt.decrement()
+            })
+                .frame(height: 44)
+            Spacer()
+            GenericInstructionView(
+                titleText: "Survey Complete",
+                bodyText: instructions, // + completionText,
+                sfBadgeName: "checkmark.square")
+                .padding()
+        }
+        .navigationBarHidden(true)
         .onAppear{
             //            globalState.complete(.dasi)
         }
