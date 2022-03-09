@@ -20,20 +20,42 @@ import Foundation
 ///
 ///- note: All references to DASI questions are by `QuestionID`.
 enum DASIStages {
+    // ~Index represents place in the questions array.
+    // These are guaranteed to be valid, as they rely on the range of array indices, not the identifiers.
+    static let startIndex = 0
+    static let endIndex   = DASIQuestion.questions.count
+    static let indexRange = (startIndex ..< endIndex)
+
+    // min and max denote least and greatest valid .presenting question identifiers.
+    // WARNING: These assume the identifers are numbered 1...answer count.
+
+    static let minIdentifier = startIndex + 1
+    static let maxIdentifier = endIndex
+    static let identifierRange = (minIdentifier...maxIdentifier)
+
+    static let minPresenting   = DASIStages.presenting(
+        questionID: minIdentifier)
+    static let maxPresenting   = DASIStages.presenting(
+        questionID: maxIdentifier)
+    static let presentingRange = (minPresenting ... maxPresenting)
+
+
     // MARK: cases
     /// The pre-survey view
     case landing
     /// The question being displayed as a `QuestionID`
-    case presenting(question: QuestionID)
+    case presenting(questionID: Int)
     /// The end-of-survey view.
     case completion
 
     // MARK: Question state
-    /// If `self` is `.presenting(question:)` return the ID for the question being presented. If not, return `nil`.
-    var questionID: QuestionID? {
-        switch self {
-        case .landing, .completion: return nil
-        case .presenting(question: let qid): return qid
+    /// If `self` is `.presenting(questionID:)` return the ID for the question being presented. If not, return `nil`.
+    var questionIdentifier: Int? {
+        if case let .presenting(questionID: ident) = self {
+            return ident
+        }
+        else {
+            return nil
         }
     }
     /// `false` iff the stage is `.landing` or `.completion`,
@@ -43,8 +65,6 @@ enum DASIStages {
 
     // MARK: Arithmetic
 
-    static let maxPresenting = DASIStages.presenting(question: QuestionID.max)
-    static let minPresenting = DASIStages.presenting(question: QuestionID.min)
 
     /// Mutate `self` to the stage before it. Return to `nil` if there is no preceding stage.
     ///
@@ -55,23 +75,16 @@ enum DASIStages {
         switch self {
         case .landing:
             retval = .landing
-        case let .presenting(question: qid)
-            where qid == QuestionID.min:
+        case Self.minPresenting:
             retval = .landing
-        case let .presenting(question: qid):
-            retval = .presenting(question: qid.pred!)
+        case let .presenting(questionID: qid):
+            retval = .presenting(questionID: qid-1)
         case .completion:
-            retval = .presenting(question: QuestionID.max)
+            retval = Self.maxPresenting
         }
         self = retval
         return retval
     }
-    #warning("Why does goBack mutate, but goForward doesn't?")
-    @discardableResult
-    mutating func retreat() -> DASIStages {
-        return self.goBack()
-    }
-
 
     /// Mutate `self` to the stage after it. Return to `nil` if there is no suceeding stage.
     ///
@@ -81,23 +94,17 @@ enum DASIStages {
         let retval: DASIStages
         switch self {
         case .landing:
-            retval = .presenting(question: 1.qid)
+            retval = Self.minPresenting
         case .completion:
             retval = .completion
-        case let .presenting(question: qid) where qid >= QuestionID.max:
+        case Self.maxPresenting:
             retval = .completion
-        case let .presenting(question: qid):
-            retval = .presenting(question: qid.succ!)
+        case let .presenting(questionID: idx):
+            retval = .presenting(questionID: idx + 1)
         }
         self = retval
         return retval
     }
-
-    @discardableResult
-    mutating func advance() -> DASIStages {
-        return self.goForward()
-    }
-
 
     /// Set `self` to represent a given question, by 1-based id.
     ///
@@ -105,25 +112,11 @@ enum DASIStages {
     /// - Parameter questionID: The ID (1-based) of the question to be represented.
     /// - precondition: The index must be in the range of question identifiers.
     /// - Returns: The represented `DASIStages` after the move.
-    mutating func goTo(question: QuestionID) -> DASIStages {
-        switch self {
-        case .completion:
-            break
-
-        case .landing:
-            self = .presenting(question: .min)
-
-        case .presenting(question: let qid)
-            where qid <= .min:
-            self = .landing
-
-        case .presenting(question: let qid)
-            where qid >= .max:
-            self = .completion
-
-        case .presenting(question: _):
-            self = .presenting(question: question)
-        }
+    mutating func goTo(questionID: Int) -> DASIStages {
+        let candidate = Self.presenting(questionID: questionID)
+        precondition(Self.presentingRange.contains(candidate),
+                     "\(#function) the requested ID \(questionID) is out of range.")
+        self = candidate
         return self
     }
 }
@@ -133,13 +126,13 @@ extension DASIStages: CustomStringConvertible {
         switch self {
         case .landing: return "Greeting"
         case .completion: return "Completion"
-        case .presenting(question: let q):
+        case .presenting(questionID: let q):
             return "Presenting ID \(q)"
         }
     }
 }
 
-extension DASIStages: Comparable, Hashable {
+extension DASIStages: Comparable, Hashable, Strideable {
     // MARK: - Equatable
     /// Protocol compliance
     static func == (lhs: DASIStages, rhs: DASIStages) -> Bool {
@@ -147,7 +140,8 @@ extension DASIStages: Comparable, Hashable {
         case (.completion, .completion),
             (.landing, .landing):
             return true
-        case (.presenting(question: let qidL), .presenting(question: let qidR)):
+        case (.presenting(questionID: let qidL),
+                .presenting(questionID: let qidR)):
             return qidL == qidR
         default: return false
         }
@@ -166,8 +160,8 @@ extension DASIStages: Comparable, Hashable {
         case (.completion, _): return false
 
             // By here, both are SUPPOSED to be .presenting
-        case (.presenting(question: let lhs),
-                .presenting(question: let rhs)):
+        case (.presenting(questionID: let lhs),
+                .presenting(questionID: let rhs)):
               return lhs < rhs
 
         default:
@@ -181,10 +175,47 @@ extension DASIStages: Comparable, Hashable {
         switch self {
         case .landing: hasher.combine(0)
         case .completion: hasher.combine(1)
-        case .presenting(question: let qid):
-            hasher.combine(qid)
+        case .presenting(questionID: let qid):
+            hasher.combine(qid + 1000)
         }
     }
 
+    func advanced(by n: Int) -> DASIStages {
+        // n > 0
+        var retval: DASIStages = self
 
+        if n == 0 { return self }
+        else if n > 0 {
+            for _ in (1...n) {
+                retval.goForward()
+            }
+            return retval
+        }
+        else {
+            for _ in 1...n {
+                retval.goBack()
+            }
+            return retval
+        }
+    }
+
+    func distance(to other: DASIStages) -> Int {
+        if self == other { return 0 }
+
+        var retval = 0
+        var cursor = self
+        if other < self {
+            while cursor > other {
+                cursor.goBack()
+                retval -= 1
+            }
+        }
+        else if other > self {
+            while cursor > other {
+                cursor.goForward()
+                retval += 1
+            }
+        }
+        return retval
+    }
 }

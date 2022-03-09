@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+/*
 // Strideable -> Comparable -> Equatable
 // Hashable -> Equatable
 // If it's Hashable, you don't need equatable
@@ -31,12 +33,12 @@ extension Int {
 ///
 /// **Conforms to**
 ///
-///* RawRepresentable,
-///* Codable
-///* Comparable
-///* Hashable,
-///* Strideable
-///* CustomStringConvertible
+///- RawRepresentable,
+///- Codable
+///- Comparable
+///- Hashable,
+///- Strideable
+///- CustomStringConvertible
 ///
 /// - warning: Client code that populates `Array`s of questions (`DASIQuestion.questions` at this writing)) _must_ assign the count to `QuestionID.questionCount`.
 public struct QuestionID: RawRepresentable, Codable,
@@ -144,3 +146,4 @@ Identifiable
         return retval
     }
 }
+*/

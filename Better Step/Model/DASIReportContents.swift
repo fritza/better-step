@@ -84,20 +84,26 @@ final class DASIReportContents: ObservableObject {
     }
 
     // MARK: Responses
+    /// Index of the first (only, we hope) element of `answers` that matches a given ID.
+    /// - Parameter id: The `id` (one-based, not necessarily ordered) to search for
+    /// - Returns: The index into the `answers` array, or `nil` if no answer by that `id` exists.
+    private func answerIndex(forID id: Int) -> Int? {
+        guard let retval = answers.firstIndex(
+            where: { response in response.id == id })
+        else { return nil }
+        return retval
+    }
+
     /// The user's response to a question.
     ///
     /// Think of this as the inverse of `didRespondToQuestion(id:with:)`
-    /// - Parameter id: The `QuestionID` identifiying the response of concern.
-    /// - Returns: The `AnswerState` for that question, `.yes`, `.no`, or `.unknown`.
-    func responseForQuestion(id: QuestionID) -> AnswerState {
-        precondition(id.isValid)
-
-        guard let theResponse = answers.first(where: {
-            // Question ID starts from 1
-            $0.id == id }) else {
-                return .unknown
-            }
-        return theResponse.response
+    /// - Parameter id: The `id` (one-based, not necessarily ordered) to search for
+    /// - Returns: The `AnswerState` for that question, `.yes`, `.no`, or `.unknown`; or `nil` if no answer with that `id` was found.
+    /// - note: If `id` is not present, the return value is `.unk
+    func responseForQuestion(identifier: Int) -> AnswerState? {
+        guard let responseIndex = answerIndex(forID: identifier) else { return nil }
+        let theAnswer = answers[responseIndex]
+        return theAnswer.response
     }
 
     /// Record the user's response to a  question.
@@ -107,32 +113,36 @@ final class DASIReportContents: ObservableObject {
     ///   - questionID: The **`id`** of the `DASIResponse` being answered. The method will find the matching array index.
     ///   - state: The user's response.
     func didRespondToQuestion(
-        id questionID: QuestionID,
+        id questionID: Int,
         with state: AnswerState) {
-            answers[questionID.index]
-            = answers[questionID.index]
-                .withResponse(state)
+            guard let replacementIndex = answerIndex(forID: questionID)
+            else { preconditionFailure("incoming questionID \(questionID) is out of range.")}
+            answers[replacementIndex] = answers[replacementIndex].withResponse(state)
             // Timestamp updates in withResponse(_:)
         }
 
     /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
     /// - note: The survey is not resdy to commit before this array is empty.
-    var emptyResponseIDs: [QuestionID] {
+    var unknownResponseIDs: [Int] {
        return answers
             .filter { $0.response == .unknown }
             .map(\.id)
+            .sorted()
     }
 
     /// Whether the DASI report is complete, there being no `unknown` responses
-    var isReadyToPublish: Bool { self.emptyResponseIDs.isEmpty }
+    var isReadyToPublish: Bool { self.unknownResponseIDs.isEmpty }
 
     /// Set the response to one question, identified by (1-based) `id` to `.unknown`.
     /// - Parameter id: The question to withdraw.
-    func resetQuestion(id: QuestionID) {
-        let newValue = answers[id.index]
+    func resetQuestion(id: Int) {
+        guard let answerIndex = answerIndex(forID: id) else {
+            assertionFailure("\(#function) - out-of-bounds answer ID \(id)")
+            return
+        }
+        let newValue = answers[answerIndex]
             .withResponse(.unknown)
-        // Timestamp updates in init()
-        answers[id.index] = newValue
+        answers[answerIndex] = newValue
     }
 
     /// Set all responses to `.unknown`
@@ -160,6 +170,7 @@ final class DASIReportContents: ObservableObject {
         let firstTimestamp = firstUsable.timestamp.iso
 
         let numberedResponses = usableResponses
+            .sorted(by: { $0.id < $1.id })
             .map {
                 String(describing: $0.id)
                 + ","

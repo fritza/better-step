@@ -87,6 +87,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
         return retval
     }()
 
+    /// Number of questions in the survey
     public static var count: Int { questions.count }
 
     /// The question with the given ID.
@@ -110,9 +111,9 @@ extension DASIQuestion {
     /// Does not mutate.
     /// - returns: the succeeding `DASIQuestion`, or `nil` if there is no question in range.
     public var next: DASIQuestion? {
-        guard let proposed = id.succ,
-              proposed.index < Self.count else { return nil }
-        return Self.with(id: proposed)
+        let proposedQuestionID = id + 1
+        guard DASIStages.indexRange.contains(proposedQuestionID) else { return nil }
+        return Self.with(id: proposedQuestionID)
     }
 
     /// The question whose `id` comes before `self`'s `id.
@@ -120,10 +121,8 @@ extension DASIQuestion {
     /// Does not mutate.
     /// - returns: the preceding `DASIQuestion`, or `nil` if there is no question in range.
     public var previous: DASIQuestion? {
-        guard let proposed = id.pred,
-              proposed.isValid else {
-            return nil
-        }
-        return Self.with(id: proposed)
+        let proposedQuestionID = id - 1
+        guard DASIStages.indexRange.contains(proposedQuestionID) else { return nil }
+        return Self.with(id: proposedQuestionID)
     }
 }

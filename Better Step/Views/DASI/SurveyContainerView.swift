@@ -20,7 +20,7 @@ final class DASIContentState: ObservableObject {
     ///
     /// At the end of the question pages, this should advance to `.completion`. There is no increment from `.completion`.
     func increment() {
-        selected.advance()
+        selected.goForward()
         refersToQuestion = selected.refersToQuestion
     }
 
@@ -28,12 +28,18 @@ final class DASIContentState: ObservableObject {
     ///
     /// From the start of the question pages, this should regress to `.landing`. There is no decrement from `.landing`.
     func decrement() {
-        selected.retreat()
+        selected.goBack()
         refersToQuestion = selected.refersToQuestion
     }
 
     @Published var refersToQuestion: Bool
-    var questionID: QuestionID? { selected.questionID }
+    var questionIdentifier: Int {
+        guard let containedID = selected.questionIdentifier else {
+            preconditionFailure(
+                "selected wasn't a .presenting.")
+        }
+        return containedID
+    }
 }
 
 struct SurveyContainerView: View {
@@ -48,7 +54,7 @@ struct SurveyContainerView: View {
                 Button("RATS Next") {
                     assert(contentEnvt.selected != nil)
 //                    contentEnvt.selected =
-                    contentEnvt.selected?.advance()
+                    contentEnvt.selected?.goForward()
                 }
                 NavigationLink(
                     isActive: $contentEnvt.refersToQuestion,

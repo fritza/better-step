@@ -11,8 +11,7 @@ import Foundation
 // MARK: - DASIResponse
 /// A response to a particular question, identified by the question's id (1-based), _not_ its index in the response array (0-based).
 struct DASIResponse: Identifiable, Codable {
-    typealias ID = QuestionID
-    let id: QuestionID
+    let id: Int     // 1-based
     var response: AnswerState
     var timestamp: Date
 
@@ -20,8 +19,10 @@ struct DASIResponse: Identifiable, Codable {
     /// - Parameters:
     ///   - id: The ID for this questin (wrapped 1-base questionIndex)
     ///   - response: `yes`, `no`, or `unknown`
-    init(id: QuestionID,
+    init(id: Int,
          response: AnswerState = .unknown) {
+        precondition(id > 0,
+                     "id is supposed to be 1-based. The caller is in error for all question IDs, not just 0.")
         self.id = id
         self.response = response
         self.timestamp = Date()

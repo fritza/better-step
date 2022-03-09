@@ -12,10 +12,11 @@ import Algorithms
 class DASIResponseTests: XCTestCase {
     var responses: [DASIResponse] = []
     static let responseCount = 12
-    static let allQIDs = (QuestionID(1)...QuestionID(responseCount))
+//    static let allQIDs = (QuestionID(1)...QuestionID(responseCount))
 
     override func setUpWithError() throws {
-        responses = Self.allQIDs
+        responses = DASIStages.presentingRange
+            .compactMap { $0.questionIdentifier }
             .map { DASIResponse(id: $0) }
         let oneThird = Self.responseCount/3
         var counter = 0
@@ -29,13 +30,16 @@ class DASIResponseTests: XCTestCase {
         // and the rest is .unknown.
     }
 
-    func expectedAnswerAt(_ qid: QuestionID) -> AnswerState? {
-        guard (0..<responses.count)
-                .contains(qid.index) else {
-                    return nil
-                }
-        return responses[qid.index]
-            .response
+    func expectedAnswerAt(_ qid: Int) -> AnswerState? {
+        // Unfortunate that I have to use a _range_ of stages just to see whether qid is a valid id.
+        guard DASIStages.identifierRange
+                .contains(qid) else {
+            return nil
+        }
+
+       let matchingResponse =  responses.first {  $0.id == qid
+        }
+        return matchingResponse!.response
     }
 
     func partsByAnswer() -> (
@@ -100,7 +104,7 @@ class DASIResponseTests: XCTestCase {
     func testQuestionIndexing() {
         var toBeSorted = responses
         toBeSorted.shuffle()
-        for ident in Self.allQIDs {
+        for ident in DASIStages.identifierRange {
             let toCheck = responses
                 .first { resp in
                     resp.id == ident
