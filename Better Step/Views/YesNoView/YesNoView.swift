@@ -57,7 +57,7 @@ struct YesNoView: View {
                         title: viewConfig[index]
                             .title)
                     { btn in
-                        print("Chose \(btn.id)")
+//                        print("Chose \(btn.id)")
                     }
                 }
             }
@@ -78,7 +78,7 @@ struct YesNoView_Previews: PreviewProvider {
             YesNoView(choices) {
                 vchoice in
                 hitYes = vchoice.title == "Yes"
-                print("Beep! YNView")
+//                print("Beep! YNView")
             }
             Spacer()
         }

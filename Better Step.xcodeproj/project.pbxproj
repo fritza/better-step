@@ -31,7 +31,6 @@
 		1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
-		1FA3B8BE27D69BFC0058F1AF /* YesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BB27D69BFC0058F1AF /* YesNoView.swift */; };
 		1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
 		1FA3B8C427D6B0CA0058F1AF /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
@@ -508,7 +507,6 @@
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
-				1FA3B8BE27D69BFC0058F1AF /* YesNoView.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
