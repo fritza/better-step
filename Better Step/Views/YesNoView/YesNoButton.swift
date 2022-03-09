@@ -48,6 +48,9 @@ struct YesNoButton: View {
     //    let choiceView: ViewChoice
     //    let contextSize: CGSize
 
+    @EnvironmentObject var reportContents: DASIReportContents
+    @EnvironmentObject var envt: DASIContentState
+
     let id: Int
     let title: String
     let completion: ((YesNoButton) -> Void)?
@@ -55,6 +58,19 @@ struct YesNoButton: View {
 
     static let buttonHeight: CGFloat = 48
     static let buttonWidthFactor: CGFloat = 0.9
+
+    var shouldBeChecked: Bool {
+        guard let currentID = envt.questionIdentifier,
+              let answer = reportContents.responseForQuestion(identifier: currentID)
+        else {
+            return false
+        }
+        switch answer {
+        case .no: return self.id == 2
+        case .unknown: return false
+        case .yes: return self.id == 1
+        }
+    }
 
     init(id: Int, title: String,
          completion: ( (YesNoButton) -> Void)? ) {
@@ -71,7 +87,7 @@ struct YesNoButton: View {
                     completion?(self)
                 },
                 label: {
-                    Text(self.title //.asChecked(isChecked)
+                    Text(self.title.asChecked(shouldBeChecked)
                     )
                         .font(.title2)
                         .fontWeight(.semibold)
@@ -93,7 +109,7 @@ struct YesNoButton_Previews: PreviewProvider {
             YesNoButton(id: 1, title: "Seldom") {
                 btn in
                 btn.isChecked.toggle()
-                print("Beep! button \(btn.title)")
+//                print("Beep! button \(btn.title)")
             }
 
 //            Color.green

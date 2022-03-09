@@ -33,10 +33,11 @@ final class DASIContentState: ObservableObject {
     }
 
     @Published var refersToQuestion: Bool
-    var questionIdentifier: Int {
+    var questionIdentifier: Int? {
         guard let containedID = selected.questionIdentifier else {
-            preconditionFailure(
-                "selected wasn't a .presenting.")
+            return nil
+//            preconditionFailure(
+//                "selected wasn't a .presenting.")
         }
         return containedID
     }
