@@ -15,29 +15,41 @@ import CoreMotion
 // FIXME: "Availability" is too cute.
 protocol Availability {
     var cmManager: CMMotionManager { get }
-    var availPath: KeyPath<CMMotionManager, Bool> { get }
-    var activePath: KeyPath<CMMotionManager, Bool> { get }
+    var available: Bool { get }
+    var active   : Bool { get }
 }
 
-extension Availability {
-    var active   : Bool  { cmManager[keyPath: activePath] }
-    var available: Bool  { cmManager[keyPath: availPath ] }
-}
-
-// FIXME: "Availability" is too cute.
 /// Mapping of `CMMotionManager` device-motion status to `MotionManager`.
 struct DeviceState: Availability {
-    private(set) var availPath: KeyPath<CMMotionManager, Bool> = \.isDeviceMotionAvailable
-    private(set) var activePath: KeyPath<CMMotionManager, Bool> = \.isDeviceMotionActive
     private(set) var cmManager: CMMotionManager
+
+    init(_ manager: CMMotionManager) {
+        self.cmManager = manager
+    }
+
+    var available: Bool {
+        cmManager.isDeviceMotionAvailable
+    }
+    var active   : Bool  {
+        cmManager.isDeviceMotionActive
+        }
 }
 
 // FIXME: "Availability" is too cute.
 /// Mapping of `CMMotionManager` accelerometry status to `MotionManager`.
 struct AccelerometerState: Availability {
-    private(set) var availPath: KeyPath<CMMotionManager, Bool> = \.isAccelerometerAvailable
-    private(set) var activePath: KeyPath<CMMotionManager, Bool> = \.isAccelerometerActive
     private(set) var cmManager: CMMotionManager
+
+    init(_ manager: CMMotionManager) {
+        self.cmManager = manager
+    }
+
+    var available: Bool {
+        cmManager.isAccelerometerAvailable
+        }
+    var active   : Bool  {
+        cmManager.isAccelerometerActive
+        }
 }
 
 
@@ -46,31 +58,26 @@ final class MotionManager {
     /// Access to the singleton `MotionManager`.
     ///
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
-    static private(set) var shared: MotionManager! = {
-        MotionManager()
-    }()
+
+    let accelerometerInterval: TimeInterval = 0.001
+    /// Only access to the singleton `MotionManager`; `init()` is `private`.
+    static let shared = MotionManager()
 
     let motionManager: CMMotionManager
-
     private let deviceState : DeviceState
-    var deviceAvailable : Bool { deviceState.available }
-    var deviceActive    : Bool { deviceState.active    }
-
-    private let accState    : AccelerometerState
-    var accAvailable    : Bool { accState   .available }
-    var accActive       : Bool { accState   .active    }
+    private let accState: AccelerometerState
+    var isCancelled: Bool = false
 
     typealias CMDataStream = AsyncStream<CMAccelerometerData>
     var stream: CMDataStream!
 
     private init() {
         let cmManager = CMMotionManager()
-        cmManager.accelerometerUpdateInterval = 0.001
+        cmManager.accelerometerUpdateInterval = accelerometerInterval
         motionManager = cmManager
 
-        deviceState = DeviceState(cmManager: cmManager)
-        accState = AccelerometerState(cmManager: cmManager)
-        Self.shared = self
+        deviceState = DeviceState(cmManager)
+        accState = AccelerometerState(cmManager)
     }
 
     /// Commence the Core Motion feed of accelerometer events.
@@ -97,8 +104,6 @@ final class MotionManager {
     private func stopAccelerometer() {
         motionManager.stopAccelerometerUpdates()
     }
-
-    var isCancelled: Bool = false
 }
 
 extension MotionManager {
