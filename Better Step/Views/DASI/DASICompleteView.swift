@@ -42,10 +42,11 @@ struct DASICompleteView: View {
         var retval = completionText + nextSteps
         let empties = reportContents.unknownResponseIDs
         if !empties.isEmpty {
+            /*
             let unknownListing = empties
                 .map { String($0) }
                 .joined(separator: ", ")
-
+             */
             retval += startIncompleteText + "\(empties.count)" + endIncompleteText
         }
         return retval

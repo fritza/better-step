@@ -48,7 +48,6 @@
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
 		1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B38279A140600E319ED /* WalkCountdownView.swift */; };
 		1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
-		1FF1330B27A05FD3004D6647 /* QuestionID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1330A27A05FD3004D6647 /* QuestionID.swift */; };
 		1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1331027A09979004D6647 /* ZIPFoundation */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -129,7 +128,6 @@
 		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
 		1FF11B38279A140600E319ED /* WalkCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkCountdownView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
-		1FF1330A27A05FD3004D6647 /* QuestionID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionID.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
 		1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMExtensionsTests.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -310,7 +308,6 @@
 		1FFB30DF277BE5090099AE5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1FF1330A27A05FD3004D6647 /* QuestionID.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45694279F589900B5429A /* DASIResponse.swift */,
 				1FD45690279F40B600B5429A /* DASIReportContents.swift */,
@@ -539,7 +536,6 @@
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
-				1FF1330B27A05FD3004D6647 /* QuestionID.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
