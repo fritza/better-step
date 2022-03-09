@@ -9,6 +9,7 @@ import Foundation
 
 
 // MARK: - DASIResponse
+/// A response to a particular question, identified by the question's id (1-based), _not_ its index in the response array (0-based).
 struct DASIResponse: Identifiable, Codable {
     typealias ID = QuestionID
     let id: QuestionID
@@ -17,7 +18,7 @@ struct DASIResponse: Identifiable, Codable {
 
     /// Initialize a `DASIResponse` from its attribute values.
     /// - Parameters:
-    ///   - id: The ID for this questin (wrapped 1-base index)
+    ///   - id: The ID for this questin (wrapped 1-base questionIndex)
     ///   - response: `yes`, `no`, or `unknown`
     init(id: QuestionID,
          response: AnswerState = .unknown) {
@@ -33,6 +34,7 @@ struct DASIResponse: Identifiable, Codable {
     }
 
     /// Pseudo-mutation by creating a new `DASIResponse` that' has the same values but for the response.
+    /// - note: The result _must not_ be ignored. The returned value is a new `DASIResponse`.
     /// - Parameters:
     ///   - response: `yes`, `no`, or `unknown`.
     ///   - stamp: The time at which this was called, therefore the time a value was last generated. You are expected not to touch this parameter

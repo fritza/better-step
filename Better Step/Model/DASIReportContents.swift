@@ -22,8 +22,7 @@ import SwiftUI
  * Read from `DASIQuestions.json`
  * The list is an immutable global: DASIQuestion.questions.
  * THIS IS AN ARRAY, zero-indexed, and it is public.
- * TO DO: hide .questions and expose a subscript by QuestionID. static with(id:) should be a subscript.
- * TO DO: Remove the "identifier" property, which is in the .plist data, and a codable part of the struct.
+ * For DASI numbering, refer to the `DASIQuestion.id`. There are also min and max `presenting` values, and a range of valid `presenting`.
 
  ### struct DASIResponse
 
@@ -31,13 +30,13 @@ import SwiftUI
 
 ### struct DASIReportContents
 
-An `ObservableObject` intended to be the environmentObject for the DASI project. It takes the Subject ID and initializes its `[DASIResponse]` array of `answers`.
+An `ObservableObject` intended to be the `@EnvironmentObject` for the DASI project. It takes the Subject ID and initializes its `[DASIResponse]` array of `answers`.
 
  It serves as the façade for the user's responses to the questions.
 
  * `responseForQuestion(id:)` - yelds the answer (yes/no/unknown) for the question under that ID.
  * `didRespondToQuestion(id:with:) `- replaces the `answers` element for that ID with one with a new `AnswerState`.
- * `emptyResponseIDs` - list of IDs for questions that are as yet `unknown`.
+ * `unknownResponseIDs` - list of IDs for questions that are as yet `unknown`.
  * `resetQuestion(id:)`  - sets the identified response to `unknown`
  * `reset()` - reset all responses to `unknown`.
  * `csvDASIRecords` - scans all responses, prepares the `csv` representation of each, and returns a `String` containing them delimited by CSV newlines (`\r\n`, per Microsoft's specifications.)
@@ -48,28 +47,11 @@ The `String` returned by `csvDASIRecords` can be converted to `Data`, and writte
  ### QuestionID
  This insulates the 1-based IDs from the 0-based `Array` induces.
 
- * RawRepresentable
- * Codable
- * Hashable
- * Strideable
- * CustomStringConvertible
-
- **Using `QuestionID**
-
- These types use `QuestionID` to refer to questions and responses.
-
- * `DASIQuestion`
- * `DASIResponse`
- * `DASIReportContents`
-
- * `DASIQuestionView`
-
- * `QuestionIDTests`
-
- ## Obsolete — removed
- 
- * `DASIReport`
- * `DASIReportDocument
+ * `RawRepresentable`
+ * `Codable`
+ * `Hashable`
+ * `Strideable`
+ * `CustomStringConvertible`
 */
 
 // MARK: - DASIReportErrors
@@ -122,7 +104,7 @@ final class DASIReportContents: ObservableObject {
     ///
     /// Think of this as the inverse of `responseForQuestion(id:)`
     /// - Parameters:
-    ///   - questionID: The ID of the `DASIResponse` being answered.
+    ///   - questionID: The **`id`** of the `DASIResponse` being answered. The method will find the matching array index.
     ///   - state: The user's response.
     func didRespondToQuestion(
         id questionID: QuestionID,
@@ -133,7 +115,7 @@ final class DASIReportContents: ObservableObject {
             // Timestamp updates in withResponse(_:)
         }
 
-    /// The `QuestionID`s of all responses that are still `.unknown`
+    /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
     /// - note: The survey is not resdy to commit before this array is empty.
     var emptyResponseIDs: [QuestionID] {
        return answers
@@ -144,7 +126,7 @@ final class DASIReportContents: ObservableObject {
     /// Whether the DASI report is complete, there being no `unknown` responses
     var isReadyToPublish: Bool { self.emptyResponseIDs.isEmpty }
 
-    /// Set the response to one question to `.unknown`.
+    /// Set the response to one question, identified by (1-based) `id` to `.unknown`.
     /// - Parameter id: The question to withdraw.
     func resetQuestion(id: QuestionID) {
         let newValue = answers[id.index]

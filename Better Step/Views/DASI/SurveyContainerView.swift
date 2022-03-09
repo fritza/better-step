@@ -7,14 +7,10 @@
 
 import SwiftUI
 
+/// Observable wrapper on a persistent `DASIStages`.
 final class DASIContentState: ObservableObject {
     @Published var selected: DASIStages!
-
-    #warning("no protection from overflow in pageNum")
-    // Should detect .questions and number > max question count, then advance the tag.
-    // TODO: Should underflow go to landing?
-//    @Published var pageNum: Int
-
+    
     init(_ selection: DASIStages = .landing) {
         selected = selection
         refersToQuestion = selection.refersToQuestion
@@ -26,10 +22,6 @@ final class DASIContentState: ObservableObject {
     func increment() {
         selected.advance()
         refersToQuestion = selected.refersToQuestion
-//        if let next = selected.goForward() {
-//            selected = next
-//            refersToQuestion = selected.refersToQuestion
-//        }
     }
 
     /// Reflect the selection of the previous page.
@@ -38,10 +30,6 @@ final class DASIContentState: ObservableObject {
     func decrement() {
         selected.retreat()
         refersToQuestion = selected.refersToQuestion
-//        if let prev = selected.goBack() {
-//            selected = prev
-//            refersToQuestion = selected.refersToQuestion
-//        }
     }
 
     @Published var refersToQuestion: Bool

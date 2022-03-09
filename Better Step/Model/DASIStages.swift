@@ -7,8 +7,6 @@
 
 import Foundation
 
-#warning("Still need an ObservableObject for the state")
-
 // MARK: - DASIStages
 
 /// Application of `QuestionID` to navigation through the stages of the DASI phase of the app. The intended use is a `@State` or a `@StateObject` property to be bound to the root survey view. The child views set the value, the root changes the view binding.
@@ -18,7 +16,7 @@ import Foundation
 ///
 /// - `.landing`: Initial view; description and **Proceed** button.
 /// -   `.completion`: The view indicating that all questions have been answered.
-/// - `.presenting(question:)`: The survey-response view for the question with the auxiliary `QuestionID`
+/// - `.presenting(questionID:)`: The survey-response view for the question with the 1-based question identifier.
 ///
 ///- note: All references to DASI questions are by `QuestionID`.
 enum DASIStages {
@@ -77,7 +75,7 @@ enum DASIStages {
 
     /// Mutate `self` to the stage after it. Return to `nil` if there is no suceeding stage.
     ///
-    /// `.completion` has no effect. `.landing` advances to the first of the `QuestionID`s. .`presenting(question:)` advances to the next `QuestionID`, or to `.completion` if the `QuestionID` is at the maximum.
+    /// `.completion` has no effect. `.landing` advances to the first of the `QuestionID`s. .`presenting(questionID:)` advances to the next `QuestionID`, or to `.completion` if the `QuestionID` is at the maximum.
     @discardableResult
     mutating func goForward() -> DASIStages {
         let retval: DASIStages
@@ -101,10 +99,11 @@ enum DASIStages {
     }
 
 
-    /// Set `self` to represent a given question.
+    /// Set `self` to represent a given question, by 1-based id.
     ///
-    /// The jump is to `.presenting` states _only._ Out-of-range `QuestionID`s might return the nearest non-`.presenting` values, but this is not to be relied on.
-    /// - Parameter question: The ID of the question to be represented. See the discussion for out-of-range IDs.
+    /// The jump is to `.presenting` states _only._
+    /// - Parameter questionID: The ID (1-based) of the question to be represented.
+    /// - precondition: The index must be in the range of question identifiers.
     /// - Returns: The represented `DASIStages` after the move.
     mutating func goTo(question: QuestionID) -> DASIStages {
         switch self {

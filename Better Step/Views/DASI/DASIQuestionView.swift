@@ -37,7 +37,6 @@ struct DASIQuestionView: View {
         else { self.answerState = .unknown }
     }
 
-
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
@@ -92,7 +91,6 @@ struct DASIQuestionView: View {
                 .navigationTitle(
                     "DASI - \((envt.questionID?.description ?? "Out of range"))"
                 )
-            }
         }
     }
 }
