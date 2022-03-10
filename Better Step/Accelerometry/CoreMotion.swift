@@ -24,6 +24,9 @@ private let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
 // MARK: - IncomingAccelerometry
 actor IncomingAccelerometry {
     var buffer = Deque<CMAccelerometerData>(minimumCapacity: numericCast(minBufferCapacity))
+    var count: Int {
+        buffer.count
+    }
 
     func receive(_ accData: CMAccelerometerData) {
         buffer.append(accData)
@@ -34,14 +37,11 @@ actor IncomingAccelerometry {
     //      If the suspension point at Task.sleep(nanoseconds:) doesn't
     //      yield to an async receive(_:), then we're deadlocked, right?
     func pop() async throws -> CMAccelerometerData? {
-        //        return  try await Task {
         while buffer.isEmpty {
             try Task.checkCancellation()
             try await Task.sleep(nanoseconds: nanoSleep)
         }
         return buffer.popFirst()
-        //        }
-        //        .value
     }
     // And now we're back to polling, right?
 }
@@ -98,7 +98,9 @@ final class MotionManager {
 
     // MARK: Properties
     /// Only access to the singleton `MotionManager`; `init()` is `private`.
-    static let shared = MotionManager()
+//    static let shared = MotionManager()
+
+    static var census = 0
 
     let motionManager: CMMotionManager
     private let deviceState : DeviceState
@@ -109,16 +111,26 @@ final class MotionManager {
     var stream: CMDataStream!
 
     let asyncBuffer = IncomingAccelerometry()
+    func count() async -> Int { return await asyncBuffer.count }
 
 // MARK: - Initialization and start
-    private init() {
+    init(interval: TimeInterval = hzInterval) {
         let cmManager = CMMotionManager()
-        cmManager.accelerometerUpdateInterval = hzInterval
+        cmManager.accelerometerUpdateInterval = interval
         motionManager = cmManager
 
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
     }
+
+    var accelerometryAvailable: Bool {
+        accState.available
+    }
+
+    var accelerometryActive: Bool {
+        accState.active
+    }
+
 
     /*
     /// Commence the Core Motion feed of accelerometer events.
@@ -166,7 +178,6 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
         // and there's no imaginable way to downcast or (more important)
         // to handle the throw.
 
-        motionManager.startAccelerometerUpdates(to: .main)
 
         // TODO: What ops queue should this go on?
         //       You create a new one by instantiating with `init()`.
@@ -176,6 +187,7 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
         //       they do without forcing a queueing system on top of
         //       whatever the Task chooses.
 
+        motionManager.startAccelerometerUpdates(to: .main)
         { accData, error in
             if let error = error {
                 print(#function, "Accelerometry error:", error)
@@ -185,6 +197,7 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
                 Task {
                     // Task? Really?
                     await self.asyncBuffer.receive(accData)
+                    Self.census = await self.asyncBuffer.count
                 }
             }
         }
@@ -202,30 +215,5 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     func cancelUpdates() {
         isCancelled = true
         stopAccelerometer()
-    }
-
-    /// Convenience: a closure that satisfies `CMAccelerometerHandler`, to handle incoming accelerometry events.
-    ///
-    /// The usual examples put the closure right in the call to `.startAccelerometerUpdates`, but this is more readable at that site.
-    static func makeHandler(
-        _ continuation: CMDataStream.Continuation)
-    -> CMAccelerometerHandler
-    // (CMAccelerometerData?, Error?)->Void
-    {
-        return {
-            (aData: CMAccelerometerData?, error: Error?) -> Void in
-            guard !Self.shared.isCancelled else {
-                continuation.finish(); return
-            }
-
-            if let error = error {
-                print(#function, "- got unhandled error:", error)
-                return
-            }
-            guard let aData = aData else {
-                fatalError("\(#function):\(#line) - no error, but no data.")
-            }
-            continuation.yield(aData)
-        }
     }
 }
