@@ -58,6 +58,7 @@
 		1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544A2791FCFF000894B8 /* CoreMotion.swift */; };
 		1FF1B59827DA78C60017E90C /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1B59727DA78C60017E90C /* Collections */; };
 		1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
+		1FF1B59B27DAA66C0017E90C /* SimpleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */; };
 		1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
@@ -142,6 +143,7 @@
 		1FF1B58B27DA77590017E90C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FF1B58D27DA775B0017E90C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FF1B59027DA775B0017E90C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBarView.swift; sourceTree = "<group>"; };
 		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFileCoordinator.swift; sourceTree = "<group>"; };
 		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
+				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
 				1FF1B58B27DA77590017E90C /* ContentView.swift */,
 				1FF1B58D27DA775B0017E90C /* Assets.xcassets */,
 				1FF1B58F27DA775B0017E90C /* Preview Content */,
@@ -647,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF1B59B27DAA66C0017E90C /* SimpleBarView.swift in Sources */,
 				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
 				1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */,
 				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
