@@ -44,6 +44,7 @@ struct ApplicationOnboardView: View {
                 if fieldHasContent {
                     NavigationLink("Accept", destination: {
 
+                        // FIXME: Why does app onboard set DASI state?
                         SurveyContainerView()
                             .environmentObject(DASIContentState(.landing))
 

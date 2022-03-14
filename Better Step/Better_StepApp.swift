@@ -39,11 +39,6 @@ struct Better_StepApp: App {
             //            ApplicationOnboardView()
             //                .environmentObject(globals)
 
-#if true
-            SurveyContainerView()
-                .environmentObject(DASIReportContents())
-                .environmentObject(DASIContentState(.landing))
-#else
             TabView {
 
                 // MARK: - DASI
@@ -84,7 +79,6 @@ struct Better_StepApp: App {
                     }
             }
             .environmentObject(globals)
-            #endif
         }
 
 
