@@ -38,12 +38,14 @@ final class CMWatcher: ObservableObject {
 }
 
 struct ContentView: View {
+    static let hzOverride: TimeInterval = 1.0/10.0
+
     enum Errors: Error {
         case collectionCancelled
     }
     @State private var isCollecting = false
 //    private var motionManager = CMWatcher()
-    private var motionManager = MotionManager(interval: 1.0/120.0)
+    private var motionManager = MotionManager(interval: Self.hzOverride)
     @State var reading: CMAccelerometerData = CMAccelerometerData()
     var bufferCount: String = ""
     mutating func updateCount(_ n: Int) {
@@ -72,13 +74,27 @@ struct ContentView: View {
             // But the count varies. It reports
             // the state of the accelerometry queue,
             // which is isolated.
-            Text(labels.status)
-            Text("Waiting: \(MotionManager.census)")
-            Button(labels.button)
-            {
-                isCollecting.toggle()
+            HStack {
+                Text(labels.status)
+                Spacer()
+                Button(labels.button) {
+                    isCollecting.toggle()
+                }
+                .disabled(labels.button.isEmpty)
             }
-            .disabled(labels.button.isEmpty)
+            .padding()
+            if isCollecting {
+                SimpleBarView(
+                    [
+                        abs(reading.acceleration.x),
+                        abs(reading.acceleration.y),
+                        abs(reading.acceleration.z)
+                    ],
+                    spacing: 0.20, color: .teal, reservedMax: 1.25)
+                    .animation(
+                        .easeInOut(duration: Self.hzOverride),
+                        value: reading.acceleration.x)
+            }
             Spacer()
         }
         .padding()
