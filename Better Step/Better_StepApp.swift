@@ -36,9 +36,6 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //            ApplicationOnboardView()
-            //                .environmentObject(globals)
-
             TabView {
 
                 // MARK: - DASI
@@ -53,7 +50,6 @@ struct Better_StepApp: App {
 
                 // MARK: - Timed Walk
                 WalkView()
-//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "figure.walk")
                         Text("Walk")
@@ -61,7 +57,6 @@ struct Better_StepApp: App {
 
                 // MARK: - Reporting
                 Text("Reporting Tab")
-//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "doc.text")
                         Text("Report")
@@ -69,10 +64,6 @@ struct Better_StepApp: App {
 
                 // MARK: - Setup
                 SetupView()
-//                    .environmentObject(
-//                        self.setupEnvironment
-//                    )
-//                    .environmentObject(Self.commonReport)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setup")

@@ -49,6 +49,8 @@ struct YesNoButton: View {
     //    let contextSize: CGSize
 
     @EnvironmentObject var reportContents: DASIReportContents
+
+    // FIXME: Direct access to the content state
     @EnvironmentObject var envt: DASIContentState
 
     let id: Int
@@ -60,6 +62,7 @@ struct YesNoButton: View {
     static let buttonWidthFactor: CGFloat = 0.9
 
     var shouldBeChecked: Bool {
+        // FIXME: Direct access to the content state
         guard let currentID = envt.questionIdentifier,
               let answer = reportContents.responseForQuestion(identifier: currentID)
         else {

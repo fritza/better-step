@@ -28,6 +28,7 @@
 		1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
 		1F8A065627A478B400477379 /* STGlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* STGlobalState.swift */; };
 		1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
+		1F8A337E27DFEE400093C896 /* DASIContentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIContentState.swift */; };
 		1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
@@ -115,6 +116,7 @@
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065527A478B400477379 /* STGlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STGlobalState.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
+		1F8A337D27DFEE400093C896 /* DASIContentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIContentState.swift; sourceTree = "<group>"; };
 		1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyContainerView.swift; sourceTree = "<group>"; };
 		1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoStack.swift; sourceTree = "<group>"; };
 		1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1F8A065527A478B400477379 /* STGlobalState.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
+				1F8A337C27DFEDAA0093C896 /* Reporting */,
 				1FFB30DF277BE5090099AE5E /* Model */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
@@ -271,6 +274,15 @@
 				1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */,
 			);
 			path = "Better StepUITests";
+			sourceTree = "<group>";
+		};
+		1F8A337C27DFEDAA0093C896 /* Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				1F8A337D27DFEE400093C896 /* DASIContentState.swift */,
+				1FD45690279F40B600B5429A /* DASIReportContents.swift */,
+			);
+			path = Reporting;
 			sourceTree = "<group>";
 		};
 		1FF11B3A279A173D00E319ED /* DASI */ = {
@@ -362,7 +374,6 @@
 			children = (
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45694279F589900B5429A /* DASIResponse.swift */,
-				1FD45690279F40B600B5429A /* DASIReportContents.swift */,
 				1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */,
 				1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
@@ -587,6 +598,7 @@
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
+				1F8A337E27DFEE400093C896 /* DASIContentState.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
