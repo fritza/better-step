@@ -8,11 +8,14 @@
 import Foundation
 import Collections
 import CoreMotion
+import SwiftUI
 
 // MARK: Time intervals
+
 private let hz                : UInt64 = 120
 private let hzInterval        : Double = 1.0/Double(hz)
 private let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
+// TODO: Put the interval in a UserDefault.
 
 private let secondsInBuffer   : UInt64 = 2
 private let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
@@ -97,9 +100,8 @@ final class MotionManager {
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
 
     // MARK: Properties
-    /// Only access to the singleton `MotionManager`; `init()` is `private`.
-//    static let shared = MotionManager()
 
+    static let shared = MotionManager()
     static var census = 0
 
     let motionManager: CMMotionManager
@@ -113,10 +115,10 @@ final class MotionManager {
     let asyncBuffer = IncomingAccelerometry()
     func count() async -> Int { return await asyncBuffer.count }
 
-// MARK: - Initialization and start
-    init(interval: TimeInterval = hzInterval) {
+    // MARK: - Initialization and start
+    init() {
         let cmManager = CMMotionManager()
-        cmManager.accelerometerUpdateInterval = interval
+        cmManager.accelerometerUpdateInterval = hzInterval
         motionManager = cmManager
 
         deviceState = DeviceState(cmManager)
