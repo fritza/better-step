@@ -28,6 +28,7 @@
 		1F8A065627A478B400477379 /* STGlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* STGlobalState.swift */; };
 		1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
 		1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
+		1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
 		1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
@@ -114,6 +115,7 @@
 		1F8A065527A478B400477379 /* STGlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STGlobalState.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
 		1F8A337D27DFEE400093C896 /* DASIPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPages.swift; sourceTree = "<group>"; };
+		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
 		1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyContainerView.swift; sourceTree = "<group>"; };
 		1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoStack.swift; sourceTree = "<group>"; };
 		1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		1F8A337F27E119A30093C896 /* App Stages */ = {
 			isa = PBXGroup;
 			children = (
+				1F8A338027E122130093C896 /* DASIUserResponse.swift */,
 				1F8A065527A478B400477379 /* STGlobalState.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponses.swift */,
@@ -609,6 +612,7 @@
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponses.swift in Sources */,
+				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */,

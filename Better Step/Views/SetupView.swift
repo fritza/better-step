@@ -93,7 +93,8 @@ struct SetupView: View {
         NavigationView {
             Form {
                 Section("Walk") {
-                    Toggle("Perform Timed Walk", isOn: $includeWalk)
+                    Toggle("Perform Timed Walk" + (neitherPhaseActive ? " ⚠️" : ""),
+                           isOn: $includeWalk)
                     Stepper("Duration (\(self.duration)):",
                             value: $duration,
                             in: AppStorageKeys.dasiWalkRange,
@@ -103,7 +104,8 @@ struct SetupView: View {
                     })
                 }
                 Section("DASI Survey") {
-                    Toggle("Perform DASI Survey", isOn: $includeSurvey)
+                    Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
+                           isOn: $includeSurvey)
                 }
 
                 Section("Reporting") {

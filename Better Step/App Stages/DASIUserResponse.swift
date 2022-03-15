@@ -1,5 +1,5 @@
 //
-//  DASIAnswer.swift
+//  DASIUserResponse.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/24/22.
@@ -8,14 +8,14 @@
 import Foundation
 
 
-// MARK: - DASIAnswer
+// MARK: - DASIUserResponse
 /// A response to a particular question, identified by the question's id (1-based), _not_ its index in the response array (0-based).
-struct DASIAnswer: Identifiable, Codable {
+struct DASIUserResponse: Identifiable, Codable {
     let id: Int     // 1-based
     var response: AnswerState
     var timestamp: Date
 
-    /// Initialize a `DASIAnswer` from its attribute values.
+    /// Initialize a `DASIUserResponse` from its attribute values.
     /// - Parameters:
     ///   - id: The ID for this questin (wrapped 1-base questionIndex)
     ///   - response: `yes`, `no`, or `unknown`
@@ -34,25 +34,25 @@ struct DASIAnswer: Identifiable, Codable {
         return (response == .yes) ? question.score : 0
     }
 
-    /// Pseudo-mutation by creating a new `DASIAnswer` that' has the same values but for the response.
-    /// - note: The result _must not_ be ignored. The returned value is a new `DASIAnswer`.
+    /// Pseudo-mutation by creating a new `DASIUserResponse` that' has the same values but for the response.
+    /// - note: The result _must not_ be ignored. The returned value is a new `DASIUserResponse`.
     /// - Parameters:
     ///   - response: `yes`, `no`, or `unknown`.
     ///   - stamp: The time at which this was called, therefore the time a value was last generated. You are expected not to touch this parameter
     /// - Returns: A new `DASIRseponse` reflecting the new answer state.
-    func withResponse(_ response: AnswerState) -> DASIAnswer {
-        DASIAnswer(id: id,
+    func withResponse(_ response: AnswerState) -> DASIUserResponse {
+        DASIUserResponse(id: id,
                      response: response)
         // Timestamp updates in init()
     }
 }
 
 // MARK: - String representation
-extension DASIAnswer: Comparable, Hashable, CustomStringConvertible {
+extension DASIUserResponse: Comparable, Hashable, CustomStringConvertible {
     /// `Equatable` adoption
-    static func == (lhs: DASIAnswer, rhs: DASIAnswer) -> Bool { lhs.id == rhs.id }
+    static func == (lhs: DASIUserResponse, rhs: DASIUserResponse) -> Bool { lhs.id == rhs.id }
     /// `Comparable` adoption
-    static func <  (lhs: DASIAnswer, rhs: DASIAnswer) -> Bool { lhs.id <  rhs.id }
+    static func <  (lhs: DASIUserResponse, rhs: DASIUserResponse) -> Bool { lhs.id <  rhs.id }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
