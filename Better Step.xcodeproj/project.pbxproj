@@ -42,7 +42,6 @@
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponses.swift */; };
-		1FD45695279F589A00B5429A /* DASIAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45694279F589900B5429A /* DASIAnswer.swift */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
 		1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B342799D54100E319ED /* AccelerationWriter.swift */; };
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
@@ -130,7 +129,6 @@
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceleratorFileSink.swift; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponses.swift; sourceTree = "<group>"; };
-		1FD45694279F589900B5429A /* DASIAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DASIAnswer.swift; path = "Better Step/Model/DASIAnswer.swift"; sourceTree = SOURCE_ROOT; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B342799D54100E319ED /* AccelerationWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationWriter.swift; sourceTree = "<group>"; };
 		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
@@ -231,8 +229,8 @@
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
-				1F8A065527A478B400477379 /* STGlobalState.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
+				1F8A337F27E119A30093C896 /* App Stages */,
 				1F8A337C27DFEDAA0093C896 /* Reporting */,
 				1FFB30DF277BE5090099AE5E /* Model */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
@@ -277,10 +275,21 @@
 		1F8A337C27DFEDAA0093C896 /* Reporting */ = {
 			isa = PBXGroup;
 			children = (
-				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
-				1FD45690279F40B600B5429A /* DASIResponses.swift */,
 			);
 			path = Reporting;
+			sourceTree = "<group>";
+		};
+		1F8A337F27E119A30093C896 /* App Stages */ = {
+			isa = PBXGroup;
+			children = (
+				1F8A065527A478B400477379 /* STGlobalState.swift */,
+				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
+				1FD45690279F40B600B5429A /* DASIResponses.swift */,
+				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
+				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
+				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
+			);
+			path = "App Stages";
 			sourceTree = "<group>";
 		};
 		1FF11B3A279A173D00E319ED /* DASI */ = {
@@ -369,12 +378,8 @@
 		1FFB30DF277BE5090099AE5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
-				1FD45694279F589900B5429A /* DASIAnswer.swift */,
 				1FF3543B278FA9C2000894B8 /* SubjectFileCoordinator.swift */,
 				1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */,
-				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
-				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -611,7 +616,6 @@
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
-				1FD45695279F589A00B5429A /* DASIAnswer.swift in Sources */,
 				1FA3B8C427D6B0CA0058F1AF /* ForwardBackBar.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */,

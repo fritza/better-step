@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum AppStages: Hashable {
+enum AppStages: Hashable, CaseIterable {
     /// A new user ID has been entered.
     case onboard
     /// The user has completed these activities
@@ -21,8 +21,11 @@ enum AppStages: Hashable {
 
 }
 
-final class GlobalState: ObservableObject {
-    static var current: GlobalState!
+final class ApplicationState: ObservableObject {
+    @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
+    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
+
+    static var current: ApplicationState!
 
     private var completed     : Set<AppStages> = []
     private var requiredPhases: Set<AppStages> {
