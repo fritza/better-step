@@ -1,5 +1,5 @@
 //
-//  DASIResponse.swift
+//  DASIAnswer.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/24/22.
@@ -8,14 +8,14 @@
 import Foundation
 
 
-// MARK: - DASIResponse
+// MARK: - DASIAnswer
 /// A response to a particular question, identified by the question's id (1-based), _not_ its index in the response array (0-based).
-struct DASIResponse: Identifiable, Codable {
+struct DASIAnswer: Identifiable, Codable {
     let id: Int     // 1-based
     var response: AnswerState
     var timestamp: Date
 
-    /// Initialize a `DASIResponse` from its attribute values.
+    /// Initialize a `DASIAnswer` from its attribute values.
     /// - Parameters:
     ///   - id: The ID for this questin (wrapped 1-base questionIndex)
     ///   - response: `yes`, `no`, or `unknown`
@@ -34,25 +34,25 @@ struct DASIResponse: Identifiable, Codable {
         return (response == .yes) ? question.score : 0
     }
 
-    /// Pseudo-mutation by creating a new `DASIResponse` that' has the same values but for the response.
-    /// - note: The result _must not_ be ignored. The returned value is a new `DASIResponse`.
+    /// Pseudo-mutation by creating a new `DASIAnswer` that' has the same values but for the response.
+    /// - note: The result _must not_ be ignored. The returned value is a new `DASIAnswer`.
     /// - Parameters:
     ///   - response: `yes`, `no`, or `unknown`.
     ///   - stamp: The time at which this was called, therefore the time a value was last generated. You are expected not to touch this parameter
     /// - Returns: A new `DASIRseponse` reflecting the new answer state.
-    func withResponse(_ response: AnswerState) -> DASIResponse {
-        DASIResponse(id: id,
+    func withResponse(_ response: AnswerState) -> DASIAnswer {
+        DASIAnswer(id: id,
                      response: response)
         // Timestamp updates in init()
     }
 }
 
 // MARK: - String representation
-extension DASIResponse: Comparable, Hashable, CustomStringConvertible {
+extension DASIAnswer: Comparable, Hashable, CustomStringConvertible {
     /// `Equatable` adoption
-    static func == (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id == rhs.id }
+    static func == (lhs: DASIAnswer, rhs: DASIAnswer) -> Bool { lhs.id == rhs.id }
     /// `Comparable` adoption
-    static func <  (lhs: DASIResponse, rhs: DASIResponse) -> Bool { lhs.id <  rhs.id }
+    static func <  (lhs: DASIAnswer, rhs: DASIAnswer) -> Bool { lhs.id <  rhs.id }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -62,7 +62,7 @@ extension DASIResponse: Comparable, Hashable, CustomStringConvertible {
 
     /// Format the ID and response attributes into an array of `String`. Callers are expected to concatenate this array with global attributes: the subject ID and lhe time the CSV file was created.
     ///
-    /// **See also** `DASIReportContents.CSVDASIRecords`
+    /// **See also** `DASIResponses.CSVDASIRecords`
     /// - note: ISO-8601 formatting is time-consuming,
     ///         but it'll be 16 times, once per run. No need to make
     ///         it `async`.

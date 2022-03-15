@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+@available(*, unavailable, message: "was never used")
 struct DurationStepper: View {
     @AppStorage(AppStorageKeys.walkInMinutes.rawValue)
     var minuteDuration = 6
@@ -15,19 +15,15 @@ struct DurationStepper: View {
         Stepper("Duration (\(minuteDuration)):",
                 value: $minuteDuration,
                 in: AppStorageKeys.dasiWalkRange,
-                step: 1
-//                ,
-//                onEditingChanged: { _ in
-//            controlFocus = nil
-//        }
-        )
+                step: 1)
 
     }
 }
 
+@available(*, unavailable, message: "was never used")
 struct DurationStepper_Previews: PreviewProvider {
     static var previews: some View {
         DurationStepper()
-            .environmentObject(DASIReportContents())
+            .environmentObject(DASIResponses())
     }
 }

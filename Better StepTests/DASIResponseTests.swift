@@ -10,14 +10,14 @@ import Algorithms
 @testable import Better_Step
 
 class DASIResponseTests: XCTestCase {
-    var responses: [DASIResponse] = []
+    var responses: [DASIAnswer] = []
     static let responseCount = 12
 //    static let allQIDs = (QuestionID(1)...QuestionID(responseCount))
 
     override func setUpWithError() throws {
         responses = DASIStages.presentingRange
             .compactMap { $0.questionIdentifier }
-            .map { DASIResponse(id: $0) }
+            .map { DASIAnswer(id: $0) }
         let oneThird = Self.responseCount/3
         var counter = 0
         for index in (counter..<oneThird) {
@@ -43,12 +43,12 @@ class DASIResponseTests: XCTestCase {
     }
 
     func partsByAnswer() -> (
-        yes    : Set<DASIResponse>,
-        no     : Set<DASIResponse>,
-        unknown: Set<DASIResponse>) {
-            var yesSet: Set<DASIResponse> = []
-            var noSet : Set<DASIResponse> = []
-            var unknownSet: Set<DASIResponse> = []
+        yes    : Set<DASIAnswer>,
+        no     : Set<DASIAnswer>,
+        unknown: Set<DASIAnswer>) {
+            var yesSet: Set<DASIAnswer> = []
+            var noSet : Set<DASIAnswer> = []
+            var unknownSet: Set<DASIAnswer> = []
 
             for element in responses {
                 switch element.response {
@@ -76,7 +76,7 @@ class DASIResponseTests: XCTestCase {
 
             XCTAssertEqual(responses[n].id, previousValue.id,
             "Resetting response value should not affect ID")
-            XCTAssert(responses[n].timestamp > previousValue.timestamp, "changing a DASIResponse's choice should advance its timestamp.")
+            XCTAssert(responses[n].timestamp > previousValue.timestamp, "changing a DASIAnswer's choice should advance its timestamp.")
 
         }
         let (y, n, u) = partsByAnswer()
@@ -98,7 +98,7 @@ class DASIResponseTests: XCTestCase {
             .allSatisfy { (left, right) -> Bool in
                 return left.id < right.id
             }
-        XCTAssert(seemsSorted, "Sorting DASIResponse by id should work; check the < operator.")
+        XCTAssert(seemsSorted, "Sorting DASIAnswer by id should work; check the < operator.")
     }
 
     func testQuestionIndexing() {
@@ -114,7 +114,7 @@ class DASIResponseTests: XCTestCase {
                 XCTAssertEqual(
                     toCheck.response,
                     expectedAnswerAt(ident),
-                    "Loose test for actually findin the expected DASIResponse")
+                    "Loose test for actually findin the expected DASIAnswer")
             }
         }
     }

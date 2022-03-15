@@ -42,7 +42,7 @@ struct Better_StepApp: App {
 
     // FIXME: App does not interpose the app onboard sheet.
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
-    let globals = GlobalState()
+    let globals = ApplicationState()
 
     var body: some Scene {
         WindowGroup {
@@ -50,8 +50,8 @@ struct Better_StepApp: App {
 
                 // MARK: - DASI
                 SurveyContainerView()
-                    .environmentObject(DASIReportContents())
-                    .environmentObject(DASIContentState(.landing))
+                    .environmentObject(DASIResponses())
+                    .environmentObject(DASIPages(.landing))
                     .tabItem {
                         Image(systemName: "checkmark.square")
                         Text("Survey")

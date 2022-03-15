@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SurveyContainerView: View {
-    @EnvironmentObject var contentEnvt: DASIContentState
+    @EnvironmentObject var contentEnvt: DASIPages
+    @EnvironmentObject var reportContents: DASIResponses
+    // FIXME: Too many EnvironmentObjects
+    @EnvironmentObject private var appState: ApplicationState
+
 
     var body: some View {
         NavigationView {
@@ -54,7 +58,8 @@ struct SurveyContainerView: View {
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
         SurveyContainerView()
-            .environmentObject(DASIContentState(.landing))
+            .environmentObject(DASIPages(.landing))
+            .environmentObject(DASIResponses())
     }
 }
 

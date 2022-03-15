@@ -85,6 +85,10 @@ struct SetupView: View {
 
     @State private var showingClears = false
 
+    var neitherPhaseActive: Bool {
+        !(includeWalk || includeSurvey)
+    }
+
     var body: some View {
         NavigationView {
             Form {
@@ -110,7 +114,7 @@ struct SetupView: View {
                                   address: $email)
                     //                            .border(.blue)
                 }
-                Section("Collected data") {
+                Section("Collected Data") {
                     NavigationLink("Clear Data", // isActive: $showingClears,
                                    destination: {
                         ClearingView()
@@ -119,6 +123,11 @@ struct SetupView: View {
                 }
             }
             .navigationTitle("Configuration")
+        }
+        .onDisappear() {
+            assert(includeWalk || includeSurvey,
+                   "Finished SetupView with neither data phase set")
+            // FIXME: Check/enforce the condition.
         }
     }
 }

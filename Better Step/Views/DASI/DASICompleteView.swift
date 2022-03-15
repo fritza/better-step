@@ -20,7 +20,7 @@ fileprivate let endIncompleteText = """
 """
 
 fileprivate var nextSteps: String {
-    if GlobalState.current.allTasksFinished {
+    if ApplicationState.current.allTasksFinished {
         return "\nPlease proceed to the “Report” view to submit your information to the team."
     }
     else {
@@ -33,20 +33,18 @@ fileprivate var nextSteps: String {
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View {
-    @EnvironmentObject private var globalState: GlobalState
-    @EnvironmentObject var envt: DASIContentState
-    @EnvironmentObject var reportContents: DASIReportContents
+    @EnvironmentObject private var globalState: ApplicationState
+    @EnvironmentObject var envt: DASIPages
+    @EnvironmentObject var reportContents: DASIResponses
 
+    var allItemsAnswered: Bool {
+        return reportContents.unknownResponseIDs.isEmpty
+    }
 
     var instructions: String {
         var retval = completionText + nextSteps
-        let empties = reportContents.unknownResponseIDs
-        if !empties.isEmpty {
-            /*
-            let unknownListing = empties
-                .map { String($0) }
-                .joined(separator: ", ")
-             */
+        if !allItemsAnswered {
+            let empties = reportContents.unknownResponseIDs
             retval += startIncompleteText + "\(empties.count)" + endIncompleteText
         }
         return retval
@@ -68,7 +66,9 @@ struct DASICompleteView: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            //            globalState.complete(.dasi)
+            // IF ALL ARE ANSWERED
+            if allItemsAnswered { globalState.didComplete(phase: .dasi) }
+            // FIXME: Test for completion on tab-out.
         }
     }
 }
@@ -76,6 +76,6 @@ struct DASICompleteView: View {
 struct DASICompleteView_Previews: PreviewProvider {
     static var previews: some View {
         DASICompleteView()
-            .environmentObject(DASIContentState())
+            .environmentObject(DASIPages())
     }
 }

@@ -22,8 +22,8 @@ struct QuestionContentView: View {
 }
 
 struct DASIQuestionView: View {
-    @EnvironmentObject var envt: DASIContentState
-    @EnvironmentObject var reportContents: DASIReportContents
+    @EnvironmentObject var envt: DASIPages
+    @EnvironmentObject var reportContents: DASIResponses
     @State var answerState: AnswerState
 
     func updateForNewBinding() {
@@ -42,7 +42,7 @@ struct DASIQuestionView: View {
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
-        Self._printChanges()
+//        Self._printChanges()
         return VStack {
             ForwardBackBar(forward: envt.selected < DASIStages.maxPresenting,
                            back: envt.selected > DASIStages.minPresenting,
@@ -82,23 +82,21 @@ struct DASIQuestionView: View {
                         updateForNewBinding()
                     }
                 )
-                    .frame(height: 130)
-                    .padding()
+                .frame(height: 130)
+                .padding()
             }
-            Text("Bound value = \(self.answerState.description)")
-
-                .navigationTitle(
-                    "DASI - \(envt.questionIdentifier?.description ?? "NO ID")"
-                )
         }
+        .navigationTitle(
+            "DASI - \(envt.questionIdentifier?.description ?? "NO ID")"
+        )
     }
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         DASIQuestionView(answerState: .yes)
-            .environmentObject(DASIContentState(.presenting(questionID: 2)))
-            .environmentObject(DASIReportContents())
+            .environmentObject(DASIPages(.presenting(questionID: 2)))
+            .environmentObject(DASIResponses())
     }
 }
 

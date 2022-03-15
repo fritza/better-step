@@ -1,5 +1,5 @@
 //
-//  DASIContentState.swift
+//  DASIPages.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/14/22.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-/// Observable wrapper on a persistent `DASIStages`.
+/// Observable selection of a DASI question, such as for question-page navigation
 ///
 ///Initialized in
 /// - `BetterStep_App` (root `environmentObject(_:)`)
@@ -21,7 +21,7 @@ import Combine
 /// - `SurveyContainerView`
 /// - `YesNoButton` (**Pull out as a dependency?**
 /// - `ApplicationOnboardView` (**Wrong Place**)
-final class DASIContentState: ObservableObject {
+final class DASIPages: ObservableObject {
     @Published var selected: DASIStages!
 
     init(_ selection: DASIStages = .landing) {

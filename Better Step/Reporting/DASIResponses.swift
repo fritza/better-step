@@ -1,5 +1,5 @@
 //
-//  DASIReportContents.swift
+//  DASIResponses.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/24/22.
@@ -24,13 +24,13 @@ import SwiftUI
  * THIS IS AN ARRAY, zero-indexed, and it is public.
  * For DASI numbering, refer to the `DASIQuestion.id`. There are also min and max `presenting` values, and a range of valid `presenting`.
 
- ### struct DASIResponse
+ ### struct DASIAnswer
 
  Joins a question (referenced by ID), a response (`AnswerState`) and a time stamp representing which questionj was answered, how, and when  for a **single question**,  It knows how to order itself, and convert itself to a comma-separated string for use in assembling full rows in the output CSV file.
 
-### struct DASIReportContents
+### struct DASIResponses
 
-An `ObservableObject` intended to be the `@EnvironmentObject` for the DASI project. It takes the Subject ID and initializes its `[DASIResponse]` array of `answers`.
+An `ObservableObject` intended to be the `@EnvironmentObject` for the DASI project. It takes the Subject ID and initializes its `[DASIAnswer]` array of `answers`.
 
  It serves as the façade for the user's responses to the questions.
 
@@ -64,23 +64,18 @@ enum DASIReportErrors: Error {
 }
 
 
-/*
- Deleted DASIReport.swift and DASIReportDocument.swift.
 
- Moved coding notes and DASIReportErrors to DASIReportContents.swift
- */
-
-// MARK: - DASIReportContents
-final class DASIReportContents: ObservableObject {
+// MARK: - DASIResponses
+final class DASIResponses: ObservableObject {
    @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = ""
 
-    public private(set) var answers: [DASIResponse]
+    public private(set) var answers: [DASIAnswer]
 
-    /// Create `DASIReportContents`
+    /// Create `DASIResponses`
     init() {
         self.answers   = DASIQuestion
             .questions
-            .map { DASIResponse(id: $0.id, response: .unknown) }
+            .map { DASIAnswer(id: $0.id, response: .unknown) }
     }
 
     // MARK: Responses
@@ -110,7 +105,7 @@ final class DASIReportContents: ObservableObject {
     ///
     /// Think of this as the inverse of `responseForQuestion(id:)`
     /// - Parameters:
-    ///   - questionID: The **`id`** of the `DASIResponse` being answered. The method will find the matching array index.
+    ///   - questionID: The **`id`** of the `DASIAnswer` being answered. The method will find the matching array index.
     ///   - state: The user's response.
     func didRespondToQuestion(
         id questionID: Int,

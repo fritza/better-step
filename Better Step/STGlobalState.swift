@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum AppStages: Hashable {
     /// A new user ID has been entered.
@@ -24,7 +25,14 @@ final class GlobalState: ObservableObject {
     static var current: GlobalState!
 
     private var completed     : Set<AppStages> = []
-    private let requiredPhases: Set<AppStages> = [.walk, .dasi]
+    private var requiredPhases: Set<AppStages> {
+        var retval = Set<AppStages>()
+        if includeWalk   { retval.insert(.walk) }
+        if includeSurvey { retval.insert(.dasi) }
+        assert(!retval.isEmpty,
+               "Must set at least one of includeWalk, includeSurvey")
+        return retval
+    }
 
     init() {
         let ud = UserDefaults.standard
@@ -66,12 +74,25 @@ final class GlobalState: ObservableObject {
     @Published var allTasksFinished: Bool = false
 
     /// Mark this phase of the run as complete.
-    func complete(_ stage: AppStages) {
-        updateReadiness(setting: stage, finished: true)
+    func didComplete(phase: AppStages) {
+        updateReadiness(setting: phase, finished: true)
     }
     /// Mark this phase of the run as incomplete.
-    func unComplete(_ stage: AppStages) {
-        updateReadiness(setting: stage, finished: false)
+    func didNotComplete(phase: AppStages) {
+        updateReadiness(setting: phase, finished: false)
+    }
+
+    func isCompleted(_ stage: AppStages) -> Bool {
+        completed.contains(stage)
+    }
+
+    func areCompleted<S: Collection>(settings: S) -> Bool
+    where S.Element == AppStages
+    {
+        let retval = settings.allSatisfy { element in
+            isCompleted(element)
+        }
+        return retval
     }
 
     private func updateReadiness(setting stage: AppStages, finished: Bool) {

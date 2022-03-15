@@ -46,7 +46,7 @@ struct ApplicationOnboardView: View {
 
                         // FIXME: Why does app onboard set DASI state?
                         SurveyContainerView()
-                            .environmentObject(DASIContentState(.landing))
+                            .environmentObject(DASIPages(.landing))
 
 
                         //                        Text("ActiveButton Pushed")
