@@ -51,6 +51,21 @@ struct SurveyContainerView: View {
                                label: {EmptyView()}
                 )
             }
+            // FIXME: This doesn't update global completion.
+            .onDisappear {
+                // Does this belong at disappearance
+                // of the tab? We want a full count of
+                // responses + concluding screen.
+                // ABOVE ALL, don't post the initial screen
+                // as soon as the conclusion screen is
+                // called for.
+                if reportContents.unknownResponseIDs.isEmpty {
+                    appState.didComplete(phase: .dasi)
+                }
+                else {
+                    appState.didNotComplete(phase: .dasi)
+                }
+            }
         }
     }
 }

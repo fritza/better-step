@@ -62,7 +62,7 @@ struct DASICompleteView: View {
                 titleText: "Survey Complete",
                 bodyText: instructions, // + completionText,
                 sfBadgeName: "checkmark.square")
-                .padding()
+            .padding()
         }
         .navigationBarHidden(true)
         .onAppear{
