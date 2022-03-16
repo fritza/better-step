@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 
 // MARK: - @AppStorage
 enum AppStorageKeys: String {
@@ -43,7 +43,10 @@ struct Better_StepApp: App {
     // FIXME: App does not interpose the app onboard sheet.
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
     let globals = ApplicationState()
+    @ObservedObject var aStage = AppStage.shared
 
+
+    #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -52,38 +55,45 @@ struct Better_StepApp: App {
                 SurveyContainerView()
                     .environmentObject(DASIResponses())
                     .environmentObject(DASIPages(.landing))
+                    .badge(AppStages.dasi.tabBadge)
                     .tabItem {
-                        Image(systemName: "checkmark.square")
-                        Text("Survey")
+                        Image(systemName: AppStages.dasi.imageName)
+                        Text(AppStages.dasi.visibleName)
                     }
-
+                    .tag(AppStages.dasi)
 
                 // MARK: - Timed Walk
                 WalkView()
+                    .badge(AppStages.walk.tabBadge)
                     .tabItem {
-                        Image(systemName: "figure.walk")
-                        Text("Walk")
+                        Image(systemName: AppStages.walk.imageName)
+                        Text(AppStages.walk.visibleName)
                     }
+                    .tag(AppStages.walk)
 
                 // MARK: - Reporting
                 Text("Reporting Tab")
+                    .badge(AppStages.report.tabBadge)
                     .tabItem {
-                        Image(systemName: "doc.text")
-                        Text("Report")
+                        Image(systemName: AppStages.report.imageName)
+                        Text(AppStages.report.visibleName)
                     }
+                    .tag(AppStages.report)
 
                 // MARK: - Setup
                 SetupView()
                     .tabItem {
-                        Image(systemName: "gear")
-                        Text("Setup")
+                        Image(systemName: AppStages.configuration.imageName)
+                        Text(AppStages.configuration.visibleName)
                     }
+                    .tag(AppStages.configuration)
             }
             .environmentObject(globals)
+            .environmentObject(RootState.shared)
         }
-
-
     }
 }
+
+// FIXME: A watcher of AppStage.shared could trigger report generation
 
 
