@@ -24,7 +24,7 @@
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
 		1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
-		1F8A065627A478B400477379 /* STGlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* STGlobalState.swift */; };
+		1F8A065627A478B400477379 /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* RootState.swift */; };
 		1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
 		1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
 		1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
@@ -111,7 +111,7 @@
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
-		1F8A065527A478B400477379 /* STGlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STGlobalState.swift; sourceTree = "<group>"; };
+		1F8A065527A478B400477379 /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
 		1F8A337D27DFEE400093C896 /* DASIPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPages.swift; sourceTree = "<group>"; };
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				1F8A338027E122130093C896 /* DASIUserResponse.swift */,
-				1F8A065527A478B400477379 /* STGlobalState.swift */,
+				1F8A065527A478B400477379 /* RootState.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponses.swift */,
 				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
@@ -625,7 +625,7 @@
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
-				1F8A065627A478B400477379 /* STGlobalState.swift in Sources */,
+				1F8A065627A478B400477379 /* RootState.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,

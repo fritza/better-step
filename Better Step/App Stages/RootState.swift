@@ -1,5 +1,5 @@
 //
-//  STGlobalState.swift
+//  RootState.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/28/22.
