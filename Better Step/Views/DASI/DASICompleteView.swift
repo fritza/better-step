@@ -67,8 +67,12 @@ struct DASICompleteView: View {
         .navigationBarHidden(true)
         .onAppear{
             // IF ALL ARE ANSWERED
-            if allItemsAnswered { globalState.didComplete(phase: .dasi) }
-            // FIXME: Test for completion on tab-out.
+            if allItemsAnswered {
+                AppStage.shared
+                    .completionSet
+                    .insert(.dasi)
+                // TODO: Maybe create the report data on completionSet changing.
+            }
         }
     }
 }

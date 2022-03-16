@@ -20,7 +20,6 @@
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
-		1F8A064B27A3401700477379 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
 		1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
@@ -646,7 +645,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */,
-				1F8A064B27A3401700477379 /* DASIResponseTests.swift in Sources */,
 				1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */,
 				1FF354552799D47A000894B8 /* AccelerometerItemTests.swift in Sources */,
 				1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */,
