@@ -42,6 +42,7 @@
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponses.swift */; };
+		1FDE825F27E29FFD00CD8368 /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
 		1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B342799D54100E319ED /* AccelerationWriter.swift */; };
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
@@ -130,6 +131,7 @@
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceleratorFileSink.swift; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponses.swift; sourceTree = "<group>"; };
+		1FDE825E27E29FFD00CD8368 /* AppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStages.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B342799D54100E319ED /* AccelerationWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationWriter.swift; sourceTree = "<group>"; };
 		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				1F8A338027E122130093C896 /* DASIUserResponse.swift */,
 				1F8A065527A478B400477379 /* RootState.swift */,
+				1FDE825E27E29FFD00CD8368 /* AppStages.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponses.swift */,
 				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
@@ -616,6 +619,7 @@
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* SubjectFileCoordinator.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
+				1FDE825F27E29FFD00CD8368 /* AppStages.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,

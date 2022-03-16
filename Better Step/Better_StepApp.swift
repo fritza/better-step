@@ -42,7 +42,6 @@ struct Better_StepApp: App {
 
     // FIXME: App does not interpose the app onboard sheet.
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
-    let globals = ApplicationState()
     @ObservedObject var aStage = AppStage.shared
 
 
@@ -55,8 +54,8 @@ struct Better_StepApp: App {
             ) {
                 // MARK: - DASI
                 SurveyContainerView()
-                    .environmentObject(DASIResponses())
-                    .environmentObject(DASIPages(.landing))
+                    .environmentObject(RootState.shared.dasiResponses)
+                    .environmentObject(RootState.shared.dasiContent)
                     .badge(AppStages.dasi.tabBadge)
                     .tabItem {
                         Image(systemName: AppStages.dasi.imageName)
@@ -90,7 +89,9 @@ struct Better_StepApp: App {
                     }
                     .tag(AppStages.configuration)
             }
-            .environmentObject(globals)
+            // .environmentObject(globals)
+            // ^ was ApplicationState()
+            .environmentObject(ApplicationState.shared)
             .environmentObject(RootState.shared)
         }
     }

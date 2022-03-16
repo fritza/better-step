@@ -9,126 +9,47 @@ import Foundation
 import SwiftUI
 import Combine
 
-final class AppStage: ObservableObject {
-    static let shared = AppStage()
-    @Published var completionSet: Set<AppStages> = []
-    @Published var currentSelection: AppStages
-
-    init(stage: AppStages = .onboard) {
-        currentSelection = stage
-    }
-}
-// FIXME: A watcher of AppStage.shared could generate a report
-//        when the completionSet is found to include its tag.
-//        This does repeat the creation every time _any_ phase
-//        completes.
-
-enum AppStages: Hashable, CaseIterable {
-    /// A new user ID has been entered.
-    case onboard
-    /// The user has completed these activities
-    case dasi, walk
-    /// The user has entered the Report tab
-    ///
-    /// You can't report without a `subjectID`
-    case report
-    case configuration
-
-    static let _imageNames: [AppStages:String] = [
-        .onboard: "circle.fill",
-        .dasi: "checkmark.square",
-        .walk: "figure.walk",
-        .report: "doc.text",
-        .configuration: "gear"
-        ]
-    var imageName: String { Self._imageNames[self]! }
-
-    static let _visibleNames: [AppStages:String] = [
-        .onboard: "•start•",
-        .dasi: "Survey",
-        .walk: "Walk",
-        .report: "Report",
-        .configuration: "Setup",
-    ]
-
-    var visibleName: String  { Self._visibleNames[self]! }
-    var tabBadge   : String? {
-        let completed = AppStage.shared.completionSet.contains(self)
-        return completed ?  "✓" : nil
-//        return isComplete ?  "✓" : nil
-    }
-
-    var isComplete: Bool {
-        return AppStage.shared.completionSet
-//        return RootState.shared.completed
-            .contains(self)
-    }
-
-    func didComplete() {
-        AppStage.shared.completionSet.insert(self)
-//        RootState.shared.completed.insert(self)
-    }
-
-    func makeIncomplete() {
-        AppStage.shared.completionSet.remove(self)
-//        RootState.shared.completed.remove(self)
-    }
-
-    func makeAllIncomplete() {
-        for stage in Self.allCases {
-            stage.makeIncomplete()
-        }
-    }
-
-    var isRequired: Bool {
-        switch self {
-        case .onboard       : return false
-        case .dasi          : return RootState.shared.includeSurvey
-        case .walk          : return RootState.shared.includeWalk
-        case .report        : return false
-        case .configuration : return false
-        }
-    }
-
-    static var areRequiredStagesComplete: Bool {
-        Self.allCases
-            .filter(\.isRequired)
-            .allSatisfy {
-                AppStage.shared.completionSet.contains($0)
-            }
-    }
-}
-
+/// Omnibus aggregate of application-stage operating values
+///
+/// These include report contents and app-level user defaults (`@AppStorage`).
+///
+/// You do not instantiate `RootState` yourself. Use `.shared` to obtain the single record of application state.
+/// - note: It is expected that `RootState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
 final class RootState: ObservableObject {
+    /// Singleton instance of `RootState`
     static var shared = RootState()
-    private init() {
+    /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
+    private init() { }
 
-    }
-
-
+    /// The content of subject-id strings if no actual value is present.
+    ///
+    /// **See also** the `subjectID` key into `AppStorage`, which must be coordinated with this value
+    /// - bug: Not sure why this can't be done with `nil`.
+    @available(*, deprecated,
+                message: "Experimental, may be replaced with literal nil")
    static let noSubjectString = "NO SUBJECT"
-    // NOTE: Update @AppStorage - subjectID
 
-    // Leave things like includeWalk to be initialized by the config view or the root of the DASI and Walk hierarchies.
-
+    /// The subject ID, as saved in `UserDefaults`. "NO SUBJECT" is a flag for an unassigned ID.
+    ///
+    /// **See also** the  static `subjectID` constant, which must be coordinated with this value
+    /// - bug: Not sure why this can't be done with `nil`.
+    @available(*, deprecated,
+                message: "Default value may be replaced with literal nil")
     @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = "NO SUBJECT"
-    // NOTE: Update constant noSubjectString
+
     // TODO: no-subject and onboarding
     //       the sheet should recognize no-subject and empty the field.
 
     // MARK: - Phase management
 
     // Structural
+    /// Whether the timed walk stage is to be available.
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
+    /// Whether the DASI survey is to be available.
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 
-    // Stages
-    var currentStage: AppStages = .onboard
-    fileprivate var completed     : Set<AppStages> = []
-
-
     // DASI
-    var dasiProgress: DASIPages = DASIPages()
+    var dasiContent: DASIPages = DASIPages()
     var dasiResponses: DASIResponses = DASIResponses()
 
     // Walk
@@ -138,7 +59,7 @@ final class ApplicationState: ObservableObject {
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 
-    static var current: ApplicationState!
+    static var shared = ApplicationState()
 
     private var completed     : Set<AppStages> = []
     private var requiredPhases: Set<AppStages> {
@@ -150,11 +71,10 @@ final class ApplicationState: ObservableObject {
         return retval
     }
 
-    init() {
+    private init() {
         let ud = UserDefaults.standard
         subjectID = ud.string(forKey: AppStorageKeys.subjectID.rawValue)
         ?? ""
-        Self.current = self
     }
 
     @Published var subjectID: String = "νεμο" {

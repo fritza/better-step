@@ -20,7 +20,7 @@ fileprivate let endIncompleteText = """
 """
 
 fileprivate var nextSteps: String {
-    if ApplicationState.current.allTasksFinished {
+    if ApplicationState.shared.allTasksFinished {
         return "\nPlease proceed to the “Report” view to submit your information to the team."
     }
     else {
