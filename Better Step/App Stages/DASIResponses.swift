@@ -72,13 +72,6 @@ final class DASIResponses: ObservableObject {
             .map { DASIUserResponse(id: $0.id, response: .unknown) }
     }
 
-    /// Empty this `DASIResponses`.
-    ///
-    /// It retains only the user's responses to the DASI questions, so the `answers` Array is simply reset to empty.
-    public func clear() throws {
-        answers = []
-    }
-
     // MARK: Responses
     /// Index of the first (only, we hope) element of `answers` that matches a given ID.
     /// - Parameter id: The `id` (one-based, not necessarily ordered) to search for
@@ -151,12 +144,16 @@ final class DASIResponses: ObservableObject {
     }
 
     /// Set all responses to `.unknown`
-    func reset() {
+    func clear() {
         let result = answers.map {
             $0.withResponse(.unknown)
             // Timestamp updates in init()
         }
         self.answers = result
+    }
+
+    static func clear() {
+        
     }
 
     // MARK: CSV formatting
