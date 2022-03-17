@@ -41,7 +41,10 @@ __Terms:__
 
  Labels, and identifiers for the workflow of a phase. Non-mutable. Ex: `DASIQuestion`, which provides a roster of DASI questions, their text, and identifiable; `AnswerState` representing the result of a question.
 
- Configuration of
+
+ **I had considered** using the subsidiary data (`DASIPages`) as `EnvironmentObject`s, even though they could be referenced through `RootState`, because I thought the "deep link" would separate concerns.
+
+ Now I wonder if simply referencing off the root isn't a safer way to coordinate these.
  */
 struct GeneralComments_RootState {}
 
@@ -53,6 +56,8 @@ struct GeneralComments_RootState {}
 /// You do not instantiate `RootState` yourself. Use `.shared` to obtain the single record of application state.
 /// - note: It is expected that `RootState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
 final class RootState: ObservableObject {
+    @Published var allTasksFinished: Bool = false
+
     /// Singleton instance of `RootState`
     static var shared = RootState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
@@ -90,11 +95,70 @@ final class RootState: ObservableObject {
     var dasiResponses: DASIResponses = DASIResponses()
 
     // Walk
+
+    // MARK: Phase completion
+    private var completed     : Set<AppStages> = []
+    private var requiredPhases: Set<AppStages> {
+        var retval = Set<AppStages>()
+        if includeWalk   { retval.insert(.walk) }
+        if includeSurvey { retval.insert(.dasi) }
+        assert(!retval.isEmpty,
+               "Must set at least one of includeWalk, includeSurvey")
+        return retval
+    }
+}
+
+extension RootState {
+    // MARK: Phase completion
+    /// Mark this phase of the run as complete.
+    func didComplete(phase: AppStages) {
+        updateReadiness(setting: phase, finished: true)
+    }
+    /// Mark this phase of the run as incomplete.
+    func didNotComplete(phase: AppStages) {
+        updateReadiness(setting: phase, finished: false)
+    }
+
+    func isCompleted(_ stage: AppStages) -> Bool {
+        completed.contains(stage)
+    }
+
+    func areCompleted<S: Collection>(settings: S) -> Bool
+    where S.Element == AppStages
+    {
+        let retval = settings.allSatisfy { element in
+            isCompleted(element)
+        }
+        return retval
+    }
+
+    private func updateReadiness(setting stage: AppStages, finished: Bool) {
+        let wasReady = checkReadyToReport
+
+        if finished { completed.insert(stage) }
+        else { completed.remove(stage)  }
+
+        let amReady = checkReadyToReport
+        if wasReady != amReady {
+            allTasksFinished = amReady
+        }
+    }
+
+    /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
+    var checkReadyToReport: Bool {
+        if subjectID == RootState.noSubjectString { return false }
+        let allCompleted = completed
+            .intersection(requiredPhases)
+        return allCompleted == requiredPhases
+    }
 }
 
 // MARK: - ApplicationState
 
+@available(*, unavailable, message: "Use RootState instead")
 final class ApplicationState: ObservableObject {
+    }
+    /*
     // MARK: Properties
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
@@ -192,4 +256,4 @@ final class ApplicationState: ObservableObject {
         return allCompleted == requiredPhases
     }
 }
-
+*/

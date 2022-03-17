@@ -11,7 +11,8 @@ struct SurveyContainerView: View {
     @EnvironmentObject var contentEnvt: DASIPages
     @EnvironmentObject var reportContents: DASIResponses
     // FIXME: Too many EnvironmentObjects
-    @EnvironmentObject private var appState: ApplicationState
+//    @EnvironmentObject private var appState: ApplicationState
+    @EnvironmentObject private var rootState: RootState
 
 
     var body: some View {
@@ -60,10 +61,10 @@ struct SurveyContainerView: View {
                 // as soon as the conclusion screen is
                 // called for.
                 if reportContents.unknownResponseIDs.isEmpty {
-                    appState.didComplete(phase: .dasi)
+                    rootState.didComplete(phase: .dasi)
                 }
                 else {
-                    appState.didNotComplete(phase: .dasi)
+                    rootState.didNotComplete(phase: .dasi)
                 }
             }
         }

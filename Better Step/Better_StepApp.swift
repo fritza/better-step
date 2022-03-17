@@ -94,7 +94,7 @@ struct Better_StepApp: App {
             }
             // .environmentObject(globals)
             // ^ was ApplicationState()
-            .environmentObject(ApplicationState.shared)
+//            .environmentObject(ApplicationState.shared)
             .environmentObject(RootState.shared)
         }
     }
