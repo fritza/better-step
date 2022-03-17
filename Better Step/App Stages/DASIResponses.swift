@@ -153,7 +153,7 @@ final class DASIResponses: ObservableObject {
     }
 
     static func clear() {
-        
+        RootState.shared.dasiResponses.clear()
     }
 
     // MARK: CSV formatting
