@@ -29,6 +29,11 @@ private enum ControlFocus: String {
     case durationStepper
 }
 
+// TODO: Add confirmation to destructive actions
+/// A view that presents a stack of buttons for clearing part or all of the data collected for the current user.
+///
+/// Presented by `SetupView`.
+/// - bug: Actions are not yet implemented.
 struct ClearingView: View {
     @State private var lastID: Int = 0
 
@@ -112,12 +117,16 @@ struct SetupView: View {
                     Toggle("Report as magnitude",
                            isOn: $asMagnitude)
                     // FIXME: need a binding for the email
-                    EmailFormView(title: "Email",
-                                  address: $email)
-                    //                            .border(.blue)
+                    EmailFormView(
+                        title: "Email",
+                        address: $email)
+                    //  .border(.blue)
                 }
                 Section("Collected Data") {
-                    NavigationLink("Clear Data", // isActive: $showingClears,
+                    #warning("No action on clear-data buttons")
+                    NavigationLink(
+                        "Clear Data",
+                                   // isActive: $showingClears,
                                    destination: {
                         ClearingView()
                             .navigationBarBackButtonHidden(true)

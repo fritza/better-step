@@ -52,11 +52,13 @@ enum DASIReportErrors: Error {
     case noReadableReport
     case missingDASIHeader(String)
     case wrongNumberOfResponseElements(Int, Int)
+    case outputHandleNotInitialized
+    case couldntCreateDASIFile
 }
 
-// MARK: - AnswerState
-// FIXME: The struct definition disappeared in a recent commit.
+// FIXME: Should this be an actor?
 
+#warning("Aggregate report is not implemented")
 // MARK: - DASIResponses
 final class DASIResponses: ObservableObject {
    @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = ""

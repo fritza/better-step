@@ -9,6 +9,42 @@ import Foundation
 import SwiftUI
 import Combine
 
+
+
+/**
+ Design principles for state and configuration objects
+
+__Terms:__
+
+ - **Top-level**: Applies to the whole application, such as phase management and subject ID. Top-level data is typically kept in @AppStorage.
+
+ - **Phase**: A broad subset of the app's functionality, or information pertaining to it. This often coincides with the selected tab, but the onboarding tab is presented automatically without regard for operational phase.
+
+ -  **Configuration**: Immutable descriptions of elements of phases to provide metadata like the question roster.
+
+- **Reportable**: Data to transcribe into files for reporting to investigators (`DASIResponses`), as opposed to configuration metadata (`DASIQuestion`) 
+
+ __Top-level:__
+
+
+ `@AppStorage` that determines the availability of phases (`includeWalk`, `includeSurvey`)
+ Current selected phase.
+ Not all `@AppStorage` belongs to the top level: For instance, walk duration pertains to that phase only.
+
+ TODO: Add conformation to the clear buttons.
+       Actually, they don't do anything yet.
+
+ There should be a top-level, omnibus class to hold both the global state and to refer to the per-phase configuration and reportable data.
+
+ Per-phase:
+ =
+
+ Labels, and identifiers for the workflow of a phase. Non-mutable. Ex: `DASIQuestion`, which provides a roster of DASI questions, their text, and identifiable; `AnswerState` representing the result of a question.
+
+ Configuration of
+ */
+struct GeneralComments_RootState {}
+
 /// Omnibus aggregate of application-stage operating values
 ///
 /// These include report contents and app-level user defaults (`@AppStorage`).

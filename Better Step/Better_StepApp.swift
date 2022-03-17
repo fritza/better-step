@@ -65,6 +65,7 @@ struct Better_StepApp: App {
 
                 // MARK: - Timed Walk
                 WalkView()
+                // TODO: Add walk-related environmentObjects as soon as known.
                     .badge(AppStages.walk.tabBadge)
                     .tabItem {
                         Image(systemName: AppStages.walk.imageName)
@@ -74,6 +75,7 @@ struct Better_StepApp: App {
 
                 // MARK: - Reporting
                 Text("Reporting Tab")
+                // TODO: Add report-related environmentObjects as soon as known.
                     .badge(AppStages.report.tabBadge)
                     .tabItem {
                         Image(systemName: AppStages.report.imageName)
@@ -83,6 +85,7 @@ struct Better_StepApp: App {
 
                 // MARK: - Setup
                 SetupView()
+                // TODO: Add configuration-related environmentObjects as soon as known.
                     .tabItem {
                         Image(systemName: AppStages.configuration.imageName)
                         Text(AppStages.configuration.visibleName)

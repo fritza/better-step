@@ -14,6 +14,7 @@ import Foundation
 /// Yes, No, or Unknown state, usually for recording the user's response to ta question
 ///
 /// `.unknown`, therefore, represents a question not yet answered.
+/// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
 enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
     case unknown, yes, no
 
@@ -36,6 +37,7 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
         }
     }
 
+    // TODO: wise to have a special-case property for `YesNoStack`?
     /// Conversion from a yes-no button stack `YesNoStack` ID to `.yes` or `.no`.
     ///
     /// Fails (`nil`) if `btnNum` isn't 1 or 2. For debug builds, asserts.
@@ -64,10 +66,14 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
 }
 
 // Verified consistent with DASIQuestions in the MinutePublisher.playground/Response\ decoding.
+// TODO: Validate that this is immutable.
+//       It just orders questions and provides
+//       lookup.
 // MARK: - DASIQuestion
 /// A question in the DASI set, loaded from `DASIQuestions.json`, with id, question text, and the score assigned to "Yes"
 ///
 /// `id` is the 1-based enumeration of the question, not its position in the array. Lookups search the `questions` array for a matching `id`. The array _needn't_ be in any particular order.
+/// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
 public struct DASIQuestion: Identifiable, Codable, Comparable {
     static let jsonBasename = "DASIQuestions"
 
