@@ -30,6 +30,20 @@ actor DASIReport {
         responses = [DASIUserResponse]()
     }
 
+    /// Empty this `DASIReport`'s record of responses.
+    ///
+    /// This isn't static, worse luck, so the caller must either retain the instance after use, or _maybe_ create a new one with the same name and directory.
+    public func clear() throws {
+        let fm = FileManager.default
+        if fm.fileExists(atURL: destinationURL) {
+            // NOTE: Not sure what happens if destinationURL somehow refers to a directory
+            try fm.removeItem(at: destinationURL)
+        }
+        responses = []
+        try outputHandle?.close()
+        outputHandle = nil
+    }
+
     // MARK: - Adding response items
     private var responses: [DASIUserResponse] = []
 

@@ -117,6 +117,15 @@ final class DASIResponses: ObservableObject {
             // Timestamp updates in withResponse(_:)
         }
 
+    /// Census of the `DASIUserResponse`s in the `answers` array that match the indicated response type.
+    /// - Parameter kind: The `AnswerState` of interest.
+    /// - Returns: A `Set` of the `answers` that match the reply type
+    func responses(of kind: AnswerState) -> Set<DASIUserResponse> {
+        let desired = answers
+            .filter { $0.response == kind }
+        return Set(desired)
+    }
+
     /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
     /// - note: The survey is not resdy to commit before this array is empty.
     var unknownResponseIDs: [Int] {
