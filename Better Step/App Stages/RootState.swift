@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-
+// MARK: - Design principles
 
 /**
  Design principles for state and configuration objects
@@ -22,7 +22,7 @@ __Terms:__
 
  -  **Configuration**: Immutable descriptions of elements of phases to provide metadata like the question roster.
 
-- **Reportable**: Data to transcribe into files for reporting to investigators (`DASIResponses`), as opposed to configuration metadata (`DASIQuestion`) 
+- **Reportable**: Data to transcribe into files for reporting to investigators (`DASIResponses`), as opposed to configuration metadata (`DASIQuestion`)
 
  __Top-level:__
 
@@ -45,6 +45,7 @@ __Terms:__
  */
 struct GeneralComments_RootState {}
 
+// MARK: - RootState
 /// Omnibus aggregate of application-stage operating values
 ///
 /// These include report contents and app-level user defaults (`@AppStorage`).
@@ -76,7 +77,7 @@ final class RootState: ObservableObject {
     // TODO: no-subject and onboarding
     //       the sheet should recognize no-subject and empty the field.
 
-    // MARK: - Phase management
+    // MARK: Phase management
 
     // Structural
     /// Whether the timed walk stage is to be available.
@@ -91,7 +92,10 @@ final class RootState: ObservableObject {
     // Walk
 }
 
+// MARK: - ApplicationState
+
 final class ApplicationState: ObservableObject {
+    // MARK: Properties
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 
@@ -143,6 +147,7 @@ final class ApplicationState: ObservableObject {
         }
     }
 
+    // MARK: Phase completion
     @Published var allTasksFinished: Bool = false
 
     /// Mark this phase of the run as complete.
