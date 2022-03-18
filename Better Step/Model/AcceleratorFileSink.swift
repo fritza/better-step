@@ -74,7 +74,9 @@ final actor AccelerometerFileSink {
     }
 
     func close() async throws {
-        #warning("Make sure to cancel the accelerometer stream when clearing/closing the sink")
+        // (Had warned that the AsyncStream should close,
+        // but the actor isn't responsible for the
+        // device-reading part.
         try await flushToFile()
         try writeHandle?.close()
     }
@@ -109,8 +111,14 @@ final actor AccelerometerFileSink {
 
         let csvs = queueContents
             .map(\.csv)
-            .map { $0 + "\r\n"}
             .joined(separator: "\r\n")
+            .appending("\r\n")
+        // The newline is a terminator, not a separator.
+        // The file should(?) end with
+        // a blank line.
+        // joined(separator:) doesn't put the empty
+        // line at the end. Therefore append it.
+
         let csvData = csvs.data(using: .utf8)!
         try writeHandle?.write(contentsOf: csvData)
     }

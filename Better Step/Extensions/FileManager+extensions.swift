@@ -55,6 +55,12 @@ extension FileManager {
         }
     }
 
+    public func deleteCreateAndOpen(_ url: URL) throws -> FileHandle {
+        try deleteAndCreate(at: url)
+        let retval = try FileHandle(forWritingTo: url)
+        return retval
+    }
+
     public var applicationDocsDirectory: URL {
         let url = self
             .urls(for: .documentDirectory,
