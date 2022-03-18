@@ -36,6 +36,12 @@ extension FileManager {
         return exists && directory
     }
 
+    public func deleteIfPresent(_ url: URL) throws {
+        guard fileExists(atURL: url) else { return }
+        // Discard any existing file.
+        try removeItem(at: url)
+    }
+
     public func deleteAndCreate(at url: URL) throws {
         if fileExists(atURL: url) {
             // Discard any existing file.

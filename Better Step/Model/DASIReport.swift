@@ -35,10 +35,8 @@ actor DASIReport {
     /// This isn't static, worse luck, so the caller must either retain the instance after use, or _maybe_ create a new one with the same name and directory.
     public func clear() throws {
         let fm = FileManager.default
-        if fm.fileExists(atURL: destinationURL) {
-            // NOTE: Not sure what happens if destinationURL somehow refers to a directory
-            try fm.removeItem(at: destinationURL)
-        }
+        try fm.deleteIfPresent(destinationURL)
+        // NOTE: Not sure what happens if destinationURL somehow refers to a directory
         responses = []
         try outputHandle?.close()
         outputHandle = nil

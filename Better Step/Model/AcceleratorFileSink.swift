@@ -47,7 +47,7 @@ final actor AccelerometerFileSink {
     static let dequeInitialSize     = 10_000
     var subjectID: String
     let fileURL: URL
-    let writeHandle: FileHandle
+    let writeHandle: FileHandle?
     var acceleratorQueue: Deque<AccelerometerItem>
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
@@ -74,10 +74,19 @@ final actor AccelerometerFileSink {
     }
 
     func close() async throws {
+        #warning("Make sure to cancel the accelerometer stream when clearing/closing the sink")
         try await flushToFile()
-        try writeHandle.close()
+        try writeHandle?.close()
     }
 
+    func clear() async throws {
+        // Doesn't flush the contents.
+        try writeHandle?.close()
+        try FileManager.default.deleteIfPresent(fileURL)
+        acceleratorQueue.removeAll()
+    }
+
+    // FIXME: Must this be async?
     func append(record: AccelerometerItem) {
         Task {
             acceleratorQueue.append(record)
@@ -85,6 +94,7 @@ final actor AccelerometerFileSink {
         }
     }
 
+    // FIXME: Must this be async?
     func append(records: [AccelerometerItem]) throws {
         Task {
             acceleratorQueue.append(contentsOf: records)
@@ -102,7 +112,7 @@ final actor AccelerometerFileSink {
             .map { $0 + "\r\n"}
             .joined(separator: "\r\n")
         let csvData = csvs.data(using: .utf8)!
-        try writeHandle.write(contentsOf: csvData)
+        try writeHandle?.write(contentsOf: csvData)
     }
 }
 

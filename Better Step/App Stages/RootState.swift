@@ -16,13 +16,14 @@ import Combine
 
 __Terms:__
 
- - **Top-level**: Applies to the whole application, such as phase management and subject ID. Top-level data is typically kept in @AppStorage.
-
+ - **Top-level**: Applies to the whole application, such as phase management and subject ID. Top-level data is typically kept in `@AppStorage`.
  - **Phase**: A broad subset of the app's functionality, or information pertaining to it. This often coincides with the selected tab, but the onboarding tab is presented automatically without regard for operational phase.
+ - **Phase Workflow**: The information the app tracks to respond to changes in phase..
+ - **Configuration**: Immutable descriptions of elements of phases to provide metadata like the question roster.
+ - **Reportable**: User-generated data that will be transformed into the contents of files sent to investigators. (`DASIResponses`), as opposed to configuration metadata (`DASIQuestion`) or specialized marshalling and file-creation objects (`DASIReport`).
+ - **Marshalling**: Entities (`DASIReport`) that take the content of Reportable data sources (`DASIResponses`), format it, and write it out to files.
 
- -  **Configuration**: Immutable descriptions of elements of phases to provide metadata like the question roster.
 
-- **Reportable**: Data to transcribe into files for reporting to investigators (`DASIResponses`), as opposed to configuration metadata (`DASIQuestion`)
 
  __Top-level:__
 
@@ -31,20 +32,28 @@ __Terms:__
  Current selected phase.
  Not all `@AppStorage` belongs to the top level: For instance, walk duration pertains to that phase only.
 
- TODO: Add conformation to the clear buttons.
+ TODO: Add confirmation to the clear buttons.
        Actually, they don't do anything yet.
 
- There should be a top-level, omnibus class to hold both the global state and to refer to the per-phase configuration and reportable data.
 
- Per-phase:
- =
+ __Per-phase__:
 
  Labels, and identifiers for the workflow of a phase. Non-mutable. Ex: `DASIQuestion`, which provides a roster of DASI questions, their text, and identifiable; `AnswerState` representing the result of a question.
 
-
- **I had considered** using the subsidiary data (`DASIPages`) as `EnvironmentObject`s, even though they could be referenced through `RootState`, because I thought the "deep link" would separate concerns.
-
  Now I wonder if simply referencing off the root isn't a safer way to coordinate these.
+
+ ---
+
+ __Auditing `AppStorage`__:
+
+What goes into `UserDefaults` (`@AppStorage`) should be able to justify itself.
+
+ __Yes__: Everything(?) available to the Configuration page, plus subject ID (Is there any other persistent global?)
+
+ __No__: Anything ephemeral, such as the timed walk-data. We can afford to (should?) drop unfinished data sets that can't be repaired, continued, or what-have-you.
+
+ __Sort of__: DASI responses aren't candidates for `@AppStorage` anyway, but should the app persist and reload responses-in-progress? The app would have to make sure the subject ID was the same.
+
  */
 struct GeneralComments_RootState {}
 
