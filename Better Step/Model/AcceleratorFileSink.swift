@@ -8,47 +8,13 @@
 import Foundation
 import Collections
 
-///// URL for a reporting csv file (per subject/run, per purpose.
-/////
-///// If no file exists at that URL, and if `creating`, create an empty file at that location.
-///// - Parameters:
-/////   - subject: The ID of the subject/run for whom the files are generated
-/////   - purpose: The role (`dasiReportFile`, `walkingReportFile`) the file serves
-/////   - creating: `true` if an empty file of that name is to be created, Default is false.
-///// - Returns: A URL for the requested file, no matter whether it now exists.
-///// - throws: FileManager errors if the directory or file are absent and could not be created.
-//func fileURLForSubjectID(
-//    _ subject: String,
-//    purpose: SubjectFileCoordinator.FlatFiles,
-//    creating: Bool = false) throws -> URL {
-//        let fm = FileManager.default
-//
-//    // Where the file for this subject and purpose should be
-//        let retval = try fm
-//            .directoryURLForSubjectID(
-//                subject, creating: true)
-//        .appendingPathComponent(purpose.rawValue, isDirectory: false)
-//
-//    if creating && !fm.fileExists(atURL: retval) {
-//        let creationSucceeded = fm
-//            .createFile(atPath: retval.path,
-//                        contents: nil)
-//        guard creationSucceeded else {
-//            throw FileStorageErrors.cantCreateFileAt(retval)
-//        }
-//    }
-//    return retval
-//}
-
-
-
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
 final actor AccelerometerFileSink {
-    static let dequeInitialSize     = 10_000
-    var subjectID: String
-    let fileURL: URL
-    let writeHandle: FileHandle?
-    var acceleratorQueue: Deque<AccelerometerItem>
+    static let dequeInitialSize     = 1000
+    var subjectID               : String
+    let fileURL                 : URL
+    private(set) var writeHandle: FileHandle?
+    var acceleratorQueue        : Deque<AccelerometerItem>
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
     /// - parameters:

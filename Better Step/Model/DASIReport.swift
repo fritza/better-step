@@ -67,14 +67,26 @@ actor DASIReport {
 
     /// The `URL` for the output file.
     var destinationURL: URL {
+        // FIXME: Make into a lazy property.
         let destination = destinationDirectory
             .appendingPathComponent("\(dasiFileBaseName).csv")
         return destination
     }
 
+    /// Delete the destination file.
+    ///
+    /// **Do not** use this in the class life cycle. The file is supposed
+    /// to survive after it has been built.
+    private func remove() throws {
+        try FileManager.default
+            .deleteIfPresent(destinationURL)
+    }
+
     /// Create an empty output file at `destinationURL`, deleting any existing item.
     /// - throws: `DASIReportErrors.couldntCreateDASIFile` if the remove or creation failed.
     private func createOutputFile() throws {
+        // FIXME: Use FileManager.deleteAndCreate(at:)
+        // TODO:  merge with prepareHandle into deleteCreateAndOpen(_:).
         let fm = FileManager.default
         if fm.fileExists(atURL: destinationURL) {
             // NOTE: Not sure what happens if destinationURL somehow refers to a directory
@@ -91,6 +103,7 @@ actor DASIReport {
     /// Create and open the report file for writing.
     /// - throws: An error if the file does not exist. This ought to be fatal.
     private func prepareHandle() throws {
+        // TODO:  merge with createOutputFile into deleteCreateAndOpen(_:).
         outputHandle = try FileHandle(
             forWritingTo: destinationURL)
     }
@@ -106,6 +119,8 @@ actor DASIReport {
         try outputHandle!.write(contentsOf: contentData)
     }
 
+    @available(*, deprecated,
+                message: "Do not close the file automatically.")
     /// Process the `responses` list into lines of `csv` data for each, and then into `Data`
     ///
     /// The returned `Data` may be empty if `self` contains no `DASIUserResponses` (plausible), or the `String`-to-UTF-8 data conversion failed (should be impossible).
@@ -129,6 +144,8 @@ actor DASIReport {
             outputHandle = nil
         }
 
+        // TODO: Consider consolidating
+        //       to FileManager.deleteCreateAndOpen
         try createOutputFile()
         try prepareHandle()
 
