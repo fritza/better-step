@@ -39,15 +39,16 @@ final actor AccelerometerFileSink {
         writeHandle = _writeHandle
     }
 
-    func close() async throws {
+    func close() throws {
         // (Had warned that the AsyncStream should close,
         // but the actor isn't responsible for the
         // device-reading part.
-        try await flushToFile()
+        try flushToFile()
         try writeHandle?.close()
+        writeHandle = nil
     }
 
-    func clear() async throws {
+    func clear() throws {
         // Doesn't flush the contents.
         try writeHandle?.close()
         try FileManager.default.deleteIfPresent(fileURL)
@@ -58,7 +59,7 @@ final actor AccelerometerFileSink {
     func append(record: AccelerometerItem) {
         Task {
             acceleratorQueue.append(record)
-            try await flushToFile()
+            try flushToFile()
         }
     }
 
@@ -66,11 +67,11 @@ final actor AccelerometerFileSink {
     func append(records: [AccelerometerItem]) throws {
         Task {
             acceleratorQueue.append(contentsOf: records)
-            try await flushToFile()
+            try flushToFile()
         }
     }
 
-    private func flushToFile() async throws
+    private func flushToFile() throws
     {
         let queueContents = Array(acceleratorQueue)
         acceleratorQueue.removeAll()
@@ -80,8 +81,7 @@ final actor AccelerometerFileSink {
             .joined(separator: "\r\n")
             .appending("\r\n")
         // The newline is a terminator, not a separator.
-        // The file should(?) end with
-        // a blank line.
+        // The file should(?) end with a blank line.
         // joined(separator:) doesn't put the empty
         // line at the end. Therefore append it.
 

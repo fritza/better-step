@@ -13,13 +13,30 @@ Only UCM staff should operate this facility
 """
 
 struct ReportView: View {
-    var body: some View {
-        GenericInstructionView(titleText: "Report",
-                               bodyText: reportNarrative, sfBadgeName: "doc.text",
-        proceedTitle: "Send it in") {
+@State private var showingAlert = false
 
+    var body: some View {
+        NavigationView {
+            VStack {
+                Spacer()
+                Text("Instructions")
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button("Cancel", role: .cancel, action: {showingAlert = true})
+                    Spacer()
+                    Button("Send", action: {})
+                    Spacer()
+                }
+                Spacer()
+            }
+            .alert("Sure?", isPresented: $showingAlert, actions: {
+                Button("Yes.") {
+                    showingAlert = false
+                }
+            })
+            .navigationTitle("Reporting")
         }
-        .padding(32)
     }
 }
 
