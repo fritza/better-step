@@ -9,6 +9,9 @@ import Foundation
 import Collections
 
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
+///
+/// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
+/// - bug: Make an Observable custodian of the subjectID.
 final actor AccelerometerFileSink {
     static let dequeInitialSize     = 1000
     var subjectID               : String
@@ -22,15 +25,14 @@ final actor AccelerometerFileSink {
     /// - returns: `nil` if either the destination (per-subject) directory or the walking `csv` file could not be created.
     init(subject: String) throws
     {
-        let fm = FileManager.default
-        let _fileURL = try fm
-            .fileURLForSubjectID(
-                subject,
+        self.subjectID = subject
+        let _fileURL =
+        try PerSubjectFileCoordinator.shared
+            .fileURLForSubject(
                 purpose: .walkingReportFile,
                 creating: true)
         fileURL = _fileURL
 
-        self.subjectID = subject
         var _queue = Deque<AccelerometerItem>()
         _queue.reserveCapacity(Self.dequeInitialSize)
         acceleratorQueue = _queue
