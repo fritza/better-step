@@ -44,7 +44,9 @@ __Terms:__
 
  ---
 
- __Auditing `AppStorage`__:
+ __Auditing `AppStorage` (BIG CHANGE)__:
+
+The subject ID is no longer kept in `AppStorage`. Further problems: How do I persist it?
 
 What goes into `UserDefaults` (`@AppStorage`) should be able to justify itself.
 
@@ -64,29 +66,42 @@ struct GeneralComments_RootState {}
 ///
 /// You do not instantiate `RootState` yourself. Use `.shared` to obtain the single record of application state.
 /// - note: It is expected that `RootState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
+///
+/// The subject ID goes through `RootState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
 final class RootState: ObservableObject {
     @Published var allTasksFinished: Bool = false
+    @Published var sharedSubjectID: String?
+
+
+    static let subjectIDDefaultsKey = "com.drdr.better-step-test.subject_id"
+    let subjectIDSubject = CurrentValueSubject<String?, Never>(
+        UserDefaults.standard.string(forKey: subjectIDDefaultsKey)
+        )
+    // How is subjectIDDefaultsKey, a static constant, usable w/o scope here?
+
+
 
     /// Singleton instance of `RootState`
+    /// - note: Maybe make this a @StateObject for the App?
     static var shared = RootState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
-    private init() { }
-
-    /// The content of subject-id strings if no actual value is present.
     ///
-    /// **See also** the `subjectID` key into `AppStorage`, which must be coordinated with this value
-    /// - bug: Not sure why this can't be done with `nil`.
-    @available(*, deprecated,
-                message: "Experimental, may be replaced with literal nil")
-   static let noSubjectString = "NO SUBJECT"
+    /// **About subjectID and UserDefaults**: The subject ID should persist across launches.
+    /// The ID is kept in `UserDefaults`,
+    private init() {
+        let defaults = UserDefaults.standard
+        // On launch, reload the subject ID from defaults.
+        sharedSubjectID = defaults.string(forKey: Self.subjectIDDefaultsKey)
 
-    /// The subject ID, as saved in `UserDefaults`. "NO SUBJECT" is a flag for an unassigned ID.
-    ///
-    /// **See also** the  static `subjectID` constant, which must be coordinated with this value
-    /// - bug: Not sure why this can't be done with `nil`.
-    @available(*, deprecated,
-                message: "Default value may be replaced with literal nil")
-    @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = "NO SUBJECT"
+        // When the subjectID changes, save it to defaults and kick it out through the subject.
+        $sharedSubjectID.sink { [self] newID in
+            defaults.set(newID, forKey: Self.subjectIDDefaultsKey)
+            subjectIDSubject.send(newID)
+        }
+        .store(in: &cancellables)
+    }
+
+    private var cancellables: Set<AnyCancellable> = []
 
     // TODO: no-subject and onboarding
     //       the sheet should recognize no-subject and empty the field.
@@ -155,7 +170,7 @@ extension RootState {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if subjectID == RootState.noSubjectString { return false }
+        if self.sharedSubjectID == nil { return false }
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases

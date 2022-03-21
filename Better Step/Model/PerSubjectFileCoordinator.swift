@@ -21,8 +21,6 @@ import Collections
 final class PerSubjectFileCoordinator {
     static var shared = PerSubjectFileCoordinator()
 
-    @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = RootState.noSubjectString
-
     // TODO: zip the output directory
     // TODO: Validate ready-to-zip
     //       Both files exist
@@ -36,8 +34,6 @@ final class PerSubjectFileCoordinator {
 //    let accelerometerSink: AccelerometerFileSink
 
     init() {    }
-
-    static let myAppDirectoryName = "com.drdr.better-step-test"
 }
 
 extension PerSubjectFileCoordinator {

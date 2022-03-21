@@ -13,6 +13,7 @@ import Foundation
 public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
+    case noSubjectID
 }
 
 extension FileManager {

@@ -23,13 +23,12 @@ enum AppStorageKeys: String {
     /// Whether to include the DASI survey
     case includeSurvey
     /// The last known subject ID.
-    case subjectID      // Is the right place?
+//    case subjectID      // Is the right place?
     // We'd rather set it each time, right?
     // FIXME: Clear subjectID when transmitted
 
     static let dasiWalkRange = (1...10)
 }
-
 
 // TODO: report contents shouldn't be global
 //       I guess they're not, since we could impose
@@ -41,7 +40,6 @@ enum AppStorageKeys: String {
 struct Better_StepApp: App {
 
     // FIXME: App does not interpose the app onboard sheet.
-    @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID = ""
     @ObservedObject var aStage = AppStage.shared
 
 
