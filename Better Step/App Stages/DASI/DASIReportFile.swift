@@ -1,5 +1,5 @@
 //
-//  DASIReport.swift
+//  DASIReportFile.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/17/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - DASIReport
+// MARK: - DASIReportFile
 /// A collection of `DASIResponseList` and the capacity to format and write them into a report file (implicitly `.csv`).
 ///
 /// Distinguished from `DASIResponseList`, which also keeps an array of user-response values, but is not concerned with output.
@@ -16,7 +16,7 @@ import Foundation
 ///
 /// Call `writeAndClose()` to create and fill the output file.
 /// - warning: Records may be added piecemeal, but appending to the output file is not supported. `writeAndClose()` will rewrite ths entire file from the start.
-actor DASIReport {
+actor DASIReportFile {
     /// The base name (no extension, no path) of the output file.
     let dasiFileBaseName: String
     /// The directory into which the file is to be written.
@@ -30,7 +30,7 @@ actor DASIReport {
         responses = [DASIUserResponse]()
     }
 
-    /// Empty this `DASIReport`'s record of responses.
+    /// Empty this `DASIReportFile`'s record of responses.
     ///
     /// This isn't static, worse luck, so the caller must either retain the instance after use, or _maybe_ create a new one with the same name and directory.
     public func clearReportFile() throws {
@@ -96,7 +96,7 @@ actor DASIReport {
 
     /// Write `Data` through the `outputHandle`.
     ///
-    /// While `performWrite(_:)` could append to the file, the rest of `DASIReport` does not support composition among partial lists.
+    /// While `performWrite(_:)` could append to the file, the rest of `DASIReportFile` does not support composition among partial lists.
     /// - throws: Whatever might come of `FileHandle.write(contentsOf:)`
     /// - Parameter contentData: The `Data` to write.
     private func writeThroughHandle(_ contentData: Data) throws {

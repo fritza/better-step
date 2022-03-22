@@ -40,11 +40,11 @@ let thingsToClear: [ThingToClear] = {
 
 func performClear(for tag: Int) {   // might throw
     switch tag {
-    case 1:     DASIResponses.clear()
+    case 1:     DASIResponseList.clearResponses()
     case 2:     break
                 // FIXME: Not implemented.
     case 3:
-        DASIResponses.clear()
+        DASIResponseList.clearResponses()
     default:
         assertionFailure("Unknown tag (\(tag)) for a clear button.")
         return
@@ -155,7 +155,6 @@ struct SetupView: View {
     @AppStorage(AppStorageKeys.reportAsMagnitude.rawValue) var asMagnitude = false
     @AppStorage(AppStorageKeys.walkInMinutes.rawValue)  var duration = 6
     @AppStorage(AppStorageKeys.reportingEmail.rawValue) var email = ""
-    @AppStorage(AppStorageKeys.subjectID.rawValue)      var subjectID = ""
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 

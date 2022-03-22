@@ -20,8 +20,8 @@ __Terms:__
  - **Phase**: A broad subset of the app's functionality, or information pertaining to it. This often coincides with the selected tab, but the onboarding tab is presented automatically without regard for operational phase.
  - **Phase Workflow**: The information the app tracks to respond to changes in phase..
  - **Configuration**: Immutable descriptions of elements of phases to provide metadata like the question roster.
- - **Reportable**: User-generated data that will be transformed into the contents of files sent to investigators. (`DASIResponseList`), as opposed to configuration metadata (`DASIQuestion`) or specialized marshalling and file-creation objects (`DASIReport`).
- - **Marshalling**: Entities (`DASIReport`) that take the content of Reportable data sources (`DASIResponseList`), format it, and write it out to files.
+ - **Reportable**: User-generated data that will be transformed into the contents of files sent to investigators. (`DASIResponseList`), as opposed to configuration metadata (`DASIQuestion`) or specialized marshalling and file-creation objects (`DASIReportFile`).
+ - **Marshalling**: Entities (`DASIReportFile`) that take the content of Reportable data sources (`DASIResponseList`), format it, and write it out to files.
 
 
 
