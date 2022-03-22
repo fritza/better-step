@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SurveyContainerView: View {
     @EnvironmentObject var contentEnvt: DASIPages
-    @EnvironmentObject var reportContents: DASIResponses
+    // FIXME: reportContents from global, not environment?
+    @EnvironmentObject var reportContents: DASIResponseList
     // FIXME: Too many EnvironmentObjects
 //    @EnvironmentObject private var appState: ApplicationState
     @EnvironmentObject private var rootState: RootState
@@ -75,7 +76,7 @@ struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
         SurveyContainerView()
             .environmentObject(DASIPages(.landing))
-            .environmentObject(DASIResponses())
+            .environmentObject(DASIResponseList())
     }
 }
 

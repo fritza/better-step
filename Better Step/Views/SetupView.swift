@@ -108,7 +108,7 @@ struct ClearingView: View {
     @State private var latestClick = ""
 
     var body: some View {
-        VStack(alignment: .center, spacing: 80.0){
+        VStack(alignment: .center, spacing: 80.0) {
             List {
                 ForEach(thingsToClear.sorted()) { thing in
 

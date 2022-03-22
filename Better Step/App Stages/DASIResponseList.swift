@@ -1,5 +1,5 @@
 //
-//  DASIResponses.swift
+//  DASIResponseList.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/24/22.
@@ -28,7 +28,7 @@ import SwiftUI
 
  Joins a question (referenced by ID), a response (`AnswerState`) and a time stamp representing which questionj was answered, how, and when  for a **single question**,  It knows how to order itself, and convert itself to a comma-separated string for use in assembling full rows in the output CSV file.
 
-### struct DASIResponses
+### struct DASIResponseList
 
 An `ObservableObject` intended to be the `@EnvironmentObject` for the DASI project. It takes the Subject ID and initializes its `[DASIUserResponse]` array of `answers`.
 
@@ -56,13 +56,11 @@ enum DASIReportErrors: Error {
     case couldntCreateDASIFile
 }
 
-// FIXME: Should this be an actor?
-
-#warning("Aggregate report is not implemented")
-// MARK: - DASIResponses
-final class DASIResponses: ObservableObject {
-   @AppStorage(AppStorageKeys.subjectID.rawValue) var subjectID: String = ""
-
+// MARK: - DASIResponseList
+/// Responses to all DASI questions. Records changes to each response. Encodes the response list into the data for a CSV file. This is the data model _only,_ without regard for how it is to be stored.
+///
+/// Observable.
+final class DASIResponseList: ObservableObject {
     public private(set) var answers: [DASIUserResponse]
 
     /// Create `DASIResponses`
@@ -144,7 +142,7 @@ final class DASIResponses: ObservableObject {
     }
 
     /// Set all responses to `.unknown`
-    func clear() {
+    func clearResponses() {
         let result = answers.map {
             $0.withResponse(.unknown)
             // Timestamp updates in init()
@@ -152,8 +150,9 @@ final class DASIResponses: ObservableObject {
         self.answers = result
     }
 
-    static func clear() {
-        RootState.shared.dasiResponses.clear()
+    /// Set all responses in the `shared` `DASIResponseList` to .unknown. This is data _only,_ without regard for storage (e.g. the report file.
+    static func clearResponses() {
+        RootState.shared.dasiResponses.clearResponses()
     }
 
     // MARK: CSV formatting

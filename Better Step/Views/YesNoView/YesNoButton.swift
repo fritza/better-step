@@ -48,7 +48,7 @@ struct YesNoButton: View {
     //    let choiceView: ViewChoice
     //    let contextSize: CGSize
 
-    @EnvironmentObject var reportContents: DASIResponses
+    @EnvironmentObject var reportContents: DASIResponseList
 
     // FIXME: Direct access to the content state
     @EnvironmentObject var envt: DASIPages

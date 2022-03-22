@@ -24,6 +24,9 @@ enum AppStorageKeys: String {
     case includeSurvey
     /// The last known subject ID.
 //    case subjectID      // Is the right place?
+    // Subject ID is handled as a UserDefault separately
+    // so as to make it observable as a CurrentValueSubject
+
     // We'd rather set it each time, right?
     // FIXME: Clear subjectID when transmitted
 

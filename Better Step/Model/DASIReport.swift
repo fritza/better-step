@@ -8,9 +8,9 @@
 import Foundation
 
 // MARK: - DASIReport
-/// A collection of `DASIResponses` and the capacity to format and write them into a report file (implicitly `.csv`).
+/// A collection of `DASIResponseList` and the capacity to format and write them into a report file (implicitly `.csv`).
 ///
-/// Distinguished from `DASIResponses`, which also keeps an array of user-response values, but is not concerned with output.
+/// Distinguished from `DASIResponseList`, which also keeps an array of user-response values, but is not concerned with output.
 ///
 /// You prepare a DASI report file by creating a `DASIReport` actor with the base name of the report file and its destination directory. Use `add(response:)`, `add(responses:)` or `set(responses:)` to fill the contents of the file.
 ///
@@ -33,13 +33,14 @@ actor DASIReport {
     /// Empty this `DASIReport`'s record of responses.
     ///
     /// This isn't static, worse luck, so the caller must either retain the instance after use, or _maybe_ create a new one with the same name and directory.
-    public func clear() throws {
-        let fm = FileManager.default
-        try fm.deleteIfPresent(destinationURL)
-        // NOTE: Not sure what happens if destinationURL somehow refers to a directory
+    public func clearReportFile() throws {
         responses = []
+
         try outputHandle?.close()
         outputHandle = nil
+
+        let fm = FileManager.default
+        try fm.deleteIfPresent(destinationURL)
     }
 
     // MARK: - Adding response items
@@ -57,9 +58,9 @@ actor DASIReport {
         responses.append(contentsOf: responses)
     }
 
-    /// Append all the `DASIUserResponse`s from the accumulated `DASIResponses`
-    /// - Parameter userResponses: The `DASIResponses` object that received the user's live responses to the DASI questions.
-    func set(responses userResponses: DASIResponses) {
+    /// Append all the `DASIUserResponse`s from the accumulated `DASIResponseList`
+    /// - Parameter userResponses: The `DASIResponseList` object that received the user's live responses to the DASI questions.
+    func set(responses userResponses: DASIResponseList) {
         self.responses = userResponses.answers
     }
 
@@ -82,28 +83,13 @@ actor DASIReport {
             .deleteIfPresent(destinationURL)
     }
 
-    /// Create an empty output file at `destinationURL`, deleting any existing item.
-    /// - throws: `DASIReportErrors.couldntCreateDASIFile` if the remove or creation failed.
-    private func createOutputFile() throws {
-        // FIXME: Use FileManager.deleteAndCreate(at:)
-        // TODO:  merge with prepareHandle into deleteCreateAndOpen(_:).
-        let fm = FileManager.default
-        if fm.fileExists(atURL: destinationURL) {
-            // NOTE: Not sure what happens if destinationURL somehow refers to a directory
-            try fm.removeItem(at: destinationURL)
-        }
-        let success = fm.createFile(
-            atPath: destinationURL.path,
-            contents: nil)
-        if !success { throw DASIReportErrors.couldntCreateDASIFile }
-    }
-
     private var outputHandle: FileHandle?
 
-    /// Create and open the report file for writing.
+    /// Create and open the report file for writing, deleting any existing DASI file for this subject.
     /// - throws: An error if the file does not exist. This ought to be fatal.
-    private func prepareHandle() throws {
-        // TODO:  merge with createOutputFile into deleteCreateAndOpen(_:).
+    private func createAndOpenHandle() throws {
+        let fm = FileManager.default
+        try fm.deleteAndCreate(at: destinationURL)
         outputHandle = try FileHandle(
             forWritingTo: destinationURL)
     }
@@ -146,9 +132,7 @@ actor DASIReport {
 
         // TODO: Consider consolidating
         //       to FileManager.deleteCreateAndOpen
-        try createOutputFile()
-        try prepareHandle()
-
+        try createAndOpenHandle()
         let csvData = compose()
         try writeThroughHandle(csvData)
     }
