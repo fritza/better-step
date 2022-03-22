@@ -82,6 +82,10 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
+            guard let subjectID = RootState.shared.sharedSubjectID else {
+                throw FileStorageErrors.noSubjectID
+            }
+
             let fm = FileManager.default
             let expectedURL = fm.applicationDocsDirectory
                 .appendingPathComponent(subjectID, isDirectory: true)

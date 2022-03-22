@@ -41,7 +41,7 @@ struct Better_StepApp: App {
 
     // FIXME: App does not interpose the app onboard sheet.
     @ObservedObject var aStage = AppStage.shared
-
+    @StateObject var rootState = RootState.shared
 
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
