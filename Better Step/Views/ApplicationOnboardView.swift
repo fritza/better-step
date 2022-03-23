@@ -13,35 +13,41 @@ struct ApplicationOnboardView: View {
         case elsewhere
     }
 
-    @AppStorage(AppStorageKeys.subjectID.rawValue) var appStoredUserID: String = ""
-
-    @State var localSubjectID: String = "fer"
-    @State var fieldHasContent: Bool  = true
+    @State var localSubjectID: String = "fer" {
+        didSet {
+            // When the view-local subjectID changes, update the global subject.
+            // TODO: Can't I refer to the subject directly?
+            //        problem: The TextField wants a String, not a String?.
+            let rootSubjectID = RootState.shared.subjectIDSubject.value
+            if rootSubjectID == nil || localSubjectID != rootSubjectID {
+                RootState.shared.subjectIDSubject.send(localSubjectID)
+            }
+        }
+    }
+//    @State var fieldHasContent: Bool  = false
 
     init() {
-        self.localSubjectID = ""
-        self.fieldHasContent = true
+        self.localSubjectID = RootState.shared.subjectIDSubject.value ?? ""
+//        self.fieldHasContent = false
     }
 
     var body: some View {
         NavigationView {
             VStack {
-                // TODO:  The HStack should probably
-                //        be the view, without a VStack.
                 HStack {
+                    // Label and field.
+                    // TODO: Doesn't TextField have a labelled variant?
                     Spacer()
                     Text("Subject ID:").font(.title3)
                     Spacer(minLength: 24)
                     TextField("Subject ID:",
                               text: self.$localSubjectID)
                         .textFieldStyle(.roundedBorder)
-                        .onChange(of: self.localSubjectID) { newValue in
-                            fieldHasContent = !newValue.isEmpty
-                        }
                         .frame(width: 200)
+                    Text(String(describing: RootState.shared.subjectIDSubject.value ?? "<n/a>"))
                     Spacer()
                 }
-                if fieldHasContent {
+                if !localSubjectID.isEmpty {
                     NavigationLink("Accept", destination: {
 
                         // FIXME: Why does app onboard set DASI state?
@@ -61,11 +67,14 @@ struct ApplicationOnboardView: View {
             }
         }
         .onAppear {
-            localSubjectID = appStoredUserID
-            fieldHasContent = localSubjectID.isEmpty
+            guard let globalID = RootState.shared.subjectIDSubject.value else {
+                fatalError()
+            }
+            localSubjectID = globalID
+//            fieldHasContent = !localSubjectID.isEmpty
         }
         .onDisappear {
-            appStoredUserID = localSubjectID
+//            appStoredUserID = RootState.
         }
     }
 }
