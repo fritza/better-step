@@ -11,6 +11,7 @@ import Collections
 
 /// Vendor for URLs of output files.
 final class PerSubjectFileCoordinator {
+    @EnvironmentObject var subjectIDState: SubjectID
     static var shared = PerSubjectFileCoordinator()
 
     // TODO: zip the output directory
@@ -74,7 +75,8 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
-            guard let subjectID = SubjectID.shared.subjectID else {
+            // TODO: Understand whether the SubjectID @EnvironmentObject is available here.
+                guard let subjectID = subjectIDState.subjectID else {
                 throw FileStorageErrors.noSubjectID
             }
 
@@ -118,7 +120,7 @@ extension PerSubjectFileCoordinator {
         }
     }
 
-    // TODO: I REALLY need a way to write data asybchronously.
+    // TODO: I REALLY need a way to write data asynchronously.
 // Not so much for DASI, but certainly the accelerometry.
 }
 

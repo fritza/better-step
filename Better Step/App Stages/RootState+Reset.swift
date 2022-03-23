@@ -36,7 +36,7 @@ extension SubjectIDDependent {
 
 extension RootState {
     func observeSubjectID() {
-        SubjectID.shared.$subjectID
+        subjectIDState.$subjectID
         // Ignore incidental re-setting
             .removeDuplicates()
         // Wait between keystrokes

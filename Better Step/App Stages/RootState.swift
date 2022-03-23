@@ -94,6 +94,7 @@ final class SubjectID: ObservableObject {
 ///
 /// The subject ID goes through `RootState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
 final class RootState: ObservableObject {
+    @EnvironmentObject var subjectIDState: SubjectID
     @Published var allTasksFinished: Bool = false
     /// Singleton instance of `RootState`
     /// - note: Maybe make this a @StateObject for the App?
@@ -182,8 +183,7 @@ extension RootState {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if SubjectID.shared.subjectID == nil { return false }
-        // FIXME: Make the SubjectID an environmentObject
+        if subjectIDState.subjectID == nil { return false }
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases

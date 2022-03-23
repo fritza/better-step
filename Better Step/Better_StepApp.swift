@@ -86,9 +86,7 @@ struct Better_StepApp: App {
                     }
                     .tag(AppStages.configuration)
             }
-            // .environmentObject(globals)
-            // ^ was ApplicationState()
-//            .environmentObject(ApplicationState.shared)
+            .environmentObject(SubjectID.shared)
             .environmentObject(RootState.shared)
         }
     }

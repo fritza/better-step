@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ApplicationOnboardView: View {
+    @EnvironmentObject var subjectIDObject: SubjectID
+
     enum WhereFocused: Hashable {
         case field
         case elsewhere
@@ -19,20 +21,17 @@ struct ApplicationOnboardView: View {
             // TODO: Can't I refer to the subject directly?
             //        problem: The TextField wants a String, not a String?.
             if localSubjectID.isEmpty {
-                SubjectID.shared.subjectID = nil
+                subjectIDObject.subjectID = nil
                 return
             }
 
-            if localSubjectID != SubjectID.shared.subjectID {
-                SubjectID.shared.subjectID = localSubjectID
+            if localSubjectID != subjectIDObject.subjectID {
+                subjectIDObject.subjectID = localSubjectID
             }
         }
     }
-//    @State var fieldHasContent: Bool  = false
 
     init() {
-//        self.localSubjectID = RootState.shared.subjectIDSubject.value ?? ""
-//        self.fieldHasContent = false
     }
 
     var body: some View {
@@ -48,7 +47,7 @@ struct ApplicationOnboardView: View {
                               text: $localSubjectID)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 200)
-                    Text(String(describing: SubjectID.shared.subjectID ?? "<n/a>"))
+                    Text(String(describing: subjectIDObject.subjectID ?? "<n/a>"))
                     Spacer()
                 }
                 if !localSubjectID.isEmpty {

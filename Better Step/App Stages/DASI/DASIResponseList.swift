@@ -61,6 +61,8 @@ enum DASIReportErrors: Error {
 ///
 /// Observable.
 final class DASIResponseList: SubjectIDDependent {
+    @EnvironmentObject var subjectIDObject: SubjectID
+
     public private(set) var answers: [DASIUserResponse]
 
     /// Create `DASIResponses`
@@ -170,7 +172,7 @@ final class DASIResponseList: SubjectIDDependent {
 
     /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
     var csvLine: String? {
-        guard let subjectID = SubjectID.shared.subjectID else {
+        guard let subjectID = subjectIDObject.subjectID else {
             assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
             return nil
         }

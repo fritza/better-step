@@ -12,6 +12,7 @@ import Collections
 ///
 /// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
 final actor AccelerometerFileSink {
+    // No @EnvironmentObjects in actors.
     static let dequeInitialSize     = 1000
     var subjectID               : String
     let fileURL                 : URL
@@ -24,21 +25,23 @@ final actor AccelerometerFileSink {
     /// - parameters:
     ///     - subject: The ID of the subject/run.
     /// - returns: `nil` if either the destination (per-subject) directory or the walking `csv` file could not be created.
-    init() throws
+    init() async throws
     {
         assert(SubjectID.shared.subjectID != nil,
                "\(#function): SubjectID.shared not initialized (shouldn't get here before it's valid.")
         self.subjectID = SubjectID.shared.subjectID!
-        let _fileURL =
-        try PerSubjectFileCoordinator.shared
-            .fileURLForSubject(
-                purpose: .walkingReportFile,
-                creating: true)
-        fileURL = _fileURL
 
         var _queue = Deque<AccelerometerItem>()
         _queue.reserveCapacity(Self.dequeInitialSize)
         acceleratorQueue = _queue
+
+        // Apparently fileURLForSubject... is isolated to @MainActor.
+        let _fileURL =
+        try await PerSubjectFileCoordinator.shared
+            .fileURLForSubject(
+                purpose: .walkingReportFile,
+                creating: true)
+        fileURL = _fileURL
         let _writeHandle = try FileHandle(
             forWritingTo: _fileURL)
         writeHandle = _writeHandle

@@ -23,7 +23,8 @@ actor DASIReportFile: SubjectIDDependent {
     }
 
     func setUpWithSubjectID(_ newID: String) async throws -> DASIReportFile? {
-        return try DASIReportFile(
+        // Apparently directoryURL... is isolated to @MainActor.
+        return try await DASIReportFile(
             baseName: "DASI",
             directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
         )
@@ -72,8 +73,9 @@ actor DASIReportFile: SubjectIDDependent {
 
     /// Append all the `DASIUserResponse`s from the accumulated `DASIResponseList`
     /// - Parameter userResponses: The `DASIResponseList` object that received the user's live responses to the DASI questions.
-    func set(responses userResponses: DASIResponseList) {
-        self.responses = userResponses.answers
+    func set(responses userResponses: DASIResponseList) async {
+        // Apparently, userResponses.answers is isolated to @MainActor.
+        self.responses = await userResponses.answers
     }
 
     // MARK: - File operations
