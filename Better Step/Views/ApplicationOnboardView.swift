@@ -18,16 +18,20 @@ struct ApplicationOnboardView: View {
             // When the view-local subjectID changes, update the global subject.
             // TODO: Can't I refer to the subject directly?
             //        problem: The TextField wants a String, not a String?.
-            let rootSubjectID = RootState.shared.subjectIDSubject.value
-            if rootSubjectID == nil || localSubjectID != rootSubjectID {
-                RootState.shared.subjectIDSubject.send(localSubjectID)
+            if localSubjectID.isEmpty {
+                SubjectID.shared.subjectID = nil
+                return
+            }
+
+            if localSubjectID != SubjectID.shared.subjectID {
+                SubjectID.shared.subjectID = localSubjectID
             }
         }
     }
 //    @State var fieldHasContent: Bool  = false
 
     init() {
-        self.localSubjectID = RootState.shared.subjectIDSubject.value ?? ""
+//        self.localSubjectID = RootState.shared.subjectIDSubject.value ?? ""
 //        self.fieldHasContent = false
     }
 
@@ -44,7 +48,7 @@ struct ApplicationOnboardView: View {
                               text: $localSubjectID)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 200)
-                    Text(String(describing: RootState.shared.subjectIDSubject.value ?? "<n/a>"))
+                    Text(String(describing: SubjectID.shared.subjectID ?? "<n/a>"))
                     Spacer()
                 }
                 if !localSubjectID.isEmpty {

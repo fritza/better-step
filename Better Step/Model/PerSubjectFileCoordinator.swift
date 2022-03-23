@@ -9,15 +9,6 @@ import Foundation
 import SwiftUI
 import Collections
 
-// TODO: - Invalidate/update if the subjecID changes.
-//         This might be happening already, given
-//         that subjectID is read from prefs every time.
-//  CLIENTS should not rely on the files and URLs
-//          being stable.
-
-
-
-
 /// Vendor for URLs of output files.
 final class PerSubjectFileCoordinator {
     static var shared = PerSubjectFileCoordinator()
@@ -83,7 +74,7 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
-            guard let subjectID = RootState.shared.sharedSubjectID else {
+            guard let subjectID = SubjectID.shared.subjectID else {
                 throw FileStorageErrors.noSubjectID
             }
 

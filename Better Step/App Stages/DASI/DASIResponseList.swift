@@ -170,7 +170,7 @@ final class DASIResponseList: SubjectIDDependent {
 
     /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
     var csvLine: String? {
-        guard let subjectID = RootState.shared.subjectIDSubject.value else {
+        guard let subjectID = SubjectID.shared.subjectID else {
             assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
             return nil
         }

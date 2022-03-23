@@ -11,7 +11,6 @@ import Collections
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
 ///
 /// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
-/// - bug: Make an Observable custodian of the subjectID.
 final actor AccelerometerFileSink {
     static let dequeInitialSize     = 1000
     var subjectID               : String
@@ -20,12 +19,16 @@ final actor AccelerometerFileSink {
     var acceleratorQueue        : Deque<AccelerometerItem>
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
+    ///
+    /// The global subjectID (`SubjectID.shared`) is captured upon initialization, and _never_ updated.
     /// - parameters:
     ///     - subject: The ID of the subject/run.
     /// - returns: `nil` if either the destination (per-subject) directory or the walking `csv` file could not be created.
-    init(subject: String) throws
+    init() throws
     {
-        self.subjectID = subject
+        assert(SubjectID.shared.subjectID != nil,
+               "\(#function): SubjectID.shared not initialized (shouldn't get here before it's valid.")
+        self.subjectID = SubjectID.shared.subjectID!
         let _fileURL =
         try PerSubjectFileCoordinator.shared
             .fileURLForSubject(

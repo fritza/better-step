@@ -182,7 +182,8 @@ extension RootState {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if self.sharedSubjectID == nil { return false }
+        if SubjectID.shared.subjectID == nil { return false }
+        // FIXME: Make the SubjectID an environmentObject
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases
