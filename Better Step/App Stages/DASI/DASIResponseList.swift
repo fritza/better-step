@@ -159,6 +159,10 @@ final class DASIResponseList: ObservableObject {
 
     /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
     var csvLine: String? {
+        guard let subjectID = RootState.shared.subjectIDSubject.value else {
+            assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
+            return nil
+        }
         let okayResponseValues: Set<AnswerState> = [.no, .yes]
         let usableResponses = answers
             .filter {
