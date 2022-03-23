@@ -117,6 +117,10 @@ final class RootState: ObservableObject {
     // DASI
     var dasiContent: DASIPages = DASIPages()
     var dasiResponses: DASIResponseList = DASIResponseList()
+    var dasiFile = try! DASIReportFile(
+        baseName: "DASI",
+        directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
+    )
 
     // Walk
 
