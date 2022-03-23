@@ -60,7 +60,7 @@ enum DASIReportErrors: Error {
 /// Responses to all DASI questions. Records changes to each response. Encodes the response list into the data for a CSV file. This is the data model _only,_ without regard for how it is to be stored.
 ///
 /// Observable.
-final class DASIResponseList: ObservableObject {
+final class DASIResponseList: SubjectIDDependent {
     public private(set) var answers: [DASIUserResponse]
 
     /// Create `DASIResponses`
@@ -150,14 +150,20 @@ final class DASIResponseList: ObservableObject {
         self.answers = result
     }
 
+    /*
     /// Set all responses in the `shared` `DASIResponseList` to .unknown. This is data _only,_ without regard for storage (e.g. the report file.
     static func clearResponses() {
         RootState.shared.dasiResponses.clearResponses()
     }
 
-    static func clearAllDASI() async {
+    static func clearAllDASI() async throws {
         clearResponses()
-        try? await RootState.shared.dasiFile.clearReportFile()
+        try await RootState.shared.dasiFile?.clearReportFile()
+    }
+     */
+    func teardownFromSubjectID() async throws -> DASIResponseList? {
+        clearResponses()
+        return self
     }
 
     // MARK: CSV formatting

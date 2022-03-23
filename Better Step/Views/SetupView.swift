@@ -38,20 +38,6 @@ let thingsToClear: [ThingToClear] = {
     }
 }()
 
-func performClear(for tag: Int) {   // might throw
-    switch tag {
-    case 1:     DASIResponseList.clearResponses()
-    case 2:     break
-                // FIXME: Not implemented.
-    case 3:
-        DASIResponseList.clearResponses()
-    default:
-        assertionFailure("Unknown tag (\(tag)) for a clear button.")
-        return
-    }
-
-}
-
 
 @available(*, unavailable, message: "Use RootStorage or document environment objects.")
 final class Configurations: ObservableObject, CustomStringConvertible {
@@ -113,19 +99,17 @@ struct ClearingView: View {
                 Button("Clear Survey") {
                     Task {
                         // NOTE: Bug risk.
-                        await DASIResponseList.clearAllDASI()
+                        RootState.shared.dasiResponses.teardownFromSubjectID
                     }
                 }
                 Button("Clear Timed Walk") {
-                    #warning("unimplemented.")
-//                    RootState.shared.
+#warning("unimplemented for walk")
                 }
                 Button("Clear Subject (all)") {
                     Task {
-                        // NOTE: Bug risk.
-                        RootState.shared.subjectIDSubject.send(nil)
-                        await DASIResponseList.clearAllDASI()
-                        // TODO: Clear walk.
+                      try! await  RootState.shared.tearDownFromSubject()
+#warning("unimplemented for walk")
+
                     }
                 }
 

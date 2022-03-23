@@ -37,7 +37,9 @@ struct DASICompleteView: View {
 
     @EnvironmentObject var envt: DASIPages
     // FIxME: Take contents from global, not .environmentObject.
-    @EnvironmentObject var reportContents: DASIResponseList
+    var reportContents: DASIResponseList {
+        RootState.shared.dasiResponses
+    }
 
     var allItemsAnswered: Bool {
         return reportContents.unknownResponseIDs.isEmpty

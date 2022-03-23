@@ -18,6 +18,7 @@ import Collections
 
 
 
+/// Vendor for URLs of output files.
 final class PerSubjectFileCoordinator {
     static var shared = PerSubjectFileCoordinator()
 

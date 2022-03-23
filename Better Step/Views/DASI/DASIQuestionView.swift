@@ -23,8 +23,8 @@ struct QuestionContentView: View {
 
 struct DASIQuestionView: View {
     @EnvironmentObject var envt: DASIPages
-    // FIXME: Take response list from global not environment?
-    @EnvironmentObject var reportContents: DASIResponseList
+
+    var reportContents: DASIResponseList = RootState.shared.dasiResponses
     @State var answerState: AnswerState
 
     func updateForNewBinding() {
@@ -95,9 +95,10 @@ struct DASIQuestionView: View {
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(answerState: .yes)
-            .environmentObject(DASIPages(.presenting(questionID: 2)))
-            .environmentObject(DASIResponseList())
+        DASIQuestionView(
+            reportContents: DASIResponseList(),
+            answerState: .yes)
+        .environmentObject(DASIPages(.presenting(questionID: 2)))
     }
 }
 

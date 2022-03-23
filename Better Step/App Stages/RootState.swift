@@ -59,6 +59,31 @@ What goes into `UserDefaults` (`@AppStorage`) should be able to justify itself.
  */
 struct GeneralComments_RootState {}
 
+/// An observable wrapper for the subject ID.
+///
+/// The value is ultimately backed by `UserDefaults` (`AppStorageKeys.subjectID`) upon initialization and update.
+///
+/// You do not create a `SubjectID`. Instead access it through `SubjectID.shared`.
+/// - warning: Do not access the `UserDefault`/`AppStorage` directly.
+final class SubjectID: ObservableObject {
+    static let shared = SubjectID()
+
+    @Published var subjectID: String? {
+        didSet {
+            UserDefaults.standard
+                .set(subjectID,
+                     forKey: AppStorageKeys.subjectID.rawValue)
+        }
+    }
+
+    private init() {
+        subjectID = UserDefaults.standard
+            .string(forKey: AppStorageKeys.subjectID.rawValue)
+    }
+}
+
+
+
 // MARK: - RootState
 /// Omnibus aggregate of application-stage operating values
 ///
@@ -70,38 +95,23 @@ struct GeneralComments_RootState {}
 /// The subject ID goes through `RootState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
 final class RootState: ObservableObject {
     @Published var allTasksFinished: Bool = false
-    @Published var sharedSubjectID: String?
-
-
-    static let subjectIDDefaultsKey = "com.drdr.better-step-test.subject_id"
-    let subjectIDSubject = CurrentValueSubject<String?, Never>(
-        UserDefaults.standard.string(forKey: subjectIDDefaultsKey)
-        )
-    // How is subjectIDDefaultsKey, a static constant, usable w/o scope here?
-
-
-
     /// Singleton instance of `RootState`
     /// - note: Maybe make this a @StateObject for the App?
     static var shared = RootState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
-    ///
-    /// **About subjectID and UserDefaults**: The subject ID should persist across launches.
-    /// The ID is kept in `UserDefaults`,
     private init() {
-        let defaults = UserDefaults.standard
-        // On launch, reload the subject ID from defaults.
-        sharedSubjectID = defaults.string(forKey: Self.subjectIDDefaultsKey)
 
-        // When the subjectID changes, save it to defaults and kick it out through the subject.
-        $sharedSubjectID.sink { [self] newID in
-            defaults.set(newID, forKey: Self.subjectIDDefaultsKey)
-            subjectIDSubject.send(newID)
-        }
-        .store(in: &cancellables)
+        // TODO: All per-user resources must be optional.
+        // Especially:
+        //  - Those that create files.
+        //  - Those that capture subject ID upon creation.
+
+        // Probably not:
+        //  - Those that get subject ID live, such as DASI/walk records that record sID into each observation.
+
     }
 
-    private var cancellables: Set<AnyCancellable> = []
+    var cancellables: Set<AnyCancellable> = []
 
     // TODO: no-subject and onboarding
     //       the sheet should recognize no-subject and empty the field.
@@ -117,10 +127,8 @@ final class RootState: ObservableObject {
     // DASI
     var dasiContent: DASIPages = DASIPages()
     var dasiResponses: DASIResponseList = DASIResponseList()
-    var dasiFile = try! DASIReportFile(
-        baseName: "DASI",
-        directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
-    )
+
+    var dasiFile: DASIReportFile?
 
     // Walk
 

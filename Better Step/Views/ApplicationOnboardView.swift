@@ -13,7 +13,7 @@ struct ApplicationOnboardView: View {
         case elsewhere
     }
 
-    @State var localSubjectID: String = "fer" {
+    @State var localSubjectID: String = "" {
         didSet {
             // When the view-local subjectID changes, update the global subject.
             // TODO: Can't I refer to the subject directly?
@@ -41,22 +41,17 @@ struct ApplicationOnboardView: View {
                     Text("Subject ID:").font(.title3)
                     Spacer(minLength: 24)
                     TextField("Subject ID:",
-                              text: self.$localSubjectID)
+                              text: $localSubjectID)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 200)
                     Text(String(describing: RootState.shared.subjectIDSubject.value ?? "<n/a>"))
                     Spacer()
                 }
                 if !localSubjectID.isEmpty {
-                    NavigationLink("Accept", destination: {
-
-                        // FIXME: Why does app onboard set DASI state?
+                    NavigationLink("Accept") {
                         SurveyContainerView()
-                            .environmentObject(DASIPages(.landing))
 
-
-                        //                        Text("ActiveButton Pushed")
-                    })
+                    }
                 }
                 else {
                     Text("Accept")
@@ -65,16 +60,6 @@ struct ApplicationOnboardView: View {
                 Spacer()
                 Text(localSubjectID).fontWeight(.medium)
             }
-        }
-        .onAppear {
-            guard let globalID = RootState.shared.subjectIDSubject.value else {
-                fatalError()
-            }
-            localSubjectID = globalID
-//            fieldHasContent = !localSubjectID.isEmpty
-        }
-        .onDisappear {
-//            appStoredUserID = RootState.
         }
     }
 }

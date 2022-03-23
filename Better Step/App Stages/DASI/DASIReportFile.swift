@@ -16,7 +16,19 @@ import Foundation
 ///
 /// Call `writeAndClose()` to create and fill the output file.
 /// - warning: Records may be added piecemeal, but appending to the output file is not supported. `writeAndClose()` will rewrite ths entire file from the start.
-actor DASIReportFile {
+actor DASIReportFile: SubjectIDDependent {
+    func teardownFromSubjectID() async throws -> DASIReportFile? {
+        try clearReportFile()
+        return self
+    }
+
+    func setUpWithSubjectID(_ newID: String) async throws -> DASIReportFile? {
+        return try DASIReportFile(
+            baseName: "DASI",
+            directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
+        )
+    }
+
     /// The base name (no extension, no path) of the output file.
     let dasiFileBaseName: String
     /// The directory into which the file is to be written.

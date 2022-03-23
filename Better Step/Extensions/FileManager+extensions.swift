@@ -27,22 +27,30 @@ extension FileManager {
         return (exists: result, isDirectory: isDirectory.boolValue)
     }
 
+    /// Whether a **regular file** exists at a URL.
     public func fileExists(atURL url: URL) -> Bool {
         let (exists, directory) = somethingExists(atURL: url)
         return exists && !directory
     }
 
+    /// Whether a **directory** exists at a URL.
     public func directoryExists(atURL url: URL) -> Bool {
         let (exists, directory) = somethingExists(atURL: url)
         return exists && directory
     }
 
+    /// Delete a **regular file** at a URL.
+    ///
+    /// No effect if there is no such file.
+    /// - throws: `FileManager` errors.
     public func deleteIfPresent(_ url: URL) throws {
         guard fileExists(atURL: url) else { return }
         // Discard any existing file.
         try removeItem(at: url)
     }
 
+    /// Create a **regular file** at a URL, deleting any existing file at that location.
+    /// - throws `FileManager` errors, or `FileStorageErrors.cantCreateFileAt()` if creation failed.
     public func deleteAndCreate(at url: URL) throws {
         if fileExists(atURL: url) {
             // Discard any existing file.
@@ -56,12 +64,17 @@ extension FileManager {
         }
     }
 
+    /// Create a **regular file** at a URL, deleting any existing file at that location, open it, and return the `FileHandle` for the new file.
+    /// - returns the `FileHandle` for the new file.
+    /// - throws: Errors thrown by `deleteAndCreate(at:)`, or FileHandle errors if the handle can't be created.
     public func deleteCreateAndOpen(_ url: URL) throws -> FileHandle {
         try deleteAndCreate(at: url)
         let retval = try FileHandle(forWritingTo: url)
         return retval
     }
 
+    /// The `URL` of the application documents directory
+    /// - warning: The OS should be able to return the `URL`, so the result is force-unwrapped.
     public var applicationDocsDirectory: URL {
         let url = self
             .urls(for: .documentDirectory,

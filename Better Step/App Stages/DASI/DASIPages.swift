@@ -21,12 +21,20 @@ import Combine
 /// - `SurveyContainerView`
 /// - `YesNoButton` (**Pull out as a dependency?**
 /// - `ApplicationOnboardView` (**Wrong Place**)
-final class DASIPages: ObservableObject {
+final class DASIPages: ObservableObject, SubjectIDDependent {
     @Published var selected: DASIStages!
+    @Published var refersToQuestion: Bool
 
     init(_ selection: DASIStages = .landing) {
         selected = selection
         refersToQuestion = selection.refersToQuestion
+    }
+
+    func teardownFromSubjectID() async throws -> DASIPages? {
+        let newSelection = DASIStages.landing
+        selected = newSelection
+        refersToQuestion = newSelection.refersToQuestion
+        return self
     }
 
     /// Reflect the selection of the next page.
@@ -45,7 +53,6 @@ final class DASIPages: ObservableObject {
         refersToQuestion = selected.refersToQuestion
     }
 
-    @Published var refersToQuestion: Bool
     var questionIdentifier: Int? {
         guard let containedID = selected.questionIdentifier else {
             return nil

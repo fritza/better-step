@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct SurveyContainerView: View {
-    @EnvironmentObject var contentEnvt: DASIPages
-    // FIXME: reportContents from global, not environment?
-    @EnvironmentObject var reportContents: DASIResponseList
+    @StateObject var contentEnvt: DASIPages = RootState.shared.dasiContent
     // FIXME: Too many EnvironmentObjects
-//    @EnvironmentObject private var appState: ApplicationState
-    @EnvironmentObject private var rootState: RootState
-
 
     var body: some View {
         NavigationView {
@@ -36,10 +31,11 @@ struct SurveyContainerView: View {
 
                     label: { EmptyView() }
                 )
-                NavigationLink(tag: DASIStages.landing,
-                               selection: $contentEnvt.selected,
-                               destination: {
-                    DASIOnboardView()
+                NavigationLink(
+                    tag: DASIStages.landing,
+                    selection: $contentEnvt.selected,
+                    destination: {
+                        DASIOnboardView()
                         .navigationBarBackButtonHidden(true)
                 },
                                label: {EmptyView()}
@@ -61,11 +57,12 @@ struct SurveyContainerView: View {
                 // ABOVE ALL, don't post the initial screen
                 // as soon as the conclusion screen is
                 // called for.
-                if reportContents.unknownResponseIDs.isEmpty {
-                    rootState.didComplete(phase: .dasi)
+                if RootState.shared.dasiResponses
+                    .unknownResponseIDs.isEmpty {
+                    RootState.shared.didComplete(phase: .dasi)
                 }
                 else {
-                    rootState.didNotComplete(phase: .dasi)
+                    RootState.shared.didNotComplete(phase: .dasi)
                 }
             }
         }
@@ -74,9 +71,7 @@ struct SurveyContainerView: View {
 
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        SurveyContainerView()
-            .environmentObject(DASIPages(.landing))
-            .environmentObject(DASIResponseList())
+        SurveyContainerView(contentEnvt: DASIPages(.landing))
     }
 }
 

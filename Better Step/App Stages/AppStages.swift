@@ -18,6 +18,27 @@ final class AppStage: ObservableObject {
     @Published var completionSet: Set<AppStages> = []
     @Published var currentSelection: AppStages
 
+    /// Declare that _no_ stages have been completed.
+    ///
+    /// This is done with reference to `AppStage.shared`.
+    /// Think of it as a convenience view into `AppStage`'s bookkeeping.
+    func makeAllIncomplete() {
+        for stage in AppStages.allCases {
+            stage.makeIncomplete()
+        }
+    }
+
+    /// Declare that _no_ stages have been completed.
+    ///
+    /// This is done with reference to `AppStage.shared`.
+    /// Think of it as a convenience view into `AppStage`'s bookkeeping.
+    func makeAllComplete() {
+        for stage in AppStages.allCases {
+            stage.didComplete()
+        }
+    }
+
+
     private init(stage: AppStages = .onboard) {
         currentSelection = stage
     }
@@ -36,7 +57,7 @@ enum AppStages: Hashable, CaseIterable {
     case dasi, walk
     /// The user has entered the Report tab
     ///
-    /// You can't report without a `subjectID`
+    /// You can't report without an unwrapped `SubjectID.shared.subjectID`
     case report
     case configuration
 
@@ -92,15 +113,6 @@ extension AppStages {
         AppStage.shared.completionSet.remove(self)
     }
 
-    /// Declare that _no_ stages have been completed.
-    ///
-    /// This is done with reference to `AppStage.shared`.
-    /// Think of it as a convenience view into `AppStage`'s bookkeeping.
-    func makeAllIncomplete() {
-        for stage in Self.allCases {
-            stage.makeIncomplete()
-        }
-    }
 
     /// Whether this stage is to be presented and must be completed before reporting.
     ///
