@@ -110,25 +110,35 @@ struct ClearingView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 80.0) {
             List {
-                ForEach(thingsToClear.sorted()) { thing in
-
-
-
-
-
-                    // NOPE.
-                    // ClearingButton isolated in a ClearingView seems to show the right alert for the label of the button.
-
-                    // In SetupView, the alert text usually doesn't match the label.
-
-
-
-
-
-                    ClearingButton(shouldShow: $showingAlert,
-                                   thing: thing)
-                    .padding()
+                Button("Clear Survey") {
+                    Task {
+                        // NOTE: Bug risk.
+                        await DASIResponseList.clearAllDASI()
+                    }
                 }
+                Button("Clear Timed Walk") {
+                    #warning("unimplemented.")
+//                    RootState.shared.
+                }
+                Button("Clear Subject (all)") {
+                    Task {
+                        // NOTE: Bug risk.
+                        RootState.shared.subjectIDSubject.send(nil)
+                        await DASIResponseList.clearAllDASI()
+                        // TODO: Clear walk.
+                    }
+                }
+
+//                ForEach(thingsToClear.sorted()) { thing in
+//                    // NOPE.
+//                    // ClearingButton isolated in a ClearingView seems to show the right alert for the label of the button.
+//
+//                    // In SetupView, the alert text usually doesn't match the label.
+//
+//                    ClearingButton(shouldShow: $showingAlert,
+//                                   thing: thing)
+//                    .padding()
+//                }
             }
         }
         .navigationTitle("Clear Data")

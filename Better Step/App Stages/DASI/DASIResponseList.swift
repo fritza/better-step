@@ -155,6 +155,11 @@ final class DASIResponseList: ObservableObject {
         RootState.shared.dasiResponses.clearResponses()
     }
 
+    static func clearAllDASI() async {
+        clearResponses()
+        try? await RootState.shared.dasiFile.clearReportFile()
+    }
+
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
