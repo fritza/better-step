@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F023C5B27ECE52700C1EBC5 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C5A27ECE52700C1EBC5 /* AWSS3 */; };
+		1F023C5D27ECE52700C1EBC5 /* AWSS3Control in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C5C27ECE52700C1EBC5 /* AWSS3Control */; };
+		1F023C5F27ECE52700C1EBC5 /* AWSS3Outposts in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C5E27ECE52700C1EBC5 /* AWSS3Outposts */; };
+		1F023C6127ECE58B00C1EBC5 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C6027ECE58B00C1EBC5 /* AWSS3 */; };
+		1F023C6327ECE58B00C1EBC5 /* AWSS3Control in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C6227ECE58B00C1EBC5 /* AWSS3Control */; };
+		1F023C6527ECE58B00C1EBC5 /* AWSS3Outposts in Frameworks */ = {isa = PBXBuildFile; productRef = 1F023C6427ECE58B00C1EBC5 /* AWSS3Outposts */; };
+		1F023C6727ECE63600C1EBC5 /* AWSTryout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */; };
 		1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
 		1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
@@ -98,6 +105,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSTryout.swift; sourceTree = "<group>"; };
 		1F0B674E276FA6C900011A7E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B6751276FA6C900011A7E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
 		1F0B6753276FA6C900011A7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -171,14 +179,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F023C5B27ECE52700C1EBC5 /* AWSS3 in Frameworks */,
 				1FDE826427E3D7F700CD8368 /* ActivityView in Frameworks */,
 				1F8A065027A3528E00477379 /* Algorithms in Frameworks */,
 				1FF354442790D1F5000894B8 /* Collections in Frameworks */,
 				1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */,
 				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
+				1F023C5D27ECE52700C1EBC5 /* AWSS3Control in Frameworks */,
 				1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */,
 				1FF354462790D1F5000894B8 /* DequeModule in Frameworks */,
 				1F1BD8D727D1450300568ADF /* Numerics in Frameworks */,
+				1F023C5F27ECE52700C1EBC5 /* AWSS3Outposts in Frameworks */,
 				1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */,
 				1F1BD8D927D1450300568ADF /* RealModule in Frameworks */,
 			);
@@ -202,7 +213,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F023C6327ECE58B00C1EBC5 /* AWSS3Control in Frameworks */,
+				1F023C6127ECE58B00C1EBC5 /* AWSS3 in Frameworks */,
 				1FF1B59827DA78C60017E90C /* Collections in Frameworks */,
+				1F023C6527ECE58B00C1EBC5 /* AWSS3Outposts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
+				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
 				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
 				1FF1B58B27DA77590017E90C /* ContentView.swift */,
 				1FF1B58D27DA775B0017E90C /* Assets.xcassets */,
@@ -460,6 +475,9 @@
 				1F1BD8D627D1450300568ADF /* Numerics */,
 				1F1BD8D827D1450300568ADF /* RealModule */,
 				1FDE826327E3D7F700CD8368 /* ActivityView */,
+				1F023C5A27ECE52700C1EBC5 /* AWSS3 */,
+				1F023C5C27ECE52700C1EBC5 /* AWSS3Control */,
+				1F023C5E27ECE52700C1EBC5 /* AWSS3Outposts */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -516,6 +534,9 @@
 			name = "Async Accel";
 			packageProductDependencies = (
 				1FF1B59727DA78C60017E90C /* Collections */,
+				1F023C6027ECE58B00C1EBC5 /* AWSS3 */,
+				1F023C6227ECE58B00C1EBC5 /* AWSS3Control */,
+				1F023C6427ECE58B00C1EBC5 /* AWSS3Outposts */,
 			);
 			productName = "Async Accel";
 			productReference = 1FF1B58727DA77590017E90C /* Async Accel.app */;
@@ -563,6 +584,7 @@
 				1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */,
+				1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -690,6 +712,7 @@
 			files = (
 				1FF1B59B27DAA66C0017E90C /* SimpleBarView.swift in Sources */,
 				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
+				1F023C6727ECE63600C1EBC5 /* AWSTryout.swift in Sources */,
 				1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */,
 				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
@@ -1075,6 +1098,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/awslabs/aws-sdk-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
 		1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-numerics.git";
@@ -1126,6 +1157,36 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F023C5A27ECE52700C1EBC5 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3;
+		};
+		1F023C5C27ECE52700C1EBC5 /* AWSS3Control */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3Control;
+		};
+		1F023C5E27ECE52700C1EBC5 /* AWSS3Outposts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3Outposts;
+		};
+		1F023C6027ECE58B00C1EBC5 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3;
+		};
+		1F023C6227ECE58B00C1EBC5 /* AWSS3Control */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3Control;
+		};
+		1F023C6427ECE58B00C1EBC5 /* AWSS3Outposts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F023C5927ECE52700C1EBC5 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSS3Outposts;
+		};
 		1F1BD8D427D1450300568ADF /* ComplexModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */;
