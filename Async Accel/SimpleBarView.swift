@@ -7,6 +7,40 @@
 
 import SwiftUI
 
+struct LogClipper {
+    /// Inputs will be limited to ±`maxAbsoluteValue`. Out-of-range values will be clipped to the maximum absolute value.
+    let maxAbsoluteValue: Double
+    /// The height of the space available for drawing the value.
+    let outputSpan: Double
+    let ε = exp(-3.0) // 0.05 G
+
+    func rescaling(_ value: Double) -> Double {
+        let sign = value.sign
+        let absoluteInput = abs(value)
+        let logInput = log(absoluteInput)
+
+/*
+ Now I'm painted into a corner.
+ What I want is to stack two rectangles, one for +a going up, one for -a going down. But if |a| is very small, log(a) → -∞.
+ So: pin log(a) to ±0 below a certain ε. Say e⁻³ (0.05 G), maybe e⁻⁴ (0.02 G)
+
+ Further: ln(ε) has to be added to ln(|a|) so the tiny g forces get translated to the ±base of the rectangles to be drawn. Which means
+ * Clip a to ε...maxAbsoluteValue — (aʹ)
+ * ln(aʹ) goes from ln(ε) ... ln(maxAbsoluteValue)
+ * Add ln(ε) to ln(aʹ) — ln(εaʹ)
+ * Scale so ln(maxAbsoluteValue) → 0.5˙ * outputSpan
+
+ ACTUALLY… What am I trying to solve here? For sake of computation, we care only about |a|.
+    OTOH, we sometimes care about negative G
+          we care about saturating the bars.
+    If we don't care about negatives, then ln(|a|) makes sense,
+          but we have to chop off the bottom of the range.
+ */
+
+        return absoluteInput
+    }
+}
+
 struct SimpleBarView: View {
     /// The breadth of the space between bars, as a fraction of the bar width
     let spaceFraction: CGFloat
