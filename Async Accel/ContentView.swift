@@ -20,7 +20,7 @@ final class CMWatcher: ObservableObject {
     private var motionManager: MotionManager
 
     init() {
-        motionManager = MotionManager(interval: 1.0)
+        motionManager = MotionManager()
         reading = CMAccelerometerData()
 
         Task {
@@ -45,7 +45,7 @@ struct ContentView: View {
     }
     @State private var isCollecting = false
 //    private var motionManager = CMWatcher()
-    private var motionManager = MotionManager(interval: Self.hzOverride)
+    private var motionManager = MotionManager()
     @State var reading: CMAccelerometerData = CMAccelerometerData()
     var bufferCount: String = ""
     mutating func updateCount(_ n: Int) {
