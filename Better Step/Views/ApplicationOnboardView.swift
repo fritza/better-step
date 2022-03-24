@@ -72,5 +72,6 @@ struct OnboardView_Previews: PreviewProvider {
         ApplicationOnboardView()
             .frame(width: .infinity)//, height: 300)
             .padding()
+            .environmentObject(SubjectID.shared)
     }
 }
