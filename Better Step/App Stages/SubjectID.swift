@@ -16,6 +16,14 @@ import Foundation
 final class SubjectID: ObservableObject {
     static let shared = SubjectID()
 
+    /// Remove the backing `UserDefaults` value for the subject ID.
+    ///
+    /// **Use with caution:** The remove-all-data button depends on a lagging Subject ID; clearing it would make it difficult (or worse) to identify what files to delete.
+    static func clear() {
+        UserDefaults.standard
+            .removeObject(forKey: AppStorageKeys.subjectID.rawValue)
+    }
+
     @Published var subjectID: String? {
         didSet {
             UserDefaults.standard
@@ -26,6 +34,6 @@ final class SubjectID: ObservableObject {
 
     private init() {
         subjectID = UserDefaults.standard
-            .string(forKey: AppStorageKeys.subjectID.rawValue)
+            .string(forKey: AppStorageKeys.subjectID.rawValue) ?? ""
     }
 }

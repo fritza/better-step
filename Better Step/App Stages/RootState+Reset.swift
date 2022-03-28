@@ -43,34 +43,11 @@ extension RootState {
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .sink { id in
                 if let id = id {
-
-                    // If there's a lagging state (file actors, etc.), proceed as if -> nil
-                    // Either way, then proceed as to create.
-
-
-                    // nil or subject ID -> different subject ID
-                    // Destroy existing subject ID stuff
-                    //   - DASI
-                    //      - file (the File actor)
-                    //      - DASI in-memory content
-                    //      - Bail from DASI page? Or can we trust no ∆ID while it's visible?
-                    //
-                    //   - Walk
-                    //      - file
-                    //      - record (the Sink actor).
-                    //
-                    //  - completion
-                    //      - un-complete all.
-
+                    // See NOTES below on requirements for clearing
                     // COMMON
                     AppStage.shared.makeAllIncomplete()
 
 
-                    //
-                    // Identify existing structure by the lagging references to the file, records, etc.
-
-                    // If -> "", set to nil?
-                    // TODO: Make onboarding nil the observed ID when field is empty.
                 }
                 else {
                     // subject ID -> nil
@@ -80,6 +57,32 @@ extension RootState {
             }
             .store(in: &cancellables)
     }
+
+/*  MARK: - NOTES
+
+ If there's a lagging state (file actors, etc.), proceed as if -> nil
+ Either way, then proceed as to create.
+
+ nil or subject ID -> different subject ID
+ Destroy existing subject ID stuff
+   - DASI
+      - file (the File actor)
+      - DASI in-memory content
+      - Bail from DASI page? Or can we trust no ∆ID while it's visible?
+
+   - Walk
+      - file
+      - record (the Sink actor).
+
+  - completion
+      - un-complete all.
+
+
+ Identify existing structure by the lagging references to the file, records, etc.
+
+ If -> "", set to nil?
+ TODO: Make onboarding nil the observed ID when field is empty.
+*/
 
 /*
  No state, looks up sID dynamically:
@@ -103,6 +106,8 @@ extension RootState {
 
             dasiResponses.clearResponses()
             try await dasiContent.teardownFromSubjectID()
+
+            SubjectID.clear()
         }
     }
 
