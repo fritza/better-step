@@ -102,16 +102,15 @@ struct SimpleBarView: View {
                     HStack(alignment: .bottom, spacing: proxy.size.width*spaceWidth) {
                         // TODO: Find another ForEach
                         ForEach(data, id: \.self) { datum in
-//                            ForEach(0..<data.count) { index in
                             Rectangle()
                                 .frame(width:
                                         barWidth * proxy.size.width,
                                        height: proxy.size.height * datum/maxValue)
-//                                .foregroundColor(Color.teal)
                                 .foregroundColor(barColor)
                                 .shadow(color: .gray,
-                                        radius: 4.0,
+                                        radius: 2.0,
                                         x: 0, y: 0)
+                                .border(.black, width: 1)
                         }
                     }
                     .padding(EdgeInsets(top: 5.0, leading: 0, bottom: 0, trailing: 0))

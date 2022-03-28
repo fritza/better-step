@@ -38,7 +38,7 @@ final class CMWatcher: ObservableObject {
 }
 
 struct ContentView: View {
-    static let hzOverride: TimeInterval = 1.0/10.0
+    static let hzOverride: TimeInterval = 1.0/4.0
 
     enum Errors: Error {
         case collectionCancelled
@@ -90,7 +90,7 @@ struct ContentView: View {
                         abs(reading.acceleration.y),
                         abs(reading.acceleration.z)
                     ],
-                    spacing: 0.20, color: .teal, reservedMax: 1.25)
+                    spacing: 0.20, color: .blue, reservedMax: 1.25)
                     .animation(
                         .easeInOut(duration: Self.hzOverride),
                         value: reading.acceleration.x)

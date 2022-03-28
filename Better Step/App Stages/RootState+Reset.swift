@@ -107,6 +107,9 @@ extension RootState {
             dasiResponses.clearResponses()
             try await dasiContent.teardownFromSubjectID()
 
+            // TODO: MAKE SURE this is the right thing to do.
+            //       ATW the only caller is the clear-all button in SetupView > ClearingView
+
             SubjectID.clear()
         }
     }
