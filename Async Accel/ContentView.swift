@@ -8,35 +8,6 @@
 import SwiftUI
 import CoreMotion
 
-extension CMAcceleration: CustomStringConvertible {
-    public var description: String {
-        "Acc(\(x.pointThree), \(y.pointThree), \(z.pointThree))"
-    }
-}
-
-final class CMWatcher: ObservableObject {
-    @Published var reading: CMAccelerometerData
-    static var census: Int = 0
-    private var motionManager: MotionManager
-
-    init() {
-        motionManager = MotionManager()
-        reading = CMAccelerometerData()
-
-        Task {
-            do {
-                for try await datum in motionManager {
-                    reading = datum
-                    CMWatcher.census = await motionManager.count()
-                }
-            }
-            catch {
-                motionManager.cancelUpdates()
-            }
-        }
-    }
-}
-
 struct ContentView: View {
     static let hzOverride: TimeInterval = 1.0/4.0
 
@@ -46,7 +17,8 @@ struct ContentView: View {
     @State private var isCollecting = false
 //    private var motionManager = CMWatcher()
     private var motionManager = MotionManager()
-    @State var reading: CMAccelerometerData = CMAccelerometerData()
+//    @State var reading: CMAccelerometerData = CMAccelerometerData()
+    @State var reading: CMAcceleration = CMAcceleration()
     var bufferCount: String = ""
     mutating func updateCount(_ n: Int) {
         bufferCount = String(n)
@@ -57,12 +29,15 @@ struct ContentView: View {
             return (status: "Not available", button: "")
         }
         else if isCollecting  {
-            return (status: reading.acceleration.description, button: "Stop")
+            return (status: reading.description, button: "Stop")
         }
         else {
             return (status: "Idle", button: "Start")
         }
     }
+
+    @State var index = 0
+    @State var window = Array(repeating: CMAcceleration(), count: 10)
 
     var body: some View {
         VStack(alignment: .center, spacing: 20.0) {
@@ -84,16 +59,24 @@ struct ContentView: View {
             }
             .padding()
             if isCollecting {
-                SimpleBarView(
-                    [
-                        abs(reading.acceleration.x),
-                        abs(reading.acceleration.y),
-                        abs(reading.acceleration.z)
-                    ],
-                    spacing: 0.20, color: .blue, reservedMax: 1.25)
-                    .animation(
-                        .easeInOut(duration: Self.hzOverride),
-                        value: reading.acceleration.x)
+                GeometryReader { proxy in
+                    VStack {
+                        SimpleBarView(
+                            [
+                                abs(reading.x),
+                                abs(reading.y),
+                                abs(reading.z)
+                            ],
+                            spacing: 0.20, color: .blue, reservedMax: 1.25)
+//                        .animation(
+//                            .easeInOut(duration: 4*Self.hzOverride),
+//                            value: reading.x)
+                        .frame(height: 0.90 * proxy.size.height)
+                        SimpleHBarView(gRange: 0.5...1.25,
+                                       datum: reading)
+                        .frame(height: 0.1 * proxy.size.height)
+                    }
+                    }
             }
             Spacer()
         }
@@ -101,7 +84,11 @@ struct ContentView: View {
         .task {
             do {
                 for try await datum in motionManager {
-                    reading = datum
+                    defer { index = (index + 1) % window.count }
+                    window[index] = datum.acceleration
+                    let average = window
+                        .reduce(.zero, +) / window.count
+                    reading = average
                 }
             }
             catch {
