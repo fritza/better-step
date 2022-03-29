@@ -99,27 +99,37 @@ struct SimpleBarView: View {
                     EmptyView()
                 }
                 else {
-                    HStack(alignment: .bottom, spacing: proxy.size.width*spaceWidth) {
-                        // TODO: Find another ForEach
-                        ForEach(data, id: \.self) { datum in
-                            Rectangle()
-                                .frame(width:
-                                        barWidth * proxy.size.width,
-                                       height: proxy.size.height * datum/maxValue)
-                                .foregroundColor(barColor)
-                                .shadow(color: .gray,
-                                        radius: 2.0,
-                                        x: 0, y: 0)
-                                .border(.black, width: 1)
-                        }
-                    }
-                    .padding(EdgeInsets(top: 5.0, leading: 0, bottom: 0, trailing: 0))
-                    // I don't know why, but supplying
-                    // a leading pad shifts the entire view,
-                    // (background included?) to the trailing
-                    // side.
-                    // Trailing pad seems to make no difference.
+                    barsView(in: proxy.size)
+                        .padding(
+                            EdgeInsets(top: 5.0, leading: 0,
+                                       bottom: 0, trailing: 0))
+                    // See note after this method on padding anomaly
                 }
+            }
+        }
+    }
+
+    /*
+     NOTE
+     I don't know why, but supplying a leading pad
+     shifts the entire view, (background included?)
+     to the trailing side.
+     Trailing pad seems to make no difference.
+     */
+
+    func barsView(in size: CGSize) -> some View {
+        HStack(alignment: .bottom,
+               spacing: size.width*spaceWidth) {
+            ForEach(data, id: \.self) { datum in
+                Rectangle()
+                    .frame(width:
+                            barWidth * size.width,
+                           height: size.height * datum/maxValue)
+                    .foregroundColor(barColor)
+                    .shadow(color: .gray,
+                            radius: 2.0,
+                            x: 0, y: 0)
+                    .border(.black, width: 1)
             }
         }
     }

@@ -15,9 +15,7 @@ struct ContentView: View {
         case collectionCancelled
     }
     @State private var isCollecting = false
-//    private var motionManager = CMWatcher()
     private var motionManager = MotionManager()
-//    @State var reading: CMAccelerometerData = CMAccelerometerData()
     @State var reading: CMAcceleration = CMAcceleration()
     var bufferCount: String = ""
     mutating func updateCount(_ n: Int) {
