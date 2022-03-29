@@ -7,41 +7,9 @@
 
 import SwiftUI
 
-struct LogClipper {
-    /// Inputs will be limited to ±`maxAbsoluteValue`. Out-of-range values will be clipped to the maximum absolute value.
-    let maxAbsoluteValue: Double
-    /// The height of the space available for drawing the value.
-    let outputSpan: Double
-    let ε = exp(-3.0) // 0.05 G
-
-    func rescaling(_ value: Double) -> Double {
-        let sign = value.sign
-        let absoluteInput = abs(value)
-        let logInput = log(absoluteInput)
-
-/*
- Now I'm painted into a corner.
- What I want is to stack two rectangles, one for +a going up, one for -a going down. But if |a| is very small, log(a) → -∞.
- So: pin log(a) to ±0 below a certain ε. Say e⁻³ (0.05 G), maybe e⁻⁴ (0.02 G)
-
- Further: ln(ε) has to be added to ln(|a|) so the tiny g forces get translated to the ±base of the rectangles to be drawn. Which means
- * Clip a to ε...maxAbsoluteValue — (aʹ)
- * ln(aʹ) goes from ln(ε) ... ln(maxAbsoluteValue)
- * Add ln(ε) to ln(aʹ) — ln(εaʹ)
- * Scale so ln(maxAbsoluteValue) → 0.5˙ * outputSpan
-
- ACTUALLY… What am I trying to solve here? For sake of computation, we care only about |a|.
-    OTOH, we sometimes care about negative G
-          we care about saturating the bars.
-    If we don't care about negatives, then ln(|a|) makes sense,
-          but we have to chop off the bottom of the range.
- */
-
-        return absoluteInput
-    }
-}
-
+// MARK: - SimpleBarView
 struct SimpleBarView: View {
+    // MARK: - Properties
     /// The breadth of the space between bars, as a fraction of the bar width
     let spaceFraction: CGFloat
 
@@ -50,26 +18,43 @@ struct SimpleBarView: View {
     /// The width of the empty spaces in points.
     let spaceWidth: CGFloat
 
-    /// The data to be drawn. Must be non-negative.
+    /// The data to be drawn. All vaues must be non-negative.
     let data: [Double]
     /// The greatest value among the `data`.
     let maxValue: Double
 
     let barColor: Color
 
-    init(_ points: [Double], spacing: CGFloat = 0.05, color: Color = .teal, reservedMax: CGFloat = 0) {
-        self.data = points
-        self.spaceFraction = spacing
+    // MARK: - Initialization
+
+    /// Initialize the view, including the represented data.
+    ///
+    /// Layout and display depend on the length of the data `Array`; varying the count would render as expected. ATW that's not needed.
+    ///
+    /// `reservedMax` and `maxValue` represent the greatest value the view will display; anything greater is clipped to the top of the view. Callers are advised to set this value; otherwise it defaults to the maximum of `points`, which would rescale the entire graph at each tick of the data clock.
+    /// - Parameters:
+    ///   - points: The data to be represented. If empty, no bars will be displayed.
+    ///   - spacing: The horizontal inset for each bar, as a fraction of the bar's share of the stack. Default `0.05`.
+    ///   - color: The color of the bars. Default `.teal`. Callers are advised to find something else, because teal is disgusting.
+    ///   - reservedMax: The maximum value the view will represent; any greater value will be clipped to the top of the view.  Defaults to `0`, which rescales the vertical axis rather than clipping it.
+    init(_ points: [Double], spacing: CGFloat = 0.05,
+         color: Color = .teal, reservedMax: CGFloat = 0) {
+        (barColor, data, spaceFraction) = (color, points, spacing)
 
         let dblBarCount = CGFloat(points.count)
-        let denominator = dblBarCount + spacing * (dblBarCount-1)
-        self.barWidth = 1.0 / denominator
-        self.spaceWidth = spacing * barWidth
-
-        let dataMaximum = data.max() ?? 0.0
+        let dataMaximum = points.max() ?? 0.0
         self.maxValue = (reservedMax > dataMaximum) ? reservedMax : dataMaximum
 
-        barColor = color
+        if points.isEmpty {
+            // Prevent a division-by-zero (no bars)
+            self.barWidth = 0.0
+            self.spaceWidth = 0.0
+        }
+        else {
+            let denominator = dblBarCount + spacing * (dblBarCount-1)
+            self.barWidth = 1.0 / denominator
+            self.spaceWidth = spacing * barWidth
+        }
     }
 
     /// A `Gradient` to draw behind the bars.
@@ -79,6 +64,8 @@ struct SimpleBarView: View {
         ]
     )
 
+    // MARK: - Views
+    /// `View` protocol adoption.
     var body: some View {
         GeometryReader {
             proxy in
@@ -117,13 +104,21 @@ struct SimpleBarView: View {
      Trailing pad seems to make no difference.
      */
 
-    func barsView(in size: CGSize) -> some View {
+    /// A horizontal visual array of the values in `data`.
+    ///
+    /// Depends on
+    ///
+    /// - `self.barColor` (into `init(_:spacing:color:reservedMax:)`)
+    /// - `self.spaceWidth` (constant)
+    /// - `self.barWidth` (constant set in `init`)
+    /// - Parameter size: The size of the `SimpleBarView`, as determined by `GeometryReader`.
+    /// - Returns: An `HStack` of `Rectangle`s whose height represents `data` relative to the known (or reserved) maximum value.
+    private func barsView(in size: CGSize) -> some View {
         HStack(alignment: .bottom,
                spacing: size.width*spaceWidth) {
             ForEach(data, id: \.self) { datum in
                 Rectangle()
-                    .frame(width:
-                            barWidth * size.width,
+                    .frame(width : barWidth * size.width,
                            height: size.height * datum/maxValue)
                     .foregroundColor(barColor)
                     .shadow(color: .gray,
