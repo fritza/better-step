@@ -119,6 +119,19 @@ actor DASIReportFile: SubjectIDDependent {
         try outputHandle!.write(contentsOf: contentData)
     }
 
+    /// Process the `responses` list into lines of `csv` data for each, and then into `Data`
+    ///
+    /// The returned `Data` may be empty if `self` contains no `DASIUserResponses` (plausible), or the `String`-to-UTF-8 data conversion failed (should be impossible).
+    /// - warning: Do not use `compose()` before all desired records have been entered in `responses`. There is no provision for resuming a partial write.
+    /// - Returns: `Data` with content for the `csv` file. May be empty.
+    private func compose() -> Data {
+        let content = responses
+            .flatMap(\.csvStrings)
+            .joined(separator: "\r\n")
+        return content.data(using: .utf8)
+        ?? Data()
+    }
+
     /// Translates the accumulated `DASIUserResponse`s into `csv` format and writes it to the designated file.
     ///
     /// Regardless of success, expect the file to be closed and the `outputHandle` file handle to be nilled-out.

@@ -8,35 +8,6 @@
 import SwiftUI
 import MessageUI
 
-struct Accelerometry: Decodable {
-    @AppStorage(AppStorageKeys.walkInMinutes.rawValue) var durationInMinutes = 6
-
-    let frequency: Double
-    let instructionAvailable: String
-    let instructionNotAvailable: String
-
-    enum CodingKeys: String, CodingKey {
-        case frequency, instructionAvailable, instructionNotAvailable
-    }
-
-    func instruction(available: Bool) -> String {
-        let workingString = (available ?
-        instructionAvailable : instructionNotAvailable) as NSString
-        let retval = workingString
-            .replacingOccurrences(of: "$MIN$",
-                                  with: durationInSeconds.spelled)
-        return retval
-    }
-
-    /// Duration of the walk **IN SECONDS**.
-    var durationInSeconds: Double {
-        assert((1...10).contains(durationInMinutes))
-        let durationInSeconds = 60 * durationInMinutes
-        return Double(durationInSeconds)
-    }
-}
-
-
 /// Value embodiment of the settings in `config-mini.plist`.
 ///
 /// Do not instantiate `Configuration` yourself. Access settings through `Configuration.shared`, which will load the data if needed.
@@ -48,8 +19,6 @@ struct Configuration: Decodable {
     let resultStrings: [String]!
     let mailing: [String:String]!
     let mailResults: [[String:String]]!
-
-    let accelerometer: Accelerometry!
 
     private static func loadConfiguration() -> Configuration {
         let decoder = PropertyListDecoder()
