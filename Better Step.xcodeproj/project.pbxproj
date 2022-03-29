@@ -70,7 +70,6 @@
 		1FDE826427E3D7F700CD8368 /* ActivityView in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDE826327E3D7F700CD8368 /* ActivityView */; };
 		1FDE828C27EBA00C00CD8368 /* RootState+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE828B27EBA00C00CD8368 /* RootState+Reset.swift */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
-		1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B342799D54100E319ED /* AccelerationWriter.swift */; };
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
 		1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B38279A140600E319ED /* WalkCountdownView.swift */; };
 		1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
@@ -169,7 +168,6 @@
 		1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportFile.swift; sourceTree = "<group>"; };
 		1FDE828B27EBA00C00CD8368 /* RootState+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootState+Reset.swift"; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
-		1FF11B342799D54100E319ED /* AccelerationWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationWriter.swift; sourceTree = "<group>"; };
 		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
 		1FF11B38279A140600E319ED /* WalkCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkCountdownView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 			isa = PBXGroup;
 			children = (
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
-				1FF11B342799D54100E319ED /* AccelerationWriter.swift */,
 			);
 			path = Accelerometry;
 			sourceTree = "<group>";
@@ -711,7 +708,6 @@
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
-				1FF11B352799D54100E319ED /* AccelerationWriter.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,

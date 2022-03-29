@@ -38,24 +38,6 @@ let thingsToClear: [ThingToClear] = {
     }
 }()
 
-
-@available(*, unavailable, message: "Use RootStorage or document environment objects.")
-final class Configurations: ObservableObject, CustomStringConvertible {
-    var emailAddress: String
-    var durationInMinutes: Int
-
-    var description: String {
-        let emailString = emailAddress
-        let durationString = String(describing: durationInMinutes)
-        return "Configurations(email: \(emailString), duration: \(durationString))"
-    }
-
-    init(startingEmail: String, duration: Int) {
-        emailAddress      = "" // startingEmail
-        durationInMinutes = 6 // duration
-    }
-}
-
 private enum ControlFocus: String {
     case emailField
     case durationStepper

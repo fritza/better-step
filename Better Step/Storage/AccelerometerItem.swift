@@ -9,6 +9,10 @@ import Foundation
 import CoreMotion
 
 
+// FIXME: Not useful for magnitude reports.
+/// A `Codable`, `Timestamped` representation of `x`, `y`, and `z` acceleration components.
+///
+/// This is the representation for a CSV record to be reported to the investigators.
 struct AccelerometerItem: Codable, Timestamped, XYZ  {
     let x, y, z: Double
     let timestamp: TimeInterval

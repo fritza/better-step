@@ -91,36 +91,5 @@ extension PerSubjectFileCoordinator {
             }
             return expectedURL
         }
-
-
-@available(*, unavailable, message: "Clients should handle writing to a known-extant file.")
-    func write(data: Data,
-               for purpose: FlatFiles) throws {
-        let fm = FileManager.default
-        let destination = try directoryURLForSubject(
-                 creating: true)
-            .appendingPathComponent(purpose.rawValue, isDirectory: false)
-
-        try fm.removeItem(at: destination)
-        try data.write(to: destination)
-    }
-
-    @available(*, unavailable, message: "Clients should handle creating/deleting extant files.")
-    func deleteContainers() throws {
-        let fm = FileManager.default
-        let containerURL = try self.directoryURLForSubject(creating: false)
-        do {
-            try fm.removeItem(at: containerURL)
-        }
-        catch {
-            #if DEBUG
-            print(#function, "deletion of", containerURL.path, "failed:", error)
-            #endif
-            throw error
-        }
-    }
-
-    // TODO: I REALLY need a way to write data asynchronously.
-// Not so much for DASI, but certainly the accelerometry.
 }
 

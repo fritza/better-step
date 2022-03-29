@@ -28,11 +28,6 @@ struct Accelerometry: Decodable {
         return retval
     }
 
-    /// Ignored in favor of the default keyed `walkDurationSecondsKey`
-    //        let duration: Double
-    @available(*, unavailable, renamed: "durationInSeconds")
-    var duration: Double { fatalError("replaced duration with durationInSeconds") }
-
     /// Duration of the walk **IN SECONDS**.
     var durationInSeconds: Double {
         assert((1...10).contains(durationInMinutes))
