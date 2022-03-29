@@ -14,6 +14,7 @@ final class AccelerationWriter {
     let outputURL: URL
     let outputHandle: FileHandle
 
+    // Can I detect changes to SubjectID.shared.subjectID?
     /// Create a stream of CSV `Data` derived from a stream of `CMAccelerometerData`, then append it to a file at `destinationURL`.
     ///
     /// If a file already exsts at `destinationURL`, it is deleted/overwritten.

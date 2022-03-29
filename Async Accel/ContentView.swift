@@ -81,6 +81,7 @@ struct ContentView: View {
         .padding()
         .task {
             do {
+                // TODO: Getting complex; Combine Publisher?
                 for try await datum in motionManager {
                     defer { index = (index + 1) % window.count }
                     window[index] = datum.acceleration

@@ -75,8 +75,7 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
-            // TODO: Understand whether the SubjectID @EnvironmentObject is available here.
-                guard let subjectID = subjectIDState.subjectID else {
+            guard let subjectID = SubjectID.shared.subjectID else {
                 throw FileStorageErrors.noSubjectID
             }
 
@@ -94,7 +93,7 @@ extension PerSubjectFileCoordinator {
         }
 
 
-@available(*, deprecated, message: "Clients should handle writing to a known-extant file.")
+@available(*, unavailable, message: "Clients should handle writing to a known-extant file.")
     func write(data: Data,
                for purpose: FlatFiles) throws {
         let fm = FileManager.default
@@ -106,6 +105,7 @@ extension PerSubjectFileCoordinator {
         try data.write(to: destination)
     }
 
+    @available(*, unavailable, message: "Clients should handle creating/deleting extant files.")
     func deleteContainers() throws {
         let fm = FileManager.default
         let containerURL = try self.directoryURLForSubject(creating: false)

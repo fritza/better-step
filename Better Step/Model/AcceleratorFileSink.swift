@@ -13,7 +13,7 @@ import Collections
 /// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
 final actor AccelerometerFileSink {
     // No @EnvironmentObjects in actors.
-    static let dequeInitialSize     = 1000
+    static let dequeInitialSize = 1000
     var subjectID               : String
     let fileURL                 : URL
     private(set) var writeHandle: FileHandle?
