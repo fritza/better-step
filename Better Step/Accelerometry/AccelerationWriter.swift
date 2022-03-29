@@ -8,10 +8,14 @@
 import Foundation
 import CoreMotion
 
+@available(*, unavailable, message: "Use AccelerometerFileSink instead.")
 final class AccelerationWriter {
     typealias InputStream = AsyncStream<CMAccelerometerData>
+    /// The `AsyncStream` of accelerometry readings.
     let stream: InputStream
+    /// The URL for the output CSV file
     let outputURL: URL
+    /// The handle for writing to the output CSV file.
     let outputHandle: FileHandle
 
     // Can I detect changes to SubjectID.shared.subjectID?
