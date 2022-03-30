@@ -11,7 +11,6 @@ import Collections
 
 /// Vendor for URLs of output files.
 final class PerSubjectFileCoordinator {
-    @EnvironmentObject var subjectIDState: SubjectID
     static var shared = PerSubjectFileCoordinator()
 
     // TODO: zip the output directory

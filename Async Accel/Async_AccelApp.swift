@@ -24,16 +24,18 @@ import SwiftUI
 
  _Changing_ Subject ID invalidates
     Subject ID -> PerUserSubjectCoordinator -> AcceleratorFileSink
-
- 
-
  */
 
 @main
 struct Async_AccelApp: App {
+    @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .sheet(isPresented: $shouldShowSheet) {
+                    SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)
+                }
+                .environmentObject(SubjectID.shared)
         }
     }
 }

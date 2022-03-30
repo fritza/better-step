@@ -59,6 +59,9 @@
 		1FB684FB27F252BE00612924 /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
 		1FB684FE27F274CF00612924 /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
+		1FB6850027F4B96800612924 /* ReportingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FF27F4B96700612924 /* ReportingView.swift */; };
+		1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */; };
+		1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6850327F4DFDC00612924 /* CompletionRowView.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -158,6 +161,9 @@
 		1FB684F527F24FC100612924 /* SimpleHBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHBarView.swift; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
+		1FB684FF27F4B96700612924 /* ReportingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingView.swift; sourceTree = "<group>"; };
+		1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDisplayView.swift; sourceTree = "<group>"; };
+		1FB6850327F4DFDC00612924 /* CompletionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionRowView.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -364,6 +370,7 @@
 		1FF1B58827DA77590017E90C /* Async Accel */ = {
 			isa = PBXGroup;
 			children = (
+				1FB6850327F4DFDC00612924 /* CompletionRowView.swift */,
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
 				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
 				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
@@ -371,6 +378,8 @@
 				1FB684F127F22AFE00612924 /* SubjectUIEditView.swift */,
 				1FB684F327F2363500612924 /* SubjectIDSheetView.swift */,
 				1FF1B58B27DA77590017E90C /* ContentView.swift */,
+				1FB684FF27F4B96700612924 /* ReportingView.swift */,
+				1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */,
 				1FF1B58D27DA775B0017E90C /* Assets.xcassets */,
 				1FF1B58F27DA775B0017E90C /* Preview Content */,
 			);
@@ -744,6 +753,7 @@
 				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
 				1FB684F227F22AFE00612924 /* SubjectUIEditView.swift in Sources */,
 				1FB684F427F2363500612924 /* SubjectIDSheetView.swift in Sources */,
+				1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */,
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
 				1FB684FB27F252BE00612924 /* Numeric+extensions.swift in Sources */,
 				1FB684E427F2254400612924 /* AcceleratorFileSink.swift in Sources */,
@@ -752,6 +762,8 @@
 				1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */,
 				1FB684EC27F2265900612924 /* XYZ.swift in Sources */,
 				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
+				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
+				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
 				1FB684EE27F226C900612924 /* FileManager+extensions.swift in Sources */,
 				1FB684FE27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
