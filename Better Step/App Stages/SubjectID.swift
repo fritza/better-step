@@ -24,6 +24,15 @@ final class SubjectID: ObservableObject {
             .removeObject(forKey: AppStorageKeys.subjectID.rawValue)
     }
 
+    /// The ID of the active subject/user. If none, `nil`. Initially from `UserDefaults` (`subjectID`)
+    ///
+    /// Setting `subjectID` also sets
+    /// - `UserDefaults` (`subjectID`)
+    /// - `noSubjectID` if `subjectID` is `nil`
+    /// - `unwrappedSubjectID`, to value, or "" if `nil.
+    ///
+    /// - note: `nil` value at startup to trigger presentation of `SubjectIDSheetView`.
+    ///
     @Published var subjectID: String? {
         didSet {
             UserDefaults.standard

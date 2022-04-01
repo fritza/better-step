@@ -370,7 +370,6 @@
 		1FF1B58827DA77590017E90C /* Async Accel */ = {
 			isa = PBXGroup;
 			children = (
-				1FB6850327F4DFDC00612924 /* CompletionRowView.swift */,
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
 				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
 				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
@@ -379,6 +378,7 @@
 				1FB684F327F2363500612924 /* SubjectIDSheetView.swift */,
 				1FF1B58B27DA77590017E90C /* ContentView.swift */,
 				1FB684FF27F4B96700612924 /* ReportingView.swift */,
+				1FB6850327F4DFDC00612924 /* CompletionRowView.swift */,
 				1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */,
 				1FF1B58D27DA775B0017E90C /* Assets.xcassets */,
 				1FF1B58F27DA775B0017E90C /* Preview Content */,

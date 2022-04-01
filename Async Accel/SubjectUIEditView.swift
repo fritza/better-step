@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /// An editor `Form` to collect a fresh patient/subject ID.
 ///
@@ -14,16 +15,11 @@ import SwiftUI
 /// - note: Also displays a `Text` row showing the value as understood iff the `DEBUG` compilation symbol is defined.
 struct SubjectUIEditView: View {
     /// Working value for the subject ID, for the use of the `TextField`. Updates the shared `SubjectID` upon `didSet`.
-    @State private var idString: String {
-        didSet {
-            SubjectID.shared.subjectID =
-            idString.isEmpty ? nil : idString
-        }
-    }
+    var idString: Binding<String>
 
     /// Create a new `SubjectUIEditView`. Clients have no direct connection to the value; the "return" value is in `SubjectID.shared.subjectID`.
-    init() {
-        self.idString = SubjectID.shared.subjectID ?? ""
+    init(id: Binding<String>) {
+        idString = id
     }
 
     var body: some View {
@@ -32,26 +28,34 @@ struct SubjectUIEditView: View {
                 // TODO: change "patient ID" to subject when needed.
                 //       Heuristic: If DASI is available, it's a patient.
                 Section("Enter your patient ID") {
-                    TextField("Subject ID", text: $idString)
-                    #if DEBUG
-                    Text(idString)
-                    #endif
+                    TextField("Subject ID",
+                              text: idString)
+#if DEBUG
+                    Text(idString.wrappedValue)
+#endif
                 }
             }
             // FIXME: Forced empirical height.
-            #if DEBUG
+#if DEBUG
             .frame(height: 200)
-            #else
+#else
             .frame(height: 160)
-            #endif
+#endif
         }
     }
 }
 
+final class JustADemo: ObservableObject {
+    @State var editValue: String
+    init(_ val: String) { editValue = val }
+}
+
 struct SubjectUIEditView_Previews: PreviewProvider {
     static var previews: some View {
-//        SubjectID.shared.subjectID = "Groovy"
         SubjectID.clear()
-        return SubjectUIEditView()
+        let holder = JustADemo(SubjectID.shared.unwrappedSubjectID)
+        return SubjectUIEditView(
+            id: holder.$editValue)
+        .environmentObject(SubjectID.shared)
     }
 }

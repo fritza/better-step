@@ -31,5 +31,5 @@ struct CompletionDisplayView_Previews: PreviewProvider {
         CompletionDisplayView(items: statusItems)
             .padding()
             .environmentObject(SubjectID.shared)
-        }
     }
+}
