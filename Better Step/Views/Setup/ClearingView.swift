@@ -72,7 +72,16 @@ struct ClearingView: View {
         }
         .navigationTitle("Clear Data")
         .toolbar {
-            Button("Done", action: {dismiss()})
+            ToolbarItemGroup {
+                Button("Cancel", role: .cancel) {
+                    dismiss()
+                }
+                Spacer()
+                Button("Done", role: .destructive)  {
+                    // execute any clears
+                    dismiss()
+                }
+            }
         }
     }
 }
@@ -81,7 +90,6 @@ struct ClearingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ClearingView()
-                .navigationTitle("Clear")
         }
     }
 }
