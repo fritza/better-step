@@ -38,11 +38,40 @@ final class SubjectID: ObservableObject {
             UserDefaults.standard
                 .set(subjectID,
                      forKey: AppStorageKeys.subjectID.rawValue)
+            noSubjectID = (subjectID == nil)
+            let asUnwrapped = subjectID ?? ""
+            if unwrappedSubjectID != asUnwrapped {
+                // TODO: is it necessary to guard against ∞ loop?
+                unwrappedSubjectID = asUnwrapped
+            }
         }
     }
 
+
+    /// `SubjectID.subjectID` rendered as an unwrapped `String`.  `SubjectID.subjectID` updates this value when set.
+    ///
+    /// Initially set to `UserDefaults` (`subjectID`) `?? ""`
+    ///
+    /// Setting `unwrappedSubjectID` also sets `subjectID`, as when the **Proceed** button is tapped in `SubjectIDSheetView`.
+    ///
+    /// `SubjectIDSheetView` initializes its editable `String` from `unwrappedSubjectID`.
+    @Published var unwrappedSubjectID: String {
+        didSet {
+            if unwrappedSubjectID != oldValue {
+                // TODO: is it necessary to guard against ∞ loop?
+                subjectID = unwrappedSubjectID
+            }
+        }
+    }
+    
+    @Published var noSubjectID: Bool = true
+
+
     private init() {
-        subjectID = UserDefaults.standard
-            .string(forKey: AppStorageKeys.subjectID.rawValue) ?? ""
+        let _subID = UserDefaults.standard
+            .string(forKey: AppStorageKeys.subjectID.rawValue) // ?? ""
+        subjectID = _subID
+        noSubjectID = (_subID == nil)
+        unwrappedSubjectID = _subID ?? ""
     }
 }

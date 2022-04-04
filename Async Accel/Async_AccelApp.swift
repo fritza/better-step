@@ -23,19 +23,57 @@ import SwiftUI
     retrieved by UserDefaults (having previously been set by SubjectIDSheetView)
 
  _Changing_ Subject ID invalidates
-    Subject ID -> PerUserSubjectCoordinator -> AcceleratorFileSink
+ Subject ID -> PerUserSubjectCoordinator -> AcceleratorFileSink
+ */
+
+/*
+ For deciding whether to drop the SubjectIDSheetView:
+ Just keep the subjectID in Defaults.
+ The binding on whether to show the sheet could then be subjectID default = nil or empty
+ Don't allow the sheet to cancel/revert
+ The sheet holds off until accepted to transfer the value, because otherwise it just rolls up.
+ Or maybe just dismiss().
+ How do you reset the subject ID? Clear-ID button in Settings. If you have a wrong subject ID you want to replace, then ipso facto you aren't blocked by a sheet.
+ Bothersome Scenario:
+    The user does a clear-ID
+    The ID is cleared.
+    The sheet is then signaled to drop, right?
+        is this a problem? It does violate
+        stability: It's surprising that the settings should be shuttered just by hitting "clear."
+        safety/forgiveness: User loses sight of the Settings page (with no clue how to regain it)
+            Are all the others applied? Reverted?
+ So the guiding principle is that nothing happens, including/especially clears, until the user is done with the settings page entirely, and expresses the desire to do so. I think "expresses the desire" means leaving the tab.
  */
 
 @main
 struct Async_AccelApp: App {
     @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
+    @State var selectedTab: Int = 1
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .sheet(isPresented: $shouldShowSheet) {
-                    SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)
-                }
-                .environmentObject(SubjectID.shared)
+            TabView(selection: $selectedTab) {
+                ContentView()
+                    .tabItem {
+                        Label("Accelerometry", systemImage: "arrow.triangle.swap")
+                    }
+                    .tag(1)
+
+                ReportingView()
+                    .tabItem {
+                        Label("Reporting", systemImage: "envelope")
+                    }
+                    .tag(2)
+
+                Setup()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
+                    .tag(3)
+            }
+            .sheet(isPresented: $shouldShowSheet) {
+                SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)
+            }
+            .environmentObject(SubjectID.shared)
         }
     }
 }

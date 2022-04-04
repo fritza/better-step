@@ -68,6 +68,8 @@
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
+		1FD64EB127F7999E006C1E59 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD64EB027F7999E006C1E59 /* Setup.swift */; };
+		1FD64EB227F79FA1006C1E59 /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
 		1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
 		1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
 		1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
@@ -174,6 +176,7 @@
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceleratorFileSink.swift; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
+		1FD64EB027F7999E006C1E59 /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		1FDB373E27F789BD00E10D8E /* ClearingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearingView.swift; sourceTree = "<group>"; };
 		1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmClearingAlert.swift; sourceTree = "<group>"; };
 		1FDE825E27E29FFD00CD8368 /* AppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStages.swift; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
+				1FD64EB027F7999E006C1E59 /* Setup.swift */,
 				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
 				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
 				1FB684F527F24FC100612924 /* SimpleHBarView.swift */,
@@ -774,6 +778,7 @@
 				1FB684F427F2363500612924 /* SubjectIDSheetView.swift in Sources */,
 				1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */,
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
+				1FD64EB127F7999E006C1E59 /* Setup.swift in Sources */,
 				1FB684FB27F252BE00612924 /* Numeric+extensions.swift in Sources */,
 				1FB684E427F2254400612924 /* AcceleratorFileSink.swift in Sources */,
 				1F023C6727ECE63600C1EBC5 /* AWSTryout.swift in Sources */,
@@ -785,6 +790,7 @@
 				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
 				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
+				1FD64EB227F79FA1006C1E59 /* EmailFormView.swift in Sources */,
 				1FB684EE27F226C900612924 /* FileManager+extensions.swift in Sources */,
 				1FB684FE27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
 				1FB684F627F24FC100612924 /* SimpleHBarView.swift in Sources */,
