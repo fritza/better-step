@@ -7,17 +7,34 @@
 
 import Foundation
 import Collections
+// TODO: Should this be a category in a separate file?
+import Combine
 
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
 ///
 /// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
 final actor AccelerometerFileSink {
-    // No @EnvironmentObjects in actors.
+    enum Errors: Error {
+        case noHandleOpen(String?)
+
+        var localizedDescription: String {
+            switch self {
+            case .noHandleOpen(let fileName):
+                return "attempt to write a CSV file (\(fileName ?? "untitled")) that isn't open."
+            }
+        }
+    }
+
     static let dequeInitialSize = 1000
-    var subjectID               : String
-    let fileURL                 : URL
+    var fileURL                 : URL!
     private(set) var writeHandle: FileHandle?
     var acceleratorQueue        : Deque<AccelerometerItem>
+
+    static var shared: AccelerometerFileSink?
+    // Okay, so how do you fill it?
+    // There's a race between the asynchronous init
+    // and the first use.
+    // SubjectID: init addresses .shared. Does anyone else beforehand? Is that a problem, given that the access here is ostensibly a read, though it might have a side effect.
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
     ///
@@ -29,41 +46,101 @@ final actor AccelerometerFileSink {
     {
         assert(SubjectID.shared.subjectID != nil,
                "\(#function): SubjectID.shared not initialized (shouldn't get here before it's valid.")
-        self.subjectID = SubjectID.shared.subjectID!
-
         var _queue = Deque<AccelerometerItem>()
         _queue.reserveCapacity(Self.dequeInitialSize)
         acceleratorQueue = _queue
 
         // Apparently fileURLForSubject... is isolated to @MainActor.
-        let _fileURL =
-        try await PerSubjectFileCoordinator.shared
+        try open()
+    }
+
+    /// Open a `FileHandle` for writing to an acceleration CSV file.
+    ///
+    /// `self.fileURL` is refreshed whenever a CSV is opened for writing: The URL depends on the current subject ID.
+    /// - throws: `FileHandle` error, probably upon `fileURL` not referring to an extant file.
+    func open() throws {
+        fileURL = try PerSubjectFileCoordinator.shared
             .fileURLForSubject(
                 purpose: .walkingReportFile,
                 creating: true)
-        fileURL = _fileURL
         let _writeHandle = try FileHandle(
-            forWritingTo: _fileURL)
+            forWritingTo: fileURL)
         writeHandle = _writeHandle
     }
 
+    /// Storage for the subject-id `.sink`. No need to purge the set, as accelerometry file handling lasts for the life of the app.
+    var cancellables: Set<AnyCancellable> = []
+
+    /// The `Task` of closing out and creating per-user CSV files.
+    ///
+    /// Clients should watch for success/failure before assuming the output file is ready..
+    var updateSubjectTask: Task<Void, Error>?
+    /// Watch the shared `SubjectID`. Flush, close, and open the respective CSV files.
+    ///
+    /// No immediate error (it just enqueues); any resulting errors go through `.updateSubjectTask`.
+    func observeSubjectID() {
+        SubjectID.shared.$subjectID
+            .removeDuplicates()
+            .sink {
+                newID in
+                self.updateSubjectTask = Task {
+                    // Any changed ID closes the active
+                    // file (writeHandle != nil)
+                    // If non-nil, it opens a new one.
+
+                    // Tear down the current file
+                    if self.writeHandle != nil {
+                        try self.close()
+                    }
+
+                    // If cancelled, don't open, and
+                    // pinch off the writeHandle,
+                    // ATW nobody wants to.
+                    if Task.isCancelled {
+                        // ATW nobody wants to cancel this Task.
+                        // If cancelled, don't open,
+                        // pinch off the writeHandle,
+                        // no current SubjectID.
+                        self.writeHandle = nil
+                        return
+                    }
+
+                    // The ID is ready for a new file.
+                    try self.open()
+                    return
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    /// Write any unsaved records to the file, close it, and `nil`-out the old `FileHandle`.
+    /// - throws: No file open, can't write to flush-out pending data.
     func close() throws {
-        // (Had warned that the AsyncStream should close,
-        // but the actor isn't responsible for the
-        // device-reading part.
+        guard let handle = writeHandle else {
+            throw Errors.noHandleOpen(fileURL.lastPathComponent)
+        }
         try flushToFile()
-        try writeHandle?.close()
+        try handle.close()
         writeHandle = nil
     }
 
+    /// Immediately delete the output file. Don't bother flushing-out the pending records.
+    /// - throws: Attempt to clear a file not open, can't close the handle, can't delete the file (Shouldn't Happen).
     func clear() throws {
         // Doesn't flush the contents.
-        try writeHandle?.close()
+        guard let handle = writeHandle else {
+            throw Errors.noHandleOpen(fileURL.lastPathComponent)
+        }
+        try handle.close()
         try FileManager.default.deleteIfPresent(fileURL)
         acceleratorQueue.removeAll()
     }
 
     // FIXME: Must this be async?
+    /// Append the record item to the output queue and then flush the queue out to storage.
+    ///
+    /// **See** `flushToFile()`
+    /// - parameter record: The `AccelerometerItem` to append.
     func append(record: AccelerometerItem) {
         Task {
             acceleratorQueue.append(record)
@@ -72,6 +149,10 @@ final actor AccelerometerFileSink {
     }
 
     // FIXME: Must this be async?
+    /// Append an `Array` of record items to the output queue and then flush the queue out to storage. The append is batched, not iterated through `append(record:)`
+    ///
+    /// **See** `flushToFile()`
+    /// - parameter records: The `AccelerometerItem`s to append.
     func append(records: [AccelerometerItem]) throws {
         Task {
             acceleratorQueue.append(contentsOf: records)
@@ -79,8 +160,13 @@ final actor AccelerometerFileSink {
         }
     }
 
+    /// Append the enqueued accelerometer records to the output file.
+    /// - warning: This does _not_ call `FileManager.synchronize`.
     private func flushToFile() throws
     {
+        guard let handle = writeHandle else {
+            throw Errors.noHandleOpen(fileURL.lastPathComponent)
+        }
         let queueContents = Array(acceleratorQueue)
         acceleratorQueue.removeAll()
 
@@ -94,7 +180,7 @@ final actor AccelerometerFileSink {
         // line at the end. Therefore append it.
 
         let csvData = csvs.data(using: .utf8)!
-        try writeHandle?.write(contentsOf: csvData)
+        try handle.write(contentsOf: csvData)
     }
 }
 

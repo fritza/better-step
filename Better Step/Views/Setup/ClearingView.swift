@@ -61,11 +61,8 @@ struct ClearingView: View {
                 }
                 Button("Clear Subject (all)") {
 #if FOR_BETTER_ST
-                    Task {
-                        try! await  RootState.shared.tearDownFromSubject()
+                   _ = try?  RootState.shared.tearDownFromSubject()
 #warning("unimplemented for walk")
-
-                    }
 #endif
                 }
             }

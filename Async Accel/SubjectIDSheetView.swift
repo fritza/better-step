@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+/* FIXME:
+ When and how is this sheet presented after launch
+ (when the `UserDefaults` value is `nil`)?
+
+ If upon reporting, does **Proceed** force the
+ tab selection?
+
+ If repenting of the setting, is there a way to
+ manually clear it?
+
+ Is the sheet presented immediately upon clearing,
+ or upon the first-selected working view?
+ */
+
 private let welcomeText = "Welcome to Better Step!\n\nThis app helps your doctor assess your heart health to guide your treatment."
 
 private let paragraph3 = "Type your ID into the form, then tap **Proceed**."
@@ -23,6 +37,11 @@ private let paragraph3 = "Type your ID into the form, then tap **Proceed**."
 
 struct SubjectIDSheetView: View {
     @Environment(\.dismiss) var dismiss: DismissAction
+    @EnvironmentObject var crappySubjectID: SubjectID
+
+    @State private var scratchID: String = SubjectID.shared.unwrappedSubjectID
+    let originalID: String
+
 
     func introText(_ str: String) -> AttributedString {
         do {
@@ -46,14 +65,22 @@ struct SubjectIDSheetView: View {
                 //        Within SubjectUIEditView
 
                 // TODO: Is "Proceed" obscured by the keyboard?
-                SubjectUIEditView()
+                SubjectUIEditView(id: $scratchID)
+                Spacer()
+                HStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        Button("Proceed") {}// dismiss() }
-                        Spacer()
+                    Button("Cancel", role: .cancel) {
+                        crappySubjectID.unwrappedSubjectID = originalID
+                        dismiss()
                     }
                     Spacer()
+                    Button("Proceed") {
+                        crappySubjectID.unwrappedSubjectID = scratchID
+                        dismiss()
+                    }
+                    Spacer()
+                }.padding()
+                Spacer()
             }
             .navigationTitle("Welcome")
         }
@@ -62,7 +89,8 @@ struct SubjectIDSheetView: View {
 
 struct SubjectIDSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectID.shared.subjectID = "Shannon"
-        return SubjectIDSheetView()
+//        SubjectID.shared.subjectID = "Shannon"
+        return SubjectIDSheetView(originalID: "Throwback")
+            .environmentObject(SubjectID.shared)
     }
 }
