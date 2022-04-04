@@ -18,7 +18,8 @@ import Combine
 @main
 struct Better_StepApp: App {
 
-    // FIXME: App does not interpose the app onboard sheet.
+    // TODO: Better Step: Interpose the onboard sheet
+    //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
     @StateObject var rootState = RootState.shared
 
@@ -72,7 +73,3 @@ struct Better_StepApp: App {
         }
     }
 }
-
-// FIXME: A watcher of AppStage.shared could trigger report generation
-
-
