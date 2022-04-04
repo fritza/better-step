@@ -30,6 +30,7 @@ final class DASIPages: ObservableObject, SubjectIDDependent {
         refersToQuestion = selection.refersToQuestion
     }
 
+    @discardableResult
     func teardownFromSubjectID() async throws -> DASIPages? {
         let newSelection = DASIStages.landing
         selected = newSelection

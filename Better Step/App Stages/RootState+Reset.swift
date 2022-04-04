@@ -103,7 +103,6 @@ extension RootState {
                 try await dasiFile!.teardownFromSubjectID()
                 dasiFile = nil
             }
-
             dasiResponses.clearResponses()
             try await dasiContent.teardownFromSubjectID()
 
