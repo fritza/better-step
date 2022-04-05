@@ -8,6 +8,18 @@
 import Foundation
 import CoreMotion
 
+/*
+ FIXME: Core Motion deals with interval-since-boot time stamps.
+        Nothing else does this, and a skim of the system documents
+        doesn't show any way to expose it.
+
+ The solution is tedious: The clients want timing as a record-to-record interval, not absolute time. The safest way to capture this is to examine the first element in the record array, capture its stamp, and subtract it from all succeeding records.
+
+ Alternative: capture the start of the exercis, note the time, and calculate it before storage.
+
+ Either way gets us into trouble remembering whether this has been done to the records.
+ */
+
 
 // MARK: - CSVConvertible
 protocol CSVConvertible: Codable, Timestamped {
