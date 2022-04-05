@@ -23,6 +23,17 @@
 		1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D427D1450300568ADF /* ComplexModule */; };
 		1F1BD8D727D1450300568ADF /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D627D1450300568ADF /* Numerics */; };
 		1F1BD8D927D1450300568ADF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D827D1450300568ADF /* RealModule */; };
+		1F2432BB27FD0260008A5418 /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
+		1F2432BC27FD0264008A5418 /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
+		1F2432BE27FD026B008A5418 /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
+		1F2432C027FD0272008A5418 /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FFB30E2277BE8390099AE5E /* DASIQuestions.json */; };
+		1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
+		1F2432C227FD0278008A5418 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
+		1F2432C327FD027B008A5418 /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
+		1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
+		1F2432C527FD0283008A5418 /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
+		1F2432C727FD0406008A5418 /* SurveyReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432C627FD0406008A5418 /* SurveyReportFile.swift */; };
+		1F2432C927FD087C008A5418 /* SurveyCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -141,6 +152,8 @@
 		1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITests.swift; sourceTree = "<group>"; };
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
+		1F2432C627FD0406008A5418 /* SurveyReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReportFile.swift; sourceTree = "<group>"; };
+		1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCompleteView.swift; sourceTree = "<group>"; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
@@ -371,6 +384,7 @@
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1FFB30E2277BE8390099AE5E /* DASIQuestions.json */,
 				1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */,
+				1F2432C627FD0406008A5418 /* SurveyReportFile.swift */,
 			);
 			path = DASI;
 			sourceTree = "<group>";
@@ -389,6 +403,7 @@
 		1FF1B58827DA77590017E90C /* Async Accel */ = {
 			isa = PBXGroup;
 			children = (
+				1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */,
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
 				1FD64EB027F7999E006C1E59 /* Setup.swift */,
 				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
@@ -683,6 +698,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F2432C027FD0272008A5418 /* DASIQuestions.json in Resources */,
 				1FF1B59127DA775B0017E90C /* Preview Assets.xcassets in Resources */,
 				1FF1B58E27DA775B0017E90C /* Assets.xcassets in Resources */,
 			);
@@ -775,6 +791,10 @@
 				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
 				1FB684F227F22AFE00612924 /* SubjectUIEditView.swift in Sources */,
 				1FDB374327F78CCD00E10D8E /* ConfirmClearingAlert.swift in Sources */,
+				1F2432C927FD087C008A5418 /* SurveyCompleteView.swift in Sources */,
+				1F2432BB27FD0260008A5418 /* SurveyContainerView.swift in Sources */,
+				1F2432C527FD0283008A5418 /* DASIUserResponse.swift in Sources */,
+				1F2432C327FD027B008A5418 /* DASIResponseList.swift in Sources */,
 				1FB684F427F2363500612924 /* SubjectIDSheetView.swift in Sources */,
 				1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */,
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
@@ -787,15 +807,21 @@
 				1FB684EC27F2265900612924 /* XYZ.swift in Sources */,
 				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
 				1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */,
+				1F2432BE27FD026B008A5418 /* DASIQuestionView.swift in Sources */,
+				1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */,
 				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
 				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
+				1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
 				1FD64EB227F79FA1006C1E59 /* EmailFormView.swift in Sources */,
 				1FB684EE27F226C900612924 /* FileManager+extensions.swift in Sources */,
 				1FB684FE27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
 				1FB684F627F24FC100612924 /* SimpleHBarView.swift in Sources */,
+				1F2432C227FD0278008A5418 /* DASIPages.swift in Sources */,
+				1F2432BC27FD0264008A5418 /* DASIOnboardView.swift in Sources */,
 				1FB684EB27F2263500612924 /* AccelerometerItem.swift in Sources */,
 				1FB684E727F225BD00612924 /* SubjectID.swift in Sources */,
+				1F2432C727FD0406008A5418 /* SurveyReportFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

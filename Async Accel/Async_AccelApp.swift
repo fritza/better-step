@@ -52,7 +52,17 @@ struct Async_AccelApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
+                SurveyContainerView()
+                // FIXME: Make the completion check responsive
+                    .badge("✓")
+                    .tabItem {
+                        Label("Survey",
+                              systemImage: "checkmark.square")
+                    }
+                    .tag(4)
+                // FIXME: Get symbolic tab tag IDs.
                 ContentView()
+                    .badge("?")
                     .tabItem {
                         Label("Accelerometry", systemImage: "arrow.triangle.swap")
                     }

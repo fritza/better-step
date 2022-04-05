@@ -21,7 +21,8 @@ import Combine
 /// - `SurveyContainerView`
 /// - `YesNoButton` (**Pull out as a dependency?**
 /// - `ApplicationOnboardView` (**Wrong Place**)
-final class DASIPages: ObservableObject, SubjectIDDependent {
+final class DASIPages: ObservableObject, SubjectIDDependent
+{
     @Published var selected: DASIStages!
     @Published var refersToQuestion: Bool
 
