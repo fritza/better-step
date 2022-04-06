@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SurveyContainerView: View {
-    @StateObject var contentEnvt: DASIPages = RootState.shared.dasiContent
-    // FIXME: Too many EnvironmentObjects
+    @EnvironmentObject var contentEnvt: DASIPages
+    @EnvironmentObject var responses  : DASIResponseList
 
     var body: some View {
         NavigationView {
@@ -57,12 +57,12 @@ struct SurveyContainerView: View {
                 // ABOVE ALL, don't post the initial screen
                 // as soon as the conclusion screen is
                 // called for.
-                if RootState.shared.dasiResponses
+                if responses
                     .unknownResponseIDs.isEmpty {
-                    RootState.shared.didComplete(phase: .dasi)
+                    AppStages.dasi.didComplete()
                 }
                 else {
-                    RootState.shared.didNotComplete(phase: .dasi)
+                    AppStages.dasi.didComplete()
                 }
             }
         }
@@ -71,7 +71,9 @@ struct SurveyContainerView: View {
 
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        SurveyContainerView(contentEnvt: DASIPages(.landing))
+        SurveyContainerView()
+            .environmentObject(DASIPages())
+            .environmentObject(DASIResponseList())
     }
 }
 

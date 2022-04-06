@@ -23,8 +23,7 @@ struct QuestionContentView: View {
 
 struct DASIQuestionView: View {
     @EnvironmentObject var envt: DASIPages
-
-    var reportContents: DASIResponseList = RootState.shared.dasiResponses
+    @EnvironmentObject var reportContents: DASIResponseList
     @State var answerState: AnswerState
 
     func updateForNewBinding() {
@@ -95,10 +94,9 @@ struct DASIQuestionView: View {
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(
-            reportContents: DASIResponseList(),
-            answerState: .yes)
+        DASIQuestionView(answerState: .yes)
         .environmentObject(DASIPages(.presenting(questionID: 2)))
+        .environmentObject(DASIResponseList())
     }
 }
 

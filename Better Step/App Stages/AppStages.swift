@@ -24,7 +24,7 @@ final class AppStage: ObservableObject {
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
     func makeAllIncomplete() {
         for stage in AppStages.allCases {
-            stage.makeIncomplete()
+            stage.didNotComplete()
         }
     }
 
@@ -92,9 +92,8 @@ extension AppStages {
     ///
     /// This is done with reference to `AppStage.shared`.
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
-    var isComplete: Bool {
-        return AppStage.shared.completionSet
-            .contains(self)
+    var isCompleted: Bool {
+        PhaseManager.shared.isCompleted(self)
     }
 
     /// Declare that this stage has been completed.
@@ -102,26 +101,32 @@ extension AppStages {
     /// This is done with reference to `AppStage.shared`.
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
     func didComplete() {
-        AppStage.shared.completionSet.insert(self)
+        PhaseManager.shared.didComplete(phase: self)
     }
 
     /// Declare that this stage has _not_ been completed.
     ///
     /// This is done with reference to `AppStage.shared`.
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
-    func makeIncomplete() {
-        AppStage.shared.completionSet.remove(self)
-    }
+    func didNotComplete() { // was makeIncomplete()
+        PhaseManager.shared.didComplete(phase: self)
+        }
 
 
     /// Whether this stage is to be presented and must be completed before reporting.
     ///
     /// `RootState` is a dependency because preferences determine whether walk and dasi are needed.
     var isRequired: Bool {
+        let defaults = UserDefaults.standard
+
         switch self {
         case .onboard       : return false
-        case .dasi          : return RootState.shared.includeSurvey
-        case .walk          : return RootState.shared.includeWalk
+        case .dasi          :
+            let includeDASI = defaults.bool(forKey: AppStorageKeys.includeSurvey.rawValue)
+            return includeDASI
+        case .walk          :
+            let includeWalk = defaults.bool(forKey: AppStorageKeys.includeWalk.rawValue)
+            return includeWalk
         case .report        : return false
         case .configuration : return false
         }

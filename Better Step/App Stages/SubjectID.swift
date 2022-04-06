@@ -67,7 +67,8 @@ final class SubjectID: ObservableObject {
     @Published var noSubjectID: Bool = true
 
 
-    private init() {
+    // Removed private because it's all going to be environment.
+    /*private*/ init() {
         let _subID = UserDefaults.standard
             .string(forKey: AppStorageKeys.subjectID.rawValue) // ?? ""
         subjectID = _subID

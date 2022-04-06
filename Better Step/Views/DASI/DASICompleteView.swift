@@ -20,7 +20,7 @@ fileprivate let endIncompleteText = """
 """
 
 fileprivate var nextSteps: String {
-    if RootState.shared.allTasksFinished {
+    if PhaseManager.shared.allTasksFinished {
         return "\nPlease proceed to the “Report” view to submit your information to the team."
     }
     else {
@@ -33,22 +33,16 @@ fileprivate var nextSteps: String {
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View {
-    @EnvironmentObject private var rootState: RootState
-
-    @EnvironmentObject var envt: DASIPages
-    // FIxME: Take contents from global, not .environmentObject.
-    var reportContents: DASIResponseList {
-        RootState.shared.dasiResponses
-    }
-
+    @EnvironmentObject private var responses: DASIResponseList
+    @EnvironmentObject private var questions: DASIPages
     var allItemsAnswered: Bool {
-        return reportContents.unknownResponseIDs.isEmpty
+        return responses.unknownResponseIDs.isEmpty
     }
 
     var instructions: String {
         var retval = completionText + nextSteps
         if !allItemsAnswered {
-            let empties = reportContents.unknownResponseIDs
+            let empties = responses.unknownResponseIDs
             retval += startIncompleteText + "\(empties.count)" + endIncompleteText
         }
         return retval
@@ -57,7 +51,7 @@ struct DASICompleteView: View {
     var body: some View {
         VStack {
             ForwardBackBar(forward: false, back: true, action: { _ in
-                rootState.dasiContent.decrement()
+                questions.decrement()
             })
                 .frame(height: 44)
             Spacer()

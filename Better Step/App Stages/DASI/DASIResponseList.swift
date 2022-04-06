@@ -60,7 +60,12 @@ enum DASIReportErrors: Error {
 /// Responses to all DASI questions. Records changes to each response. Encodes the response list into the data for a CSV file. This is the data model _only,_ without regard for how it is to be stored.
 ///
 /// Observable.
-final class DASIResponseList: SubjectIDDependent {
+final class DASIResponseList: ObservableObject {
+
+    #warning("Removed SubjectIDDependent. added ObservableObject")
+
+
+
     @EnvironmentObject var subjectIDObject: SubjectID
 
     public private(set) var answers: [DASIUserResponse]

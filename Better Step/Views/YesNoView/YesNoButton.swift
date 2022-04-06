@@ -48,11 +48,9 @@ struct YesNoButton: View {
     //    let choiceView: ViewChoice
     //    let contextSize: CGSize
 
-    // FICME: global response list from global sted environment?
-    var reportContents: DASIResponseList = RootState.shared.dasiResponses
-
     // FIXME: Direct access to the content state
     @EnvironmentObject var envt: DASIPages
+    @EnvironmentObject var reportContents: DASIResponseList
 
     let id: Int
     let title: String
