@@ -76,6 +76,7 @@ struct GenericInstructionView_Previews: PreviewProvider {
             sfBadgeName: "trash.slash",
             proceedTitle: "Go!") { // do something
             }
+            .padding()
             VStack {
                 Spacer()
                 GenericInstructionView(

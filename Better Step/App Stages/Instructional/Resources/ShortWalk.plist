@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>Welcome</string>
+	<key>mdContent</key>
+	<string>This is the content for what I _hope_ will be a configurable Markdown message.</string>
+</dict>
+</plist>
