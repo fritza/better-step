@@ -90,7 +90,7 @@ extension WalkInstructionView {
     }
 }
 
-struct ShortWalkView_Previews: PreviewProvider {
+struct WalkInstructionView_Previews: PreviewProvider {
     static var previews: some View {
         WalkInstructionView()
     }

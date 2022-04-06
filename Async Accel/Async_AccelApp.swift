@@ -84,6 +84,9 @@ struct Async_AccelApp: App {
                 SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)
             }
             .environmentObject(SubjectID.shared)
+            .environmentObject(DASIPages())
+            .environmentObject(DASIResponseList())
+            .environmentObject(PhaseManager.shared)
         }
     }
 }
