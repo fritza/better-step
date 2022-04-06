@@ -1,5 +1,5 @@
 //
-//  ShortWalkView.swift
+//  WalkInstructionView.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 4/6/22.
@@ -36,7 +36,7 @@ struct ShortWalkSettings: Codable, Identifiable, Hashable {
     }
 }
 
-struct ShortWalkView: View {
+struct WalkInstructionView: View {
 //    let plistURL: URL
     let settings        : ShortWalkSettings
     static let imageNames = ["hero", "tabBar"]
@@ -71,7 +71,7 @@ struct ShortWalkView: View {
     }
 }
 
-extension ShortWalkView {
+extension WalkInstructionView {
     // MARK: - URL helpers
 
     static func _imageURLsByName() -> [String:URL] {
@@ -92,6 +92,6 @@ extension ShortWalkView {
 
 struct ShortWalkView_Previews: PreviewProvider {
     static var previews: some View {
-        ShortWalkView()
+        WalkInstructionView()
     }
 }
