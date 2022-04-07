@@ -47,26 +47,33 @@ import SwiftUI
 
 @main
 struct Async_AccelApp: App {
+    @AppStorage(AppStorageKeys.includeWalk.rawValue) var includeWalk: Bool = true
+    @AppStorage(AppStorageKeys.includeSurvey.rawValue) var includeSurvey: Bool = true
+
     @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
     @State var selectedTab: Int = 1
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
-                SurveyContainerView()
-                // FIXME: Make the completion check responsive
-                    .badge("✓")
-                    .tabItem {
-                        Label("Survey",
-                              systemImage: "checkmark.square")
-                    }
-                    .tag(4)
+                if includeSurvey {
+                    SurveyContainerView()
+                    // FIXME: Make the completion check responsive
+                        .badge("✓")
+                        .tabItem {
+                            Label("Survey",
+                                  systemImage: "checkmark.square")
+                        }
+                        .tag(4)
+                }
                 // FIXME: Get symbolic tab tag IDs.
-                ContentView()
-                    .badge("?")
-                    .tabItem {
-                        Label("Accelerometry", systemImage: "arrow.triangle.swap")
-                    }
-                    .tag(1)
+                if includeWalk {
+                    ContentView()
+                        .badge("?")
+                        .tabItem {
+                            Label("Accelerometry", systemImage: "arrow.triangle.swap")
+                        }
+                        .tag(1)
+                }
 
                 ReportingView()
                     .tabItem {
