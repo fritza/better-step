@@ -47,6 +47,7 @@
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
+		1F769EAF27FF859100A3CAE3 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
 		1F7A6C3E27FE3A7500FBC296 /* AsyncDASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */; };
 		1F7A6C4027FF517200FBC296 /* WalkInstructionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */; };
 		1F7A6C4227FF51E900FBC296 /* WalkInstructionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */; };
@@ -174,6 +175,7 @@
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionElement.swift; sourceTree = "<group>"; };
 		1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = AsyncDASIQuestions.json; path = "Better Step/Views/DASI/AsyncDASIQuestions.json"; sourceTree = SOURCE_ROOT; };
 		1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInstructionBase.swift; sourceTree = "<group>"; };
 		1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInstructionPage.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				1F2432D727FDF88E008A5418 /* WalkInstructionView.swift */,
+				1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */,
 				1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */,
 				1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */,
 				1F2432DB27FE0748008A5418 /* WalkResources */,
@@ -787,6 +790,7 @@
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
+				1F769EAF27FF859100A3CAE3 /* InstructionElement.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
 				1FDE825F27E29FFD00CD8368 /* AppStages.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
