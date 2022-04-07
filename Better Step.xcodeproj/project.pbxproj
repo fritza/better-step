@@ -50,7 +50,6 @@
 		1F769EB027FF90FD00A3CAE3 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
 		1F7A6C3E27FE3A7500FBC296 /* AsyncDASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */; };
 		1F7A6C4027FF517200FBC296 /* WalkInstructionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */; };
-		1F7A6C4227FF51E900FBC296 /* WalkInstructionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */; };
 		1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
@@ -179,7 +178,6 @@
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = AsyncDASIQuestions.json; path = "Better Step/Views/DASI/AsyncDASIQuestions.json"; sourceTree = SOURCE_ROOT; };
 		1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInstructionBase.swift; sourceTree = "<group>"; };
-		1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInstructionPage.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065527A478B400477379 /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
@@ -373,7 +371,6 @@
 			children = (
 				1F2432D727FDF88E008A5418 /* InstructionPageView.swift */,
 				1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */,
-				1F7A6C4127FF51E900FBC296 /* WalkInstructionPage.swift */,
 				1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */,
 				1F2432DB27FE0748008A5418 /* WalkResources */,
 			);
@@ -879,7 +876,6 @@
 				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
 				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
 				1F2432CC27FD0DA6008A5418 /* AppStages.swift in Sources */,
-				1F7A6C4227FF51E900FBC296 /* WalkInstructionPage.swift in Sources */,
 				1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
 				1FD64EB227F79FA1006C1E59 /* EmailFormView.swift in Sources */,

@@ -79,6 +79,12 @@ struct Async_AccelApp: App {
                         Label("Settings", systemImage: "gear")
                     }
                     .tag(3)
+
+                WalkInstructionBase()
+                    .tabItem {
+                        Label("Intro", systemImage: "person.crop.circle.badge.questionmark")
+                    }
+                    .tag(5)
             }
             .sheet(isPresented: $shouldShowSheet) {
                 SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)

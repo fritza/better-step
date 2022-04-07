@@ -130,7 +130,7 @@ enum InstructionElement: Hashable, CustomStringConvertible, Identifiable {
     /// - Returns: An array, of which each member is an `Array<InstructionElement>` from a source file. The returned array is ordered by the names of the source files.
     /// -note: The result array will be one per source file, and in order by file name, but the file name is not preserved. The expected use is to populate a list of pages in order and index through them; whatever navigates through them should be agnostic as to the content of pages.
     static func elements(withExtension `extension`: String = "txt",
-                         subdirectory: String?) throws -> [[InstructionElement]] {
+                         subdirectory: String? = nil) throws -> [[InstructionElement]] {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: `extension`,
                                           subdirectory: subdirectory) else { return [] }
         let dataPerFile = urls
