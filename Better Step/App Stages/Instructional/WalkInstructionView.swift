@@ -8,33 +8,12 @@
 import SwiftUI
 
 enum ResourceErrors: Error {
-    case urlNotValid
-    case directoryNotFound
+    case urlNotValid(URL?)
+    case directoryNotFound(URL?)
     case imageFileNotFound(String)
     case couldNotDecodeSettings
 }
 
-struct ShortWalkSettings: Codable, Identifiable, Hashable {
-    static let plistBasename = "ShortWalk"
-    static let resourceDirName = "Resources"
-
-    let id: Int
-    let title: String
-    let mdContent: String
-
-    static let plistURL = Bundle.main.url(forResource: plistBasename, withExtension: "plist", subdirectory: resourceDirName)
-
-    init(title: String, mdContent: String) {
-        (self.title, self.mdContent) = (title, mdContent)
-        id = [title, mdContent].hashValue
-    }
-
-    static func settings() throws -> ShortWalkSettings {
-        let plistData = try Data(contentsOf: plistURL!)
-        return try PropertyListDecoder()
-            .decode(ShortWalkSettings.self, from: plistData)
-    }
-}
 
 struct WalkInstructionView: View {
 //    let plistURL: URL
@@ -46,16 +25,21 @@ struct WalkInstructionView: View {
     init() {
         // Should be throws instead of failable?
         let relativeBaseURL: URL
-        if let plfLocal = ShortWalkSettings.plistURL {
-            settings  = try! ShortWalkSettings.settings()
+        do {
+            let plURL = ShortWalkSettings.plistURL
+
+            guard let plURL = plURL else { throw ResourceErrors.urlNotValid(plURL)
+            }
+            settings = try ShortWalkSettings.settings()
+            relativeBaseURL = plURL.deletingLastPathComponent()
             imageURLsByName = Self._imageURLsByName()
-            relativeBaseURL = plfLocal.deletingLastPathComponent()
         }
-        else {
-            settings = ShortWalkSettings(title: "URL Error",
-                                         mdContent: "The **Settings** could not be found in the **Resources** directory.")
-            imageURLsByName = [:]
+        catch {
+            settings = ShortWalkSettings(
+                title: "URL Error",
+                mdContent: "The **Settings** could not be found in the **Resources** directory. (\(error))")
             relativeBaseURL = URL(fileURLWithPath: "")
+            imageURLsByName = [:]
         }
         bodyContent = try! AttributedString(
             markdown: settings.mdContent,
