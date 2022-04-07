@@ -77,12 +77,14 @@ enum InstructionElement: Hashable, CustomStringConvertible, Identifiable {
         case .title(let text)     : Text(text)   .font(.title)
         case .body (let content)  : Text(content).font(.body)
         case .image(let key)      :
-            if let uiImage = UIImage(
-                named: key,
-                in: Bundle.main, with: nil) {
+            if let uiImage =
+//                UIImage( named: key, in: Bundle.main, with: nil)
+            UIImage(named: key)
+            {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
+                    .shadow(radius: 2.0)
             }
             else { Color.green }
         case .unknown(let source) : Text("Could not parse Markdown source “\(source)”")
