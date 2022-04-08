@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A `View` that presents the `Text`/`Image`/whatever elements of the instruction page.
 struct InstructionPageView: View {
     let content: [InstructionElement]
 
@@ -19,6 +20,7 @@ struct InstructionPageView: View {
     }
 }
 
+// For Preview use only.
 let sourceStrings: [String] = [
     "title", "Measuring your walk",
     "body" , "We want to know how hard your heart works, when it's challenged.",

@@ -7,7 +7,16 @@
 
 import SwiftUI
 
+
+/// A `View` that hosts a series of pages for user instruction.
+///
+/// The "pages" are presented by `InstructionPageView` from content in an array of `InstructionElement`. `Self.instructionPages` loads them from the main `Bundle` by iterating `.txt` files in a bundle subdirectory.
+///
+/// The page content is parsed from that file into `InstructionElement`s; see `InstructionElement.swift` for further information.
 struct WalkInstructionBase: View {
+    /// An array (representing all pages) of arrays of `InstructionElement` (representing page content).
+    ///
+    /// The array is initialized from `.txt` files in a named directory. If it can't be found, it's a fatal error.
     static let instructionPages: [[InstructionElement]] = {
         do {
             return try InstructionElement.elements(withExtension: "txt", subdirectory: "WalkResources")
@@ -40,6 +49,7 @@ struct WalkInstructionBase: View {
     var body: some View {
         NavigationView {
             if counter >= Self.instructionPages.count {
+                // Diagnostic for the current-page index overflowing the content. Shouldn't happen in production.
                 Text("Out of range: \(counter), limit is \(Self.instructionPages.count)")
             }
             else {
@@ -57,11 +67,11 @@ struct WalkInstructionBase: View {
                             }
                     }
                     Button("Okay!") {
-
+// TODO: Incomplete
                     }
                 }
             }
-Spacer()
+            Spacer()
         }
     }
 }
