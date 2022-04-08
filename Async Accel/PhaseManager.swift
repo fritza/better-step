@@ -15,7 +15,8 @@ final class PhaseManager: ObservableObject {
 
     @Published var selectedStage: AppStages = .dasi
     @Published var allTasksFinished: Bool = false
-    // FIXME: Must set the environment in the App struct
+    // FIXME: apparently doesn't see EnvironmentObjects
+    //        Future commit, remove this line.
     @EnvironmentObject var subjectIDState: SubjectID
 
 //     @EnvironmentObject var subjectIDState: SubjectID
@@ -75,7 +76,7 @@ extension PhaseManager {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if subjectIDState.subjectID == nil { return false }
+        if SubjectID.shared.subjectID == nil { return false }
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases
