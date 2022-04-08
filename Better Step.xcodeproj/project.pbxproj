@@ -377,6 +377,16 @@
 			path = Instructional;
 			sourceTree = "<group>";
 		};
+		1F769EB22800A7B200A3CAE3 /* Bar Graph accel */ = {
+			isa = PBXGroup;
+			children = (
+				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
+				1FB684F527F24FC100612924 /* SimpleHBarView.swift */,
+				1FF1B58B27DA77590017E90C /* ContentView.swift */,
+			);
+			path = "Bar Graph accel";
+			sourceTree = "<group>";
+		};
 		1F8A337C27DFEDAA0093C896 /* Reporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,11 +450,9 @@
 				1FF1B58927DA77590017E90C /* Async_AccelApp.swift */,
 				1FD64EB027F7999E006C1E59 /* Setup.swift */,
 				1F023C6627ECE63600C1EBC5 /* AWSTryout.swift */,
-				1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */,
-				1FB684F527F24FC100612924 /* SimpleHBarView.swift */,
+				1F769EB22800A7B200A3CAE3 /* Bar Graph accel */,
 				1FB684F127F22AFE00612924 /* SubjectUIEditView.swift */,
 				1FB684F327F2363500612924 /* SubjectIDSheetView.swift */,
-				1FF1B58B27DA77590017E90C /* ContentView.swift */,
 				1FB684FF27F4B96700612924 /* ReportingView.swift */,
 				1FB6850327F4DFDC00612924 /* CompletionRowView.swift */,
 				1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */,
