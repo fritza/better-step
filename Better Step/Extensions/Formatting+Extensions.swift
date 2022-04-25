@@ -30,10 +30,38 @@ private let _pointThree: NumberFormatter = {
     return retval
 }()
 
+private let _pointEight: NumberFormatter = {
+    let retval = NumberFormatter()
+    retval.minimumIntegerDigits = 1
+    retval .minimumFractionDigits = 8
+    retval.maximumFractionDigits  = 8
+    return retval
+}()
+
+private let _pointTen: NumberFormatter = {
+    let retval = NumberFormatter()
+    retval.minimumIntegerDigits = 1
+    retval .minimumFractionDigits = 10
+    retval.maximumFractionDigits  = 10
+    return retval
+}()
+
+
 extension BinaryFloatingPoint {
     var pointThree: String {
         _pointThree.string(from: self as! NSNumber)!
     }
+
+    var pointEight: String {
+        _pointEight.string(from: self as! NSNumber)!
+    }
+
+    var pointTen: String {
+        _pointTen.string(from: self as! NSNumber)!
+    }
+
+
+
     /// Render a `BinaryFloatingPoint` (_e.g._`Double`) as a spelled-out `String`
     var spelled: String {
         let asSeconds = Int(Double(self).rounded())
