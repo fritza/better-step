@@ -52,25 +52,31 @@ struct Async_AccelApp: App {
 
     @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
     @State var selectedTab: Int = 1
+
+    func badgeText(representing stage: AppStages) -> String? {
+        return PhaseManager.shared.isCompleted(stage) ?  "✓" : nil
+    }
+
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
                 if includeSurvey {
                     SurveyContainerView()
                     // FIXME: Make the completion check responsive
-                        .badge("✓")
+                        .badge(badgeText(representing: .dasi))
                         .tabItem {
                             Label("Survey",
-                                  systemImage: "checkmark.square")
+                                  systemImage: "person.crop.circle.badge.questionmark")
                         }
                         .tag(4)
                 }
                 // FIXME: Get symbolic tab tag IDs.
                 if includeWalk {
                     ContentView()
-                        .badge("?")
+                        .badge(badgeText(representing: .walk))
                         .tabItem {
-                            Label("Accelerometry", systemImage: "arrow.triangle.swap")
+                            Label("Accelerometry",
+                                  systemImage: "arrow.triangle.swap")
                         }
                         .tag(1)
                 }
