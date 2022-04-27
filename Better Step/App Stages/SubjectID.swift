@@ -11,11 +11,9 @@ import Foundation
 ///
 /// The value is ultimately backed by `UserDefaults` (`AppStorageKeys.subjectID`) upon initialization and update.
 ///
-/// You do not create a `SubjectID`. Instead access it through `SubjectID.shared`.
+/// The App object inserts a `SubjectID` into the environment. Access it only through an `@EnvironmentObject`.
 /// - warning: Do not access the `UserDefault`/`AppStorage` directly.
 final class SubjectID: ObservableObject {
-    static let shared = SubjectID()
-
     /// Remove the backing `UserDefaults` value for the subject ID.
     ///
     /// **Use with caution:** The remove-all-data button depends on a lagging Subject ID; clearing it would make it difficult (or worse) to identify what files to delete.
@@ -48,7 +46,7 @@ final class SubjectID: ObservableObject {
     }
 
 
-    /// `SubjectID.subjectID` rendered as an unwrapped `String`.  `SubjectID.subjectID` updates this value when set.
+    /// `SubjectID.subjectID` rendered as an unwrapped `String`, either the `subjectID` property or `""`.
     ///
     /// Initially set to `UserDefaults` (`subjectID`) `?? ""`
     ///
@@ -68,7 +66,7 @@ final class SubjectID: ObservableObject {
 
 
     // Removed private because it's all going to be environment.
-    /*private*/ init() {
+    init() {
         let _subID = UserDefaults.standard
             .string(forKey: AppStorageKeys.subjectID.rawValue) // ?? ""
         subjectID = _subID

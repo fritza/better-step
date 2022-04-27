@@ -21,7 +21,7 @@ struct Better_StepApp: App {
     // TODO: Better Step: Interpose the onboard sheet
     //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
-    @StateObject var rootState = RootState.shared
+    @StateObject var rootState = AppStageState.shared
 
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
@@ -68,8 +68,8 @@ struct Better_StepApp: App {
                     }
                     .tag(AppStages.configuration)
             }
-            .environmentObject(SubjectID.shared)
-            .environmentObject(RootState.shared)
+//            .environmentObject(SubjectID.shared)
+            .environmentObject(AppStageState.shared)
         }
     }
 }

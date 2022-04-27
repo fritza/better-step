@@ -1,5 +1,5 @@
 //
-//  RootState.swift
+//  AppStageState.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/28/22.
@@ -62,21 +62,25 @@ struct GeneralComments_RootState {}
 
 
 
-// MARK: - RootState
+// MARK: - AppStageState
 /// Omnibus aggregate of application-stage operating values
 ///
 /// These include report contents and app-level user defaults (`@AppStorage`).
 ///
-/// You do not instantiate `RootState` yourself. Use `.shared` to obtain the single record of application state.
-/// - note: It is expected that `RootState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
+/// You do not instantiate `AppStageState` yourself. Use `.shared` to obtain the single record of application state.
+/// - note: It is expected that `AppStageState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
 ///
-/// The subject ID goes through `RootState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
-final class RootState: ObservableObject {
+/// The subject ID goes through `AppStageState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
+final class AppStageState: ObservableObject {
     @EnvironmentObject var subjectIDState: SubjectID
+
+    // FIXME: Find a better place for all-finished
+    //        or be reconciled to maintaining a global state.
+    //        See if
     @Published var allTasksFinished: Bool = false
     /// Singleton instance of `RootState`
     /// - note: Maybe make this a @StateObject for the App?
-    static var shared = RootState()
+    static var shared = AppStageState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
     private init() {
 
@@ -103,10 +107,12 @@ final class RootState: ObservableObject {
     /// Whether the DASI survey is to be available.
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 
+    /*
+     REMOVE these DASI~ instance and rely on the DASI~ environmentObjects
     // DASI
     var dasiContent: DASIPages = DASIPages()
     var dasiResponses: DASIResponseList = DASIResponseList()
-
+     */
     var dasiFile: DASIReportFile?
 
     // Walk
@@ -123,7 +129,7 @@ final class RootState: ObservableObject {
     }
 }
 
-extension RootState {
+extension AppStageState {
     // MARK: Phase completion
     /// Mark this phase of the run as complete.
     func didComplete(phase: AppStages) {

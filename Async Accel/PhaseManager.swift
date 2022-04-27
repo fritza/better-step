@@ -10,9 +10,6 @@ import Combine
 import SwiftUI
 
 final class PhaseManager: ObservableObject {
-    static let shared = PhaseManager()
-    private init() {}
-
     @Published var selectedStage: AppStages = .dasi
     @Published var allTasksFinished: Bool = false
     // FIXME: apparently doesn't see EnvironmentObjects

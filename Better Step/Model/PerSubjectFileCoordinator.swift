@@ -9,9 +9,17 @@ import Foundation
 import SwiftUI
 import Collections
 
+#warning("Can we disentangle (early) initialization as a StateObject in the app with the other dependencies?")
 /// Vendor for URLs of output files.
-final class PerSubjectFileCoordinator {
-    static var shared = PerSubjectFileCoordinator()
+final class PerSubjectFileCoordinator: ObservableObject {
+//    static var shared = PerSubjectFileCoordinator()
+    @EnvironmentObject var subjectID: SubjectID
+
+    static public var shared: PerSubjectFileCoordinator?
+
+    init() {
+        Self.shared = self
+    }
 
     // TODO: zip the output directory
     // TODO: Validate ready-to-zip
@@ -22,10 +30,6 @@ final class PerSubjectFileCoordinator {
         case dasiReportFile    = "DASI.csv"
         case walkingReportFile = "Accelerometry.csv"
     }
-
-//    let accelerometerSink: AccelerometerFileSink
-
-    init() {    }
 }
 
 extension PerSubjectFileCoordinator {
@@ -74,7 +78,7 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
-            guard let subjectID = SubjectID.shared.subjectID else {
+            guard let subjectID = subjectID.subjectID else {
                 throw FileStorageErrors.noSubjectID
             }
 

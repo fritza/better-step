@@ -61,11 +61,6 @@ enum DASIReportErrors: Error {
 ///
 /// Observable.
 final class DASIResponseList: ObservableObject {
-
-    #warning("Removed SubjectIDDependent. added ObservableObject")
-
-
-
     @EnvironmentObject var subjectIDObject: SubjectID
 
     public private(set) var answers: [DASIUserResponse]
@@ -160,12 +155,12 @@ final class DASIResponseList: ObservableObject {
     /*
     /// Set all responses in the `shared` `DASIResponseList` to .unknown. This is data _only,_ without regard for storage (e.g. the report file.
     static func clearResponses() {
-        RootState.shared.dasiResponses.clearResponses()
+        AppStageState.shared.dasiResponses.clearResponses()
     }
 
     static func clearAllDASI() async throws {
         clearResponses()
-        try await RootState.shared.dasiFile?.clearReportFile()
+        try await AppStageState.shared.dasiFile?.clearReportFile()
     }
      */
     func teardownFromSubjectID() async throws -> DASIResponseList? {

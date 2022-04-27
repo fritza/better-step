@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#warning("Remove SubjectIDDependent and other mass-deletions.")
 protocol SubjectIDDependent {
     @discardableResult
     func teardownFromSubjectID() async throws -> Self?
@@ -27,18 +28,9 @@ fileprivate let endIncompleteText = """
  questions yet to answer.
 """
 
-fileprivate var nextSteps: String {
-    if PhaseManager.shared.allTasksFinished {
-        return "\nPlease proceed to the “Report” view to submit your information to the team."
-    }
-    else {
-        return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
-    }
-}
-
 
 // FIXME: Environment-ize shared state for all finished
-//        RootState.shared.allTasksFinished
+//        AppStageState.shared.allTasksFinished
 struct SurveyCompleteView: View {
     @EnvironmentObject var pages    : DASIPages
     @EnvironmentObject var responses: DASIResponseList
@@ -82,6 +74,15 @@ struct SurveyCompleteView: View {
             }
         }
     }
+
+    var nextSteps: String {
+        if phaseManager.allTasksFinished {
+            return "\nPlease proceed to the “Report” view to submit your information to the team."
+        }
+        else {
+            return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
+        }
+    }
 }
 
 struct SurveyCompleteView_Previews: PreviewProvider {
@@ -90,5 +91,6 @@ struct SurveyCompleteView_Previews: PreviewProvider {
             .environmentObject(DASIPages())
             .environmentObject(DASIResponseList())
             .environmentObject(SubjectID())
+            .environmentObject(PhaseManager())
     }
 }

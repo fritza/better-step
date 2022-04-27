@@ -52,7 +52,7 @@ struct ClearingView: View {
                 Button("Clear Survey") {
                     Task {
                         // NOTE: Bug risk.
-                        RootState.shared.dasiResponses.teardownFromSubjectID
+                        AppStageState.shared.dasiResponses.teardownFromSubjectID
                     }
                 }
 #endif
@@ -61,7 +61,7 @@ struct ClearingView: View {
                 }
                 Button("Clear Subject (all)") {
 #if FOR_BETTER_ST
-                   _ = try?  RootState.shared.tearDownFromSubject()
+                   _ = try?  AppStageState.shared.tearDownFromSubject()
 #warning("unimplemented for walk")
 #endif
                 }

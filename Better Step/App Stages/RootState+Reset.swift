@@ -1,5 +1,5 @@
 //
-//  RootState+Reset.swift
+//  AppStageState+Reset.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/23/22.
@@ -34,7 +34,7 @@ extension SubjectIDDependent {
     }
 }
 
-extension RootState {
+extension AppStageState {
     func observeSubjectID() {
         subjectIDState.$subjectID
         // Ignore incidental re-setting
@@ -109,6 +109,7 @@ extension RootState {
             // TODO: MAKE SURE this is the right thing to do.
             //       ATW the only caller is the clear-all button in SetupView > ClearingView
 
+            #warning("How do we clear the now-environment SubjectID?")
             SubjectID.clear()
         }
     }

@@ -50,11 +50,18 @@ struct Async_AccelApp: App {
     @AppStorage(AppStorageKeys.includeWalk.rawValue) var includeWalk: Bool = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue) var includeSurvey: Bool = true
 
+    @StateObject var subjectID        = SubjectID()
+    @StateObject var dasiPages        = DASIPages()
+    @StateObject var dasiResponseList = DASIResponseList()
+    @StateObject var phaseManager     = PhaseManager()
+    @StateObject var fileCoordinator = PerSubjectFileCoordinator()
+
+
     @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
     @State var selectedTab: Int = 1
 
     func badgeText(representing stage: AppStages) -> String? {
-        return PhaseManager.shared.isCompleted(stage) ?  "✓" : nil
+        return phaseManager.isCompleted(stage) ?  "✓" : nil
     }
 
     var body: some Scene {
@@ -100,12 +107,13 @@ struct Async_AccelApp: App {
                     .tag(5)
             }
             .sheet(isPresented: $shouldShowSheet) {
-                SubjectIDSheetView(originalID: SubjectID.shared.unwrappedSubjectID)
+                SubjectIDSheetView(originalID: subjectID.unwrappedSubjectID)
             }
-            .environmentObject(SubjectID.shared)
-            .environmentObject(DASIPages())
-            .environmentObject(DASIResponseList())
-            .environmentObject(PhaseManager.shared)
+            .environmentObject(subjectID)
+            .environmentObject(dasiPages)
+            .environmentObject(dasiResponseList)
+            .environmentObject(phaseManager)
+            .environmentObject(fileCoordinator)
         }
     }
 }

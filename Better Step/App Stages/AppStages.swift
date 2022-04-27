@@ -57,7 +57,7 @@ enum AppStages: Hashable, CaseIterable {
     case dasi, walk
     /// The user has entered the Report tab
     ///
-    /// You can't report without an unwrapped `SubjectID.shared.subjectID`
+    /// You can't report without an unwrapped `SubjectID` EnvironmentObject
     case report
     case configuration
 
