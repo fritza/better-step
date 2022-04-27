@@ -38,18 +38,13 @@ final actor AccelerometerFileSink {
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
     ///
-    /// The global subjectID (`SubjectID.shared`) is captured upon initialization, and _never_ updated.
-    /// - parameters:
-    ///     - subject: The ID of the subject/run.
+    /// The `SubjectID` environment value is captured upon initialization, and _never_ updated.
     /// - returns: `nil` if either the destination (per-subject) directory or the walking `csv` file could not be created.
     init() async throws
     {
-        assert(SubjectID.shared.subjectID != nil,
-               "\(#function): SubjectID.shared not initialized (shouldn't get here before it's valid.")
         var _queue = Deque<AccelerometerItem>()
         _queue.reserveCapacity(Self.dequeInitialSize)
         acceleratorQueue = _queue
-
         // Apparently fileURLForSubject... is isolated to @MainActor.
         try open()
     }
@@ -59,7 +54,10 @@ final actor AccelerometerFileSink {
     /// `self.fileURL` is refreshed whenever a CSV is opened for writing: The URL depends on the current subject ID.
     /// - throws: `FileHandle` error, probably upon `fileURL` not referring to an extant file.
     func open() throws {
-        fileURL = try PerSubjectFileCoordinator.shared
+        guard let fc = PerSubjectFileCoordinator.shared else {
+            fatalError("file coordinator not set")
+        }
+        fileURL = try fc
             .fileURLForSubject(
                 purpose: .walkingReportFile,
                 creating: true)

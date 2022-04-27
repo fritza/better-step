@@ -7,7 +7,7 @@
 
 import Foundation
 
-actor SurveyReportFile {
+final class SurveyReportFile {
     // TODO: DASIReportFile was SubjectIDDependent.
 
     // MARK: - Properties

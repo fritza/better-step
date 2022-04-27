@@ -16,7 +16,7 @@ import Foundation
 ///
 /// Call `writeAndClose()` to create and fill the output file.
 /// - warning: Records may be added piecemeal, but appending to the output file is not supported. `writeAndClose()` will rewrite ths entire file from the start.
-actor DASIReportFile: SubjectIDDependent {
+final class DASIReportFile: SubjectIDDependent {
     @discardableResult
     func teardownFromSubjectID() async throws -> DASIReportFile? {
         try clearReportFile()
