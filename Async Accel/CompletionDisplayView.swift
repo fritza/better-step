@@ -30,6 +30,6 @@ struct CompletionDisplayView_Previews: PreviewProvider {
     static var previews: some View {
         CompletionDisplayView(items: statusItems)
             .padding()
-            .environmentObject(SubjectID.shared)
+            .environmentObject(SubjectID())
     }
 }

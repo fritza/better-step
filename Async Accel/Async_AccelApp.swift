@@ -107,7 +107,8 @@ struct Async_AccelApp: App {
                     .tag(5)
             }
             .sheet(isPresented: $shouldShowSheet) {
-                SubjectIDSheetView(originalID: subjectID.unwrappedSubjectID)
+                SubjectIDSheetView()
+//                SubjectIDSheetView(originalID: subjectID.unwrappedSubjectID)
             }
             .environmentObject(subjectID)
             .environmentObject(dasiPages)

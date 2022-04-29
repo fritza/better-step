@@ -172,10 +172,10 @@ final class DASIResponseList: ObservableObject {
 
     /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
     var csvLine: String? {
-        guard let subjectID = subjectIDObject.subjectID else {
-            assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
-            return nil
-        }
+//        guard let subjectID = subjectIDObject.subjectID else {
+//            assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
+//            return nil
+//        }
         let okayResponseValues: Set<AnswerState> = [.no, .yes]
         let usableResponses = answers
             .filter {
@@ -196,7 +196,7 @@ final class DASIResponseList: ObservableObject {
             }
 
         let components: [String] =
-        [subjectID] + [firstTimestamp] + numberedResponses
+        [subjectIDObject.subjectID] + [firstTimestamp] + numberedResponses
 
         assert(components.count == 2+DASIQuestion.count,
                "Expected \(2+DASIQuestion.count) response items, got \(components.count)")

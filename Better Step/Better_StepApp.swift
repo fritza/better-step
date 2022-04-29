@@ -68,8 +68,13 @@ struct Better_StepApp: App {
                     }
                     .tag(AppStages.configuration)
             }
-//            .environmentObject(SubjectID.shared)
-            .environmentObject(AppStageState.shared)
+            .environmentObject(subjectID)
+            .environmentObject(dasiPages)
+            .environmentObject(dasiResponseList)
+            .environmentObject(phaseManager)
+            .environmentObject(fileCoordinator)
+            .environmentObject(appStage)
+            .environmentObject(WalkingSequence())
         }
     }
 }

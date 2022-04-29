@@ -51,6 +51,6 @@ struct ReportingView: View {
 struct ReportingView_Previews: PreviewProvider {
     static var previews: some View {
             ReportingView()
-        .environmentObject(SubjectID.shared)
+        .environmentObject(SubjectID())
     }
 }

@@ -14,6 +14,11 @@ import Foundation
 /// The App object inserts a `SubjectID` into the environment. Access it only through an `@EnvironmentObject`.
 /// - warning: Do not access the `UserDefault`/`AppStorage` directly.
 final class SubjectID: ObservableObject {
+    static private(set) var initialized = false
+
+    //  Regrettably necessary to initailize 
+    static var shared: SubjectID = SubjectID()
+
     /// Remove the backing `UserDefaults` value for the subject ID.
     ///
     /// **Use with caution:** The remove-all-data button depends on a lagging Subject ID; clearing it would make it difficult (or worse) to identify what files to delete.
@@ -31,17 +36,17 @@ final class SubjectID: ObservableObject {
     ///
     /// - note: `nil` value at startup to trigger presentation of `SubjectIDSheetView`.
     ///
-    @Published var subjectID: String? {
+    @Published var subjectID: String {
         didSet {
             UserDefaults.standard
                 .set(subjectID,
                      forKey: AppStorageKeys.subjectID.rawValue)
-            noSubjectID = (subjectID == nil)
-            let asUnwrapped = subjectID ?? ""
-            if unwrappedSubjectID != asUnwrapped {
-                // TODO: is it necessary to guard against ∞ loop?
-                unwrappedSubjectID = asUnwrapped
-            }
+//            noSubjectID = (subjectID == nil)
+//            let asUnwrapped = subjectID ?? ""
+//            if unwrappedSubjectID != asUnwrapped {
+//                // TODO: is it necessary to guard against ∞ loop?
+//                unwrappedSubjectID = asUnwrapped
+//            }
         }
     }
 
@@ -53,24 +58,23 @@ final class SubjectID: ObservableObject {
     /// Setting `unwrappedSubjectID` also sets `subjectID`, as when the **Proceed** button is tapped in `SubjectIDSheetView`.
     ///
     /// `SubjectIDSheetView` initializes its editable `String` from `unwrappedSubjectID`.
-    @Published var unwrappedSubjectID: String {
-        didSet {
-            if unwrappedSubjectID != oldValue {
-                // TODO: is it necessary to guard against ∞ loop?
-                subjectID = unwrappedSubjectID
-            }
-        }
-    }
-    
-    @Published var noSubjectID: Bool = true
+//    @Published var unwrappedSubjectID: String {
+//        didSet {
+//            if unwrappedSubjectID != oldValue {
+//                // TODO: is it necessary to guard against ∞ loop?
+    //                subjectID = unwrappedSubjectID
+    //            }
+    //        }
+
+//    @Published var noSubjectID: Bool = true
 
 
     // Removed private because it's all going to be environment.
     init() {
         let _subID = UserDefaults.standard
-            .string(forKey: AppStorageKeys.subjectID.rawValue) // ?? ""
+            .string(forKey: AppStorageKeys.subjectID.rawValue) ?? ""
         subjectID = _subID
-        noSubjectID = (_subID == nil)
-        unwrappedSubjectID = _subID ?? ""
+
+        Self.initialized = true
     }
 }

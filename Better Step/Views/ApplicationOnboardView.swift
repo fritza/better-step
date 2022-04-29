@@ -21,7 +21,7 @@ struct ApplicationOnboardView: View {
             // TODO: Can't I refer to the subject directly?
             //        problem: The TextField wants a String, not a String?.
             if localSubjectID.isEmpty {
-                subjectIDObject.subjectID = nil
+                subjectIDObject.subjectID = ""
                 return
             }
 

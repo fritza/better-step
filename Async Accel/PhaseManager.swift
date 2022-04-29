@@ -14,9 +14,7 @@ final class PhaseManager: ObservableObject {
     @Published var allTasksFinished: Bool = false
     // FIXME: apparently doesn't see EnvironmentObjects
     //        Future commit, remove this line.
-    @EnvironmentObject var subjectIDState: SubjectID
-
-//     @EnvironmentObject var subjectIDState: SubjectID
+    @EnvironmentObject var subjectID: SubjectID
 
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
@@ -73,7 +71,9 @@ extension PhaseManager {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if SubjectID.shared.subjectID == nil { return false }
+        guard SubjectID.initialized else {
+            return false
+        }
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases

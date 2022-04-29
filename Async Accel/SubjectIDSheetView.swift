@@ -37,10 +37,12 @@ private let paragraph3 = "Type your ID into the form, then tap **Proceed**."
 
 struct SubjectIDSheetView: View {
     @Environment(\.dismiss) var dismiss: DismissAction
-    @EnvironmentObject var crappySubjectID: SubjectID
+    @EnvironmentObject var subjectID: SubjectID
+    private let originalID: String
 
-    @State private var scratchID: String = SubjectID.shared.unwrappedSubjectID
-    let originalID: String
+    init(scratchID sid: String = "") {
+        originalID = SubjectID.shared.subjectID ?? ""
+    }
 
 
     func introText(_ str: String) -> AttributedString {
@@ -65,17 +67,20 @@ struct SubjectIDSheetView: View {
                 //        Within SubjectUIEditView
 
                 // TODO: Is "Proceed" obscured by the keyboard?
-                SubjectUIEditView(id: $scratchID)
+//                SubjectUIEditView(id: $subjectID.unwrappedSubjectID)
+                SubjectUIEditView()
                 Spacer()
                 HStack {
                     Spacer()
                     Button("Cancel", role: .cancel) {
-                        crappySubjectID.unwrappedSubjectID = originalID
+                        // I think we don't need to reset the ID string here, do we?
+                        // We don't touch the stored value until Proceed?
+//                        subjectID.unwrappedSubjectID = originalID
                         dismiss()
                     }
                     Spacer()
                     Button("Proceed") {
-                        crappySubjectID.unwrappedSubjectID = scratchID
+                        subjectID.unwrappedSubjectID = originalID
                         dismiss()
                     }
                     Spacer()
@@ -90,7 +95,7 @@ struct SubjectIDSheetView: View {
 struct SubjectIDSheetView_Previews: PreviewProvider {
     static var previews: some View {
 //        SubjectID.shared.subjectID = "Shannon"
-        return SubjectIDSheetView(originalID: "Throwback")
-            .environmentObject(SubjectID.shared)
+        return SubjectIDSheetView()
+            .environmentObject(SubjectID())
     }
 }

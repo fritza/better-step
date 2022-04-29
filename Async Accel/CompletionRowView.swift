@@ -66,7 +66,7 @@ struct CompletionRowView_Previews: PreviewProvider {
             Spacer()
         }
         .frame(maxHeight: Double(statusItems.count) * 100.0)
-        .environmentObject(SubjectID.shared)
+        .environmentObject(SubjectID())
     }
 }
 

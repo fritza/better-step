@@ -41,18 +41,16 @@ extension AppStageState {
             .removeDuplicates()
         // Wait between keystrokes
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
-            .sink { id in
-                if let id = id {
+            .sink { _ in
+//                if let id = id {
                     // See NOTES below on requirements for clearing
                     // COMMON
                     AppStage.shared.makeAllIncomplete()
-
-
-                }
-                else {
-                    // subject ID -> nil
-
-                }
+//                }
+//                else {
+//                    // subject ID -> nil
+//
+//                }
 
             }
             .store(in: &cancellables)

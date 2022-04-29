@@ -14,14 +14,7 @@ import Combine
 /// - Upon first use of the app by an unknown user. "Unknown" is a question for the client code, ATW the need is signaled by a `nil` value for `SubjectID.shared.subjectID`.
 /// - note: Also displays a `Text` row showing the value as understood iff the `DEBUG` compilation symbol is defined.
 struct SubjectUIEditView: View {
-    /// Working value for the subject ID, for the use of the `TextField`. Updates the shared `SubjectID` upon `didSet`.
-    var idString: Binding<String>
-
-    /// Create a new `SubjectUIEditView`. Clients have no direct connection to the value; the "return" value is in `SubjectID.shared.subjectID`.
-    init(id: Binding<String>) {
-        idString = id
-    }
-
+    @EnvironmentObject var subjectID: SubjectID
     var body: some View {
         VStack {
             Form {
@@ -29,9 +22,9 @@ struct SubjectUIEditView: View {
                 //       Heuristic: If DASI is available, it's a patient.
                 Section("Enter your patient ID") {
                     TextField("Subject ID",
-                              text: idString)
+                              text: $subjectID.unwrappedSubjectID)
 #if DEBUG
-                    Text(idString.wrappedValue)
+                    Text(subjectID.unwrappedSubjectID)
 #endif
                 }
             }
@@ -52,10 +45,7 @@ final class JustADemo: ObservableObject {
 
 struct SubjectUIEditView_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectID.clear()
-        let holder = JustADemo(SubjectID.shared.unwrappedSubjectID)
-        return SubjectUIEditView(
-            id: holder.$editValue)
-        .environmentObject(SubjectID.shared)
+        SubjectUIEditView()
+            .environmentObject(SubjectID())
     }
 }
