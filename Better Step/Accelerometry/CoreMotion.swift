@@ -25,7 +25,7 @@ private let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
 //  Can you replace `.shared`?
 
 // MARK: - IncomingAccelerometry
-actor IncomingAccelerometry {
+final class IncomingAccelerometry {
     var buffer = Deque<CMAccelerometerData>(minimumCapacity: numericCast(minBufferCapacity))
     var count: Int {
         buffer.count
@@ -198,8 +198,8 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
             if let accData = accData {
                 Task {
                     // Task? Really?
-                    await self.asyncBuffer.receive(accData)
-                    Self.census = await self.asyncBuffer.count
+                    self.asyncBuffer.receive(accData)
+                    Self.census = self.asyncBuffer.count
                 }
             }
         }

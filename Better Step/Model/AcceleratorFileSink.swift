@@ -13,7 +13,7 @@ import Combine
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
 ///
 /// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
-final actor AccelerometerFileSink {
+final class AccelerometerFileSink {
     enum Errors: Error {
         case noHandleOpen(String?)
 
@@ -34,7 +34,6 @@ final actor AccelerometerFileSink {
     // Okay, so how do you fill it?
     // There's a race between the asynchronous init
     // and the first use.
-    // SubjectID: init addresses .shared. Does anyone else beforehand? Is that a problem, given that the access here is ostensibly a read, though it might have a side effect.
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
     ///

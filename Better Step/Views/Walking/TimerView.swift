@@ -14,7 +14,9 @@ import SwiftUI
 /// * `MinSecFormatter`
 struct TimerView: View {
     @StateObject var minutePub: MinutePublisher
-    @State var isFinished: Bool = false
+//    @State var isFinished: Bool = false
+
+    @EnvironmentObject var sequencer: WalkingSequence
     
     let formatter = MinSecFormatter(showMinutes: true)
 
@@ -30,7 +32,8 @@ struct TimerView: View {
             Spacer()
         }
         .onReceive(minutePub.completedSubject) { _ in
-            isFinished = true
+            sequencer.showComplete = true
+//            isFinished = true
         }
         .onAppear {
             minutePub.start()
@@ -44,5 +47,6 @@ struct TimerView_Previews: PreviewProvider {
         TimerView(
             minutePub: MinutePublisher(after: 65)
         )
+        .environmentObject(WalkingSequence())
     }
 }

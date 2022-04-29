@@ -75,7 +75,7 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
 /// `id` is the 1-based enumeration of the question, not its position in the array. Lookups search the `questions` array for a matching `id`. The array _needn't_ be in any particular order.
 /// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
 public struct DASIQuestion: Identifiable, Codable, Comparable {
-    static let jsonBasename = "AsyncDASIQuestions"
+    static let jsonBasename = "DASIQuestions"
 
     // TODO: Consider making this into a Collection
     public var id   : Int       // 1-based
@@ -84,6 +84,11 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
 
     // WARNING: the ID is 1-based
     public static let questions: [DASIQuestion] = {
+//        let bundlePath = Bundle.main.bundlePath
+//        let durl = Bundle.main.url(
+//            forResource: Self.jsonBasename,
+//            withExtension: "json")
+
         guard let dasiURL = Bundle.main.url(
             forResource: Self.jsonBasename, withExtension: "json") else {
                 preconditionFailure("Could not find DASIQuestions.json")
