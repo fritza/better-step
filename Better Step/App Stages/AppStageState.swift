@@ -73,6 +73,7 @@ struct GeneralComments_RootState {}
 /// The subject ID goes through `AppStageState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
 final class AppStageState: ObservableObject {
     @EnvironmentObject var subjectIDState: SubjectID
+//    @EnvironmentObject var appStageState : AppStageState
 
     // FIXME: Find a better place for all-finished
     //        or be reconciled to maintaining a global state.
@@ -80,9 +81,9 @@ final class AppStageState: ObservableObject {
     @Published var allTasksFinished: Bool = false
     /// Singleton instance of `RootState`
     /// - note: Maybe make this a @StateObject for the App?
-    static var shared = AppStageState()
+//    static var shared = AppStageState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
-    private init() {
+    init() {
 
         // TODO: All per-user resources must be optional.
         // Especially:
@@ -113,7 +114,7 @@ final class AppStageState: ObservableObject {
     var dasiContent: DASIPages = DASIPages()
     var dasiResponses: DASIResponseList = DASIResponseList()
      */
-    var dasiFile: DASIReportFile?
+//    var dasiFile: DASIReportFile?
 
     // Walk
 

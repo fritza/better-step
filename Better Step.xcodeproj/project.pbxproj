@@ -19,6 +19,11 @@
 		1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6758276FA6CA00011A7E /* Preview Assets.xcassets */; };
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
+		1F1641F22819E80D00E4E2FA /* AppStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* AppStageState.swift */; };
+		1F1641F32819E87C00E4E2FA /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
+		1F1641F42819E88A00E4E2FA /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
+		1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */; };
+		1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE828B27EBA00C00CD8368 /* AppStageState+Reset.swift */; };
 		1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
 		1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D427D1450300568ADF /* ComplexModule */; };
 		1F1BD8D727D1450300568ADF /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D627D1450300568ADF /* Numerics */; };
@@ -34,7 +39,6 @@
 		1F2432C727FD0406008A5418 /* SurveyReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432C627FD0406008A5418 /* SurveyReportFile.swift */; };
 		1F2432C927FD087C008A5418 /* SurveyCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */; };
 		1F2432CB27FD0CAC008A5418 /* PhaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */; };
-		1F2432CC27FD0DA6008A5418 /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
 		1F2432CE27FD129D008A5418 /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1F2432CF27FD134D008A5418 /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F2432D027FD1373008A5418 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
@@ -66,7 +70,6 @@
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
-		1FB684E427F2254400612924 /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E727F225BD00612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
@@ -97,10 +100,8 @@
 		1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
 		1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
 		1FDB374327F78CCD00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
-		1FDE825F27E29FFD00CD8368 /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
 		1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
 		1FDE826427E3D7F700CD8368 /* ActivityView in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDE826327E3D7F700CD8368 /* ActivityView */; };
-		1FDE828C27EBA00C00CD8368 /* RootState+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE828B27EBA00C00CD8368 /* RootState+Reset.swift */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
 		1FED1C5D27FE1A4A00C290F7 /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F2432DF27FE11D9008A5418 /* DASIQuestions.json */; };
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
@@ -163,6 +164,7 @@
 		1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Better StepUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITests.swift; sourceTree = "<group>"; };
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1F1641F7281B018A00E4E2FA /* DASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
 		1F2432C627FD0406008A5418 /* SurveyReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReportFile.swift; sourceTree = "<group>"; };
 		1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCompleteView.swift; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 		1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmClearingAlert.swift; sourceTree = "<group>"; };
 		1FDE825E27E29FFD00CD8368 /* AppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStages.swift; sourceTree = "<group>"; };
 		1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportFile.swift; sourceTree = "<group>"; };
-		1FDE828B27EBA00C00CD8368 /* RootState+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootState+Reset.swift"; sourceTree = "<group>"; };
+		1FDE828B27EBA00C00CD8368 /* AppStageState+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStageState+Reset.swift"; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkProgressView.swift; sourceTree = "<group>"; };
 		1FF11B38279A140600E319ED /* WalkCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkCountdownView.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		1F0B6757276FA6CA00011A7E /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				1F1641F7281B018A00E4E2FA /* DASIQuestions.json */,
 				1F769EB127FF93F200A3CAE3 /* STBar.jpeg */,
 				1F0B6758276FA6CA00011A7E /* Preview Assets.xcassets */,
 			);
@@ -400,7 +403,7 @@
 				1F2432D427FDF843008A5418 /* Instructional */,
 				1FDE828A27EA463B00CD8368 /* DASI */,
 				1F8A065527A478B400477379 /* AppStageState.swift */,
-				1FDE828B27EBA00C00CD8368 /* RootState+Reset.swift */,
+				1FDE828B27EBA00C00CD8368 /* AppStageState+Reset.swift */,
 				1FDE825E27E29FFD00CD8368 /* AppStages.swift */,
 			);
 			path = "App Stages";
@@ -798,7 +801,6 @@
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
-				1FDE825F27E29FFD00CD8368 /* AppStages.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
@@ -811,6 +813,7 @@
 				1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
 				1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */,
+				1F1641F32819E87C00E4E2FA /* AppStages.swift in Sources */,
 				1F8A065627A478B400477379 /* AppStageState.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
@@ -821,10 +824,11 @@
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
+				1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
+				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
-				1FDE828C27EBA00C00CD8368 /* RootState+Reset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,10 +872,10 @@
 				1F2432DA27FDFD63008A5418 /* InstructionPageView.swift in Sources */,
 				1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */,
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
+				1F1641F22819E80D00E4E2FA /* AppStageState.swift in Sources */,
 				1F2432CE27FD129D008A5418 /* ForwardBackBar.swift in Sources */,
 				1FD64EB127F7999E006C1E59 /* Setup.swift in Sources */,
 				1FB684FB27F252BE00612924 /* Numeric+extensions.swift in Sources */,
-				1FB684E427F2254400612924 /* AcceleratorFileSink.swift in Sources */,
 				1F023C6727ECE63600C1EBC5 /* AWSTryout.swift in Sources */,
 				1FB684ED27F2269300612924 /* PerSubjectFileCoordinator.swift in Sources */,
 				1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */,
@@ -883,7 +887,6 @@
 				1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */,
 				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
 				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
-				1F2432CC27FD0DA6008A5418 /* AppStages.swift in Sources */,
 				1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */,
 				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
 				1FD64EB227F79FA1006C1E59 /* EmailFormView.swift in Sources */,
@@ -897,6 +900,7 @@
 				1F2432D227FD143A008A5418 /* YesNoView.swift in Sources */,
 				1FB684E727F225BD00612924 /* SubjectID.swift in Sources */,
 				1F769EB027FF90FD00A3CAE3 /* InstructionElement.swift in Sources */,
+				1F1641F42819E88A00E4E2FA /* AppStages.swift in Sources */,
 				1F2432C727FD0406008A5418 /* SurveyReportFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

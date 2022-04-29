@@ -41,27 +41,26 @@ let thingsToClear: [ThingToClear] = {
 /// - bug: Actions are not yet implemented.
 struct ClearingView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showingAlert = false
-
-    @State private var latestClick = ""
+//    @State private var latestClick = ""
+    @EnvironmentObject var appStageState: AppStageState
+    // @EnvironmentObject var phaseManager: PhaseManager
+    @EnvironmentObject var dasiResponses: DASIResponseList
 
     var body: some View {
         VStack(alignment: .center, spacing: 80.0) {
             List {
-                #if FOR_BETTER_ST
                 Button("Clear Survey") {
-                    Task {
-                        // NOTE: Bug risk.
-                        AppStageState.shared.dasiResponses.teardownFromSubjectID
-                    }
+                    // NOTE: Bug risk.
+//                    appStageState
+//                        .dasiResponses
+//                        .teardownFromSubjectID
                 }
-#endif
                 Button("Clear Timed Walk") {
 #warning("unimplemented for walk")
                 }
                 Button("Clear Subject (all)") {
 #if FOR_BETTER_ST
-                   _ = try?  AppStageState.shared.tearDownFromSubject()
+                   _ = try?  appStageState.tearDownFromSubject()
 #warning("unimplemented for walk")
 #endif
                 }
@@ -88,5 +87,6 @@ struct ClearingView_Previews: PreviewProvider {
         NavigationView {
             ClearingView()
         }
+        .environmentObject(PhaseManager())
     }
 }

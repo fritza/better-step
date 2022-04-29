@@ -54,7 +54,8 @@ struct Async_AccelApp: App {
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
     @StateObject var phaseManager     = PhaseManager()
-    @StateObject var fileCoordinator = PerSubjectFileCoordinator()
+    @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
+    @StateObject var appStage         = AppStageState()
 
 
     @State var shouldShowSheet: Bool = true // SubjectID.shared.noSubjectID
@@ -115,6 +116,7 @@ struct Async_AccelApp: App {
             .environmentObject(dasiResponseList)
             .environmentObject(phaseManager)
             .environmentObject(fileCoordinator)
+            .environmentObject(appStage)
         }
     }
 }

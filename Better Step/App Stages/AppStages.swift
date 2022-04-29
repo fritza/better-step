@@ -109,7 +109,7 @@ extension AppStages {
     /// This is done with reference to `AppStage.shared`.
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
     func didNotComplete() { // was makeIncomplete()
-        PhaseManager.shared.didComplete(phase: self)
+        PhaseManager.shared.didNotComplete(phase: self)
         }
 
 

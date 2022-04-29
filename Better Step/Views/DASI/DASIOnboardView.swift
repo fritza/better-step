@@ -15,7 +15,7 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
 """
 
     @EnvironmentObject var envt: DASIPages
-
+    @State var shouldShow = false
 
     // TODO: Add the forward/back bar.
 

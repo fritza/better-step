@@ -92,6 +92,7 @@ extension AppStageState {
  */
 
     func tearDownFromSubject() throws {
+        /*
         // Actually, just give everything a protocol for what it does when the existing sID disappears.
         Task {
             AppStage.shared.makeAllIncomplete()
@@ -110,14 +111,15 @@ extension AppStageState {
             #warning("How do we clear the now-environment SubjectID?")
             SubjectID.clear()
         }
+         */
     }
 
     func respondToNewSubject(_ new: String) throws {
         AppStage.shared.makeAllIncomplete()
-
-       dasiFile = try DASIReportFile(
-           baseName: "DASI",
-           directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
-       )
+//
+//       dasiFile = try DASIReportFile(
+//           baseName: "DASI",
+//           directory: PerSubjectFileCoordinator.shared.directoryURLForSubject(creating: true)
+//       )
     }
 }

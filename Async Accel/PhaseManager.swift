@@ -10,6 +10,11 @@ import Combine
 import SwiftUI
 
 final class PhaseManager: ObservableObject {
+    // TODO: Initialize static `shared` at declaration.
+    /// Upon creating the first PhaseManager, make it the public singleton.
+    /// - warning: `PhaseManager.shared` should not be used unless absolutely necessary. Use `EnvironmentObject` instead.
+    static private(set) var shared: PhaseManager!
+
     @Published var selectedStage: AppStages = .dasi
     @Published var allTasksFinished: Bool = false
     // FIXME: apparently doesn't see EnvironmentObjects
@@ -30,6 +35,15 @@ final class PhaseManager: ObservableObject {
         assert(!retval.isEmpty,
                "Must set at least one of includeWalk, includeSurvey")
         return retval
+    }
+
+    // TODO: Initialize static `shared` at declaration.
+    /// Upon creating the first PhaseManager, make it the public singleton.
+    /// - warning: `PhaseManager.shared` should not be used unless absolutely necessary. Use `EnvironmentObject` instead.
+    init() {
+        if Self.shared == nil {
+            Self.shared = self
+        }
     }
 }
 

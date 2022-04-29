@@ -21,7 +21,17 @@ struct Better_StepApp: App {
     // TODO: Better Step: Interpose the onboard sheet
     //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
-    @StateObject var rootState = AppStageState.shared
+
+    @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalkPersistent = true
+    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeDASIPersistent = true
+
+    @StateObject var subjectID        = SubjectID()
+    @StateObject var dasiPages        = DASIPages()
+    @StateObject var dasiResponseList = DASIResponseList()
+    @StateObject var phaseManager     = PhaseManager()
+    @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
+    @StateObject var appStage         = AppStageState()
+
 
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
@@ -50,8 +60,8 @@ struct Better_StepApp: App {
                     .tag(AppStages.walk)
 
                 // MARK: - Reporting
-                Text("Reporting Tab")
                 // TODO: Add report-related environmentObjects as soon as known.
+                Text("Reporting Tab")
                     .badge(AppStages.report.tabBadge)
                     .tabItem {
                         Image(systemName: AppStages.report.imageName)

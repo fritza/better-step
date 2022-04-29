@@ -19,15 +19,6 @@ fileprivate let endIncompleteText = """
  questions yet to answer.
 """
 
-fileprivate var nextSteps: String {
-    if PhaseManager.shared.allTasksFinished {
-        return "\nPlease proceed to the “Report” view to submit your information to the team."
-    }
-    else {
-        return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
-    }
-}
-
 //let nextSteps = "NON-GLOBAL nextSteps"
 
 // FIXME: Should there be a Back button?
@@ -35,15 +26,26 @@ fileprivate var nextSteps: String {
 struct DASICompleteView: View {
     @EnvironmentObject private var responses: DASIResponseList
     @EnvironmentObject private var questions: DASIPages
+    @EnvironmentObject private var phaseManager: PhaseManager
+
     var allItemsAnswered: Bool {
         return responses.unknownResponseIDs.isEmpty
+    }
+
+    var nextSteps: String {
+        if phaseManager.allTasksFinished {
+            return "\nPlease proceed to the “Report” view to submit your information to the team."
+        }
+        else {
+            return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
+        }
     }
 
     var instructions: String {
         var retval = completionText + nextSteps
         if !allItemsAnswered {
             let empties = responses.unknownResponseIDs
-            retval += startIncompleteText + "\(empties.count)" + endIncompleteText
+            retval += startIncompleteText + " " + "\(empties.count)" + endIncompleteText
         }
         return retval
     }
@@ -77,6 +79,9 @@ struct DASICompleteView: View {
 struct DASICompleteView_Previews: PreviewProvider {
     static var previews: some View {
         DASICompleteView()
-            .environmentObject(DASIPages())
+        // FIXME: These will need better initializer
+            .environmentObject(DASIPages(.completion))
+            .environmentObject(DASIResponseList())
+            .environmentObject(PhaseManager())
     }
 }

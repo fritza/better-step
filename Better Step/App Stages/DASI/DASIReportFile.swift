@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // MARK: - DASIReportFile
 /// A collection of `DASIResponseList` and the capacity to format and write them into a report file (implicitly `.csv`).
@@ -17,6 +18,9 @@ import Foundation
 /// Call `writeAndClose()` to create and fill the output file.
 /// - warning: Records may be added piecemeal, but appending to the output file is not supported. `writeAndClose()` will rewrite ths entire file from the start.
 final class DASIReportFile: SubjectIDDependent {
+//    @EnvironmentObject var dasi:
+    @EnvironmentObject var fileCoordinator: PerSubjectFileCoordinator
+
     @discardableResult
     func teardownFromSubjectID() async throws -> DASIReportFile? {
         try clearReportFile()
@@ -27,7 +31,7 @@ final class DASIReportFile: SubjectIDDependent {
         let result: DASIReportFile? = await MainActor.run() {
             return try? DASIReportFile(
                 baseName: "DASI",
-                directory: PerSubjectFileCoordinator.shared
+                directory: fileCoordinator
                     .directoryURLForSubject(creating: true)
             )
         }
