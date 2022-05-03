@@ -35,6 +35,8 @@ public struct MinSecFormatter {
     }()
 
     // MARK: Format strategy
+    // FIXME: Why should any of this throw?
+    //        Maybe some should return String?, some subject to a precondition check.
     let formatStrategy: (_ minutes: Int, _ seconds: Int) throws -> String
     static func withMinutesStrategy(minutes: Int, seconds: Int) throws -> String {
         guard minutes >= 0 else { throw MinSecErrors.negativeMinutes }
