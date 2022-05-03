@@ -8,6 +8,8 @@
 import Foundation
 
 // MARK: - MinSecFormatter
+// FIXME: This isn't actually used.
+//        Examine MinutePublisher to see whether it could benefit from changing over.
 public struct MinSecFormatter {
     static private let throwSecondsOverflow = false
     // MARK: Errors

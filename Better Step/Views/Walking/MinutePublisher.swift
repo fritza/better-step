@@ -14,20 +14,19 @@ import Combine
 //       and maybe the Timer can be given a looser interval and tolerance.
 
 // MARK: - MinutePublisher
-/// Publisher of components of `Timer` ticks in `Int` minutes and seconds, and `Double` subseconds, counting up or down.
-///
-/// Count-_down_ timers run for a specified duration into the future (deadline). Count-_up_ timers run indefinitely. When the deadline is reached, `completedSubject` carries a `Bool` indicating whether the clock ran out vs. cancelled.
-///
-/// Because all publishers are downstream from a single shared `Timer.Publisher`, the outputs are synchronized to the single timebase they share. For instance, the minute component will drop from 2 to 1 at _exactly_ the moment when the seconds component goes from 0 to 59.
-/// - bug: Count-up timing is not completely implemented. Especially, no deadline is observed for the time limit at which the count-up is no longer desired.
+/**
+ Publisher of components of `Timer` ticks in minutes, seconds, subseconds, and formatted minute/second strings, counting up or down.
+
+ Count-_down_ timers run for a specified duration into the future (deadline). Count-_up_ timers run indefinitely. When the deadline is reached, ``completedSubject`` carries a `Bool` indicating ether the clock ran out vs. cancelled.
+
+ Because all publishers are downstream from a single shared `Timer.Publisher`, the outputs are synchronized to the single timebase they share. For instance, the minute component will drop from o 1 at _exactly_ the moment when the seconds component goes from 0 to 59.
+ - bug: Count-up timing is not completely implemented. Especially, no deadline is observed for the time limit at which the count-up is no longer desired.
+ */
 final class MinutePublisher: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
 
     // MARK: Subjects
-    // The minute, second, and fraction subjects were of the form
-    // var minuteSubject   = PassthroughSubject<Int   , Never>()
-
-    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling `.stop()`. The `Bool` is true iff the completion is due to exhaustion.
+    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``.stop()``. The `Bool` is true iff the completion is due to exhaustion.
     var completedSubject = PassthroughSubject<Bool, Never>()
 
     /// The root time publisher with default parameters:
@@ -56,7 +55,7 @@ final class MinutePublisher: ObservableObject {
     private let countdownTo: Date?
     /// Initialize a count-up _from_ the starting date toward the indefinite future.
     /// - parameter date: The `Date` at which to start counting. If `nil` (the default), the time is reported from now.
-    /// - bug: Either this isn't true, _or_ it's badly explained, _or_ the use of `countdownTo` as the endpoint for the timer is a misnomer.
+    /// - bug: Either this isn't true, _or_ it's badly explained, _or_ the use of ``countdownTo`` as the endpoint for the timer is a misnomer.
     init(to date: Date? = nil) {
         countdownTo = date
     }
@@ -68,7 +67,7 @@ final class MinutePublisher: ObservableObject {
         self.init(to: date)
     }
 
-    /// The `Date` at which `start()` commenced the count. Used only as a reference point for counting up.
+    /// The `Date` at which` `start()`` commenced the count. Used only as a reference point for counting up.
     private var started: Date!
     /// The time publisher, converted to emitting a `TimeInterval` between now and the deadline.
     var commonPublisher: AnyPublisher<TimeInterval, Never>!
@@ -145,10 +144,10 @@ final class MinutePublisher: ObservableObject {
     }
 
     // MARK: Stop
-    /// Halt the clock and send a `Bool` to `completedSubject` to indicate exhaustion or halt.
+    /// Halt the clock and send a `Bool` to ``completedSubject`` to indicate exhaustion or halt.
     ///
-    /// - parameter exhausted: `true` iff `stop()` was called because the deadline was reached. This is passed along through `completedSubject` to inform clients the clock is finished.
-    /// - note: Shouldn't the components be `Publisher<Int, Error>` so a downstream `sink` can detect completion?
+    /// - parameter exhausted: `true` iff ``stop()`` was called because the deadline was reached. This is passed along through ``completedSubject`` to inform clients the clock is finished.
+    /// - note: Shouldn't the components be `Publisher<Int, Error>` (etc.) so a downstream `sink` can detect completion?
     func stop(exhausted: Bool = false) {
         for c in cancellables {
             c.cancel()
