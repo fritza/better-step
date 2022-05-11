@@ -100,6 +100,8 @@
 		1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
 		1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
 		1FDB374327F78CCD00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
+		1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */; };
+		1FDBB3FD281C49A200D0A7E9 /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
 		1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
 		1FDE826427E3D7F700CD8368 /* ActivityView in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDE826327E3D7F700CD8368 /* ActivityView */; };
 		1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
@@ -214,6 +216,8 @@
 		1FD64EB027F7999E006C1E59 /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		1FDB373E27F789BD00E10D8E /* ClearingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearingView.swift; sourceTree = "<group>"; };
 		1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmClearingAlert.swift; sourceTree = "<group>"; };
+		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
+		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
 		1FDE825E27E29FFD00CD8368 /* AppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStages.swift; sourceTree = "<group>"; };
 		1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportFile.swift; sourceTree = "<group>"; };
 		1FDE828B27EBA00C00CD8368 /* AppStageState+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStageState+Reset.swift"; sourceTree = "<group>"; };
@@ -419,6 +423,15 @@
 			path = Setup;
 			sourceTree = "<group>";
 		};
+		1FDBB3F9281C494F00D0A7E9 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */,
+				1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */,
+			);
+			path = Instructions;
+			sourceTree = "<group>";
+		};
 		1FDE828A27EA463B00CD8368 /* DASI */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +527,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */,
+				1FDBB3F9281C494F00D0A7E9 /* Instructions */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
 				1FF11B3A279A173D00E319ED /* DASI */,
@@ -814,12 +828,14 @@
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
 				1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */,
 				1F1641F32819E87C00E4E2FA /* AppStages.swift in Sources */,
+				1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */,
 				1F8A065627A478B400477379 /* AppStageState.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1FB684E627F225A300612924 /* SubjectID.swift in Sources */,
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
+				1FDBB3FD281C49A200D0A7E9 /* InstructionArrows.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,

@@ -17,7 +17,6 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-
     // TODO: Better Step: Interpose the onboard sheet
     //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
@@ -41,23 +40,28 @@ struct Better_StepApp: App {
                     $aStage.currentSelection
             ) {
                 // MARK: - DASI
-                SurveyContainerView()
-                    .badge(AppStages.dasi.tabBadge)
-                    .tabItem {
-                        Image(systemName: AppStages.dasi.imageName)
-                        Text(AppStages.dasi.visibleName)
-                    }
-                    .tag(AppStages.dasi)
+                if includeDASIPersistent {
+                    SurveyContainerView()
+                        .badge(AppStages
+                            .dasi.tabBadge)
+                        .tabItem {
+                            Image(systemName: AppStages.dasi.imageName)
+                            Text(AppStages.dasi.visibleName)
+                        }
+                        .tag(AppStages.dasi)
+                }
 
                 // MARK: - Timed Walk
-                WalkView()
-                // TODO: Add walk-related environmentObjects as soon as known.
-                    .badge(AppStages.walk.tabBadge)
-                    .tabItem {
-                        Image(systemName: AppStages.walk.imageName)
-                        Text(AppStages.walk.visibleName)
-                    }
-                    .tag(AppStages.walk)
+                if includeWalkPersistent {
+                    WalkView()
+                    // TODO: Add walk-related environmentObjects as soon as known.
+                        .badge(AppStages.walk.tabBadge)
+                        .tabItem {
+                            Image(systemName: AppStages.walk.imageName)
+                            Text(AppStages.walk.visibleName)
+                        }
+                        .tag(AppStages.walk)
+                }
 
                 // MARK: - Reporting
                 // TODO: Add report-related environmentObjects as soon as known.

@@ -11,11 +11,14 @@ struct WalkProgressView: View {
     @EnvironmentObject var sequencer: WalkingSequence
     @AppStorage(AppStorageKeys.walkInMinutes.rawValue) var durationInMinutes = 6
 
-    var body: some View {
+    var navTitleView: some View {
+        Text("\(durationInMinutes.spelled.capitalized) Minute Walk")
+            .font(.largeTitle)
+    }
 
+    var body: some View {
         VStack {
-            Text("\(durationInMinutes.spelled.capitalized) Minute Walk")
-                .font(.largeTitle)
+            navTitleView
             Spacer()
             TimerView(
                 minutePub: MinutePublisher(
@@ -23,19 +26,22 @@ struct WalkProgressView: View {
                 ))
                 .font(.system(size: 120, weight: .ultraLight)
                 )
-
             Spacer()
             Button("Cancel") {
                 print("stopping")
                 MotionManager.shared.cancelUpdates()
                 sequencer.showProgress = false
             }
+            Spacer()
         }
+        .padding()
     }
 }
 
 struct WalkProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        WalkProgressView()
+        NavigationView {
+            WalkProgressView()
+        }
     }
 }

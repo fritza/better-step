@@ -13,46 +13,71 @@ This exercise will assess your stride and pace though a short (six-minute) walk.
 Tap “Proceed" when you are ready
 """
 
+
+let walkingFinished = """
+You’ve completed your walk. If you haven’t responded to the DASI survey, tap the "Survey" tab below.
+"""
+
 final class WalkingSequence: ObservableObject, CustomStringConvertible {
     var description: String {
         "WalkingSequence(progress: \(showProgress), countdown: \(showCountdown))"}
 
     @Published var showProgress: Bool
     @Published var showCountdown: Bool
+    @Published var showComplete: Bool
 
     init() {
-        showProgress = false; showCountdown = false
+        showProgress = false; showCountdown = false; showComplete = false
     }
 }
 
 
 struct WalkView: View {
     @StateObject private var sequencer = WalkingSequence()
+    @EnvironmentObject var stages: AppStageState
 
     var body: some View {
         // FIXME: The figure does not conform to the image aspect ratio.
         NavigationView {
-            GenericInstructionView(
-                titleText: "Walking Test",
-                bodyText: walkingNarrative, sfBadgeName: "figure.walk",
-                proceedTitle: "Proceed") {
+            VStack {
+                GenericInstructionView(
+                    bodyText: walkingNarrative, sfBadgeName: "figure.walk",
+                    proceedTitle: "Proceed") {
 
-                }
+                    }
                 .padding(32)
             NavigationLink(
                 destination: {
                     AnyView(WalkProgressView())
-                        .environmentObject(sequencer)
                 }(),
                 isActive: $sequencer.showCountdown,
                 label: { EmptyView()}
             )
+                NavigationLink(
+                    destination: {
+                        GenericInstructionView(
+                            bodyText: walkingFinished,
+                            sfBadgeName: "figure.walk")
+                    }(),
+                    isActive: $sequencer.showComplete,
+                    label: {EmptyView()}
+                )
+            }
+            .navigationTitle("Walking Test")
         }
+        .environmentObject(sequencer)
     }
 }
 
 struct WalkView_Previews: PreviewProvider {
+    static var stageState: AppStageState {
+        let stage = AppStageState()
+        stage.didComplete(phase: .walk)
+        return stage
+    }
+
     static var previews: some View {
         WalkView()
+            .environmentObject(stageState)
     }
 }
