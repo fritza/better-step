@@ -28,6 +28,7 @@ struct SetupView: View {
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
 
+    @State var      showingClearButtons = false
 
     var neitherPhaseActive: Bool {
         !(includeWalk || includeSurvey)
@@ -48,46 +49,55 @@ struct SetupView: View {
     }
 
     var body: some View {
-        NavigationView {
-            Form {
-                walkSection
-                Section("DASI Survey") {
-                    Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
-                           isOn: $includeSurvey)
+        Form {
+            walkSection
+            Section("DASI Survey") {
+                Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
+                       isOn: $includeSurvey)
+            }
+
+            Section("Reporting") {
+                Toggle(
+                    "Report as magnitude  —  "
+                    + (asMagnitude ? "|a|" : " a⃑")
+                    ,
+                    isOn: $asMagnitude)
+                // FIXME: need a binding for the email
+                EmailFormView(
+                    title: "Email",
+                    address: $email)
+                Text("for testing only").font(.caption)
+            }
+            Section("Collected Data") {
+#warning("No action on clear-data buttons")
+//                NavigationLink("Clear Data", isActive: $showingClearButtons, destination: {
+//                    ClearingView()
+////                        .navigationBarBackButtonHidden(true)
+//                })
+                NavigationLink(isActive: $showingClearButtons) {
+                    ClearingView()
+                } label: {
+                    Text("Clear Data")
                 }
 
-                Section("Reporting") {
-                    Toggle("Report as magnitude",
-                           isOn: $asMagnitude)
-                    // FIXME: need a binding for the email
-                    EmailFormView(
-                        title: "Email",
-                        address: $email)
-                }
-                Section("Collected Data") {
-                    #warning("No action on clear-data buttons")
-                    NavigationLink(
-                        "Clear Data",
-                        destination: {
-                        ClearingView()
-                            .navigationBarBackButtonHidden(true)
-                    })
-                }
             }
             .navigationTitle("Configuration")
-        }
-        .onDisappear() {
-            assert(includeWalk || includeSurvey,
-                   "Finished SetupView with neither data phase set")
-            // FIXME: Check/enforce the condition.
+            .onDisappear() {
+//                assert(includeWalk || includeSurvey,
+//                       "Finished SetupView with neither data phase set")
+                // FIXME: Check/enforce the condition.
+            }
         }
     }
 }
 
-struct SetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            SetupView()
+    struct SetupView_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView {
+                VStack {
+                    SetupView()
+                }
+            }
+            .environmentObject(PhaseManager())
         }
     }
-}
