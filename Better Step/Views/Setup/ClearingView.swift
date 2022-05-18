@@ -46,39 +46,62 @@ struct ClearingView: View {
     // @EnvironmentObject var phaseManager: PhaseManager
     @EnvironmentObject var dasiResponses: DASIResponseList
 
+    @State var showClearDASI: Bool = false
+    @State var showClearWalk: Bool = false
+    @State var showClearAll : Bool = false
+
     var body: some View {
         VStack(alignment: .center, spacing: 80.0) {
             List {
-                Button("Clear Survey") {
-                    // NOTE: Bug risk.
-//                    appStageState
-//                        .dasiResponses
-//                        .teardownFromSubjectID
+                Button("Clear Surveys") {
+                    showClearDASI = true
                 }
-                Button("Clear Timed Walk") {
-#warning("unimplemented for walk")
+                .confirmationDialog("Clearing Surveys",
+                                    isPresented: $showClearDASI,
+                                    actions: {
+                    Button("Clear DASI & Usability", role: .destructive) {
+                        print("clearing survey")
+                    }
+                }, message: {
+                    Text("Do you want to clear the usability and DASI responses? This cannot be undone,")
+                })
+
+                Button("Clear Timed Walks") {
+                    showClearWalk = true
                 }
+                .confirmationDialog("Clearing Walk Data",
+                                    isPresented: $showClearWalk,
+                                    actions: {
+                    Button("Clear Walk", role: .destructive) {
+                        print("clearing walk")
+                    }
+                }, message: {
+                    Text("Do you want to clear all walking-test records? This cannot be undone,")
+                })
+
+
                 Button("Clear Subject (all)") {
-#if FOR_BETTER_ST
-                   _ = try?  appStageState.tearDownFromSubject()
-#warning("unimplemented for walk")
-#endif
+                    showClearAll = true
+                }
+                .confirmationDialog("Clearing the Subject",
+                                    isPresented: $showClearAll,
+                                    actions: {
+                    Button("Clear ALL", role: .destructive) {
+                        print("clearing subject")
+                    }
+                }, message: {
+                    Text("Do you want to clear the subject ID and all its records? This cannot be undone.")
+                })
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                HStack {
+                    Button("Done") {  dismiss() }
                 }
             }
         }
         .navigationTitle("Clear Data")
-        .toolbar {
-            ToolbarItemGroup {
-                Button("Cancel", role: .cancel) {
-                    dismiss()
-                }
-                Spacer()
-                Button("Done", role: .destructive)  {
-                    // execute any clears
-                    dismiss()
-                }
-            }
-        }
     }
 }
 

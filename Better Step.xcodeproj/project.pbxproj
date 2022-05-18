@@ -51,6 +51,10 @@
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
+		1F76963D282C17CD00016566 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76963C282C17CD00016566 /* Stage.swift */; };
+		1F76963E282C17CD00016566 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76963C282C17CD00016566 /* Stage.swift */; };
+		1F769640282C424600016566 /* ObservableStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76963F282C424600016566 /* ObservableStage.swift */; };
+		1F769641282C424600016566 /* ObservableStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76963F282C424600016566 /* ObservableStage.swift */; };
 		1F769EB027FF90FD00A3CAE3 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
 		1F7A6C3E27FE3A7500FBC296 /* AsyncDASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */; };
 		1F7A6C4027FF517200FBC296 /* WalkInstructionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A6C3F27FF517200FBC296 /* WalkInstructionBase.swift */; };
@@ -178,6 +182,8 @@
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		1F76963C282C17CD00016566 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stage.swift; path = "Better Step/App Stages/Stage.swift"; sourceTree = "<group>"; };
+		1F76963F282C424600016566 /* ObservableStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ObservableStage.swift; path = "Better Step/ObservableStage.swift"; sourceTree = "<group>"; };
 		1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionElement.swift; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F7A6C3D27FE3A7500FBC296 /* AsyncDASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = AsyncDASIQuestions.json; path = "Better Step/Views/DASI/AsyncDASIQuestions.json"; sourceTree = SOURCE_ROOT; };
@@ -300,6 +306,8 @@
 		1F0B6745276FA6C900011A7E = {
 			isa = PBXGroup;
 			children = (
+				1F76963C282C17CD00016566 /* Stage.swift */,
+				1F76963F282C424600016566 /* ObservableStage.swift */,
 				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
 				1FB684E527F225A300612924 /* SubjectID.swift */,
 				1F0B6750276FA6C900011A7E /* Better Step */,
@@ -830,6 +838,7 @@
 				1F1641F32819E87C00E4E2FA /* AppStages.swift in Sources */,
 				1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */,
 				1F8A065627A478B400477379 /* AppStageState.swift in Sources */,
+				1F76963D282C17CD00016566 /* Stage.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
@@ -845,6 +854,7 @@
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
+				1F769640282C424600016566 /* ObservableStage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +887,7 @@
 				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
 				1FB684F227F22AFE00612924 /* SubjectUIEditView.swift in Sources */,
 				1FDB374327F78CCD00E10D8E /* ConfirmClearingAlert.swift in Sources */,
+				1F76963E282C17CD00016566 /* Stage.swift in Sources */,
 				1F2432C927FD087C008A5418 /* SurveyCompleteView.swift in Sources */,
 				1F2432BB27FD0260008A5418 /* SurveyContainerView.swift in Sources */,
 				1F2432D027FD1373008A5418 /* DASICompleteView.swift in Sources */,
@@ -912,6 +923,7 @@
 				1F2432CF27FD134D008A5418 /* GenericInstructionView.swift in Sources */,
 				1F2432C227FD0278008A5418 /* DASIPages.swift in Sources */,
 				1F2432BC27FD0264008A5418 /* DASIOnboardView.swift in Sources */,
+				1F769641282C424600016566 /* ObservableStage.swift in Sources */,
 				1FB684EB27F2263500612924 /* AccelerometerItem.swift in Sources */,
 				1F2432D227FD143A008A5418 /* YesNoView.swift in Sources */,
 				1FB684E727F225BD00612924 /* SubjectID.swift in Sources */,

@@ -7,11 +7,14 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 // MARK: - AppStage class
+
 /// Observable tracker of the `AppStages`: The currently-displayed stage from the `TabView`, and the stages that have been marked complete
 ///
 /// **Take care** not to confuse `AppStage` (observable `class`) and `AppStages` (`enum` identifying stages). The type system should help with this.
+
 final class AppStage: ObservableObject {
     static let shared = AppStage()
     /// The `Set` of `AppStages` that have been marked complete.
@@ -28,10 +31,7 @@ final class AppStage: ObservableObject {
         }
     }
 
-    /// Declare that _no_ stages have been completed.
-    ///
-    /// This is done with reference to `AppStage.shared`.
-    /// Think of it as a convenience view into `AppStage`'s bookkeeping.
+    /// Declare that _all_ stages have been completed.
     func makeAllComplete() {
         for stage in AppStages.allCases {
             stage.didComplete()
@@ -49,6 +49,12 @@ final class AppStage: ObservableObject {
 //        completes.
 
 // MARK: - AppStages enum
+
+///
+/// This is done with reference to `PhaseManager.shared`.
+///
+/// It would be better to access `PhaseManager` as an EnvironmentObject, but AppStages is an enum, without stored properties of its own.
+///
 enum AppStages: Hashable, CaseIterable {
     // MARK: Cases
     /// A new user ID has been entered.
@@ -91,7 +97,7 @@ extension AppStages {
     /// Whether this stage has been marked complete.
     ///
     /// This is done with reference to `AppStage.shared`.
-    /// Think of it as a convenience view into `AppStage`'s bookkeeping.
+    /// - note: It would be better to access `PhaseManager` in the environment, but `AppStages` is an `enum` and can't have `EnvironmentObject`s.
     var isCompleted: Bool {
         PhaseManager.shared.isCompleted(self)
     }
@@ -122,7 +128,7 @@ extension AppStages {
         switch self {
         case .onboard       : return false
         case .dasi          :
-            let includeDASI = defaults.bool(forKey: AppStorageKeys.includeSurvey.rawValue)
+            let includeDASI = defaults.bool(forKey: AppStorageKeys.includeDASISurvey.rawValue)
             return includeDASI
         case .walk          :
             let includeWalk = defaults.bool(forKey: AppStorageKeys.includeWalk.rawValue)
@@ -140,4 +146,3 @@ extension AppStages {
             }
     }
 }
-
