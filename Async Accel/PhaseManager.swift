@@ -22,7 +22,7 @@ final class PhaseManager: ObservableObject {
     @EnvironmentObject var subjectID: SubjectID
 
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
-    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
+    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeSurvey = true
 
     // Skip (no longer a factotum object)
     // dasiContent, dasiResponses, dasiFile

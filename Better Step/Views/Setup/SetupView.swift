@@ -26,17 +26,19 @@ struct SetupView: View {
     @AppStorage(AppStorageKeys.walkInMinutes.rawValue)  var duration = 6
     @AppStorage(AppStorageKeys.reportingEmail.rawValue) var email = ""
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
-    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
+    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASI = true
+    @AppStorage(AppStorageKeys.includeUsabilitySurvey.rawValue)  var includeUsability = true
+
 
     @State var      showingClearButtons = false
 
     var neitherPhaseActive: Bool {
-        !(includeWalk || includeSurvey)
+        !(includeWalk || includeDASI)
     }
 
     var walkSection: some View {
         Section("Walk") {
-            Toggle("Perform Timed Walk" + (neitherPhaseActive ? " ⚠️" : ""),
+            Toggle("Perform Timed Walks" + (neitherPhaseActive ? " ⚠️" : ""),
                    isOn: $includeWalk)
             Stepper("Duration (\(self.duration)):",
                     value: $duration,
@@ -51,9 +53,14 @@ struct SetupView: View {
     var body: some View {
         Form {
             walkSection
-            Section("DASI Survey") {
+            Section("Surveys") {
                 Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
-                       isOn: $includeSurvey)
+                       isOn: $includeDASI)
+                //includeUsability
+                Toggle("Perform Usability Survey"
+//                       + (neitherPhaseActive ? " ⚠️" : "")
+                       ,
+                       isOn: $includeUsability)
             }
 
             Section("Reporting") {

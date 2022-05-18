@@ -106,7 +106,7 @@ final class AppStageState: ObservableObject {
     /// Whether the timed walk stage is to be available.
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
     /// Whether the DASI survey is to be available.
-    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeSurvey = true
+    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeSurvey = true
 
     /*
      REMOVE these DASI~ instance and rely on the DASI~ environmentObjects

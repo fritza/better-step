@@ -26,7 +26,7 @@ final class MinutePublisher: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
 
     // MARK: Subjects
-    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``.stop()``. The `Bool` is true iff the completion is due to exhaustion.
+    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``MinutePublisher/stop(exhausted:)``. The `Bool` is true iff the completion is due to exhaustion.
     var completedSubject = PassthroughSubject<Bool, Never>()
 
     /// The root time publisher with default parameters:
@@ -55,7 +55,7 @@ final class MinutePublisher: ObservableObject {
     private let countdownTo: Date?
     /// Initialize a count-up _from_ the starting date toward the indefinite future.
     /// - parameter date: The `Date` at which to start counting. If `nil` (the default), the time is reported from now.
-    /// - bug: Either this isn't true, _or_ it's badly explained, _or_ the use of ``countdownTo`` as the endpoint for the timer is a misnomer.
+    /// - bug: Either this isn't true, _or_ it's badly explained, _or_ the use of `countdownTo` as the endpoint for the timer is a misnomer.
     init(to date: Date? = nil) {
         countdownTo = date
     }
@@ -146,7 +146,7 @@ final class MinutePublisher: ObservableObject {
     // MARK: Stop
     /// Halt the clock and send a `Bool` to ``completedSubject`` to indicate exhaustion or halt.
     ///
-    /// - parameter exhausted: `true` iff ``stop()`` was called because the deadline was reached. This is passed along through ``completedSubject`` to inform clients the clock is finished.
+    /// - parameter exhausted: `true` iff `stop()` was called because the deadline was reached. This is passed along through ``completedSubject`` to inform clients the clock is finished.
     /// - note: Shouldn't the components be `Publisher<Int, Error>` (etc.) so a downstream `sink` can detect completion?
     func stop(exhausted: Bool = false) {
         for c in cancellables {

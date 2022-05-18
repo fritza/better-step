@@ -22,7 +22,7 @@ struct Better_StepApp: App {
     @ObservedObject var aStage = AppStage.shared
 
     @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalkPersistent = true
-    @AppStorage(AppStorageKeys.includeSurvey.rawValue)  var includeDASIPersistent = true
+    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
 
     @StateObject var subjectID        = SubjectID()
     @StateObject var dasiPages        = DASIPages()

@@ -19,10 +19,20 @@ enum AppStorageKeys: String {
     case reportingEmail
     /// Whether to include the timed walk
     case includeWalk
+    /// Whether to include a second timed walk
+    case includeSecondWalk
     /// Whether to include the DASI survey
-    case includeSurvey
+    case includeDASISurvey
+    /// Whether to include the usability survey
+    case includeUsabilitySurvey
     /// The last known subject ID.
     case subjectID
+
+    /// Completion of the "post-usability" task.
+//    case usability
+
+    /// The raw value for the completed stages.
+    case completedStages
 
     static let dasiWalkRange = (1...10)
 }
