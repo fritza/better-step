@@ -9,16 +9,16 @@ import SwiftUI
 
 // MARK: - ButtonSurveyView
 struct ButtonSurveyView: View {
-    @EnvironmentObject var allResponses: SurveyResponses
-    @State var score: Double
-    @State var index: Int
+    @EnvironmentObject private var allResponses: SurveyResponses
+    @State private var score: Double
+    @State private var index: Int
 
     init(id: Int, score: Double) {
         self.index = id
         self.score = score
     }
 
-    func buttonLabel(_ rank: Int) -> some View {
+    private func buttonLabel(_ rank: Int) -> some View {
         return Label("\(rank)",
                      systemImage:
                         (rank == Int(score)) ? "checkmark.circle" : "")
@@ -38,6 +38,7 @@ struct ButtonSurveyView: View {
                     buttonLabel(i)
                 }
                 // FIXME: How do next/back buttons affect the selection if the toolbar isn't part of this view?
+                // Answer: stepping should be done in the superview, which has @State for page number and tracking responses upon leaving a page (in the case of the last page, when the Submit button is tapped — is this something I can do with focus? Shift of focus or submission of the Done button?)
             }
         }
     }
