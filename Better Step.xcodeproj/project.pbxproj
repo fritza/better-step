@@ -92,6 +92,15 @@
 		1FB6850027F4B96800612924 /* ReportingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FF27F4B96700612924 /* ReportingView.swift */; };
 		1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */; };
 		1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6850327F4DFDC00612924 /* CompletionRowView.swift */; };
+		1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */; };
+		1FCBAA002835AA560088EAF2 /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */; };
+		1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */; };
+		1FCBAA032835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */; };
+		1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */; };
+		1FCBAA07283692010088EAF2 /* SurveyPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */; };
+		1FCBAA082836A1010088EAF2 /* USurveyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */; };
+		1FCBAA092836A17F0088EAF2 /* SurveyPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */; };
+		1FCBAA0B2836A1FD0088EAF2 /* ButtonSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA0A2836A1FD0088EAF2 /* ButtonSurveyView.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -213,6 +222,11 @@
 		1FB684FF27F4B96700612924 /* ReportingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingView.swift; sourceTree = "<group>"; };
 		1FB6850127F4BAD100612924 /* CompletionDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDisplayView.swift; sourceTree = "<group>"; };
 		1FB6850327F4DFDC00612924 /* CompletionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionRowView.swift; sourceTree = "<group>"; };
+		1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = USurveyQuestions.json; path = Art/USurveyQuestions.json; sourceTree = SOURCE_ROOT; };
+		1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestionView.swift; sourceTree = "<group>"; };
+		1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestion.swift; sourceTree = "<group>"; };
+		1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyPromptView.swift; sourceTree = "<group>"; };
+		1FCBAA0A2836A1FD0088EAF2 /* ButtonSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSurveyView.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -337,6 +351,7 @@
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
+				1FCBA9FD2835AA040088EAF2 /* Usability */,
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1F8A337C27DFEDAA0093C896 /* Reporting */,
 				1FFB30DF277BE5090099AE5E /* Model */,
@@ -419,6 +434,18 @@
 				1FDE825E27E29FFD00CD8368 /* AppStages.swift */,
 			);
 			path = "App Stages";
+			sourceTree = "<group>";
+		};
+		1FCBA9FD2835AA040088EAF2 /* Usability */ = {
+			isa = PBXGroup;
+			children = (
+				1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */,
+				1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */,
+				1FCBAA0A2836A1FD0088EAF2 /* ButtonSurveyView.swift */,
+				1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */,
+				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
+			);
+			path = Usability;
 			sourceTree = "<group>";
 		};
 		1FDB373D27F789A700E10D8E /* Setup */ = {
@@ -745,6 +772,7 @@
 				1FED1C5D27FE1A4A00C290F7 /* DASIQuestions.json in Resources */,
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
+				1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +798,7 @@
 				1F7A6C3E27FE3A7500FBC296 /* AsyncDASIQuestions.json in Resources */,
 				1FF1B59127DA775B0017E90C /* Preview Assets.xcassets in Resources */,
 				1FF1B58E27DA775B0017E90C /* Assets.xcassets in Resources */,
+				1FCBAA002835AA560088EAF2 /* USurveyQuestions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +841,7 @@
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
+				1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
@@ -819,6 +849,7 @@
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
+				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
@@ -853,8 +884,10 @@
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
+				1FCBAA0B2836A1FD0088EAF2 /* ButtonSurveyView.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
 				1F769640282C424600016566 /* ObservableStage.swift in Sources */,
+				1FCBAA07283692010088EAF2 /* SurveyPromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +929,7 @@
 				1F7A6C4027FF517200FBC296 /* WalkInstructionBase.swift in Sources */,
 				1FB684F427F2363500612924 /* SubjectIDSheetView.swift in Sources */,
 				1F2432CB27FD0CAC008A5418 /* PhaseManager.swift in Sources */,
+				1FCBAA092836A17F0088EAF2 /* SurveyPromptView.swift in Sources */,
 				1F2432DA27FDFD63008A5418 /* InstructionPageView.swift in Sources */,
 				1FB6850427F4DFDD00612924 /* CompletionRowView.swift in Sources */,
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
@@ -909,6 +943,7 @@
 				1F2432D127FD143A008A5418 /* YesNoButton.swift in Sources */,
 				1FB684EC27F2265900612924 /* XYZ.swift in Sources */,
 				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
+				1FCBAA082836A1010088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */,
 				1F2432BE27FD026B008A5418 /* DASIQuestionView.swift in Sources */,
 				1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */,
@@ -922,6 +957,7 @@
 				1FB684F627F24FC100612924 /* SimpleHBarView.swift in Sources */,
 				1F2432CF27FD134D008A5418 /* GenericInstructionView.swift in Sources */,
 				1F2432C227FD0278008A5418 /* DASIPages.swift in Sources */,
+				1FCBAA032835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
 				1F2432BC27FD0264008A5418 /* DASIOnboardView.swift in Sources */,
 				1F769641282C424600016566 /* ObservableStage.swift in Sources */,
 				1FB684EB27F2263500612924 /* AccelerometerItem.swift in Sources */,
