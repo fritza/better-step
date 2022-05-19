@@ -13,10 +13,10 @@ struct SurveyPromptView: View {
     let prompt: String
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            Text("\(index): ").font(Font.title3.weight(.semibold))
+            Text("\(index): ").font(Font.body.weight(.semibold))
             Text(prompt)
-                .font(Font.title3.weight(.regular))
-
+                .font(Font.body.weight(.regular))
+                .minimumScaleFactor(0.5)
         }
     }
 }

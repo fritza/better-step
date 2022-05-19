@@ -11,7 +11,7 @@ import SwiftUI
 struct ButtonSurveyView: View {
     @EnvironmentObject var allResponses: SurveyResponses
     @State var score: Double
-    let index: Int
+    @State var index: Int
 
     init(id: Int, score: Double) {
         self.index = id
@@ -29,6 +29,7 @@ struct ButtonSurveyView: View {
             SurveyPromptView(
                 index: index,
                 prompt: USurveyQuestion.all[index-1].text)
+            .padding()
             List((1..<8)) {
                 i in
                 Button {
@@ -36,29 +37,33 @@ struct ButtonSurveyView: View {
                 } label: {
                     buttonLabel(i)
                 }
-
+                // FIXME: How do next/back buttons affect the selection if the toolbar isn't part of this view?
             }
-        }.navigationTitle("Survey")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    Button("← Back") {   }
-                }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button("Next →") {   }
-                }
-            }
+        }
     }
 }
 
 struct ButtonSurveyView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        NavigationView {
             VStack {
                 Spacer()
                 ButtonSurveyView(id: 3, score: 3)
                     .environmentObject(SurveyResponses())
                 Spacer()
             }
+            .navigationTitle("Survey item")
+
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button("← Back") {   }
+                        .disabled(false)
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("Next →") {  }
+                        .disabled(false)
+                }
         }
+            }
     }
 }

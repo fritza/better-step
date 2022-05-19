@@ -24,7 +24,7 @@ struct USurveyQuestionView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             SurveyPromptView(
                 index: index,
                 prompt: USurveyQuestion.question(withID: index).text)
@@ -33,7 +33,6 @@ struct USurveyQuestionView: View {
         minimumValueLabel: { Text("1") }
         maximumValueLabel: { Text("7") }
         }
-        .navigationTitle("Survey")
     }
 }
 
