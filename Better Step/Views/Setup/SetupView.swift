@@ -17,17 +17,32 @@ private enum ControlFocus: String {
 
 // TODO: Add confirmation to destructive actions
 
+/// View that displays and edits app-wide configurations.
+///
+/// This includes
+/// * `.reportAsMagnitude`              — acceleration reported as magnitude rather than vector components.
+/// * `.walkInMinutes`                  - Length of the timed walk phases, in minutes
+/// * `.reportingEmail`                 - Email address to receive reports; temporary use only.
+/// * `.includeWalk`                    - Whether to include timed walks at all.
+/// * `.includeDASISurvey`              - Whether to present the DASI survey
+/// * `.includeUsabilitySurvey`         - Whether to present the “usability” survey.
+///
+/// Also, the user can wipe the walk results, the surveys, or the subject ID and all collected data.
 struct SetupView: View {
+
     // FIXME: text field row can't track focus.
 
     @FocusState private var controlFocus: ControlFocus?
 
-    @AppStorage(AppStorageKeys.reportAsMagnitude.rawValue) var asMagnitude = false
-    @AppStorage(AppStorageKeys.walkInMinutes.rawValue)  var duration = 6
-    @AppStorage(AppStorageKeys.reportingEmail.rawValue) var email = ""
-    @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalk = true
-    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASI = true
-    @AppStorage(AppStorageKeys.includeUsabilitySurvey.rawValue)  var includeUsability = true
+    // MARK: AppStorage
+
+    @AppStorage(AppStorageKeys.reportAsMagnitude      .rawValue) var asMagnitude = false
+    @AppStorage(AppStorageKeys.walkInMinutes          .rawValue)  var duration = 6
+    @AppStorage(AppStorageKeys.reportingEmail         .rawValue) var email = ""
+    @AppStorage(AppStorageKeys.includeWalk            .rawValue)    var includeWalk = true
+    @AppStorage(AppStorageKeys.includeDASISurvey      .rawValue)  var includeDASI = true
+    @AppStorage(AppStorageKeys.includeUsabilitySurvey .rawValue)  var includeUsability = true
+    @AppStorage(AppStorageKeys.inspectionMode         .rawValue)  var proceedAsInspection = false
 
 
     @State var      showingClearButtons = false
@@ -36,6 +51,7 @@ struct SetupView: View {
         !(includeWalk || includeDASI)
     }
 
+    // MARK: Walk form section
     var walkSection: some View {
         Section("Walk") {
             Toggle("Perform Timed Walks" + (neitherPhaseActive ? " ⚠️" : ""),
@@ -52,17 +68,22 @@ struct SetupView: View {
 
     var body: some View {
         Form {
+            // MARK: Presentation
+            Section("Presentation") {
+                Toggle("Inspection (visit screens freely)",
+                       isOn: $proceedAsInspection)
+            }
+            // MARK: Walks
             walkSection
+            // MARK: Surveys
             Section("Surveys") {
                 Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
                        isOn: $includeDASI)
                 //includeUsability
-                Toggle("Perform Usability Survey"
-                       //                       + (neitherPhaseActive ? " ⚠️" : "")
-                       ,
+                Toggle("Perform Usability Survey",
                        isOn: $includeUsability)
             }
-
+            // MARK: Reporting
             Section("Reporting") {
                 Toggle(
                     "Report as magnitude  —  "
@@ -75,12 +96,9 @@ struct SetupView: View {
                     address: $email)
                 Text("for testing only").font(.caption)
             }
+            // MARK: Data
             Section("Collected Data") {
 #warning("No action on clear-data buttons")
-                //                NavigationLink("Clear Data", isActive: $showingClearButtons, destination: {
-                //                    ClearingView()
-                ////                        .navigationBarBackButtonHidden(true)
-                //                })
                 NavigationLink(isActive: $showingClearButtons) {
                     ClearingView()
                 } label: {
@@ -88,22 +106,16 @@ struct SetupView: View {
                 }
 
             }
-            .navigationTitle("Configuration")
-            .onDisappear() {
-                //                assert(includeWalk || includeSurvey,
-                //                       "Finished SetupView with neither data phase set")
-                // FIXME: Check/enforce the condition.
-            }
         }
+        .navigationTitle("Configuration")
     }
 }
 
+// MARK: - Previews
 struct SetupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            VStack {
-                SetupView()
-            }
+            SetupView()
         }
         .environmentObject(PhaseManager())
     }
