@@ -70,28 +70,35 @@ struct ButtonSurveyView: View {
                 index: index,
                 prompt: USurveyQuestion.all[index-1].text)
             .padding()
-            List((1..<8)) {
-                i in
+            List(Self.agreementLabels) { pair in
                 Button {
-                    score = Double(i)
+                    selectedResponse = pair.degree
+//                    SurveyResponses.shared.respond(to: index, with: selectedResponse)
                 } label: {
-                    buttonLabel(i)
+                     buttonLabel(pair)
                 }
             }
         }
     }
 }
 
+final class SelHolder: ObservableObject {
+    @Published var selection: Int?
+    init() { selection = nil }
+}
+
 struct ButtonSurveyView_Previews: PreviewProvider {
+    @State static var itemSelection: Int?
+    
     static var previews: some View {
         NavigationView {
             VStack {
                 Spacer()
-                ButtonSurveyView(id: 3, score: 3)
+                ButtonSurveyView(id: 3, score: $itemSelection)
                     .environmentObject(SurveyResponses())
                 Spacer()
             }
-            .navigationTitle("Survey item")
+            .navigationTitle("Usability")
 
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -100,7 +107,9 @@ struct ButtonSurveyView_Previews: PreviewProvider {
                     gearBarItem()
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button("Next →") {  }
+                    Button("Next →") {
+
+                    }
                         .disabled(false)
                 }
             }

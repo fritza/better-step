@@ -49,22 +49,41 @@ struct USurveyQuestion: Decodable, Hashable, Comparable {
 // MARK: - SurveyResponses
 final class SurveyResponses: ObservableObject {
     @Published var responses: [USurveyResponse] = []
+
+    static private(set) var shared: SurveyResponses!
+    // FIXME: Restore the actual responses
+    //        Doing it with @AppStorage would be evil. But maybe effective.
     init() {
         responses = (1...USurveyQuestion.count)
             .map { USurveyResponse(id: $0) }
+        Self.shared = self
     }
 
-    func respond(to id: Int, with answer: Int?) {
+    var allAnswered: Bool {
+        responses.allSatisfy { $0.response != nil }
+    }
+
+    func response(for questionID: Int) -> Int? {
+        guard let putativeResponse = responses.first( where: { answer in
+            answer.id == questionID
+       }) else {
+           fatalError("\(#function) - can’t find a question ID \(questionID)")
+       }
+
+        return putativeResponse.response
+    }
+
+    func respond(to responseRecord: Int, with answer: Int?) {
         guard let responseArrayIndex = responses.firstIndex(where: {
-            $0.id == id
+            $0.id == responseRecord
         }),
               (0..<USurveyQuestion.count).contains(responseArrayIndex)
         else {
-            fatalError("\(#function) - id \(id) should have an index in (0..<\(USurveyQuestion.count))")
+            fatalError("\(#function) - id \(responseRecord) should have an index in (0..<\(USurveyQuestion.count))")
         }
-        guard let answer = answer else {
-            fatalError("\(#function) - nil answer")
-        }
+//        guard let answer = answer else {
+//            fatalError("\(#function) - nil answer")
+//        }
 
         let targetRange = (responseArrayIndex...responseArrayIndex)
         let newResponse = responses[responseArrayIndex]
@@ -94,7 +113,7 @@ struct USurveyResponse: Codable, Hashable, Comparable {
         hasher.combine(response)
     }
 
-    func with(answer: Int) -> USurveyResponse {
+    func with(answer: Int?) -> USurveyResponse {
         USurveyResponse(id: id, response: answer)
     }
     // So response

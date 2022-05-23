@@ -106,6 +106,7 @@
 		1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FCBAA14283BF1F10088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FCBAA15283BFF0E0088EAF2 /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
+		1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -234,6 +235,7 @@
 		1FCBAA0A2836A1FD0088EAF2 /* ButtonSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSurveyView.swift; sourceTree = "<group>"; };
 		1FCBAA0C2836B3B80088EAF2 /* FullSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSurveyView.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
+		1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWrapperView.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */,
 				1FCBAA0C2836B3B80088EAF2 /* FullSurveyView.swift */,
 				1FCBAA0A2836A1FD0088EAF2 /* ButtonSurveyView.swift */,
+				1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */,
 				1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */,
 				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
 			);
@@ -893,6 +896,7 @@
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */,
+				1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
