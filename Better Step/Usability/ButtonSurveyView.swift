@@ -8,6 +8,9 @@
 import SwiftUI
 
 // MARK: - ButtonSurveyView
+/// Presents a single item in the usability survey, a full screen for the text of the question and the responses.
+///
+/// - note: Need a wrapper view to take care of the navigation title, paging between questions, and recording the choices.
 struct ButtonSurveyView: View {
     @EnvironmentObject private var allResponses: SurveyResponses
     @State private var score: Double
