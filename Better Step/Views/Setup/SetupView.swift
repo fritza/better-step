@@ -51,7 +51,7 @@ struct SetupView: View {
         !(includeWalk || includeDASI)
     }
 
-    // MARK: Walk form section
+    // MARK: Form sections
     var walkSection: some View {
         Section("Walk") {
             Toggle("Perform Timed Walks" + (neitherPhaseActive ? " ⚠️" : ""),
@@ -66,6 +66,22 @@ struct SetupView: View {
         }
     }
 
+    var reportingSection: some View {
+        Section("Reporting") {
+            Toggle(
+                "Report as magnitude  —  "
+                + (asMagnitude ? "|a|" : " a⃑")
+                ,
+                isOn: $asMagnitude)
+            // FIXME: need a binding for the email
+            EmailFormView(
+                title: "Email",
+                address: $email)
+            Text("for testing only").font(.caption)
+        }
+    }
+
+    // MARK: Body
     var body: some View {
         Form {
             // MARK: Presentation
@@ -73,8 +89,10 @@ struct SetupView: View {
                 Toggle("Inspection (visit screens freely)",
                        isOn: $proceedAsInspection)
             }
+
             // MARK: Walks
             walkSection
+
             // MARK: Surveys
             Section("Surveys") {
                 Toggle("Perform DASI Survey" + (neitherPhaseActive ? " ⚠️" : ""),
@@ -83,19 +101,10 @@ struct SetupView: View {
                 Toggle("Perform Usability Survey",
                        isOn: $includeUsability)
             }
+            
             // MARK: Reporting
-            Section("Reporting") {
-                Toggle(
-                    "Report as magnitude  —  "
-                    + (asMagnitude ? "|a|" : " a⃑")
-                    ,
-                    isOn: $asMagnitude)
-                // FIXME: need a binding for the email
-                EmailFormView(
-                    title: "Email",
-                    address: $email)
-                Text("for testing only").font(.caption)
-            }
+            reportingSection
+
             // MARK: Data
             Section("Collected Data") {
 #warning("No action on clear-data buttons")
