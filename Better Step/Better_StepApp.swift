@@ -21,8 +21,9 @@ struct Better_StepApp: App {
     //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
 
-    @AppStorage(AppStorageKeys.includeWalk.rawValue)    var includeWalkPersistent = true
+    @AppStorage(AppStorageKeys.includeWalk.rawValue)        var includeWalkPersistent = true
     @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
+    @AppStorage(AppStorageKeys.inspectionMode.rawValue)     var perStagePresentation  = false
 
     @StateObject var subjectID        = SubjectID()
     @StateObject var dasiPages        = DASIPages()
