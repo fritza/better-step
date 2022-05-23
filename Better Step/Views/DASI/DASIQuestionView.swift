@@ -42,29 +42,13 @@ struct DASIQuestionView: View {
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
-//        Self._printChanges()
-        return VStack {
-            ForwardBackBar(forward: envt.selected < DASIStages.maxPresenting,
-                           back: envt.selected > DASIStages.minPresenting,
-                           action: { goingForward in
-                if goingForward {
-                    envt.increment()
-                    updateForNewBinding()
-                }
-                else {
-                    envt.decrement()
-                    updateForNewBinding()
-                }
-            })
-                .frame(height: 44)
-                .padding()
-            Spacer()
+        VStack {
             if envt.questionIdentifier != nil {
                 QuestionContentView(
                     content: "Do you have difficulty?",
                     questionIndex:
                         envt.questionIdentifier!)
-                    .padding()
+                .padding()
 
                 Spacer()
                 YesNoStack(
@@ -86,15 +70,34 @@ struct DASIQuestionView: View {
                 .padding()
             }
         }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button("← Back") {
+                    envt.decrement()
+                    updateForNewBinding()
+                }
+                .disabled(envt.selected <= DASIStages.minPresenting)
+                gearBarItem()
+            }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button("Next →") {
+                    envt.increment()
+                    updateForNewBinding()
+                }
+                .disabled(envt.selected >= DASIStages.maxPresenting)
+            }
+        }
         .navigationTitle(
-            "DASI - \(envt.questionIdentifier?.description ?? "NO ID")"
+            "Question \(envt.questionIdentifier?.description ?? "NO ID"):"
         )
     }
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        DASIQuestionView(answerState: .yes)
+        NavigationView {
+            DASIQuestionView(answerState: .yes)
+        }
         .environmentObject(DASIPages(.presenting(questionID: 2)))
         .environmentObject(DASIResponseList())
     }

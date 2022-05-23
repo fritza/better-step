@@ -20,6 +20,9 @@ struct FullSurveyView: View {
                     print("WHAT NOW?")
                 }
             }
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                gearBarItem()
+            }
         }
     }
 }

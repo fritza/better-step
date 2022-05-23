@@ -52,18 +52,21 @@ struct DASICompleteView: View {
 
     var body: some View {
         VStack {
-            ForwardBackBar(forward: false, back: true, action: { _ in
-                questions.decrement()
-            })
-                .frame(height: 44)
-            Spacer()
             GenericInstructionView(
-                titleText: "Survey Complete",
+                titleText: "x",
                 bodyText: instructions, // + completionText,
                 sfBadgeName: "checkmark.square")
             .padding()
         }
-        .navigationBarHidden(true)
+        .navigationTitle("Survey Complete")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button("← Back") {
+                    questions.decrement()
+                }
+                gearBarItem()
+            }
+        }
         .onAppear{
             // IF ALL ARE ANSWERED
             if allItemsAnswered {
@@ -78,10 +81,12 @@ struct DASICompleteView: View {
 
 struct DASICompleteView_Previews: PreviewProvider {
     static var previews: some View {
-        DASICompleteView()
-        // FIXME: These will need better initializer
-            .environmentObject(DASIPages(.completion))
-            .environmentObject(DASIResponseList())
+        NavigationView {
+            DASICompleteView()
+            // FIXME: These will need better initializer
+                .environmentObject(DASIPages(.completion))
+                .environmentObject(DASIResponseList())
             .environmentObject(PhaseManager())
+        }
     }
 }

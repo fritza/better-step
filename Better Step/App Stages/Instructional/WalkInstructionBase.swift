@@ -48,31 +48,32 @@ struct WalkInstructionBase: View {
 
     var body: some View {
         NavigationView {
-            if counter >= Self.instructionPages.count {
-                // Diagnostic for the current-page index overflowing the content. Shouldn't happen in production.
-                Text("Out of range: \(counter), limit is \(Self.instructionPages.count)")
+            VStack(spacing: 24) {
+                InstructionPageView(content: Self.instructionPages[counter])
+                // FIXME: in this case, use the title as the navigation title.
+                    .navigationTitle("Welcome")
+                    .padding()
             }
-            else {
-                VStack(spacing: 24) {
-                    InstructionPageView(content: Self.instructionPages[counter])
-                    // FIXME: in this case, use the title as the navigation title.
-                        .navigationTitle("Welcome")
-                        .padding()
-                        .toolbar {
-                            ToolbarItem(id: "Next", placement: .navigationBarTrailing, showsByDefault: true) {
-                                self.nextButton
-                            }
-                            ToolbarItem(id: "Prev", placement: .navigationBarLeading, showsByDefault: true) {
-                                self.prevButton
-                            }
-                    }
-                    Button("Okay!") {
-// TODO: Incomplete
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    self.prevButton
+                    gearBarItem()
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("Next") {
+                        self.nextButton
                     }
                 }
             }
-            Spacer()
+            .onAppear {
+                assert(counter <= Self.instructionPages.count,
+                       "Out of range: \(counter), limit is \(Self.instructionPages.count)")
+            }
+            Button("Okay!") {
+                // TODO: Incomplete
+            }
         }
+        Spacer()
     }
 }
 

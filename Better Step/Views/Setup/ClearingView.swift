@@ -95,7 +95,7 @@ struct ClearingView: View {
             }
         }
         .toolbar {
-            ToolbarItemGroup {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 HStack {
                     Button("Done") {  dismiss() }
                 }

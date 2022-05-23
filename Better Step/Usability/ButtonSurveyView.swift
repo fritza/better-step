@@ -62,12 +62,13 @@ struct ButtonSurveyView_Previews: PreviewProvider {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button("← Back") {   }
                         .disabled(false)
+                    gearBarItem()
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Next →") {  }
                         .disabled(false)
                 }
-        }
             }
+        }
     }
 }

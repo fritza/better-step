@@ -28,11 +28,12 @@ struct ForwardBackBar: View {
                     Button("\(Image(systemName: "arrow.left")) Previous") {
                         action?(false)
                     }
-                    Spacer()
+//                    Spacer()
                 }
-
+                gearBarItem()
+                Spacer()
                 if wantForward {
-                    Spacer()
+//                    Spacer()
                     Button("Next \(Image(systemName: "arrow.right"))") {
                         action?(true)
                     }

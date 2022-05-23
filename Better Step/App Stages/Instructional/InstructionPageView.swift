@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// FIXME: What NavigationView does InstructionPageView inhabit?
+
 /// A `View` that presents the `Text`/`Image`/whatever elements of the instruction page.
 struct InstructionPageView: View {
     let content: [InstructionElement]
@@ -56,10 +58,11 @@ struct InstructionPageView_Previews: PreviewProvider {
 
                         }
                     }
-                    ToolbarItem(id: "Prev", placement: .navigationBarLeading, showsByDefault: true) {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button("Back") {
 
                         }
+                        gearBarItem()
                     }
                 }
         }

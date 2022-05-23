@@ -58,7 +58,7 @@ struct SetupView: View {
                        isOn: $includeDASI)
                 //includeUsability
                 Toggle("Perform Usability Survey"
-//                       + (neitherPhaseActive ? " ⚠️" : "")
+                       //                       + (neitherPhaseActive ? " ⚠️" : "")
                        ,
                        isOn: $includeUsability)
             }
@@ -77,10 +77,10 @@ struct SetupView: View {
             }
             Section("Collected Data") {
 #warning("No action on clear-data buttons")
-//                NavigationLink("Clear Data", isActive: $showingClearButtons, destination: {
-//                    ClearingView()
-////                        .navigationBarBackButtonHidden(true)
-//                })
+                //                NavigationLink("Clear Data", isActive: $showingClearButtons, destination: {
+                //                    ClearingView()
+                ////                        .navigationBarBackButtonHidden(true)
+                //                })
                 NavigationLink(isActive: $showingClearButtons) {
                     ClearingView()
                 } label: {
@@ -90,21 +90,21 @@ struct SetupView: View {
             }
             .navigationTitle("Configuration")
             .onDisappear() {
-//                assert(includeWalk || includeSurvey,
-//                       "Finished SetupView with neither data phase set")
+                //                assert(includeWalk || includeSurvey,
+                //                       "Finished SetupView with neither data phase set")
                 // FIXME: Check/enforce the condition.
             }
         }
     }
 }
 
-    struct SetupView_Previews: PreviewProvider {
-        static var previews: some View {
-            NavigationView {
-                VStack {
-                    SetupView()
-                }
+struct SetupView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            VStack {
+                SetupView()
             }
-            .environmentObject(PhaseManager())
         }
+        .environmentObject(PhaseManager())
     }
+}

@@ -45,8 +45,8 @@ struct ApplicationOnboardView: View {
                     Spacer(minLength: 24)
                     TextField("Subject ID:",
                               text: $localSubjectID)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 200)
                     Text(String(describing: subjectIDObject.subjectID ?? "<n/a>"))
                     Spacer()
                 }
