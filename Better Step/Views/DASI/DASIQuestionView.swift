@@ -11,7 +11,7 @@ struct QuestionContentView: View {
     let content: String
     let questionIndex: Int
     var text: String {
-        DASIQuestion
+        DASIQuestionState
             .with(id: questionIndex).text
     }
     var body: some View {

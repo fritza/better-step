@@ -67,7 +67,7 @@ final class DASIResponseList: ObservableObject {
 
     /// Create `DASIResponses`
     init() {
-        self.answers   = DASIQuestion
+        self.answers   = DASIQuestionState
             .questions
             .map { DASIUserResponse(id: $0.id, response: .unknown) }
     }
@@ -198,8 +198,8 @@ final class DASIResponseList: ObservableObject {
         let components: [String] =
         [subjectIDObject.subjectID] + [firstTimestamp] + numberedResponses
 
-        assert(components.count == 2+DASIQuestion.count,
-               "Expected \(2+DASIQuestion.count) response items, got \(components.count)")
+        assert(components.count == 2+DASIQuestionState.count,
+               "Expected \(2+DASIQuestionState.count) response items, got \(components.count)")
 
         return components.joined(separator: ",")
     }

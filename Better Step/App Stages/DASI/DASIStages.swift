@@ -23,7 +23,7 @@ enum DASIStages {
     // ~Index represents place in the questions array.
     // These are guaranteed to be valid, as they rely on the range of array indices, not the identifiers.
     static let startIndex = 0
-    static let endIndex   = DASIQuestion.questions.count
+    static let endIndex   = DASIQuestionState.questions.count
     static let indexRange = (startIndex ..< endIndex)
 
     // min and max denote least and greatest valid .presenting question identifiers.

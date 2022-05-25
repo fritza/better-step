@@ -30,7 +30,7 @@ struct DASIUserResponse: Identifiable, Codable {
 
     /// The score the current response to thie question contributes to the overall score for the instrument.
     var score: Double {
-        let question = DASIQuestion.with(id: self.id)
+        let question = DASIQuestionState.with(id: self.id)
         return (response == .yes) ? question.score : 0
     }
 
