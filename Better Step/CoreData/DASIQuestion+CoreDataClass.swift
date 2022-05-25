@@ -65,10 +65,17 @@ public class DASIQuestion: NSManagedObject {
     ///   - url: The URL for the question specs.
     ///   - moc: The managed-object context to receive the new instances.
     ///   - note: No attempt is made to remove existing questions from the store.
-    static func load(from url: URL, into moc: NSManagedObjectContext) throws {
-        try DASIQuestion.clear(from: moc)
+    static func load(from url: URL, into moc: NSManagedObjectContext, force: Bool = false) throws {
 
-        // For now assume it's JSON
+        if !DASIQuestion.isEmpty() {
+            // There are items there already.
+            if force { try DASIQuestion.clear(from: moc) }
+                // Make it empty and proceed as new.
+            else     { return                            }
+                // The table is satisfactory as-is. Do nothing.
+        }
+        // One way or another, it's empty. Proceed as new.
+
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let list = try decoder.decode([JSONQuestion].self,
