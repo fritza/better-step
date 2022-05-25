@@ -28,6 +28,7 @@ struct Better_StepApp: App {
     @StateObject var subjectID        = SubjectID()
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
+    @StateObject var usabilityResponses = SurveyResponses()
     @StateObject var phaseManager     = PhaseManager()
     @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
     @StateObject var appStage         = AppStageState()
@@ -86,6 +87,7 @@ struct Better_StepApp: App {
             .environmentObject(subjectID)
             .environmentObject(dasiPages)
             .environmentObject(dasiResponseList)
+            .environmentObject(SurveyResponses())   // FIXME: Load these for restoration
             .environmentObject(phaseManager)
             .environmentObject(fileCoordinator)
             .environmentObject(appStage)
