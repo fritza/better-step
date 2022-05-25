@@ -24,7 +24,7 @@ public class Subject: NSManagedObject {
     public static func subject(from name: String) -> Subject {
         let object = NSEntityDescription
             .insertNewObject(forEntityName: "Subject",
-                             into: sharedContext.viewContext)
+                             into: CDGlobals.viewContext)
         as! Subject
         object.subjectID = name
         return object
@@ -36,7 +36,7 @@ public class Subject: NSManagedObject {
     public static func replaceSubject(with name: String) throws -> Subject {
         try Subject.purge()
         let newSubject = subject(from: name)
-        try sharedContext.viewContext.save()
+        try CDGlobals.viewContext.save()
         return newSubject
     }
 
@@ -47,7 +47,7 @@ public class Subject: NSManagedObject {
     /// **See Also** `NSManagedObject.fetchOne<T>(in:)` in `CDExtensions.swift`.
     /// - Parameter moc: The managed-object context to draw from, default is the `Shared.viewContext`.
     /// - Returns: Some instance of `Subject`, or `nil` if there is no `Subject` in the context.
-    public static func singleton(in moc: NSManagedObjectContext = sharedContext.viewContext) throws -> Subject? {
+    public static func singleton(in moc: NSManagedObjectContext = CDGlobals.viewContext) throws -> Subject? {
         return try Subject.fetchOne(in: moc)
     }
 }

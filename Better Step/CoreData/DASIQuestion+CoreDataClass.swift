@@ -45,7 +45,7 @@ public class DASIQuestion: NSManagedObject {
         let retval: DASIResponse? = DASIResponse
             .fetchOne(withTemplate: "withResponseID",
                       params: ["QUESTIONID": number as NSNumber],
-                      in: self.managedObjectContext ?? sharedContext.viewContext)
+                      in: self.managedObjectContext ?? CDGlobals.viewContext)
         return retval
     }
 
@@ -90,7 +90,7 @@ public class DASIQuestion: NSManagedObject {
     static func question(withID id: Int32) throws -> DASIQuestion? {
         let fetch = Self.fetchRequest()
         fetch.predicate = NSPredicate(format: "number == %d", id)
-        let result = try sharedContext.viewContext.fetch(fetch)
+        let result = try CDGlobals.viewContext.fetch(fetch)
         return result.first
     }
 
@@ -102,7 +102,7 @@ public class DASIQuestion: NSManagedObject {
     /// - Returns: An array of `DASIQuestion`s. If there are no matches, this will be empty.
     static func questions(
         withAnswer answer: ResponseLiteral,
-        in moc: NSManagedObjectContext = sharedContext.viewContext) -> [DASIQuestion] {
+        in moc: NSManagedObjectContext = CDGlobals.viewContext) -> [DASIQuestion] {
             let targetString = answer.description
             let allQuestions: [DASIQuestion] = DASIQuestion.all(in: moc)
 

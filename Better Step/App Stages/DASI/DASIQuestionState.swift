@@ -14,7 +14,7 @@ import Foundation
 /// Yes, No, or Unknown state, usually for recording the user's response to ta question
 ///
 /// `.unknown`, therefore, represents a question not yet answered.
-/// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
+/// - note: `DASIQuestionState` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
 enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
     case unknown, yes, no
 
@@ -69,12 +69,12 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
 // TODO: Validate that this is immutable.
 //       It just orders questions and provides
 //       lookup.
-// MARK: - DASIQuestion
+// MARK: - DASIQuestionState
 /// A question in the DASI set, loaded from `DASIQuestions.json`, with id, question text, and the score assigned to "Yes"
 ///
 /// `id` is the 1-based enumeration of the question, not its position in the array. Lookups search the `questions` array for a matching `id`. The array _needn't_ be in any particular order.
-/// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
-public struct DASIQuestion: Identifiable, Codable, Comparable {
+/// - note: `DASIQuestionState` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
+public struct DASIQuestionState: Identifiable, Codable, Comparable {
     static let jsonBasename = "DASIQuestions"
 
     // TODO: Consider making this into a Collection
@@ -83,7 +83,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
     public let score: Double
 
     // WARNING: the ID is 1-based
-    public static let questions: [DASIQuestion] = {
+    public static let questions: [DASIQuestionState] = {
 //        let bundlePath = Bundle.main.bundlePath
 //        let durl = Bundle.main.url(
 //            forResource: Self.jsonBasename,
@@ -94,7 +94,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
                 preconditionFailure("Could not find DASIQuestions.json")
             }
         let dasiData = try! Data(contentsOf: dasiURL)
-        let retval =  try! JSONDecoder().decode([DASIQuestion].self, from: dasiData)
+        let retval =  try! JSONDecoder().decode([DASIQuestionState].self, from: dasiData)
         return retval
     }()
 
@@ -103,7 +103,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
 
     /// The question with the given ID.
     /// - precondition: ID out-of-range is a fatal error.
-    public static func with(id soughtID: Int) -> DASIQuestion {
+    public static func with(id soughtID: Int) -> DASIQuestionState {
         guard let retval = questions.first(where: { question in
             question.id == soughtID
         })
@@ -112,16 +112,16 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
     }
 
     // MARK: Comparable cmopliance
-    public static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
-    public static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
+    public static func == (lhs: DASIQuestionState, rhs: DASIQuestionState) -> Bool { lhs.id == rhs.id }
+    public static func <  (lhs: DASIQuestionState, rhs: DASIQuestionState) -> Bool { lhs.id <  rhs.id }
 }
 
-extension DASIQuestion {
+extension DASIQuestionState {
     /// The question whose `id` comes after `self`'s `id.
     ///
     /// Does not mutate.
-    /// - returns: the succeeding `DASIQuestion`, or `nil` if there is no question in range.
-    public var next: DASIQuestion? {
+    /// - returns: the succeeding `DASIQuestionState`, or `nil` if there is no question in range.
+    public var next: DASIQuestionState? {
         let proposedQuestionID = id + 1
         guard DASIStages.indexRange.contains(proposedQuestionID) else { return nil }
         return Self.with(id: proposedQuestionID)
@@ -130,8 +130,8 @@ extension DASIQuestion {
     /// The question whose `id` comes before `self`'s `id.
     ///
     /// Does not mutate.
-    /// - returns: the preceding `DASIQuestion`, or `nil` if there is no question in range.
-    public var previous: DASIQuestion? {
+    /// - returns: the preceding `DASIQuestionState`, or `nil` if there is no question in range.
+    public var previous: DASIQuestionState? {
         let proposedQuestionID = id - 1
         guard DASIStages.indexRange.contains(proposedQuestionID) else { return nil }
         return Self.with(id: proposedQuestionID)

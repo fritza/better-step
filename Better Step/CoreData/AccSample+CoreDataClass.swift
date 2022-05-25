@@ -49,7 +49,7 @@ public class AccSample: NSManagedObject {
     static func newSample(
         _ x: Double, _ y: Double, _ z: Double,
         timestamp: TimeInterval = Date().timeIntervalSinceReferenceDate,
-        inContext moc: NSManagedObjectContext = sharedContext.viewContext) -> AccSample {
+        inContext moc: NSManagedObjectContext = CDGlobals.viewContext) -> AccSample {
             let object = NSEntityDescription
                 .insertNewObject(forEntityName: "AccSample",
                                  into: moc)
@@ -69,7 +69,7 @@ public class AccSample: NSManagedObject {
     /// - Returns: A new, freshly-inserted accelerometry sample.
     static func newSample(_ acceleration: CMAcceleration,
         timestamp: TimeInterval = Date().timeIntervalSinceReferenceDate,
-        inContext moc: NSManagedObjectContext = sharedContext.viewContext) -> AccSample {
+        inContext moc: NSManagedObjectContext = CDGlobals.viewContext) -> AccSample {
         return newSample(acceleration.x,
                          acceleration.y,
                          acceleration.z,

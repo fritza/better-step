@@ -88,7 +88,7 @@ public class DASIResponse: NSManagedObject {
         index: Int32, response: ResponseLiteral) -> DASIResponse {
             let object = NSEntityDescription
                 .insertNewObject(forEntityName: "DASIResponse",
-                                 into: sharedContext.viewContext)
+                                 into: CDGlobals.viewContext)
             as! DASIResponse
             (object.subject, object.questionNumber, object.answer) =
             (subject, index, response.description)
@@ -105,7 +105,7 @@ public class DASIResponse: NSManagedObject {
         let retval: DASIQuestion? = DASIQuestion
             .fetchOne(withTemplate: "withQuestionID",
                       params: ["QUESTIONID": questionNumber as NSNumber],
-                      in: self.managedObjectContext ?? sharedContext.viewContext)
+                      in: self.managedObjectContext ?? CDGlobals.viewContext)
         return retval
     }
 }

@@ -17,8 +17,28 @@ import CoreData
  There's no need to make them out of command-line parameters.
  */
 
-let containerBaseName = "BetterStep"
 
-func setUpContainer() {
-    let container = NSPersistentContainer(name: containerBaseName)
+public struct CDGlobals {
+    // “A public type defaults to having internal members, not public members.”
+
+    static public let containerBaseName = "BetterStep"
+    static public let persistentContainer = NSPersistentContainer(name: containerBaseName)
+
+    static public var viewContext: NSManagedObjectContext { persistentContainer.viewContext        }
+    static public var model      : NSManagedObjectModel   { persistentContainer.managedObjectModel }
+
+    static public func initialize() {
+        // Initialize DASI
+        do {
+            guard
+                let url = Bundle.main.url(forResource: "DASIQuestions",
+                                          withExtension: "json")
+            else { preconditionFailure() }
+            try DASIQuestion.load(from: url,
+                                  into: CDGlobals.viewContext)
+        }
+        catch {
+            preconditionFailure("\(#function) - can’t read DASIQuestions.json: \(error)")
+        }
+    }
 }

@@ -10,6 +10,13 @@ import Foundation
 import CoreData
 import CoreMotion
 
+
+enum OutputErrors: String, Error {
+    case noAccContent = "Could not generate CSV from (empty?) element set"
+    case cantMakeTempZipFile = "Could not create the uncompressed data file."
+    case cantMakeZIPArchive = "initializer Archive(data:accessMode:) failed."
+}
+
 /// A managed object aggregating `AccSample` observations for a particular starting time.
 ///
 /// Deletion of `AccSession` cascades into its `AccSample`s.
@@ -30,7 +37,7 @@ public class AccSession: NSManagedObject {
     /// - warning: (1) this does not cancel, stop, or delete an existing session. (2) It does not save to store.
     static func newSession(forSubject subject: Subject,
                            atDate date: Date = Date(),
-                           inContext moc: NSManagedObjectContext = sharedContext.viewContext) -> AccSession {
+                           inContext moc: NSManagedObjectContext = CDGlobals.viewContext) -> AccSession {
         let object =  NSEntityDescription
             .insertNewObject(forEntityName: "AccSession",
                              into: moc) as! AccSession
@@ -38,17 +45,11 @@ public class AccSession: NSManagedObject {
         return object
     }
 
-    // TODO: Consider whether to use Date or TimeInterval here.
-    //       Especially since the idea is to compare readings over a time scale.
-    // TODO: Have a bunch of validations such as, Is the set of samples _really_ ordered?
-    //       If it is, is it reliable to assume the readings come in order, or will
-    //       readings get switched around?
-    
     /// Append `CMAcceleration` as an `AccSample` to the session list.
     func add(
         acceleration: CMAcceleration,
         timestamp: TimeInterval,
-        inContext moc:  NSManagedObjectContext = sharedContext.viewContext) throws {
+        inContext moc:  NSManagedObjectContext = CDGlobals.viewContext) throws {
             let newAccRecord = AccSample.newSample(
                 acceleration.x, acceleration.y, acceleration.z,
                 timestamp: timestamp,
@@ -108,7 +109,7 @@ extension AccSession {
         let didCreate = FileManager.default
             .createFile(atPath: temporaryFileURL.path,
                         contents: content)
-        if !didCreate { throw GeneralErrors.cantMakeTempZipFile }
+        if !didCreate { throw OutputErrors.cantMakeTempZipFile }
 
         return temporaryFileURL
     }
@@ -121,12 +122,12 @@ extension AccSession {
     /// - precondition: `url` must have the `.zip` extension (asserted). It must not exist at the time of call, and the user must have adequate privileges (throws Foundation errors).
     /// - throws: Various Foundation errors if the file already exists or the user isn't authorized to create it.
     /// - Parameter url: The URL for a new `.zip` file.
-    /// - throws: Foundation errors for file operations. `ZipFoundation` errors. `GeneralErrors.noAccContent` if no `AccSample`s are joined
+    /// - throws: Foundation errors for file operations. `ZipFoundation` errors. `OutputErrors.noAccContent` if no `AccSample`s are joined
     func saveZipped(to url: URL, asMagnitude: Bool) throws {
         assert(url.path.hasSuffix(".zip"))
 
         guard let data = sessionFileContents(asMagnitude: asMagnitude) else {
-            throw GeneralErrors.noAccContent
+            throw OutputErrors.noAccContent
         }
         let sourceFile = try Self.sessionTempFile(content: data)
         let fm = FileManager.default

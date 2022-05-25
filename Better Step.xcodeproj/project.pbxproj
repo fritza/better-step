@@ -31,7 +31,7 @@
 		1F2432BB27FD0260008A5418 /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1F2432BC27FD0264008A5418 /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1F2432BE27FD026B008A5418 /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
-		1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
+		1F2432C127FD0275008A5418 /* DASIQuestionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestionState.swift */; };
 		1F2432C227FD0278008A5418 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
 		1F2432C327FD027B008A5418 /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
 		1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
@@ -108,17 +108,12 @@
 		1FCBAA15283BFF0E0088EAF2 /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */; };
 		1FCBAA26283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA19283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift */; };
-		1FCBAA27283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1A283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift */; };
 		1FCBAA28283E8CAA0088EAF2 /* Subject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1B283E8CAA0088EAF2 /* Subject+CoreDataClass.swift */; };
 		1FCBAA29283E8CAA0088EAF2 /* BetterStep.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1C283E8CAA0088EAF2 /* BetterStep.xcdatamodeld */; };
 		1FCBAA2A283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1E283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift */; };
-		1FCBAA2B283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1F283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift */; };
 		1FCBAA2C283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA20283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift */; };
-		1FCBAA2D283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA21283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift */; };
 		1FCBAA2E283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA22283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift */; };
-		1FCBAA2F283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA23283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift */; };
 		1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */; };
-		1FCBAA31283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */; };
 		1FCBAA33283E8EC30088EAF2 /* CDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA32283E8EC30088EAF2 /* CDExtensions.swift */; };
 		1FCBAA35283E8F7C0088EAF2 /* CDContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA34283E8F7C0088EAF2 /* CDContainer.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
@@ -164,7 +159,7 @@
 		1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544C27920A1C000894B8 /* Configuration.swift */; };
 		1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FF354552799D47A000894B8 /* AccelerometerItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545227977302000894B8 /* AccelerometerItemTests.swift */; };
-		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
+		1FFB30E1277BE5230099AE5E /* DASIQuestionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestionState.swift */; };
 		1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31052787892B0099AE5E /* MinutePublisher.swift */; };
 		1FFB31082787991A0099AE5E /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31072787991A0099AE5E /* TimerView.swift */; };
 		1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
@@ -299,7 +294,7 @@
 		1FF3544E27920A3B000894B8 /* config-mini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "config-mini.plist"; sourceTree = "<group>"; };
 		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
-		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
+		1FFB30E0277BE5230099AE5E /* DASIQuestionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestionState.swift; sourceTree = "<group>"; };
 		1FFB31052787892B0099AE5E /* MinutePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutePublisher.swift; sourceTree = "<group>"; };
 		1FFB31072787991A0099AE5E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = "Better Step/Views/Walking/TimerView.swift"; sourceTree = SOURCE_ROOT; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
@@ -535,7 +530,7 @@
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponseList.swift */,
 				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
-				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
+				1FFB30E0277BE5230099AE5E /* DASIQuestionState.swift */,
 				1F2432DF27FE11D9008A5418 /* DASIQuestions.json */,
 				1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */,
 				1F2432C627FD0406008A5418 /* SurveyReportFile.swift */,
@@ -896,7 +891,7 @@
 				1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */,
 				1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */,
 				1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */,
-				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
+				1FFB30E1277BE5230099AE5E /* DASIQuestionState.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
@@ -914,7 +909,6 @@
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
-				1FCBAA27283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FCBAA33283E8EC30088EAF2 /* CDExtensions.swift in Sources */,
 				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
@@ -922,16 +916,13 @@
 				1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
-				1FCBAA31283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift in Sources */,
 				1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */,
 				1FCBAA28283E8CAA0088EAF2 /* Subject+CoreDataClass.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
-				1FCBAA2B283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FCBAA26283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift in Sources */,
-				1FCBAA2F283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */,
@@ -949,7 +940,6 @@
 				1FCBAA35283E8F7C0088EAF2 /* CDContainer.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
-				1FCBAA2D283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1FB684E627F225A300612924 /* SubjectID.swift in Sources */,
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
@@ -1027,7 +1017,7 @@
 				1FCBAA082836A1010088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FDB374227F78CC900E10D8E /* ClearingView.swift in Sources */,
 				1F2432BE27FD026B008A5418 /* DASIQuestionView.swift in Sources */,
-				1F2432C127FD0275008A5418 /* DASIQuestions.swift in Sources */,
+				1F2432C127FD0275008A5418 /* DASIQuestionState.swift in Sources */,
 				1FB6850027F4B96800612924 /* ReportingView.swift in Sources */,
 				1FB6850227F4BAD100612924 /* CompletionDisplayView.swift in Sources */,
 				1F2432C427FD027F008A5418 /* DASIStages.swift in Sources */,

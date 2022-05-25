@@ -9,28 +9,6 @@
 import Foundation
 import CoreData
 
-// HUH?!
-/*
- var sharedContext: (some CDShared)?
--->
- Generic parameter 'τ_0_0' could not be inferred
-
- var sharedContext: CDShared?
-// This depends on no .shared static in the protocol, which I'm okay with.
-
- some CDShared
- -> An 'opaque' type must specify only 'Any', 'AnyObject', protocols, and/or a base class
-
- (some CDShared)?
- -> generic parameter 'τ_0_0' could not be inferred
- No reference to a location (file/line), it's a top-level compiler error.
-
- Conclusion: Don't bother with `some`.
- var sharedContext: CDShared?
- */
-
-public var sharedContext: CDShared!
-
 extension NSEntityDescription {
     /// Whether a named relationship for this entity is to-many rather than to-one
     ///
@@ -90,7 +68,7 @@ extension NSManagedObject {
     @objc
     public static func orphans(from relationships: [String],
                         ofEntityNamed entityName: String,
-                        within moc:  NSManagedObjectContext = sharedContext.viewContext) -> [NSManagedObject] {
+                        within moc:  NSManagedObjectContext = CDGlobals.viewContext) -> [NSManagedObject] {
         // If there are no relationships, trivially empty
         guard !relationships.isEmpty else { return [] }
         // The entity has to exist in the moc.
@@ -129,7 +107,7 @@ extension NSManagedObject {
     /// - Returns: All members of the entity.
     /// - precondition: The class's entity name should not be `nil`;  the fetch request, if it fails, calls `fatalError()` rather than rethrowing.
     public static func all<T: NSFetchRequestResult>(
-        in moc: NSManagedObjectContext = sharedContext.viewContext) -> [T] {
+        in moc: NSManagedObjectContext = CDGlobals.viewContext) -> [T] {
         guard let entityName = self.entity().name else { fatalError() }
         do {
             let fetch: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
@@ -150,7 +128,7 @@ extension NSManagedObject {
     ///   - body: A closure that receives each instance.
     ///   - managedObject: The current managed object in the iteration.
     public static func forEach(
-        in moc: NSManagedObjectContext = sharedContext.viewContext,
+        in moc: NSManagedObjectContext = CDGlobals.viewContext,
         body: (_ managedObject: NSManagedObject)->Void) {
         guard let entityName = self.entity().name else { fatalError() }
         do {
@@ -196,7 +174,7 @@ extension NSManagedObject {
     /// - Parameter moc: The `NSManagedObjectContext` to receive the deletion;
     ///                  defaults to the view context for the global persistent container.
     /// - Throws: Core Data-related errors related to `.execute(_:)` on the MOC.
-    public static func purge(from moc: NSManagedObjectContext = sharedContext.viewContext) throws {
+    public static func purge(from moc: NSManagedObjectContext = CDGlobals.viewContext) throws {
         guard let entityName = self.entity().name else { fatalError() }
         let fetch = NSFetchRequest<NSFetchRequestResult>(
             entityName: entityName)
@@ -226,7 +204,7 @@ extension NSManagedObject {
     /// - Parameter moc:     ///  The managed-object context to draw from, default the `viewMOC`.
     /// - Returns: The number of instances of `self`'s entity.
     /// - precondition: If `Self`'s entity has no name, it is a fatal error.
-    public static func count(in moc: NSManagedObjectContext = sharedContext.viewContext) -> Int {
+    public static func count(in moc: NSManagedObjectContext = CDGlobals.viewContext) -> Int {
         guard let entityName = self.entity().name else { fatalError() }
         let fetch: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entityName)
         var retval = 0
@@ -247,7 +225,7 @@ extension NSManagedObject {
     /// - precondition: The fetch should be well-formed. It is a fatal error for the context to fail with an error,
     public static func fetch<T: NSFetchRequestResult>(
         upTo limit: Int,
-        from moc: NSManagedObjectContext = sharedContext.viewContext) -> [T] {
+        from moc: NSManagedObjectContext = CDGlobals.viewContext) -> [T] {
         let entity = Self.entity()
         
         let fetch: NSFetchRequest<T> = NSFetchRequest(entityName: entity.name!)
@@ -272,9 +250,9 @@ extension NSManagedObject {
     public static func fetchAllWith<T: NSFetchRequestResult>(
         template: String,
         params: [String:AnyObject],
-        in moc: NSManagedObjectContext = sharedContext.viewContext) -> [T]
+        in moc: NSManagedObjectContext = CDGlobals.viewContext) -> [T]
     {
-        guard let fetch = sharedContext.managedObjectModel
+        guard let fetch = CDGlobals.model
             .fetchRequestFromTemplate(
                 withName: template,
                 substitutionVariables: params)
@@ -303,9 +281,9 @@ extension NSManagedObject {
     public static func fetchOne<T: NSFetchRequestResult>(
         withTemplate template: String,
         params: [String:AnyObject],
-        in moc: NSManagedObjectContext = sharedContext.viewContext) -> T?
+        in moc: NSManagedObjectContext = CDGlobals.viewContext) -> T?
     {
-        guard let fetch = sharedContext.managedObjectModel
+        guard let fetch = CDGlobals.model
             .fetchRequestFromTemplate(
                 withName: template,
                 substitutionVariables: params)
@@ -332,7 +310,7 @@ extension NSManagedObject {
     /// - Parameter moc: The managed-object context to draw from, default is the `Shared.viewContext`.
     /// - Returns: The resulting instance of `Self`, or `nil` if there is no instance in the context.
     public static func fetchOne<T: NSFetchRequestResult>(
-       in moc: NSManagedObjectContext = sharedContext.viewContext) throws -> T?
+       in moc: NSManagedObjectContext = CDGlobals.viewContext) throws -> T?
     {
         let fetch = Self.fetchRequest()
         fetch.fetchLimit = 1
@@ -352,7 +330,7 @@ extension NSManagedObject {
     /// - Returns: An array of Strings, starting with the name-amd count for the entity, followed by up to `limit` strings describing the values of each property named in `properties`.
     public static func summary(properties: [String] = [],
                         limit: Int = 5,
-                        in moc: NSManagedObjectContext = sharedContext.viewContext) -> [String] {
+                        in moc: NSManagedObjectContext = CDGlobals.viewContext) -> [String] {
         var output: [String] = []
         guard let eName = self.entity().name else {
             fatalError()
