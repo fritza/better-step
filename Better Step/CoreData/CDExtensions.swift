@@ -201,7 +201,7 @@ extension NSManagedObject {
     }
 
     /// Thw number of `NSManagedObjects` that are instances of this managed object's entity.
-    /// - Parameter moc:     ///  The managed-object context to draw from, default the `viewMOC`.
+    /// - Parameter moc:     ///  The managed-object context to draw from, default the `CDGlobals.viewContext`.
     /// - Returns: The number of instances of `self`'s entity.
     /// - precondition: If `Self`'s entity has no name, it is a fatal error.
     public static func count(in moc: NSManagedObjectContext = CDGlobals.viewContext) -> Int {
@@ -213,6 +213,13 @@ extension NSManagedObject {
             catch { print(#function, "CD error on trying to count.", error) }
         }
         return retval
+    }
+
+    /// Whether the store contains _any_ instances of this entity
+    /// - Parameter moc:  The managed-object context to draw from, default the `CDGlobals.viewContext`.
+    /// - Returns: `true` iff the store is empty of this entity — `count(in:)` returns 0.
+    public static func isEmpty(in moc: NSManagedObjectContext = CDGlobals.viewContext) -> Bool {
+        return count(in: moc) == 0
     }
 
     /// Sample a few instances of `self`'sentity.

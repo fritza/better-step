@@ -80,7 +80,6 @@ public class DASIQuestion: NSManagedObject {
             (object.number, object.text, object.score)
             = (record.id, record.text, record.score)
         }
-//        try moc.save()
     }
 
     /// The `DASIQuestion` that matches the question `number`.

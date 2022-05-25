@@ -115,7 +115,7 @@
 		1FCBAA2E283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA22283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift */; };
 		1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */; };
 		1FCBAA33283E8EC30088EAF2 /* CDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA32283E8EC30088EAF2 /* CDExtensions.swift */; };
-		1FCBAA35283E8F7C0088EAF2 /* CDContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA34283E8F7C0088EAF2 /* CDContainer.swift */; };
+		1FCBAA35283E8F7C0088EAF2 /* CDGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -258,7 +258,7 @@
 		1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DocCatalog.docc; sourceTree = "<group>"; };
 		1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSample+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FCBAA32283E8EC30088EAF2 /* CDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDExtensions.swift; sourceTree = "<group>"; };
-		1FCBAA34283E8F7C0088EAF2 /* CDContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDContainer.swift; sourceTree = "<group>"; };
+		1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDGlobals.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -488,7 +488,7 @@
 			children = (
 				1FCBAA1C283E8CAA0088EAF2 /* BetterStep.xcdatamodeld */,
 				1FCBAA20283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift */,
-				1FCBAA34283E8F7C0088EAF2 /* CDContainer.swift */,
+				1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */,
 				1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */,
 				1FCBAA19283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift */,
 				1FCBAA1F283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift */,
@@ -937,7 +937,7 @@
 				1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */,
 				1F8A065627A478B400477379 /* AppStageState.swift in Sources */,
 				1F76963D282C17CD00016566 /* Stage.swift in Sources */,
-				1FCBAA35283E8F7C0088EAF2 /* CDContainer.swift in Sources */,
+				1FCBAA35283E8F7C0088EAF2 /* CDGlobals.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
