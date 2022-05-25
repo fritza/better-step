@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AccSample" representedClassName="AccSample" syncable="YES" codeGenerationType="category">
+        <attribute name="magnitude" transient="YES" attributeType="Double" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="timeSeconds" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="z" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccSession" inverseName="samples" inverseEntity="AccSession"/>
+    </entity>
+    <entity name="AccSession" representedClassName="AccSession" syncable="YES" codeGenerationType="category">
+        <attribute name="start" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="samples" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="AccSample" inverseName="session" inverseEntity="AccSample"/>
+        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="accSessions" inverseEntity="Subject"/>
+    </entity>
+    <entity name="DASIQuestion" representedClassName="DASIQuestion" syncable="YES" codeGenerationType="category">
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="-1" usesScalarValueType="YES"/>
+        <attribute name="score" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" defaultValueString="FIXME"/>
+    </entity>
+    <entity name="DASIResponse" representedClassName="DASIResponse" syncable="YES" codeGenerationType="category">
+        <attribute name="answer" attributeType="String" defaultValueString="unknown" regularExpressionString="[?YN]"/>
+        <attribute name="questionNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="dasiResponses" inverseEntity="Subject"/>
+    </entity>
+    <entity name="Subject" representedClassName="Subject" syncable="YES" codeGenerationType="category">
+        <attribute name="subjectID" optional="YES" attributeType="String"/>
+        <relationship name="accSessions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AccSession" inverseName="subject" inverseEntity="AccSession"/>
+        <relationship name="dasiResponses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DASIResponse" inverseName="subject" inverseEntity="DASIResponse"/>
+    </entity>
+    <fetchRequest name="withQuestionID" entity="DASIQuestion" predicateString="number == $QUESTIONNUMBER"/>
+    <fetchRequest name="withResponseID" entity="DASIResponse" predicateString="questionNumber == $QUESTIONID"/>
+    <elements>
+        <element name="AccSample" positionX="-231.48046875" positionY="-123.7109375" width="128" height="119"/>
+        <element name="AccSession" positionX="-236.5234375" positionY="-251.05078125" width="128" height="74"/>
+        <element name="DASIQuestion" positionX="7.59375" positionY="-118.44921875" width="128" height="88"/>
+        <element name="DASIResponse" positionX="7.45703125" positionY="-248.6171875" width="128" height="88"/>
+        <element name="Subject" positionX="-137.22265625" positionY="-390.69140625" width="128" height="74"/>
+    </elements>
+</model>

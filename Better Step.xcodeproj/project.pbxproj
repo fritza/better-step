@@ -107,6 +107,18 @@
 		1FCBAA14283BF1F10088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FCBAA15283BFF0E0088EAF2 /* ForwardBackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */; };
 		1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */; };
+		1FCBAA26283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA19283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift */; };
+		1FCBAA27283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1A283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift */; };
+		1FCBAA28283E8CAA0088EAF2 /* Subject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1B283E8CAA0088EAF2 /* Subject+CoreDataClass.swift */; };
+		1FCBAA29283E8CAA0088EAF2 /* StepModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1C283E8CAA0088EAF2 /* StepModel.xcdatamodeld */; };
+		1FCBAA2A283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1E283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift */; };
+		1FCBAA2B283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA1F283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift */; };
+		1FCBAA2C283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA20283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift */; };
+		1FCBAA2D283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA21283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift */; };
+		1FCBAA2E283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA22283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift */; };
+		1FCBAA2F283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA23283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift */; };
+		1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */; };
+		1FCBAA31283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -236,6 +248,18 @@
 		1FCBAA0C2836B3B80088EAF2 /* FullSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSurveyView.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FCBAA16283C29730088EAF2 /* SurveyWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWrapperView.swift; sourceTree = "<group>"; };
+		1FCBAA19283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSession+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCBAA1A283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DASIQuestion+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCBAA1B283E8CAA0088EAF2 /* Subject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Subject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCBAA1D283E8CAA0088EAF2 /* StepModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StepModel.xcdatamodel; sourceTree = "<group>"; };
+		1FCBAA1E283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DASIResponse+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCBAA1F283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCBAA20283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSample+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCBAA21283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DASIResponse+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCBAA22283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DASIQuestion+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCBAA23283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Subject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DocCatalog.docc; sourceTree = "<group>"; };
+		1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSample+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -357,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
+				1FCBAA18283E8CAA0088EAF2 /* CoreData */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
@@ -457,6 +482,25 @@
 				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
 			);
 			path = Usability;
+			sourceTree = "<group>";
+		};
+		1FCBAA18283E8CAA0088EAF2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1FCBAA19283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift */,
+				1FCBAA1A283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift */,
+				1FCBAA1B283E8CAA0088EAF2 /* Subject+CoreDataClass.swift */,
+				1FCBAA1C283E8CAA0088EAF2 /* StepModel.xcdatamodeld */,
+				1FCBAA1E283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift */,
+				1FCBAA1F283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift */,
+				1FCBAA20283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift */,
+				1FCBAA21283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift */,
+				1FCBAA22283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift */,
+				1FCBAA23283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift */,
+				1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */,
+				1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		1FDB373D27F789A700E10D8E /* Setup */ = {
@@ -853,28 +897,38 @@
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
+				1FCBAA2A283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift in Sources */,
 				1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FCBAA0D2836B3B80088EAF2 /* FullSurveyView.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
+				1FCBAA2C283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
+				1FCBAA27283E8CAA0088EAF2 /* DASIQuestion+CoreDataProperties.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
+				1FCBAA31283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift in Sources */,
+				1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */,
+				1FCBAA28283E8CAA0088EAF2 /* Subject+CoreDataClass.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
+				1FCBAA2B283E8CAA0088EAF2 /* AccSession+CoreDataProperties.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
+				1FCBAA26283E8CAA0088EAF2 /* AccSession+CoreDataClass.swift in Sources */,
+				1FCBAA2F283E8CAA0088EAF2 /* Subject+CoreDataProperties.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */,
+				1FCBAA2E283E8CAA0088EAF2 /* DASIQuestion+CoreDataClass.swift in Sources */,
 				1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */,
 				1F1701A62777B65A00E510AE /* EmailFormView.swift in Sources */,
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
@@ -887,6 +941,7 @@
 				1F76963D282C17CD00016566 /* Stage.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
+				1FCBAA2D283E8CAA0088EAF2 /* DASIResponse+CoreDataProperties.swift in Sources */,
 				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1FB684E627F225A300612924 /* SubjectID.swift in Sources */,
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
@@ -898,6 +953,7 @@
 				1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */,
 				1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
+				1FCBAA29283E8CAA0088EAF2 /* StepModel.xcdatamodeld in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
 				1FCBAA0B2836A1FD0088EAF2 /* ButtonSurveyView.swift in Sources */,
@@ -1521,6 +1577,19 @@
 			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		1FCBAA1C283E8CAA0088EAF2 /* StepModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1FCBAA1D283E8CAA0088EAF2 /* StepModel.xcdatamodel */,
+			);
+			currentVersion = 1FCBAA1D283E8CAA0088EAF2 /* StepModel.xcdatamodel */;
+			path = StepModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1F0B6746276FA6C900011A7E /* Project object */;
 }
