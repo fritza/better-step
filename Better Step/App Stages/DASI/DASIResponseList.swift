@@ -67,6 +67,8 @@ final class DASIResponseList: ObservableObject {
 
     /// Create `DASIResponses`
     init() {
+        CDGlobals.initialize()
+
         self.answers   = DASIQuestionState
             .questions
             .map { DASIUserResponse(id: $0.id, response: .unknown) }

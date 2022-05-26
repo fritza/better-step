@@ -84,11 +84,6 @@ public struct DASIQuestionState: Identifiable, Codable, Comparable {
 
     // WARNING: the ID is 1-based
     public static let questions: [DASIQuestionState] = {
-//        let bundlePath = Bundle.main.bundlePath
-//        let durl = Bundle.main.url(
-//            forResource: Self.jsonBasename,
-//            withExtension: "json")
-
         guard let dasiURL = Bundle.main.url(
             forResource: Self.jsonBasename, withExtension: "json") else {
                 preconditionFailure("Could not find DASIQuestions.json")
@@ -100,6 +95,7 @@ public struct DASIQuestionState: Identifiable, Codable, Comparable {
 
     /// Number of questions in the survey
     public static var count: Int { questions.count }
+    public static var cdCount: Int { DASIQuestion.count() }
 
     /// The question with the given ID.
     /// - precondition: ID out-of-range is a fatal error.
@@ -136,4 +132,35 @@ extension DASIQuestionState {
         guard DASIStages.indexRange.contains(proposedQuestionID) else { return nil }
         return Self.with(id: proposedQuestionID)
     }
+
+    // CORE DATA equivalent:
+
+    public var cdNext: DASIQuestionState? {
+        let cdRetval: DASIQuestion? =
+        DASIQuestion.fetchOne(withTemplate: "withQuestionID",
+                              params: ["QUESTIONNUMBER": (id + 1) as NSNumber])
+        guard let cdQuestion = cdRetval, let text = cdRetval?.text else { return nil }
+        return DASIQuestionState(id: numericCast(cdQuestion.number),
+                                 text: text, score: Double(cdQuestion.score))
+    }
+
+    public var cdPrevious: DASIQuestionState? {
+        let cdRetval: DASIQuestion? =
+        DASIQuestion.fetchOne(withTemplate: "withQuestionID",
+                              params: ["QUESTIONNUMBER": (id - 1) as NSNumber])
+        guard let cdQuestion = cdRetval, let text = cdRetval?.text else { return nil }
+        return DASIQuestionState(id: numericCast(cdQuestion.number),
+                                 text: text, score: Double(cdQuestion.score))
+    }
+
+    public static let cdQuestions: [DASIQuestionState] = {
+        let allCDQuestions: [DASIQuestion] = DASIQuestion.all().sorted { $0.id < $1.id }
+        return allCDQuestions
+            .compactMap { (cdq: DASIQuestion) -> DASIQuestionState? in
+                guard let text = cdq.text else { return nil }
+                return DASIQuestionState(id: numericCast(cdq.number),
+                                         text: text, score: Double(cdq.score))
+            }
+    }()
+
 }
