@@ -49,6 +49,26 @@ public class DASIQuestion: NSManagedObject {
         return retval
     }
 
+    /// The `DASIQuestion` with `number` one-greater than `self`; or `nil` if there's no such thing.
+    var next: DASIQuestion? {
+        let nextNumberedQuestions: [DASIQuestion] = //: [DASIQuestion] =
+        DASIQuestion
+            .fetchAllWith(
+                template: "withQuestionID",
+                params: ["QUESTIONNUMBER" : (number+1) as NSNumber])
+        return nextNumberedQuestions.first
+    }
+
+    /// The `DASIQuestion` with `number` one-less than `self`; or `nil` if there's no such thing.
+    var prev: DASIQuestion? {
+        let nextNumberedQuestions: [DASIQuestion] = //: [DASIQuestion] =
+        DASIQuestion
+            .fetchAllWith(
+                template: "withQuestionID",
+                params: ["QUESTIONNUMBER" : (number-1) as NSNumber])
+        return nextNumberedQuestions.first
+    }
+
     /// Remove all instances of `DASIQuestion` from the managed-object context.
     ///
     /// Deletion is from the MOC, and is not yet committed to store.
