@@ -116,6 +116,8 @@
 		1FCBAA30283E8CAA0088EAF2 /* DocCatalog.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA24283E8CAA0088EAF2 /* DocCatalog.docc */; };
 		1FCBAA33283E8EC30088EAF2 /* CDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA32283E8EC30088EAF2 /* CDExtensions.swift */; };
 		1FCBAA35283E8F7C0088EAF2 /* CDGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */; };
+		1FCBAA3A283FE33A0088EAF2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA39283FE33A0088EAF2 /* OnboardingView.swift */; };
+		1FCBAA3C283FE4FC0088EAF2 /* ClearableTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -259,6 +261,8 @@
 		1FCBAA25283E8CAA0088EAF2 /* AccSample+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccSample+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FCBAA32283E8EC30088EAF2 /* CDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDExtensions.swift; sourceTree = "<group>"; };
 		1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDGlobals.swift; sourceTree = "<group>"; };
+		1FCBAA39283FE33A0088EAF2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableTextFieldView.swift; sourceTree = SOURCE_ROOT; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FF3543D2790A958000894B8 /* Storage */,
+				1FCBAA36283FE2DC0088EAF2 /* Subject Onboard */,
 				1FCBA9FD2835AA040088EAF2 /* Usability */,
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1F8A337C27DFEDAA0093C896 /* Reporting */,
@@ -504,6 +509,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		1FCBAA36283FE2DC0088EAF2 /* Subject Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				1FCBAA39283FE33A0088EAF2 /* OnboardingView.swift */,
+			);
+			path = "Subject Onboard";
+			sourceTree = "<group>";
+		};
 		1FDB373D27F789A700E10D8E /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +630,7 @@
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */,
 				1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */,
 				1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */,
 				1FDBB3F9281C494F00D0A7E9 /* Instructions */,
@@ -908,6 +922,7 @@
 				1FCBAA2C283E8CAA0088EAF2 /* AccSample+CoreDataClass.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
 				1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */,
+				1FCBAA3A283FE33A0088EAF2 /* OnboardingView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FCBAA33283E8EC30088EAF2 /* CDExtensions.swift in Sources */,
@@ -946,6 +961,7 @@
 				1FDBB3FD281C49A200D0A7E9 /* InstructionArrows.swift in Sources */,
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
+				1FCBAA3C283FE4FC0088EAF2 /* ClearableTextFieldView.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */,
