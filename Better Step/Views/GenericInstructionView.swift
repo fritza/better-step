@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#warning("Replace with an HTML pager (app in mommk")
+
+/// An adaptable framework view for introductions, instructions, interstitial views, etc.
+/// - bug: This has to be rewritten for flexibility. See the HTML Pager app in mommk.
 struct GenericInstructionView: View {
     private let imageScale: CGFloat = 0.6
 
