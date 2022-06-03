@@ -118,6 +118,8 @@
 		1FCBAA35283E8F7C0088EAF2 /* CDGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */; };
 		1FCBAA3A283FE33A0088EAF2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA39283FE33A0088EAF2 /* OnboardingView.swift */; };
 		1FCBAA3C283FE4FC0088EAF2 /* ClearableTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */; };
+		1FD1783C284A77E600C39026 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1783B284A77E600C39026 /* HTMLView.swift */; };
+		1FD1783E284A787900C39026 /* AppStaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1783D284A787900C39026 /* AppStaging.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
@@ -263,6 +265,8 @@
 		1FCBAA34283E8F7C0088EAF2 /* CDGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDGlobals.swift; sourceTree = "<group>"; };
 		1FCBAA39283FE33A0088EAF2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableTextFieldView.swift; sourceTree = SOURCE_ROOT; };
+		1FD1783B284A77E600C39026 /* HTMLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
+		1FD1783D284A787900C39026 /* AppStaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStaging.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -470,6 +474,7 @@
 				1F8A065527A478B400477379 /* AppStageState.swift */,
 				1FDE828B27EBA00C00CD8368 /* AppStageState+Reset.swift */,
 				1FDE825E27E29FFD00CD8368 /* AppStages.swift */,
+				1FD1783D284A787900C39026 /* AppStaging.swift */,
 			);
 			path = "App Stages";
 			sourceTree = "<group>";
@@ -633,6 +638,7 @@
 				1FCBAA3B283FE4FC0088EAF2 /* ClearableTextFieldView.swift */,
 				1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */,
 				1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */,
+				1FD1783B284A77E600C39026 /* HTMLView.swift */,
 				1FDBB3F9281C494F00D0A7E9 /* Instructions */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
@@ -906,12 +912,14 @@
 				1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */,
 				1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */,
 				1FFB30E1277BE5230099AE5E /* DASIQuestionState.swift in Sources */,
+				1FD1783C284A77E600C39026 /* HTMLView.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
+				1FD1783E284A787900C39026 /* AppStaging.swift in Sources */,
 				1FCBAA2A283E8CAA0088EAF2 /* DASIResponse+CoreDataClass.swift in Sources */,
 				1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
