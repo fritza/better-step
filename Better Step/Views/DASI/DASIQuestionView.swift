@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+// FIXME: Replace with dumber DASIQuestionView
+//        (just the content and response), let superview
+//        handle the navigation. (May not be possible?)
+//        See if there's a QuestionPresenting protocol here.
+
 struct QuestionContentView: View {
     let content: String
     let questionIndex: Int
@@ -21,11 +26,15 @@ struct QuestionContentView: View {
     }
 }
 
+/// Presents DASI questions as a sequence of question tex + Yes/No buttons for each.
+///
+/// Reflect existing answers with checkmarks on the **Yes** or **No** buttons
 struct DASIQuestionView: View {
     @EnvironmentObject var envt: DASIPages
     @EnvironmentObject var reportContents: DASIResponseList
     @State var answerState: AnswerState
 
+    /// Reflect the current question after incrementing or decrementing the question ID.
     func updateForNewBinding() {
         let answerState: AnswerState
         if let qID = envt.questionIdentifier,

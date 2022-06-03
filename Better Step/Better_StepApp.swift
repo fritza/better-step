@@ -33,6 +33,16 @@ struct Better_StepApp: App {
     @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
     @StateObject var appStage         = AppStageState()
 
+    // The following merely forces CDGlobals to initialize its statics.
+    let _dummyCDGlobals = CDGlobals()
+    // Surely that's not right.
+
+    @State var tempUserID = "none" {
+        didSet {
+            print("app content = “content”")
+            print()
+        }
+    }
 
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
@@ -92,6 +102,7 @@ struct Better_StepApp: App {
             .environmentObject(fileCoordinator)
             .environmentObject(appStage)
             .environmentObject(WalkingSequence())
+#endif
         }
     }
 }
