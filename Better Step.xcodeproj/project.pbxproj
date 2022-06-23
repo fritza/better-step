@@ -19,6 +19,8 @@
 		1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6758276FA6CA00011A7E /* Preview Assets.xcassets */; };
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F151841285A7292001A3D50 /* AnyAppStaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F151840285A7292001A3D50 /* AnyAppStaging.swift */; };
+		1F15185F2864E403001A3D50 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
+		1F1518602864E40E001A3D50 /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
 		1F1641F22819E80D00E4E2FA /* AppStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* AppStageState.swift */; };
 		1F1641F32819E87C00E4E2FA /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
 		1F1641F42819E88A00E4E2FA /* AppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* AppStages.swift */; };
@@ -998,6 +1000,7 @@
 				1FB684EA27F2260D00612924 /* AppStorageKeys.swift in Sources */,
 				1F1641F22819E80D00E4E2FA /* AppStageState.swift in Sources */,
 				1FCBAA14283BF1F10088EAF2 /* UtilityViews.swift in Sources */,
+				1F15185F2864E403001A3D50 /* DASIPages.swift in Sources */,
 				1FB684FB27F252BE00612924 /* Numeric+extensions.swift in Sources */,
 				1FCBAA15283BFF0E0088EAF2 /* ForwardBackBar.swift in Sources */,
 				1FB684ED27F2269300612924 /* PerSubjectFileCoordinator.swift in Sources */,
@@ -1016,6 +1019,7 @@
 				1FB684EB27F2263500612924 /* AccelerometerItem.swift in Sources */,
 				1FB684E727F225BD00612924 /* SubjectID.swift in Sources */,
 				1F769EB027FF90FD00A3CAE3 /* InstructionElement.swift in Sources */,
+				1F1518602864E40E001A3D50 /* DASIResponseList.swift in Sources */,
 				1F1641F42819E88A00E4E2FA /* AppStages.swift in Sources */,
 				1FCBAA0E2836B5B20088EAF2 /* FullSurveyView.swift in Sources */,
 			);

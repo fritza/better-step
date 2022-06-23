@@ -48,7 +48,7 @@ import SwiftUI
 @main
 struct Async_AccelApp: App {
     @AppStorage(AppStorageKeys.includeWalk.rawValue) var includeWalk: Bool = true
-    @AppStorage(AppStorageKeys.includeSurvey.rawValue) var includeSurvey: Bool = true
+    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue) var includeSurvey: Bool = true
 
     @StateObject var subjectID        = SubjectID()
     @StateObject var dasiPages        = DASIPages()
