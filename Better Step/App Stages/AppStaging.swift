@@ -7,12 +7,16 @@
 
 import Foundation
 
-// Example the questions or interstitials of a DASI stage
-protocol StageTasking: AnyObject & Hashable {
+/// The tasks to be performed in an `AppStaging` workflow: A **stage's tasks**. An example would be the questions and interstitials in a DASI survey.
+///
+/// Hashed and equated solely on the basis of `id`. The task knows how to perform itself through the `perform()` instance method.
+/// - warning: Take care that the task `id`s be unique within a stage.
+protocol StageTasking: AnyObject & Hashable & Identifiable {
     associatedtype Stage: AppStaging
-    var name: String { get }
-    var id: Int { get }
-    var stage: Stage { get }
+
+    var name    : String { get }
+    var id      : Int    { get }
+    var stage   : Stage  { get }
 
     func perform()
 }
@@ -28,6 +32,7 @@ extension StageTasking {
 }
 
 class AnyStageTasking: StageTasking {
+    // FIXME: This doesn't trampoline into the bound stage-tasking. 
     func perform() {
         _perform()
     }
@@ -40,106 +45,31 @@ class AnyStageTasking: StageTasking {
     }
 
     // Passthroughs:
-
-    let name: String
-    let id: Int
-    let stage: AnyAppStaging
+    let name    : String
+    let id      : Int
+    let stage   : AnyAppStaging
     let _perform: () -> Void
 }
 
-class AnyAppStaging: AppStaging {
-    typealias Task = AnyStageTasking
 
-    let name: String
-    let id: Int
-/*
-    let statusClosure: () -> String
-    init<Base:TaskLike>(_ base: Base) {
-        id = base.id
-        name = base.name
-        statusClosure = {
-            return base.status
-        }
-    }
-*/
-
-    typealias TaskClosure = () -> AnyStageTasking?
-    let currentClosure  : TaskClosure
-    let setClosure      : (AnyStageTasking) -> Void
-    let prevClosure     : TaskClosure
-    let nextClosure     : TaskClosure
-
-    let goNextClosure   : TaskClosure
-    let goBackClosure   : TaskClosure
-
-    init<AS: AppStaging>(boundValue: AS) {
-        (name, id) = (boundValue.name, boundValue.id)
-        currentClosure = {
-            guard let curr = boundValue.currentTask else { return nil }
-            return AnyStageTasking(curr)
-        }
-
-        prevClosure = {
-            guard let val = boundValue.prevTask else {
-                return nil
-            }
-            return AnyStageTasking(val)
-        }
-        nextClosure = {
-            guard let val = boundValue.nextTask else {
-                return nil
-            }
-            return AnyStageTasking(val)
-        }
-        goNextClosure = {
-            guard let val = boundValue.incrementTask() else {
-                return nil
-            }
-            return AnyStageTasking(val)
-        }
-        goBackClosure = {
-            guard let val = boundValue.decrementTask() else {
-                return nil
-            }
-            return AnyStageTasking(val)
-        }
-        setClosure = {
-            anyTask in
-            #warning("Watch the following cast:")
-            boundValue.setCurrentTask(to: anyTask as! AS.Task)
-        }
-    }
-
-    func setCurrentTask(to new: AnyStageTasking) {
-        setClosure(new)
-    }
-    var currentTask : AnyStageTasking? { currentClosure() }
-    var nextTask    : AnyStageTasking? { nextClosure()    }
-    var prevTask    : AnyStageTasking? { prevClosure()    }
-    // FIXME: Seems no way to set the current task.
-
-//    let _setCurrentTask: (AnyStageTasking) -> Void
-//    func setCurrentTask(to next: AnyStageTasking) {
-//        _setCurrentTask(next)
-//    }
-
-    func incrementTask() -> AnyStageTasking? { goNextClosure() }
-    func decrementTask() -> AnyStageTasking? { goBackClosure() }
-}
-
-// Example: all tasks of the DASI stage
+/// One of the workflows among an app's repertoire: An **app's staging**.
+///
+/// Stages are comprised of `StageTasking` elements. Stages do not share tasks; tasks must appear only once in the workflow. Each task identifies the ones before and after (if any), making it possible to iterate the steps without the stage having to know anything about them.
 protocol AppStaging: AnyObject & Hashable {
     associatedtype Task: StageTasking
-    var name: String { get }
-    var id: Int { get }
+    var name: String                    { get }
+    var id: Int                         { get }
 
-    var currentTask: Task? { get }
+    var currentTask: Task?              { get }
     func setCurrentTask(to: Task)
 
-    var nextTask: Task? { get }
-    func incrementTask()    -> Task?
-    var prevTask: Task? { get }
-    func decrementTask()    -> Task?
+    /// The `StageTasking`, if any, after this one
+    var nextTask            :   Task?   { get }
+    func incrementTask()    ->  Task?
+
+    /// The `StageTasking`, if any, before this one
+    var prevTask            :   Task?   { get }
+    func decrementTask()    ->  Task?
 }
 
 extension AppStaging {
@@ -181,6 +111,8 @@ class DASIStage: AppStaging {
         self.tasks = []
     }
 
+    #warning("Task sequencing not implemented.")
+
     func setCurrentTask(to: DASIQuestionTask) {
         // COMPLETE ME!
     }
@@ -189,11 +121,5 @@ class DASIStage: AppStaging {
     var prevTask: DASIQuestionTask? { return nil }
     func incrementTask() -> DASIQuestionTask? { return nil }
     func decrementTask() -> DASIQuestionTask? { return nil }
-
-    // TODO: Can we have the task-sequence DSL? It's just a sequence here.
-    //       But the DSL can probably add decorations like restoration points
-    //       Gosh, maybe even save/destroy actions.
-
-
 }
 

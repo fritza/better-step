@@ -40,19 +40,32 @@ struct WalkView: View {
         // FIXME: The figure does not conform to the image aspect ratio.
         NavigationView {
             VStack {
+                // Greeting and explanation of the walking exercises.
+                // Restoration point
                 GenericInstructionView(
                     bodyText: walkingNarrative, sfBadgeName: "figure.walk",
                     proceedTitle: "Proceed") {
 
                     }
-                .padding(32)
-            NavigationLink(
-                destination: {
-                    AnyView(WalkProgressView())
-                }(),
-                isActive: $sequencer.showCountdown,
-                label: { EmptyView()}
-            )
+                    .padding(32)
+                // Countdown #1 followed by walk #1
+                NavigationLink(
+                    destination: {
+                        AnyView(WalkProgressView())
+                    }(),
+                    isActive: $sequencer.showCountdown,
+                    label: { EmptyView()}
+                )
+                // Walk #1
+                NavigationLink(
+                    destination: {
+                        AnyView(WalkProgressView())
+                    }(),
+                    isActive: $sequencer.showCountdown,
+                    label: { EmptyView()}
+                )
+                // Walk interstitial
+                // restoration point
                 NavigationLink(
                     destination: {
                         GenericInstructionView(
@@ -62,6 +75,12 @@ struct WalkView: View {
                     isActive: $sequencer.showComplete,
                     label: {EmptyView()}
                 )
+                // Countdown #2
+
+                // Walk #2
+
+                // End-of-phase landing screen
+                // restoration point
             }
             .navigationTitle("Walking Test")
         }

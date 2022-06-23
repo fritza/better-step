@@ -47,6 +47,11 @@ struct Better_StepApp: App {
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
         WindowGroup {
+            #if true
+       VStack  {   ClearableTextFieldView(string: $tempUserID)
+           Text(tempUserID)
+       }
+            #else
             TabView(
                 selection:
                     $aStage.currentSelection

@@ -30,14 +30,15 @@ struct QuestionContentView: View {
 ///
 /// Reflect existing answers with checkmarks on the **Yes** or **No** buttons
 struct DASIQuestionView: View {
-    @EnvironmentObject var envt: DASIPages
+    /// Track a current selection among questions.
+    @EnvironmentObject var pageCursor: DASIPages
     @EnvironmentObject var reportContents: DASIResponseList
     @State var answerState: AnswerState
 
     /// Reflect the current question after incrementing or decrementing the question ID.
     func updateForNewBinding() {
         let answerState: AnswerState
-        if let qID = envt.questionIdentifier,
+        if let qID = pageCursor.questionIdentifier,
            let state = reportContents
             .responseForQuestion(identifier: qID) {
             answerState = state
@@ -51,12 +52,11 @@ struct DASIQuestionView: View {
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
-        VStack {
-            if envt.questionIdentifier != nil {
+        if let qID = pageCursor.questionIdentifier {
+            VStack {
                 QuestionContentView(
                     content: "Do you have difficulty?",
-                    questionIndex:
-                        envt.questionIdentifier!)
+                    questionIndex: qID)
                 .padding()
 
                 Spacer()
@@ -64,41 +64,41 @@ struct DASIQuestionView: View {
                     boundState: self.$answerState,
                     completion: { state in
 #warning("How many times do we do this?")
-                        guard let qID = envt.questionIdentifier else {
-                            return
-                        }
                         reportContents
                             .didRespondToQuestion(
                                 id: qID,
                                 with: state)
-                        envt.increment()
+                        pageCursor.increment()
                         updateForNewBinding()
                     }
                 )
                 .frame(height: 130)
                 .padding()
             }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button("← Back") {
-                    envt.decrement()
-                    updateForNewBinding()
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button("← Back") {
+                        pageCursor.decrement()
+                        updateForNewBinding()
+                    }
+                    .disabled(pageCursor.selected <= DASIStages.minPresenting)
+                    gearBarItem()
                 }
-                .disabled(envt.selected <= DASIStages.minPresenting)
-                gearBarItem()
-            }
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button("Next →") {
-                    envt.increment()
-                    updateForNewBinding()
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("Next →") {
+                        pageCursor.increment()
+                        updateForNewBinding()
+                    }
+                    .disabled(pageCursor.selected >= DASIStages.maxPresenting)
                 }
-                .disabled(envt.selected >= DASIStages.maxPresenting)
             }
+            .navigationTitle(
+                "Question \(qID.description ?? "NO ID"):"
+            )
         }
-        .navigationTitle(
-            "Question \(envt.questionIdentifier?.description ?? "NO ID"):"
-        )
+        else {
+            EmptyView()
+        }
     }
 }
 
