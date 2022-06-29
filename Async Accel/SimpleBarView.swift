@@ -23,7 +23,20 @@ struct SimpleBarView: View {
 
     let barColor: Color
 
-    init(_ points: [Double], spacing: CGFloat = 0.05, color: Color = .teal, reservedMax: CGFloat = 0) {
+    /// Create a `SimpleBarView`, a bar chart for an array of `Double` values.
+    ///
+    /// The maximum value displayed at any one time is the maximum value among the data `points`: `[1, 3, 2] → [1/3, 1, 2/3]`, However, if all elements are smaller than `reservedMax`, they will be scaled to that value: `[1, 3, 2], max 5 → [1/5, 3/5, 2/5]`.
+    /// - Parameters:
+    ///   - points: An array of `Double` values that determine the height of the bars
+    ///   - spacing: The amount of space between bars, as a fraction of the bars themselves. Default 5%
+    ///   - color: The color fill for the bars. Default is `.teal`.
+    ///   - reservedMax: The minimum vertical scale to use, regardless of how small the data are. Default is `0.01` (the tallest of the three bars determines the scale moment-to-moment). Non-zero to prevent division by zero.
+    init(_ points: [Double],
+         spacing: CGFloat = 0.05,
+         color: Color = .teal,
+         reservedMax: CGFloat = 0.01) {
+        precondition(reservedMax > 0.0)
+
         self.data = points
         self.spaceFraction = spacing
 
@@ -32,8 +45,9 @@ struct SimpleBarView: View {
         self.barWidth = 1.0 / denominator
         self.spaceWidth = spacing * barWidth
 
-        let dataMaximum = data.max() ?? 0.0
-        self.maxValue = (reservedMax > dataMaximum) ? reservedMax : dataMaximum
+        self.maxValue = Swift.max(
+            (data.max() ?? -.infinity),
+            reservedMax)
 
         barColor = color
     }
@@ -45,18 +59,28 @@ struct SimpleBarView: View {
         ]
     )
 
+    var gradientBackground: some View {
+        Rectangle()
+            .fill (
+            .linearGradient(
+                backGradient,
+                startPoint: UnitPoint(x: 0.5, y: 0),
+                endPoint: UnitPoint(x: 0.5, y: 1))
+            )
+    }
+
+    func bar(for datum: CGFloat, in size: CGSize) ->  some View {
+        return Rectangle()
+            .frame(width : barWidth * size.width       ,
+                   height: size.height * datum/maxValue)
+            .foregroundColor(barColor)
+    }
+
     var body: some View {
         GeometryReader {
             proxy in
             ZStack(alignment: .bottom) {
-                // Back: A vertical gradient
-                Rectangle()
-                    .fill (
-                    .linearGradient(
-                        backGradient,
-                        startPoint: UnitPoint(x: 0.5, y: 0),
-                        endPoint: UnitPoint(x: 0.5, y: 1))
-                    )
+                gradientBackground
 
                 // Fore: One bar per datum, spaced per the
                 //       spacing parameter of init.
@@ -65,26 +89,13 @@ struct SimpleBarView: View {
                     EmptyView()
                 }
                 else {
-                    HStack(alignment: .bottom, spacing: proxy.size.width*spaceWidth) {
-                        // TODO: Find another ForEach
-                        ForEach(0..<data.count) { index in
-                            Rectangle()
-                                .frame(width:
-                                        barWidth * proxy.size.width,
-                                       height: proxy.size.height * data[index]/maxValue)
-//                                .foregroundColor(Color.teal)
-                                .foregroundColor(barColor)
-                                .shadow(color: .gray,
-                                        radius: 4.0,
-                                        x: 0, y: 0)
+                    HStack(alignment: .bottom,
+                           spacing: proxy.size.width*spaceWidth) {
+                        ForEach(data, id: \.self) { datum in
+                            bar(for: datum, in: proxy.size)
                         }
                     }
                     .padding(EdgeInsets(top: 5.0, leading: 0, bottom: 0, trailing: 0))
-                    // I don't know why, but supplying
-                    // a leading pad shifts the entire view,
-                    // (background included?) to the trailing
-                    // side.
-                    // Trailing pad seems to make no difference.
                 }
             }
         }
@@ -94,8 +105,10 @@ struct SimpleBarView: View {
 struct ThreeBarView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleData: [Double] = [2.0, 0.9, 0.4 ]//, 1.2]
-        return SimpleBarView(sampleData, spacing: 0.4,
-                             color: .accentColor
+        return SimpleBarView(
+            sampleData,
+            spacing: 0.4,
+            color: .green // .accentColor
 //                            , reservedMax: 3.0
         )
             .frame(width: .infinity, height: 160, alignment: .center)
