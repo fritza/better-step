@@ -54,14 +54,6 @@
 		1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1331027A09979004D6647 /* ZIPFoundation */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
-		1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1B58927DA77590017E90C /* Async_AccelApp.swift */; };
-		1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1B58B27DA77590017E90C /* ContentView.swift */; };
-		1FF1B58E27DA775B0017E90C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF1B58D27DA775B0017E90C /* Assets.xcassets */; };
-		1FF1B59127DA775B0017E90C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF1B59027DA775B0017E90C /* Preview Assets.xcassets */; };
-		1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544A2791FCFF000894B8 /* CoreMotion.swift */; };
-		1FF1B59827DA78C60017E90C /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1B59727DA78C60017E90C /* Collections */; };
-		1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
-		1FF1B59B27DAA66C0017E90C /* SimpleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1B59A27DAA66C0017E90C /* SimpleBarView.swift */; };
 		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */; };
 		1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
@@ -144,7 +136,6 @@
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
 		1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMExtensionsTests.swift; sourceTree = "<group>"; };
-		1FF1B58727DA77590017E90C /* Async Accel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Async Accel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF1B58927DA77590017E90C /* Async_AccelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async_AccelApp.swift; sourceTree = "<group>"; };
 		1FF1B58B27DA77590017E90C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FF1B58D27DA775B0017E90C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,14 +189,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1FF1B58427DA77590017E90C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF1B59827DA78C60017E90C /* Collections in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -227,7 +210,6 @@
 				1F0B674E276FA6C900011A7E /* Better Step.app */,
 				1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */,
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
-				1FF1B58727DA77590017E90C /* Async Accel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -501,26 +483,6 @@
 			productReference = 1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		1FF1B58627DA77590017E90C /* Async Accel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1FF1B59227DA775B0017E90C /* Build configuration list for PBXNativeTarget "Async Accel" */;
-			buildPhases = (
-				1FF1B58327DA77590017E90C /* Sources */,
-				1FF1B58427DA77590017E90C /* Frameworks */,
-				1FF1B58527DA77590017E90C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Async Accel";
-			packageProductDependencies = (
-				1FF1B59727DA78C60017E90C /* Collections */,
-			);
-			productName = "Async Accel";
-			productReference = 1FF1B58727DA77590017E90C /* Async Accel.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -541,9 +503,6 @@
 					1F0B6767276FA6CA00011A7E = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 1F0B674D276FA6C900011A7E;
-					};
-					1FF1B58627DA77590017E90C = {
-						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
@@ -571,7 +530,6 @@
 				1F0B674D276FA6C900011A7E /* Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
-				1FF1B58627DA77590017E90C /* Async Accel */,
 			);
 		};
 /* End PBXProject section */
@@ -598,15 +556,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1FF1B58527DA77590017E90C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF1B59127DA775B0017E90C /* Preview Assets.xcassets in Resources */,
-				1FF1B58E27DA775B0017E90C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,18 +630,6 @@
 			files = (
 				1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */,
 				1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1FF1B58327DA77590017E90C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF1B59B27DAA66C0017E90C /* SimpleBarView.swift in Sources */,
-				1FF1B59927DA826D0017E90C /* Formatting+Extensions.swift in Sources */,
-				1FF1B58C27DA77590017E90C /* ContentView.swift in Sources */,
-				1FF1B59527DA778B0017E90C /* CoreMotion.swift in Sources */,
-				1FF1B58A27DA77590017E90C /* Async_AccelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,63 +904,6 @@
 			};
 			name = Release;
 		};
-		1FF1B59327DA775B0017E90C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Async Accel/Preview Content\"";
-				DEVELOPMENT_TEAM = J2E8MMY7GM;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Async-Accel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1FF1B59427DA775B0017E90C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Async Accel/Preview Content\"";
-				DEVELOPMENT_TEAM = J2E8MMY7GM;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Async-Accel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1059,15 +939,6 @@
 			buildConfigurations = (
 				1F0B6779276FA6CA00011A7E /* Debug */,
 				1F0B677A276FA6CA00011A7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1FF1B59227DA775B0017E90C /* Build configuration list for PBXNativeTarget "Async Accel" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1FF1B59327DA775B0017E90C /* Debug */,
-				1FF1B59427DA775B0017E90C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1155,11 +1026,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
-		};
-		1FF1B59727DA78C60017E90C /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
 		};
 		1FF35437278F61FB000894B8 /* CodableCSV */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,44 +14,39 @@ import Combine
 //       and maybe the Timer can be given a looser interval and tolerance.
 
 // MARK: - MinutePublisher
-/// Publisher of components of `Timer` ticks in `Int` minutes and seconds, and `Double` subseconds, counting up or down.
+/// Publisher of components of `Timer` ticks in integer minutes and seconds; and `Double` subseconds, counting up or down.
 ///
-/// Countdown timers run for a specified duration into the future. The duration — deadline — may be set as an interval to an ending time, or a `Date` deadline.
+/// Countdown timers run down to a specified deadline into the future. Count-up timers run indefinitely (but see **Bug**).
 ///
-/// Count-up timers run indefinitely.
-///
-/// The published outputs are components of "clock time" (not fo be confused with kernel-level "clock" timing) toward the deadline, truncated minutes, seconds, and fractional seconds.
-///
-/// When the deadline is reached, `completedSubject` carries a `Bool` indicating whether the clock ran out vs. cancelled.
-///
+/// `MinutePublisher` broadcasts a `Bool` through `completedSubject` when the deadline is reached (`true`) or the client called `stop()` (`false`).
 /// - bug: The count-up should also stop the clock when a deadline is reached.
-final class MinutePublisher: ObservableObject {
+public final class MinutePublisher: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
 
     // MARK: Subjects
-    // The minute, second, and fraction subjects were of the form
-    // var minuteSubject   = PassthroughSubject<Int   , Never>()
+    /// Subscribers get a `Bool` input when the deadline arrives (`true`) or the client calls `.stop()` (`false`). The `Bool` is true iff the clock ran out and nit cancalled.
+    public var completedSubject = PassthroughSubject<Bool, Never>()
 
-    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling `.stop()`. The `Bool` is true iff the completion is due to exhaustion.
-    var completedSubject = PassthroughSubject<Bool, Never>()
-
-    /// The root time publisher with default parameters:
-    /// * every 0.01 seconds...
-    /// * ... ± 0.03 sconds (**NOTE**: a substantial amount of slack)
-    /// * current run loop
-    /// * in `.common` mode
+    /// The root time publisher for a `Timer` signaling every `0.01 ± 0.03` seconds.
+    ///
+    /// Clients do not see this publisher; they should subscribe to the `@Published` time components instead.
     private let timePublisher = Timer.publish(
         every: 0.01, tolerance: 0.03,
         on: .current, in: .common)
 
     // MARK: @Published
-    @Published var minutes: Int = 0
-    @Published var seconds: Int = 0
-    @Published var fraction: Double = 0.0
-    @Published var minuteColonSecond: String = ""
+    /// Minutes until deadline
+    @Published public var minutes: Int = 0
+    /// Seconds-in-minute until deadline
+    @Published public var seconds: Int = 0
+    /// Fractions-in-second until deadline
+    @Published public var fraction: Double = 0.0
+    /// Formatted `mm:ss` until deadline
+    @Published public var minuteColonSecond: String = ""
 
     // MARK: Initialization
 
+    /// The deadline for ending the countdown
     private let countdownTo: Date?
     /// Initialize a countdown toward a future date, or a count-up from the present.
     /// - parameter date: The deadline as `Date` to count down to. If `nil` (the default), the clock counts up indefinitely from the current date.
@@ -69,13 +64,11 @@ final class MinutePublisher: ObservableObject {
     /// The `Date` at which `start()` commenced the count. Used only as a reference point for counting up.
     private var started: Date!
     /// The time publisher, converted to emitting a `TimeInterval` between now and the deadline.
-    var commonPublisher: AnyPublisher<TimeInterval, Never>!
+    private var commonPublisher: AnyPublisher<TimeInterval, Never>!
 
     // MARK: start
-    /// Set up subscriptions to (ultimately) the `Timer.Publisher` and start the clock.
-    ///
-    /// The shared time publisher (`commonPublisher`) emits the current interval to the deadline, and calls `.stop()` if this instance is a countdown timer and the deadline is reached. The fraction, seconds, and minutes subscribe to it.
-    func start() {
+    /// Set up internal subscriptions to (ultimately) the `Timer.Publisher`, and start counting down to the deadline.
+    public func start() {
         started = Date()
 
         // Subscribe to the timer, correct to count-down or -up, and check for deadlines.
@@ -111,7 +104,7 @@ final class MinutePublisher: ObservableObject {
             }
             .store(in: &cancellables)
 
-        // emit minutes
+        // Emit minutes
         commonPublisher
             .map { Int($0) / 60 }
             .removeDuplicates()
@@ -120,7 +113,7 @@ final class MinutePublisher: ObservableObject {
             }
             .store(in: &cancellables)
 
-        // Emit mm:ss
+        // Emit "mm:ss"
         commonPublisher
             .map { (commonSeconds: TimeInterval) -> (m: Int, s: Int) in
                 let dblMin = (commonSeconds / 60.0).rounded(.towardZero)
@@ -146,7 +139,7 @@ final class MinutePublisher: ObservableObject {
     /// Halt the clock and send a `Bool` to `completedSubject` to indicate exhaustion or halt.
     ///
     /// - parameter exhausted: `true` iff `stop()` was called because the clock ran out. This is passed along through `completedSubject` to inform clients the clock is finished.
-    func stop(exhausted: Bool = false) {
+    public func stop(exhausted: Bool = false) {
         for c in cancellables {
             c.cancel()
             completedSubject.send(exhausted)
