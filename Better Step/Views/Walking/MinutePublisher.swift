@@ -77,7 +77,7 @@ public final class MinutePublisher: ObservableObject {
             .map {
                 currentDate -> TimeInterval in
                 if let remote = self.countdownTo {
-                    if currentDate >= remote { self.stop() }
+                    if currentDate >= remote { self.stop(exhausted: false) }
                     return -currentDate.timeIntervalSince(remote)
                 }
                 else {
@@ -139,11 +139,11 @@ public final class MinutePublisher: ObservableObject {
     /// Halt the clock and send a `Bool` to `completedSubject` to indicate exhaustion or halt.
     ///
     /// - parameter exhausted: `true` iff `stop()` was called because the clock ran out. This is passed along through `completedSubject` to inform clients the clock is finished.
-    public func stop(exhausted: Bool = false) {
+    public func stop(exhausted: Bool = true) {
         for c in cancellables {
             c.cancel()
-            completedSubject.send(exhausted)
         }
+        completedSubject.send(exhausted)
     }
 }
 
