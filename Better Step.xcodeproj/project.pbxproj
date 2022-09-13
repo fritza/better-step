@@ -37,6 +37,7 @@
 		1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
+		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
@@ -150,6 +151,7 @@
 		1FA3B8C327D6B0CA0058F1AF /* ForwardBackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardBackBar.swift; sourceTree = "<group>"; };
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
+		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectID.swift; path = "Better Step/App Stages/SubjectID.swift"; sourceTree = "<group>"; };
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1FB2F53728D133B600593692 /* Time */,
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
@@ -360,6 +363,14 @@
 				1FDE825E27E29FFD00CD8368 /* AppStages.swift */,
 			);
 			path = "App Stages";
+			sourceTree = "<group>";
+		};
+		1FB2F53728D133B600593692 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				1FB2F53828D133E700593692 /* MinSecAndFraction.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 		1FCBA9FD2835AA040088EAF2 /* Usability */ = {
@@ -701,6 +712,7 @@
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
+				1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
