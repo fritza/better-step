@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+/*
 final class ObservableStage: ObservableObject {
     @AppStorage(AppStorageKeys.includeUsabilitySurvey.rawValue) var includeUsability: Bool = false
 
@@ -51,3 +52,5 @@ final class ObservableStage: ObservableObject {
         updateDependentStages()
     }
 }
+*/
+
