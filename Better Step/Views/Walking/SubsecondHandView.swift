@@ -45,17 +45,19 @@ struct SubsecondHandView: View {
 
 struct SubsecondHandView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            ForEach(0..<10) { tick in
-                HStack(alignment: .top) {
-                    Text("\(tick)/9").font(.headline)
-                    SubsecondHandView(fractionalSecond: Double(tick)/9.0)
-                        .foregroundColor(.red)
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .border(.green, width: 0.5)
+        ScrollView {
+            VStack {
+                ForEach(0..<10) { tick in
+                    HStack(alignment: .top) {
+                        Text("\(tick)/9").font(.headline)
+                        SubsecondHandView(fractionalSecond: Double(tick)/9.0)
+                            .foregroundColor(.red)
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .border(.green, width: 0.5)
+                    }
                 }
-            }
         }
+            }
         .padding()
     }
 }

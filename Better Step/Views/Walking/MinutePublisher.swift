@@ -84,6 +84,7 @@ final class MinutePublisher: ObservableObject {
     /// The shared time publisher (`commonPublisher`) emits the current interval to the deadline, and calls `.stop()` if the deadline (down to 0:00 or up to the limiting interval) is reached. All  published components are `Cancellable`s downstream from the shared time publisher.
     func start() {
         started = Date()
+/*
 
         // Subscribe to the timer, correct to count-down or -up, and check for deadlines.
         commonPublisher = timePublisher
@@ -147,6 +148,7 @@ final class MinutePublisher: ObservableObject {
                 self.minuteColonSecond = $0
             }
             .store(in: &cancellables)
+        */
     }
 
     // MARK: Stop

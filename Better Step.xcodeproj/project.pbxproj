@@ -40,6 +40,7 @@
 		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
 		1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53D28D1403800593692 /* CallbackUtterance.swift */; };
+		1FB2F54028D142F300593692 /* TEMP-RewindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
@@ -156,6 +157,7 @@
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F53A28D138E200593692 /* TimeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReader.swift; sourceTree = "<group>"; };
 		1FB2F53D28D1403800593692 /* CallbackUtterance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackUtterance.swift; sourceTree = "<group>"; };
+		1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TEMP-RewindBar.swift"; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectID.swift; path = "Better Step/App Stages/SubjectID.swift"; sourceTree = "<group>"; };
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			children = (
 				1FB2F53828D133E700593692 /* MinSecAndFraction.swift */,
 				1FB2F53A28D138E200593692 /* TimeReader.swift */,
+				1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FCBAA0D2836B3B80088EAF2 /* FullSurveyView.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
+				1FB2F54028D142F300593692 /* TEMP-RewindBar.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
