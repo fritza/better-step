@@ -22,30 +22,26 @@ import Combine
  Because all publishers are downstream from a single shared `Timer.Publisher`, the outputs are synchronized to the single timebase they share. For instance, the minute component will drop from o 1 at _exactly_ the moment when the seconds component goes from 0 to 59.
  - bug: Count-up timing is not completely implemented. Especially, no deadline is observed for the time limit at which the count-up is no longer desired.
  */
-final class MinutePublisher: ObservableObject {
-    var cancellables: Set<AnyCancellable> = []
 
-    // MARK: Subjects
-    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``MinutePublisher/stop(exhausted:)``. The `Bool` is true iff the completion is due to exhaustion.
-    var completedSubject = PassthroughSubject<Bool, Never>()
-
-    /// The root time publisher with default parameters:
-    /// * every 0.01 seconds...
-    /// * ... ± 0.03 sconds (**NOTE**: a substantial amount of slack)
-    /// * current run loop
-    /// * in `.common` mode
+/// The root time publisher with default parameters:
+/// * every 0.01 seconds...
+/// * ... ± 0.03 sconds (**NOTE**: a substantial amount of slack)
+/// * current run loop
+/// * in `.common` mode
 /// Publisher of components of `Timer` ticks in integer minutes and seconds; and `Double` subseconds, counting up or down.
 ///
 /// Countdown timers run down to a specified deadline into the future. Count-up timers run indefinitely (but see **Bug**).
 ///
 /// `MinutePublisher` broadcasts a `Bool` through `completedSubject` when the deadline is reached (`true`) or the client called `stop()` (`false`).
 /// - bug: The count-up should also stop the clock when a deadline is reached.
-public final class MinutePublisher: ObservableObject {
+
+
+final class MinutePublisher: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
 
     // MARK: Subjects
-    /// Subscribers get a `Bool` input when the deadline arrives (`true`) or the client calls `.stop()` (`false`). The `Bool` is true iff the clock ran out and nit cancalled.
-    public var completedSubject = PassthroughSubject<Bool, Never>()
+    /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``MinutePublisher/stop(exhausted:)``. The `Bool` is true iff the completion is due to exhaustion.
+    var completedSubject = PassthroughSubject<Bool, Never>()
 
     /// The root time publisher for a `Timer` signaling every `0.01 ± 0.03` seconds.
     ///
@@ -58,19 +54,6 @@ public final class MinutePublisher: ObservableObject {
     @Published var fraction: Double = 0.0
     /// Publish the formatted pairing of the whole minites and seconds from the deadline (`"1:38"`).
     @Published var minuteColonSecond: String = ""
-
-    // MARK: Initialization
-
-    /// The limiting `Date` (start or stop) from which the time intervals are counted.
-    /// - bug: Not yet implemented for timer-up.
-    /// Minutes until deadline
-    @Published public var minutes: Int = 0
-    /// Seconds-in-minute until deadline
-    @Published public var seconds: Int = 0
-    /// Fractions-in-second until deadline
-    @Published public var fraction: Double = 0.0
-    /// Formatted `mm:ss` until deadline
-    @Published public var minuteColonSecond: String = ""
 
     // MARK: Initialization
 
@@ -177,4 +160,3 @@ public final class MinutePublisher: ObservableObject {
         completedSubject.send(exhausted)
     }
 }
-

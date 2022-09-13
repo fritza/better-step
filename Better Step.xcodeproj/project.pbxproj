@@ -38,6 +38,7 @@
 		1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
+		1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
@@ -152,6 +153,7 @@
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
+		1FB2F53A28D138E200593692 /* TimeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReader.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectID.swift; path = "Better Step/App Stages/SubjectID.swift"; sourceTree = "<group>"; };
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				1FB2F53828D133E700593692 /* MinSecAndFraction.swift */,
+				1FB2F53A28D138E200593692 /* TimeReader.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
+				1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */,
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,

@@ -20,12 +20,10 @@ struct WalkProgressView: View {
         VStack {
             navTitleView
             Spacer()
-            TimerView(
-                minutePub: MinutePublisher(
-                    after: TimeInterval(60*durationInMinutes)
-                ))
-                .font(.system(size: 120, weight: .ultraLight)
-                )
+            TimerView(minutePub: MinutePublisher(
+                after: TimeInterval(durationInMinutes * 60)
+            ) )
+            .font(.system(size: 120, weight: .ultraLight))
             Spacer()
             Button("Cancel") {
                 print("stopping")
