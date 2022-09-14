@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TEMP_RewindBar: View {
+    @State private var explanationVisible = false
+
     @State private var content = "No"
     var body: some View {
         NavigationView {
@@ -18,12 +20,19 @@ struct TEMP_RewindBar: View {
                     ToolbarItem(/*placement: .navigationBarTrailing*/) {
                         Button {
                             content = "Yes"
+                            explanationVisible = true
                         } label: {
                             Label("S", systemImage: "arrow.backward.to.line")
                         }
                     }
                 }
         }
+        .alert("Starting Over", isPresented: $explanationVisible) {
+            Button("Cancel", role: .cancel)      { explanationVisible.toggle() }
+            Button("Reset" , role: .destructive) { explanationVisible.toggle() }
+        }
+    message: {
+        Text("This button removes everything but the subject ID and starts over.") }
     }
 }
 
