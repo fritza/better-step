@@ -19,6 +19,7 @@
 		1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D427D1450300568ADF /* ComplexModule */; };
 		1F1BD8D727D1450300568ADF /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D627D1450300568ADF /* Numerics */; };
 		1F1BD8D927D1450300568ADF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D827D1450300568ADF /* RealModule */; };
+		1F1C4DE328D288DA00547C7A /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -40,7 +41,9 @@
 		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
 		1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53D28D1403800593692 /* CallbackUtterance.swift */; };
-		1FB2F54028D142F300593692 /* TEMP-RewindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */; };
+		1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54128D22FB600593692 /* TopContainerView.swift */; };
+		1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54428D261B900593692 /* DummySubviews.swift */; };
+		1FB2F54728D261FF00593692 /* BranchBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* BranchBuilders.swift */; };
 		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
@@ -124,6 +127,7 @@
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1F1641F7281B018A00E4E2FA /* DASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
+		1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarViewModifiers.swift; sourceTree = "<group>"; };
 		1F2432C627FD0406008A5418 /* SurveyReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReportFile.swift; sourceTree = "<group>"; };
 		1F2432C827FD087C008A5418 /* SurveyCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCompleteView.swift; sourceTree = "<group>"; };
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
@@ -157,7 +161,9 @@
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F53A28D138E200593692 /* TimeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReader.swift; sourceTree = "<group>"; };
 		1FB2F53D28D1403800593692 /* CallbackUtterance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackUtterance.swift; sourceTree = "<group>"; };
-		1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TEMP-RewindBar.swift"; sourceTree = "<group>"; };
+		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
+		1FB2F54428D261B900593692 /* DummySubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySubviews.swift; sourceTree = "<group>"; };
+		1FB2F54628D261FF00593692 /* BranchBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchBuilders.swift; sourceTree = "<group>"; };
 		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectID.swift; path = "Better Step/App Stages/SubjectID.swift"; sourceTree = "<group>"; };
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1FB2F54328D2619D00593692 /* Top container */,
 				1FF3543D2790A958000894B8 /* Storage */,
 				1FCBA9FD2835AA040088EAF2 /* Usability */,
 				1F8A337F27E119A30093C896 /* App Stages */,
@@ -377,7 +384,6 @@
 			children = (
 				1FB2F53828D133E700593692 /* MinSecAndFraction.swift */,
 				1FB2F53A28D138E200593692 /* TimeReader.swift */,
-				1FB2F53F28D142F300593692 /* TEMP-RewindBar.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -388,6 +394,17 @@
 				1FB2F53D28D1403800593692 /* CallbackUtterance.swift */,
 			);
 			path = Voice;
+			sourceTree = "<group>";
+		};
+		1FB2F54328D2619D00593692 /* Top container */ = {
+			isa = PBXGroup;
+			children = (
+				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
+				1FB2F54628D261FF00593692 /* BranchBuilders.swift */,
+				1FB2F54428D261B900593692 /* DummySubviews.swift */,
+				1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */,
+			);
+			path = "Top container";
 			sourceTree = "<group>";
 		};
 		1FCBA9FD2835AA040088EAF2 /* Usability */ = {
@@ -727,6 +744,7 @@
 				1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */,
 				1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */,
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
+				1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */,
@@ -738,7 +756,6 @@
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FCBAA0D2836B3B80088EAF2 /* FullSurveyView.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
-				1FB2F54028D142F300593692 /* TEMP-RewindBar.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
@@ -746,6 +763,7 @@
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
 				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
+				1F1C4DE328D288DA00547C7A /* ToolbarViewModifiers.swift in Sources */,
 				1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
 				1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */,
@@ -755,6 +773,7 @@
 				1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
+				1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
@@ -780,6 +799,7 @@
 				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1F1641F6281AEE3F00E4E2FA /* AppStageState+Reset.swift in Sources */,
 				1FCBAA17283C29740088EAF2 /* SurveyWrapperView.swift in Sources */,
+				1FB2F54728D261FF00593692 /* BranchBuilders.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1F1641F5281AEC9A00E4E2FA /* PhaseManager.swift in Sources */,
@@ -881,7 +901,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				RUN_DOCUMENTATION_COMPILER = YES;
+				RUN_DOCUMENTATION_COMPILER = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
