@@ -30,6 +30,9 @@
 		1F1C4DF828D3A42000547C7A /* AccelerometryConsuming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */; };
 		1F1C4DFA28D3A51200547C7A /* CSVArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */; };
 		1F1C4DFC28D3A65B00547C7A /* AVFAudio+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */; };
+		1F1C4E0128D3BD6700547C7A /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* usability-intro.json */; };
+		1F1C4E0228D3BD6700547C7A /* second-walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */; };
+		1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -146,6 +149,9 @@
 		1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometryConsuming.swift; sourceTree = "<group>"; };
 		1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVArchiver.swift; sourceTree = "<group>"; };
 		1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVFAudio+extensions.swift"; sourceTree = "<group>"; };
+		1F1C4DFE28D3BD6700547C7A /* usability-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "usability-intro.json"; sourceTree = "<group>"; };
+		1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "second-walk-intro.json"; sourceTree = "<group>"; };
+		1F1C4E0028D3BD6700547C7A /* walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "walk-intro.json"; sourceTree = "<group>"; };
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 			children = (
 				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
 				1F0B6750276FA6C900011A7E /* Better Step */,
+				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
 				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
@@ -330,6 +337,16 @@
 				1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */,
 			);
 			path = "Better StepUITests";
+			sourceTree = "<group>";
+		};
+		1F1C4DFD28D3BD6700547C7A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1F1C4DFE28D3BD6700547C7A /* usability-intro.json */,
+				1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */,
+				1F1C4E0028D3BD6700547C7A /* walk-intro.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1F2432D427FDF843008A5418 /* Instructional */ = {
@@ -664,10 +681,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */,
 				1FED1C5D27FE1A4A00C290F7 /* DASIQuestions.json in Resources */,
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
+				1F1C4E0128D3BD6700547C7A /* usability-intro.json in Resources */,
 				1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */,
+				1F1C4E0228D3BD6700547C7A /* second-walk-intro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
