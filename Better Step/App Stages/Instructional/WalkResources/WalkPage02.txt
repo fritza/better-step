@@ -1,6 +1,0 @@
-title
-How do I send a report?
-body
-You send a report by tapping on the **Report** tab at the bottom of the screen. You’ll be able to review your information, and the app will remind you if there's something more to do.
-body
-When everything is ready, the **Submit** button will appear. Tap it, confirm that you want to send a report, and that’s it.

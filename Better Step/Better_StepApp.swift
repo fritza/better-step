@@ -37,6 +37,9 @@ struct Better_StepApp: App {
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
         WindowGroup {
+        #if true
+            TopContainerView()
+#else
             TabView(
                 selection:
                     $aStage.currentSelection
@@ -52,7 +55,7 @@ struct Better_StepApp: App {
                         }
                         .tag(AppStages.dasi)
                 }
-
+                
                 // MARK: - Timed Walk
                 if includeWalkPersistent {
                     WalkView()
@@ -64,7 +67,7 @@ struct Better_StepApp: App {
                         }
                         .tag(AppStages.walk)
                 }
-
+                
                 // MARK: - Reporting
                 // TODO: Add report-related environmentObjects as soon as known.
                 Text("Reporting Tab")
@@ -74,7 +77,7 @@ struct Better_StepApp: App {
                         Text(AppStages.report.visibleName)
                     }
                     .tag(AppStages.report)
-
+                
                 // MARK: - Setup
                 SetupView()
                 // TODO: Add configuration-related environmentObjects as soon as known.
@@ -92,6 +95,7 @@ struct Better_StepApp: App {
             .environmentObject(fileCoordinator)
             .environmentObject(appStage)
             .environmentObject(WalkingSequence())
+#endif
         }
     }
 }
