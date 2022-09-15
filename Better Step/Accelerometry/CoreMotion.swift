@@ -191,11 +191,11 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
 
         motionManager.startAccelerometerUpdates(to: .main)
         { accData, error in
-            if let error = error {
+            if let error {
                 print(#function, "Accelerometry error:", error)
                 self.cancelUpdates()
             }
-            if let accData = accData {
+            if let accData {
                 Task {
                     // Task? Really?
                     self.asyncBuffer.receive(accData)
