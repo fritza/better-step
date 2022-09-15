@@ -8,8 +8,8 @@
 import SwiftUI
 
 // MARK: - Branch views
-/*
 extension TopContainerView {
+    // MARK: - Branch links
 
     @ViewBuilder func onboarding_view() -> some View {
         // MARK: Onboarding
@@ -28,12 +28,11 @@ extension TopContainerView {
                         self.currentPhase = .usability
                     }
                 }
-                Text("onboarding phase")
-                    .navigationTitle("Onboarding")
-                    .padding()
-                    .navigationBarBackButtonHidden(true)
-                    .hidden()
+                .reversionToolbar($showRewindAlert)
+                .navigationTitle("Onboarding")
+                .padding()
             }
+            .hidden()
     }
 
     @ViewBuilder func walking_view() -> some View {
@@ -42,13 +41,12 @@ extension TopContainerView {
             "SHOULDN'T SEE (walking_view)",
             tag: TopPhases.walking, selection: $currentPhase) {
                 DummyWalk { result in
+
                     switch result {
                     case .failure(_):
                         self.currentPhase = .failed
-
                     case .success(let val) where val >= 0:
                         self.currentPhase = .usability
-
                     default:
                         self.currentPhase = .conditions
                     }
@@ -56,18 +54,10 @@ extension TopContainerView {
                 Text("walking phase")
                     .navigationTitle("Walking")
                     .padding()
-                    .navigationBarBackButtonHidden(true)
+                    .reversionToolbar($showRewindAlert)
             }
             .hidden()
     }
-    /*
-     √ case onboarding
-     √ case walking
-     √ case conditions
-     √ case usability
-
-     case failed
-     */
 
     @ViewBuilder func usability_view() -> some View {
         // MARK: Usability
@@ -86,10 +76,9 @@ extension TopContainerView {
                         self.currentPhase = .onboarding
                     }
                 }
-                Text("usability phase")
-                    .navigationTitle("Usability")
-                    .padding()
-                    .navigationBarBackButtonHidden(true)
+                .navigationTitle("Usability")
+                .padding()
+                .reversionToolbar($showRewindAlert)
             }
             .hidden()
     }
@@ -112,10 +101,9 @@ extension TopContainerView {
                         self.currentPhase = .conditions
                     }
                 }
-                Text("conditions phase")
-                    .navigationTitle("Walking")
-                    .padding()
-                    .navigationBarBackButtonHidden(true)
+                .reversionToolbar($showRewindAlert)
+                .navigationTitle("Walking")
+                .padding()
             }
             .hidden()
     }
@@ -123,7 +111,7 @@ extension TopContainerView {
     @ViewBuilder func failed_view() -> some View
     {
         // MARK: Failed
-        NavigationLink(
+            NavigationLink(
             "SHOULDN'T SEE (failed_view)",
             tag: TopPhases.failed, selection: $currentPhase) {
                 DummyFailure { result in
@@ -138,12 +126,10 @@ extension TopContainerView {
                         self.currentPhase = .conditions
                     }
                 }
-                Text("failure phase")
-                    .navigationTitle("FAILED")
-                    .padding()
-                    .navigationBarBackButtonHidden(true)
+                .reversionToolbar($showRewindAlert)
+                .navigationTitle("FAILED")
+                .padding()
             }
             .hidden()
     }
 }
-*/
