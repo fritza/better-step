@@ -23,4 +23,17 @@ struct SubjectID {
             UserDefaults.standard.set(newValue, forKey: AppStorageKeys.subjectID.rawValue)
         }
     }
+
+    static var validated: String? {
+//        guard !id.isEmpty else { return nil }
+        let desiredCharacters = CharacterSet.whitespacesAndNewlines.inverted
+        let scanner = Scanner(string: id)
+        var trimmed = scanner.scanCharacters(from: desiredCharacters)
+
+        if let trimmed, !trimmed.isEmpty {
+            return trimmed
+        }
+
+        return nil
+    }
 }

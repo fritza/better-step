@@ -98,11 +98,11 @@ extension Date {
 
 extension String {
     /**
-    Simple translation of special characters in the string into control characters.
-    This makes it easier to put tabs and newlines into configuration strings.
+     Simple translation of special characters in the string into control characters.
+     This makes it easier to put tabs and newlines into configuration strings.
 
-    - `|` (vertical bar) becomes `\n`
-    - `^` (caret) becomes `\t`.
+     - `|` (vertical bar) becomes `\n`
+     - `^` (caret) becomes `\t`.
      */
     public var addControlCharacters: String {
         let nlLines = self.split(separator: "|", omittingEmptySubsequences: false)
@@ -112,5 +112,31 @@ extension String {
         let tabJoined = tabLines.joined(separator: "\t")
 
         return tabJoined
+    }
+
+    var trimmed: String? {
+        let allowable = CharacterSet.alphanumerics
+        var working = self
+        while let first = working.first {
+            if allowable.contains(first.unicodeScalars.last!) {
+                break
+            }
+            working = String(working.dropFirst())
+        }
+
+        while let last = working.last {
+            if allowable.contains(last.unicodeScalars.last!) {
+                break
+            }
+            working = String(working.dropLast())
+        }
+        return working.isEmpty ? nil : working
+    }
+    
+    var isAlphanumeric: Bool {
+        let allowable = CharacterSet.alphanumerics
+        return self.allSatisfy(
+            { chr in allowable.contains(chr.unicodeScalars.last!) }
+        )
     }
 }

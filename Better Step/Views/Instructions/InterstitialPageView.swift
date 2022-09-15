@@ -32,7 +32,7 @@ struct InterstitialPageView: View {
                 .minimumScaleFactor(0.75)
             Spacer(minLength: 30)
             // MARK: SF Symbol
-            Image(systemName: item.systemImage ?? "circle")
+            Image(systemName: item.systemImage ?? "bolt.slash.fill")
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(.accentColor)

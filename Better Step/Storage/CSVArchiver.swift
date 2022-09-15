@@ -63,8 +63,6 @@ let addToArchive = NotificationCenter.default
 final class CSVArchiver {
     static let shared = try! CSVArchiver()
 
-    /// Invariant: The ID of the user
-    let subjectID: String
     /// Invariant: time of creation of the export set
     let timestamp = Date().iso
     /// The output ZIP archive
@@ -72,10 +70,7 @@ final class CSVArchiver {
 
     /// Capture file and directory locations and initialize the archive.
     /// - Parameter subject: The ID of the user
-    //    init(subjectID subject: String)
     init() throws {
-        self.subjectID = SubjectID.id
-
         let backingStore = Data()
         guard let _archive = Archive(
             data: backingStore,
@@ -175,7 +170,7 @@ final class CSVArchiver {
 // MARK: - File names
 extension CSVArchiver {
     var directoryName: String {
-        "\(subjectID)_\(timestamp)"
+        "\(SubjectID.id)_\(timestamp)"
     }
 
     /// target `.zip` file name
@@ -200,7 +195,7 @@ extension CSVArchiver {
 
     /// Name of the tagged `.csv` file
     func csvFileName(tag: String) -> String {
-        "\(subjectID)_\(tag)_\(timestamp).csv"
+        "\(SubjectID.id)_\(tag)_\(timestamp).csv"
     }
 
     /// Destination (wrapper) directory + per-exercise `.csv` name
