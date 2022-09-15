@@ -14,6 +14,9 @@ public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case noSubjectID
+
+    case cantInitializeZIPArchive
+    case cantGetArchiveData
 }
 
 extension FileManager {
