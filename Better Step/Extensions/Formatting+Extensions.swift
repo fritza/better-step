@@ -95,3 +95,22 @@ extension Date {
         return Date().timeIntervalSince(Self.y1960)
     }
 }
+
+extension String {
+    /**
+    Simple translation of special characters in the string into control characters.
+    This makes it easier to put tabs and newlines into configuration strings.
+
+    - `|` (vertical bar) becomes `\n`
+    - `^` (caret) becomes `\t`.
+     */
+    public var addControlCharacters: String {
+        let nlLines = self.split(separator: "|", omittingEmptySubsequences: false)
+        let nlJoined = nlLines.joined(separator: "\n")
+
+        let tabLines = nlJoined.split(separator: "^", omittingEmptySubsequences: false)
+        let tabJoined = tabLines.joined(separator: "\t")
+
+        return tabJoined
+    }
+}

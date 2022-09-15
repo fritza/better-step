@@ -10,7 +10,7 @@ import SwiftUI
 struct SurveyContainerView: View {
     @EnvironmentObject var contentEnvt: DASIPages
     @EnvironmentObject var responses  : DASIResponseList
-//    @EnvironmentObject var appState: AppStageState
+//    @EnvironmentObject var appState: BSTAppStageState
 
     var body: some View {
         NavigationView {
@@ -59,7 +59,7 @@ struct SurveyContainerView: View {
                 // as soon as the conclusion screen is
                 // called for.
                 if !responses.unknownResponseIDs.isEmpty {
-                    AppStages.dasi.didComplete()
+                    BSTAppStages.dasi.didComplete()
                 }
             }
         }

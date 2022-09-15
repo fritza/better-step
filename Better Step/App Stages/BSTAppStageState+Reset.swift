@@ -1,5 +1,5 @@
 //
-//  AppStageState+Reset.swift
+//  BSTAppStageState+Reset.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/23/22.
@@ -34,7 +34,7 @@ extension SubjectIDDependent {
     }
 }
 
-extension AppStageState {
+extension BSTAppStageState {
     func observeSubjectID() {
         subjectIDState.$subjectID
         // Ignore incidental re-setting

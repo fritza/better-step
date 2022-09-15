@@ -8,6 +8,17 @@
 import SwiftUI
 import Combine
 
+enum Constants {
+#if DEBUG
+    static let countdownDuration    = 15.0
+#else
+    static let countdownDuration    = 120.0
+#endif
+
+    static let countdownInterval    = 30
+    static let sweepDuration        = 5.0
+}
+
 
 // TODO: report contents shouldn't be global
 //       I guess they're not, since we could impose
@@ -31,7 +42,7 @@ struct Better_StepApp: App {
     @StateObject var usabilityResponses = SurveyResponses()
     @StateObject var phaseManager     = PhaseManager()
     @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
-    @StateObject var appStage         = AppStageState()
+    @StateObject var appStage         = BSTAppStageState()
 
 
     #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
@@ -47,45 +58,45 @@ struct Better_StepApp: App {
                 // MARK: - DASI
                 if includeDASIPersistent {
                     SurveyContainerView()
-                        .badge(AppStages
+                        .badge(BSTAppStages
                             .dasi.tabBadge)
                         .tabItem {
-                            Image(systemName: AppStages.dasi.imageName)
-                            Text(AppStages.dasi.visibleName)
+                            Image(systemName: BSTAppStages.dasi.imageName)
+                            Text(BSTAppStages.dasi.visibleName)
                         }
-                        .tag(AppStages.dasi)
+                        .tag(BSTAppStages.dasi)
                 }
                 
                 // MARK: - Timed Walk
                 if includeWalkPersistent {
                     WalkView()
                     // TODO: Add walk-related environmentObjects as soon as known.
-                        .badge(AppStages.walk.tabBadge)
+                        .badge(BSTAppStages.walk.tabBadge)
                         .tabItem {
-                            Image(systemName: AppStages.walk.imageName)
-                            Text(AppStages.walk.visibleName)
+                            Image(systemName: BSTAppStages.walk.imageName)
+                            Text(BSTAppStages.walk.visibleName)
                         }
-                        .tag(AppStages.walk)
+                        .tag(BSTAppStages.walk)
                 }
                 
                 // MARK: - Reporting
                 // TODO: Add report-related environmentObjects as soon as known.
                 Text("Reporting Tab")
-                    .badge(AppStages.report.tabBadge)
+                    .badge(BSTAppStages.report.tabBadge)
                     .tabItem {
-                        Image(systemName: AppStages.report.imageName)
-                        Text(AppStages.report.visibleName)
+                        Image(systemName: BSTAppStages.report.imageName)
+                        Text(BSTAppStages.report.visibleName)
                     }
-                    .tag(AppStages.report)
+                    .tag(BSTAppStages.report)
                 
                 // MARK: - Setup
                 SetupView()
                 // TODO: Add configuration-related environmentObjects as soon as known.
                     .tabItem {
-                        Image(systemName: AppStages.configuration.imageName)
-                        Text(AppStages.configuration.visibleName)
+                        Image(systemName: BSTAppStages.configuration.imageName)
+                        Text(BSTAppStages.configuration.visibleName)
                     }
-                    .tag(AppStages.configuration)
+                    .tag(BSTAppStages.configuration)
             }
             .environmentObject(subjectID)
             .environmentObject(dasiPages)

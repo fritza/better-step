@@ -42,7 +42,7 @@ let thingsToClear: [ThingToClear] = {
 struct ClearingView: View {
     @Environment(\.dismiss) private var dismiss
 //    @State private var latestClick = ""
-    @EnvironmentObject var appStageState: AppStageState
+    @EnvironmentObject var appStageState: BSTAppStageState
     // @EnvironmentObject var phaseManager: PhaseManager
     @EnvironmentObject var dasiResponses: DASIResponseList
 

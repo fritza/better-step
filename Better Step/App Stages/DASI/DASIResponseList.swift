@@ -155,12 +155,12 @@ final class DASIResponseList: ObservableObject {
     /*
     /// Set all responses in the `shared` `DASIResponseList` to .unknown. This is data _only,_ without regard for storage (e.g. the report file.
     static func clearResponses() {
-        AppStageState.shared.dasiResponses.clearResponses()
+        BSTAppStageState.shared.dasiResponses.clearResponses()
     }
 
     static func clearAllDASI() async throws {
         clearResponses()
-        try await AppStageState.shared.dasiFile?.clearReportFile()
+        try await BSTAppStageState.shared.dasiFile?.clearReportFile()
     }
      */
     func teardownFromSubjectID() async throws -> DASIResponseList? {

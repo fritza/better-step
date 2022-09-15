@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#warning("May be obsolete.")
 /// View that displays a time interval in minutes and seconds, supplied by a `MinutePublisher`.
 ///
 /// **See also**

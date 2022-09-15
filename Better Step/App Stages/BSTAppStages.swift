@@ -1,5 +1,5 @@
 //
-//  AppStages.swift
+//  BSTAppStages.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/16/22.
@@ -11,35 +11,35 @@ import SwiftUI
 
 // MARK: - AppStage class
 
-/// Observable tracker of the `AppStages`: The currently-displayed stage from the `TabView`, and the stages that have been marked complete
+/// Observable tracker of the `BSTAppStages`: The currently-displayed stage from the `TabView`, and the stages that have been marked complete
 ///
-/// **Take care** not to confuse `AppStage` (observable `class`) and `AppStages` (`enum` identifying stages). The type system should help with this.
+/// **Take care** not to confuse `AppStage` (observable `class`) and `BSTAppStages` (`enum` identifying stages). The type system should help with this.
 
 final class AppStage: ObservableObject {
     static let shared = AppStage()
-    /// The `Set` of `AppStages` that have been marked complete.
-    @Published var completionSet: Set<AppStages> = []
-    @Published var currentSelection: AppStages
+    /// The `Set` of `BSTAppStages` that have been marked complete.
+    @Published var completionSet: Set<BSTAppStages> = []
+    @Published var currentSelection: BSTAppStages
 
     /// Declare that _no_ stages have been completed.
     ///
     /// This is done with reference to `AppStage.shared`.
     /// Think of it as a convenience view into `AppStage`'s bookkeeping.
     func makeAllIncomplete() {
-        for stage in AppStages.allCases {
+        for stage in BSTAppStages.allCases {
             stage.didNotComplete()
         }
     }
 
     /// Declare that _all_ stages have been completed.
     func makeAllComplete() {
-        for stage in AppStages.allCases {
+        for stage in BSTAppStages.allCases {
             stage.didComplete()
         }
     }
 
 
-    private init(stage: AppStages = .onboard) {
+    private init(stage: BSTAppStages = .onboard) {
         currentSelection = stage
     }
 }
@@ -48,14 +48,14 @@ final class AppStage: ObservableObject {
 //        This does repeat the creation every time _any_ phase
 //        completes.
 
-// MARK: - AppStages enum
+// MARK: - BSTAppStages enum
 
 ///
 /// This is done with reference to `PhaseManager.shared`.
 ///
-/// It would be better to access `PhaseManager` as an EnvironmentObject, but AppStages is an enum, without stored properties of its own.
+/// It would be better to access `PhaseManager` as an EnvironmentObject, but BSTAppStages is an enum, without stored properties of its own.
 ///
-enum AppStages: Hashable, CaseIterable {
+enum BSTAppStages: Hashable, CaseIterable {
     // MARK: Cases
     /// A new user ID has been entered.
     case onboard
@@ -68,7 +68,7 @@ enum AppStages: Hashable, CaseIterable {
     case configuration
 
     // MARK: Static attributes
-    private static let _imageNames: [AppStages:String] = [
+    private static let _imageNames: [BSTAppStages:String] = [
         .onboard: "circle.fill",
         .dasi: "checkmark.square",
         .walk: "figure.walk",
@@ -77,7 +77,7 @@ enum AppStages: Hashable, CaseIterable {
         ]
     var imageName: String { Self._imageNames[self]! }
 
-    private static let _visibleNames: [AppStages:String] = [
+    private static let _visibleNames: [BSTAppStages:String] = [
         .onboard: "•start•",
         .dasi: "Survey",
         .walk: "Walk",
@@ -93,11 +93,11 @@ enum AppStages: Hashable, CaseIterable {
 }
 
 // MARK: - AppStage dependent
-extension AppStages {
+extension BSTAppStages {
     /// Whether this stage has been marked complete.
     ///
     /// This is done with reference to `AppStage.shared`.
-    /// - note: It would be better to access `PhaseManager` in the environment, but `AppStages` is an `enum` and can't have `EnvironmentObject`s.
+    /// - note: It would be better to access `PhaseManager` in the environment, but `BSTAppStages` is an `enum` and can't have `EnvironmentObject`s.
     var isCompleted: Bool {
         PhaseManager.shared.isCompleted(self)
     }

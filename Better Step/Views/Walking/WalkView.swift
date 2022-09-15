@@ -34,7 +34,7 @@ final class WalkingSequence: ObservableObject, CustomStringConvertible {
 
 struct WalkView: View {
     @StateObject private var sequencer = WalkingSequence()
-    @EnvironmentObject var stages: AppStageState
+    @EnvironmentObject var stages: BSTAppStageState
 
     var body: some View {
         // FIXME: The figure does not conform to the image aspect ratio.
@@ -70,8 +70,8 @@ struct WalkView: View {
 }
 
 struct WalkView_Previews: PreviewProvider {
-    static var stageState: AppStageState {
-        let stage = AppStageState()
+    static var stageState: BSTAppStageState {
+        let stage = BSTAppStageState()
         stage.didComplete(phase: .walk)
         return stage
     }

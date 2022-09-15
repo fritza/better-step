@@ -1,5 +1,5 @@
 //
-//  AppStageState.swift
+//  BSTAppStageState.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 1/28/22.
@@ -62,16 +62,16 @@ struct GeneralComments_RootState {}
 
 
 
-// MARK: - AppStageState
+// MARK: - BSTAppStageState
 /// Omnibus aggregate of application-stage operating values
 ///
 /// These include report contents and app-level user defaults (`@AppStorage`).
 ///
-/// You do not instantiate `AppStageState` yourself. Use `.shared` to obtain the single record of application state.
-/// - note: It is expected that `AppStageState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
+/// You do not instantiate `BSTAppStageState` yourself. Use `.shared` to obtain the single record of application state.
+/// - note: It is expected that `BSTAppStageState` should be used as a reference for application-level state, but _not_ as an `@EnvironmentObject`; the thought is that the stages will be more clearly isolated.
 ///
-/// The subject ID goes through `AppStageState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
-final class AppStageState: ObservableObject {
+/// The subject ID goes through `BSTAppStageState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
+final class BSTAppStageState: ObservableObject {
     @EnvironmentObject var subjectIDState: SubjectID
 //    @EnvironmentObject var appStageState : AppStageState
 
@@ -81,7 +81,7 @@ final class AppStageState: ObservableObject {
     @Published var allTasksFinished: Bool = false
     /// Singleton instance of `RootState`
     /// - note: Maybe make this a @StateObject for the App?
-//    static var shared = AppStageState()
+//    static var shared = BSTAppStageState()
     /// Initialize a new `RootState`. Use `shared` rather than creating a new one.
     init() {
 
@@ -119,9 +119,9 @@ final class AppStageState: ObservableObject {
     // Walk
 
     // MARK: Phase requirement
-    private var completed     : Set<AppStages> = []
-    private var requiredPhases: Set<AppStages> {
-        var retval = Set<AppStages>()
+    private var completed     : Set<BSTAppStages> = []
+    private var requiredPhases: Set<BSTAppStages> {
+        var retval = Set<BSTAppStages>()
         if includeWalk   { retval.insert(.walk) }
         if includeSurvey { retval.insert(.dasi) }
         assert(!retval.isEmpty,
@@ -130,23 +130,23 @@ final class AppStageState: ObservableObject {
     }
 }
 
-extension AppStageState {
+extension BSTAppStageState {
     // MARK: Phase completion
     /// Mark this phase of the run as complete.
-    func didComplete(phase: AppStages) {
+    func didComplete(phase: BSTAppStages) {
         updateReadiness(setting: phase, finished: true)
     }
     /// Mark this phase of the run as incomplete.
-    func didNotComplete(phase: AppStages) {
+    func didNotComplete(phase: BSTAppStages) {
         updateReadiness(setting: phase, finished: false)
     }
 
-    func isCompleted(_ stage: AppStages) -> Bool {
+    func isCompleted(_ stage: BSTAppStages) -> Bool {
         completed.contains(stage)
     }
 
     func areCompleted<S: Collection>(settings: S) -> Bool
-    where S.Element == AppStages
+    where S.Element == BSTAppStages
     {
         let retval = settings.allSatisfy { element in
             isCompleted(element)
@@ -154,7 +154,7 @@ extension AppStageState {
         return retval
     }
 
-    private func updateReadiness(setting stage: AppStages, finished: Bool) {
+    private func updateReadiness(setting stage: BSTAppStages, finished: Bool) {
         let wasReady = checkReadyToReport
 
         if finished { completed.insert(stage) }
