@@ -40,6 +40,7 @@ struct SurveyWrapperView: View {
                 ButtonSurveyView(id: selectionPage, score: $currentResponse)
                     .navigationTitle("Usability")
                     .toolbar {
+// TODO: Replace with ToolbarItem
                         ToolbarItemGroup(placement: .navigationBarLeading) {
                             Button("← Back") {
                                 decrementPage()
@@ -47,6 +48,7 @@ struct SurveyWrapperView: View {
                             .disabled(selectionPage <= 1)
                             gearBarItem()
                         }
+// TODO: Replace with ToolbarItem
                         ToolbarItemGroup(placement: .navigationBarTrailing) {
                             Button("Next →") {
                                 incrementPage()

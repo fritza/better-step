@@ -95,6 +95,7 @@ struct ClearingView: View {
             }
         }
         .toolbar {
+// TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 HStack {
                     Button("Done") {  dismiss() }

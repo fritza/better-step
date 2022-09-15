@@ -15,11 +15,13 @@ struct FullSurveyView: View {
         }
         .navigationTitle("Usability Survey")
         .toolbar {
+// TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button("Done") {
                     print("WHAT NOW?")
                 }
             }
+// TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 gearBarItem()
             }

@@ -55,10 +55,12 @@ struct WalkInstructionBase: View {
                     .padding()
             }
             .toolbar {
+// TODO: Replace with ToolbarItem
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     self.prevButton
                     gearBarItem()
                 }
+// TODO: Replace with ToolbarItem
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Next") {
                         self.nextButton

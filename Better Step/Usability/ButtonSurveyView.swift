@@ -101,11 +101,13 @@ struct ButtonSurveyView_Previews: PreviewProvider {
             .navigationTitle("Usability")
 
             .toolbar {
+// TODO: Replace with ToolbarItem
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button("← Back") {   }
                         .disabled(false)
                     gearBarItem()
                 }
+// TODO: Replace with ToolbarItem
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Next →") {
 
