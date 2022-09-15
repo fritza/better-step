@@ -61,8 +61,6 @@ enum DASIReportErrors: Error {
 ///
 /// Observable.
 final class DASIResponseList: ObservableObject {
-    @EnvironmentObject var subjectIDObject: SubjectID
-
     public private(set) var answers: [DASIUserResponse]
 
     /// Create `DASIResponses`
@@ -170,12 +168,8 @@ final class DASIResponseList: ObservableObject {
 
     // MARK: CSV formatting
 
-    /// Generate a single-line comma-delimited report of `subjectID`, `timestamp`, and number/answer pairs.
+    /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
     var csvLine: String? {
-//        guard let subjectID = subjectIDObject.subjectID else {
-//            assertionFailure("No subject ID, shouldn't get to \(#function) in the first place.")
-//            return nil
-//        }
         let okayResponseValues: Set<AnswerState> = [.no, .yes]
         let usableResponses = answers
             .filter {
@@ -196,7 +190,7 @@ final class DASIResponseList: ObservableObject {
             }
 
         let components: [String] =
-        [subjectIDObject.subjectID] + [firstTimestamp] + numberedResponses
+        [SubjectID.id] + [firstTimestamp] + numberedResponses
 
         assert(components.count == 2+DASIQuestion.count,
                "Expected \(2+DASIQuestion.count) response items, got \(components.count)")

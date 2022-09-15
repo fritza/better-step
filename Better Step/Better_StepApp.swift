@@ -36,7 +36,6 @@ struct Better_StepApp: App {
     @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
     @AppStorage(AppStorageKeys.inspectionMode.rawValue)     var perStagePresentation  = false
 
-    @StateObject var subjectID        = SubjectID()
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
     @StateObject var usabilityResponses = SurveyResponses()
@@ -98,7 +97,6 @@ struct Better_StepApp: App {
                     }
                     .tag(BSTAppStages.configuration)
             }
-            .environmentObject(subjectID)
             .environmentObject(dasiPages)
             .environmentObject(dasiResponseList)
             .environmentObject(SurveyResponses())   // FIXME: Load these for restoration

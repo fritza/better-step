@@ -62,8 +62,6 @@ enum BSTAppStages: Hashable, CaseIterable {
     /// The user has completed these activities
     case dasi, walk
     /// The user has entered the Report tab
-    ///
-    /// You can't report without an unwrapped `SubjectID` EnvironmentObject
     case report
     case configuration
 

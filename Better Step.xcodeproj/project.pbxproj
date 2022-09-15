@@ -20,7 +20,6 @@
 		1F1BD8D927D1450300568ADF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1F1BD8D827D1450300568ADF /* RealModule */; };
 		1F1C4DE328D288DA00547C7A /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
 		1F1C4DE528D3989C00547C7A /* PhaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */; };
-		1F1C4DE728D39D2E00547C7A /* SubjectIDSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE628D39D2E00547C7A /* SubjectIDSheet.swift */; };
 		1F1C4DEB28D39E6A00547C7A /* InterstitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */; };
 		1F1C4DEC28D3A1CA00547C7A /* WalkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */; };
 		1F1C4DEF28D3A27300547C7A /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
@@ -98,7 +97,6 @@
 		1FF354462790D1F5000894B8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF354452790D1F5000894B8 /* DequeModule */; };
 		1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF354472790D1F5000894B8 /* OrderedCollections */; };
 		1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544A2791FCFF000894B8 /* CoreMotion.swift */; };
-		1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544C27920A1C000894B8 /* Configuration.swift */; };
 		1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FF354552799D47A000894B8 /* AccelerometerItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545227977302000894B8 /* AccelerometerItemTests.swift */; };
 		1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
@@ -138,7 +136,6 @@
 		1F1641F7281B018A00E4E2FA /* DASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F1701A52777B65A00E510AE /* EmailFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFormView.swift; sourceTree = "<group>"; };
 		1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarViewModifiers.swift; sourceTree = "<group>"; };
-		1F1C4DE628D39D2E00547C7A /* SubjectIDSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectIDSheet.swift; sourceTree = "<group>"; };
 		1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingContainerView.swift; sourceTree = "<group>"; };
 		1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialInfo.swift; sourceTree = "<group>"; };
 		1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitalPageContainerView.swift; sourceTree = "<group>"; };
@@ -348,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				1FB684E527F225A300612924 /* SubjectID.swift */,
-				1F1C4DE628D39D2E00547C7A /* SubjectIDSheet.swift */,
 				1F2432D427FDF843008A5418 /* Instructional */,
 				1FDE828A27EA463B00CD8368 /* DASI */,
 				1F8A065527A478B400477379 /* BSTAppStageState.swift */,
@@ -709,7 +705,6 @@
 				1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
-				1FF3544D27920A1C000894B8 /* Configuration.swift in Sources */,
 				1F1C4DFC28D3A65B00547C7A /* AVFAudio+extensions.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */,
@@ -734,7 +729,6 @@
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
 				1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
-				1F1C4DE728D39D2E00547C7A /* SubjectIDSheet.swift in Sources */,
 				1F1C4DF628D3A3BE00547C7A /* TimedWalkObserver.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */,

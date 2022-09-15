@@ -72,9 +72,6 @@ struct GeneralComments_RootState {}
 ///
 /// The subject ID goes through `BSTAppStageState` as an `@Observable` property. For cross-launch access, there has to be a write to `@AppStorage`.
 final class BSTAppStageState: ObservableObject {
-    @EnvironmentObject var subjectIDState: SubjectID
-//    @EnvironmentObject var appStageState : AppStageState
-
     // FIXME: Find a better place for all-finished
     //        or be reconciled to maintaining a global state.
     //        See if
@@ -168,7 +165,6 @@ extension BSTAppStageState {
 
     /// Whether the active tasks (survey and tasks) have all been completed _and_ there is a known subject ID;
     var checkReadyToReport: Bool {
-        if subjectIDState.subjectID == nil { return false }
         let allCompleted = completed
             .intersection(requiredPhases)
         return allCompleted == requiredPhases

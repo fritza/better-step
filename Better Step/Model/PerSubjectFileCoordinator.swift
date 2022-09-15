@@ -12,9 +12,6 @@ import Collections
 #warning("Can we disentangle (early) initialization as a StateObject in the app with the other dependencies?")
 /// Vendor for URLs of output files.
 final class PerSubjectFileCoordinator: ObservableObject {
-//    static var shared = PerSubjectFileCoordinator()
-    @EnvironmentObject var subjectID: SubjectID
-
     static public var shared: PerSubjectFileCoordinator?
 
     init() {
@@ -78,14 +75,10 @@ extension PerSubjectFileCoordinator {
     ///     - creating: If `true`, the subject's directory will be created.
     public func directoryURLForSubject(
         creating: Bool = false) throws -> URL {
-//            guard let subjectID = subjectID.subjectID else {
-//                throw FileStorageErrors.noSubjectID
-//            }
 
             let fm = FileManager.default
             let expectedURL = fm.applicationDocsDirectory
-                .appendingPathComponent(subjectID.subjectID,
-                                        isDirectory: true)
+                .appendingPathComponent(SubjectID.id, isDirectory: true)
 
             if creating {
                 try fm

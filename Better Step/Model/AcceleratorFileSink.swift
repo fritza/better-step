@@ -11,8 +11,6 @@ import Collections
 import Combine
 
 /// A pipeline between a stream of `AccelerometerItem`s and the `csv` file to be written from them.
-///
-/// - warning: When the `subjectID` changes, client code is responsible for generating a new `AccelerometerFileSink`.  I don't see a way to do it that's `Sendable`.
 final class AccelerometerFileSink {
     enum Errors: Error {
         case noHandleOpen(String?)
@@ -36,8 +34,6 @@ final class AccelerometerFileSink {
     // and the first use.
 
     /// Create an `AccelerometerFileSink` bridging between a stream of `AcceleratorItem`s and `csv` output.
-    ///
-    /// The `SubjectID` environment value is captured upon initialization, and _never_ updated.
     /// - returns: `nil` if either the destination (per-subject) directory or the walking `csv` file could not be created.
     init() async throws
     {
@@ -72,6 +68,7 @@ final class AccelerometerFileSink {
     ///
     /// Clients should watch for success/failure before assuming the output file is ready..
     var updateSubjectTask: Task<Void, Error>?
+    */
     /// Watch the shared `SubjectID`. Flush, close, and open the respective CSV files.
     ///
     /// No immediate error (it just enqueues); any resulting errors go through `.updateSubjectTask`.
@@ -108,8 +105,7 @@ final class AccelerometerFileSink {
                 }
             }
             .store(in: &cancellables)
-    }
-
+}
     /// Write any unsaved records to the file, close it, and `nil`-out the old `FileHandle`.
     /// - throws: No file open, can't write to flush-out pending data.
     func close() throws {
