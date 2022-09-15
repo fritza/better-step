@@ -7,14 +7,12 @@
 
 import Foundation
 
-
-import Foundation
-
 public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case noSubjectID
-
+    case cantLoadData(URL)
+    case uploadEmptyData(String)
     case cantInitializeZIPArchive
     case cantGetArchiveData
 }
@@ -54,14 +52,15 @@ extension FileManager {
 
     /// Create a **regular file** at a URL, deleting any existing file at that location.
     /// - throws `FileManager` errors, or `FileStorageErrors.cantCreateFileAt()` if creation failed.
-    public func deleteAndCreate(at url: URL) throws {
+    public func deleteAndCreate(at url: URL,
+                                contents: Data? = nil) throws {
         if fileExists(atURL: url) {
             // Discard any existing file.
             try removeItem(at: url)
         }
         guard createFile(
             atPath: url.path,
-            contents: nil, attributes: nil) else {
+            contents: contents, attributes: nil) else {
                 throw FileStorageErrors
                     .cantCreateFileAt(url)
         }
