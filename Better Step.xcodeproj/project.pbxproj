@@ -34,6 +34,7 @@
 		1F1C4E0228D3BD6700547C7A /* second-walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */; };
 		1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 		1F1C4E0528D3BEA400547C7A /* onboard-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0428D3BEA400547C7A /* onboard-intro.json */; };
+		1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -155,6 +156,7 @@
 		1F1C4E0028D3BD6700547C7A /* walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "walk-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0428D3BEA400547C7A /* onboard-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "onboard-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0628D3C63B00547C7A /* onboard-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "onboard-intro.json"; sourceTree = "<group>"; };
+		1F1C4E0728D3DB0500547C7A /* TaggedField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedField.swift; sourceTree = "<group>"; };
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 				1F8A065727A4841400477379 /* ApplicationOnboardView.swift */,
+				1F1C4E0728D3DB0500547C7A /* TaggedField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1F1C4DF628D3A3BE00547C7A /* TimedWalkObserver.swift in Sources */,
+				1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */,
 				1F1C4DEC28D3A1CA00547C7A /* WalkingContainerView.swift in Sources */,
