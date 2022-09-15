@@ -78,7 +78,6 @@
 		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
-		1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
 		1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
 		1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
@@ -201,7 +200,6 @@
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
-		1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceleratorFileSink.swift; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
 		1FDB373E27F789BD00E10D8E /* ClearingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearingView.swift; sourceTree = "<group>"; };
 		1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmClearingAlert.swift; sourceTree = "<group>"; };
@@ -530,7 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */,
-				1FD4568E279F318900B5429A /* AcceleratorFileSink.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -722,7 +719,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1C4DF228D3A29300547C7A /* EndpointSound.swift in Sources */,
-				1FD4568F279F318900B5429A /* AcceleratorFileSink.swift in Sources */,
 				1F1C4DF028D3A27300547C7A /* InterstitialPageView.swift in Sources */,
 				1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */,
 				1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */,
