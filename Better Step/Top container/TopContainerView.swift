@@ -15,12 +15,16 @@ protocol ReportingPhase {
     // The container can expect the reporter's result/failure
 }
 
-
+// onboarding, walking, dasi, usability, conclusion / failed
 
 enum TopPhases: String, CaseIterable, Comparable {
     case onboarding
+    //  `ApplicationOnboardView`.
+    //  There are two distinct onboarding tasks:
+    //  * New user, greet and collect ID
+    //  * detailed explanation (probably different when new)
     case walking
-    case conditions
+    //  WalkingContainerView
     case usability
     //  UsabilityController
     //      + EnvironmentObject UsabilityController
@@ -105,7 +109,7 @@ struct TopContainerView: View {
             }
             else { currentPhase = .walking }
         }
-        .onDisappear { currentPhase?.save() }
+//        .onDisappear { currentPhase?.save() }
     }
 }
 
@@ -118,7 +122,6 @@ enum DummyFails: Error {
     case conclusionFailure
     case failingFailure
 }
-
 
 
 // MARK: - Preview

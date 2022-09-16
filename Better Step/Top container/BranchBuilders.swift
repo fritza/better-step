@@ -6,27 +6,20 @@
 //
 
 import SwiftUI
+import CoreMotion
 
 // MARK: - Branch links
 extension TopContainerView {
-    // MARK: - Branch links
-
     @ViewBuilder func onboarding_view() -> some View {
         // MARK: Onboarding
         NavigationLink(
             "SHOULDN'T SEE (onboarding_view)",
             tag: TopPhases.onboarding, selection: $currentPhase) {
                 DummyOnboard { result in
-                    switch result {
-                    case .failure(_):
-                        self.currentPhase = .failed
-
-                    case .success(let yes) where yes:
-                        self.currentPhase = .walking
-
-                    default:
-                        self.currentPhase = .usability
-                    }
+                    guard let newID = try? result.get() else { self.currentPhase = .failed; return }
+                    // The result of the assignment is the embedded Bool return value
+                    subjectID = newID
+                    currentPhase = .walking
                 }
                 .reversionToolbar($showRewindAlert)
                 .navigationTitle("Onboarding")
@@ -41,15 +34,22 @@ extension TopContainerView {
             "SHOULDN'T SEE (walking_view)",
             tag: TopPhases.walking, selection: $currentPhase) {
                 DummyWalk { result in
-
-                    switch result {
-                    case .failure(_):
-                        self.currentPhase = .failed
-                    case .success(let val) where val >= 0:
-                        self.currentPhase = .usability
-                    default:
-                        self.currentPhase = .conditions
+                    guard let series = try? result.get() else {
+                        self.currentPhase = .failed; return
                     }
+                    let nextPhase: TopPhases
+                    switch (d: collectedDASI, u: collectedUsability) {
+                    case (d: false, u: _):
+                        // no DASI, get DASI
+                        nextPhase = .dasi
+                    case (d: true, u: false):
+                        // dasi, no usability, get usability
+                        nextPhase = .usability
+                    case (d: true, u: true):
+                        // dasi, usability, go comclusion
+                        nextPhase = .conclusion
+                    }
+                    self.currentPhase = nextPhase
                 }
                 Text("walking phase")
                     .navigationTitle("Walking")
@@ -97,27 +97,15 @@ extension TopContainerView {
             .hidden()
     }
 
-
-    @ViewBuilder func conditions_view() -> some View {
-        // MARK: Conditions
+    @ViewBuilder func conclusion_view() -> some View {
         NavigationLink(
-            "SHOULDN'T SEE (conditions_view)",
-            tag: TopPhases.conditions, selection: $currentPhase) {
-                DummyConditions { result in
-                    switch result {
-                    case .failure(_):
-                        self.currentPhase = .failed
-
-                    case .success(let val) where val.hasSuffix("well"):
-                        self.currentPhase = .usability
-
-                    default:
-                        self.currentPhase = .conditions
-                    }
+            "SHOULDN'T SEE (conclusion_view)",
+            tag: TopPhases.conclusion, selection: $currentPhase) {
+                DummyConclusion { _ in
+                    self.currentPhase = .failed
                 }
+                .navigationTitle("Finished")
                 .reversionToolbar($showRewindAlert)
-                .navigationTitle("Walking")
-                .padding()
             }
             .hidden()
     }
@@ -125,20 +113,11 @@ extension TopContainerView {
     @ViewBuilder func failed_view() -> some View
     {
         // MARK: Failed
-            NavigationLink(
+        NavigationLink(
             "SHOULDN'T SEE (failed_view)",
             tag: TopPhases.failed, selection: $currentPhase) {
-                DummyFailure { result in
-                    switch result {
-                    case .failure(_):
-                        self.currentPhase = .failed
-
-                    case .success(let val) where val.hasSuffix("well"):
-                        self.currentPhase = .usability
-
-                    default:
-                        self.currentPhase = .conditions
-                    }
+                DummyFailure { _ in
+                    self.currentPhase = .failed
                 }
                 .reversionToolbar($showRewindAlert)
                 .navigationTitle("FAILED")

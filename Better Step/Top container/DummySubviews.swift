@@ -16,16 +16,14 @@ import CoreMotion
 ///
 /// Result type is `String`, the recorded subject ID
 struct DummyOnboard: View, ReportingPhase {
-    var completion: ((Result<Bool, Error>) -> Void)!
+    var completion: ((Result<String, Error>) -> Void)!
+
+    let resultingSubjectID = "DummyOnboardID"
 
     var body: some View {
         VStack {
             Text("Onboard simulator")
-            Button("Complete (good)") { completion(.success(true)) }
-            Button("Complete (bad)") { completion(.success(false)) }
-            Button("Complete (fail)") {
-                completion(.failure(DummyFails.onboardFailure))
-            }
+            Button("Complete") { completion(.success(resultingSubjectID)) }
         }
     }
 }
@@ -34,12 +32,11 @@ struct DummyOnboard: View, ReportingPhase {
 ///
 /// Result type is `Int`, will likely be the full array of measurements
 struct DummyWalk: View, ReportingPhase {
-    var completion: ((Result<Int, Error>) -> Void)!
+    var completion: ((Result<[CMAccelerometerData], Error>) -> Void)!
     var body: some View {
         VStack {
             Text("Walking simulator")
-            Button("Complete (good)") { completion(.success(100)) }
-            Button("Complete (bad)") { completion(.success(-10)) }
+            Button("Complete (dasi)") { completion(.success([])) }
             Button("Complete (fail)") { completion(.failure(DummyFails.walkingFailure)) }
         }
     }
