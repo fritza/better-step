@@ -17,6 +17,7 @@ public enum FileStorageErrors: Error {
     case cantInitializeZIPArchive
     case cantGetArchiveData
     case subjectIDInvalid(String)
+    case shortageOfDASIResponsesBy(Int)
 }
 
 extension FileManager {

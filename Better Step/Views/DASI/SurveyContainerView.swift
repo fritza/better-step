@@ -7,10 +7,16 @@
 
 import SwiftUI
 
-struct SurveyContainerView: View {
+struct SurveyContainerView: View, ReportingPhase {
+    let completion: ((Result<DASIResponseList, Error>) -> Void)!
+
     @EnvironmentObject var contentEnvt: DASIPages
     @EnvironmentObject var responses  : DASIResponseList
 //    @EnvironmentObject var appState: BSTAppStageState
+
+    // FIXME: YUCK! if this doesn't easily work…
+    // Oh gosh — what would I have to do to make it a navigable view like the top level?
+    // Given that there are no optional branches, maybe there is simply no need.
 
     var body: some View {
         NavigationView {
@@ -18,11 +24,11 @@ struct SurveyContainerView: View {
                 Text(
                     "SHOULD NOT APPEAR(\(contentEnvt.selected?.description ?? "EMPTY"))"
                 )
-                Button("RATS Next") {
-                    assert(contentEnvt.selected != nil)
-//                    contentEnvt.selected =
-                    contentEnvt.selected?.goForward()
-                }
+//                Button("RATS Next") {
+//                    assert(contentEnvt.selected != nil)
+////                    contentEnvt.selected =
+//                    contentEnvt.selected?.goForward()
+//                }
                 NavigationLink(
                     isActive: $contentEnvt.refersToQuestion,
                     destination: {
@@ -32,6 +38,8 @@ struct SurveyContainerView: View {
 
                     label: { EmptyView() }
                 )
+                .hidden()
+
                 NavigationLink(
                     tag: DASIStages.landing,
                     selection: $contentEnvt.selected,
@@ -39,16 +47,37 @@ struct SurveyContainerView: View {
                         DASIOnboardView()
                         .navigationBarBackButtonHidden(true)
                 },
-                               label: {EmptyView()}
+                    label: {EmptyView()}
                 )
+                .hidden()
+
                 NavigationLink(tag: DASIStages.completion,
                                selection: $contentEnvt.selected,
                                destination: {
-                    DASICompleteView()
+                    DASICompleteView() {
+                        result in
+                        switch result {
+                        case let .success(answers):
+                            print("Got", answers.answers.count)
+                            completion(.success(answers))
+                            break
+
+                        case let .failure(error):
+                            if case let FileStorageErrors.shortageOfDASIResponsesBy(shortage) = error {
+                                print("Short by", shortage)
+                            }
+                            else {
+                                print("Unknown:", error)
+                                print()
+                            }
+                            completion(.failure(error))
+                        }
+                    }
                         .navigationBarBackButtonHidden(true)
                 },
                                label: {EmptyView()}
                 )
+                .hidden()
             }
             // FIXME: This doesn't update global completion.
             .onDisappear {
@@ -68,7 +97,10 @@ struct SurveyContainerView: View {
 
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        SurveyContainerView()
+        SurveyContainerView(completion: {
+            result in
+            print("Result:", result)
+        })
             .environmentObject(DASIPages())
             .environmentObject(DASIResponseList())
     }

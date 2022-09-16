@@ -32,9 +32,14 @@ struct Better_StepApp: App {
     //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
 
-    @AppStorage(AppStorageKeys.includeWalk.rawValue)        var includeWalkPersistent = true
-    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
-    @AppStorage(AppStorageKeys.inspectionMode.rawValue)     var perStagePresentation  = false
+//    @AppStorage(AppStorageKeys.includeWalk.rawValue)        var includeWalkPersistent = true
+//    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
+//    @AppStorage(AppStorageKeys.inspectionMode.rawValue)     var perStagePresentation  = false
+
+    @AppStorage(AppStorageKeys.collectedDASI.rawValue)
+    var temporaryDASIStorage: String = ""
+    @AppStorage(AppStorageKeys.collectedUsability.rawValue)
+    var temporaryUsabilityStorage: String = ""
 
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
@@ -47,8 +52,19 @@ struct Better_StepApp: App {
 #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
     var body: some Scene {
         WindowGroup {
-        #if true
+#if false
             TopContainerView()
+#elseif true
+            SurveyContainerView(completion: {
+                result in
+                if let answerList = try? result.get() {
+                    // Save the answer list.
+                    temporaryDASIStorage = answerList.csvLine!
+                }
+            })
+            .environmentObject(DASIPages())
+            .environmentObject(DASIResponseList())
+
 #else
             TabView(
                 selection:
@@ -100,10 +116,10 @@ struct Better_StepApp: App {
             .environmentObject(dasiPages)
             .environmentObject(dasiResponseList)
             .environmentObject(SurveyResponses())   // FIXME: Load these for restoration
-            .environmentObject(phaseManager)
             .environmentObject(fileCoordinator)
             .environmentObject(appStage)
             .environmentObject(WalkingSequence())
+            .environmentObject(phaseManager)
 #endif
         }
     }

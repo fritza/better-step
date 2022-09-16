@@ -12,11 +12,11 @@ struct SubjectID {
     static var id: String {
         get {
             if let fromStore = UserDefaults.standard
-                .string(forKey: AppStorageKeys.subjectID.rawValue) {
+                .string(forKey: AppStorageKeys.subjectID.rawValue)
+            {
                 return fromStore
             }
             else {
-                UserDefaults.standard.set("", forKey: AppStorageKeys.subjectID.rawValue)
                 return ""
             }
         }
@@ -25,16 +25,18 @@ struct SubjectID {
         }
     }
 
-    static var validated: String? {
-//        guard !id.isEmpty else { return nil }
+    static func validate(string: String) -> String {
         let desiredCharacters = CharacterSet.whitespacesAndNewlines.inverted
         let scanner = Scanner(string: id)
-        var trimmed = scanner.scanCharacters(from: desiredCharacters)
+        let trimmed = scanner.scanCharacters(from: desiredCharacters)
 
         if let trimmed, !trimmed.isEmpty {
             return trimmed
         }
+        else { return SubjectID.unSet }
+    }
 
-        return nil
+    static var validated: String {
+        return validate(string: id)
     }
 }

@@ -23,17 +23,22 @@ fileprivate let endIncompleteText = """
 
 // FIXME: Should there be a Back button?
 
-struct DASICompleteView: View {
+struct DASICompleteView: View, ReportingPhase {
+    let completion: ((Result<DASIResponseList, Error>) -> Void)!
+
     @EnvironmentObject private var responses: DASIResponseList
     @EnvironmentObject private var questions: DASIPages
-    @EnvironmentObject private var phaseManager: PhaseManager
+//    @EnvironmentObject private var phaseManager: PhaseManager
 
     var allItemsAnswered: Bool {
         return responses.unknownResponseIDs.isEmpty
     }
 
     var nextSteps: String {
-        if phaseManager.allTasksFinished {
+        if
+        allItemsAnswered
+//            phaseManager.allTasksFinished
+        {
             return "\nPlease proceed to the “Report” view to submit your information to the team."
         }
         else {
@@ -69,12 +74,17 @@ struct DASICompleteView: View {
             }
         }
         .onAppear{
+
             // IF ALL ARE ANSWERED
             if allItemsAnswered {
                 AppStage.shared
                     .completionSet
                     .insert(.dasi)
                 // TODO: Maybe create the report data on completionSet changing.
+                completion(.success(responses))
+            }
+            else {
+                completion(.failure(FileStorageErrors.shortageOfDASIResponsesBy(responses.unknownResponseIDs.count)))
             }
         }
     }
@@ -83,11 +93,13 @@ struct DASICompleteView: View {
 struct DASICompleteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DASICompleteView()
+            DASICompleteView() {
+                _ in
+            }
             // FIXME: These will need better initializer
                 .environmentObject(DASIPages(.completion))
                 .environmentObject(DASIResponseList())
-            .environmentObject(PhaseManager())
+//            .environmentObject(PhaseManager())
         }
     }
 }

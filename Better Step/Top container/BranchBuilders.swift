@@ -63,14 +63,14 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (dasi_view)",
             tag: TopPhases.dasi, selection: $currentPhase) {
-                Text("for rent")
-//                DASIPages
-//                DummyDASI() { result in
-//                    // TODO: Collect results
-//                    collectedDASI = true
-//                    self.currentPhase = collectedUsability ? .conclusion : .usability
-//                    self.collectedDASI = true
-//                }
+                SurveyContainerView(completion: {
+                    result in
+                    if let answerList = try? result.get() {
+                        // Save the answer list.
+                        let surveyContents = answerList.csvLine!
+                        print()
+                    }
+                })
                 .navigationTitle("(not) DASI")
                 .reversionToolbar($showRewindAlert)
                 .padding()
