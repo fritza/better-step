@@ -34,7 +34,7 @@ struct DummyOnboard: View, ReportingPhase {
 struct DummyWalk: View, ReportingPhase {
     var completion: ((Result<[CMAccelerometerData], Error>) -> Void)!
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
             Text("Walking simulator")
             Button("Complete (dasi)") { completion(.success([])) }
             Button("Complete (fail)") { completion(.failure(DummyFails.walkingFailure)) }

@@ -75,7 +75,7 @@ enum TopPhases: String, CaseIterable, Comparable {
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 struct TopContainerView: View {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
-    var subjectID: String = ""
+    var subjectID: String = SubjectID.unSet
     @AppStorage(AppStorageKeys.collectedDASI.rawValue)
     var collectedDASI: Bool = false
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
@@ -104,7 +104,7 @@ struct TopContainerView: View {
                             shouldShow: $showRewindAlert)
         }
         .onAppear {
-            if subjectID == "" {
+            if subjectID == SubjectID.unSet {
                 currentPhase = .onboarding
             }
             else { currentPhase = .walking }

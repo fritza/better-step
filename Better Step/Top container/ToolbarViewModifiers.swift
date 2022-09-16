@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReversionAlert: ViewModifier {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
-    var subjectID: String = ""
+    var subjectID: String = SubjectID.unSet
     @AppStorage(AppStorageKeys.collectedDASI.rawValue)
     var collectedDASI: Bool = false
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
@@ -28,7 +28,7 @@ struct ReversionAlert: ViewModifier {
             .alert("Starting Over", isPresented: $shouldShow) {
                 Button("Reset" , role: .destructive) {
                     // Forget user and progress
-                    subjectID = ""
+                    subjectID = SubjectID.unSet
                     collectedDASI = false
                     collectedUsability = false
                     nextPhase = .onboarding

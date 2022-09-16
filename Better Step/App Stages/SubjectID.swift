@@ -8,6 +8,7 @@
 import Foundation
 
 struct SubjectID {
+    static let unSet = ""
     static var id: String {
         get {
             if let fromStore = UserDefaults.standard
