@@ -47,38 +47,39 @@ struct TaggedField: View {
                         .foregroundColor(.gray)
                         .opacity(0.5)
                 }
-                .onChange(of: subject, perform: { newText in
-                    self.showComment = false
-                    self.showInstructions = !canSubmitText
-                })
+//                .onChange(of: subject, perform: { newText in
+//                    closeCallback(subject.trimmed!)
+//                    self.showComment = false
+//                    self.showInstructions = !canSubmitText
+//                })
+                .onSubmit {
+                    closeCallback(subject)
+                }
                 .padding([.trailing], 2)
             }
-            Spacer()
-            Text("current is \(subject.trimmed ?? "EMPTY")")
-            Spacer()
 
-            Button("Proceed") {
-                if canSubmitText {
-                    showComment = true
-                    closeCallback(subject.trimmed!)
-                    showInstructions = false
-                }
-            }
-            .disabled(!self.canSubmitText)
-            if showComment {
-                Text("Closed with \(subject)")
-                    .foregroundColor(.red)
-            }
+//            Button("Proceed") {
+//                if canSubmitText {
+//                    showComment = true
+//                    closeCallback(subject.trimmed!)
+//                    showInstructions = false
+//                }
+//            }
+//            .disabled(!self.canSubmitText)
+//            if showComment {
+//                Text("Closed with \(subject)")
+//                    .foregroundColor(.red)
+//            }
 
-            if showInstructions {
-                Spacer()
-                Text("Your ID consists of letters and numbers, no punctuation or spacing.")
-                    .font(.body)
-                    .foregroundColor(.red)
-                    .lineLimit(6)
+//            if showInstructions {
+//                Spacer()
+//                Text("Your ID consists of letters and numbers, no punctuation or spacing.")
+//                    .font(.body)
+//                    .foregroundColor(.red)
+//                    .lineLimit(6)
 //                    .minimumScaleFactor(0.5)
-                    .frame(width: 300, height: 80)
-            }
+//                    .frame(width: 300, height: 80)
+//            }
 
         }
         .onSubmit(of: .text) {

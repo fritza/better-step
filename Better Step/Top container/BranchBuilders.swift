@@ -15,14 +15,14 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (onboarding_view)",
             tag: TopPhases.onboarding, selection: $currentPhase) {
-                DummyOnboard { result in
+                ApplicationOnboardView() { result in
                     guard let newID = try? result.get() else { self.currentPhase = .failed; return }
-                    // The result of the assignment is the embedded Bool return value
-                    subjectID = newID
                     currentPhase = .walking
-                }
+                    SubjectID.id = newID
+                    assert(SubjectID.id == newID)
+                }!
                 .reversionToolbar($showRewindAlert)
-                .navigationTitle("Onboarding")
+                .navigationTitle("Welcome")
                 .padding()
             }
             .hidden()
@@ -63,12 +63,14 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (dasi_view)",
             tag: TopPhases.dasi, selection: $currentPhase) {
-                DummyDASI() { result in
-                    // TODO: Collect results
-                    collectedDASI = true
-                    self.currentPhase = collectedUsability ? .conclusion : .usability
-                    self.collectedDASI = true
-                }
+                Text("for rent")
+//                DASIPages
+//                DummyDASI() { result in
+//                    // TODO: Collect results
+//                    collectedDASI = true
+//                    self.currentPhase = collectedUsability ? .conclusion : .usability
+//                    self.collectedDASI = true
+//                }
                 .navigationTitle("(not) DASI")
                 .reversionToolbar($showRewindAlert)
                 .padding()
