@@ -35,6 +35,14 @@
 		1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 		1F1C4E0528D3BEA400547C7A /* onboard-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0428D3BEA400547C7A /* onboard-intro.json */; };
 		1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
+		1F1C4E1528D4D76900547C7A /* UsabilityQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */; };
+		1F1C4E1628D4D76900547C7A /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
+		1F1C4E1728D4D76900547C7A /* UsabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */; };
+		1F1C4E1828D4D76900547C7A /* UsabilitySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */; };
+		1F1C4E1928D4D76900547C7A /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
+		1F1C4E1A28D4D76900547C7A /* WalkInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */; };
+		1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityController.swift */; };
+		1F1C4E1C28D4D76900547C7A /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -149,6 +157,14 @@
 		1F1C4E0428D3BEA400547C7A /* onboard-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "onboard-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0628D3C63B00547C7A /* onboard-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "onboard-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0728D3DB0500547C7A /* TaggedField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedField.swift; sourceTree = "<group>"; };
+		1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityQuestions.swift; sourceTree = "<group>"; };
+		1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityInterstitialView.swift; sourceTree = "<group>"; };
+		1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityView.swift; sourceTree = "<group>"; };
+		1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilitySummaryView.swift; sourceTree = "<group>"; };
+		1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityContainer.swift; sourceTree = "<group>"; };
+		1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkInfoForm.swift; sourceTree = "<group>"; };
+		1F1C4E1328D4D76900547C7A /* UsabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityController.swift; sourceTree = "<group>"; };
+		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
@@ -393,6 +409,14 @@
 		1FCBA9FD2835AA040088EAF2 /* Usability */ = {
 			isa = PBXGroup;
 			children = (
+				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
+				1F1C4E1328D4D76900547C7A /* UsabilityController.swift */,
+				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
+				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
+				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
+				1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */,
+				1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */,
+				1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */,
 			);
 			path = Usability;
 			sourceTree = "<group>";
@@ -668,6 +692,7 @@
 				1F1C4E0528D3BEA400547C7A /* onboard-intro.json in Resources */,
 				1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */,
 				1FED1C5D27FE1A4A00C290F7 /* DASIQuestions.json in Resources */,
+				1F1C4E1C28D4D76900547C7A /* USurveyQuestions.json in Resources */,
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
 				1F1C4E0128D3BD6700547C7A /* usability-intro.json in Resources */,
@@ -700,6 +725,8 @@
 				1F1C4DF028D3A27300547C7A /* InterstitialPageView.swift in Sources */,
 				1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */,
 				1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */,
+				1F1C4E1A28D4D76900547C7A /* WalkInfoForm.swift in Sources */,
+				1F1C4E1528D4D76900547C7A /* UsabilityQuestions.swift in Sources */,
 				1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */,
 				1FFB30E1277BE5230099AE5E /* DASIQuestions.swift in Sources */,
 				1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */,
@@ -707,12 +734,14 @@
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
 				1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
+				1F1C4E1928D4D76900547C7A /* UsabilityContainer.swift in Sources */,
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1F1C4DFC28D3A65B00547C7A /* AVFAudio+extensions.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
+				1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1F1C4DF828D3A42000547C7A /* AccelerometryConsuming.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
@@ -731,9 +760,12 @@
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1F1C4DF628D3A3BE00547C7A /* TimedWalkObserver.swift in Sources */,
 				1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */,
+				1F1C4E1828D4D76900547C7A /* UsabilitySummaryView.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
 				1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */,
 				1F1C4DEC28D3A1CA00547C7A /* WalkingContainerView.swift in Sources */,
+				1F1C4E1628D4D76900547C7A /* UsabilityInterstitialView.swift in Sources */,
+				1F1C4E1728D4D76900547C7A /* UsabilityView.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
 				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
