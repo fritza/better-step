@@ -27,11 +27,20 @@ struct ReversionAlert: ViewModifier {
         content
             .alert("Starting Over", isPresented: $shouldShow) {
                 Button("Reset" , role: .destructive) {
+                    // Forget user and progress
+                    subjectID = ""
+                    collectedDASI = false
+                    collectedUsability = false
+                    nextPhase = .onboarding
+                }
+                Button("Rewind") {
+                    // The user and progress are ok,
+                    // just wind back to the first screen
                     nextPhase = .onboarding
                 }
             }
         message: {
-            Text("This button removes everything but the subject ID and starts over.") }
+            Text("Do you want to rewind (restart as the same subject), or reset (restart with user and progress cleared)?\nYou cannot undo this.") }
     }
 }
 
