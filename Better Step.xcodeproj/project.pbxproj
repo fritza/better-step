@@ -65,7 +65,6 @@
 		1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
 		1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */; };
-		1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */; };
 		1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */; };
 		1FCBAA07283692010088EAF2 /* SurveyPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */; };
 		1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
@@ -186,7 +185,6 @@
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
 		1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = USurveyQuestions.json; path = Art/USurveyQuestions.json; sourceTree = SOURCE_ROOT; };
-		1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestionView.swift; sourceTree = "<group>"; };
 		1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestion.swift; sourceTree = "<group>"; };
 		1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyPromptView.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
@@ -402,7 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */,
-				1FCBAA012835AA6E0088EAF2 /* USurveyQuestionView.swift */,
 				1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */,
 				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
 			);
@@ -734,7 +731,6 @@
 				1F1C4DEF28D3A27300547C7A /* InterstitalPageContainerView.swift in Sources */,
 				1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */,
 				1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */,
-				1FCBAA022835AA6E0088EAF2 /* USurveyQuestionView.swift in Sources */,
 				1F1C4DE328D288DA00547C7A /* ToolbarViewModifiers.swift in Sources */,
 				1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */,
 				1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */,
