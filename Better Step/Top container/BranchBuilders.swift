@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Branch views
+// MARK: - Branch links
 extension TopContainerView {
     // MARK: - Branch links
 
@@ -59,22 +59,36 @@ extension TopContainerView {
             .hidden()
     }
 
+    @ViewBuilder func dasi_view() -> some View {
+        NavigationLink(
+            "SHOULDN'T SEE (dasi_view)",
+            tag: TopPhases.dasi, selection: $currentPhase) {
+                DummyDASI() { result in
+                    // TODO: Collect results
+                    collectedDASI = true
+                    self.currentPhase = collectedUsability ? .conclusion : .usability
+                    self.collectedDASI = true
+                }
+                .navigationTitle("(not) DASI")
+                .reversionToolbar($showRewindAlert)
+                .padding()
+            }
+            .hidden()
+        // No reversion from DASI to walking
+    }
+
     @ViewBuilder func usability_view() -> some View {
         // MARK: Usability
         NavigationLink(
             "SHOULDN'T SEE (usability_view)",
             tag: TopPhases.usability, selection: $currentPhase) {
                 DummyUsability { result in
-                    switch result {
-                    case .failure(_):
-                        self.currentPhase = .failed
+                    guard let pair = try? result.get() else { self.currentPhase = .failed; return}
+                    print("Selections:", pair.0,
+                          "Answers:"   , pair.1)
 
-                    case .success(let res) where res == "Good":
-                        self.currentPhase = .walking
-
-                    case .success:
-                        self.currentPhase = .onboarding
-                    }
+                    self.currentPhase = collectedDASI ? .conclusion : .dasi
+                    self.collectedUsability = true
                 }
                 .navigationTitle("Usability")
                 .padding()

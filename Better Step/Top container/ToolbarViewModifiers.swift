@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct ReversionAlert: ViewModifier {
+    @AppStorage(AppStorageKeys.subjectID.rawValue)
+    var subjectID: String = ""
+    @AppStorage(AppStorageKeys.collectedDASI.rawValue)
+    var collectedDASI: Bool = false
+    @AppStorage(AppStorageKeys.collectedUsability.rawValue)
+    var collectedUsability: Bool = false
+
     @Binding var nextPhase: TopPhases?
     @Binding var shouldShow: Bool
 

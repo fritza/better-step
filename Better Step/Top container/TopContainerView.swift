@@ -22,8 +22,19 @@ enum TopPhases: String, CaseIterable, Comparable {
     case walking
     case conditions
     case usability
+    //  UsabilityController
+    //      + EnvironmentObject UsabilityController
+
+    case dasi
+
+    //  case conditions
+    //  -- had been here, but usability takse care of it.
+
+    case conclusion
 
     case failed
+
+    //  NOT surveyWrapperView.
 
     static func < (lhs: TopPhases, rhs: TopPhases) -> Bool {
         guard lhs.rawValue != rhs.rawValue else{ return false }
@@ -41,10 +52,10 @@ enum TopPhases: String, CaseIterable, Comparable {
         lhs.rawValue == rhs.rawValue
     }
 
-    func save() {
-        let defaults = UserDefaults.standard
-        defaults.set(rawValue, forKey: "phaseToken")
-    }
+//    func save() {
+//        let defaults = UserDefaults.standard
+//        defaults.set(rawValue, forKey: "phaseToken")
+//    }
 
     static let `default`: TopPhases = .onboarding
     static func savedPhase() -> TopPhases {
@@ -59,6 +70,14 @@ enum TopPhases: String, CaseIterable, Comparable {
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 struct TopContainerView: View {
+    @AppStorage(AppStorageKeys.subjectID.rawValue)
+    var subjectID: String = ""
+    @AppStorage(AppStorageKeys.collectedDASI.rawValue)
+    var collectedDASI: Bool = false
+    @AppStorage(AppStorageKeys.collectedUsability.rawValue)
+    var collectedUsability: Bool = false
+
+
     static let defaultPhase = TopPhases.walking
     @State var currentPhase: TopPhases?
 
@@ -67,18 +86,24 @@ struct TopContainerView: View {
     var body: some View {
         NavigationView {
             VStack {
-                walking_view()
-                failed_view()
-                usability_view()
-                conditions_view()
                 onboarding_view()
+                walking_view()
+
+                dasi_view()
+                usability_view()
+
+                conclusion_view()
+                failed_view()
             }
             .navigationTitle("Should not see")
             .reversionAlert(next      : $currentPhase,
                             shouldShow: $showRewindAlert)
         }
         .onAppear {
-            currentPhase = TopPhases.savedPhase()
+            if subjectID == "" {
+                currentPhase = .onboarding
+            }
+            else { currentPhase = .walking }
         }
         .onDisappear { currentPhase?.save() }
     }
@@ -88,9 +113,10 @@ struct TopContainerView: View {
 enum DummyFails: Error {
     case onboardFailure
     case walkingFailure
-    case conditionsFailure
-    case errorFailure
+    case dasiFailure
     case usabilityFailure
+    case conclusionFailure
+    case failingFailure
 }
 
 

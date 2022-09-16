@@ -25,10 +25,11 @@ enum AppStorageKeys: String {
     case includeDASISurvey
     /// `Bool` whether to include the usability survey
     case includeUsabilitySurvey
+
     /// The last known subject ID.
     case subjectID
-
-
+    case collectedDASI
+    case collectedUsability
 
     /// The raw value for the completed stages.
     case completedStages
