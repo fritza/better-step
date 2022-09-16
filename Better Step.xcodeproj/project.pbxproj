@@ -66,7 +66,6 @@
 		1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
 		1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */; };
 		1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */; };
-		1FCBAA07283692010088EAF2 /* SurveyPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */; };
 		1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
 		1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
 		1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
@@ -186,7 +185,6 @@
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
 		1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = USurveyQuestions.json; path = Art/USurveyQuestions.json; sourceTree = SOURCE_ROOT; };
 		1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestion.swift; sourceTree = "<group>"; };
-		1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyPromptView.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */,
-				1FCBAA06283692010088EAF2 /* SurveyPromptView.swift */,
 				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
 			);
 			path = Usability;
@@ -777,7 +774,6 @@
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
 				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
-				1FCBAA07283692010088EAF2 /* SurveyPromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
