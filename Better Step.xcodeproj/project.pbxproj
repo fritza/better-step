@@ -64,8 +64,6 @@
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
 		1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
-		1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */; };
-		1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */; };
 		1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
 		1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
 		1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
@@ -183,8 +181,6 @@
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
-		1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = USurveyQuestions.json; path = Art/USurveyQuestions.json; sourceTree = SOURCE_ROOT; };
-		1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USurveyQuestion.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4566C279B68DC00B5429A /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpeaker.swift; sourceTree = "<group>"; };
@@ -397,8 +393,6 @@
 		1FCBA9FD2835AA040088EAF2 /* Usability */ = {
 			isa = PBXGroup;
 			children = (
-				1FCBA9FE2835AA560088EAF2 /* USurveyQuestions.json */,
-				1FCBAA042835AAAB0088EAF2 /* USurveyQuestion.swift */,
 			);
 			path = Usability;
 			sourceTree = "<group>";
@@ -677,7 +671,6 @@
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
 				1F1C4E0128D3BD6700547C7A /* usability-intro.json in Resources */,
-				1FCBA9FF2835AA560088EAF2 /* USurveyQuestions.json in Resources */,
 				1F1C4E0228D3BD6700547C7A /* second-walk-intro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,7 +710,6 @@
 				1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */,
 				1F1C4DFC28D3A65B00547C7A /* AVFAudio+extensions.swift in Sources */,
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
-				1FCBAA052835AAAB0088EAF2 /* USurveyQuestion.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
