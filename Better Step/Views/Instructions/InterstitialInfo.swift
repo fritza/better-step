@@ -83,7 +83,7 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
 /// Decodable content for the page _except_ for the ID, which is assigned at decoding time as JSON array order **plus one**.
 ///
 /// See ``InterstitialInfo`` for details on the properties.
-fileprivate struct TaskInterstitialDecodable: Codable {
+struct TaskInterstitialDecodable: Codable {
     let intro: String
     // TODO: Should proceedTitle ever be nil?
     let proceedTitle: String

@@ -9,6 +9,7 @@
     {
         "pageTitle": "Thanks!",
         "intro": "That concludes your session with [OUR APP].|| You can close the app now.",
-        "systemImage": "hand.wave"
+        "systemImage": "hand.wave",
+        "proceedTitle": "Done"
     }
 ]
