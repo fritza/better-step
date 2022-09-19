@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0AF27528D53FB500ED01AE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F0AF27428D53FB500ED01AE /* ZIPFoundation */; };
 		1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
 		1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
@@ -91,10 +92,8 @@
 		1FF11B37279A0A0A00E319ED /* WalkProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B36279A0A0A00E319ED /* WalkProgressView.swift */; };
 		1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B38279A140600E319ED /* WalkCountdownView.swift */; };
 		1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
-		1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF1331027A09979004D6647 /* ZIPFoundation */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
-		1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF35437278F61FB000894B8 /* CodableCSV */; };
 		1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */; };
 		1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
 		1FF354412790A99E000894B8 /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
@@ -240,12 +239,11 @@
 				1F8A065027A3528E00477379 /* Algorithms in Frameworks */,
 				1FF354442790D1F5000894B8 /* Collections in Frameworks */,
 				1F1BD8D527D1450300568ADF /* ComplexModule in Frameworks */,
-				1FF35438278F61FB000894B8 /* CodableCSV in Frameworks */,
 				1FF354482790D1F5000894B8 /* OrderedCollections in Frameworks */,
 				1FF354462790D1F5000894B8 /* DequeModule in Frameworks */,
 				1F1BD8D727D1450300568ADF /* Numerics in Frameworks */,
-				1FF1331127A09979004D6647 /* ZIPFoundation in Frameworks */,
 				1F1BD8D927D1450300568ADF /* RealModule in Frameworks */,
+				1F0AF27528D53FB500ED01AE /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,16 +580,15 @@
 			);
 			name = "Better Step";
 			packageProductDependencies = (
-				1FF35437278F61FB000894B8 /* CodableCSV */,
 				1FF354432790D1F5000894B8 /* Collections */,
 				1FF354452790D1F5000894B8 /* DequeModule */,
 				1FF354472790D1F5000894B8 /* OrderedCollections */,
-				1FF1331027A09979004D6647 /* ZIPFoundation */,
 				1F8A064F27A3528E00477379 /* Algorithms */,
 				1F1BD8D427D1450300568ADF /* ComplexModule */,
 				1F1BD8D627D1450300568ADF /* Numerics */,
 				1F1BD8D827D1450300568ADF /* RealModule */,
 				1FDE826327E3D7F700CD8368 /* ActivityView */,
+				1F0AF27428D53FB500ED01AE /* ZIPFoundation */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -668,10 +665,10 @@
 			packageReferences = (
 				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 				1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */,
-				1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */,
+				1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -1141,6 +1138,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
 		1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-numerics.git";
@@ -1165,14 +1170,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.9;
-			};
-		};
 		1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dehesa/CodableCSV";
@@ -1192,6 +1189,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F0AF27428D53FB500ED01AE /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		1F1BD8D427D1450300568ADF /* ComplexModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */;
@@ -1216,16 +1218,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */;
 			productName = ActivityView;
-		};
-		1FF1331027A09979004D6647 /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF1330F27A09979004D6647 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
-		};
-		1FF35437278F61FB000894B8 /* CodableCSV */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */;
-			productName = CodableCSV;
 		};
 		1FF354432790D1F5000894B8 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
