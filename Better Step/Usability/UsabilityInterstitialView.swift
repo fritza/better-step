@@ -10,7 +10,8 @@ import SwiftUI
 // FIXME: All the interstitial views are getting redundant.
 
 /// This is mostly redundant of `DASIInterstitialView`, except that one is a DASI depencency, and it doesn't do the right thing about the toolbar.
-struct UsabilityInterstitialView: View {
+struct UsabilityInterstitialView: View, ReportingPhase {
+
     // FIXME: Conform UsabilityContainer to own, not envt, its controller.
     @EnvironmentObject var controller: UsabilityController
     @State var showNotIntegratedAlert = false
@@ -19,8 +20,7 @@ struct UsabilityInterstitialView: View {
     let bodyText: String
     let systemImageName: String
     let continueTitle: String
-
-    let completion: (() -> Void)?
+    let completion: ((Result<String, Error>) -> Void)!
 
     var body: some View {
         VStack {
@@ -48,9 +48,6 @@ struct UsabilityInterstitialView: View {
 
             Button(continueTitle) {
                 if controller.canIncrement { controller.increment()
-                }
-                else {
-                    completion?()
                 }
             }
             .accessibilityLabel("continuation button")
