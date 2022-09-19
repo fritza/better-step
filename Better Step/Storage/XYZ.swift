@@ -41,6 +41,10 @@ extension Float: CSVRepresentable {
     public var csvLine: String { Double(self).csvLine }
 }
 
+extension Int: CSVRepresentable {
+    public var csvLine: String { "\(self)"  }
+}
+
 extension String: CSVRepresentable {
     /// Render a `String` value by wrapping it in quotation marks.
     public var csvLine: String {

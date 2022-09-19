@@ -18,6 +18,8 @@ public enum FileStorageErrors: Error {
     case cantGetArchiveData
     case subjectIDInvalid(String)
     case shortageOfDASIResponsesBy(Int)
+
+    case NOS
 }
 
 extension FileManager {
