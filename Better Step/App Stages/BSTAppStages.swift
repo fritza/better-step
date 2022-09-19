@@ -50,11 +50,12 @@ final class AppStage: ObservableObject {
 
 // MARK: - BSTAppStages enum
 
+// FIXME: Why is the closing interstitial not in `BSTAppStages`?
+#warning("BSTAppStages does not account for the closing intrerstitial")
+
+/// The top-level stages of the `workflow`, `onboard`, `walk`, `dasi`, `usability`
 ///
-/// This is done with reference to `PhaseManager.shared`.
-///
-/// It would be better to access `PhaseManager` as an EnvironmentObject, but BSTAppStages is an enum, without stored properties of its own.
-///
+/// Phases (`AppStage`) are read via `PhaseManager.shared`. This can't be done through an `EnvironmentObject` because `enum`s can't have them.
 enum BSTAppStages: Hashable, CaseIterable {
     // MARK: Cases
     /// A new user ID has been entered.

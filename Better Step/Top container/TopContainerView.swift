@@ -24,16 +24,12 @@ enum TopPhases: String, CaseIterable, Comparable {
     //  * New user, greet and collect ID
     //  * detailed explanation (probably different when new)
     case walking
+
     //  WalkingContainerView
     case usability
-    //  UsabilityController
-    //      + EnvironmentObject UsabilityController
 
     case dasi
-
-    //  case conditions
-    //  -- had been here, but usability takse care of it.
-
+    /// Interstitial at the end of the user activities
     case conclusion
 
     case failed

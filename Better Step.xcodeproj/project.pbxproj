@@ -272,7 +272,6 @@
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
-				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 			);
@@ -291,11 +290,12 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
 				1FB2F53728D133B600593692 /* Time */,
 				1FB2F53C28D1402700593692 /* Voice */,
 				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
-				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FB2F54328D2619D00593692 /* Top container */,
 				1FF3543D2790A958000894B8 /* Storage */,
 				1FCBA9FD2835AA040088EAF2 /* Usability */,

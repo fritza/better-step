@@ -10,6 +10,9 @@ import CoreMotion
 
 // MARK: - Branch links
 extension TopContainerView {
+    /// **Top-level** view for the greeting/onboarding phase
+    ///
+    /// At first effort, there is only one stage, a greeting. In future it may have alternative directions for introduction and re-entry.
     @ViewBuilder func onboarding_view() -> some View {
         // MARK: Onboarding
         NavigationLink(
@@ -28,6 +31,9 @@ extension TopContainerView {
             .hidden()
     }
 
+    /// **Top-level** view for the walkiing phase.
+    ///
+    /// The phase controller handles the stages (intro, walk 1, intertitial, walk 2, exit).
     @ViewBuilder func walking_view() -> some View {
         // MARK: Walking
         NavigationLink(
@@ -59,6 +65,7 @@ extension TopContainerView {
             .hidden()
     }
 
+    /// **Top-level** view for the DASI-survey phase
     @ViewBuilder func dasi_view() -> some View {
         NavigationLink(
             "SHOULDN'T SEE (dasi_view)",
@@ -79,6 +86,9 @@ extension TopContainerView {
         // No reversion from DASI to walking
     }
 
+    /// **Top-level** view for the usability phase
+    ///
+    /// The phase controller handles the stages (rating sequence, details).
     @ViewBuilder func usability_view() -> some View {
         // MARK: Usability
         NavigationLink(
