@@ -28,18 +28,11 @@ enum Constants {
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    // TODO: Better Step: Interpose the onboard sheet
-    //       See Async_AccelApp.
     @ObservedObject var aStage = AppStage.shared
 
-//    @AppStorage(AppStorageKeys.includeWalk.rawValue)        var includeWalkPersistent = true
-//    @AppStorage(AppStorageKeys.includeDASISurvey.rawValue)  var includeDASIPersistent = true
-//    @AppStorage(AppStorageKeys.inspectionMode.rawValue)     var perStagePresentation  = false
+    @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+    @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
 
-    @AppStorage(AppStorageKeys.collectedDASI.rawValue)
-    var temporaryDASIStorage: String = ""
-    @AppStorage(AppStorageKeys.collectedUsability.rawValue)
-    var temporaryUsabilityStorage: String = ""
 
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
@@ -50,6 +43,9 @@ struct Better_StepApp: App {
 
 
 #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
+
+ //   @State var currentPhase: TopPhases? = .walking
+
     var body: some Scene {
         WindowGroup {
 #if false

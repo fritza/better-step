@@ -21,14 +21,23 @@ enum UsabilityPhase: // AppStages,
     //CaseIterable, Comparable, Hashable
 {
     case start, questions, end, summary
-    var csvPrefix: String? { "PSSUQ" }
+    static let csvPrefix = "PSSUQ"
 }
 
 
 /// Observable owner of the state of the usability workflow, including opening and closing interstitials.
 ///
 /// ``UsabilityContainer`` and ``UsabilityView`` are clients.
-final class UsabilityController: ObservableObject {
+final class UsabilityController: ObservableObject, CSVRepresentable {
+    /// All responses, initialized to all-zeroes (unanswered).
+    var results =  [Int](repeating: 0, count: UsabilityQuestion.count)
+    /// The answer (1–7) for the current question. Initialized to zero (illegal)
+    @Published var currentResponse = 0
+
+    var csvLine: String {
+        return "\(UsabilityPhase.csvPrefix),\(SubjectID.id)," + results.csvLine
+    }
+
 
     /// DRY for moving the displayed choice to the persistent record.
     func storeCurrentResponse() {
@@ -55,9 +64,6 @@ final class UsabilityController: ObservableObject {
             currentResponse = results[questionID-1]
         }
     }
-
-    /// The answer (1–7) for the current question. Initialized to zero (illegal)
-    @Published var currentResponse = 0
 
     // TODO: Validate the question index.
 
@@ -96,9 +102,6 @@ final class UsabilityController: ObservableObject {
             questionID -= 1
         }
     }
-
-    /// All responses, initialized to all-zeroes (unanswered).
-    var results =  [Int](repeating: 0, count: UsabilityQuestion.count)
 
     // Start without interstitials.
     /// Set up the questions and display one.

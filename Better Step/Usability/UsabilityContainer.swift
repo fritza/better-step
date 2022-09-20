@@ -13,7 +13,10 @@ import SwiftUI
 ///
 /// The ``UsabilityController`` takes care of navigating among the phases and
 /// the usability questions, including recording the responses.
-struct UsabilityContainer: View {
+struct UsabilityContainer: View, ReportingPhase {
+    let completion: ((Result<String, Error>) -> Void)!
+
+
     // FIXME: Conform UsabilityContainer to own, not envt, its controller.
     @EnvironmentObject var controller: UsabilityController
 
@@ -62,7 +65,7 @@ struct UsabilityContainer: View {
                 titleText: "Usability",
                 bodyText: usabilityInCopy, //"This space for rent",
                 systemImageName: "checkmark.circle",
-                continueTitle: "Continue", completion: {})
+                continueTitle: "Continue", completion: {_ in})
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -74,13 +77,11 @@ struct UsabilityContainer: View {
                 titleText: "Completed",
                 bodyText: usabilityOutCopy,
                 systemImageName: "checkmark.circle",
-                continueTitle: "Continue") {
-
-
-// CALL BACK to the walking container
-// to signal a phase transition.
-
-
+                continueTitle: "Continue") { response in
+                    guard let numbers = try? response.get() else {
+                        completion(.failure(FileStorageErrors.NOS)); return
+                    }
+                    completion(.success(numbers.csvLine))
                 }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -96,7 +97,7 @@ struct UsabilityContainer: View {
 struct UsabilityContainer_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UsabilityContainer()
+            UsabilityContainer() { _ in }
         }
         .environmentObject(UsabilityController(phase: .start, questionID: 1))
         .environmentObject(DASIPages())

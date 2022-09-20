@@ -26,24 +26,25 @@ struct SweepSecondView: View {
     @State private  var minSecFrac: MinSecAndFraction?
     @State private  var wholeSeconds: Int
 
+    /// The closure provided by client code at `init` to notify it of expiration
     private let completionCallback: (() -> Void)
 
+    /// Initialize `SweepSecondView` with the duration of the countdown and a completion block.
+    /// - Parameters:
+    ///   - duration: `TimeInterval` (in seconds to count down from
+    ///   - onCompletion: Closure to notify the client that the countdown has run out.
     init(duration: TimeInterval,
          onCompletion: @escaping (()->Void),
          function: String = #function,
          fileID: String = #file,
          line: Int = #line
     ) {
-//        print("SweepSecondView.init called from", function, "\(fileID):\(line)")
-
         timer = TimeReader(interval: CountdownConstants.sweepDuration, by: 0.075)
         wholeSeconds = Int(duration)
         completionCallback = onCompletion
     }
 
-    /// Whether the clock is running, as set by ``TimerStartStopButton``.
-    /// - note: Stopping the countdown does not pause it.  When `isRunning` changes to `true`, its controller is completely restarted.
-
+    /// Formatted seconds from current `minSecFrac`(mm:ss.fff`).
     var stringForSeconds: String {
         if let seconds = self.minSecFrac?.second, seconds >= 0 {
             return String(describing: seconds+1)
@@ -95,7 +96,6 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             .padding()
 
             // MARK: Change isRunning
-//            .onChange(of: isRunning, perform:
             .onChange(of: timer.status, perform:
                         { newValue in
                 switch newValue {
@@ -124,6 +124,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             }
 
             .onAppear() {
+#if RETAIN_VOICE
                 CallbackUtterance(string: "Start walking in \(wholeSeconds.spelled) seconds") { utterance in
                     timer.start()
 //                    isRunning = true
