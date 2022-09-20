@@ -99,8 +99,6 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             .onChange(of: timer.status, perform:
                         { newValue in
                 switch newValue {
-//                case .ready:
-//                    timer.start()
                 case .cancelled, .expired:
                     // Timer's already completed, hence status
                     completionCallback()
@@ -119,8 +117,10 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             .onReceive(timer.secondsSubject) {
                 secs in
                 self.wholeSeconds = secs
+#if RETAIN_VOICE
                 CallbackUtterance(string: "\(secs+1)")
                     .speak()
+#endif
             }
 
             .onAppear() {
@@ -129,6 +129,8 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
 //                    isRunning = true
                 }
                 .speak()
+#endif
+                timer.start()
             }
             .navigationTitle("Start in…")
         }

@@ -106,15 +106,19 @@ struct DigitalTimerView: View {
 
     fileprivate func timerStateDidChange(_ stat: TimeReader.TimerStatus) {
         if stat == .expired {
+#if RETAIN_VOICE
             playSound(named: "Klaxon",
                       thenSay: "Stop walking.")
+#endif
             expirationCallback?()
         }
         else if stat == .running {
+#if RETAIN_VOICE
             let content = (walkingState == .walk_1) ?
             "Start walking." : "Start your fast walk."
             playSound(named: "Klaxon",
                       thenSay: content)
+#endif
         }
 
         // If the timer halts, stop collecting.
@@ -178,9 +182,11 @@ struct DigitalTimerView: View {
             self.minSecfrac = newTime
         })
         .onReceive(timer.mmssSubject) { newTime in
+#if RETAIN_VOICE
             CallbackUtterance(
                 string: newTime.spoken)
             .speak()
+#endif
         }
         .navigationTitle(
             (walkingState == .walk_1) ?

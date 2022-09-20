@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F0AF27528D53FB500ED01AE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F0AF27428D53FB500ED01AE /* ZIPFoundation */; };
+		1F0AF27728D8DCEB00ED01AE /* OnboardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */; };
 		1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
 		1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
@@ -44,6 +44,7 @@
 		1F1C4E1A28D4D76900547C7A /* WalkInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */; };
 		1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityController.swift */; };
 		1F1C4E1C28D4D76900547C7A /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
+		1F3B49EB28DA37B700133765 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3B49EA28DA37B700133765 /* ZIPFoundation */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
@@ -64,7 +65,6 @@
 		1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
-		1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53D28D1403800593692 /* CallbackUtterance.swift */; };
 		1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54128D22FB600593692 /* TopContainerView.swift */; };
 		1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54428D261B900593692 /* DummySubviews.swift */; };
 		1FB2F54728D261FF00593692 /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
@@ -77,7 +77,6 @@
 		1FCBAA11283BE9CA0088EAF2 /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
 		1FCBAA13283BEE160088EAF2 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FD4566D279B68DC00B5429A /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566C279B68DC00B5429A /* Voice.swift */; };
-		1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4566E279CAE2B00B5429A /* TimeSpeaker.swift */; };
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
@@ -127,6 +126,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardContainerView.swift; sourceTree = "<group>"; };
 		1F0B674E276FA6C900011A7E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B6751276FA6C900011A7E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
 		1F0B6753276FA6C900011A7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 				1FF354462790D1F5000894B8 /* DequeModule in Frameworks */,
 				1F1BD8D727D1450300568ADF /* Numerics in Frameworks */,
 				1F1BD8D927D1450300568ADF /* RealModule in Frameworks */,
-				1F0AF27528D53FB500ED01AE /* ZIPFoundation in Frameworks */,
+				1F3B49EB28DA37B700133765 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +366,7 @@
 		1F8A337F27E119A30093C896 /* App Stages */ = {
 			isa = PBXGroup;
 			children = (
+				1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */,
 				1FB684E527F225A300612924 /* SubjectID.swift */,
 				1F2432D427FDF843008A5418 /* Instructional */,
 				1FDE828A27EA463B00CD8368 /* DASI */,
@@ -588,7 +589,7 @@
 				1F1BD8D627D1450300568ADF /* Numerics */,
 				1F1BD8D827D1450300568ADF /* RealModule */,
 				1FDE826327E3D7F700CD8368 /* ActivityView */,
-				1F0AF27428D53FB500ED01AE /* ZIPFoundation */,
+				1F3B49EA28DA37B700133765 /* ZIPFoundation */,
 			);
 			productName = "Better Step";
 			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
@@ -663,12 +664,11 @@
 			);
 			mainGroup = 1F0B6745276FA6C900011A7E;
 			packageReferences = (
-				1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 				1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */,
-				1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -738,6 +738,7 @@
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
+				1F0AF27728D8DCEB00ED01AE /* OnboardContainerView.swift in Sources */,
 				1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1F1C4DF828D3A42000547C7A /* AccelerometryConsuming.swift in Sources */,
@@ -753,7 +754,6 @@
 				1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */,
 				1FF3543C278FA9C2000894B8 /* PerSubjectFileCoordinator.swift in Sources */,
 				1FEA9ED7279A23B3004F3B83 /* SubsecondHandView.swift in Sources */,
-				1FB2F53E28D1403800593692 /* CallbackUtterance.swift in Sources */,
 				1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */,
 				1F1C4DF628D3A3BE00547C7A /* TimedWalkObserver.swift in Sources */,
 				1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */,
@@ -781,7 +781,6 @@
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1F1C4DFA28D3A51200547C7A /* CSVArchiver.swift in Sources */,
 				1FF11B39279A140600E319ED /* WalkCountdownView.swift in Sources */,
-				1FD4566F279CAE2B00B5429A /* TimeSpeaker.swift in Sources */,
 				1FB684E627F225A300612924 /* SubjectID.swift in Sources */,
 				1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */,
 				1FDBB3FD281C49A200D0A7E9 /* InstructionArrows.swift in Sources */,
@@ -886,7 +885,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -943,7 +942,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				RUN_DOCUMENTATION_COMPILER = YES;
@@ -973,7 +972,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -981,6 +980,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG FOR_BETTER_ST";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1006,7 +1008,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1014,6 +1016,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1138,20 +1143,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.9;
-			};
-		};
 		1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-numerics.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				branch = development;
+				kind = branch;
 			};
 		};
 		1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
@@ -1170,14 +1175,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		1FF35436278F61FB000894B8 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dehesa/CodableCSV";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.7;
-			};
-		};
 		1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -1189,11 +1186,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1F0AF27428D53FB500ED01AE /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1F0AF27328D53FB500ED01AE /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
-		};
 		1F1BD8D427D1450300568ADF /* ComplexModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */;
@@ -1208,6 +1200,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */;
 			productName = RealModule;
+		};
+		1F3B49EA28DA37B700133765 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 		1F8A064F27A3528E00477379 /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;

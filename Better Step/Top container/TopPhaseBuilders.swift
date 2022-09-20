@@ -57,7 +57,6 @@ extension TopContainerView {
                     }
                     self.currentPhase = nextPhase
                 }
-                Text("walking phase")
                     .navigationTitle("Walking")
                     .padding()
                     .reversionToolbar($showRewindAlert)

@@ -15,6 +15,7 @@ enum MP3Errors: Error {
     case noSoundID(String, Int)
 }
 
+#if RETAIN_VOICE
 /// Asynchronously play a sound, then speak some text.
 ///
 /// As implemented, the name of the sound is ignored — it's simply the current beep sound.
@@ -34,6 +35,7 @@ func playSound(named: String, thenSay text: String) {
 
 
 /// Given the base name of an MP3 file in the main `Bundle`, `SoundPlayer` plays it.
+@available(*, unavailable, message: "Excising voice support")
 final class SoundPlayer {
 
     static let klaxonAudioSession: AVAudioSession = {
@@ -107,14 +109,7 @@ final class SoundPlayer {
 //        }
 //    }
 }
-
-// MARK: Initialization helpers
-// FIXME: Can I override volume?
-// FIXME: Can I run in the background?
-//        Perhaps something similar to telephony?
-// FIXME: Can I have sounds override silence?
-
-// (If I were App Review, I'd have some questions to ask)
+#endif
 
 // AVAudioSession options:
 // duckOthers
@@ -144,6 +139,7 @@ final class SoundPlayer {
        Theory: Beep sounds do not run off the shared audio sesson.
  */
 
+#if RETAIN_VOICE
 extension SoundPlayer {
     static func initializeAudio() throws {
         guard Self.klaxonSoundID == 0 else { return }
@@ -189,4 +185,4 @@ extension SoundPlayer: CustomStringConvertible {
     var description: String { "SoundPlayer(\(soundName)" }
 }
 
-
+#endif

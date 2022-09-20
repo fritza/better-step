@@ -77,7 +77,6 @@ struct TopContainerView: View {
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
     var collectedUsability: Bool = false
 
-
     static let defaultPhase = TopPhases.walking
     @State var currentPhase: TopPhases?
 

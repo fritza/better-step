@@ -8,7 +8,9 @@
 import Foundation
 import AVFoundation
 
+#if RETAIN_VOICE
 /// The reason an utterance stopped: finished, canceled, or error.
+@available(*, unavailable, message: "Excising voice support")
 enum ReasonStoppedSpeaking {
     case complete
     case canceled
@@ -18,6 +20,7 @@ enum ReasonStoppedSpeaking {
 /// Interface between client code and `AVSpeechSynthesizer`
 ///
 /// This is where the completion callbacks are collected and transmitted to the async continuation as the return value.
+@available(*, unavailable, message: "Excising voice support")
 final class TimeSpeaker: NSObject {
     /// Singleton speaker
     static let shared = TimeSpeaker()
@@ -29,12 +32,14 @@ final class TimeSpeaker: NSObject {
 
     override init() {
         voiceSynthesizer = AVSpeechSynthesizer()
+
         super.init()
         voiceSynthesizer.delegate = self
     }
 }
 
 extension TimeSpeaker: AVSpeechSynthesizerDelegate {
+    @MainActor
     /// Pronounce a string at a given pitch and speed.
     ///
     /// - returns: `ReasonStoppedSpeaking`, whether the speech finished by completion or cancellation.
@@ -78,3 +83,5 @@ extension TimeSpeaker: AVSpeechSynthesizerDelegate {
         self.speechContinuation.resume(returning: .canceled)
     }
 }
+
+#endif

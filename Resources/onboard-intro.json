@@ -1,7 +1,7 @@
 [
     {
         "pageTitle": "Welcome.",
-        "intro": "We deeply appreciate your help in making [OUR APP] the best tool to measure the activity of patients and research volunteers like you.||First, we need to match you to the information you'll send. You were given a Subkect ID. Please enter it below.",
+        "intro": "We deeply appreciate your help in making [OUR APP] the best tool to measure the activity of patients and research volunteers like you.||First, we need to match you to the information you'll send. You were given a Subject ID. Please enter it below.",
         "systemImage": "hand.wave",
         "proceedTitle": "Done"
     },

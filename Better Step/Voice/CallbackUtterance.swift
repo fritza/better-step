@@ -8,6 +8,8 @@
 import Foundation
 import AVFoundation
 
+#if RETAIN_VOICE
+@available(*, unavailable, message: "Excising voice support")
 // MARK: - CallbackUtterance
 /// A subclass of `AVSpeechUtterance` that passes a callback for completion of an utterance when the synthesizer hits `didFinish`.
 ///
@@ -62,8 +64,6 @@ final class CallbackUtterance: AVSpeechUtterance {
     func speak(function: String = #function,
                fileID: String = #file,
                line: Int = #line) {
-//                print("CallbackUtterance.speak",
-//                      "called from", function, "\(fileID):\(line)")
         Self.synthesizer.speak(self)
     }
 
@@ -91,6 +91,7 @@ final class CallbackUtterance: AVSpeechUtterance {
 }
 
 // MARK: - SpeechDelegate
+@available(*, unavailable, message: "Excising voice support")
 final class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
     // REMEMBER! AVSpeechSynthesizer keeps a queue of its own.
     /// `AVSpeechSynthesizerDelegate` adoption for the end of an utterance.
@@ -129,3 +130,5 @@ extension CallbackUtterance {
         //       one utterance, it'll be queued.
     }
 }
+#endif
+// RETAIN_VOICE

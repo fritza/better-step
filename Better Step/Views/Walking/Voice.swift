@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 
+#if RETAIN_VOICE
 /// rate, pitch, and synthesis of a particular style of speech.
 ///
 /// - `.routine`: Ordinary speech
@@ -15,6 +16,7 @@ import AVFoundation
 /// - `.instructional`: Narrative of the next task
 ///
 /// - note: At this writing,` .routine `and `.instructional` are the same.
+@available(*, unavailable, message: "Excising voice support")
 enum Voice {
     case routine, clipped, instructional
 
@@ -56,3 +58,5 @@ enum Voice {
         await TimeSpeaker.shared.say(str, with: self)
     }
 }
+
+#endif

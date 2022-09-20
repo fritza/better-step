@@ -109,10 +109,12 @@ struct WalkingContainerView: View {
             "Walking (beta)"
         )
         .onAppear {
+#if RETAIN_VOICE
             do { try SoundPlayer.initializeAudio() }
             catch {
                 print("initializeAudio failed:", error)
             }
+#endif
         }
     } // body
 }
@@ -269,7 +271,9 @@ extension WalkingContainerView {
 struct WalkingContainerView_Previews: PreviewProvider {
 
     static var previews: some View {
-        WalkingContainerView()
+        WalkingContainerView() {
+            _ in 
+        }
     }
 }
 
