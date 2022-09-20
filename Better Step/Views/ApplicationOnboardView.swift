@@ -42,22 +42,12 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 item = rawList.first!
             }
             catch {
-                fatalError("trying to decode \(error)")
                 print("Bad decoding:", error)
+                fatalError("trying to decode \(error)")
                 return nil
             }
         }
         // The JSON title is ignored in favor of whatever presenting ViewBuilder puts into the navigationTitle.
-    }
-
-    /*
-     By the way, the exit interstitial should use "hand.thumbsup"
-     */
-
-
-    enum WhereFocused: Hashable {
-        case field
-        case elsewhere
     }
 
     // MARK: - body
@@ -74,34 +64,25 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.accentColor)
-                    .frame(height: 200)
+                    .frame(height: 120)
                     .symbolRenderingMode(.hierarchical)
-                /*
-                TaggedField(subject: SubjectID.id, callback: { result in
-                    if let trim = result.trimmed,
-                       trim.isAlphanumeric {
-                        submissionRemarks = "valid: \(trim)"
-                        completion(.success(trim))
+
+                TaggedField(subject: SubjectID.id) {
+                    // FIXME: Handle .failure.
+                    // FIXME: Have the top-level container reset the SubjectID?
+                    result in
+                    if let newID = try? result.get() {
+                        SubjectID.id = newID
                     }
-                    else {
-                        submissionRemarks = "not valid: “\(result)”"
-                    }
-                })
-                Text(submissionRemarks)
-                Spacer()
-                // MARK: Disclaimer
-                // FIXME: Remove once the issues are resolved.
-                Group {
-                    Text("Tap the return key to submit. Further validation will come in a later build")
-                    Text("\nNo “Back” button, should that be wanted. A possibly unwanted feature: swipe across the screen to change the page.")
-                }.font(.caption).minimumScaleFactor(0.5).foregroundColor(.red)
-                 */
+                    completion(.success(SubjectID.id))
+                }
                 // MARK: The action button
+                Spacer()
                 Button("Submit") {
                     completion(.success("S101"))
                 }
                 Spacer()
-                Text("This page will have a text field to create a user ID. For now, tap “Submit.”\n\nAfter an ID is set, there will be a different landing page, because the subject ID cannot be changed.")
+                Text("After an ID is set, there will be a different landing page, because the subject cannot change it. For beta, the gear button can reset the app.")
                     .font(.caption).minimumScaleFactor(0.5).foregroundColor(.red)
             .navigationTitle("Welcome")
         }
@@ -121,8 +102,8 @@ struct OnboardView_Previews: PreviewProvider {
             return rawList.first!
         }
         catch {
-            fatalError("trying to decode \(error.localizedDescription)")
             print("Bad decoding:", error)
+            fatalError("trying to decode \(error.localizedDescription)")
             return nil
         }
     }

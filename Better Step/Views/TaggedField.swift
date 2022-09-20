@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct TaggedField: View {
+struct TaggedField: View, ReportingPhase {
+    var completion: ((Result<String, Error>) -> Void)!
 
     @State var subject: String
     @State var showComment: Bool = false
@@ -16,17 +17,16 @@ struct TaggedField: View {
     // backing string _and_ rendering conditioned on the
     // (existing pre-change?) value.
     @State var showInstructions: Bool = true
-    let closeCallback: (String) -> Void
-
     var canSubmitText: Bool {
         return subject.trimmed?.isAlphanumeric ?? false
     }
 
 //    @Binding var subject: String
 
-    init(subject: String, callback: @escaping ((String) -> Void)) {
+    init(subject: String,
+         callback: @escaping (Result<String, Error>) -> Void) {
         self.subject = subject
-        self.closeCallback = callback
+        self.completion = callback
     }
 
     var body: some View {
@@ -37,7 +37,6 @@ struct TaggedField: View {
                           prompt: Text("reporting address"))
                     .keyboardType(.emailAddress)
                     .textFieldStyle(.roundedBorder)
-    //                        .focused($amSelected)
                 Button(action: {
                     subject = ""
 
@@ -53,7 +52,7 @@ struct TaggedField: View {
 //                    self.showInstructions = !canSubmitText
 //                })
                 .onSubmit {
-                    closeCallback(subject)
+                    completion(.success(subject))
                 }
                 .padding([.trailing], 2)
             }

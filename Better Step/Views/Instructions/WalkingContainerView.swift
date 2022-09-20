@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import CoreMotion
 
 /* TODO: Handle cancellation.
  */
@@ -83,10 +84,28 @@ protocol StageCompleting {
 ///
 ///  As implemented, each NavigationLink is created by its own `@ViewBuilder` so the `body` property need only list them by name.
 ///  - note: `demo_summaryView()` is presented only if the `INCLUDE_WALK_TERMINAL` compilation flag is set.
-struct WalkingContainerView: View {
+
+
+struct WalkingContainerView: View, ReportingPhase {
+    typealias SuccessValue = [CMAccelerometerData]
+    typealias ResultValue = Result<SuccessValue,Error>
+    typealias WCClosure = (ResultValue) -> Void
+/*
+ ((Result<SuccessValue, Error>) -> Void)!
+ */
     @State var state: WalkingState? = .interstitial_1
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
+    var completion: WCClosure!
+
+    init(completion: @escaping WCClosure) {
+        self.completion = completion
+    }
+    //((Result<[CMAccelerometerData], Error>) -> Void)!
+//    ) {
+//        self.completion = completion
+//    }
+
 
     var body: some View {
         NavigationView {
