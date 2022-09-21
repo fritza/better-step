@@ -220,7 +220,6 @@
 		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
 		1FF354402790A99E000894B8 /* XYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYZ.swift; sourceTree = "<group>"; };
 		1FF3544A2791FCFF000894B8 /* CoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotion.swift; sourceTree = "<group>"; };
-		1FF3544C27920A1C000894B8 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1FF3544E27920A3B000894B8 /* config-mini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "config-mini.plist"; sourceTree = "<group>"; };
 		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
@@ -305,7 +304,6 @@
 				1F60E70028DA71AC00EC2593 /* Milestones */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
-				1FF3544C27920A1C000894B8 /* Configuration.swift */,
 				1FF3544E27920A3B000894B8 /* config-mini.plist */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
 			);
