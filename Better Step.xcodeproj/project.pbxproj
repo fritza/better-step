@@ -50,6 +50,8 @@
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1F60E6FF28DA5CCA00EC2593 /* Countdowns.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */; };
+		1F60E70228DA71F700EC2593 /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
+		1F60E70428DA720500EC2593 /* HapticMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* HapticMilestone.swift */; };
 		1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
@@ -173,6 +175,8 @@
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Countdowns.m4a; sourceTree = "<group>"; };
+		1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMilestone.swift; sourceTree = "<group>"; };
+		1F60E70328DA720500EC2593 /* HapticMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMilestone.swift; sourceTree = "<group>"; };
 		1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionElement.swift; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1FFB30DF277BE5090099AE5E /* Model */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
+				1F60E70028DA71AC00EC2593 /* Milestones */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
 				1FF3544C27920A1C000894B8 /* Configuration.swift */,
@@ -364,6 +369,15 @@
 				1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */,
 			);
 			path = Instructional;
+			sourceTree = "<group>";
+		};
+		1F60E70028DA71AC00EC2593 /* Milestones */ = {
+			isa = PBXGroup;
+			children = (
+				1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */,
+				1F60E70328DA720500EC2593 /* HapticMilestone.swift */,
+			);
+			path = Milestones;
 			sourceTree = "<group>";
 		};
 		1F8A337F27E119A30093C896 /* App Stages */ = {
@@ -733,6 +747,7 @@
 				1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */,
 				1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */,
 				1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */,
+				1F60E70428DA720500EC2593 /* HapticMilestone.swift in Sources */,
 				1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */,
 				1FFB31062787892B0099AE5E /* MinutePublisher.swift in Sources */,
 				1F1C4E1928D4D76900547C7A /* UsabilityContainer.swift in Sources */,
@@ -744,6 +759,7 @@
 				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1F0AF27728D8DCEB00ED01AE /* OnboardContainerView.swift in Sources */,
 				1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */,
+				1F60E70228DA71F700EC2593 /* PlaybackMilestone.swift in Sources */,
 				1FF3543F2790A96C000894B8 /* AccelerometerItem.swift in Sources */,
 				1F1C4DF828D3A42000547C7A /* AccelerometryConsuming.swift in Sources */,
 				1FFB31082787991A0099AE5E /* TimerView.swift in Sources */,
