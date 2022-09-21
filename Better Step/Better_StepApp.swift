@@ -8,23 +8,6 @@
 import SwiftUI
 import Combine
 
-enum Constants {
-#if DEBUG
-    static let countdownDuration    = 15.0
-#else
-    static let countdownDuration    = 120.0
-#endif
-
-    static let countdownInterval    = 30
-    static let sweepDuration        = 5.0
-}
-
-
-// TODO: report contents shouldn't be global
-//       I guess they're not, since we could impose
-//       an environmentObject at a lower level
-//       of the hierarchy.
-
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
@@ -48,9 +31,21 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
-#if false
+#if true
+//            WalkingContainerView() {
+//                (results: WalkingContainerView.ResultValue) -> Void in
+//            }
+            NavigationView {
+                SweepSecondView(duration: 10, onCompletion: {
+                    print("ss complete")
+                })
+                .navigationTitle("Walking")
+                .padding()
+            }
+            //                .reversionToolbar($showRewindAlert)
+#elseif false
             TopContainerView()
-#elseif true
+#elseif false
             SurveyContainerView(completion: {
                 result in
                 if let answerList = try? result.get() {

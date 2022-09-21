@@ -203,7 +203,7 @@ struct DigitalTimerView: View {
 struct DigitalTimerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DigitalTimerView(duration: Constants.countdownDuration,
+            DigitalTimerView(duration: CountdownConstants.countdownDuration,
                              walkingState: .walk_2)
                 .padding()
         }

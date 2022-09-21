@@ -35,14 +35,19 @@ enum AppStorageKeys: String {
     /// Whether the context form substage of the usability phase is complete.
     case collectedFreehandU
 
-    /// The raw value for the completed stages.
-    case completedStages
-
     /// `Int` allowable length of timed walk _in minutes._ Do not confuse with the `walkInMinutes` preference key,  which is the specific duration to use.
     static let dasiWalkRange = (1...10)
 
-    /// `Bool`, `true` iff the in-use app sequence (landing → DASI → walk →…) is to be ignored in favor of user navigation.
-    case inspectionMode
+    func resetSubjectData() {
+        let defaults = UserDefaults.standard
+        defaults.set("", forKey: AppStorageKeys.subjectID.rawValue)
+
+        let stringPrefs: [AppStorageKeys] = [.collectedDASI, .collectedFreehandU, .collectedUsability]
+        let keys = stringPrefs.map(\.rawValue)
+        for key in keys {
+            defaults.set(false, forKey: key)
+        }
+    }
 }
 
 /**
