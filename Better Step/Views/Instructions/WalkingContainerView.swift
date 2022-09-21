@@ -128,12 +128,6 @@ struct WalkingContainerView: View, ReportingPhase {
             "Walking (beta)"
         )
         .onAppear {
-#if RETAIN_VOICE
-            do { try SoundPlayer.initializeAudio() }
-            catch {
-                print("initializeAudio failed:", error)
-            }
-#endif
         }
     } // body
 }

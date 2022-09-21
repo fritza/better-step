@@ -117,20 +117,9 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             .onReceive(timer.secondsSubject) {
                 secs in
                 self.wholeSeconds = secs
-#if RETAIN_VOICE
-                CallbackUtterance(string: "\(secs+1)")
-                    .speak()
-#endif
             }
 
             .onAppear() {
-#if RETAIN_VOICE
-                CallbackUtterance(string: "Start walking in \(wholeSeconds.spelled) seconds") { utterance in
-                    timer.start()
-//                    isRunning = true
-                }
-                .speak()
-#endif
                 timer.start()
             }
             .navigationTitle("Start in…")

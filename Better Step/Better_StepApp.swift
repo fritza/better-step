@@ -74,17 +74,15 @@ struct Better_StepApp: App {
                 }
                 
                 // MARK: - Timed Walk
-                if includeWalkPersistent {
-                    WalkView()
-                    // TODO: Add walk-related environmentObjects as soon as known.
-                        .badge(BSTAppStages.walk.tabBadge)
-                        .tabItem {
-                            Image(systemName: BSTAppStages.walk.imageName)
-                            Text(BSTAppStages.walk.visibleName)
-                        }
-                        .tag(BSTAppStages.walk)
-                }
-                
+                WalkingContainerView()
+                // TODO: Add walk-related environmentObjects as soon as known.
+                    .badge(BSTAppStages.walk.tabBadge)
+                    .tabItem {
+                        Image(systemName: BSTAppStages.walk.imageName)
+                        Text(BSTAppStages.walk.visibleName)
+                    }
+                    .tag(BSTAppStages.walk)
+
                 // MARK: - Reporting
                 // TODO: Add report-related environmentObjects as soon as known.
                 Text("Reporting Tab")
