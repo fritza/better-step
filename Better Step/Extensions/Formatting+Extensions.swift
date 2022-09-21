@@ -19,17 +19,33 @@ let _spelledFmt: NumberFormatter = {
     return retval
 }()
 
+let _separated: NumberFormatter = {
+    let retval                   = NumberFormatter()
+    retval.usesGroupingSeparator = true
+    retval.groupingSize          = 3
+    retval.groupingSeparator     = "_"
+    return retval
+}()
+
 // MARK: - Spelled-out numbers
 extension BinaryInteger {
     /// The integer formatted to be at least two digits long, with leading zeros if necessary.
+    /// - warning: This accessor crashes if `self` isn't convertible to `NSNumber`.
     public var twoZeros: String {
         _leadingZeroFmt.string(from: self as! NSNumber)!
     }
 
     /// Render a `BinaryInteger` (_e.g._`Int`) as a spelled-out `String`
+    /// - warning: This accessor crashes if `self` isn't convertible to `NSNumber`.
     var spelled: String {
         let myself: Int = numericCast(self)
         return _spelledFmt.string(from: myself as NSNumber)!
+    }
+
+    /// Render a `BinaryInteger`, grouping by thousands with `_` as the delimiter.
+    /// - warning: This accessor crashes if `self` isn't convertible to `NSNumber`.
+    var separated: String {
+        _separated.string(from: self as! NSNumber)!
     }
 }
 
