@@ -48,7 +48,6 @@
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09F276FBD1B0026D28B /* WalkView.swift */; };
 		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
-		1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A3276FCF690026D28B /* SetupView.swift */; };
 		1F60E6FF28DA5CCA00EC2593 /* Countdowns.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */; };
 		1F60E70228DA71F700EC2593 /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
 		1F60E70428DA720500EC2593 /* HapticMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* HapticMilestone.swift */; };
@@ -83,8 +82,6 @@
 		1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FD45691279F40B600B5429A /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
-		1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB373E27F789BD00E10D8E /* ClearingView.swift */; };
-		1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */; };
 		1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */; };
 		1FDBB3FD281C49A200D0A7E9 /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
 		1FDE826127E3B45F00CD8368 /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
@@ -173,7 +170,6 @@
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B09F276FBD1B0026D28B /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		1F60B0A3276FCF690026D28B /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Countdowns.m4a; sourceTree = "<group>"; };
 		1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMilestone.swift; sourceTree = "<group>"; };
 		1F60E70328DA720500EC2593 /* HapticMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMilestone.swift; sourceTree = "<group>"; };
@@ -208,8 +204,6 @@
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
-		1FDB373E27F789BD00E10D8E /* ClearingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearingView.swift; sourceTree = "<group>"; };
-		1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmClearingAlert.swift; sourceTree = "<group>"; };
 		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
 		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
 		1FDE825E27E29FFD00CD8368 /* BSTAppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTAppStages.swift; sourceTree = "<group>"; };
@@ -437,16 +431,6 @@
 			path = Usability;
 			sourceTree = "<group>";
 		};
-		1FDB373D27F789A700E10D8E /* Setup */ = {
-			isa = PBXGroup;
-			children = (
-				1F60B0A3276FCF690026D28B /* SetupView.swift */,
-				1FDB374027F789FB00E10D8E /* ConfirmClearingAlert.swift */,
-				1FDB373E27F789BD00E10D8E /* ClearingView.swift */,
-			);
-			path = Setup;
-			sourceTree = "<group>";
-		};
 		1FDBB3F9281C494F00D0A7E9 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,7 +518,6 @@
 				1FF11B3A279A173D00E319ED /* DASI */,
 				1FFB30E9277F89A70099AE5E /* YesNoView */,
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
-				1FDB373D27F789A700E10D8E /* Setup */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 				1F8A065727A4841400477379 /* ApplicationOnboardView.swift */,
@@ -785,7 +768,6 @@
 				1F1C4E1728D4D76900547C7A /* UsabilityView.swift in Sources */,
 				1FF11B3C279A184A00E319ED /* SweepSecondView.swift in Sources */,
 				1FA3B8C627D6C0250058F1AF /* DASIOnboardView.swift in Sources */,
-				1F60B0A4276FCF690026D28B /* SetupView.swift in Sources */,
 				1F1C4DE528D3989C00547C7A /* PhaseManager.swift in Sources */,
 				1F1C4DEB28D39E6A00547C7A /* InterstitialInfo.swift in Sources */,
 				1FCBAA10283BE91B0088EAF2 /* InstructionElement.swift in Sources */,
@@ -794,7 +776,6 @@
 				1FD4568D279F217700B5429A /* CoreGraphics+Extensions.swift in Sources */,
 				1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
 				1F60B0A0276FBD1B0026D28B /* WalkView.swift in Sources */,
-				1FDB374127F789FB00E10D8E /* ConfirmClearingAlert.swift in Sources */,
 				1F1641F32819E87C00E4E2FA /* BSTAppStages.swift in Sources */,
 				1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */,
 				1F8A065627A478B400477379 /* BSTAppStageState.swift in Sources */,
@@ -812,7 +793,6 @@
 				1F1C4DF428D3A2CC00547C7A /* DigitalTimerView.swift in Sources */,
 				1FB2F54728D261FF00593692 /* TopPhaseBuilders.swift in Sources */,
 				1FD4566D279B68DC00B5429A /* Voice.swift in Sources */,
-				1FDB373F27F789BD00E10D8E /* ClearingView.swift in Sources */,
 				1FD4568B279F208400B5429A /* FileManager+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
