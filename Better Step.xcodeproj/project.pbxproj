@@ -184,7 +184,6 @@
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
 		1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMExtensionsTests.swift; sourceTree = "<group>"; };
-		1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerSubjectFileCoordinator.swift; sourceTree = "<group>"; };
 		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
 		1FF354402790A99E000894B8 /* XYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYZ.swift; sourceTree = "<group>"; };
@@ -259,7 +258,6 @@
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
 				1FB2F53728D133B600593692 /* Time */,
-				1FF35433278F5ED0000894B8 /* Better-Step-Info.plist */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1FB2F54328D2619D00593692 /* Top container */,
 				1FF3543D2790A958000894B8 /* Storage */,
@@ -571,6 +569,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */;
 			buildPhases = (
+				1FD5139B28DD0D2600418F38 /* ShellScript */,
 				1FA281CA28DBBA160038353E /* Sources */,
 				1FA281CB28DBBA160038353E /* Frameworks */,
 				1FA281CC28DBBA160038353E /* Resources */,
@@ -636,9 +635,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				1FA281CD28DBBA160038353E /* Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
-				1FA281CD28DBBA160038353E /* Better Step */,
 			);
 		};
 /* End PBXProject section */
@@ -676,6 +675,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FD5139B28DD0D2600418F38 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"for BIG rent.\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F0B675A276FA6CA00011A7E /* Sources */ = {
@@ -827,12 +847,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				RUN_DOCUMENTATION_COMPILER = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -885,11 +906,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = FOR_BETTER_ST;
 				SWIFT_COMPILATION_MODE = wholemodule;
