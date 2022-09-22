@@ -27,7 +27,6 @@
 		1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FA281ED28DBBB270038353E /* BSTAppStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* BSTAppStageState.swift */; };
 		1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
-		1FA281EF28DBBB270038353E /* BSTAppStageState+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE828B27EBA00C00CD8368 /* BSTAppStageState+Reset.swift */; };
 		1FA281F028DBBB270038353E /* HapticMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* HapticMilestone.swift */; };
 		1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FA281F228DBBB270038353E /* TimedWalkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF528D3A3BD00547C7A /* TimedWalkObserver.swift */; };
@@ -46,7 +45,6 @@
 		1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
 		1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
-		1FA2820228DBBB270038353E /* PerSubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */; };
 		1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA281D028DBBA160038353E /* Better_StepApp.swift */; };
 		1FA2820528DBBB270038353E /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
@@ -184,7 +182,6 @@
 		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
 		1FDE825E27E29FFD00CD8368 /* BSTAppStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTAppStages.swift; sourceTree = "<group>"; };
 		1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportFile.swift; sourceTree = "<group>"; };
-		1FDE828B27EBA00C00CD8368 /* BSTAppStageState+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSTAppStageState+Reset.swift"; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
@@ -352,7 +349,6 @@
 				1F2432D427FDF843008A5418 /* Instructional */,
 				1FDE828A27EA463B00CD8368 /* DASI */,
 				1F8A065527A478B400477379 /* BSTAppStageState.swift */,
-				1FDE828B27EBA00C00CD8368 /* BSTAppStageState+Reset.swift */,
 				1FDE825E27E29FFD00CD8368 /* BSTAppStages.swift */,
 			);
 			path = "App Stages";
@@ -745,13 +741,11 @@
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
 				1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */,
-				1FA281EF28DBBB270038353E /* BSTAppStageState+Reset.swift in Sources */,
 				1FA2821A28DBBB270038353E /* AccelerometerItem.swift in Sources */,
 				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
 				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,
 				1FA281F728DBBB270038353E /* EmailFormView.swift in Sources */,
 				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,
-				1FA2820228DBBB270038353E /* PerSubjectFileCoordinator.swift in Sources */,
 				1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */,
 				1FA281F028DBBB270038353E /* HapticMilestone.swift in Sources */,
 				1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */,

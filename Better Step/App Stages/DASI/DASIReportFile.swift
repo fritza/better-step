@@ -18,7 +18,8 @@ import SwiftUI
 /// Call `writeAndClose()` to create and fill the output file.
 /// - warning: Records may be added piecemeal, but appending to the output file is not supported. `writeAndClose()` will rewrite ths entire file from the start.
 final class DASIReportFile {
-//    @EnvironmentObject var dasi:
+
+/*
     @EnvironmentObject var fileCoordinator: PerSubjectFileCoordinator
 
     @discardableResult
@@ -37,6 +38,7 @@ final class DASIReportFile {
         }
         return result
     }
+ */
 
     /// The base name (no extension, no path) of the output file.
     let dasiFileBaseName: String

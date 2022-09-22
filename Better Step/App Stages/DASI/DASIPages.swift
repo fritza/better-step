@@ -35,6 +35,7 @@ final class DASIPages: ObservableObject
         isCompleted = false
     }
 
+/*
     @discardableResult
     func teardownFromSubjectID() async throws -> DASIPages? {
         let newSelection = DASIStages.landing
@@ -42,6 +43,7 @@ final class DASIPages: ObservableObject
         refersToQuestion = newSelection.refersToQuestion
         return self
     }
+*/
 
     /// Reflect the selection of the next page.
     ///
