@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F09EE3228DB745900CFBE4B /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
 		1F0AF27728D8DCEB00ED01AE /* OnboardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */; };
 		1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F0B6754276FA6C900011A7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
@@ -44,12 +45,11 @@
 		1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityController.swift */; };
 		1F1C4E1C28D4D76900547C7A /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
 		1F3B49EB28DA37B700133765 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3B49EA28DA37B700133765 /* ZIPFoundation */; };
+		1F5CE52828DBA8EE000BF284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
 		1F60B09E276FB6E20026D28B /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
-		1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1F60E6FF28DA5CCA00EC2593 /* Countdowns.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */; };
 		1F60E70228DA71F700EC2593 /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
 		1F60E70428DA720500EC2593 /* HapticMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* HapticMilestone.swift */; };
-		1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F8A065027A3528E00477379 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1F8A064F27A3528E00477379 /* Algorithms */; };
 		1F8A065427A4724500477379 /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
@@ -57,6 +57,98 @@
 		1F8A065827A4841400477379 /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
 		1F8A337E27DFEE400093C896 /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
 		1F8A338127E122130093C896 /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
+		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
+		1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D728DBBA170038353E /* Preview Assets.xcassets */; };
+		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
+		1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */; };
+		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
+		1FA281E028DBBB270038353E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
+		1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
+		1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
+		1FA281E328DBBB270038353E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
+		1FA281E428DBBB270038353E /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
+		1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
+		1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */; };
+		1FA281E728DBBB270038353E /* PhaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */; };
+		1FA281E828DBBB270038353E /* DummySubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54428D261B900593692 /* DummySubviews.swift */; };
+		1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
+		1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
+		1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
+		1FA281ED28DBBB270038353E /* BSTAppStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065527A478B400477379 /* BSTAppStageState.swift */; };
+		1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
+		1FA281EF28DBBB270038353E /* BSTAppStageState+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE828B27EBA00C00CD8368 /* BSTAppStageState+Reset.swift */; };
+		1FA281F028DBBB270038353E /* HapticMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* HapticMilestone.swift */; };
+		1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
+		1FA281F228DBBB270038353E /* TimedWalkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF528D3A3BD00547C7A /* TimedWalkObserver.swift */; };
+		1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */; };
+		1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
+		1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */; };
+		1FA281F628DBBB270038353E /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
+		1FA281F728DBBB270038353E /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
+		1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */; };
+		1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
+		1FA281FA28DBBB270038353E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
+		1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
+		1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
+		1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
+		1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
+		1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
+		1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
+		1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
+		1FA2820228DBBB270038353E /* PerSubjectFileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */; };
+		1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
+		1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA281D028DBBA160038353E /* Better_StepApp.swift */; };
+		1FA2820528DBBB270038353E /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
+		1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
+		1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */; };
+		1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */; };
+		1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54128D22FB600593692 /* TopContainerView.swift */; };
+		1FA2820A28DBBB270038353E /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
+		1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */; };
+		1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3544A2791FCFF000894B8 /* CoreMotion.swift */; };
+		1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
+		1FA2820E28DBBB270038353E /* BSTAppStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE825E27E29FFD00CD8368 /* BSTAppStages.swift */; };
+		1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
+		1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
+		1FA2821128DBBB270038353E /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
+		1FA2821228DBBB270038353E /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
+		1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
+		1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */; };
+		1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
+		1FA2821728DBBB270038353E /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
+		1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
+		1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */; };
+		1FA2821A28DBBB270038353E /* AccelerometerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */; };
+		1FA2821B28DBBB270038353E /* MinutePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31052787892B0099AE5E /* MinutePublisher.swift */; };
+		1FA2821C28DBBB270038353E /* AccelerometerItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545227977302000894B8 /* AccelerometerItemTests.swift */; };
+		1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD45690279F40B600B5429A /* DASIResponseList.swift */; };
+		1FA2821E28DBBB270038353E /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
+		1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */; };
+		1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */; };
+		1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
+		1FA2822228DBBB270038353E /* InstructionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */; };
+		1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */; };
+		1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
+		1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
+		1FA2822628DBBB270038353E /* UsabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityController.swift */; };
+		1FA2822728DBBB270038353E /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
+		1FA2822828DBBB270038353E /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
+		1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
+		1FA2822B28DBBB940038353E /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
+		1FA2822C28DBBB940038353E /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* usability-intro.json */; };
+		1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
+		1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0428D3BEA400547C7A /* onboard-intro.json */; };
+		1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F2432DF27FE11D9008A5418 /* DASIQuestions.json */; };
+		1FA2823128DBBB940038353E /* second-walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */; };
+		1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */; };
+		1FA2823428DBBC3F0038353E /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823328DBBC3F0038353E /* Collections */; };
+		1FA2823628DBBC3F0038353E /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823528DBBC3F0038353E /* DequeModule */; };
+		1FA2823828DBBC3F0038353E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823728DBBC3F0038353E /* OrderedCollections */; };
+		1FA2823A28DBBC3F0038353E /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823928DBBC3F0038353E /* Algorithms */; };
+		1FA2823C28DBBC3F0038353E /* ActivityView in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823B28DBBC3F0038353E /* ActivityView */; };
+		1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823D28DBBC3F0038353E /* ZIPFoundation */; };
+		1FA2824028DBBC800038353E /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823F28DBBC800038353E /* RealModule */; };
+		1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1FA3B8B827D699DB0058F1AF /* SurveyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */; };
 		1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA3B8BD27D69BFC0058F1AF /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
@@ -66,9 +158,7 @@
 		1FB2F53928D133E700593692 /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FB2F53B28D138E200593692 /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
 		1FB2F54228D22FB600593692 /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54128D22FB600593692 /* TopContainerView.swift */; };
-		1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54428D261B900593692 /* DummySubviews.swift */; };
 		1FB2F54728D261FF00593692 /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
-		1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB367B2279B551B0056600A /* WrappedTimer.swift */; };
 		1FB684E627F225A300612924 /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FB684E927F225EC00612924 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
 		1FB684FA27F252BA00612924 /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
@@ -120,8 +210,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F09EE3128DB745900CFBE4B /* FailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureView.swift; sourceTree = "<group>"; };
 		1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardContainerView.swift; sourceTree = "<group>"; };
-		1F0B674E276FA6C900011A7E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F0B674E276FA6C900011A7E /* x-Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "x-Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B6751276FA6C900011A7E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
 		1F0B6753276FA6C900011A7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F0B6755276FA6CA00011A7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +251,7 @@
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
+		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Countdowns.m4a; sourceTree = "<group>"; };
@@ -173,6 +265,10 @@
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
 		1F8A337D27DFEE400093C896 /* DASIPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPages.swift; sourceTree = "<group>"; };
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
+		1FA281CE28DBBA160038353E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA281D028DBBA160038353E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
+		1FA281D428DBBA170038353E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1FA281D728DBBA170038353E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyContainerView.swift; sourceTree = "<group>"; };
 		1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoStack.swift; sourceTree = "<group>"; };
 		1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
@@ -184,7 +280,6 @@
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB2F54428D261B900593692 /* DummySubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySubviews.swift; sourceTree = "<group>"; };
 		1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhaseBuilders.swift; sourceTree = "<group>"; };
-		1FB367B2279B551B0056600A /* WrappedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTimer.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectID.swift; sourceTree = "<group>"; };
 		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
@@ -246,6 +341,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FA281CB28DBBA160038353E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FA2823C28DBBC3F0038353E /* ActivityView in Frameworks */,
+				1FA2823A28DBBC3F0038353E /* Algorithms in Frameworks */,
+				1FA2824028DBBC800038353E /* RealModule in Frameworks */,
+				1FA2823428DBBC3F0038353E /* Collections in Frameworks */,
+				1FA2823628DBBC3F0038353E /* DequeModule in Frameworks */,
+				1FA2823828DBBC3F0038353E /* OrderedCollections in Frameworks */,
+				1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -257,6 +366,7 @@
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
+				1FA281CF28DBBA160038353E /* Better Step */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 			);
@@ -265,9 +375,10 @@
 		1F0B674F276FA6C900011A7E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1F0B674E276FA6C900011A7E /* Better Step.app */,
+				1F0B674E276FA6C900011A7E /* x-Better Step.app */,
 				1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */,
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
+				1FA281CE28DBBA160038353E /* Better Step.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -330,6 +441,7 @@
 		1F1C4DFD28D3BD6700547C7A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */,
 				1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */,
 				1F1C4E0428D3BEA400547C7A /* onboard-intro.json */,
 				1F1C4DFE28D3BD6700547C7A /* usability-intro.json */,
@@ -371,6 +483,24 @@
 			path = "App Stages";
 			sourceTree = "<group>";
 		};
+		1FA281CF28DBBA160038353E /* Better Step */ = {
+			isa = PBXGroup;
+			children = (
+				1FA281D028DBBA160038353E /* Better_StepApp.swift */,
+				1FA281D428DBBA170038353E /* Assets.xcassets */,
+				1FA281D628DBBA170038353E /* Preview Content */,
+			);
+			path = "Better Step";
+			sourceTree = "<group>";
+		};
+		1FA281D628DBBA170038353E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1FA281D728DBBA170038353E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		1FB2F53728D133B600593692 /* Time */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +516,7 @@
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */,
 				1FB2F54428D261B900593692 /* DummySubviews.swift */,
+				1F09EE3128DB745900CFBE4B /* FailureView.swift */,
 				1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */,
 			);
 			path = "Top container";
@@ -409,7 +540,6 @@
 		1FDBB3F9281C494F00D0A7E9 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
-				1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */,
 				1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */,
 				1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */,
 				1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */,
@@ -436,9 +566,9 @@
 		1FF11B3A279A173D00E319ED /* DASI */ = {
 			isa = PBXGroup;
 			children = (
+				1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */,
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
-				1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */,
 				1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */,
 			);
 			path = DASI;
@@ -524,7 +654,7 @@
 				1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */,
 				1FF11B3B279A184A00E319ED /* SweepSecondView.swift */,
 				1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */,
-				1FB367B2279B551B0056600A /* WrappedTimer.swift */,
+				1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */,
 				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
 				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 				1F1C4DF528D3A3BD00547C7A /* TimedWalkObserver.swift */,
@@ -535,9 +665,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1F0B674D276FA6C900011A7E /* Better Step */ = {
+		1F0B674D276FA6C900011A7E /* x-Better Step */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F0B6772276FA6CA00011A7E /* Build configuration list for PBXNativeTarget "Better Step" */;
+			buildConfigurationList = 1F0B6772276FA6CA00011A7E /* Build configuration list for PBXNativeTarget "x-Better Step" */;
 			buildPhases = (
 				1F0B674A276FA6C900011A7E /* Sources */,
 				1F0B674B276FA6C900011A7E /* Frameworks */,
@@ -547,7 +677,7 @@
 			);
 			dependencies = (
 			);
-			name = "Better Step";
+			name = "x-Better Step";
 			packageProductDependencies = (
 				1FF354432790D1F5000894B8 /* Collections */,
 				1FF354452790D1F5000894B8 /* DequeModule */,
@@ -560,7 +690,7 @@
 				1F3B49EA28DA37B700133765 /* ZIPFoundation */,
 			);
 			productName = "Better Step";
-			productReference = 1F0B674E276FA6C900011A7E /* Better Step.app */;
+			productReference = 1F0B674E276FA6C900011A7E /* x-Better Step.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1F0B675D276FA6CA00011A7E /* Better StepTests */ = {
@@ -599,6 +729,32 @@
 			productReference = 1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1FA281CD28DBBA160038353E /* Better Step */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */;
+			buildPhases = (
+				1FA281CA28DBBA160038353E /* Sources */,
+				1FA281CB28DBBA160038353E /* Frameworks */,
+				1FA281CC28DBBA160038353E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Better Step";
+			packageProductDependencies = (
+				1FA2823328DBBC3F0038353E /* Collections */,
+				1FA2823528DBBC3F0038353E /* DequeModule */,
+				1FA2823728DBBC3F0038353E /* OrderedCollections */,
+				1FA2823928DBBC3F0038353E /* Algorithms */,
+				1FA2823B28DBBC3F0038353E /* ActivityView */,
+				1FA2823D28DBBC3F0038353E /* ZIPFoundation */,
+				1FA2823F28DBBC800038353E /* RealModule */,
+			);
+			productName = "Better Step";
+			productReference = 1FA281CE28DBBA160038353E /* Better Step.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -606,7 +762,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					1F0B674D276FA6C900011A7E = {
@@ -619,6 +775,9 @@
 					1F0B6767276FA6CA00011A7E = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 1F0B674D276FA6C900011A7E;
+					};
+					1FA281CD28DBBA160038353E = {
+						CreatedOnToolsVersion = 14.0;
 					};
 				};
 			};
@@ -642,9 +801,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1F0B674D276FA6C900011A7E /* Better Step */,
+				1F0B674D276FA6C900011A7E /* x-Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
+				1FA281CD28DBBA160038353E /* Better Step */,
 			);
 		};
 /* End PBXProject section */
@@ -657,6 +817,7 @@
 				1F1C4E0528D3BEA400547C7A /* onboard-intro.json in Resources */,
 				1F1C4E0328D3BD6700547C7A /* walk-intro.json in Resources */,
 				1FED1C5D27FE1A4A00C290F7 /* DASIQuestions.json in Resources */,
+				1F5CE52828DBA8EE000BF284 /* LaunchScreen.storyboard in Resources */,
 				1F1C4E1C28D4D76900547C7A /* USurveyQuestions.json in Resources */,
 				1F0B6759276FA6CA00011A7E /* Preview Assets.xcassets in Resources */,
 				1F0B6756276FA6CA00011A7E /* Assets.xcassets in Resources */,
@@ -677,6 +838,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FA281CC28DBBA160038353E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */,
+				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
+				1FA2822C28DBBB940038353E /* usability-intro.json in Resources */,
+				1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */,
+				1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */,
+				1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */,
+				1FA2823128DBBB940038353E /* second-walk-intro.json in Resources */,
+				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
+				1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */,
+				1FA281D528DBBA170038353E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +884,6 @@
 				1FFB310A2787997E0099AE5E /* MinSecFormatter.swift in Sources */,
 				1FF3544B2791FCFF000894B8 /* CoreMotion.swift in Sources */,
 				1FA3B8C027D69C440058F1AF /* DASIQuestionView.swift in Sources */,
-				1F60B0A2276FCE410026D28B /* ReportView.swift in Sources */,
 				1F0AF27728D8DCEB00ED01AE /* OnboardContainerView.swift in Sources */,
 				1F1C4E1B28D4D76900547C7A /* UsabilityController.swift in Sources */,
 				1F60E70228DA71F700EC2593 /* PlaybackMilestone.swift in Sources */,
@@ -727,7 +904,6 @@
 				1F1C4E0828D3DB0500547C7A /* TaggedField.swift in Sources */,
 				1F1C4E1828D4D76900547C7A /* UsabilitySummaryView.swift in Sources */,
 				1FA3B8C827D7C4170058F1AF /* DASIStages.swift in Sources */,
-				1FB2F54528D261B900593692 /* DummySubviews.swift in Sources */,
 				1F1C4DEC28D3A1CA00547C7A /* WalkingContainerView.swift in Sources */,
 				1F1C4E1628D4D76900547C7A /* UsabilityInterstitialView.swift in Sources */,
 				1F1C4E1728D4D76900547C7A /* UsabilityView.swift in Sources */,
@@ -742,6 +918,7 @@
 				1FB684FD27F274CF00612924 /* CoreMotion+extensions.swift in Sources */,
 				1F1641F32819E87C00E4E2FA /* BSTAppStages.swift in Sources */,
 				1FDBB3FB281C498600D0A7E9 /* InstructionRoot.swift in Sources */,
+				1F09EE3228DB745900CFBE4B /* FailureView.swift in Sources */,
 				1F8A065627A478B400477379 /* BSTAppStageState.swift in Sources */,
 				1FF354412790A99E000894B8 /* XYZ.swift in Sources */,
 				1F1C4DFA28D3A51200547C7A /* CSVArchiver.swift in Sources */,
@@ -751,7 +928,6 @@
 				1F0B6752276FA6C900011A7E /* Better_StepApp.swift in Sources */,
 				1FA3B8BC27D69BFC0058F1AF /* YesNoStack.swift in Sources */,
 				1FF3545127921204000894B8 /* Formatting+Extensions.swift in Sources */,
-				1FB367B3279B551B0056600A /* WrappedTimer.swift in Sources */,
 				1F1641F6281AEE3F00E4E2FA /* BSTAppStageState+Reset.swift in Sources */,
 				1F1C4DF428D3A2CC00547C7A /* DigitalTimerView.swift in Sources */,
 				1FB2F54728D261FF00593692 /* TopPhaseBuilders.swift in Sources */,
@@ -775,7 +951,88 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */,
-				1F8A064C27A34EA900477379 /* Better_StepUITests.swift in Sources */,
+				1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FA281CA28DBBA160038353E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */,
+				1FA2822628DBBB270038353E /* UsabilityController.swift in Sources */,
+				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
+				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
+				1FA281ED28DBBB270038353E /* BSTAppStageState.swift in Sources */,
+				1FA2821E28DBBB270038353E /* ToolbarViewModifiers.swift in Sources */,
+				1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */,
+				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
+				1FA281E828DBBB270038353E /* DummySubviews.swift in Sources */,
+				1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */,
+				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
+				1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */,
+				1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */,
+				1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */,
+				1FA281E028DBBB270038353E /* FailureView.swift in Sources */,
+				1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */,
+				1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */,
+				1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */,
+				1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */,
+				1FA2821B28DBBB270038353E /* MinutePublisher.swift in Sources */,
+				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
+				1FA281F628DBBB270038353E /* TimeReader.swift in Sources */,
+				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
+				1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */,
+				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
+				1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */,
+				1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */,
+				1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */,
+				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
+				1FA281FA28DBBB270038353E /* ContentView.swift in Sources */,
+				1FA281E428DBBB270038353E /* UsabilityInterstitialView.swift in Sources */,
+				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
+				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
+				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
+				1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */,
+				1FA281EF28DBBB270038353E /* BSTAppStageState+Reset.swift in Sources */,
+				1FA2821A28DBBB270038353E /* AccelerometerItem.swift in Sources */,
+				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
+				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,
+				1FA281F728DBBB270038353E /* EmailFormView.swift in Sources */,
+				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,
+				1FA2820228DBBB270038353E /* PerSubjectFileCoordinator.swift in Sources */,
+				1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */,
+				1FA281F028DBBB270038353E /* HapticMilestone.swift in Sources */,
+				1FA281E328DBBB270038353E /* Better_StepTests.swift in Sources */,
+				1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */,
+				1FA2821728DBBB270038353E /* ReportView.swift in Sources */,
+				1FA2822828DBBB270038353E /* Better_StepUITestsLaunchTests.swift in Sources */,
+				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
+				1FA2822728DBBB270038353E /* YesNoButton.swift in Sources */,
+				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
+				1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */,
+				1FA2822228DBBB270038353E /* InstructionElement.swift in Sources */,
+				1FA281F228DBBB270038353E /* TimedWalkObserver.swift in Sources */,
+				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
+				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
+				1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */,
+				1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */,
+				1FA281E728DBBB270038353E /* PhaseManager.swift in Sources */,
+				1FA2821128DBBB270038353E /* DASIResponseTests.swift in Sources */,
+				1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */,
+				1FA2820E28DBBB270038353E /* BSTAppStages.swift in Sources */,
+				1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */,
+				1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */,
+				1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */,
+				1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */,
+				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
+				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
+				1FA2821228DBBB270038353E /* DASIPages.swift in Sources */,
+				1FA2820A28DBBB270038353E /* DASIReportTests.swift in Sources */,
+				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
+				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
+				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
+				1FA2821C28DBBB270038353E /* AccelerometerItemTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,12 +1041,12 @@
 /* Begin PBXTargetDependency section */
 		1F0B6760276FA6CA00011A7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F0B674D276FA6C900011A7E /* Better Step */;
+			target = 1F0B674D276FA6C900011A7E /* x-Better Step */;
 			targetProxy = 1F0B675F276FA6CA00011A7E /* PBXContainerItemProxy */;
 		};
 		1F0B676A276FA6CA00011A7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F0B674D276FA6C900011A7E /* Better Step */;
+			target = 1F0B674D276FA6C900011A7E /* x-Better Step */;
 			targetProxy = 1F0B6769276FA6CA00011A7E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -847,6 +1104,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -904,6 +1162,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -922,25 +1181,27 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Better-Step-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Step";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.x-Better-Step";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -958,25 +1219,27 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Better-Step-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Step";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.x-Better-Step";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1063,6 +1326,70 @@
 			};
 			name = Release;
 		};
+		1FA281DA28DBBA170038353E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "Better Step";
+			};
+			name = Debug;
+		};
+		1FA281DB28DBBA170038353E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-Step";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "Better Step";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1075,7 +1402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F0B6772276FA6CA00011A7E /* Build configuration list for PBXNativeTarget "Better Step" */ = {
+		1F0B6772276FA6CA00011A7E /* Build configuration list for PBXNativeTarget "x-Better Step" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F0B6773276FA6CA00011A7E /* Debug */,
@@ -1098,6 +1425,15 @@
 			buildConfigurations = (
 				1F0B6779276FA6CA00011A7E /* Debug */,
 				1F0B677A276FA6CA00011A7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FA281DA28DBBA170038353E /* Debug */,
+				1FA281DB28DBBA170038353E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1172,6 +1508,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
+		};
+		1FA2823328DBBC3F0038353E /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		1FA2823528DBBC3F0038353E /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		1FA2823728DBBC3F0038353E /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		1FA2823928DBBC3F0038353E /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F8A064E27A3528E00477379 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		1FA2823B28DBBC3F0038353E /* ActivityView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */;
+			productName = ActivityView;
+		};
+		1FA2823D28DBBC3F0038353E /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		1FA2823F28DBBC800038353E /* RealModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */;
+			productName = RealModule;
 		};
 		1FDE826327E3D7F700CD8368 /* ActivityView */ = {
 			isa = XCSwiftPackageProductDependency;

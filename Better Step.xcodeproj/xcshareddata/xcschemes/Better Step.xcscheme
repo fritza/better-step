@@ -7,6 +7,20 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1F0B674D276FA6C900011A7E"
+               BuildableName = "x-Better Step.app"
+               BlueprintName = "x-Better Step"
+               ReferencedContainer = "container:Better Step.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "YES"
@@ -14,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F0B674D276FA6C900011A7E"
+               BlueprintIdentifier = "1FA281CD28DBBA160038353E"
                BuildableName = "Better Step.app"
                BlueprintName = "Better Step"
                ReferencedContainer = "container:Better Step.xcodeproj">
@@ -33,8 +47,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F0B674D276FA6C900011A7E"
-            BuildableName = "Better Step.app"
-            BlueprintName = "Better Step"
+            BuildableName = "x-Better Step.app"
+            BlueprintName = "x-Better Step"
             ReferencedContainer = "container:Better Step.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -67,7 +81,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1F0B674D276FA6C900011A7E"
+            BlueprintIdentifier = "1FA281CD28DBBA160038353E"
             BuildableName = "Better Step.app"
             BlueprintName = "Better Step"
             ReferencedContainer = "container:Better Step.xcodeproj">
@@ -80,16 +94,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1F0B674D276FA6C900011A7E"
+            BlueprintIdentifier = "1FA281CD28DBBA160038353E"
             BuildableName = "Better Step.app"
             BlueprintName = "Better Step"
             ReferencedContainer = "container:Better Step.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
