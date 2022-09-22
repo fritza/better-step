@@ -37,7 +37,6 @@
 		1FA281F728DBBB270038353E /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
 		1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */; };
 		1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
-		1FA281FA28DBBB270038353E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6753276FA6C900011A7E /* ContentView.swift */; };
 		1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF11B3B279A184A00E319ED /* SweepSecondView.swift */; };
 		1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
@@ -104,7 +103,6 @@
 		1F09EE3128DB745900CFBE4B /* FailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureView.swift; sourceTree = "<group>"; };
 		1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardContainerView.swift; sourceTree = "<group>"; };
 		1F0B6751276FA6C900011A7E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
-		1F0B6753276FA6C900011A7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F0B6755276FA6CA00011A7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F0B6758276FA6CA00011A7E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Better StepTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,7 +493,6 @@
 				1FFB30E9277F89A70099AE5E /* YesNoView */,
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
-				1F0B6753276FA6C900011A7E /* ContentView.swift */,
 				1F8A065727A4841400477379 /* ApplicationOnboardView.swift */,
 				1F1C4E0728D3DB0500547C7A /* TaggedField.swift */,
 			);
@@ -735,7 +732,6 @@
 				1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */,
 				1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
-				1FA281FA28DBBB270038353E /* ContentView.swift in Sources */,
 				1FA281E428DBBB270038353E /* UsabilityInterstitialView.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
