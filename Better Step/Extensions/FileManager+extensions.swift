@@ -11,6 +11,8 @@ public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case cantFindURL(String)
+
+    #warning("FileStorageErrors is wrong for these cases")
     case noSubjectID
     case cantLoadData(URL)
     case uploadEmptyData(String)

@@ -5,6 +5,12 @@
 //  Created by Fritz Anderson on 7/22/22.
 //
 
+/* ===================================
+ IT'S OKAY THAT THIS VIEW IS NOT INSTANTIATED.
+
+ It's a useful debugging stage.
+ =================================== */
+
 import SwiftUI
 
 let bgColors: [UIColor] = [

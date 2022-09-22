@@ -72,7 +72,7 @@ struct Better_StepApp: App {
                         }
                         .tag(BSTAppStages.dasi)
                 }
-                
+
                 // MARK: - Timed Walk
                 WalkingContainerView()
                 // TODO: Add walk-related environmentObjects as soon as known.
@@ -92,7 +92,7 @@ struct Better_StepApp: App {
                         Text(BSTAppStages.report.visibleName)
                     }
                     .tag(BSTAppStages.report)
-                
+
                 // MARK: - Setup
                 SetupView()
                 // TODO: Add configuration-related environmentObjects as soon as known.

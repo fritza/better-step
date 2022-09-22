@@ -39,7 +39,7 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (walking_view)",
             tag: TopPhases.walking, selection: $currentPhase) {
-                DummyWalk { result in
+                WalkingContainerView { result in
                     guard let series = try? result.get() else {
                         self.currentPhase = .failed; return
                     }
@@ -75,6 +75,10 @@ extension TopContainerView {
                         // Save the answer list.
                         let surveyContents = answerList.csvLine!
                         print()
+
+                        // TODO: Make next-phase and DASI flags dynamic
+                        self.currentPhase = .usabilityForm
+                        self.collectedDASI = true
                     }
                 })
                 .navigationTitle("(not) DASI")
@@ -93,12 +97,10 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (usability_view)",
             tag: TopPhases.usability, selection: $currentPhase) {
-                DummyUsability { result in
-                    guard let pair = try? result.get() else { self.currentPhase = .failed; return}
-                    print("Selections:", pair.0,
-                          "Answers:"   , pair.1)
-
-                    self.currentPhase = collectedDASI ? .conclusion : .dasi
+                UsabilityContainer { result in
+                    guard let csv = try? result.get() else { self.currentPhase = .failed; return }
+                    print("Answers:"   , csv)
+                    self.currentPhase = .conclusion
                     self.collectedUsability = true
                 }
                 .navigationTitle("Usability")
@@ -108,11 +110,32 @@ extension TopContainerView {
             .hidden()
     }
 
+    @ViewBuilder func usabilityForm_view() -> some View {
+        // usabilityForm
+
+        NavigationLink(
+            "SHOULDN'T SEE (usabilityForm_view)",
+            tag: TopPhases.usabilityForm, selection: $currentPhase) {
+                WalkInfoForm {
+                    result in
+                    guard let infoResult = try? result.get() else { self.currentPhase = .failed; return}
+                    print(infoResult.where, infoResult.distance)
+                    self.currentPhase = .conclusion
+                    self.collectedUsability = true
+                }
+                .navigationTitle("Usability")
+                .padding()
+                .reversionToolbar($showRewindAlert)
+            }
+            .hidden()
+        }
+
+
     @ViewBuilder func conclusion_view() -> some View {
         NavigationLink(
             "SHOULDN'T SEE (conclusion_view)",
             tag: TopPhases.conclusion, selection: $currentPhase) {
-                DummyConclusion { _ in
+                ConclusionView { _ in
                     self.currentPhase = .failed
                 }
                 .navigationTitle("Finished")
@@ -127,7 +150,7 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (failed_view)",
             tag: TopPhases.failed, selection: $currentPhase) {
-                DummyFailure { _ in
+                FailureView { _ in
                     self.currentPhase = .failed
                 }
                 .reversionToolbar($showRewindAlert)

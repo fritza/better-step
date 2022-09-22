@@ -20,8 +20,17 @@ enum EffortWalked: String, Hashable, CaseIterable {
     case veryHard = "Very Hard"
 }
 
+struct WalkInfoResult {
+    let `where`: String
+    let distance: Int
+
+    // FIXME: Incomplete
+}
+
 /// A `Form` for the post-usability survey asking about the condition of the subject and the chosen walking area.
-struct WalkInfoForm: View {
+struct WalkInfoForm: View, ReportingPhase {
+    let completion: ((Result<WalkInfoResult, Error>) -> Void)!
+
     var summary: String {
         var content = "Info: "
         print((whereWalked == .atHome) ? "Home" : "Away",
@@ -137,13 +146,18 @@ struct WalkInfoForm: View {
                 }
             }  // falling section
         }
+        .onSubmit {
+            completion(.success(WalkInfoResult(where: "Home", distance: 200)))
+        }
         .safeAreaInset(edge: .top, content: {
             Text("Tell us about your walking conditions — where you chose for your walk, and how you felt while performing it.")
                 .padding()
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Submit") {  }
+                Button("Submit") {
+                    completion(.success(WalkInfoResult(where: "Toolbar Submit", distance: 200)))
+                }
             }
         }
     }
@@ -152,7 +166,9 @@ struct WalkInfoForm: View {
 struct WalkInfoForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WalkInfoForm()
+            WalkInfoForm {
+                _ in // nothing
+            }
                 .navigationTitle("Walking Info")
         }
     }

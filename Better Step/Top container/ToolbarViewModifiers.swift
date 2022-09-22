@@ -29,9 +29,13 @@ struct ReversionAlert: ViewModifier {
                 Button("Reset" , role: .destructive) {
                     // Forget user and progress
                     subjectID = SubjectID.unSet
+
+                    AppStorageKeys.resetSubjectData()
+                    /*
                     collectedDASI = false
                     collectedUsability = false
                     nextPhase = .onboarding
+                     */
                 }
                 Button("Rewind") {
                     // The user and progress are ok,

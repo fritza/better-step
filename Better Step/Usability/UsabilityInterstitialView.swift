@@ -53,6 +53,9 @@ struct UsabilityInterstitialView: View, ReportingPhase {
             .accessibilityLabel("continuation button")
         }
 
+        // FIXME: End-of-phase should be the top container
+        //        Not an inert farewell.
+
         .alert("No destination beyond Usability", isPresented: $showNotIntegratedAlert, actions: { },
                message: {
             Text("The G Bars app doesn't integrate the phases of Step Test. You’ve gone as far as you can with Usability.")
@@ -76,8 +79,6 @@ let usabilityOutCopy = """
 Thank you for your feedback.
 
 Use the Back button if you want to review your answers. You will not be able to revise your answers after you tap Continue.
-
-In G Bars, the phases are not yet integrated, so Continue does nothing.
 """
 
 private let systemImageName = "person.crop.circle.badge.questionmark"

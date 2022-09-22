@@ -41,12 +41,13 @@ private let end_walkingContentList     = try! InterstitialList(baseName: "usabil
 let csvUTT       = UTType.commaSeparatedText
 let csvUTTString = "public.comma-separated-values-text"
 
+/*
 /// Adopters promise to present a `completion` closure for the `WalkingContainerView` to designate the next page.
 protocol StageCompleting {
     /// Informs the creator whether a contained `NavigationLink` destination has completed successfully or not.
     var completion: (Bool) -> Void { get }
 }
-
+*/
 /// ## Topics
 ///
 /// ### Introduction
@@ -247,6 +248,11 @@ extension WalkingContainerView {
                 InterstitalPageContainerView(
                     // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
                     listing: end_walkingContentList, selection: 1) {
+                        completion(
+                            .success(
+                                [ ]
+                            )
+                        )
                         self.state = .interstitial_1
                     }.padding() // completion closure for end_walkingList
                     .navigationBarBackButtonHidden(true)

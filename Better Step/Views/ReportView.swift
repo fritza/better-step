@@ -13,7 +13,7 @@ Only UCM staff should operate this facility
 """
 
 struct ReportView: View {
-@State private var showingAlert = false
+    @State private var showingAlert = false
 
     var body: some View {
         NavigationView {

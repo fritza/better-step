@@ -24,11 +24,15 @@ import Combine
 final class DASIPages: ObservableObject
 {
     @Published var selected: DASIStages!
-    @Published var refersToQuestion: Bool
+    @Published var refersToQuestion: Bool {
+        didSet { isCompleted = !refersToQuestion }
+    }
+    @Published var isCompleted: Bool
 
     init(_ selection: DASIStages = .landing) {
         selected = selection
         refersToQuestion = selection.refersToQuestion
+        isCompleted = false
     }
 
     @discardableResult

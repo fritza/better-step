@@ -51,8 +51,7 @@ struct SurveyContainerView: View, ReportingPhase {
                 )
                 .hidden()
 
-                NavigationLink(tag: DASIStages.completion,
-                               selection: $contentEnvt.selected,
+                NavigationLink(isActive: $contentEnvt.isCompleted,
                                destination: {
                     DASICompleteView() {
                         result in

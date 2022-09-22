@@ -27,6 +27,7 @@ enum TopPhases: String, CaseIterable, Comparable {
 
     //  WalkingContainerView
     case usability
+    case usabilityForm
 
     case dasi
     /// Interstitial at the end of the user activities
@@ -77,10 +78,16 @@ struct TopContainerView: View {
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
     var collectedUsability: Bool = false
 
-    static let defaultPhase = TopPhases.walking
+    static let defaultPhase = TopPhases.onboarding
     @State var currentPhase: TopPhases?
 
+    @State var usabilityFormResults: WalkInfoForm?
+
     @State var showRewindAlert = false
+
+    init() {
+        self.currentPhase = Self.defaultPhase
+    }
 
     var body: some View {
         NavigationView {
@@ -90,6 +97,7 @@ struct TopContainerView: View {
 
                 dasi_view()
                 usability_view()
+                usabilityForm_view()
 
                 conclusion_view()
                 failed_view()
@@ -99,6 +107,12 @@ struct TopContainerView: View {
                             shouldShow: $showRewindAlert)
         }
         .onAppear {
+
+#if DEBUG
+            AppStorageKeys.resetSubjectData()
+#endif
+
+
             if subjectID == SubjectID.unSet {
                 currentPhase = .onboarding
             }
@@ -122,7 +136,7 @@ enum DummyFails: Error {
 // MARK: - Preview
 struct TopContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        TopContainerView(currentPhase: .failed)
+        TopContainerView()
     }
 }
 

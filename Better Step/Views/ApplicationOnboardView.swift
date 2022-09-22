@@ -82,7 +82,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     completion(.success("S101"))
                 }
                 Spacer()
-                Text("After an ID is set, there will be a different landing page, because the subject cannot change it. For beta, the gear button can reset the app.")
+                Text("Setting the ID should change the landing page and omit the DASI/usability phases. For beta, the gear button can reset the app.\n\nA subject ID is required but not yet enforced.")
                     .font(.caption).minimumScaleFactor(0.5).foregroundColor(.red)
             .navigationTitle("Welcome")
         }
