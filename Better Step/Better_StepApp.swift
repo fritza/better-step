@@ -31,10 +31,10 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
+
 #if true
-//            WalkingContainerView() {
-//                (results: WalkingContainerView.ResultValue) -> Void in
-//            }
+            TopContainerView()
+#elseif false
             NavigationView {
                 SweepSecondView(duration: 10, onCompletion: {
                     print("ss complete")
@@ -43,8 +43,6 @@ struct Better_StepApp: App {
                 .padding()
             }
             //                .reversionToolbar($showRewindAlert)
-#elseif false
-            TopContainerView()
 #elseif false
             SurveyContainerView(completion: {
                 result in
