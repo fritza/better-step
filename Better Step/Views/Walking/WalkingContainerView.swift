@@ -109,7 +109,7 @@ struct WalkingContainerView: View, ReportingPhase {
 
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 interstitial_1View()
                 countdown_1View()
@@ -122,12 +122,7 @@ struct WalkingContainerView: View, ReportingPhase {
                 demo_summaryView()
 #endif
             }   // VStack
-        }       // NavigationView
-
-        // MARK: Usability
-        .navigationTitle(
-            "Walking (beta)"
-        )
+//        }       // NavigationView
         .onAppear {
         }
     } // body
