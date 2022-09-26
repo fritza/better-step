@@ -37,21 +37,21 @@ final class AudioMilestone: NSObject {
     }
 
     /// The `URL` pointing to the audio data
-    var audioURL: URL
+    let audioURL: URL
     /// The contents of the audio file
     let soundData: Data
 
     /// The audio session (currently the `sharedInstance`)
-    var session: AVAudioSession
+    private var session: AVAudioSession
     /// The player instance
-    let player: AVAudioPlayer
+    private let player: AVAudioPlayer
 
     /// The URL and contents of a file having a certain name and extension.
     ///
     /// Unlike the related `Bundle` instance function, neither parameter is defaulted.
     /// - returns: A pair, `(URL, Data)`, with the URL and content of the file.
     /// - throws: `Errors.noURL` if no such file, `Data` errors if it could not be read.
-    static func initializeData(at name: String, `extension`: String)
+    private static func initializeData(at name: String, `extension`: String)
     throws -> (URL, Data) {
         guard let nonceURL = Bundle.main.url(
             forResource: name, withExtension: `extension`)
