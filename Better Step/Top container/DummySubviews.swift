@@ -37,7 +37,7 @@ struct DummyWalk: View, ReportingPhase {
         VStack(spacing: 16) {
             Text("Walking simulator")
             Button("Complete (dasi)") { completion(.success([])) }
-            Button("Complete (fail)") { completion(.failure(DummyFails.walkingFailure)) }
+            Button("Complete (fail)") { completion(.failure(DummyFailures.walkingFailure)) }
         }
     }
 }
@@ -82,7 +82,7 @@ struct DummyConclusion: View, ReportingPhase {
         VStack {
             Text("Congratulations, you're done.")
             Button("Complete (fail)") { completion(
-                .failure(DummyFails.conclusionFailure)
+                .failure(DummyFailures.conclusionFailure)
                 // Why do I have to instantiate Void?
             ) }
         }
@@ -99,7 +99,7 @@ struct DummyFailure: View, ReportingPhase {
         VStack {
             Text("Failure simulator")
             Button("Complete (fail)") { completion(
-                .failure(DummyFails.failingFailure)
+                .failure(DummyFailures.failingFailure)
             ) }
         }
     }

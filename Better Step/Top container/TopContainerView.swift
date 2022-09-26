@@ -123,7 +123,7 @@ struct TopContainerView: View {
 }
 
 // MARK: - Dummies
-enum DummyFails: Error {
+enum DummyFailures: Error {
     case onboardFailure
     case walkingFailure
     case dasiFailure
