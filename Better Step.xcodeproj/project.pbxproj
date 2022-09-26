@@ -145,6 +145,7 @@
 		1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Countdowns.m4a; sourceTree = "<group>"; };
 		1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMilestone.swift; sourceTree = "<group>"; };
 		1F60E70328DA720500EC2593 /* HapticMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMilestone.swift; sourceTree = "<group>"; };
+		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EAE27FF859100A3CAE3 /* InstructionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionElement.swift; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
 				1FB2F53728D133B600593692 /* Time */,
@@ -986,6 +988,7 @@
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better-Step-Info.plist";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1020,6 +1023,7 @@
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better-Step-Info.plist";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
