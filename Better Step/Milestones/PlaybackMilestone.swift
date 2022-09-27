@@ -8,25 +8,16 @@
 import Foundation
 import AVFoundation
 
-/*
-let _separated: NumberFormatter = {
-    let retval                   = NumberFormatter()
-    retval.usesGroupingSeparator = true
-    retval.groupingSize          = 3
-    retval.groupingSeparator     = "_"
-    return retval
-}()
-
-extension BinaryInteger {
-    var separated: String {
-        _separated.string(from: self as! NSNumber)!
-    }
+fileprivate enum PlaybackConstants {
+    static let baseName     = "Countdowns"
+    static let `extension`  = "m4a"
+    static let volume       = 0.6
 }
-*/
 
 /// Player for a named audio file in the main bundle.
 /// - note: The volume of an ``AVAudioPlayer``is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.
-final class AudioMilestone: NSObject {
+final class AudioMilestone
+{
     enum Errors: Error {
         /// No file of that name is in `Bundle.main`.
         case noURL(String)
@@ -36,15 +27,26 @@ final class AudioMilestone: NSObject {
         case avCantStart
     }
 
+    static var _shared: AudioMilestone?
+    static var shared: AudioMilestone {
+        if let retval = _shared { return retval }
+        _shared = try! AudioMilestone(PlaybackConstants.baseName,
+                                      extension: PlaybackConstants.extension)
+        return _shared!
+    }
+
+    // MARK: Audio data attrubutes
     /// The `URL` pointing to the audio data
     let audioURL: URL
     /// The contents of the audio file
     let soundData: Data
 
+    // MARK: Audio playback attrubutes
     /// The audio session (currently the `sharedInstance`)
     private var session: AVAudioSession
     /// The player instance
-    private let player: AVAudioPlayer
+    private let player: AVAudioPlayer?
+    private let audioDelegate = AudioPlaybackDelegate()
 
     /// The URL and contents of a file having a certain name and extension.
     ///
@@ -64,25 +66,26 @@ final class AudioMilestone: NSObject {
 
     /// Construct an instance from the basename and extension of an audio file.
     /// - throws: Errors related to a missing or unreadable file. This object does _not_ validate the content as audio.
-    init(_ base: String, `extension`: String) throws {
+    private init(_ base: String, `extension`: String) throws {
         let urlAndData = try Self.initializeData(
             at: base, extension: `extension`)
         (self.audioURL, self.soundData) = urlAndData
 
-        let tempPlayer = try AVAudioPlayer(data: urlAndData.1)
-        player = tempPlayer
-        // tempPlayer.volume = 0.6
-
+        // MARK: Session init
         let session = AVAudioSession.sharedInstance()
         self.session = session
         try session.setCategory(.playback,
                                 mode: .voicePrompt,
                                 options: [.duckOthers, .defaultToSpeaker])
+        // MARK: Player init
+        do {
+            let tempPlayer = try AVAudioPlayer(data: soundData)    // Optional player
+            tempPlayer.volume = 0.6
+            tempPlayer.delegate = audioDelegate
+            tempPlayer.prepareToPlay()
+            player = tempPlayer
 
-        super.init()
-
-        tempPlayer.delegate = self
-        guard player.prepareToPlay() else {
+        } catch {
             throw Errors.avCantPrepare
         }
     }
@@ -90,18 +93,27 @@ final class AudioMilestone: NSObject {
     /// Start playing the data loaded from the audio file.
     /// - throws: `.avCantStart` if ``AVAudioPlayer/play()`` returns `false`.
     func play() throws {
-        guard player.play() else { throw Errors.avCantStart }
+        guard let player else { throw Errors.avCantStart }
+        player.currentTime = 0.0
+        player.play()
+    }
+
+    /// Stop playback.
+    ///
+    /// > "Calling this method undoes the resource allocation the system performs in `prepareToPlay()` or `play()`"
+    func stop() {
+        if let player {
+            player.stop()
+            // NOTE that `AVAudioPlayer/stop()` tears down the
+            player.currentTime = 0.0
+        }
     }
 }
 
-extension AudioMilestone: AVAudioPlayerDelegate {
-    /// `AVAudioPlayerDelegate` adoption.
+fileprivate final class AudioPlaybackDelegate: NSObject, AVAudioPlayerDelegate {
+    // TODO: should the delegate be hidden from clients?
+    //       should there be an end-of-audio callback?
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("End of sound.")
     }
 }
-
-
-
-//: [Next](@next)
-
