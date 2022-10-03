@@ -113,7 +113,8 @@ struct DigitalTimerView: View {
 
         // If the timer halts, stop collecting.
         switch timer.status {
-        case .cancelled, .expired: observer.stop()
+        case .cancelled, .expired:
+            observer.stop()
             // Now that it's stopped, you're ready to write a CSV file
             // Do not call reset or clearRecords, you need those for writing.
 

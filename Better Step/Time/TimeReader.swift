@@ -112,6 +112,13 @@ final class TimeReader: ObservableObject {
         sharedTimer = nil
     }
 
+    #if DEBUG
+    deinit {
+        print("TimeReader disposed-of")
+        print()
+    }
+    #endif
+
     /// Initiate the countdown that was set up in `init`.
     ///
     /// Sets up the Combine chains from the `Timer` to all the published interval components.
@@ -141,7 +148,9 @@ final class TimeReader: ObservableObject {
                         return
                     }
                     switch err {
-                    case .expired:   break //print("Timer serial", self.serial, "ran out")
+                    case .expired:
+                        self.status = .expired
+                        //print("Timer serial", self.serial, "ran out")
                     case .cancelled:       // print("Timer serial", self.serial, "was cancelled")
                         self.status = .cancelled
                     }

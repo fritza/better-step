@@ -14,18 +14,6 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     typealias Element = CMAccelerometerData
     typealias AsyncIterator = MotionManager
     
-
-/*
- func pop() async throws -> CMAccelerometerData? {
-     while buffer.isEmpty {
-         try Task.checkCancellation()
-         try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep)
-     }
-     return buffer.popFirst()
- }
- */
-
-
     func next() async throws -> CMAccelerometerData? {
         while let accData = motionManager.accelerometerData,
               accData.timestamp == lastTimeStamp {

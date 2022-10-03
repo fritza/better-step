@@ -26,7 +26,7 @@ struct SweepSecondView: View {
     @State private  var minSecFrac: MinSecAndFraction?
     @State private  var wholeSeconds: Int
 
-    static let startDelay: TimeInterval = 1.0
+    static let startDelay: TimeInterval = 1.2
 
     /// The closure provided by client code at `init` to notify it of expiration
     private let completionCallback: (() -> Void)
