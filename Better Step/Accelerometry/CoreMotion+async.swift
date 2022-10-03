@@ -51,5 +51,3 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
         motionManager.stopAccelerometerUpdates()
     }
 }
-
-
