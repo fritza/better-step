@@ -12,42 +12,20 @@ import SwiftUI
 
 // MARK: Time intervals
 
-private let hz                : UInt64 = 120
-private let hzInterval        : Double = 1.0/Double(hz)
-private let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
-// TODO: Put the interval in a UserDefault.
+enum CMTimeInterval {
+    static let hz                : UInt64 = 120
+    static let hzInterval        : Double = 1.0/Double(hz)
+    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
+    // TODO: Consider putting the interval in a UserDefault.
 
-private let secondsInBuffer   : UInt64 = 2
-private let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
+    static let secondsInBuffer   : UInt64 = 2
+    static let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
+}
 
 // FIXME: Figure out how to collect for a new subject.
 //        That is, you may not be killing this app before a second subject arrives to take a new test. The loop-exhaustion process forecloses a restart in-place.
 //  Can you replace `.shared`?
 
-// MARK: - IncomingAccelerometry
-final class IncomingAccelerometry {
-    var buffer = Deque<CMAccelerometerData>(minimumCapacity: numericCast(minBufferCapacity))
-    var count: Int {
-        buffer.count
-    }
-
-    func receive(_ accData: CMAccelerometerData) {
-        buffer.append(accData)
-    }
-
-    // FIXME: - Does pop() deadlock receive(_:)?
-    //      It spins waiting for the arrival of data into the buffer.
-    //      If the suspension point at Task.sleep(nanoseconds:) doesn't
-    //      yield to an async receive(_:), then we're deadlocked, right?
-    func pop() async throws -> CMAccelerometerData? {
-        while buffer.isEmpty {
-            try Task.checkCancellation()
-            try await Task.sleep(nanoseconds: nanoSleep)
-        }
-        return buffer.popFirst()
-    }
-    // And now we're back to polling, right?
-}
 
 // MARK: - Available / Active
 /// Wrapper for the availability and activity of some facility.
@@ -113,12 +91,12 @@ final class MotionManager {
     var stream: CMDataStream!
 
     let asyncBuffer = IncomingAccelerometry()
-    func count() async -> Int { return await asyncBuffer.count }
+//    func count() -> Int { return asyncBuffer.count }
 
     // MARK: - Initialization and start
     init() {
         let cmManager = CMMotionManager()
-        cmManager.accelerometerUpdateInterval = hzInterval
+        cmManager.accelerometerUpdateInterval = CMTimeInterval.hzInterval
         motionManager = cmManager
 
         deviceState = DeviceState(cmManager)
