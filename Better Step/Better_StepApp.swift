@@ -32,8 +32,13 @@ struct Better_StepApp: App {
     var body: some Scene {
         WindowGroup {
 
-#if true
+#if false
             TopContainerView()
+#elseif true
+            NavigationView {
+                WalkingContainerView { _ in
+                }
+            }
 #elseif false
             NavigationView {
                 SweepSecondView(duration: 10, onCompletion: {

@@ -26,6 +26,8 @@ struct SweepSecondView: View {
     @State private  var minSecFrac: MinSecAndFraction?
     @State private  var wholeSeconds: Int
 
+    static let startDelay: TimeInterval = 1.0
+
     /// The closure provided by client code at `init` to notify it of expiration
     private let completionCallback: (() -> Void)
 
@@ -120,7 +122,12 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             }
 
             .onAppear() {
-                timer.start()
+                Timer.scheduledTimer(
+                    withTimeInterval: Self.startDelay,
+                    repeats: false) { _ in
+                        timer.start()
+                }
+
                 do {
                     try AudioMilestone.shared.play()
                 }
