@@ -98,6 +98,7 @@
 		1FC7477428E787AD00817041 /* AAA.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476D28E7694E00817041 /* AAA.ahap */; };
 		1FC7477528E787AD00817041 /* NNN.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476F28E7694E00817041 /* NNN.ahap */; };
 		1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */; };
+		1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477828EB59F300817041 /* CoreMotion+async.swift */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -183,6 +184,7 @@
 		1FC7476E28E7694E00817041 /* A.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = A.ahap; sourceTree = "<group>"; };
 		1FC7476F28E7694E00817041 /* NNN.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = NNN.ahap; sourceTree = "<group>"; };
 		1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingAccelerometry.swift; sourceTree = "<group>"; };
+		1FC7477828EB59F300817041 /* CoreMotion+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+async.swift"; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			children = (
 				1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */,
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
+				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
 			);
 			path = Accelerometry;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				1FA281E428DBBB270038353E /* UsabilityInterstitialView.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
+				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
 				1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */,
 				1FA2821A28DBBB270038353E /* AccelerometerItem.swift in Sources */,
