@@ -82,6 +82,8 @@ final class MotionManager {
     static let shared = MotionManager()
     static var census = 0
 
+    var lastTimeStamp: TimeInterval = -TimeInterval.infinity
+
     let motionManager: CMMotionManager
     private let deviceState : DeviceState
     private let accState: AccelerometerState
@@ -109,12 +111,5 @@ final class MotionManager {
 
     var accelerometryActive: Bool {
         accState.active
-    }
-
-    /// Halt Core Motion reports on accelerometry.
-    ///
-    /// Not intended for external use; use `.cancelUpdates()` instead.
-    func stopAccelerometer() {
-        motionManager.stopAccelerometerUpdates()
     }
 }

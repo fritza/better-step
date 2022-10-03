@@ -13,45 +13,34 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     // MARK: - AsyncSequence
     typealias Element = CMAccelerometerData
     typealias AsyncIterator = MotionManager
+    
+
+/*
+ func pop() async throws -> CMAccelerometerData? {
+     while buffer.isEmpty {
+         try Task.checkCancellation()
+         try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep)
+     }
+     return buffer.popFirst()
+ }
+ */
+
+
     func next() async throws -> CMAccelerometerData? {
-        guard !isCancelled else { return nil }
-        return try? await asyncBuffer.pop()
+        while let accData = motionManager.accelerometerData,
+              accData.timestamp == lastTimeStamp {
+            try Task.checkCancellation()
+            try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep/4)
+        }
+        // By here
+        // EITHER there is no data (probably the cm manager hasn't started or has stopped)
+        // OR     there is a new timestamp.
+        // Either way, report the data/absence
+        return motionManager.accelerometerData
     }
 
     func makeAsyncIterator() -> MotionManager {
-        // TODO: How do we do start-updates without starting the iterator?
-        //       You might want to do the two separately...?
-        //       Maybe not. I mean, if you can't start without providing
-        //       an action closure, then what closure do you want except to
-        //       feed the sequence?
-        // How does this fail? `throws` is a supertype of non-throwing,
-        // and there's no imaginable way to downcast or (more important)
-        // to handle the throw.
-
-
-        // TODO: What ops queue should this go on?
-        //       You create a new one by instantiating with `init()`.
-        //       I'd want serial. I don't need the main actor.
-        //       Should I go nuts with a separate queue for writing the
-        //       results? Probably not. Let the other things do what
-        //       they do without forcing a queueing system on top of
-        //       whatever the Task chooses.
-
-        motionManager.startAccelerometerUpdates(to: .main)
-        { accData, error in
-            if let error {
-                print(#function, "Accelerometry error:", error)
-                self.cancelUpdates()
-            }
-            if let accData {
-                Task {
-                    // Task? Really?
-                    await self.asyncBuffer.receive(accData)
-                    Self.census = await self.asyncBuffer.count
-                }
-            }
-        }
-
+        motionManager.startAccelerometerUpdates()
         return self
     }
 
@@ -65,6 +54,13 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     func cancelUpdates() {
         isCancelled = true
         stopAccelerometer()
+    }
+
+    /// Halt Core Motion reports on accelerometry.
+    ///
+    /// Not intended for external use; use `.cancelUpdates()` instead.
+    private func stopAccelerometer() {
+        motionManager.stopAccelerometerUpdates()
     }
 }
 
