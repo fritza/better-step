@@ -103,12 +103,13 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = ""
+      savedToolIdentifier = "Allocations"
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1FA281CD28DBBA160038353E"
@@ -116,7 +117,7 @@
             BlueprintName = "Better Step"
             ReferencedContainer = "container:Better Step.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

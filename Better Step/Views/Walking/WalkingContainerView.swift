@@ -101,6 +101,8 @@ struct WalkingContainerView: View, ReportingPhase {
 
     init(completion: @escaping WCClosure) {
         self.completion = completion
+        // The idea is to get AVAudioPlayer to preheat:
+        _ = AudioMilestone.shared
     }
     //((Result<[CMAccelerometerData], Error>) -> Void)!
 //    ) {
