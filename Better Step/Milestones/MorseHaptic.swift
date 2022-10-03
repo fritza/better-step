@@ -24,7 +24,11 @@ struct MorseHaptic: RawRepresentable {
     static var engine   : CHHapticEngine!
 
     /// Initialize all properties (except `chPattern)` from the base name..
-    init?(rawValue   : String) {
+    init?(rawValue: String) {
+        // Bail if the device doesn't support haptics (both kinds)
+        let capabilities = CHHapticEngine.capabilitiesForHardware()
+        guard capabilities.supportsAudio, capabilities.supportsHaptics else { return nil }
+
         do {
             // RawRepresentable compliance
             self.rawValue = rawValue
@@ -71,7 +75,7 @@ struct MorseHaptic: RawRepresentable {
         try player.start(atTime: CHHapticTimeImmediate)
     }
 
-    static let aaa = MorseHaptic(rawValue: "AAA")
-    static let nnn = MorseHaptic(rawValue: "NNN")
+    static var aaa = MorseHaptic(rawValue: "AAA")!
+    static var nnn = MorseHaptic(rawValue: "NNN")!
 }
 

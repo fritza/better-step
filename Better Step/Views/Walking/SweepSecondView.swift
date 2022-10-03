@@ -121,6 +121,14 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
 
             .onAppear() {
                 timer.start()
+                do {
+                    try AudioMilestone.shared.play()
+                }
+                catch {
+#if DEBUG
+                    print(#function, ":", #line, "- attempt to play countdown audio failed:", error.localizedDescription)
+#endif
+                }
             }
             .navigationTitle("Start in…")
         }

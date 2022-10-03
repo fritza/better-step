@@ -93,6 +93,10 @@
 		1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823D28DBBC3F0038353E /* ZIPFoundation */; };
 		1FA2824028DBBC800038353E /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823F28DBBC800038353E /* RealModule */; };
 		1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
+		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
+		1FC7477328E787AD00817041 /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
+		1FC7477428E787AD00817041 /* AAA.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476D28E7694E00817041 /* AAA.ahap */; };
+		1FC7477528E787AD00817041 /* NNN.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476F28E7694E00817041 /* NNN.ahap */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -672,13 +676,17 @@
 			files = (
 				1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */,
 				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
+				1FC7477228E787AD00817041 /* A.ahap in Resources */,
 				1FA2822C28DBBB940038353E /* usability-intro.json in Resources */,
+				1FC7477328E787AD00817041 /* N.ahap in Resources */,
 				1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */,
 				1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */,
 				1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */,
 				1FA2823128DBBB940038353E /* second-walk-intro.json in Resources */,
+				1FC7477428E787AD00817041 /* AAA.ahap in Resources */,
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
 				1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */,
+				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
 				1FA281D528DBBA170038353E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

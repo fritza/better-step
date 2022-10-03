@@ -148,16 +148,26 @@ struct DigitalTimerView: View {
             // the observer's consumer list.
         }
         .onAppear {
+            do {
+                try MorseHaptic.aaa.play()
+                }
+            catch {
+                #if DEBUG
+                print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
+                #endif
+            }
             timer.start()
+
         }
         .onDisappear() {
             do {
+                try MorseHaptic.nnn.play()
                 try observer
                     .writeForArchive(tag: self.walkingState.csvPrefix!)
 //                try observer
 //                    .writeToFile(walkState: self.walkingState)
             } catch {
-                print("DigitalTimerView:\(#line) error on write: \(error)")
+                print("DigitalTimerView:\(#line) error on write/haptic: \(error)")
                 assertionFailure()
             }
             // Is this handler really the best place?

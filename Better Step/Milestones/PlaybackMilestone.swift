@@ -30,8 +30,9 @@ final class AudioMilestone
     static var _shared: AudioMilestone?
     static var shared: AudioMilestone {
         if let retval = _shared { return retval }
-        _shared = try! AudioMilestone(PlaybackConstants.baseName,
-                                      extension: PlaybackConstants.extension)
+        _shared = try! AudioMilestone(
+            PlaybackConstants.baseName,
+            extension: PlaybackConstants.extension)
         return _shared!
     }
 
@@ -74,9 +75,15 @@ final class AudioMilestone
         // MARK: Session init
         let session = AVAudioSession.sharedInstance()
         self.session = session
-        try session.setCategory(.playback,
+        /*
+        try session.setCategory(.playAndRecord,
                                 mode: .voicePrompt,
-                                options: [.duckOthers, .defaultToSpeaker])
+                                options:  [.defaultToSpeaker])
+         THE FOLLOWING HAD WORKED BEFORE:
+        try asession.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers, .defaultToSpeaker])
+         */
+        try session.setCategory(.playAndRecord, mode: .spokenAudio, options: [.duckOthers, .defaultToSpeaker])
+
         // MARK: Player init
         do {
             let tempPlayer = try AVAudioPlayer(data: soundData)    // Optional player
