@@ -67,6 +67,21 @@ struct AccelerometerState: Availability {
         }
 }
 
+// MARK: queue status
+enum Lifecycle: Equatable {
+    case idle, running, error(Error), broken
+    static func == (lhs: Lifecycle, rhs: Lifecycle) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle),
+            (.running, .running),
+            (.broken, .broken)
+            : return true
+        case (.error, .error): return true
+        default:
+            return false
+        }
+    }
+}
 
 // MARK: - MotionManager
 /// Wrapper around `CMMotionManager` with convenient start / stop / `AsyncSequence` for accelerometry,
@@ -84,22 +99,19 @@ final class MotionManager {
 
     var lastTimeStamp: TimeInterval = -TimeInterval.infinity
 
-    let motionManager: CMMotionManager
+    let cmMotionManager: CMMotionManager
     private let deviceState : DeviceState
     private let accState: AccelerometerState
-    var isCancelled: Bool = false
 
     typealias CMDataStream = AsyncStream<CMAccelerometerData>
-    var stream: CMDataStream!
-
     let asyncBuffer = IncomingAccelerometry()
-//    func count() -> Int { return asyncBuffer.count }
 
     // MARK: - Initialization and start
     init() {
+        // temp to avoid configuration through self
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = CMTimeInterval.hzInterval
-        motionManager = cmManager
+        cmMotionManager = cmManager
 
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
@@ -111,5 +123,40 @@ final class MotionManager {
 
     var accelerometryActive: Bool {
         accState.active
+    }
+
+    var lifecycle = Lifecycle.idle
+
+    static let opsQueue: OperationQueue = {
+        let retval = OperationQueue()
+        retval.qualityOfService = .userInitiated
+        // Actually, are we cool with letting OQ spawn
+        // as many threads as it wants?
+        retval.maxConcurrentOperationCount = 1
+        return retval
+    }()
+
+    func start() {
+        cmMotionManager.startAccelerometerUpdates(to: Self.opsQueue, withHandler: accelerometryHandler)
+        lifecycle = .running
+    }
+
+    private func accelerometryHandler(newElement: CMAccelerometerData?,
+                                      error: Error?)
+    {
+        guard lifecycle == .running else { return }
+        if let error { lifecycle = .error(error) }
+        guard let newElement else {
+            lifecycle = .broken
+            return
+        }
+        Task.detached {
+            await self.asyncBuffer.receive(newElement)
+        }
+    }
+
+    func halt() {
+        cmMotionManager.stopAccelerometerUpdates()
+        lifecycle = .idle
     }
 }

@@ -14,6 +14,9 @@ the accels are in .consumer
 import Foundation
 import CoreMotion
 
+#warning("unify MotionManager.lifecycle and self.isCancelled")
+
+
 
 /// ## Topics
 ///
@@ -84,6 +87,7 @@ final class TimedWalkObserver: ObservableObject, CustomStringConvertible {
     /// Reports are collected through a `try await for` loop. If the loop iterator throws, the motion manager is cancelled.
     func start() async {
         isRunning = true
+        MotionManager.shared.start()
         Task {
             do {
                 for try await datum in MotionManager.shared {
@@ -91,7 +95,7 @@ final class TimedWalkObserver: ObservableObject, CustomStringConvertible {
                 }
             }
             catch {
-                MotionManager.shared.cancelUpdates()
+                MotionManager.shared.lifecycle = .error(error)
                 isRunning = false
                 print("\(#file):\(#line): the incoming data loop threw", error)
             }
@@ -106,7 +110,8 @@ final class TimedWalkObserver: ObservableObject, CustomStringConvertible {
 
     /// Halt the Core Motion updates.
     func stop() {
-        MotionManager.shared.cancelUpdates()
+        // FIXME: sholdn't have to rely on singleton
+        MotionManager.shared.halt()
         isRunning = false
     }
 

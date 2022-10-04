@@ -15,20 +15,20 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     typealias AsyncIterator = MotionManager
     
     func next() async throws -> CMAccelerometerData? {
-        while let accData = motionManager.accelerometerData,
+        while let accData = cmMotionManager.accelerometerData,
               accData.timestamp == lastTimeStamp {
-            try Task.checkCancellation()
+            guard self.lifecycle == .running else { return nil }
             try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep/4)
         }
         // By here
         // EITHER there is no data (probably the cm manager hasn't started or has stopped)
         // OR     there is a new timestamp.
         // Either way, report the data/absence
-        return motionManager.accelerometerData
+        return cmMotionManager.accelerometerData
     }
 
     func makeAsyncIterator() -> MotionManager {
-        motionManager.startAccelerometerUpdates()
+//        motionManager.startAccelerometerUpdates()
         return self
     }
 
@@ -39,15 +39,15 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
     /// Use this instead of `.stopAccelerometer()` to terminate the stream. This function does call `.stopAccelerometer()`, but maybe shouldn't — see **Note**.
     ///
     /// - note: The call to `stopAccelerometer()` may be redundant of the `.onTermination` action in `startAccelerometry()`
-    func cancelUpdates() {
-        isCancelled = true
-        stopAccelerometer()
-    }
+//    func cancelUpdates() {
+//        isCancelled = true
+//        stopAccelerometer()
+//    }
 
     /// Halt Core Motion reports on accelerometry.
     ///
     /// Not intended for external use; use `.cancelUpdates()` instead.
-    private func stopAccelerometer() {
-        motionManager.stopAccelerometerUpdates()
-    }
+//    private func stopAccelerometer() {
+//        cmMotionManager.stopAccelerometerUpdates()
+//    }
 }
