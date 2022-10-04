@@ -23,35 +23,6 @@ private let digitalNarrative = """
  - ``init(toggling:size:label:)``
  */
 
-@available(*, unavailable,
-            message: "Do not use, no replacement")
-struct SpeechOnOffView: View {
-    // Don't use AppStorage for this,
-    // it obscures the dependency up through DigitalTimerView..
-    let text: String?
-    @Binding var speechValue: Bool
-    let size: CGSize
-
-    init(toggling: Binding<Bool>, size: CGSize, label: String? = nil) {
-        self.text = label
-        self._speechValue = toggling
-        self.size = size
-    }
-
-    var body: some View {
-        HStack(alignment: .center) {
-            if let text {
-                Text("\(text)")
-                    .minimumScaleFactor(0.5)
-                Spacer(); Divider()
-            }
-            Spacer()
-            Toggle("Speech", isOn: $speechValue)
-                .frame(width: size.width * 0.4)
-        }.frame(height: 50)
-    }
-}
-
 /**
  ## Topics
 
