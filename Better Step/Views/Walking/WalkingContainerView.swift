@@ -94,6 +94,7 @@ struct WalkingContainerView: View, ReportingPhase {
 /*
  ((Result<SuccessValue, Error>) -> Void)!
  */
+    @EnvironmentObject var motionManager: MotionManager
     @State var state: WalkingState? = .interstitial_1
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
@@ -290,6 +291,7 @@ struct WalkingContainerView_Previews: PreviewProvider {
         WalkingContainerView() {
             _ in 
         }
+        .environmentObject(MotionManager(bufferTag: "PVW"))
     }
 }
 

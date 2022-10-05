@@ -29,7 +29,6 @@
 		1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2432D727FDF88E008A5418 /* InstructionPageView.swift */; };
 		1FA281F028DBBB270038353E /* MorseHaptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* MorseHaptic.swift */; };
 		1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
-		1FA281F228DBBB270038353E /* TimedWalkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF528D3A3BD00547C7A /* TimedWalkObserver.swift */; };
 		1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */; };
 		1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
 		1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */; };
@@ -99,6 +98,7 @@
 		1FC7477528E787AD00817041 /* NNN.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476F28E7694E00817041 /* NNN.ahap */; };
 		1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */; };
 		1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477828EB59F300817041 /* CoreMotion+async.swift */; };
+		1FC7477D28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -185,6 +185,7 @@
 		1FC7476F28E7694E00817041 /* NNN.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = NNN.ahap; sourceTree = "<group>"; };
 		1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingAccelerometry.swift; sourceTree = "<group>"; };
 		1FC7477828EB59F300817041 /* CoreMotion+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+async.swift"; sourceTree = "<group>"; };
+		1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IncomingAccelerometry+Marshalling.swift"; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
@@ -481,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */,
+				1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */,
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
 				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
 			);
@@ -775,11 +777,11 @@
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
 				1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */,
 				1FA2822228DBBB270038353E /* InstructionElement.swift in Sources */,
-				1FA281F228DBBB270038353E /* TimedWalkObserver.swift in Sources */,
 				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
 				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
 				1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */,
 				1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */,
+				1FC7477D28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift in Sources */,
 				1FA281E728DBBB270038353E /* PhaseManager.swift in Sources */,
 				1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */,
 				1FA2820E28DBBB270038353E /* BSTAppStages.swift in Sources */,

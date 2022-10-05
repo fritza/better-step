@@ -112,6 +112,9 @@ struct Better_StepApp: App {
             .environmentObject(appStage)
             .environmentObject(WalkingSequence())
             .environmentObject(phaseManager)
+
+            #warning("Move MotionManager environment var closer to the walk container")
+            .environmentObject(MotionManager(bufferTag: "APP_UNCHANGED"))
 #endif
         }
     }

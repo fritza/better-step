@@ -185,13 +185,13 @@ extension TimedWalkObserver: AccelerometryConsuming {
 
     // MARK: Writing
 
-    func addToArchive(tag: String) throws {
-        // TODO: Throwing
-        let prefix = "\(tag),\(SubjectID.id)"
-        let data = allAsData(prefixed: prefix)
-        try CSVArchiver.shared
-            .writeData(data, forTag: tag)
-    }
+//    func addToArchive(tag: String) throws {
+//        // TODO: Throwing
+//        let prefix = "\(tag),\(SubjectID.id)"
+//        let data = allAsData(prefixed: prefix)
+//        try CSVArchiver.shared
+//            .writeData(data, forTag: tag)
+//    }
 
 //    static var filePaths: [String] = []
 //    static func registerFilePath(_ name: String) {

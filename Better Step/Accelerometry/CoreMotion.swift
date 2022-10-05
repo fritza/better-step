@@ -87,14 +87,55 @@ enum Lifecycle: Equatable {
 /// Wrapper around `CMMotionManager` with convenient start / stop / `AsyncSequence` for accelerometry,
 ///
 /// - bug: It's not obvious how to start the accelerometers independently of generating sequence elements.
-final class MotionManager {
+final class MotionManager: ObservableObject {
     /// Access to the singleton `MotionManager`.
     ///
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
 
     // MARK: Properties
 
-    static let shared = MotionManager()
+    // TODO: Remove the singleton MotionManager
+    //       We need one for each walk.
+    //       ... OR some other way to reset the walk-phase tag (w_1)
+    //       An actual tagged-reset wouldn't be a bad idea.
+    static let shared = MotionManager(bufferTag: "###")
+
+    var walkingState: WalkingState? = nil
+    @discardableResult
+    func reset(newPhase: WalkingState? = nil) async -> [CMAccelerometerData] {
+        // warning: The result is discardable.
+        // You should have harvested the data result already.
+        let retval = await asyncBuffer.popAll()
+        walkingState = newPhase
+        return retval
+
+        #error("I'm losing it.")
+
+/*
+ I'm losing it.
+
+ What do we want when the timer window appears?
+    Reset the motion manager    (done in .task)
+    assign it a new tag. (walkingPhase?)
+    start it.
+
+ What do we want when the timer window goes away?
+     halt it. (should already be done.
+     √ report conclusion of the stage.
+
+ What do we want when control arrives at the container?
+     Save the data array as either the first or the second series.
+    When completed, make sure they are in a temp directory
+    zip them.
+
+ BUT
+ */
+
+
+    }
+
+
+
     static var census = 0
 
     var lastTimeStamp: TimeInterval = -TimeInterval.infinity
@@ -104,10 +145,10 @@ final class MotionManager {
     private let accState: AccelerometerState
 
     typealias CMDataStream = AsyncStream<CMAccelerometerData>
-    let asyncBuffer = IncomingAccelerometry()
+    var asyncBuffer = IncomingAccelerometry(prefix: "w_1")
 
     // MARK: - Initialization and start
-    init() {
+    init(bufferTag: String) {
         // temp to avoid configuration through self
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = CMTimeInterval.hzInterval
@@ -115,6 +156,7 @@ final class MotionManager {
 
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
+        asyncBuffer = IncomingAccelerometry(prefix: bufferTag)
     }
 
     var accelerometryAvailable: Bool {
@@ -125,7 +167,7 @@ final class MotionManager {
         accState.active
     }
 
-    var lifecycle = Lifecycle.idle
+    @Published var lifecycle = Lifecycle.idle
 
     static let opsQueue: OperationQueue = {
         let retval = OperationQueue()
@@ -150,7 +192,7 @@ final class MotionManager {
             lifecycle = .broken
             return
         }
-        Task.detached {
+        Task {
             await self.asyncBuffer.receive(newElement)
         }
     }

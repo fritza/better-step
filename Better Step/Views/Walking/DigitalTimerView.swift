@@ -27,19 +27,11 @@ private let digitalNarrative = """
  ## Topics
 
  ### Properties
- - ``controller``
  - ``body``
  */
 
-/*
- How do we work the MotionManager iterator?
- Should DigitalTimerView bother accepting data at all?
- Put that in a "manager?"
+struct DigitalTimerView: View, ReportingPhase {
 
- In time, it should not be responsible for cancellation. Except… we do that already for TimeReader
- */
-
-struct DigitalTimerView: View {
     static var dtvSerial = 100
     let serialNumber: Int
 
@@ -48,13 +40,18 @@ struct DigitalTimerView: View {
 
     var walkingState: WalkingState
 
-    private let expirationCallback: (() -> Void)?
+    typealias SuccessValue = Data
+    typealias CompletionFunc = ((Result<SuccessValue, Error>) -> Void)
+//    @MainActor
+    var completion: CompletionFunc!
+    // DAMMIT:
+    // Stored property 'completion' within struct cannot have a global actor; this is an error in Swift 6
 
-    var observer = TimedWalkObserver(title: "some Timer")
+    @EnvironmentObject private var motionManager: MotionManager
 
     init(duration: TimeInterval,
          walkingState: WalkingState,
-         immediately completion: (() -> Void)? = nil,
+         immediately completion: CompletionFunc? = nil,
 
          function: String = #function,
          fileID: String = #file,
@@ -72,12 +69,12 @@ struct DigitalTimerView: View {
 
         let tr =  TimeReader(interval: duration)
         self.timer = tr
-        expirationCallback = completion
+        self.completion = completion
     }
 
     fileprivate func timerStateDidChange(_ stat: TimeReader.TimerStatus) {
         if stat == .expired {
-            expirationCallback?()
+//            completion?()
         }
         else if stat == .running {
         }
@@ -85,7 +82,7 @@ struct DigitalTimerView: View {
         // If the timer halts, stop collecting.
         switch timer.status {
         case .cancelled, .expired:
-            observer.stop()
+            motionManager.halt()
             // Now that it's stopped, you're ready to write a CSV file
             // Do not call reset or clearRecords, you need those for writing.
 
@@ -115,7 +112,11 @@ struct DigitalTimerView: View {
             .padding()
         }
         .task {
-            await self.observer.start()
+            // warning: The result is discardable.
+            // You should have harvested the data result already.
+            await self.motionManager.reset(newPhase: self.walkingState)
+
+            self.motionManager.start()
             // This appends CMAccelerometerData to
             // the observer's consumer list.
         }
@@ -134,11 +135,16 @@ struct DigitalTimerView: View {
         .onDisappear() {
             do {
                 try MorseHaptic.nnn.play()
-                try observer
-                    .writeForArchive(tag: self.walkingState.csvPrefix!)
-//                try observer
-//                    .writeToFile(walkState: self.walkingState)
-            } catch {
+
+                Task {
+                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
+                    completion?(.success(allData))
+                }
+
+                try  motionManager
+                    .writeForArchive(tag: walkingState.csvPrefix!)
+            }
+            catch {
                 print("DigitalTimerView:\(#line) error on write/haptic: \(error)")
                 assertionFailure()
             }
@@ -173,6 +179,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
             DigitalTimerView(duration: CountdownConstants.countdownDuration,
                              walkingState: .walk_2)
                 .padding()
+                .environmentObject(MotionManager(bufferTag: "!!!!"))
         }
     }
 }

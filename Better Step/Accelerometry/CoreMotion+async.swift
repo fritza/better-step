@@ -31,23 +31,13 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
 //        motionManager.startAccelerometerUpdates()
         return self
     }
+}
 
-// MARK: - MotionManager life cycle
-
-    /// Halt the `CMAccelerometerData` stream by signaling the loop that it has been canceled.
-    ///
-    /// Use this instead of `.stopAccelerometer()` to terminate the stream. This function does call `.stopAccelerometer()`, but maybe shouldn't — see **Note**.
-    ///
-    /// - note: The call to `stopAccelerometer()` may be redundant of the `.onTermination` action in `startAccelerometry()`
-//    func cancelUpdates() {
-//        isCancelled = true
-//        stopAccelerometer()
-//    }
-
-    /// Halt Core Motion reports on accelerometry.
-    ///
-    /// Not intended for external use; use `.cancelUpdates()` instead.
-//    private func stopAccelerometer() {
-//        cmMotionManager.stopAccelerometerUpdates()
-//    }
+extension MotionManager {
+    // Wrappers on the IncomingCccelerometry actor
+    func writeForArchive(tag: String) throws {
+        Task {
+            try await asyncBuffer.writeForArchive()
+        }
+    }
 }

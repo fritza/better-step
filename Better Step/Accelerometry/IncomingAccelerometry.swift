@@ -16,10 +16,12 @@ actor IncomingAccelerometry {
 
 // MARK: Properties
 
-//    let motionManager = MotionManager()
-#warning("Audit all other instantiations of MotionManager.")
-    // ALSO, what are the prerequisites for instantiating one?
-
+    let walkStagePrefix: String
+    init(prefix: String) {
+        precondition(!prefix.isEmpty,
+        "IncomingAccelerometry must not have an empty tag")
+        walkStagePrefix = prefix
+    }
 
     var buffer = Deque<CMAccelerometerData>(
         minimumCapacity: numericCast(CMTimeInterval.minBufferCapacity))
@@ -42,9 +44,14 @@ actor IncomingAccelerometry {
 
     func popAll()  -> [CMAccelerometerData] {
         // This isn't async?!
+        let content = all()
+        buffer.removeFirst(content.count)
+        return content
+    }
+
+    func all() -> [CMAccelerometerData] {
         let number = buffer.count
         let content = buffer[..<number]
-        buffer.removeFirst(number)
         return Array(content)
     }
 }
