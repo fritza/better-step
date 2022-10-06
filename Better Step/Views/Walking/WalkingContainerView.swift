@@ -174,7 +174,7 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(ownPhase.csvPrefix!))",
             tag: ownPhase, selection: $state) {
-                DigitalTimerView(duration: CountdownConstants.countdownDuration,
+                DigitalTimerView(duration: CountdownConstants.walkDuration,
                                  walkingState: ownPhase) {
                     result  in
                     switch result {

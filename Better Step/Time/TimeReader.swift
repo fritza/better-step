@@ -17,9 +17,9 @@ let signposter = OSSignposter(subsystem: "com.wt9t.G-Bars",
 
 enum CountdownConstants {
 #if DEBUG
-    static let countdownDuration    = 120.0             // 15.0
+    static let walkDuration    = 120.0             // 15.0
 #else
-    static let countdownDuration    = 120.0
+    static let walkDuration    = 120.0
 #endif
 
     static let countdownInterval    = 30

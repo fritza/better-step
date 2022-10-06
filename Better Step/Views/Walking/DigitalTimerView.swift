@@ -38,7 +38,7 @@ struct DigitalTimerView: View, ReportingPhase {
     static var dtvSerial = 100
     let serialNumber: Int
     
-    @ObservedObject var timer = TimeReader(interval: CountdownConstants.countdownDuration)
+    @ObservedObject var timer = TimeReader(interval: CountdownConstants.walkDuration)
     @State private var minSecfrac: MinSecAndFraction?
 
     var walkingState: WalkingState
@@ -178,7 +178,7 @@ struct DigitalTimerView: View, ReportingPhase {
 struct DigitalTimerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DigitalTimerView(duration: CountdownConstants.countdownDuration,
+            DigitalTimerView(duration: CountdownConstants.walkDuration,
                              walkingState: .walk_2)
                 .padding()
                 .environmentObject(MotionManager(phase: .walk_1))
