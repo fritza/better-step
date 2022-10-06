@@ -53,7 +53,7 @@ final class TimeReader: ObservableObject {
     @Published var status: TimerStatus = .ready
 
     private var startingDate, endingDate: Date
-    private let totalInterval: TimeInterval
+    private var totalInterval: TimeInterval
     private let tickInterval: TimeInterval
     private let tickTolerance: TimeInterval
 
@@ -120,6 +120,14 @@ final class TimeReader: ObservableObject {
     }
     #endif
 
+    func reset() {
+        // I hate that
+        let currentDate = Date()
+        startingDate = currentDate
+        endingDate = Date().addingTimeInterval(totalInterval)
+
+    }
+
     /// Initiate the countdown that was set up in `init`.
     ///
     /// Sets up the Combine chains from the `Timer` to all the published interval components.
@@ -128,56 +136,28 @@ final class TimeReader: ObservableObject {
                line: Int = #line) {
 //        print("TimeReader.START called from", function, "\(fileID):\(line)")
 
-
         // FIXME: timer status versus expected
         // like ".ready" is getting seriously into misalignment.
         assert(status != .running,
         "attempt to restart a timer")
 
-        startingDate = Date()
-        endingDate = Date().addingTimeInterval(totalInterval)
+        reset()
+
         status = .running
         sharedTimer = setUpCombine().share().eraseToAnyPublisher()
 
-        timeCancellable = sharedTimer
-            .sink { completion in
-                switch completion {
-                case .finished: break
-                case .failure(let error):
-                    guard let err = error as? TerminationErrors else {
-//                        print("Timer serial", self.serial, ": other error: \(error).")
-                        return
-                    }
-                    switch err {
-                    case .expired:
-                        self.status = .expired
-                        //print("Timer serial", self.serial, "ran out")
-                    case .cancelled:       // print("Timer serial", self.serial, "was cancelled")
-                        self.status = .cancelled
-                    }
-                }
-            } receiveValue: { msf in
-                self.timeSubject.send(msf)
-            }
-
-        mmssCancellable = sharedTimer
-            .map { time in
-                return time.with(fraction: 0.0)
-            }
-            .replaceError(with: .zero)
-            .filter {
-                $0.second % CountdownConstants.countdownInterval
-                 == 0
-            }
-            .removeDuplicates()
-            .sink { mmssfff in
-                self.mmssSubject.send(mmssfff)
-            }
-
-        secondsCancellable = sharedTimer
+        timeCancellable = mmss_ff_Cancellable()
+        mmssCancellable = mmss_00_Cancellable()
+        secondsCancellable = ss_Cancellable()
+    }
+    func ss_Cancellable() -> AnyCancellable {
+        let retval = sharedTimer
             .map { $0.second }
             .filter { $0 >= 0 }
             .removeDuplicates()
+
+            .print("seconds")
+
             .sink(
                 receiveCompletion: { completion in
                     switch completion {
@@ -197,7 +177,51 @@ final class TimeReader: ObservableObject {
                     self.secondsSubject.send(secInteger)
                 }
             )
-//        print("Timer serial", serial, "was started.")
+        return retval
+    }
+
+    func mmss_ff_Cancellable() -> AnyCancellable {
+        let retval = sharedTimer
+            .sink { completion in
+                switch completion {
+                case .finished: break
+                case .failure(let error):
+                    guard let err = error as? TerminationErrors else {
+                        //                        print("Timer serial", self.serial, ": other error: \(error).")
+                        return
+                    }
+                    switch err {
+                    case .expired:
+                        self.status = .expired
+                        //print("Timer serial", self.serial, "ran out")
+                    case .cancelled:       // print("Timer serial", self.serial, "was cancelled")
+                        self.status = .cancelled
+                    }
+                }
+            } receiveValue: { msf in
+                self.timeSubject.send(msf)
+            }
+        return retval
+    }
+
+    func mmss_00_Cancellable() ->  AnyCancellable {
+        let retval = sharedTimer
+            .map { time in
+                return time.with(fraction: 0.0)
+            }
+            .print("mmss_00")
+            .replaceError(with: .zero)
+            .filter {
+                $0.second % CountdownConstants.countdownInterval
+                == 0
+            }
+            .removeDuplicates()
+
+
+            .sink { mmssfff in
+                self.mmssSubject.send(mmssfff)
+            }
+        return retval
     }
 
     static let roundingScale = 100.0
@@ -210,7 +234,6 @@ final class TimeReader: ObservableObject {
                                    tolerance: tickTolerance,
                                    on: .main, in: .common)
             .autoconnect()
-//            .print()
             .tryMap {
                 // Timer's date to seconds until expiry
                 (date: Date) -> TimeInterval in
