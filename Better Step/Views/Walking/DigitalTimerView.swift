@@ -37,8 +37,8 @@ struct DigitalTimerView: View, ReportingPhase {
 
     static var dtvSerial = 100
     let serialNumber: Int
-
-    @ObservedObject var timer: TimeReader
+    
+    @ObservedObject var timer = TimeReader(interval: CountdownConstants.countdownDuration)
     @State private var minSecfrac: MinSecAndFraction?
 
     var walkingState: WalkingState
@@ -66,12 +66,6 @@ struct DigitalTimerView: View, ReportingPhase {
         self.walkingState = walkingState
         serialNumber = Self.dtvSerial
         Self.dtvSerial += 1
-
-//        print("DigitalTimerView.init", serialNumber,
-//              "called from", function, "\(fileID):\(line)")
-
-        let tr =  TimeReader(interval: duration)
-        self.timer = tr
         self.completion = completion
     }
 
@@ -142,7 +136,6 @@ struct DigitalTimerView: View, ReportingPhase {
                 #endif
             }
             timer.start()
-
         }
         .onDisappear() {
             do {
