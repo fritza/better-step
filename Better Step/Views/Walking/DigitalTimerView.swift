@@ -12,6 +12,9 @@ private let digitalNarrative = """
 “Cancel” will stop the count but not dispatch to a recovery page.
 """
 
+// FIXME: Add an Error that describes cancellation.
+
+
 /**
  ## Topics
 
@@ -40,7 +43,7 @@ struct DigitalTimerView: View, ReportingPhase {
 
     var walkingState: WalkingState
 
-    typealias SuccessValue = Data
+    typealias SuccessValue = IncomingAccelerometry
     typealias CompletionFunc = ((Result<SuccessValue, Error>) -> Void)
 //    @MainActor
     var completion: CompletionFunc!
@@ -72,9 +75,17 @@ struct DigitalTimerView: View, ReportingPhase {
         self.completion = completion
     }
 
+    // FIXME: Test this.
     fileprivate func timerStateDidChange(_ stat: TimeReader.TimerStatus) {
+        switch stat {
+        case .cancelled      : completion?(.failure(FileStorageErrors.walkingPhaseProbablyKilled(self.walkingState)))
+        case .expired        : completion?(.success(self.motionManager.asyncBuffer))
+        case .ready, .running: break
+        }
+}
+        /*
         if stat == .expired {
-//            completion?()
+//            ANYTHING
         }
         else if stat == .running {
         }
@@ -89,6 +100,7 @@ struct DigitalTimerView: View, ReportingPhase {
         default: break
         }
     }
+         */
 
     var body: some View {
         GeometryReader { proxy in
@@ -137,12 +149,9 @@ struct DigitalTimerView: View, ReportingPhase {
                 try MorseHaptic.nnn.play()
 
                 Task {
-                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
-                    completion?(.success(allData))
+                    //                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
+                    completion?(.success(motionManager.asyncBuffer))
                 }
-
-                try  motionManager
-                    .writeForArchive(tag: walkingState.csvPrefix!)
             }
             catch {
                 print("DigitalTimerView:\(#line) error on write/haptic: \(error)")
@@ -179,7 +188,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
             DigitalTimerView(duration: CountdownConstants.countdownDuration,
                              walkingState: .walk_2)
                 .padding()
-                .environmentObject(MotionManager(bufferTag: "!!!!"))
+                .environmentObject(MotionManager(phase: .walk_1))
         }
     }
 }

@@ -8,26 +8,6 @@
 import Foundation
 import ZIPFoundation
 
-// Whew. A notification.
-/// `Notification` for the addition of a (intended) `.csv` file.
-let ZIPProgressNotice = Notification.Name(rawValue: "zipProgressNotice")
-enum ZIPProgressKeys: String {
-    // String, which phase tag has been completed.
-    /// The tag (`String`) inserted into CSV lines and file names.
-    case tagCompleted
-    /// The name of the generated `.csv` file
-    case fileName
-}
-
-/// `Notification` for the completion of the `.zip` file.
-let ZIPCompletionNotice = Notification.Name(rawValue: "zipCompletionNotice")
-enum ZIPCompletionKeys: String {
-    /// URL for the generated .zip file
-    case zipFileURL
-}
-
-
-
 // Where do I receive this notification?
 
 /*
@@ -42,21 +22,7 @@ enum ZIPCompletionKeys: String {
  9. CMAccelerometerData can emit a .csvLine (CSVRepresentable).
  */
 
-var completedTags: [String] = []
-let addToArchive = NotificationCenter.default
-    .addObserver(forName: ZIPProgressNotice,
-                 object: nil, queue: .main) { notice in
-        guard let info = notice.userInfo as? [ZIPProgressKeys: String],
-                let fileName = info[.fileName],
-                let theTag   = info[.tagCompleted]
-        else {
-            fatalError()
-        }
-        completedTags.append(theTag)
-        if completedTags.count == 2 {
-            try! CSVArchiver.shared.exportZIPFile()
-        }
-    }
+//var completedTags: [String] = []
 
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
@@ -116,15 +82,14 @@ final class CSVArchiver {
         return destinationDirectoryURL
     }
 
-    /// Write data into one `.csv` file in the working directory and add it to the `.zip` archive
+    /// Write data into one `.csv` file in the working directory .
     /// - Parameters:
     ///   - data: The content of the file to archive.
-    ///   - tag: A short `String` distinguishing the phase (regular, fast) of collection.
-    func writeData(_ data : Data,
-                   forTag tag : String) throws {
+    ///   - tag: A short `String` distinguishing the phase (walk 1 or 2) of collection. Expected to be derived from WalkingPhase
+    func writeFile(data : Data, forPhase phase: WalkingState) throws -> URL {
         // TODO: Replace duplicate-named files with the new one.
         // Create and write a csv file for the data.
-        let taggedURL = csvFileURL(tag: tag)
+        let taggedURL = csvFileURL(phase: phase)
         let success = FileManager.default
             .createFile(
                 atPath: taggedURL.path,
@@ -133,20 +98,42 @@ final class CSVArchiver {
             throw FileStorageErrors.cantCreateFileAt(taggedURL)
         }
 
-        // Add to archive
-        try csvArchive.addEntry(
-            with: taggedURL.lastPathComponent,
-            fileURL: taggedURL)
-
-        // Notify the addition of the file
-        let params: [ZIPProgressKeys : String] = [
-            .tagCompleted : tag,
-            .fileName     : taggedURL.path
-          ]
+        // Notify the write of the file
+        let params = ZIPProgressKeys.dictionary(
+            phase: phase, url: taggedURL)
         NotificationCenter.default
-            .post(name: ZIPProgressNotice,
+            .post(name: ZIPDataWriteCompletion,
                   object: self, userInfo: params)
+        return taggedURL
     }
+
+    /// Write a file containing CSV content data into the uniform holding file for one run of a walk challenge
+    /// - Parameters:
+    ///   - data: The data to write
+    ///   - tag: The `WalkingState` for the walk phase.
+    func addToArchive(data: Data, forPhase phase: WalkingState) throws {
+        do {
+            let dataURL = try writeFile(data: data,
+                                       forPhase: phase)
+            try csvArchive.addEntry(
+                with: dataURL.lastPathComponent,
+                fileURL: dataURL)
+
+            let params = ZIPProgressKeys.dictionary(
+                phase: phase, url: dataURL)
+            NotificationCenter.default
+                .post(name: ZIPDataArchiveCompletion,
+                      object: self, userInfo: params)
+        }
+        catch {
+            let params = ZIPProgressKeys.dictionary(error: error)
+            NotificationCenter.default
+                .post(name: ZIPDataArchiveCompletion,
+                      object: self, userInfo: params)
+            throw error
+        }
+    }
+
 
     /// Assemble and compress the file data and write it to a `.zip` file.
     ///
@@ -158,11 +145,11 @@ final class CSVArchiver {
         try content.write(to: zipFileURL)
 
         // Notify the export of the `.zip` file
-        let params: [ZIPCompletionKeys : URL] = [
-            .zipFileURL :    zipFileURL
-          ]
+        let params: [ZIPProgressKeys : URL] = [
+            .fileURL :    zipFileURL
+        ]
         NotificationCenter.default
-            .post(name: ZIPCompletionNotice,
+            .post(name: ZIPDataWriteCompletion,
                   object: self, userInfo: params)
     }
 }
@@ -194,13 +181,14 @@ extension CSVArchiver {
     }
 
     /// Name of the tagged `.csv` file
-    func csvFileName(tag: String) -> String {
-        "\(SubjectID.id)_\(tag)_\(timestamp).csv"
+    func csvFileName(phase: WalkingState) -> String {
+        "\(SubjectID.id)_\(phase.csvPrefix!)_\(timestamp).csv"
     }
 
     /// Destination (wrapper) directory + per-exercise `.csv` name
-    func csvFileURL(tag: String) -> URL {
+    func csvFileURL(phase: WalkingState) -> URL {
         containerDirectory
-            .appendingPathComponent(csvFileName(tag: tag))
+            .appendingPathComponent(
+                csvFileName(phase: phase))
     }
 }

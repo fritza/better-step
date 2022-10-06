@@ -32,12 +32,3 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
         return self
     }
 }
-
-extension MotionManager {
-    // Wrappers on the IncomingCccelerometry actor
-    func writeForArchive(tag: String) throws {
-        Task {
-            try await asyncBuffer.writeForArchive()
-        }
-    }
-}

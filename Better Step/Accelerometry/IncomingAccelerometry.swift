@@ -10,17 +10,15 @@ import CoreMotion
 import Collections
 
 // MARK: - IncomingAccelerometry
-actor IncomingAccelerometry {
+public actor IncomingAccelerometry {
 //    weak var motionManager: MotionManager!
 
 
 // MARK: Properties
 
-    let walkStagePrefix: String
-    init(prefix: String) {
-        precondition(!prefix.isEmpty,
-        "IncomingAccelerometry must not have an empty tag")
-        walkStagePrefix = prefix
+    let phase: WalkingState
+    init(phase: WalkingState) {
+        self.phase = phase
     }
 
     var buffer = Deque<CMAccelerometerData>(

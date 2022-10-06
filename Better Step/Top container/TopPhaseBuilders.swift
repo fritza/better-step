@@ -39,9 +39,12 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (walking_view)",
             tag: TopPhases.walking, selection: $currentPhase) {
-                WalkingContainerView { result in
-                    guard let series = try? result.get() else {
-                        self.currentPhase = .failed; return
+                WalkingContainerView { error in
+                    if let error {
+                        // TODO: respond to cancellation."
+                        print(#function,
+                              "- WalkingContainerView came back with an error:",
+                              error.localizedDescription)
                     }
                     let nextPhase: TopPhases
                     switch (d: collectedDASI, u: collectedUsability) {

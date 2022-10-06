@@ -17,13 +17,13 @@ protocol HasVoidCompletion {
 }
 
 // MARK: - WalkingState
-enum WalkingState: String, CaseIterable // , BSTAppStages
+public enum WalkingState: String, CaseIterable // , BSTAppStages
 {
     case interstitial_1, countdown_1, walk_1
     case interstitial_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
 
-    var csvPrefix: String? {
+    public var csvPrefix: String? {
         switch self {
         case .walk_1: return "w_1"
         case .walk_2: return "w_2"
@@ -32,6 +32,14 @@ enum WalkingState: String, CaseIterable // , BSTAppStages
         }
     }
 }
+
+/*
+ The right but hard way to handle walk-data completion is an observable WalkingContainerResult. EnvObj, singleton, whatever.
+
+ The wrong but easy way is to make them global.
+ */
+var walkResult_1: Data?
+var walkResult_2: Data?
 
 
 private let instructionContentList     = try! InterstitialList(baseName: "walk-intro"       )
@@ -42,12 +50,12 @@ let csvUTT       = UTType.commaSeparatedText
 let csvUTTString = "public.comma-separated-values-text"
 
 /*
-/// Adopters promise to present a `completion` closure for the `WalkingContainerView` to designate the next page.
-protocol StageCompleting {
-    /// Informs the creator whether a contained `NavigationLink` destination has completed successfully or not.
-    var completion: (Bool) -> Void { get }
-}
-*/
+ /// Adopters promise to present a `completion` closure for the `WalkingContainerView` to designate the next page.
+ protocol StageCompleting {
+ /// Informs the creator whether a contained `NavigationLink` destination has completed successfully or not.
+ var completion: (Bool) -> Void { get }
+ }
+ */
 /// ## Topics
 ///
 /// ### Introduction
@@ -87,45 +95,44 @@ protocol StageCompleting {
 ///  - note: `demo_summaryView()` is presented only if the `INCLUDE_WALK_TERMINAL` compilation flag is set.
 
 
-struct WalkingContainerView: View, ReportingPhase {
-    typealias SuccessValue = [CMAccelerometerData]
-    typealias ResultValue = Result<SuccessValue,Error>
-    typealias WCClosure = (ResultValue) -> Void
-/*
- ((Result<SuccessValue, Error>) -> Void)!
- */
+struct WalkingContainerView: View {
+    typealias WCVClosure = ((Error?) -> Void)
+    var completion: WCVClosure
+
+    /*
+     ((Result<SuccessValue, Error>) -> Void)!
+     */
     @EnvironmentObject var motionManager: MotionManager
     @State var state: WalkingState? = .interstitial_1
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
-    var completion: WCClosure!
 
-    init(completion: @escaping WCClosure) {
+    init(completion: @escaping WCVClosure) {
         self.completion = completion
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
     }
     //((Result<[CMAccelerometerData], Error>) -> Void)!
-//    ) {
-//        self.completion = completion
-//    }
+    //    ) {
+    //        self.completion = completion
+    //    }
 
 
     var body: some View {
-//        NavigationView {
-            VStack {
-                interstitial_1View()
-                countdown_1View()
-                walk_1View()
-                interstitial_2View()
-                countdown_2View()
-                walk_2View()
-                ending_interstitialView()
+        //        NavigationView {
+        VStack {
+            interstitial_1View()
+            countdown_1View()
+            walk_1View()
+            interstitial_2View()
+            countdown_2View()
+            walk_2View()
+            ending_interstitialView()
 #if INCLUDE_WALK_TERMINAL
-                demo_summaryView()
+            demo_summaryView()
 #endif
-            }   // VStack
-//        }       // NavigationView
+        }   // VStack
+            //        }       // NavigationView
         .onAppear {
         }
     } // body
@@ -140,7 +147,7 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (interstitial_1)",
             tag: WalkingState.interstitial_1, selection: $state) {
-                InterstitalPageContainerView(listing: instructionContentList, selection: 1) {
+                InterstitalPageContainerView(listing: instructionContentList, selection: 1) {_ in
                     self.state = .countdown_1
                 }.padding()
                     .navigationBarBackButtonHidden(true)
@@ -162,34 +169,61 @@ extension WalkingContainerView {
             .hidden()
     }
 
-    /// A `NavigationLink` for the first timed walk (`walk_1`)
     @ViewBuilder
-    func walk_1View() -> some View {
+    func walk_N_View(ownPhase: WalkingState, nextPhase: WalkingState) -> some View {
         NavigationLink(
-            "SHOULDN'T SEE (walk_1)",
-            tag: WalkingState.walk_1, selection: $state) {
+            "SHOULDN'T SEE (walk_N, \(ownPhase.csvPrefix!))",
+            tag: ownPhase, selection: $state) {
                 DigitalTimerView(duration: CountdownConstants.countdownDuration,
-                                 walkingState: .walk_1) {
-                    // → .interstitial_2
-                    state = .interstitial_2
+                                 walkingState: ownPhase) {
+                    result  in
+                    switch result {
+                    case .failure(_):   // Should be FileStorageErrors.walkingPhaseProbablyKilled
+                        break
+                    case .success(let incoming):
+                        let wcrS = WalkingContainerResult.shared
+                        wcrS[ownPhase] = incoming
+
+                        if wcrS.readyForExport {
+                            let (slowResult, fastResult) = (wcrS.walk_1!, wcrS.walk_2!)
+                            //                            for each, write the files, then build an archive.
+                            Task {
+                                try? await slowResult.addToArchive()
+                                try? await fastResult.addToArchive()
+                                // FIXME: do something about export failures.
+                            }
+                        }
+                    }
+
+                    // → nextPhase
+                    state = nextPhase
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
             .hidden()
     }
 
+
+    /// A `NavigationLink` for the first timed walk (`walk_1`)
+    @ViewBuilder
+    func walk_1View() -> some View {
+        walk_N_View(ownPhase: .walk_1,
+                    nextPhase: .interstitial_2)
+    }
+
     /// A `NavigationLink` for the interstitial view between the two walk sequences (`interstitial_2`)
     @ViewBuilder
-    func interstitial_2View() -> some View    {             NavigationLink(
-        "SHOULDN'T SEE (interstitial_2)",
-        tag: WalkingState.interstitial_2, selection: $state) {
-            InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) {
-                // → .countdown_2
-                self.state = .countdown_2
-            }.padding()
-                .navigationBarBackButtonHidden(true)
-        }
-        .hidden()
+    func interstitial_2View() -> some View    {
+        NavigationLink(
+            "SHOULDN'T SEE (interstitial_2)",
+            tag: WalkingState.interstitial_2, selection: $state) {
+                InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) { _ in
+                    // → .countdown_2
+                    self.state = .countdown_2
+                }.padding()
+                    .navigationBarBackButtonHidden(true)
+            }
+            .hidden()
     }
 
     /// A `NavigationLink` for the second pre-walk countdown (`countdown_2`)
@@ -209,18 +243,8 @@ extension WalkingContainerView {
 
     /// A `NavigationLink` for the second timed walk (`walk_2`)
     func walk_2View() -> some View {
-        NavigationLink(
-            "SHOULDN'T SEE (walk_2)",
-            tag: WalkingState.walk_2, selection: $state) {
-                DigitalTimerView(
-                    duration: CountdownConstants.countdownDuration,
-                    walkingState: .walk_2) {
-                        // → .ending_interstitial
-                        state = .ending_interstitial
-                    }.padding()
-                    .navigationBarBackButtonHidden(true)
-            }
-            .hidden()
+        walk_N_View(ownPhase: .walk_2,
+                    nextPhase: .ending_interstitial)
     }
 
     /// A `NavigationLink` for the closing screen (`ending_interstitial`)
@@ -230,58 +254,21 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {
-
-                #if INCLUDE_WALK_TERMINAL
-
-                // REGULAR farewell to the user.
-                InterstitalPageContainerView(
-                    // Walk-demo, the summary page follows.
-                    listing: end_walkingContentList, selection: 1) {
-                        self.state = .demo_summary
-                    }.padding() // completion closure for end_walkingList
-                    .navigationBarBackButtonHidden(true)
-
-                #else
-
                 InterstitalPageContainerView(
                     // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
-                    listing: end_walkingContentList, selection: 1) {
-                        completion(
-                            .success(
-                                [ ]
-                            )
-                        )
-                        self.state = .interstitial_1
-                    }.padding() // completion closure for end_walkingList
-                    .navigationBarBackButtonHidden(true)
-
-                #endif
-            }
+                    listing: end_walkingContentList, selection: 1) { result in
+                        switch result {
+                        case .success(_)        : completion(nil)
+                        case .failure(let error): completion(error)
+                        }
+                        // FIXME: Can't pass an error back through completion.
+//                        completion(nil)
+                        //                        self.state = .interstitial_1
+                    }
+            }.padding() // completion closure for end_walkingList
+            .navigationBarBackButtonHidden(true)
             .hidden()
     }
-
-#if INCLUDE_WALK_TERMINAL
-    // Is a walk-demo. Display the generated-data summary. Loops around to the initial screen interstitial_1
-    // which may at choice include clearing data as for a fresh user.
-
-    /// A `NavigationLink` for a demo app to demonstrate the data collected.
-    ///
-    /// Available only if the `INCLUDE_WALK_TERMINAL` compiler flag is set.
-    @ViewBuilder
-    func demo_summaryView() -> some View {
-        NavigationLink(
-            "SHOULDN'T SEE (demo_summary)",
-            tag: WalkingState.demo_summary, selection: $state) {
-                LastWalkingDemoView() {
-                    self.state = .interstitial_1
-                }
-                .padding() // completion closure for end_walkingList
-                .navigationBarBackButtonHidden(true)
-            }
-            .hidden()
-    }
-#endif
-
 }
 
 // MARK: - Preview
@@ -289,9 +276,9 @@ struct WalkingContainerView_Previews: PreviewProvider {
 
     static var previews: some View {
         WalkingContainerView() {
-            _ in 
+_ in
         }
-        .environmentObject(MotionManager(bufferTag: "PVW"))
+        .environmentObject(MotionManager(phase: .walk_2))
     }
 }
 

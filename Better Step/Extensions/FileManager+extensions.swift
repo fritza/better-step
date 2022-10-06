@@ -21,6 +21,8 @@ public enum FileStorageErrors: Error {
     case subjectIDInvalid(String)
     case shortageOfDASIResponsesBy(Int)
 
+    case walkingPhaseProbablyKilled(WalkingState)
+
     case NOS
 }
 

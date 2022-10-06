@@ -67,7 +67,8 @@ struct AccelerometerState: Availability {
         }
 }
 
-// MARK: queue status
+// MARK: - Top-level queue status
+/// The run status of a `MotionManager`: Running, halted, illegal, or error
 enum Lifecycle: Equatable {
     case idle, running, error(Error), broken
     static func == (lhs: Lifecycle, rhs: Lifecycle) -> Bool {
@@ -85,31 +86,27 @@ enum Lifecycle: Equatable {
 
 // MARK: - MotionManager
 /// Wrapper around `CMMotionManager` with convenient start / stop / `AsyncSequence` for accelerometry,
-///
-/// - bug: It's not obvious how to start the accelerometers independently of generating sequence elements.
 final class MotionManager: ObservableObject {
     /// Access to the singleton `MotionManager`.
     ///
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
 
     // MARK: Properties
-
-    // TODO: Remove the singleton MotionManager
-    //       We need one for each walk.
-    //       ... OR some other way to reset the walk-phase tag (w_1)
-    //       An actual tagged-reset wouldn't be a bad idea.
-    static let shared = MotionManager(bufferTag: "###")
-
-    var walkingState: WalkingState? = nil
+    /// The active-walk phase for which `self` collects data. Used to pre-fill data identifiers on CSV records and file names.
+    var walkingState: WalkingState = .walk_1
+//    var walkingState: WalkingState? = nil
+    /// Reset status and accelerometer queue to as-new condition
+    /// - parameter newPhase: the walk `WalkingState` identifying the next walking task the object is to serve.
+    /// - returns: An array of the `CMAccelerometerData` that had been in the queue. Can be ignored.
     @discardableResult
-    func reset(newPhase: WalkingState? = nil) async -> [CMAccelerometerData] {
+    func reset(newPhase: WalkingState) async -> [CMAccelerometerData] {
         // warning: The result is discardable.
         // You should have harvested the data result already.
         let retval = await asyncBuffer.popAll()
         walkingState = newPhase
         return retval
 
-        #error("I'm losing it.")
+        #warning("I'm losing it.")
 
 /*
  I'm losing it.
@@ -145,10 +142,10 @@ final class MotionManager: ObservableObject {
     private let accState: AccelerometerState
 
     typealias CMDataStream = AsyncStream<CMAccelerometerData>
-    var asyncBuffer = IncomingAccelerometry(prefix: "w_1")
+    var asyncBuffer: IncomingAccelerometry
 
     // MARK: - Initialization and start
-    init(bufferTag: String) {
+    init(phase: WalkingState) {
         // temp to avoid configuration through self
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = CMTimeInterval.hzInterval
@@ -156,7 +153,7 @@ final class MotionManager: ObservableObject {
 
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
-        asyncBuffer = IncomingAccelerometry(prefix: bufferTag)
+        asyncBuffer = IncomingAccelerometry(phase: phase)
     }
 
     var accelerometryAvailable: Bool {

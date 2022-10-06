@@ -9,7 +9,7 @@ import Foundation
 
 extension IncomingAccelerometry {
     private var tagAndID: String {
-        "\(walkStagePrefix),\(SubjectID.id)"
+        "\(phase.csvPrefix!),\(SubjectID.id)"
     }
 
     private func marshalledRecords() -> [String] {
@@ -31,7 +31,7 @@ extension IncomingAccelerometry {
     ///
     /// - Returns: A single `String`, each line being the marshalling of the `CMAccelerometerData` records
     private func allTaggedCSV() -> String {
-        return marshalledRecords()
+        return taggedRecords()
             .joined(separator: "\r\n")
     }
 
@@ -49,10 +49,10 @@ extension IncomingAccelerometry {
 
     func addToArchive() throws {
         // TODO: Throwing
-        let prefix = "\(walkStagePrefix),\(SubjectID.id)"
+        let prefix = "\(phase.csvPrefix!),\(SubjectID.id)"
         let data = allAsTaggedData()
         try CSVArchiver.shared
-            .writeData(data, forTag: walkStagePrefix)
+            .addToArchive(data: data, forPhase: phase)
     }
 
 //    static var filePaths: [String] = []
@@ -67,7 +67,7 @@ extension IncomingAccelerometry {
     /// - Parameters:
     ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``marshalledRecords(withPrefix:)``
     ///   - url: The location of the new file.
-    func write(withPrefix prefix: String, to url: URL) throws {
+    func write(phase: WalkingState, to url: URL) throws {
         // TODO: Make it async
         let fm = FileManager.default
         let data = allAsTaggedData()
@@ -80,7 +80,7 @@ extension IncomingAccelerometry {
     ///   - fileName: The base name of the target file as a `String`. No extension will be added.
     ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``marshalledRecords(withPrefix:)``
     func writeToFile(named fileName: String,
-                     linesPrefixedWith prefix: String) throws {
+                     phase: WalkingState) throws {
         precondition(!fileName.isEmpty,
                      "\(#function): empty prefix string")
         let destURL = try FileManager.default
@@ -88,17 +88,11 @@ extension IncomingAccelerometry {
             .appendingPathComponent(fileName)
             .appendingPathExtension("csv")
 
-        try write(withPrefix: prefix, to: destURL)
+        try write(phase: phase, to: destURL)
     }
 
     // FIXME: - URGENT - get a way to have a global subject ID.
     static var lastData = try! CSVArchiver()
-
-    func writeForArchive() throws {
-        let content = allAsTaggedData()
-        try Self.lastData.writeData(content,
-                                    forTag: walkStagePrefix)
-    }
 
     func outputBaseName(walkState: WalkingState) -> String {
         let isoDate = Date().iso
@@ -107,14 +101,14 @@ extension IncomingAccelerometry {
         return "Sample-\(state!):\(isoDate)"
     }
 
-    func writeToFile(walkState: WalkingState) throws {
-        precondition(walkState == .walk_2 || walkState == .walk_1,
-                     "Unexpected walk state \(walkState)"
-        )
-        let baseName = outputBaseName(walkState: walkState)
-        try writeToFile(
-            named: baseName,
-            linesPrefixedWith: "\(walkState.csvPrefix!),Sample")
-    }
+//    func writeToFile(walkState: WalkingState) throws {
+//        precondition(walkState == .walk_2 || walkState == .walk_1,
+//                     "Unexpected walk state \(walkState)"
+//        )
+//        let baseName = outputBaseName(walkState: walkState)
+//        try writeToFile(
+//            named: baseName,
+//            linesPrefixedWith: "\(walkState.csvPrefix!),Sample")
+//    }
 
 }
