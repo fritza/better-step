@@ -47,8 +47,8 @@ final class TimeReader: ObservableObject {
     }
 
 
-    /// The current remaining time, as a ``MinSecAndFraction``
-    @Published var currentTime: MinSecAndFraction = .zero
+    // The current remaining time, as a ``MinSecAndFraction``
+//    @Published var currentTime: MinSecAndFraction = .zero
     /// The ready/run/stopped/expired status of the count.
     @Published var status: TimerStatus = .ready
 
@@ -80,6 +80,7 @@ final class TimeReader: ObservableObject {
          function: String = #function,
          fileID: String = #file,
          line: Int = #line) {
+
 #if LOGGER
         let spIS = signposter.beginInterval("TimeReader init")
         intervalState = spIS
@@ -209,6 +210,7 @@ final class TimeReader: ObservableObject {
                                    tolerance: tickTolerance,
                                    on: .main, in: .common)
             .autoconnect()
+//            .print()
             .tryMap {
                 // Timer's date to seconds until expiry
                 (date: Date) -> TimeInterval in

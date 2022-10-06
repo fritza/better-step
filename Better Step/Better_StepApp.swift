@@ -39,6 +39,7 @@ struct Better_StepApp: App {
                 WalkingContainerView { _ in
                 }
             }
+            .environmentObject(MotionManager(phase: .walk_1))
 #elseif false
             NavigationView {
                 SweepSecondView(duration: 10, onCompletion: {
@@ -114,7 +115,7 @@ struct Better_StepApp: App {
             .environmentObject(phaseManager)
 
             #warning("Move MotionManager environment var closer to the walk container")
-            .environmentObject(MotionManager(bufferTag: "APP_UNCHANGED"))
+            .environmentObject(MotionManager(phase: .walk_1))
 #endif
         }
     }
