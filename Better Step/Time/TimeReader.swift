@@ -181,7 +181,7 @@ final class TimeReader: ObservableObject {
         //        watches a flag you set, that will
         //        stop publishing until the flag is reset?
         //
-        sharedTimer.cancel()
+        Self.sharedTimePublisher.cancel()
 
 //        timePublisher      = nil
 //        mmssPublisher      = nil
@@ -222,7 +222,6 @@ final class TimeReader: ObservableObject {
         reset()
 
         status = .running
-        sharedTimer = createSharedTimePublisher().share().eraseToAnyPublisher()
 
         timeCancellable = mmss_ff_Cancellable()
         mmssCancellable = mmss_00_Cancellable()

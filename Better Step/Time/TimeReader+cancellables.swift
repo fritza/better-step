@@ -52,16 +52,19 @@ extension TimeReader {
         mmssPublisher    = mmss_00_Timer()
         secondsPublisher = ss_Timer()
         fractionsPublisher = fff_Timer()
+         */
 
         return retval
     }
 
     func ss_Timer() -> AnyPublisher<Int, Error> {
-        let retval = sharedTimer
+        let retval = Self.sharedTimePublisher
             .map { $0.second }
             .filter { $0 >= 0 }
             .removeDuplicates()
             .eraseToAnyPublisher()
+
+
         return retval
 
         /*
@@ -88,7 +91,7 @@ extension TimeReader {
     }
 
     func fff_Timer() -> AnyPublisher<Double, Error> {
-        let retval = sharedTimer
+        let retval = Self.sharedTimePublisher
             .map { (mmssfff: MinSecAndFraction) -> Double in
                 return mmssfff.fraction
             }
@@ -117,7 +120,7 @@ extension TimeReader {
 
     func mmss_00_Timer() ->  AnyPublisher<MinSecAndFraction, Error> {
         //        var lastMMSS = MinSecAndFraction.zero
-        let retval = sharedTimer
+        let retval = Self.sharedTimePublisher
             .removeDuplicates(by: {
                 (lhs, rhs) -> Bool in
                 return lhs.minute == rhs.minute &&
