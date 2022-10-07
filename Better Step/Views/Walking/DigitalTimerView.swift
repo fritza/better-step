@@ -161,8 +161,6 @@ struct DigitalTimerView: View, ReportingPhase {
         .onReceive(timer.timeSubject, perform: { newTime in
             self.minSecfrac = newTime
         })
-        .onReceive(timer.mmssSubject) { newTime in
-        }
         .navigationTitle(
             (walkingState == .walk_1) ?
             "Normal Walk" : "Fast Walk"
