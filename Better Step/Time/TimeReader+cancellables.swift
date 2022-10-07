@@ -12,7 +12,7 @@ extension TimeReader {
 
     /// A `Publisher` that emits the `Timer`'s `Date` as minute/second/fraction at every tick.
     /// - Returns: The `Publisher` resulting from that chain.
-    func createSharedTimePublisher() -> AnyPublisher<MinSecAndFraction, Error>
+    static func createSharedTimePublisher() -> AnyPublisher<MinSecAndFraction, Error>
     {
         let retval = Timer.publish(every: tickInterval,
                                    tolerance: tickTolerance,
@@ -44,6 +44,7 @@ extension TimeReader {
                     fraction: tInterval - trunc(tInterval)
                 )
             }
+            .share()
             .eraseToAnyPublisher()
 
         sharedTimer      = retval

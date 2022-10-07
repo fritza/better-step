@@ -60,6 +60,11 @@ final class TimeReader: ObservableObject {
     internal let tickInterval: TimeInterval
     internal let tickTolerance: TimeInterval
 
+    // MAJOR DEVELOPMENT: sharedTimePublisher IS NOW STATIC
+    private static let sharedTimePublisher = createSharedTimePublisher()
+
+
+
     /// Broadcasts the current time remaining as rapidly as the underlying `Timer` publishes it.
     var timeSubject = PassthroughSubject<MinSecAndFraction, Error>()
     /// Broadcasts only the number of seconds remaining
