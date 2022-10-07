@@ -18,7 +18,7 @@ extension MotionManager: AsyncSequence, AsyncIteratorProtocol {
         while let accData = cmMotionManager.accelerometerData,
               accData.timestamp == lastTimeStamp {
             guard self.lifecycle == .running else { return nil }
-            try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep/4)
+            try await Task.sleep(nanoseconds: CountdownConstants.nanoSleep/4)
         }
         // By here
         // EITHER there is no data (probably the cm manager hasn't started or has stopped)

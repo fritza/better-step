@@ -21,7 +21,7 @@ import SwiftUI
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
 struct SweepSecondView: View {
     @Environment(\.colorScheme) private static var colorScheme: ColorScheme
-    @StateObject var timer: TimeReader = TimeReader(interval: CountdownConstants.sweepDuration)
+    @StateObject var timer: TimeReader = TimeReader(spanning: CountdownConstants.sweepDuration)
     /// The current minute/second/fraction value of the countdown.
     @State private  var minSecFrac: MinSecAndFraction?
     @State private  var wholeSeconds: Int
@@ -124,7 +124,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                 Timer.scheduledTimer(
                     withTimeInterval: Self.startDelay,
                     repeats: false) { _ in
-                        timer.start()
+                        timer.start(totalSpan: CountdownConstants.sweepDuration)
                 }
 
                 do {

@@ -38,7 +38,7 @@ struct DigitalTimerView: View, ReportingPhase {
     static var dtvSerial = 100
     let serialNumber: Int
     
-    @ObservedObject var timer = TimeReader(interval: CountdownConstants.walkDuration)
+    @ObservedObject var timer = TimeReader(spanning: CountdownConstants.walkDuration)
     @State private var minSecfrac: MinSecAndFraction?
 
     var walkingState: WalkingState
@@ -135,7 +135,7 @@ struct DigitalTimerView: View, ReportingPhase {
                 print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
                 #endif
             }
-            timer.start()
+            timer.start(totalSpan: CountdownConstants.walkDuration)
         }
         .onDisappear() {
             do {

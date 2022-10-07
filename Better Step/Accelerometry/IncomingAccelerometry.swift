@@ -35,7 +35,7 @@ public actor IncomingAccelerometry {
     func pop() async throws -> CMAccelerometerData? {
         while buffer.isEmpty {
             try Task.checkCancellation()
-            try await Task.sleep(nanoseconds: CMTimeInterval.nanoSleep)
+            try await Task.sleep(nanoseconds: CountdownConstants.nanoSleep)
         }
         return buffer.popFirst()
     }

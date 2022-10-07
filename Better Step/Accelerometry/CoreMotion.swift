@@ -13,13 +13,13 @@ import SwiftUI
 // MARK: Time intervals
 
 enum CMTimeInterval {
-    static let hz                : UInt64 = 120
-    static let hzInterval        : Double = 1.0/Double(hz)
-    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
+////    static let hz                : UInt64 = 120
+//    static let hzInterval        : Double = 1.0/Double(hz)
+//    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
     // TODO: Consider putting the interval in a UserDefault.
 
     static let secondsInBuffer   : UInt64 = 2
-    static let minBufferCapacity : UInt64 = secondsInBuffer * hz * 2
+    static let minBufferCapacity : UInt64 = secondsInBuffer * CountdownConstants.hz * 2
 }
 
 // FIXME: Figure out how to collect for a new subject.
@@ -148,7 +148,7 @@ final class MotionManager: ObservableObject {
     init(phase: WalkingState) {
         // temp to avoid configuration through self
         let cmManager = CMMotionManager()
-        cmManager.accelerometerUpdateInterval = CMTimeInterval.hzInterval
+        cmManager.accelerometerUpdateInterval = CountdownConstants.hzInterval
         cmMotionManager = cmManager
 
         deviceState = DeviceState(cmManager)

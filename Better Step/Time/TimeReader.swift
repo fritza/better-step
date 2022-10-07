@@ -24,6 +24,12 @@ enum CountdownConstants {
 
     static let countdownInterval    = 30
     static let sweepDuration        = 5.0
+
+    static let hz                : UInt64 = 120
+    static let hzInterval        : Double = 1.0/Double(hz)
+    static let timerTick         : Double = hzInterval/10.0
+    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
+
 }
 
 
@@ -81,8 +87,8 @@ final class TimeReader: ObservableObject {
     ///   - function: The call site
     ///   - fileID: The caller's file
     ///   - line: The caller's line number in that file.
-    init(interval: TimeInterval,
-         by tickSize: TimeInterval = 0.01,
+    init(spanning total: TimeInterval = CountdownConstants.walkDuration,
+         by tickSize: TimeInterval = CountdownConstants.timerTick,
          function: String = #function,
          fileID: String = #file,
          line: Int = #line) {
@@ -212,6 +218,25 @@ final class TimeReader: ObservableObject {
     func start(function: String = #function,
                fileID: String = #file,
                line: Int = #line) {
+// FIXME: Callers should somehow take care of restarting MotionManager for walks but not sweeps
+        // error("Callers must take care of restarting MotionManager")
+
+/*
+ Census of start(~
+ () defined on TimeReader
+ () defined on MotionManager
+ () called on CHHapticEngine in MorseHaptic.init
+ (atTime:) on CHHapticPatternPlayer in MorseHaptic.play()
+ timer.start() called .onAppear in SweepSecondView [missing total interval] (no conflict(?) Digital's .task starting motion)
+
+ () called on MOTION manager in DigitalTimerView.body.task (No conflict(?) with Sweep's starting timer in .onAppear)
+ () on TIMEER in Digital onAppear. s
+
+ () Defined in MinutePublisher  - I don't think .start on MP is done any more
+ */
+
+
+
 //        print("TimeReader.START called from", function, "\(fileID):\(line)")
 
         // FIXME: timer status versus expected
