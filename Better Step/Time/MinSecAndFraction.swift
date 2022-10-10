@@ -8,10 +8,17 @@
 import Foundation
 
 
-/// A single struct embodying a minute, second, and fraction for some interval.
-public struct MinSecAndFraction: Hashable {
+/// A _value_ type embodying a minute, second, and fraction-of-seconf for a single moment in time. It translates to clock time only in relation to some starting or ending epoch.
+///
+/// The expected use is relative to some starting or ending bound to a period of time (coundown or timer). It is not suitable for absolute time, though that _could_ be converted into a `TimeInterval`.
+infix operator ≈≈ :  ComparisonPrecedence
+struct MinSecAndFraction: Hashable, Comparable,
+                          RoughlyEquatable {
+    /// The integer-minute component of the moment. Strictly `0 ... 59`.
     public let minute  : Int
+    /// The integer-second component of the moment. Strictly `0 ... 59`.
     public let second  : Int
+    ///  The fraction-of-second component of the moment. Strictly `0.0 ..< 1.0`
     public let fraction: TimeInterval
 
     /// Create a `MinSecAndFraction` from its components.
@@ -25,6 +32,8 @@ public struct MinSecAndFraction: Hashable {
         (minute, second, fraction)
     }
 
+    /// Create a `MinSecAndFraction` from a time interval relative to an arbitrary epoch.
+    /// - Parameter interval: The `TimeInterval` away from the epoch.
     public init(interval: TimeInterval) {
         let intInterval = Int(trunc(interval))
         self.init(minute: intInterval / 60,
@@ -37,8 +46,29 @@ public struct MinSecAndFraction: Hashable {
         minute == 0 && second == 0 && fraction == 0.0
     }
 
+    /// Whether thie represented interval is at or before the epoch.
     public var isPositive: Bool {
         minute >=  0 || second >= 0 || fraction > 0.0
+    }
+
+    /// `Comparable` confirmance. Usual warnings about float values not equating well.
+    public static func < (lhs: MinSecAndFraction, rhs: MinSecAndFraction) -> Bool {
+        return lhs.minute < rhs.minute ||
+        lhs.second < rhs.second ||
+        lhs.fraction < rhs.fraction
+    }
+
+    /// `RoughlyEquatable` confirmance. Usual warnings about float values not equating well.
+    static public func ≈≈ (
+        lhs: MinSecAndFraction,
+        rhs: MinSecAndFraction) -> Bool {
+            let eqMinute: Bool = lhs.minute == rhs.minute
+            let eqSecond: Bool = lhs.second == rhs.second
+            let leftFrac: TimeInterval = lhs.fraction
+            let rightFrac: TimeInterval = rhs.fraction
+            let aboutEqFraction: Bool =
+            (leftFrac ≈≈ rightFrac)
+        return eqMinute && eqSecond && aboutEqFraction
     }
 
     /// A copy of this struct with the `fraction` component set to a new value

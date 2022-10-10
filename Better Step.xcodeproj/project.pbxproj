@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F56E67228EF62E100746FF9 /* TimeReader+cancellables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67128EF62E100746FF9 /* TimeReader+cancellables.swift */; };
+		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
 		1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D728DBBA170038353E /* Preview Assets.xcassets */; };
@@ -148,6 +149,7 @@
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F56E67128EF62E100746FF9 /* TimeReader+cancellables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeReader+cancellables.swift"; sourceTree = "<group>"; };
+		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		1F0B6745276FA6C900011A7E = {
 			isa = PBXGroup;
 			children = (
+				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
 				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
 				1F0B6750276FA6C900011A7E /* Better Step */,
@@ -743,6 +746,7 @@
 				1FA2821E28DBBB270038353E /* ToolbarViewModifiers.swift in Sources */,
 				1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
+				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
 				1FA281E828DBBB270038353E /* DummySubviews.swift in Sources */,
 				1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */,
 				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
