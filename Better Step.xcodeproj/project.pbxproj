@@ -211,7 +211,6 @@
 		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
 		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
-		1FFB31052787892B0099AE5E /* MinutePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutePublisher.swift; sourceTree = "<group>"; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -554,7 +553,6 @@
 				1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */,
 				1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */,
 				1FFB31092787997E0099AE5E /* MinSecFormatter.swift */,
-				1FFB31052787892B0099AE5E /* MinutePublisher.swift */,
 			);
 			path = Walking;
 			sourceTree = "<group>";
