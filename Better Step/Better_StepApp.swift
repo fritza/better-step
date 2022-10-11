@@ -11,7 +11,7 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    @ObservedObject var aStage = AppStage.shared
+//    @ObservedObject var aStage = AppStage.shared
 
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
     @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
@@ -20,9 +20,9 @@ struct Better_StepApp: App {
     @StateObject var dasiPages        = DASIPages()
     @StateObject var dasiResponseList = DASIResponseList()
     //    @StateObject var usabilityResponses = SurveyResponses()
-    @StateObject var phaseManager     = PhaseManager()
+//    @StateObject var phaseManager     = PhaseManager()
 //    @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
-    @StateObject var appStage         = BSTAppStageState()
+//    @StateObject var appStage         = BSTAppStageState()
 
 
 #warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")

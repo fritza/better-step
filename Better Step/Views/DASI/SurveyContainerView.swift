@@ -80,15 +80,18 @@ struct SurveyContainerView: View, ReportingPhase {
             }
             // FIXME: This doesn't update global completion.
             .onDisappear {
+#warning("As a ReportingPhase, hit the callback for complete/incomplete")
+
+
                 // Does this belong at disappearance
                 // of the tab? We want a full count of
                 // responses + concluding screen.
                 // ABOVE ALL, don't post the initial screen
                 // as soon as the conclusion screen is
                 // called for.
-                if !responses.unknownResponseIDs.isEmpty {
-                    BSTAppStages.dasi.didComplete()
-                }
+//                if !responses.unknownResponseIDs.isEmpty {
+//                    BSTAppStages.dasi.didComplete()
+//                }
             }
         }
     }

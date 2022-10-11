@@ -104,7 +104,6 @@ struct OnboardView_Previews: PreviewProvider {
         catch {
             print("Bad decoding:", error)
             fatalError("trying to decode \(error.localizedDescription)")
-            return nil
         }
     }
 

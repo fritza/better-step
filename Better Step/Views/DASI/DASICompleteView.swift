@@ -24,6 +24,8 @@ fileprivate let endIncompleteText = """
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View, ReportingPhase {
+    @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+
     let completion: ((Result<DASIResponseList, Error>) -> Void)!
 
     @EnvironmentObject private var responses: DASIResponseList
@@ -74,14 +76,17 @@ struct DASICompleteView: View, ReportingPhase {
             }
         }
         .onAppear{
-
             // IF ALL ARE ANSWERED
             if allItemsAnswered {
-                AppStage.shared
-                    .completionSet
-                    .insert(.dasi)
-                // TODO: Maybe create the report data on completionSet changing.
+                collectedDASI = true
                 completion(.success(responses))
+#warning("Find some way to preserve DASI-finished")
+//
+//                AppStage.shared
+//                    .completionSet
+//                    .insert(.dasi)
+                // FIXME: Also, why is this in onAppear?
+                // TODO: Maybe create the report data on completionSet changing.
             }
             else {
                 completion(.failure(FileStorageErrors.shortageOfDASIResponsesBy(responses.unknownResponseIDs.count)))

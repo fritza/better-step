@@ -105,30 +105,6 @@ final class MotionManager: ObservableObject {
         let retval = await asyncBuffer.popAll()
         walkingState = newPhase
         return retval
-
-        #warning("I'm losing it.")
-
-/*
- I'm losing it.
-
- What do we want when the timer window appears?
-    Reset the motion manager    (done in .task)
-    assign it a new tag. (walkingPhase?)
-    start it.
-
- What do we want when the timer window goes away?
-     halt it. (should already be done.
-     √ report conclusion of the stage.
-
- What do we want when control arrives at the container?
-     Save the data array as either the first or the second series.
-    When completed, make sure they are in a temp directory
-    zip them.
-
- BUT
- */
-
-
     }
 
 
