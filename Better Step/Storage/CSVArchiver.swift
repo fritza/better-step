@@ -41,7 +41,7 @@ final class CSVArchiver {
         guard let _archive = Archive(
             data: backingStore,
             accessMode: .create)
-        else { throw FileStorageErrors.cantInitializeZIPArchive }
+        else { throw AppPhaseErrors.cantInitializeZIPArchive }
         self.csvArchive = _archive
     }
 
@@ -140,7 +140,7 @@ final class CSVArchiver {
     /// Posts `ZIPCompletionNotice` with the URL of the product `.zip`.
     func exportZIPFile() throws {
         guard let content = csvArchive.data else {
-            throw FileStorageErrors.cantGetArchiveData
+            throw AppPhaseErrors.cantGetArchiveData
         }
         try content.write(to: zipFileURL)
 

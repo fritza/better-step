@@ -56,7 +56,7 @@
 		1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
-		1FA2821228DBBB270038353E /* DASIPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPages.swift */; };
+		1FA2821228DBBB270038353E /* DASIPageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */; };
 		1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */; };
 		1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
@@ -73,7 +73,7 @@
 		1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */; };
 		1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
-		1FA2822628DBBB270038353E /* UsabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityController.swift */; };
+		1FA2822628DBBB270038353E /* UsabilityPageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */; };
 		1FA2822728DBBB270038353E /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
 		1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
 		1FA2822B28DBBB940038353E /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
@@ -140,7 +140,7 @@
 		1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilitySummaryView.swift; sourceTree = "<group>"; };
 		1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityContainer.swift; sourceTree = "<group>"; };
 		1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkInfoForm.swift; sourceTree = "<group>"; };
-		1F1C4E1328D4D76900547C7A /* UsabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityController.swift; sourceTree = "<group>"; };
+		1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityPageSelection.swift; sourceTree = "<group>"; };
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065527A478B400477379 /* BSTAppStageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTAppStageState.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
-		1F8A337D27DFEE400093C896 /* DASIPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPages.swift; sourceTree = "<group>"; };
+		1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPageSelection.swift; sourceTree = "<group>"; };
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
 		1FA281CE28DBBA160038353E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA281D028DBBA160038353E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
-				1F1C4E1328D4D76900547C7A /* UsabilityController.swift */,
+				1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */,
 				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
 				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
 				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
@@ -449,7 +449,7 @@
 				1F8A338027E122130093C896 /* DASIUserResponse.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponseList.swift */,
-				1F8A337D27DFEE400093C896 /* DASIPages.swift */,
+				1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1F2432DF27FE11D9008A5418 /* DASIQuestions.json */,
 				1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */,
@@ -736,7 +736,7 @@
 			files = (
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */,
-				1FA2822628DBBB270038353E /* UsabilityController.swift in Sources */,
+				1FA2822628DBBB270038353E /* UsabilityPageSelection.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
 				1FA2821E28DBBB270038353E /* ToolbarViewModifiers.swift in Sources */,
@@ -798,7 +798,7 @@
 				1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
-				1FA2821228DBBB270038353E /* DASIPages.swift in Sources */,
+				1FA2821228DBBB270038353E /* DASIPageSelection.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,

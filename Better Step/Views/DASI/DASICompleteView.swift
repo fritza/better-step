@@ -89,7 +89,7 @@ struct DASICompleteView: View, ReportingPhase {
                 // TODO: Maybe create the report data on completionSet changing.
             }
             else {
-                completion(.failure(FileStorageErrors.shortageOfDASIResponsesBy(responses.unknownResponseIDs.count)))
+                completion(.failure(AppPhaseErrors.shortageOfDASIResponsesBy(responses.unknownResponseIDs.count)))
             }
         }
     }

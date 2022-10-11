@@ -178,7 +178,7 @@ extension WalkingContainerView {
                                  walkingState: ownPhase) {
                     result  in
                     switch result {
-                    case .failure(_):   // Should be FileStorageErrors.walkingPhaseProbablyKilled
+                    case .failure(_):   // Should be AppPhaseErrors.walkingPhaseProbablyKilled
                         break
                     case .success(let incoming):
                         let wcrS = WalkingContainerResult.shared

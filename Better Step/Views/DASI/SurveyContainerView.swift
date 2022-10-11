@@ -62,7 +62,7 @@ struct SurveyContainerView: View, ReportingPhase {
                             break
 
                         case let .failure(error):
-                            if case let FileStorageErrors.shortageOfDASIResponsesBy(shortage) = error {
+                            if case let AppPhaseErrors.shortageOfDASIResponsesBy(shortage) = error {
                                 print("Short by", shortage)
                             }
                             else {

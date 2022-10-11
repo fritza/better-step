@@ -11,8 +11,9 @@ public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case cantFindURL(String)
+}
 
-    #warning("FileStorageErrors is wrong for these cases")
+public enum AppPhaseErrors: Error {
     case noSubjectID
     case cantLoadData(URL)
     case uploadEmptyData(String)
@@ -60,7 +61,7 @@ extension FileManager {
     }
 
     /// Create a **regular file** at a URL, deleting any existing file at that location.
-    /// - throws `FileManager` errors, or `FileStorageErrors.cantCreateFileAt()` if creation failed.
+    /// - throws `FileManager` errors, or `AppPhaseErrors.cantCreateFileAt()` if creation failed.
     public func deleteAndCreate(at url: URL,
                                 contents: Data? = nil) throws {
         if fileExists(atURL: url) {

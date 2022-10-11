@@ -72,7 +72,7 @@ struct DigitalTimerView: View, ReportingPhase {
     // FIXME: Test this.
     fileprivate func timerStateDidChange(_ stat: TimeReader.TimerStatus) {
         switch stat {
-        case .cancelled      : completion?(.failure(FileStorageErrors.walkingPhaseProbablyKilled(self.walkingState)))
+        case .cancelled      : completion?(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
         case .expired        : completion?(.success(self.motionManager.asyncBuffer))
         case .ready, .running: break
         }

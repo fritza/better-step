@@ -13,7 +13,7 @@ struct ConclusionView: View, ReportingPhase {
         VStack {
             Text("Congratulations, you're done.")
             Button("Complete") {
-                completion(.failure(FileStorageErrors.NOS))
+                completion(.failure(AppPhaseErrors.NOS))
                 // Why do I have to instantiate Void?
             }
         }

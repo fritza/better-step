@@ -79,7 +79,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 systemImageName: "checkmark.circle",
                 continueTitle: "Continue") { response in
                     guard let numbers = try? response.get() else {
-                        completion(.failure(FileStorageErrors.NOS)); return
+                        completion(.failure(AppPhaseErrors.NOS)); return
                     }
                     completion(.success(numbers.csvLine))
                 }
