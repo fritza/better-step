@@ -11,6 +11,7 @@ public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case cantFindURL(String)
+    case cantReadDictionaryAt(URL)
 }
 
 public enum AppPhaseErrors: Error {

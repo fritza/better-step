@@ -49,7 +49,6 @@ extension IncomingAccelerometry {
 
     func addToArchive() throws {
         // TODO: Throwing
-        let prefix = "\(phase.csvPrefix!),\(SubjectID.id)"
         let data = allAsTaggedData()
         try CSVArchiver.shared
             .addToArchive(data: data, forPhase: phase)

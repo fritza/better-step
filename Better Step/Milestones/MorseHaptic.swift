@@ -61,9 +61,35 @@ struct MorseHaptic: RawRepresentable {
     /// The `CHHapticPattern` derived from the `rawValue` value of `self`.
     mutating func pattern() throws -> CHHapticPattern {
         if let chPattern { return chPattern }
-        chPattern = try CHHapticPattern(contentsOf: url)
+        if #available(iOS 16.0, *) {
+            chPattern = try CHHapticPattern(contentsOf: url)
+        } else {
+            let retval = try Self.haptic(from: url)
+            chPattern = retval
+        }
         return chPattern!
     }
+
+    static func haptic(from url: URL) throws -> CHHapticPattern {
+        let data = try Data(contentsOf: url)
+        let decode = try JSONSerialization.jsonObject(
+            with: data, options: [])
+        guard let dictionary = decode as? [CHHapticPattern.Key : Any] else {
+            throw FileStorageErrors.cantReadDictionaryAt(url) }
+        let retval = try CHHapticPattern(dictionary: dictionary)
+        return retval
+    }
+
+    /*
+     /*! @method initWithDictionary:error
+      @abstract
+      Initialize a new CHHapticPattern using the passed-in NSDictionary.
+      @param patternDict
+      NSDictionary containing a pattern property list.
+      */
+     - (nullable instancetype)initWithDictionary:(NSDictionary<CHHapticPatternKey, id> *)patternDict
+     error:(NSError **)outError;
+     */
 
     mutating func play() throws {
         // Remember that the engine will hold on to the
