@@ -21,7 +21,7 @@ let addedLabels = [
 struct UsabilityView: View {
     @Binding private var resultingChoice: Int
     // FIXME: Conform UsabilityContainer to own, not envt, its controller.
-    @EnvironmentObject private var controller: UsabilityController
+    @EnvironmentObject private var controller: UsabilityPageSelection
 
     private let arbitraryCheckmarkEdge: CGFloat =  32
     private let arbitraryButtonWidth  : CGFloat = 240
@@ -141,7 +141,7 @@ struct UsabilityView: View {
                 }
             }
             }
-            .environmentObject(UsabilityController())
+            .environmentObject(UsabilityPageSelection())
 //            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }

@@ -17,17 +17,9 @@ struct Better_StepApp: App {
     @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
 
 
-    @StateObject var dasiPages        = DASIPages()
-    @StateObject var dasiResponseList = DASIResponseList()
-    //    @StateObject var usabilityResponses = SurveyResponses()
-//    @StateObject var phaseManager     = PhaseManager()
-//    @StateObject var fileCoordinator  = PerSubjectFileCoordinator()
-//    @StateObject var appStage         = BSTAppStageState()
-
-
-#warning("Using currentSelection to rebuild the Tabs means end of the DASI Completion forces the phase back to its beginning.")
-
- //   @State var currentPhase: TopPhases? = .walking
+    // FIXME: DASIPageSelection and DASIResponseList -> DASI container.
+//    @StateObject var dasiPages        = DASIPageSelection()
+//    @StateObject var dasiResponseList = DASIResponseList()
 
     var body: some Scene {
         WindowGroup {

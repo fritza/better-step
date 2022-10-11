@@ -1,5 +1,5 @@
 //
-//  DASIPages.swift
+//  DASIPageSelection.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 3/14/22.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-/// Observable selection of a DASI question, such as for question-page navigation
+/// Observable selection of a DASI question, such as for question-page navigation. **This is just SELECTION, state for paging through the questions, it has no content
 ///
 ///Initialized in
 /// - `BetterStep_App` (root `environmentObject(_:)`)
@@ -21,7 +21,8 @@ import Combine
 /// - `SurveyContainerView`
 /// - `YesNoButton` (**Pull out as a dependency?**
 /// - `ApplicationOnboardView` (**Wrong Place**)
-final class DASIPages: ObservableObject
+
+final class DASIPageSelection: ObservableObject
 {
     @Published var selected: DASIStages!
     @Published var refersToQuestion: Bool {
@@ -37,7 +38,7 @@ final class DASIPages: ObservableObject
 
 /*
     @discardableResult
-    func teardownFromSubjectID() async throws -> DASIPages? {
+    func teardownFromSubjectID() async throws -> DASIPageSelection? {
         let newSelection = DASIStages.landing
         selected = newSelection
         refersToQuestion = newSelection.refersToQuestion

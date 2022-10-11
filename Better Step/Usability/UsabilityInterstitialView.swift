@@ -12,8 +12,8 @@ import SwiftUI
 /// This is mostly redundant of `DASIInterstitialView`, except that one is a DASI depencency, and it doesn't do the right thing about the toolbar.
 struct UsabilityInterstitialView: View, ReportingPhase {
 
-    // FIXME: Conform UsabilityContainer to own, not envt, its controller.
-    @EnvironmentObject var controller: UsabilityController
+    // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
+    @EnvironmentObject var pageSelection: UsabilityPageSelection
     @State var showNotIntegratedAlert = false
 
     let titleText: String
@@ -47,7 +47,7 @@ struct UsabilityInterstitialView: View, ReportingPhase {
             // (ignoring the ugliness around the toolbar)
 
             Button(continueTitle) {
-                if controller.canIncrement { controller.increment()
+                if pageSelection.canIncrement { pageSelection.increment()
                 }
             }
             .accessibilityLabel("continuation button")
@@ -102,7 +102,7 @@ struct UsabilityInterstitialView_Previews: PreviewProvider {
                     completion: nil)
             }
             .environmentObject(
-                UsabilityController(phase: .end, questionID: 8)
+                UsabilityPageSelection(phase: .end, questionID: 8)
             )
 //            .previewDevice(PreviewDevice(
 //                rawValue:

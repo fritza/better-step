@@ -11,14 +11,15 @@ import SwiftUI
 
 /// A  sequence of open-intertitial → questions → close-interstitial phases
 ///
-/// The ``UsabilityController`` takes care of navigating among the phases and
+/// The ``UsabilityPageSelection`` takes care of navigating among the phases and
 /// the usability questions, including recording the responses.
 struct UsabilityContainer: View, ReportingPhase {
     let completion: ((Result<String, Error>) -> Void)!
 
 
-    // FIXME: Conform UsabilityContainer to own, not envt, its controller.
-    @EnvironmentObject var controller: UsabilityController
+    // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
+    @StateObject var pageSelection = UsabilityPageSelection()
+    // Sets selection to .start, question 1.
 
     var body: some View {
         List {
@@ -26,6 +27,7 @@ struct UsabilityContainer: View, ReportingPhase {
             openingInterstitialView()
             closingInterstitialView()
         }
+        .environmentObject(pageSelection)
     }
 
     // MARK: - Links to phase views
@@ -34,19 +36,19 @@ struct UsabilityContainer: View, ReportingPhase {
     func questionPresentationView() -> some View {
         NavigationLink("",
                        tag: UsabilityPhase.questions,
-                       selection: $controller.currentPhase) {
+                       selection: $pageSelection.currentPhase) {
             UsabilityView(
-                questionID: controller.questionID,
-                selectedAnswer: $controller.currentResponse)
+                questionID: pageSelection.questionID,
+                selectedAnswer: $pageSelection.currentResponse)
             { newAnswer in
-                controller.increment()
+                pageSelection.increment()
             }   // Questions destination
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") { controller.decrement() }
+                    Button("← Back") { pageSelection.decrement() }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Next →") { controller.increment() }
+                    Button("Next →") { pageSelection.increment() }
                 }
             }
 
@@ -60,7 +62,7 @@ struct UsabilityContainer: View, ReportingPhase {
 
     // MARK: Opening
     func openingInterstitialView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.start, selection: $controller.currentPhase) {
+        NavigationLink("", tag: UsabilityPhase.start, selection: $pageSelection.currentPhase) {
             UsabilityInterstitialView(
                 titleText: "Usability",
                 bodyText: usabilityInCopy, //"This space for rent",
@@ -72,7 +74,7 @@ struct UsabilityContainer: View, ReportingPhase {
 
     // MARK: Closing
     func closingInterstitialView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.end, selection: $controller.currentPhase) {
+        NavigationLink("", tag: UsabilityPhase.end, selection: $pageSelection.currentPhase) {
             UsabilityInterstitialView(
                 titleText: "Completed",
                 bodyText: usabilityOutCopy,
@@ -86,7 +88,7 @@ struct UsabilityContainer: View, ReportingPhase {
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") { controller.decrement() }
+                    Button("← Back") { pageSelection.decrement() }
                 }
             }
         }
@@ -99,8 +101,8 @@ struct UsabilityContainer_Previews: PreviewProvider {
         NavigationView {
             UsabilityContainer() { _ in }
         }
-        .environmentObject(UsabilityController(phase: .start, questionID: 1))
-        .environmentObject(DASIPages())
+        .environmentObject(UsabilityPageSelection(phase: .start, questionID: 1))
+//        .environmentObject(DASIPageSelection())
         .previewDevice(.init(stringLiteral: "iPhone 12"))
         .previewDevice(.init(stringLiteral: "iPhone SE (3rd generation)"))
     }

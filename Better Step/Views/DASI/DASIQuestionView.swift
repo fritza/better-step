@@ -22,7 +22,7 @@ struct QuestionContentView: View {
 }
 
 struct DASIQuestionView: View {
-    @EnvironmentObject var envt: DASIPages
+    @EnvironmentObject var envt: DASIPageSelection
     @EnvironmentObject var reportContents: DASIResponseList
     @State var answerState: AnswerState
 
@@ -54,7 +54,6 @@ struct DASIQuestionView: View {
                 YesNoStack(
                     boundState: self.$answerState,
                     completion: { state in
-#warning("How many times do we do this?")
                         guard let qID = envt.questionIdentifier else {
                             return
                         }
@@ -100,7 +99,7 @@ struct DASIQuestionView_Previews: PreviewProvider {
         NavigationView {
             DASIQuestionView(answerState: .yes)
         }
-        .environmentObject(DASIPages(.presenting(questionID: 2)))
+        .environmentObject(DASIPageSelection(.presenting(questionID: 2)))
         .environmentObject(DASIResponseList())
     }
 }

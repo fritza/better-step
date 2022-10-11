@@ -20,7 +20,7 @@ let bgColors: [UIColor] = [
 /// A `View` listing all usability questions and the user's responses.
 struct UsabilitySummaryView: View {
     // FIXME: Conform UsabilityContainer to own, not envt, its controller.
-    @EnvironmentObject var controller: UsabilityController
+    @EnvironmentObject var controller: UsabilityPageSelection
 
     func question(index: Int) -> UsabilityQuestion {
         UsabilityQuestion.allQuestions[index]
@@ -78,7 +78,7 @@ struct UsabilitySummaryView_Previews: PreviewProvider {
         NavigationView {
                 UsabilitySummaryView()
                     .environmentObject(
-                        UsabilityController(phase: .summary,
+                        UsabilityPageSelection(phase: .summary,
                                             questionID: 1))
                     .padding()
             }

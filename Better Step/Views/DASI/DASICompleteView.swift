@@ -29,7 +29,7 @@ struct DASICompleteView: View, ReportingPhase {
     let completion: ((Result<DASIResponseList, Error>) -> Void)!
 
     @EnvironmentObject private var responses: DASIResponseList
-    @EnvironmentObject private var questions: DASIPages
+    @EnvironmentObject private var questions: DASIPageSelection
 //    @EnvironmentObject private var phaseManager: PhaseManager
 
     var allItemsAnswered: Bool {
@@ -102,7 +102,7 @@ struct DASICompleteView_Previews: PreviewProvider {
                 _ in
             }
             // FIXME: These will need better initializer
-                .environmentObject(DASIPages(.completion))
+                .environmentObject(DASIPageSelection(.completion))
                 .environmentObject(DASIResponseList())
 //            .environmentObject(PhaseManager())
         }

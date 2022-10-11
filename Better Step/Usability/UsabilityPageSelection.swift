@@ -1,5 +1,5 @@
 //
-//  UsabilityController.swift
+//  UsabilityPageSelection.swift
 //  G Bars
 //
 //  Created by Fritz Anderson on 7/11/22.
@@ -15,7 +15,7 @@ import Foundation
 /// - `questions`: the sequence of questions
 /// - `end`: the final interstitial
 /// - `summary` (demo only): display the responses to all questions.
-/// - note: ``UsabilityController`` is the type that does incrementing and decrementing. It _could_ be amended to take advantage of `UsabilityPhase`'s being `AppStages`, but it's not plug-and-play.
+/// - note: ``UsabilityPageSelection`` is the type that does incrementing and decrementing. It _could_ be amended to take advantage of `UsabilityPhase`'s being `AppStages`, but it's not plug-and-play.
 enum UsabilityPhase: // AppStages,
                         CaseIterable, Comparable
     //CaseIterable, Comparable, Hashable
@@ -28,7 +28,7 @@ enum UsabilityPhase: // AppStages,
 /// Observable owner of the state of the usability workflow, including opening and closing interstitials.
 ///
 /// ``UsabilityContainer`` and ``UsabilityView`` are clients.
-final class UsabilityController: ObservableObject, CSVRepresentable {
+final class UsabilityPageSelection: ObservableObject, CSVRepresentable {
     /// All responses, initialized to all-zeroes (unanswered).
     var results =  [Int](repeating: 0, count: UsabilityQuestion.count)
     /// The answer (1–7) for the current question. Initialized to zero (illegal)

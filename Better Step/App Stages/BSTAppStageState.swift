@@ -108,7 +108,7 @@ final class BSTAppStageState: ObservableObject {
     /*
      REMOVE these DASI~ instance and rely on the DASI~ environmentObjects
     // DASI
-    var dasiContent: DASIPages = DASIPages()
+    var dasiContent: DASIPageSelection = DASIPageSelection()
     var dasiResponses: DASIResponseList = DASIResponseList()
      */
 //    var dasiFile: DASIReportFile?

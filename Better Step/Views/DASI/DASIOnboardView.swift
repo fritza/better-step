@@ -14,7 +14,7 @@ In this part of the assessment, you will be asked \(DASIQuestion.count) question
 Answer “Yes” or “No” to each. You will be able to move backward and forward through the questions, but you must respond to all for this exercise to be complete.
 """
 
-    @EnvironmentObject var envt: DASIPages
+    @EnvironmentObject var envt: DASIPageSelection
     @State var shouldShow = false
 
     // TODO: Add the forward/back bar.
@@ -40,6 +40,6 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
 struct DASIOnboardView_Previews: PreviewProvider {
     static var previews: some View {
         DASIOnboardView()
-            .environmentObject(DASIPages(.landing))
+            .environmentObject(DASIPageSelection(.landing))
     }
 }

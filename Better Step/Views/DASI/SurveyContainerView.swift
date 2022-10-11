@@ -10,9 +10,9 @@ import SwiftUI
 struct SurveyContainerView: View, ReportingPhase {
     let completion: ((Result<DASIResponseList, Error>) -> Void)!
 
-    @EnvironmentObject var contentEnvt: DASIPages
-    @EnvironmentObject var responses  : DASIResponseList
-//    @EnvironmentObject var appState: BSTAppStageState
+    #warning("Be sure to initialize Pages and Response list")
+    @StateObject var contentEnvt = DASIPageSelection()
+    @StateObject var responses   = DASIResponseList()
 
     // FIXME: YUCK! if this doesn't easily work…
     // Oh gosh — what would I have to do to make it a navigable view like the top level?
@@ -94,6 +94,8 @@ struct SurveyContainerView: View, ReportingPhase {
 //                }
             }
         }
+        .environmentObject(contentEnvt)
+        .environmentObject(responses)
     }
 }
 
@@ -103,7 +105,7 @@ struct SurveyContainerView_Previews: PreviewProvider {
             result in
             print("Result:", result)
         })
-            .environmentObject(DASIPages())
+//            .environmentObject(DASIPageSelection())
             .environmentObject(DASIResponseList())
     }
 }
