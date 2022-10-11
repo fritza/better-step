@@ -18,6 +18,10 @@ import Combine
  - ``minuteSecondString``
  - ``fraction``
 
+ ### Life Cycle
+ - ``start()``
+ - ``cancel()``
+
  ### Initializers
  - ``init(_:)``
  - ``init(duration:increment:tolerance:roundingScale:units:)``
@@ -27,13 +31,12 @@ import Combine
  - ``TimingSpec/roundingScale``
  - ``TimingSpec/units``
  - ``TimingSpec/init(duration:increment:tolerance:roundingScale:units:)
+
+ ### Units
  - ``Units/minutes``
  - ``Units/seconds``
  - ``Units/fraction``
-
-### Life Cycle
- - ``start()``
- - ``cancel()``
+ - ``Units/mmssString``
 
 ### Status
  - ``Status-swift.enum/idle``
@@ -41,7 +44,6 @@ import Combine
  - ``Status-swift.enum/cancelled``
  - ``Status-swift.enum/completed``
  - ``Status-swift.enum/unknown``
-
  */
 
 
@@ -91,15 +93,27 @@ final class Timekeeper: ObservableObject {
     ///
     /// Clients should not examine publishers whose unuts have not been requested. The clock will not update them.
     /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ generate a stream for the string `"mm:ss"`. _See_ ``Timekeeper/start()``.
-    struct Units: RawRepresentable, OptionSet {
+    struct Units: RawRepresentable, OptionSet, CustomStringConvertible {
         // MARK: Units
         let rawValue: Int
         init(rawValue: Int) { self.rawValue = rawValue }
 
-        static let minutes    = Units(rawValue: 1)
-        static let seconds    = Units(rawValue: 2)
-        static let fraction   = Units(rawValue: 4)
-        static let all: Units = [.minutes, .seconds, .fraction]
+        var description: String {
+            var strings: [String] = []
+            if self.contains(.minutes )        { strings.append("minutes" ) }
+            if self.contains(.seconds )        { strings.append("seconds" ) }
+            if self.contains(.fraction)        { strings.append("fraction") }
+            if self.contains(.mmSecondsString) { strings.append("mm:ss"   ) }
+
+            guard !strings.isEmpty else { return "<none>"}
+            return "[ " + strings.joined(separator: ", ") + " ]"
+        }
+
+        static let minutes         = Units(rawValue: 1)
+        static let seconds         = Units(rawValue: 2)
+        static let fraction        = Units(rawValue: 4)
+        static let mmSecondsString = Units(rawValue: 8)
+        static let all: Units = [.minutes, .seconds, .fraction, .mmSecondsString]
     }
 
     // MARK: Properties (state)
@@ -108,12 +122,16 @@ final class Timekeeper: ObservableObject {
     private var units: Units
 
     // MARK: Properties (published)
+    /// The stage (`idle`, `completed`, etc.) of the life cycle. Initially `idle`
     @Published var status: Status
+    /// The whole number of minutes remaining in the countdown. Initially 0.
     @Published var minutes: Int
+    /// The whole number of seconds within a minute remaining in the countdown. Initially 0.
     @Published var seconds: Int
+    /// A `String` denoting `minutes` and `seconds` in the form "mm:ss". Initially "xx:xx".
     @Published var minuteSecondString: String
+    /// The fraction of a second within the minutes and seconds remaining in the countdown. Initially 0.0.
     @Published var fraction: TimeInterval
-    // TODO: Why no minutes+seconds for "mm:ss"?
 
     // MARK Initializers
     /// Initialize a `Timekeeper` with internal state variables specified individually.
@@ -161,12 +179,10 @@ final class Timekeeper: ObservableObject {
         startTime = Date()
         deadline  = startTime + duration
         rootPublisher = makeRootPublisher()
-        if units.contains(.fraction)  { handleFractions() }
-        if units.contains(.seconds )  { handleSeconds()   }
-        if units.contains(.minutes )  { handleMinutes()   }
-        if units.isSuperset(of: [.minutes, .seconds]) {
-            handleMinSeconds()
-        }
+        if units.contains(.minutes          ) { handleMinutes()    }
+        if units.contains(.seconds          ) { handleSeconds()    }
+        if units.contains(.fraction         ) { handleFractions()  }
+        if units.contains(.mmSecondsString  ) { handleMinSeconds() }
     }
 
     /// Cancel the timer. All updates will halt; `rootPublisher` will see the `.cancelled` status and throw it.
