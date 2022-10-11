@@ -15,21 +15,30 @@ import SwiftUI
  - ``body``
  */
 
+// TODO: This isn't a ReportingPhase. Should it be?
+// FIXME: YES! it has to report success (expired) versus
+//        failure (cancelled).
+
 
 /// A `View` that displays a circle containing a sweep-second hand and a digit, representing a countdown in seconds.
 ///
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
 struct SweepSecondView: View {
     @Environment(\.colorScheme) private static var colorScheme: ColorScheme
+    #warning("Use a shared TimeReader instead.")
     @StateObject var timer: TimeReader = TimeReader(spanning: CountdownConstants.sweepDuration)
+//    TimeReader(spanning: CountdownConstants.sweepDuration, by: 0.01)
     /// The current minute/second/fraction value of the countdown.
-    @State private  var minSecFrac: MinSecAndFraction?
-    @State private  var wholeSeconds: Int
+//    @State private  var minSecFrac: MinSecAndFraction?
+    @State private var wholeSeconds : Int?
+    @State private var subSeconds   : TimeInterval?
 
     static let startDelay: TimeInterval = 1.2
 
     /// The closure provided by client code at `init` to notify it of expiration
     private let completionCallback: (() -> Void)
+    // TODO: This isn't what you'd use
+    // if this were a ReportingPhase.
 
     /// Initialize `SweepSecondView` with the duration of the countdown and a completion block.
     /// - Parameters:
@@ -45,10 +54,10 @@ struct SweepSecondView: View {
         completionCallback = onCompletion
     }
 
-    /// Formatted seconds from current `minSecFrac`(mm:ss.fff`).
+    /// Formatted seconds from current `minSecFrac.second`.
     var stringForSeconds: String {
-        if let seconds = self.minSecFrac?.second, seconds >= 0 {
-            return String(describing: seconds+1)
+        if let wholeSeconds, wholeSeconds >= 0 {
+            return String(describing: wholeSeconds+1)
         }
         else { return "*" }
     }
@@ -67,7 +76,8 @@ struct SweepSecondView: View {
                 .stroke(lineWidth: 1.0)
                 .foregroundColor(.gray)
 
-            SubsecondHandView(fractionalSecond: minSecFrac?.fraction ?? 0.0)
+            //            SubsecondHandView(fractionalSecond: minSecFrac?.fraction ?? 0.0)
+            SubsecondHandView(fractionalSecond: self.subSeconds ?? 0.0)
                 .foregroundColor((Self.colorScheme == .light) ? .black : .gray)
 
             numericOverlay(
@@ -97,9 +107,14 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             .padding()
 
             // MARK: Change isRunning
-            .onChange(of: timer.status, perform:
+            .onChange(of: timer.status,
+                      perform:
                         { newValue in
                 switch newValue {
+
+                    // TODO: Should an error be propagating?
+                    // I don't see why. The status itself
+                    // says everything there is to say.
                 case .cancelled, .expired:
                     // Timer's already completed, hence status
                     completionCallback()
@@ -107,11 +122,17 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                 }
             })
 
+            .onReceive(timer.fractionsSubject, perform: { fraction in
+                self.subSeconds = fraction
+            })
+
+            /*
             // MARK: Time subscription -> sweep second
             // Change of mm:ss.fff - sweep angle
             .onReceive(timer.timeSubject) { mmssff in
                 self.minSecFrac = mmssff
             }
+             */
 
             // MARK: Seconds -> Overlay + speech
             // Change of :ss. (speak seconds)
@@ -145,8 +166,12 @@ struct SweepSecondView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                
             }
+            .environmentObject(MotionManager(phase: .countdown_1))
+
+            // TODO: Should TimeReader be an EnvironmentObject?
+
+            // FIXME: Supply TimeReader(spanning: CountdownConstants.sweepDuration, by: 0.01)
             .frame(width: 300)
         }
     }

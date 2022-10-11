@@ -12,9 +12,10 @@ extension TimeReader {
 
     /// A `Publisher` that emits the `Timer`'s `Date` as minute/second/fraction at every tick.
     /// - Returns: The `Publisher` resulting from that chain.
-    static func createSharedTimePublisher() -> AnyPublisher<MinSecAndFraction, Error>
+    /* static */ func createSharedTimePublisher() -> AnyPublisher<MinSecAndFraction, Error>
     {
-        let retval = Timer.publish(every: tickInterval,
+        let retval = Timer.publish(
+            every: tickInterval,
                                    tolerance: tickTolerance,
                                    on: .main, in: .common)
             .autoconnect()
@@ -27,11 +28,11 @@ extension TimeReader {
                 }
                 return retval
             }
-            .map { rawInterval in
+            .map { [self] rawInterval in
                 // Seconds to expiry rounded by roundingScale
-                let scaled = Self.roundingScale * rawInterval
+                let scaled = roundingScale * rawInterval
                 let trimmed = round(scaled)
-                let rescaled = trimmed / Self.roundingScale
+                let rescaled = trimmed / roundingScale
                 return rescaled
             }
             .map {
@@ -46,91 +47,68 @@ extension TimeReader {
             }
             .share()
             .eraseToAnyPublisher()
-
-        sharedTimer      = retval
-        timePublisher    = retval // ???
-        mmssPublisher    = mmss_00_Timer()
-        secondsPublisher = ss_Timer()
-        fractionsPublisher = fff_Timer()
-         */
-
         return retval
     }
 
-    func ss_Timer() -> AnyPublisher<Int, Error> {
-        let retval = Self.sharedTimePublisher
+    private static var cancellables: Set<AnyCancellable> = []
+
+    private /* static */ var areSubjectsInitialized: Bool {
+        sharedTimePublisher != nil
+    }
+
+    private /* static */ func ss_Timer() -> AnyCancellable {
+        let retval = sharedTimePublisher
+            .replaceError(with: .zero)
+            .removeDuplicates()
             .map { $0.second }
             .filter { $0 >= 0 }
-            .removeDuplicates()
             .eraseToAnyPublisher()
-
-
+            .sink(receiveValue: { [self]
+                secs in secondsSubject.send(secs)
+            })
         return retval
-
-        /*
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .finished: break
-                    case .failure(let error):
-                        if let error = error as? TerminationErrors {
-                            if error == .expired {
-                                self.status = .expired
-                            }
-                            else {
-                                self.status = .cancelled
-                            }
-                        }
-                    }
-                }, receiveValue: {
-                    secInteger in
-                    self.secondsSubject.send(secInteger)
-                }
-            )
-        */
     }
 
-    func fff_Timer() -> AnyPublisher<Double, Error> {
-        let retval = Self.sharedTimePublisher
+    /// The shared timer's output with the trailing zeros suppressed.
+    private /* static */ func mmss00_Timer() -> AnyCancellable {
+        let retval = sharedTimePublisher
+            .replaceError(with: .zero)
+            .removeDuplicates(by: { lhs, rhs in
+                return lhs.second == rhs.second &&
+                lhs.minute == rhs.minute
+            })
+            .map { mmssff in
+                let retval = MinSecAndFraction(
+                    minute: mmssff.minute,
+                    second: mmssff.second,
+                    fraction: 0.0)
+                return retval
+            }
+            .eraseToAnyPublisher()
+            .sink(receiveValue: { [self]
+                secs in mmssSubject.send(secs)
+            })
+        return retval
+    }
+
+    private /* static */ func fff_Timer() -> AnyCancellable {
+        let retval = sharedTimePublisher
+            .replaceError(with: .zero)
+            .removeDuplicates()
             .map { (mmssfff: MinSecAndFraction) -> Double in
                 return mmssfff.fraction
             }
-            .eraseToAnyPublisher()
-        return retval
-    }
-//            .sink { completion in
-//                switch completion {
-//                case .finished: break
-//                case .failure(let error):
-//                    guard let err = error as? TerminationErrors else {
-//                        //                        print("Timer serial", self.serial, ": other error: \(error).")
-//                        return
-//                    }
-//                    switch err {
-//                    case .expired:
-//                        self.status = .expired
-//                        //print("Timer serial", self.serial, "ran out")
-//                    case .cancelled:       // print("Timer serial", self.serial, "was cancelled")
-//                        self.status = .cancelled
-//                    }
-//                }
-//            } receiveValue: { msf in
-//                self.timeSubject.send(msf)
-//            }
-
-    func mmss_00_Timer() ->  AnyPublisher<MinSecAndFraction, Error> {
-        //        var lastMMSS = MinSecAndFraction.zero
-        let retval = Self.sharedTimePublisher
-            .removeDuplicates(by: {
-                (lhs, rhs) -> Bool in
-                return lhs.minute == rhs.minute &&
-                lhs.second == rhs.second
-            })
-            .eraseToAnyPublisher()
+            .sink { [self] fracts in fractionsSubject.send(fracts) }
         return retval
     }
 
-
+    private /* static */ func setUpCombine() {
+        sharedTimePublisher = createSharedTimePublisher()
+        ss_Timer().store(in: &Self.cancellables)
+        mmss00_Timer().store(in: &Self.cancellables)
+        fff_Timer().store(in: &Self.cancellables)
+    }
+}
         // An error can come from upstream when the timer expires.
         // Passthrough subjects (& current, I assume) can pass an Error down the chain.
         // This is probably a good idea.
@@ -139,14 +117,3 @@ extension TimeReader {
         // They don't insist on Never. Now how do you subscribe so as to get the error from the subject?
         // You have to replace the onReceive to some kind of func expand(aSubject) -> Result<MinSecAndFraction>
         // Or func receivedValue(from: subject) throws -> MinSecAndFraction
-//
-//
-//            .removeDuplicates()
-//            .print("mmss_00")
-//            .sink { mmssfff in  // <- obsolete
-//                self.mmssSubject.send(mmssfff)
-//            }
-
-}
-
-

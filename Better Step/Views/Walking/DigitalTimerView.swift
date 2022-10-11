@@ -158,7 +158,7 @@ struct DigitalTimerView: View, ReportingPhase {
             // Is this handler really the best place?
             // or onDisappear?
         })
-        .onReceive(timer.timeSubject, perform: { newTime in
+        .onReceive(timer.mmssSubject, perform: { newTime in
             self.minSecfrac = newTime
         })
         .navigationTitle(

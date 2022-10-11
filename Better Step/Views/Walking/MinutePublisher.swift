@@ -37,7 +37,7 @@ import Combine
 
 
 final class MinutePublisher: ObservableObject {
-    var cancellables: Set<AnyCancellable> = []
+//    var cancellables: Set<AnyCancellable> = []
 
     // MARK: Subjects
     /// Subscribers get a `Bool` input when the set period ends through exhaustion or by clients' calling ``MinutePublisher/stop(exhausted:)``. The `Bool` is true iff the completion is due to exhaustion.
@@ -47,6 +47,7 @@ final class MinutePublisher: ObservableObject {
     ///
     /// Clients do not see this publisher; they should subscribe to the `@Published` time components instead.
     /// Publish the number of whole minutes from the deadline (`0..<60`).
+/*
     @Published var minutes: Int = 0
     /// Publish the number of whole seconds from the deadline (`0..<60`).
     @Published var seconds: Int = 0
@@ -54,7 +55,7 @@ final class MinutePublisher: ObservableObject {
     @Published var fraction: Double = 0.0
     /// Publish the formatted pairing of the whole minites and seconds from the deadline (`"1:38"`).
     @Published var minuteColonSecond: String = ""
-
+*/
     // MARK: Initialization
 
     /// The deadline for ending the countdown
@@ -82,6 +83,7 @@ final class MinutePublisher: ObservableObject {
     /// Set up subscriptions to (ultimately) the `Timer.Publisher` and start the clock.
     ///
     /// The shared time publisher (`commonPublisher`) emits the current interval to the deadline, and calls `.stop()` if the deadline (down to 0:00 or up to the limiting interval) is reached. All  published components are `Cancellable`s downstream from the shared time publisher.
+    /*
     func start() {
         started = Date()
 /*
@@ -150,8 +152,10 @@ final class MinutePublisher: ObservableObject {
             .store(in: &cancellables)
         */
     }
+     */
 
     // MARK: Stop
+    /*
     /// Halt the clock and send a `Bool` to ``completedSubject`` to indicate exhaustion or halt.
     ///
     /// - parameter exhausted: `true` iff `stop()` was called because the clock ran out. This is passed along through `completedSubject` to inform clients the clock is finished.
@@ -161,4 +165,5 @@ final class MinutePublisher: ObservableObject {
         }
         completedSubject.send(exhausted)
     }
+     */
 }

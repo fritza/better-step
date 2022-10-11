@@ -35,6 +35,13 @@ enum CountdownConstants {
 
 /// An `ObservableObject` that serves as a single source of truth for the time remaining in an interval, publishing minutes, seconds, and fractions in sync.
 final class TimeReader: ObservableObject {
+
+    // FIXME: Need a reset that changes the total interval
+    // error("Need a reset that changes the total interval")
+    static let shared: TimeReader = TimeReader(
+        spanning: CountdownConstants.walkDuration,
+        by: CountdownConstants.timerTick)
+
     enum TerminationErrors: Error, CustomStringConvertible {
         case cancelled
         case expired
@@ -54,31 +61,35 @@ final class TimeReader: ObservableObject {
 
     // MARK: Combine support
     var cancellables = Set<AnyCancellable>()
-    var mmss_00_publisher: AnyPublisher<MinSecAndFraction, Error>!
-    var mmss_ff_publisher: AnyPublisher<MinSecAndFraction, Error>!
-    var ss_publisher: AnyPublisher<Int, Error>!
 
     /// The ready/run/stopped/expired status of the count.
     @Published var status: TimerStatus = .ready
 
     internal var startingDate, endingDate: Date
-    internal var totalInterval: TimeInterval
+    internal var timeSpan: TimeInterval
     internal let tickInterval: TimeInterval
     internal let tickTolerance: TimeInterval
 
-    // MAJOR DEVELOPMENT: sharedTimePublisher IS NOW STATIC
-    private static let sharedTimePublisher = createSharedTimePublisher()
 
 
-
+    /*
     /// Broadcasts the current time remaining as rapidly as the underlying `Timer` publishes it.
-    var timeSubject = PassthroughSubject<MinSecAndFraction, Error>()
-    /// Broadcasts only the number of seconds remaining
-    var secondsSubject = PassthroughSubject<Int, Error>()
+    /* static */ var timeSubject        = PassthroughSubject<MinSecAndFraction, Never>()
+     */
+    /// Broadcasts only the number of seconds remaining (pre-walk countdown digit)
+    /* static */ var secondsSubject     = PassthroughSubject<Int, Never>()
+    /// Broadcats only the fraction  within the current second (sweep-second)
+    /* static */ var fractionsSubject   = PassthroughSubject<TimeInterval, Never>()
+    /// Broadcasts only minutes and _truncated_ seconds.
+    /* static */ var mmssSubject        = PassthroughSubject<MinSecAndFraction, Never>()
 
 #if LOGGER
     var intervalState: OSSignpostIntervalState
 #endif
+
+
+
+
 
     /// Collect the parameters that will initialize the time publisher and its subscribers when ``start()`` is called.
     /// - Parameters:
@@ -101,43 +112,35 @@ final class TimeReader: ObservableObject {
         tickTolerance = tickSize / 20.0
 
         let currentDate = Date()
-        totalInterval = interval
+        timeSpan = total
         startingDate = currentDate
-        endingDate = Date().addingTimeInterval(interval)
+        endingDate = Date().addingTimeInterval(total)
 #if LOGGER
         signposter.endInterval("TimeReader init", spIS)
 #endif
     }
 
-
-#error("Wrong way to reset the publishers.")
-
-    // FIXME: Are the nil-outs of the publishers necessary?
-    //        Can’t we just keep the publishers around and
-    //        start/stop/cancel/reset the shared time publisher?
-    //        Below and elsewhere, we nuke all the publishers.
-    //        I wonder if that's necessary. Maybe you need only singletons of these.
-    var sharedTimer                 : AnyPublisher<MinSecAndFraction, Error>!
-    var timePublisher       : AnyPublisher<MinSecAndFraction, Error>!
-    var mmssPublisher       : AnyPublisher<MinSecAndFraction, Error>!
-    var secondsPublisher    : AnyPublisher<Int          , Error>!
-    var fractionsPublisher  : AnyPublisher<Double           , Error>!
-    #error("What do we do with Errors?")
-    // Well, your terminal sink assign, or whatever
-    // catches the completion in sink and… that stops the
-    // subscriber, doesn't it? Or you can do a cancel
-    // (it's AnyCancellable, right?) which would wreck the
-    // whole stream (which is what you want).
-    // I'm afraid you'd have to re-create the timing chain, though.
-
     /*
-     TWO SETS OF AnyPublishers?!
-     TimeReader ~Publisher, as just above (ll 111-116).
+     Removed the _publisher() time-tick publisher, redundant and never used.
 
-     TimeReader ~_publisher, as at ll 50-53.
-         ... which, thank God, are declared but not used.
-     Does not include a sharedTimer, not a fractions publisher.
-     Does include cancellables, not used, which makes sense given that we no longer have any cancellable source.
+     I now have four Subjects:
+     timeSubject        as in mm:ss.ffff ††
+     secondsSubject     as in :<ss>.
+     fractionsSubject   as in .<ffff>
+     mmssSubject        as in MinSecAndFraction truncated to mm:ss.0000 †
+
+     † Having a zero-fraction output permits suppressing duplicates headed for the Digital view.
+        QUERY: how early do we suppress?
+
+     †† Nobody uses the unfiltered mm:ss.ffff direct from the sharedTimePublisher,
+        and probably nobody should. It's not useful for sweep (ffff), sweep count (ss), or walk timing (mm:ss)
+        Some clients do an .onReceive on timeSubject, but nobody does anything with it.
+
+     SUGGEST:  REMOVE timeSubject.
+     CONSIDER: Add a filter before mmssSubject to yield "mm:ss".
+        Why:        no other use is made of it.
+        Why not:    not a good idea to mingle data (ints) with presentation ("12:34").
+
 
      Meanwhile the Subjects are still there.
      But they have significant gaps in function (just
@@ -179,6 +182,8 @@ final class TimeReader: ObservableObject {
 
     /// Stop the timer and updates `status` to whether it was cancelled or simply ran out.
     func cancel() {
+        // FIXME: Move `status` into the /* static */ space.
+        #warning("`status` should be /* static */.")
         status = (status == .running) ?
             .cancelled : .expired
 
@@ -187,7 +192,7 @@ final class TimeReader: ObservableObject {
         //        watches a flag you set, that will
         //        stop publishing until the flag is reset?
         //
-        Self.sharedTimePublisher.cancel()
+        // FIXME: make sharedTimePublisher private
 
 //        timePublisher      = nil
 //        mmssPublisher      = nil
@@ -204,18 +209,18 @@ final class TimeReader: ObservableObject {
     }
     #endif
 
-    func reset() {
+    func reset(to newTotalSpan: Double) {
         // I hate that
         let currentDate = Date()
         startingDate = currentDate
-        endingDate = Date().addingTimeInterval(totalInterval)
-
+        endingDate = Date().addingTimeInterval(newTotalSpan)
     }
 
     /// Initiate the countdown that was set up in `init`.
     ///
     /// Sets up the Combine chains from the `Timer` to all the published interval components.
-    func start(function: String = #function,
+    func start(totalSpan: Double,
+               function: String = #function,
                fileID: String = #file,
                line: Int = #line) {
 // FIXME: Callers should somehow take care of restarting MotionManager for walks but not sweeps
@@ -244,15 +249,17 @@ final class TimeReader: ObservableObject {
         assert(status != .running,
         "attempt to restart a timer")
 
-        reset()
+        reset(to: totalSpan)
 
         status = .running
-
-        timeCancellable = mmss_ff_Cancellable()
-        mmssCancellable = mmss_00_Cancellable()
-        secondsCancellable = ss_Cancellable()
     }
-    static let roundingScale = 100.0
+
+    // MARK: - Compulsory out-of-extension
+    // FIXME: Make these static
+    /* static */ let roundingScale = 100.0
+    var sharedTimePublisher: AnyPublisher<MinSecAndFraction, Error>!
+
+
 
 }
 
