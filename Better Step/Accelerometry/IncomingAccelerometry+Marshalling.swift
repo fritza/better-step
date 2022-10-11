@@ -54,14 +54,6 @@ extension IncomingAccelerometry {
             .addToArchive(data: data, forPhase: phase)
     }
 
-//    static var filePaths: [String] = []
-//    static func registerFilePath(_ name: String) {
-//        while filePaths.count > 2 {
-//            filePaths.removeFirst()
-//        }
-//        filePaths.append(name)
-//    }
-
     /// Write all CSV records into a file.
     /// - Parameters:
     ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``marshalledRecords(withPrefix:)``

@@ -8,10 +8,9 @@
 import Foundation
 import CoreHaptics
 
+// MARK: - MorseHaptic.
 /// Player for a haptic in a named AHAP file `rawValue`, a `String`, is the base name for the corresponding AHAP pattern file.
 ///
-/// - note: ATW, `MorseHaptic` relies on `.init(contentsOf:)`, which is iOS 16-only.
-///                 It should be possible to generate the patterns programmatically, but this gets a beta out the door.
 /// - warning: `MorseHaptic` relies on `throws` everywhere _except_ the initailzer, which `RawRepresentable` insists must be a non-throwing failable.
 struct MorseHaptic: RawRepresentable {
     /// `RawRepresentable` adoption
@@ -23,6 +22,7 @@ struct MorseHaptic: RawRepresentable {
     /// Singleton haptic engine
     static var engine   : CHHapticEngine!
 
+    // MARK: Initialization
     /// Initialize all properties (except `chPattern)` from the base name..
     init?(rawValue: String) {
         // Bail if the device doesn't support haptics (both kinds)
@@ -58,6 +58,7 @@ struct MorseHaptic: RawRepresentable {
         }
     }
 
+    // MARK: Loading
     /// The `CHHapticPattern` derived from the `rawValue` value of `self`.
     mutating func pattern() throws -> CHHapticPattern {
         if let chPattern { return chPattern }
@@ -70,6 +71,9 @@ struct MorseHaptic: RawRepresentable {
         return chPattern!
     }
 
+    /// Create a haptic pattern from an `.ahap` (JSON) file at a given `URL`.
+    ///
+    /// Needed as a fallback from `CHHapticPattern(contentsOf:)` on iOS < 16.0
     static func haptic(from url: URL) throws -> CHHapticPattern {
         let data = try Data(contentsOf: url)
         let decode = try JSONSerialization.jsonObject(
@@ -80,17 +84,9 @@ struct MorseHaptic: RawRepresentable {
         return retval
     }
 
-    /*
-     /*! @method initWithDictionary:error
-      @abstract
-      Initialize a new CHHapticPattern using the passed-in NSDictionary.
-      @param patternDict
-      NSDictionary containing a pattern property list.
-      */
-     - (nullable instancetype)initWithDictionary:(NSDictionary<CHHapticPatternKey, id> *)patternDict
-     error:(NSError **)outError;
-     */
+    // MARK: Play
 
+    /// Play the pattern.
     mutating func play() throws {
         // Remember that the engine will hold on to the
         // player for the duration. There's no need
@@ -101,7 +97,9 @@ struct MorseHaptic: RawRepresentable {
         try player.start(atTime: CHHapticTimeImmediate)
     }
 
+    // MARK: Prepared haptic patterns
+    /// A haptic for Morse `._  ._  ._` as described in `AAA.ahap`.
     static var aaa = MorseHaptic(rawValue: "AAA")!
+    /// A haptic for Morse `_.  _.  _.` as described in `NNN.ahap`.
     static var nnn = MorseHaptic(rawValue: "NNN")!
 }
-

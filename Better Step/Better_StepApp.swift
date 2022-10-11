@@ -49,8 +49,8 @@ struct Better_StepApp: App {
                     temporaryDASIStorage = answerList.csvLine!
                 }
             })
-            .environmentObject(DASIPages())
-            .environmentObject(DASIResponseList())
+//            .environmentObject(DASIPageSelection())
+//            .environmentObject(DASIResponseList())
 
 #else
             TabView(
