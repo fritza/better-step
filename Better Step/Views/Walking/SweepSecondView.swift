@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /**
  ## Topics
@@ -23,20 +24,24 @@ import SwiftUI
 /// A `View` that displays a circle containing a sweep-second hand and a digit, representing a countdown in seconds.
 ///
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
-struct SweepSecondView: View {
-    @Environment(\.colorScheme) private static var colorScheme: ColorScheme
-    #warning("Use a shared TimeReader instead.")
-    @StateObject var timer: TimeReader = TimeReader(spanning: CountdownConstants.sweepDuration)
-//    TimeReader(spanning: CountdownConstants.sweepDuration, by: 0.01)
-    /// The current minute/second/fraction value of the countdown.
-//    @State private  var minSecFrac: MinSecAndFraction?
-    @State private var wholeSeconds : Int?
-    @State private var subSeconds   : TimeInterval?
+struct SweepSecondView: View, ReportingPhase {
+    typealias SuccessValue = ()
+    typealias ResultValue = Result<SuccessValue,Error>
+    typealias SSVClosure = ((Result<(), Error>) -> Void)
 
-    static let startDelay: TimeInterval = 1.2
+    static let timeKeeperSpec = Timekeeper.TimingSpec(
+        duration: CountdownConstants.sweepDuration,
+        increment: CountdownConstants.timerTick,
+        tolerance: CountdownConstants.timerTolerance,
+        roundingScale: CountdownConstants.secondsRoundingFactor,
+        units: [.seconds, .fraction]
+        )
+
+    @Environment(\.colorScheme) private static var colorScheme: ColorScheme
+    @StateObject var timer: Timekeeper = Timekeeper(Self.timeKeeperSpec)
 
     /// The closure provided by client code at `init` to notify it of expiration
-    private let completionCallback: (() -> Void)
+    let completion: SSVClosure!
     // TODO: This isn't what you'd use
     // if this were a ReportingPhase.
 
@@ -45,22 +50,33 @@ struct SweepSecondView: View {
     ///   - duration: `TimeInterval` (in seconds to count down from
     ///   - onCompletion: Closure to notify the client that the countdown has run out.
     init(duration: TimeInterval,
-         onCompletion: @escaping (()->Void),
+         onCompletion: @escaping SSVClosure,
          function: String = #function,
          fileID: String = #file,
          line: Int = #line
     ) {
-        wholeSeconds = Int(duration)
-        completionCallback = onCompletion
+//        wholeSeconds = Int(duration)
+        self.completion = onCompletion
     }
 
-    /// Formatted seconds from current `minSecFrac.second`.
+    // MARK: Subview builders
     var stringForSeconds: String {
-        if let wholeSeconds, wholeSeconds >= 0 {
+        if (0...Int(CountdownConstants.sweepDuration))
+            .contains(timer.seconds) {
+            return String(timer.seconds+1)
+        }
+        else { return "*" }
+    }
+
+    /*
+    var xxStringForSeconds: String {
+        if let wholeSeconds, wholeSeconds >= 0,
+           wholeSeconds <= Int(CountdownConstants.walkDuration) {
             return String(describing: wholeSeconds+1)
         }
         else { return "*" }
     }
+     */
 
     /// A digit to be overlaid on the clock face, intended to indicate seconds remaining.
     @ViewBuilder private func numericOverlay(edge: CGFloat) -> some View {
@@ -75,11 +91,8 @@ struct SweepSecondView: View {
             Circle()
                 .stroke(lineWidth: 1.0)
                 .foregroundColor(.gray)
-
-            //            SubsecondHandView(fractionalSecond: minSecFrac?.fraction ?? 0.0)
-            SubsecondHandView(fractionalSecond: self.subSeconds ?? 0.0)
-                .foregroundColor((Self.colorScheme == .light) ? .black : .gray)
-
+            SubsecondHandView(fractionalSecond: timer.fraction)
+                            .foregroundColor((Self.colorScheme == .light) ? .black : .gray)
             numericOverlay(
                 edge: size.short * 0.6
             )
@@ -106,55 +119,34 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
             }
             .padding()
 
-            // MARK: Change isRunning
+            // MARK: Clock status
             .onChange(of: timer.status,
                       perform:
                         { newValue in
                 switch newValue {
-
                     // TODO: Should an error be propagating?
                     // I don't see why. The status itself
                     // says everything there is to say.
-                case .cancelled, .expired:
-                    // Timer's already completed, hence status
-                    completionCallback()
+                case .cancelled:
+                    completion?(
+                        .failure(Timekeeper.Status.cancelled))
+                case .completed:
+                    completion?(.failure(Timekeeper.Status.completed))
                 default: break
                 }
             })
-
-            .onReceive(timer.fractionsSubject, perform: { fraction in
-                self.subSeconds = fraction
-            })
-
-            /*
-            // MARK: Time subscription -> sweep second
-            // Change of mm:ss.fff - sweep angle
-            .onReceive(timer.timeSubject) { mmssff in
-                self.minSecFrac = mmssff
-            }
-             */
-
-            // MARK: Seconds -> Overlay + speech
-            // Change of :ss. (speak seconds)
-            .onReceive(timer.secondsSubject) {
-                secs in
-                self.wholeSeconds = secs
-            }
-
-            .onAppear() {
+            .onAppear {
+                // Delay a little bit so the view syncs to the audio
                 Timer.scheduledTimer(
-                    withTimeInterval: Self.startDelay,
+                    withTimeInterval: CountdownConstants.sweepSecondDelay,
                     repeats: false) { _ in
-                        timer.start(totalSpan: CountdownConstants.sweepDuration)
+                        timer.start()
                 }
-
                 do {
                     try AudioMilestone.shared.play()
                 }
                 catch {
-#if DEBUG
                     print(#function, ":", #line, "- attempt to play countdown audio failed:", error.localizedDescription)
-#endif
                 }
             }
             .navigationTitle("Start in…")
@@ -166,12 +158,18 @@ struct SweepSecondView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SweepSecondView(duration: CountdownConstants.sweepDuration) {
+                result in
+                switch result {
+                case .success:
+                    print("Succeeded")
+                case .failure(let error):
+                    print("Failed with error", error)
+                }
             }
-            .environmentObject(MotionManager(phase: .countdown_1))
-
-            // TODO: Should TimeReader be an EnvironmentObject?
-
-            // FIXME: Supply TimeReader(spanning: CountdownConstants.sweepDuration, by: 0.01)
+//            .environmentObject(MotionManager(phase: .countdown_1))
+//            .environmentObject(
+//                Timekeeper(SweepSecondView.timeKeeperSpec)
+//            )
             .frame(width: 300)
         }
     }

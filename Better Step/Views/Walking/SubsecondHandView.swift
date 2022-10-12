@@ -56,8 +56,8 @@ struct SubsecondHandView_Previews: PreviewProvider {
                             .border(.green, width: 0.5)
                     }
                 }
-        }
             }
+        }
         .padding()
     }
 }

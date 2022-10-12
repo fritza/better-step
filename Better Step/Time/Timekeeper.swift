@@ -42,6 +42,9 @@ enum CountdownConstants {
 
     /// `Timer`-provided second marks arrive at unlimited precision. `Timekeeper` rounds thest to this fraction of a second.
     static let secondsRoundingFactor = 100.0
+
+    /// Delay in displaying `SweepSecondView` till the ``AudioMilestone`` catches up.
+    static let sweepSecondDelay = 1.2
 }
 
 
