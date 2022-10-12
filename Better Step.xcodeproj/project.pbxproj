@@ -33,7 +33,6 @@
 		1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */; };
 		1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
 		1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */; };
-		1FA281F628DBBB270038353E /* TimeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53A28D138E200593692 /* TimeReader.swift */; };
 		1FA281F728DBBB270038353E /* EmailFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1701A52777B65A00E510AE /* EmailFormView.swift */; };
 		1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */; };
 		1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */; };
@@ -755,7 +754,6 @@
 				1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */,
 				1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */,
 				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
-				1FA281F628DBBB270038353E /* TimeReader.swift in Sources */,
 				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
 				1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */,
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,

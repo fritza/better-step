@@ -15,23 +15,6 @@ let signposter = OSSignposter(subsystem: "com.wt9t.G-Bars",
                               category: .pointsOfInterest)
 #endif
 
-enum CountdownConstants {
-#if DEBUG
-    static let walkDuration    = 120.0             // 15.0
-#else
-    static let walkDuration    = 120.0
-#endif
-
-    static let countdownInterval    = 30
-    static let sweepDuration        = 5.0
-
-    static let hz                : UInt64 = 120
-    static let hzInterval        : Double = 1.0/Double(hz)
-    static let timerTick         : Double = hzInterval/10.0
-    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
-
-}
-
 
 /// An `ObservableObject` that serves as a single source of truth for the time remaining in an interval, publishing minutes, seconds, and fractions in sync.
 final class TimeReader: ObservableObject {
@@ -182,24 +165,10 @@ final class TimeReader: ObservableObject {
 
     /// Stop the timer and updates `status` to whether it was cancelled or simply ran out.
     func cancel() {
-        // FIXME: Move `status` into the /* static */ space.
-        #warning("`status` should be /* static */.")
+        // ex-fixme: Move `status` into the /* static */ space.
+        // ex-warning("`status` should be /* static */.")
         status = (status == .running) ?
             .cancelled : .expired
-
-        // FIXME: There's a way to stop a Timer.Publisher.
-        //        Could you maybe insert a filter that
-        //        watches a flag you set, that will
-        //        stop publishing until the flag is reset?
-        //
-        // FIXME: make sharedTimePublisher private
-
-//        timePublisher      = nil
-//        mmssPublisher      = nil
-//        secondsPublisher   = nil
-//        fractionsPublisher = nil
-
-//        sharedTimer = nil
     }
 
     #if DEBUG

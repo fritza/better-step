@@ -8,6 +8,44 @@
 import Foundation
 import Combine
 
+// MARK: - CountdownConstants
+
+/// Constants for time intervals, as for
+///
+/// * Duration of walk tests
+/// * Durtation of the sweep-second counttdown to walk tests
+/// * Time between announcements of time-remaining in a walk (obsolete)
+/// * Sampling rate and precision for Core Motion and clocks.
+enum CountdownConstants {
+    /// Total duration of a walk phase. This may be shorter in debugging views, because waiting a whole two minutes just to check out the view is a drag.
+#if DEBUG
+    static let walkDuration    = 120.0             // 15.0
+#else
+    static let walkDuration    = 120.0
+#endif
+    /// Time between spoken progress announcements in a walk
+    @available(*, unavailable, message: "Remaining walk time is no longer announced")
+    static let countdownInterval    = 30
+    /// Total seconds in the countdown to commencement of walk
+    static let sweepDuration        = 5.0
+
+    /// Collection rate for Core Motion accelerometry.
+    static let hz                : UInt64 = 60
+    /// Timing between accelerometry readings.
+    static let hzInterval        : Double = 1.0/Double(hz)
+    /// The interval for between `Timer` updates for updating the UI. See `Timer`.
+    static let timerTick         : Double = hzInterval*2.0
+    /// Tolerated variance ± from strict regularity in `Timer` notifications. See `Timer`.
+    static let timerTolerance    : Double = timerTick/8.0
+    /// Duration in ns between `Task.sleep(nanoseconds:)` updates of the `AsyncStream` values for `for async`. Twice as frequent as the requested update (.`timerTick` interval.
+    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC) / 2.0)
+
+    /// `Timer`-provided second marks arrive at unlimited precision. `Timekeeper` rounds thest to this fraction of a second.
+    static let secondsRoundingFactor = 100.0
+}
+
+
+
 /**
  ## Topics
 
@@ -56,7 +94,7 @@ final class Timekeeper: ObservableObject {
     ///
     /// Throwing an error in a Combine chain propagates up to cancelling the `Timer` publisher. Clients of any of the published attributes will receive the reason for termination as a `.failure`  error in the `receiveCompletion` branch of `.sink`.
     enum Status: Error, CustomStringConvertible {
-        // MARK: Status
+        // MARK: - Status
         case idle, running, completed, cancelled, unknown
         var description: String {
             switch self {
@@ -73,13 +111,13 @@ final class Timekeeper: ObservableObject {
     ///
     /// Initialize `TimeKeeper` with a `TimingSpec`. `Timekeeper` has an additional initializer for specifying these as parameters.
     struct TimingSpec {
-        // MARK: TimingSpec
+        // MARK: - TimingSpec
         let duration, increment, tolerance, roundingScale : TimeInterval
         let units: Units
         init(duration       : TimeInterval,
-             increment      : TimeInterval = 0.05,
-             tolerance      : TimeInterval = 0.02,
-             roundingScale  : TimeInterval = 100.0,
+             increment      : TimeInterval = CountdownConstants.timerTick,
+             tolerance      : TimeInterval = CountdownConstants.timerTolerance,
+             roundingScale  : TimeInterval = CountdownConstants.secondsRoundingFactor,
              units          : Units) {
             self.duration      = duration
             self.increment     = increment
@@ -94,7 +132,7 @@ final class Timekeeper: ObservableObject {
     /// Clients should not examine publishers whose unuts have not been requested. The clock will not update them.
     /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ generate a stream for the string `"mm:ss"`. _See_ ``Timekeeper/start()``.
     struct Units: RawRepresentable, OptionSet, CustomStringConvertible {
-        // MARK: Units
+        // MARK: - Units
         let rawValue: Int
         init(rawValue: Int) { self.rawValue = rawValue }
 
@@ -117,6 +155,7 @@ final class Timekeeper: ObservableObject {
     }
 
     // MARK: Properties (state)
+
     private let duration, increment, tolerance, roundingScale: TimeInterval
     private var startTime, deadline: Date!
     private var units: Units
@@ -139,14 +178,14 @@ final class Timekeeper: ObservableObject {
     /// For details on the parameters, see `Timer`.
     /// - Parameters:
     ///   - duration: The amount of time the countdown is to run. (e.g. 120 seconds). This is not defaulted.
-    ///   - increment: The increment within the duration at which the underlying `Timer` emits time. Default is `0.05` seconds.
-    ///   - tolerance: The maximum amount the emitted time may vary from the strict increment. See `Timer`. Defaults to `0.02`.
+    ///   - increment: The increment within the duration at which the underlying `Timer` emits time. Default is `CountdownConstants.timerTick`, (`1/30` of a second ATW).
+    ///   - tolerance: The maximum amount the emitted time may vary from the strict increment. See `Timer`. Defaults to `CountdownConstants.timerTolerance` (`1/240` second ATW).
     ///   - roundingScale: The divisor by which to round the Timer's reported time . Defaults to `100.0` (`5.12345 -> 5.123`)
     ///   - units: The time components to be updated during the lifetime of the `Timekeeper`.  `seconds`, for instance, will not be updated if `.seconds` is not included. If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ update `"mm:ss"` (`minuteSecondString`). Not defaulted.
     convenience init(duration       : TimeInterval,
-                     increment      : TimeInterval = 0.05,
-                     tolerance      : TimeInterval = 0.02,
-                     roundingScale  : TimeInterval = 100.0,
+                     increment      : TimeInterval = CountdownConstants.timerTick,
+                     tolerance      : TimeInterval = CountdownConstants.timerTolerance,
+                     roundingScale  : TimeInterval = CountdownConstants.secondsRoundingFactor,
                      units          : Units) {
         let specs = TimingSpec(duration: duration, increment: increment,
                                tolerance: tolerance, roundingScale: roundingScale,
