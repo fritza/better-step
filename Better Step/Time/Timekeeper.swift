@@ -288,6 +288,9 @@ final class Timekeeper: ObservableObject {
     // MARK: Minutes
     /// Sink downsteam from the root timer publisher, setting `self.minutes`.
     private func handleMinutes() {
+#if DEBUG
+        print("Enter", #function, "- \(#fileID):\(#line)")
+#endif
         rootPublisher
             .map { $0.minute }
             .removeDuplicates()
@@ -308,6 +311,9 @@ final class Timekeeper: ObservableObject {
     // MARK: Seconds
     /// Sink downsteam from the root timer publisher, setting `self.seconds`.
     private func handleSeconds() {
+#if DEBUG
+print("Enter", #function, "- \(#fileID):\(#line)")
+#endif
         rootPublisher
             .map { $0.second }
             .removeDuplicates()
@@ -328,6 +334,9 @@ final class Timekeeper: ObservableObject {
     // MARK: "mm:ss"
     /// Sink downsteam from the root timer publisher, converting to `mm:ss` and setting `self.minuteSecondString`.
     private func handleMinSeconds() {
+#if DEBUG
+print("Enter", #function, "- \(#fileID):\(#line)")
+#endif
         rootPublisher
             .map {
                 minSecFrac in
@@ -355,6 +364,9 @@ final class Timekeeper: ObservableObject {
 // MARK: Fraction
     /// Sink downsteam from the root timer publisher, setting `self.fraction` to the reported fraction-within second..
     private func handleFractions() {
+#if DEBUG
+print("Enter", #function, "- \(#fileID):\(#line)")
+#endif
         rootPublisher
             .map { $0.fraction }
             .sink { completion in

@@ -5,6 +5,14 @@
 //  Created by Fritz Anderson on 1/20/22.
 //
 
+#warning("read me: completion errors")
+/*
+ My present concern is that the completion/cancellatioin errors don't get thrown, or are otherwise ignored; so the timer iteself never pushes up something to distinguis reasons for stopping.
+ Remember: THROWING THE COMPLETION "ERRORS" CANCELS THE TIMER.
+ */
+
+
+
 import SwiftUI
 import Combine
 
@@ -16,9 +24,7 @@ import Combine
  - ``body``
  */
 
-// TODO: This isn't a ReportingPhase. Should it be?
-// FIXME: YES! it has to report success (expired) versus
-//        failure (cancelled).
+// FIXME: Add an Error that describes cancellation.
 
 
 /// A `View` that displays a circle containing a sweep-second hand and a digit, representing a countdown in seconds.

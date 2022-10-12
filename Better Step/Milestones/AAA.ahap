@@ -28,17 +28,7 @@
                {"ParameterID":"HapticIntensity","ParameterValue":1}
               ]
             }
-        },
-		{"Event":
-			{ "Time": 0.2, "EventType":"AudioContinuous",
-			 "EventDuration": 0.3,
-			"EventParameters": [
-				{"ParameterID":"AudioVolume","ParameterValue":1 },
-				{"ParameterID":"AudioPitch", "ParameterValue":1 }
-			    ]
-			}
-		},
-		
+        },		
 		
 		
 		{"Event":
@@ -49,15 +39,7 @@
               ]
             }
         },
-		{"Event":
-			{ "Time": 0.8, "EventType":"AudioContinuous",
-			 "EventDuration": 0.1,
-			"EventParameters": [
-				{"ParameterID":"AudioVolume","ParameterValue":1 },
-				{"ParameterID":"AudioPitch", "ParameterValue":0.995 }
-			    ]
-			}
-		},
+
 		{"Event":
             {"Time": 1.0,"EventType":"HapticContinuous", "EventDuration": 0.3,
             "EventParameters": [
@@ -65,18 +47,7 @@
                {"ParameterID":"HapticIntensity","ParameterValue":1}
               ]
             }
-        },
-		{"Event":
-			{ "Time": 1.0, "EventType":"AudioContinuous",
-			 "EventDuration": 0.3,
-			"EventParameters": [
-				{"ParameterID":"AudioVolume","ParameterValue":1 },
-				{"ParameterID":"AudioPitch", "ParameterValue":1 }
-			    ]
-			}
-		},
-		
-		
+        },		
 		
 		{"Event":
             {"Time": 1.6,"EventType":"HapticContinuous", "EventDuration": 0.1,
@@ -86,16 +57,7 @@
               ]
             }
         },
-        {"Event":
-			{ "Time": 1.6, "EventType":"AudioContinuous",
-			 "EventDuration": 0.1,
-			"EventParameters": [
-				{"ParameterID":"AudioVolume","ParameterValue":1 },
-				{"ParameterID":"AudioPitch", "ParameterValue":0.995 }
-			    ]
-			}
-		},
-        
+         
 		{"Event":
             {"Time": 1.8,"EventType":"HapticContinuous", "EventDuration": 0.3,
             "EventParameters": [
@@ -103,17 +65,6 @@
                {"ParameterID":"HapticIntensity","ParameterValue":1}
               ]
             }
-        },
-		{"Event":
-			{ "Time": 1.8, "EventType":"AudioContinuous",
-			 "EventDuration": 0.3,
-			"EventParameters": [
-				{"ParameterID":"AudioVolume","ParameterValue":1 },
-				{"ParameterID":"AudioPitch", "ParameterValue":1 }
-			    ]
-			}
-		}
+        }
 	]
 }
-
-

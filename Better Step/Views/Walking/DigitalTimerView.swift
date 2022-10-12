@@ -14,7 +14,6 @@ private let digitalNarrative = """
 
 // FIXME: Add an Error that describes cancellation.
 
-
 /**
  ## Topics
 
@@ -34,12 +33,19 @@ private let digitalNarrative = """
  */
 
 struct DigitalTimerView: View, ReportingPhase {
+    static let timeKeeperSpec = Timekeeper.TimingSpec(
+        duration: CountdownConstants.walkDuration,
+        increment: CountdownConstants.timerTick,
+        tolerance: CountdownConstants.timerTolerance,
+        roundingScale: CountdownConstants.secondsRoundingFactor,
+        units: [.mmSecondsString]
+        )
 
     static var dtvSerial = 100
     let serialNumber: Int
-    
-    @ObservedObject var timer = TimeReader(spanning: CountdownConstants.walkDuration)
-    @State private var minSecfrac: MinSecAndFraction?
+
+    @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
+    @State private var minSecString: String?
 
     var walkingState: WalkingState
 
@@ -70,11 +76,11 @@ struct DigitalTimerView: View, ReportingPhase {
     }
 
     // FIXME: Test this.
-    fileprivate func timerStateDidChange(_ stat: TimeReader.TimerStatus) {
+    fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
         switch stat {
         case .cancelled      : completion?(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
-        case .expired        : completion?(.success(self.motionManager.asyncBuffer))
-        case .ready, .running: break
+        case .completed      : completion?(.success(self.motionManager.asyncBuffer))
+        default: break
         }
 }
         /*
@@ -104,7 +110,8 @@ struct DigitalTimerView: View, ReportingPhase {
                     .foregroundColor(.red)
                 Spacer()
                 // MM:SS to screen
-                Text(minSecfrac?.clocked ?? "--:--" )
+                Text(timer.minuteSecondString)
+//                Text(minSecString ?? "xx:xx")
                     .font(.system(size: 100, weight: .ultraLight))
                     .minimumScaleFactor(0.5)
                     .monospacedDigit()
@@ -135,7 +142,7 @@ struct DigitalTimerView: View, ReportingPhase {
                 print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
                 #endif
             }
-            timer.start(totalSpan: CountdownConstants.walkDuration)
+            timer.start()
         }
         .onDisappear() {
             do {
@@ -153,13 +160,10 @@ struct DigitalTimerView: View, ReportingPhase {
             // Is this handler really the best place?
             // or onReceive of timer.$status?
         }
-        .onReceive(timer.$status, perform: { stat in
+        .onChange(of: timer.status, perform: { stat in
             timerStateDidChange(stat)
             // Is this handler really the best place?
             // or onDisappear?
-        })
-        .onReceive(timer.mmssSubject, perform: { newTime in
-            self.minSecfrac = newTime
         })
         .navigationTitle(
             (walkingState == .walk_1) ?
