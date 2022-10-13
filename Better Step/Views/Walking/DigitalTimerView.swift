@@ -41,9 +41,6 @@ struct DigitalTimerView: View, ReportingPhase {
         units: [.mmSecondsString]
         )
 
-    static var dtvSerial = 100
-    let serialNumber: Int
-
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?
 
@@ -71,8 +68,6 @@ struct DigitalTimerView: View, ReportingPhase {
         "\(fileID):\(line): Unexpected walking state: \(walkingState)"
         )
         self.walkingState = walkingState
-        serialNumber = Self.dtvSerial
-        Self.dtvSerial += 1
         self.completion = completion
     }
 

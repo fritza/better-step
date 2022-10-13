@@ -26,8 +26,30 @@ struct Better_StepApp: App {
 
 #if false
             TopContainerView()
+
 #elseif true
             NavigationView {
+                DigitalTimerView(duration: CountdownConstants.walkDuration,
+                                 walkingState: .walk_2) { (result: Result<IncomingAccelerometry, Error>) in
+                    switch result {
+                    case .failure(let err):   // Should be AppPhaseErrors.walkingPhaseProbablyKilled
+                        print("\(#fileID):\(#line) error = \(err)")
+                        return
+
+                    case .success(let incoming):
+                        print("\(#fileID):\(#line) result = \(incoming)")
+
+                        let wcrS = WalkingContainerResult.shared
+                        wcrS[.walk_2] = incoming
+                        wcrS.exportEitherWalk()
+                    }
+
+                }
+                                 .padding()
+                                 .environmentObject(MotionManager(phase: .walk_1))
+            }
+#elseif false
+            NavigationView<WalkingContainerView> {
                 WalkingContainerView { _ in
                 }
             }

@@ -25,13 +25,42 @@ public final class WalkingContainerResult: ObservableObject {
     @discardableResult
     public func exportWalksIfReady() -> Bool {
         guard let walk_1, let walk_2 else { return false }
-        Task.detached { // FIXME: doubles or hangs if one incomplete
+        Task.detached {
+            // NOTE: we know both are filled because of the guard.
             try? await walk_1.addToArchive()
             try? await walk_2.addToArchive()
             // FIXME: do something about export failures.
         }
         return true
     }
+
+
+    public func exportEitherWalk() -> Bool {
+        guard let walk = walk_1 ?? walk_2 else { return false }
+        Task.detached {
+            try? await walk.addToArchive()
+        }
+        return true
+    }
+
+    #if OUTPUT_ASYNC
+    @discardableResult
+    public func asyncExportWalksIfReady() async -> Bool {
+        guard let walk_1, let walk_2 else { return false }
+
+        let exportValue = await Task<Void, Error> {
+            try await walk_1.addToArchive()
+            try await walk_2.addToArchive()
+        }
+            .result
+        switch exportValue {
+        case.success:   return true
+        case let .failure(err):
+            // Do something with the error
+            return false
+        }
+    }
+    #endif
 
     /// Convenience setter for walks 1 and 2.
     ///
