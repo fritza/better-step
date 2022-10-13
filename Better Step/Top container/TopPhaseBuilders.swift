@@ -36,9 +36,9 @@ extension TopContainerView {
     /// The phase controller handles the stages (intro, walk 1, intertitial, walk 2, exit).
     @ViewBuilder func walking_view() -> some View {
         // MARK: Walking
-        NavigationLink(
+        NavigationLink ( //<WalkingContainerView, TopPhases>(
             "SHOULDN'T SEE (walking_view)",
-            tag: TopPhases.walking, selection: $currentPhase) {
+            tag: TopPhases.walking, selection: $currentPhase, destination: {
                 WalkingContainerView { error in
                     if let error {
                         // TODO: respond to cancellation."
@@ -63,7 +63,7 @@ extension TopContainerView {
 //                    .navigationTitle("Walking")
                     .padding()
                     .reversionToolbar($showRewindAlert)
-            }
+            })
             .hidden()
     }
 
@@ -78,7 +78,7 @@ extension TopContainerView {
                         // Save the answer list.
                         let surveyContents = answerList.csvLine!
                         print()
-
+// FIXME: do something with the CSV line.
                         // TODO: Make next-phase and DASI flags dynamic
                         self.currentPhase = .usabilityForm
                         self.collectedDASI = true
@@ -113,6 +113,7 @@ extension TopContainerView {
             .hidden()
     }
 
+        /*
     @ViewBuilder func usabilityForm_view() -> some View {
         // usabilityForm
 
@@ -132,6 +133,7 @@ extension TopContainerView {
             }
             .hidden()
         }
+         */
 
 
     @ViewBuilder func conclusion_view() -> some View {

@@ -66,6 +66,7 @@ struct DigitalTimerView: View, ReportingPhase {
          fileID: String = #file,
          line: Int = #line
     ) {
+        assert(completion != nil)
         assert(walkingState == .walk_1 || walkingState == .walk_2,
         "\(fileID):\(line): Unexpected walking state: \(walkingState)"
         )
@@ -161,6 +162,7 @@ struct DigitalTimerView: View, ReportingPhase {
             // or onReceive of timer.$status?
         }
         .onChange(of: timer.status, perform: { stat in
+            // FIXME: Why call into timerStateDidChange?
             timerStateDidChange(stat)
             // Is this handler really the best place?
             // or onDisappear?

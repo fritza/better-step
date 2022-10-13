@@ -11,8 +11,6 @@ import Collections
 
 // MARK: - IncomingAccelerometry
 public actor IncomingAccelerometry {
-//    weak var motionManager: MotionManager!
-
 
 // MARK: Properties
 

@@ -97,7 +97,8 @@ struct TopContainerView: View {
 
                 dasi_view()
                 usability_view()
-                usabilityForm_view()
+
+//                usabilityForm_view()
 
                 conclusion_view()
                 failed_view()

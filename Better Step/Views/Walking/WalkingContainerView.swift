@@ -132,9 +132,8 @@ struct WalkingContainerView: View {
             demo_summaryView()
 #endif
         }   // VStack
-            //        }       // NavigationView
-        .onAppear {
-        }
+//        .onAppear {
+//        }
     } // body
 }
 
@@ -162,15 +161,23 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (countdown_1)",
             tag: WalkingState.countdown_1, selection: $state) {
                 SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    state = .walk_1
-                }.padding()
-                    .navigationBarBackButtonHidden(true)
-            }
+                    success in
+                    switch success {
+                    case .success(_):
+                        state = .walk_1
+                    case .failure:
+                        state = .interstitial_1
+                    }
+                }
+                // TODO: Compare countdown_2View() modifiers
+            }.padding()
+            .navigationBarBackButtonHidden(true)
+        // ^ these two modifiers were 1 "}" up,
             .hidden()
     }
 
     @ViewBuilder
-    func walk_N_View(ownPhase: WalkingState, nextPhase: WalkingState) -> some View {
+    func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(ownPhase.csvPrefix!))",
             tag: ownPhase, selection: $state) {
@@ -178,25 +185,18 @@ extension WalkingContainerView {
                                  walkingState: ownPhase) {
                     result  in
                     switch result {
+
                     case .failure(_):   // Should be AppPhaseErrors.walkingPhaseProbablyKilled
-                        break
+                        state = nextPhaseBad
+                        return
+
                     case .success(let incoming):
                         let wcrS = WalkingContainerResult.shared
                         wcrS[ownPhase] = incoming
-
-                        if wcrS.readyForExport {
-                            let (slowResult, fastResult) = (wcrS.walk_1!, wcrS.walk_2!)
-                            //                            for each, write the files, then build an archive.
-                            Task {
-                                try? await slowResult.addToArchive()
-                                try? await fastResult.addToArchive()
-                                // FIXME: do something about export failures.
-                            }
-                        }
+                        wcrS.exportWalksIfReady()
                     }
 
-                    // → nextPhase
-                    state = nextPhase
+                    state = nextPhaseGood
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
@@ -207,8 +207,9 @@ extension WalkingContainerView {
     /// A `NavigationLink` for the first timed walk (`walk_1`)
     @ViewBuilder
     func walk_1View() -> some View {
-        walk_N_View(ownPhase: .walk_1,
-                    nextPhase: .interstitial_2)
+        walk_N_View(ownPhase     : .walk_1,
+                    nextPhaseGood: .interstitial_2,
+                    nextPhaseBad : .interstitial_1)
     }
 
     /// A `NavigationLink` for the interstitial view between the two walk sequences (`interstitial_2`)
@@ -233,8 +234,13 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (countdown_2)",
             tag: WalkingState.countdown_2, selection: $state) {
                 SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    // → .walk_2
-                    state = .walk_2
+                    success in
+                    switch success {
+                    case .success(_):
+                        state = .walk_2
+                    case .failure:
+                        state = .interstitial_2
+                    }
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
@@ -243,8 +249,9 @@ extension WalkingContainerView {
 
     /// A `NavigationLink` for the second timed walk (`walk_2`)
     func walk_2View() -> some View {
-        walk_N_View(ownPhase: .walk_2,
-                    nextPhase: .ending_interstitial)
+        walk_N_View(ownPhase     : .walk_2,
+                    nextPhaseGood: .ending_interstitial,
+                    nextPhaseBad : .interstitial_1)
     }
 
     /// A `NavigationLink` for the closing screen (`ending_interstitial`)
@@ -262,48 +269,48 @@ extension WalkingContainerView {
                         case .failure(let error): completion(error)
                         }
                         // FIXME: Can't pass an error back through completion.
-//                        completion(nil)
+                        //                        completion(nil)
                         //                        self.state = .interstitial_1
                     }
             }.padding() // completion closure for end_walkingList
             .navigationBarBackButtonHidden(true)
             .hidden()
     }
-}
 
-// MARK: - Preview
-struct WalkingContainerView_Previews: PreviewProvider {
+    // MARK: - Preview
+    struct WalkingContainerView_Previews: PreviewProvider {
 
-    static var previews: some View {
-        WalkingContainerView() {
-_ in
+        static var previews: some View {
+            WalkingContainerView() {
+                _ in
+            }
+            .environmentObject(MotionManager(phase: .walk_2))
         }
-        .environmentObject(MotionManager(phase: .walk_2))
     }
 }
 
-/*      SHOW-ACTIVITY button
- Button {
- shouldShowActivity = true
- }
- label: { Label(
- "Tap to Export",
- systemImage: "square.and.arrow.up")
- }
- .buttonStyle(.bordered)
- */
+    /*      SHOW-ACTIVITY button
+     Button {
+     shouldShowActivity = true
+     }
+     label: { Label(
+     "Tap to Export",
+     systemImage: "square.and.arrow.up")
+     }
+     .buttonStyle(.bordered)
+     */
 
 
-/*
+    /*
 
- }   // NavigationView
- .sheet(isPresented: $shouldShowActivity, content: {
- ActivityUIController(
- //                    data: walkingData,
- data: "01234 N/A 56789".data(using: .utf8)!,
- text: "01234 N/A 56789"
- //textEquivalent)
- )
- }) // .sheet content
+     }   // NavigationView
+     .sheet(isPresented: $shouldShowActivity, content: {
+     ActivityUIController(
+     //                    data: walkingData,
+     data: "01234 N/A 56789".data(using: .utf8)!,
+     text: "01234 N/A 56789"
+     //textEquivalent)
+     )
+     }) // .sheet content
 
- */
+     */
