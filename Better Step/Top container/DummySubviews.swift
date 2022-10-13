@@ -16,7 +16,11 @@ import CoreMotion
 ///
 /// Result type is `String`, the recorded subject ID
 struct DummyOnboard: View, ReportingPhase {
-    var completion: ((Result<String, Error>) -> Void)!
+    typealias SuccessValue = String
+    let completion: ClosureType
+    init(_ closure: @escaping ClosureType) {
+        self.completion = closure
+    }
 
     let resultingSubjectID = "DummyOnboardID"
 
@@ -32,7 +36,12 @@ struct DummyOnboard: View, ReportingPhase {
 ///
 /// Result type is `Int`, will likely be the full array of measurements
 struct DummyWalk: View, ReportingPhase {
-    var completion: ((Result<[CMAccelerometerData], Error>) -> Void)!
+    typealias SuccessValue = [CMAccelerometerData]
+    let completion: ClosureType
+    init(_ closure: @escaping ClosureType) {
+        completion = closure
+    }
+
     var body: some View {
         VStack(spacing: 16) {
             Text("Walking simulator")
@@ -46,7 +55,11 @@ struct DummyWalk: View, ReportingPhase {
 ///
 /// Result type is `String`, will likely be the CSV-ized answers.
 struct DummyDASI: View, ReportingPhase {
-    var completion: ((Result<String, Error>) -> Void)!
+    typealias SuccessValue = String
+    let completion: ClosureType
+    init(_ closure: @escaping ClosureType) {
+        completion = closure
+    }
     var body: some View {
         VStack {
             Text("DASI simulator")
@@ -61,7 +74,12 @@ struct DummyDASI: View, ReportingPhase {
 ///
 /// Result type is `(String, String)`, representing the ratings and the detail responses. The second item might be some kind of `struct` representing those answers.
 struct DummyUsability: View, ReportingPhase {
-    var completion: ((Result<(String, String), Error>) -> Void)!
+    typealias SuccessValue = (String, String)
+    var completion: ClosureType
+    init(_ closure: @escaping ClosureType) {
+        self.completion = closure
+    }
+
     var body: some View {
         VStack {
             Text("Usability simulator")
@@ -77,7 +95,11 @@ struct DummyUsability: View, ReportingPhase {
 ///
 /// Result type is `Void`, because there's not much to say.
 struct DummyConclusion: View, ReportingPhase {
-    var completion: ((Result<Void, Error>) -> Void)!
+    typealias SuccessValue = Void
+
+    var completion: ClosureType
+    init(_ closure: @escaping ClosureType) { self.completion = closure }
+
     var body: some View {
         VStack {
             Text("Congratulations, you're done.")
@@ -94,7 +116,11 @@ struct DummyConclusion: View, ReportingPhase {
 ///
 /// Result type is `Void`, because there's not much to say.
 struct DummyFailure: View, ReportingPhase {
-    var completion: ((Result<Void, Error>) -> Void)!
+    typealias SuccessValue = Void
+
+    var completion: ClosureType
+    init(_ closure: @escaping ClosureType) { completion = closure }
+
     var body: some View {
         VStack {
             Text("Failure simulator")

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TaggedField: View, ReportingPhase {
-    var completion: ((Result<String, Error>) -> Void)!
+    typealias SuccessValue = String
+    let completion: ClosureType
 
     @State var subject: String
     @State var showComment: Bool = false
@@ -24,7 +25,7 @@ struct TaggedField: View, ReportingPhase {
 //    @Binding var subject: String
 
     init(subject: String,
-         callback: @escaping (Result<String, Error>) -> Void) {
+         callback: @escaping ClosureType) {
         self.subject = subject
         self.completion = callback
     }

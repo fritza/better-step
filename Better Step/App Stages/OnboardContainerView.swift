@@ -14,9 +14,12 @@ import SwiftUI
 struct OnboardContainerView: View, ReportingPhase {
     @State private var correctStage: Int?
     var finishedInterstitialInfo: InterstitialInfo
-    var completion: ((Result<Void, Error>) -> Void)!
 
-    init(completion: (Result<(), Error>) -> Void) {
+    typealias SuccessValue = Void
+    let completion: ClosureType
+
+    init(completion: @escaping ClosureType) {
+        self.completion = completion
         finishedInterstitialInfo = InterstitialInfo(
             id: 0,
             intro: """

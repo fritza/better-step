@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SurveyContainerView: View, ReportingPhase {
-    let completion: ((Result<DASIResponseList, Error>) -> Void)!
+    typealias SuccessValue = DASIResponseList
+    let completion: ClosureType
+    init(_ closure: @escaping ClosureType) {
+        completion = closure
+    }
 
     #warning("Be sure to initialize Pages and Response list")
     @StateObject var contentEnvt = DASIPageSelection()
@@ -101,7 +105,7 @@ struct SurveyContainerView: View, ReportingPhase {
 
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        SurveyContainerView(completion: {
+        SurveyContainerView({
             result in
             print("Result:", result)
         })

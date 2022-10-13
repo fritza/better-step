@@ -29,7 +29,12 @@ struct WalkInfoResult {
 
 /// A `Form` for the post-usability survey asking about the condition of the subject and the chosen walking area.
 struct WalkInfoForm: View, ReportingPhase {
-    let completion: ((Result<WalkInfoResult, Error>) -> Void)!
+    typealias SuccessType = WalkInfoResult
+
+    let completion: ClosureType
+    init(_ completion: @escaping ClosureType) {
+        self.completion = completion
+    }
 
     var summary: String {
         var content = "Info: "

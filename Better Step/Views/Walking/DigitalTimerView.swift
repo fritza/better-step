@@ -47,9 +47,7 @@ struct DigitalTimerView: View, ReportingPhase {
     var walkingState: WalkingState
 
     typealias SuccessValue = IncomingAccelerometry
-    typealias CompletionFunc = ((Result<SuccessValue, Error>) -> Void)
-//    @MainActor
-    var completion: CompletionFunc!
+    var completion: ClosureType
     // DAMMIT:
     // Stored property 'completion' within struct cannot have a global actor; this is an error in Swift 6
 
@@ -57,13 +55,12 @@ struct DigitalTimerView: View, ReportingPhase {
 
     init(duration: TimeInterval,
          walkingState: WalkingState,
-         immediately completion: CompletionFunc? = nil,
+         immediately completion: @escaping ClosureType,
 
          function: String = #function,
          fileID: String = #file,
          line: Int = #line
     ) {
-        assert(completion != nil)
         assert(walkingState == .walk_1 || walkingState == .walk_2,
         "\(fileID):\(line): Unexpected walking state: \(walkingState)"
         )
@@ -74,8 +71,8 @@ struct DigitalTimerView: View, ReportingPhase {
     // FIXME: Test this.
     fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
         switch stat {
-        case .cancelled      : completion?(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
-        case .completed      : completion?(.success(self.motionManager.asyncBuffer))
+        case .cancelled      : completion(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
+        case .completed      : completion(.success(self.motionManager.asyncBuffer))
         default: break
         }
 }
@@ -146,7 +143,7 @@ struct DigitalTimerView: View, ReportingPhase {
 
                 Task {
                     //                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
-                    completion?(.success(motionManager.asyncBuffer))
+                    completion(.success(motionManager.asyncBuffer))
                 }
             }
             catch {
@@ -178,7 +175,15 @@ struct DigitalTimerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DigitalTimerView(duration: CountdownConstants.walkDuration,
-                             walkingState: .walk_2)
+                             walkingState: .walk_2) {
+                result in
+                switch result {
+                case .success:
+                    print("DTV succeeded.")
+                case .failure(let err):
+                    print("DTV failed:", err)
+                }
+            }
                 .padding()
                 .environmentObject(MotionManager(phase: .walk_1))
         }

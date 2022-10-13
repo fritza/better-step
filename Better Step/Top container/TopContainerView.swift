@@ -9,7 +9,12 @@ import SwiftUI
 
 protocol ReportingPhase {
     associatedtype SuccessValue
-    var completion: ((Result<SuccessValue, Error>) -> Void)! { get }
+    typealias ResultValue = Result<SuccessValue,Error>
+    typealias ClosureType = (ResultValue) -> Void
+
+    var completion: ClosureType { get }
+
+//    var completion: ((Result<SuccessValue, Error>) -> Void)! { get }
     // Each phase must report completion.
     // Meaning it must call the completion closure.
     // The container can expect the reporter's result/failure

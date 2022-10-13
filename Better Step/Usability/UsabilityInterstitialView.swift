@@ -11,6 +11,8 @@ import SwiftUI
 
 /// This is mostly redundant of `DASIInterstitialView`, except that one is a DASI depencency, and it doesn't do the right thing about the toolbar.
 struct UsabilityInterstitialView: View, ReportingPhase {
+    typealias SuccessValue = Void
+
 
     // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
     @EnvironmentObject var pageSelection: UsabilityPageSelection
@@ -20,7 +22,7 @@ struct UsabilityInterstitialView: View, ReportingPhase {
     let bodyText: String
     let systemImageName: String
     let continueTitle: String
-    let completion: ((Result<String, Error>) -> Void)!
+    let completion: ClosureType // Void value type.
 
     var body: some View {
         VStack {
@@ -98,8 +100,10 @@ struct UsabilityInterstitialView_Previews: PreviewProvider {
                     titleText: viewTitle,
                     bodyText: usabilityInCopy,
                     systemImageName: systemImageName,
-                    continueTitle: "Continue",
-                    completion: nil)
+                    continueTitle: "Continue") {
+                        str in
+                        print(str)
+                    }
             }
             .environmentObject(
                 UsabilityPageSelection(phase: .end, questionID: 8)

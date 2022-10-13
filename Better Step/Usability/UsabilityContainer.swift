@@ -14,7 +14,11 @@ import SwiftUI
 /// The ``UsabilityPageSelection`` takes care of navigating among the phases and
 /// the usability questions, including recording the responses.
 struct UsabilityContainer: View, ReportingPhase {
-    let completion: ((Result<String, Error>) -> Void)!
+    typealias SuccessValue = String
+    let completion: ClosureType
+    init(_ completion: @escaping ClosureType) {
+        self.completion = completion
+    }
 
 
     // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
@@ -67,7 +71,8 @@ struct UsabilityContainer: View, ReportingPhase {
                 titleText: "Usability",
                 bodyText: usabilityInCopy, //"This space for rent",
                 systemImageName: "checkmark.circle",
-                continueTitle: "Continue", completion: {_ in})
+                continueTitle: "Continue",
+                completion: { _ in  })
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -79,17 +84,17 @@ struct UsabilityContainer: View, ReportingPhase {
                 titleText: "Completed",
                 bodyText: usabilityOutCopy,
                 systemImageName: "checkmark.circle",
-                continueTitle: "Continue") { response in
-                    guard let numbers = try? response.get() else {
-                        completion(.failure(AppPhaseErrors.NOS)); return
-                    }
-                    completion(.success(numbers.csvLine))
-                }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") { pageSelection.decrement() }
-                }
+                continueTitle: "Continue", completion: {_ in })
+            completion(.success("???"))
+            // NOTE: Expected String
+            //       as the success value of
+            //       UsabilityInterstitialView.
+            //       (is Void)
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("← Back") { pageSelection.decrement() }
             }
         }
     }
@@ -102,7 +107,7 @@ struct UsabilityContainer_Previews: PreviewProvider {
             UsabilityContainer() { _ in }
         }
         .environmentObject(UsabilityPageSelection(phase: .start, questionID: 1))
-//        .environmentObject(DASIPageSelection())
+        //        .environmentObject(DASIPageSelection())
         .previewDevice(.init(stringLiteral: "iPhone 12"))
         .previewDevice(.init(stringLiteral: "iPhone SE (3rd generation)"))
     }

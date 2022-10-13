@@ -10,15 +10,11 @@ import SwiftUI
 // MARK: - InterstitalPageTabView
 /// A view that flips through ``InterstitialPageView``s using `TabView`’s `page` style.
 struct InterstitalPageContainerView: View, ReportingPhase {
-    typealias SuccessValue = ()
-    typealias ResultValue = Result<SuccessValue,Error>
-    typealias IPCClosure = ((Result<(), Error>) -> Void)
-
+    typealias SuccessValue = Void
+    let completion: ClosureType
 
     @State private var showEndOfList = false
     @State private var selectedPage: Int
-
-    var completion: IPCClosure!
 
     private let listing: InterstitialList
 
@@ -26,7 +22,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
     /// - Parameters:
     ///   - listing: An ``InterstitialList`` containing the details of the page sequence
     ///   - selection: The **ID** (one-based) of the initially-selected page.
-    init(listing: InterstitialList, selection: Int, callback: @escaping IPCClosure) {
+    init(listing: InterstitialList, selection: Int, callback: @escaping ClosureType) {
         self.listing = listing
         selectedPage = selection
         self.completion = callback
@@ -44,7 +40,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
                         selectedPage += 1
                     }
                     else {
-                        self.completion?(
+                        self.completion(
                             .success(())
                         )
                     }

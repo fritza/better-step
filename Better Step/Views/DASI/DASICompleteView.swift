@@ -24,9 +24,14 @@ fileprivate let endIncompleteText = """
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View, ReportingPhase {
+    typealias SuccessValue = DASIResponseList
+
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
 
-    let completion: ((Result<DASIResponseList, Error>) -> Void)!
+    let completion: ClosureType
+    init(_ completion: @escaping ClosureType) {
+        self.completion = completion
+    }
 
     @EnvironmentObject private var responses: DASIResponseList
     @EnvironmentObject private var questions: DASIPageSelection

@@ -32,8 +32,6 @@ import Combine
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
 struct SweepSecondView: View, ReportingPhase {
     typealias SuccessValue = ()
-    typealias ResultValue = Result<SuccessValue,Error>
-    typealias SSVClosure = ((Result<(), Error>) -> Void)
 
     static let timeKeeperSpec = Timekeeper.TimingSpec(
         duration: CountdownConstants.sweepDuration,
@@ -47,7 +45,7 @@ struct SweepSecondView: View, ReportingPhase {
     @StateObject var timer: Timekeeper = Timekeeper(Self.timeKeeperSpec)
 
     /// The closure provided by client code at `init` to notify it of expiration
-    let completion: SSVClosure!
+    let completion: ClosureType
     // TODO: This isn't what you'd use
     // if this were a ReportingPhase.
 
@@ -56,7 +54,7 @@ struct SweepSecondView: View, ReportingPhase {
     ///   - duration: `TimeInterval` (in seconds to count down from
     ///   - onCompletion: Closure to notify the client that the countdown has run out.
     init(duration: TimeInterval,
-         onCompletion: @escaping SSVClosure,
+         onCompletion: @escaping ClosureType,
          function: String = #function,
          fileID: String = #file,
          line: Int = #line
@@ -134,7 +132,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                     // I don't see why. The status itself
                     // says everything there is to say.
                 case .cancelled:
-                    completion?(
+                    completion(
                         .failure(Timekeeper.Status.cancelled))
                 case .completed:
                     completion?(.failure(Timekeeper.Status.completed))

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplicationOnboardView: View, ReportingPhase {
     let item: TaskInterstitialDecodable
-    var completion: ((Result<String, Error>) -> Void)!
+    var completion: ((Result<String, Error>) -> Void)
 
     @State private var submissionRemarks = ""
     @State private var idInProgress: String

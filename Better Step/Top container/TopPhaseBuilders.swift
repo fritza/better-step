@@ -72,7 +72,7 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (dasi_view)",
             tag: TopPhases.dasi, selection: $currentPhase) {
-                SurveyContainerView(completion: {
+                SurveyContainerView({
                     result in
                     if let answerList = try? result.get() {
                         // Save the answer list.
