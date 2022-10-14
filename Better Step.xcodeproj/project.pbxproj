@@ -13,6 +13,7 @@
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
+		1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */; };
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
 		1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D728DBBA170038353E /* Preview Assets.xcassets */; };
 		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
@@ -74,7 +75,6 @@
 		1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
 		1FA2822628DBBB270038353E /* UsabilityPageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */; };
-		1FA2822728DBBB270038353E /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */; };
 		1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
 		1FA2822B28DBBB940038353E /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 		1FA2822C28DBBB940038353E /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* usability-intro.json */; };
@@ -164,6 +164,7 @@
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
 		1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPageSelection.swift; sourceTree = "<group>"; };
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
+		1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButtonView.swift; sourceTree = "<group>"; };
 		1FA281CE28DBBA160038353E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA281D028DBBA160038353E /* Better_StepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepApp.swift; sourceTree = "<group>"; };
 		1FA281D428DBBA170038353E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -539,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA3B8BA27D69BFC0058F1AF /* YesNoButton.swift */,
+				1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */,
 				1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */,
 			);
 			path = YesNoView;
@@ -749,6 +751,7 @@
 				1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */,
 				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
 				1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */,
+				1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */,
 				1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */,
 				1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */,
 				1FA281E028DBBB270038353E /* FailureView.swift in Sources */,
@@ -782,7 +785,6 @@
 				1FA281EE28DBBB270038353E /* InstructionPageView.swift in Sources */,
 				1FA2821728DBBB270038353E /* ReportView.swift in Sources */,
 				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
-				1FA2822728DBBB270038353E /* YesNoButton.swift in Sources */,
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
 				1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */,
 				1FA2822228DBBB270038353E /* InstructionElement.swift in Sources */,
