@@ -17,6 +17,10 @@ struct Better_StepApp: App {
     @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
 
 
+    #warning("Add a DASI container.")
+    // Provide for its reading/writing responses in App Storage? As I recall, Dan would like those results to cohabit with Usability.
+    // Isn't there a can-advance/completed handler that responds to both DASI and usability being complete?
+
     // FIXME: DASIPageSelection and DASIResponseList -> DASI container.
 //    @StateObject var dasiPages        = DASIPageSelection()
 //    @StateObject var dasiResponseList = DASIResponseList()

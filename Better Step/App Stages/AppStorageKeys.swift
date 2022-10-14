@@ -38,6 +38,7 @@ enum AppStorageKeys: String {
     /// `Int` allowable length of timed walk _in minutes._ Do not confuse with the `walkInMinutes` preference key,  which is the specific duration to use.
     static let dasiWalkRange = (1...10)
 
+    #warning("Move subject-data reset out of AppStorageKeys")
     static func resetSubjectData() {
         let defaults = UserDefaults.standard
         defaults.set("", forKey: AppStorageKeys.subjectID.rawValue)

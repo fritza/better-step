@@ -20,8 +20,6 @@ struct UsabilityContainer: View, ReportingPhase {
         self.completion = completion
     }
 
-
-    // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
     @StateObject var pageSelection = UsabilityPageSelection()
     // Sets selection to .start, question 1.
 
@@ -84,14 +82,16 @@ struct UsabilityContainer: View, ReportingPhase {
                 titleText: "Completed",
                 bodyText: usabilityOutCopy,
                 systemImageName: "checkmark.circle",
-                continueTitle: "Continue", completion: {_ in })
-            completion(.success("???"))
+                continueTitle: "Continue", completion: {
+                    _ in  completion(.success("???"))
+                })
+            .navigationBarBackButtonHidden(true)
+
             // NOTE: Expected String
             //       as the success value of
             //       UsabilityInterstitialView.
             //       (is Void)
         }
-        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") { pageSelection.decrement() }

@@ -47,7 +47,7 @@ struct DigitalTimerView: View, ReportingPhase {
     var walkingState: WalkingState
 
     typealias SuccessValue = IncomingAccelerometry
-    var completion: ClosureType
+    let completion: ClosureType
     // DAMMIT:
     // Stored property 'completion' within struct cannot have a global actor; this is an error in Swift 6
 

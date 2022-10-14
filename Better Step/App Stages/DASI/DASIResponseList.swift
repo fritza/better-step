@@ -46,6 +46,8 @@ The `String` returned by `csvDASIRecords` can be converted to `Data`, and writte
 */
 
 // MARK: - DASIReportErrors
+/// Errors that may arise from converting DASI responses to a CSV file.
+/// - warning: Largely unused.
 enum DASIReportErrors: Error {
     case wrongDataType(UTType)
     case notRegularFile
@@ -53,6 +55,7 @@ enum DASIReportErrors: Error {
     case missingDASIHeader(String)
     case wrongNumberOfResponseElements(Int, Int)
     case outputHandleNotInitialized
+    #warning("only one DASIReportErrors is used.")
     case couldntCreateDASIFile
 }
 
@@ -63,7 +66,7 @@ enum DASIReportErrors: Error {
 final class DASIResponseList: ObservableObject {
     public private(set) var answers: [DASIUserResponse]
 
-    /// Create `DASIResponses`
+    /// Create `DASIResponses, filling all items in with `.unlnown`.
     init() {
         self.answers   = DASIQuestion
             .questions

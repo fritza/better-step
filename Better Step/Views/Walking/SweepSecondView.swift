@@ -135,7 +135,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                     completion(
                         .failure(Timekeeper.Status.cancelled))
                 case .completed:
-                    completion?(.failure(Timekeeper.Status.completed))
+                    completion(.failure(Timekeeper.Status.completed))
                 default: break
                 }
             })

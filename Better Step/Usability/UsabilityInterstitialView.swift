@@ -13,11 +13,11 @@ import SwiftUI
 struct UsabilityInterstitialView: View, ReportingPhase {
     typealias SuccessValue = Void
 
-
     // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
     @EnvironmentObject var pageSelection: UsabilityPageSelection
     @State var showNotIntegratedAlert = false
 
+    // TODO: Turn these into a Decodable struct.
     let titleText: String
     let bodyText: String
     let systemImageName: String
