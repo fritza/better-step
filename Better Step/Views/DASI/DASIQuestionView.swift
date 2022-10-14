@@ -52,15 +52,16 @@ struct DASIQuestionView: View {
 
                 Spacer()
                 YesNoStack(
-                    boundState: self.$answerState,
+//                    boundState: self.$answerState,
                     completion: { state in
-                        guard let qID = envt.questionIdentifier else {
+                        guard let answer = try? state.get() else {
+                            print(#function, "- got an error answer.")
                             return
                         }
                         reportContents
                             .didRespondToQuestion(
-                                id: qID,
-                                with: state)
+                                id: envt.questionIdentifier!,
+                                with: answer)
                         envt.increment()
                         updateForNewBinding()
                     }

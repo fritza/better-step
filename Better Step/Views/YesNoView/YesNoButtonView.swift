@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+
+extension String {
+    /// Prepend a Unicode "✓ " to this `String if `checked` is `true`.
+    func asChecked(_ checked: Bool) -> String {
+        // TODO: Empirical checkmark width is a bad idea
+        (checked ? "✓ " : "   ") + self
+    }
+}
+
 struct YesNoButtonView: View, ReportingPhase {
     typealias SuccessValue = ()
     let title: String

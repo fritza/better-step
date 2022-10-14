@@ -13,41 +13,40 @@ import SwiftUI
  I think it might be best to bind the button selection so the stack sets/unsets the answer in client code.
  */
 
-struct YesNoStack: View {
-    typealias AnswerVoid = ((AnswerState) -> Void)
+struct YesNoStack: View, ReportingPhase {
+    typealias SuccessValue = AnswerState
+    let completion: ClosureType
+
 
     @State var currentAnswer = AnswerState.unknown
-    @Binding var boundState: AnswerState
-    let completion: ((AnswerState) -> Void)?
+//    @Binding var boundState: ClosureType
 
-    init(boundState: Binding<AnswerState>
-         , completion: AnswerVoid?
-    )
-    {
-        self._boundState = boundState
+    init(completion: @escaping ClosureType) {
         self.completion = completion
     }
 
-    func selectButton(id button: YesNoButton) {
-        switch button.id {
-        case 1: currentAnswer  = .yes
-        case 2: currentAnswer  = .no
-        default: currentAnswer = .unknown
-        }
-        boundState = currentAnswer
-        completion?(currentAnswer)
-    }
+
+
+//    func selectButton(id button: YesNoButton) {
+//        switch button.id {
+//        case 1: currentAnswer  = .yes
+//        case 2: currentAnswer  = .no
+//        default: currentAnswer = .unknown
+//        }
+//        boundState = currentAnswer
+//        completion(currentAnswer)
+//    }
 
     var body: some View {
         VStack {
-            YesNoButton(
-                id: 1, title: "Yes",
-                completion: selectButton(id:)
-            )
-            Spacer(minLength: 24)
-            YesNoButton(
-                id: 2, title: "No",
-                completion: selectButton(id:))
+            YesNoButtonView(title: "Yes", checked: (currentAnswer == .yes)) { yesAnswer in
+                currentAnswer = .yes
+                completion(.success(.yes))
+            }
+            YesNoButtonView(title: "No" , checked: (currentAnswer == .no )) { noAnswer in
+                currentAnswer = .no
+                completion(.success(.no))
+            }
             Spacer()
         }
         .padding()
@@ -60,12 +59,22 @@ final class YNUState: ObservableObject {
 
 struct YesNoStack_Previews: PreviewProvider {
     static let ynuState = YNUState()
-    @State static var last: String = "NONE"
+    @State static var yesCount: Int = 0
+    @State static var noCount : Int = 0
+    @State static var illegalCount : Int = 0
     static var previews: some View {
         VStack {
-            YesNoStack(boundState: ynuState.$answer
-            , completion: nil)
+            YesNoStack(completion: { answerYesOrNo in
+                let rawAnswer = try! answerYesOrNo.get()
+                switch rawAnswer {
+                case .yes: yesCount += 1
+                case .no : noCount  += 1
+                case .unknown: illegalCount += 1
+                }
+            })
             .frame(height: 160, alignment: .center)
+
+            Text("Y: \(yesCount) - N: \(noCount) - U: \(illegalCount)")
         }
     }
 }

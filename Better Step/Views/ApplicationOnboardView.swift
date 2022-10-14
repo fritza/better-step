@@ -52,7 +52,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
 
     // MARK: - body
     var body: some View {
-            // FIXME: Copied directly from InterstitialPageView
+            // TODO: Copied directly from InterstitialPageView
             VStack {
                 // MARK: Instructional text
                 Text(item.intro.addControlCharacters)
@@ -68,8 +68,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .symbolRenderingMode(.hierarchical)
 
                 TaggedField(subject: SubjectID.id) {
-                    // FIXME: Handle .failure.
-                    // FIXME: Have the top-level container reset the SubjectID?
+                    // TODO: Handle .failure.
                     result in
                     if let newID = try? result.get() {
                         SubjectID.id = newID
