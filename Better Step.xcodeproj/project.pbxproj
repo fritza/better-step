@@ -148,7 +148,6 @@
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
-		1F56E67128EF62E100746FF9 /* TimeReader+cancellables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeReader+cancellables.swift"; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
@@ -176,7 +175,6 @@
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
-		1FB2F53A28D138E200593692 /* TimeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReader.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB2F54428D261B900593692 /* DummySubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySubviews.swift; sourceTree = "<group>"; };
 		1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhaseBuilders.swift; sourceTree = "<group>"; };
@@ -401,9 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				1FB2F53828D133E700593692 /* MinSecAndFraction.swift */,
-				1FB2F53A28D138E200593692 /* TimeReader.swift */,
 				1F32980728F4C652003B9827 /* Timekeeper.swift */,
-				1F56E67128EF62E100746FF9 /* TimeReader+cancellables.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
