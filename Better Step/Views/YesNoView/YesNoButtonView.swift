@@ -32,25 +32,86 @@ struct YesNoButtonView: View, ReportingPhase {
 
     let lightGray = Color(white: 0.875, opacity: 1.0)
 
+    /*
+    @ViewBuilder
+    func buttonLabelView() -> some View {
+        ZStack(alignment: .center, content: {
+
+            Capsule(style: .continuous)
+                .fill(
+                    Color(white: 0.75) //, opacity: 0.25)
+                )
+
+            Text(self.title.asChecked(isChecked)
+            )
+            .font(.title2)
+            .fontWeight(.semibold)
+//            .foregroundColor(.accentColor)
+        }
+        )
+
+    }
+     */
+    @GestureState var buttonIsHeld: Bool = false
+
+    var buttonishGesture: some Gesture {
+        let retval = TapGesture(count: 1)
+            .updating($buttonIsHeld) { v, s, t in
+                s.toggle()
+            }
+            .onEnded { _ in
+                if buttonIsHeld {
+                    completion(.success(()))
+                }
+            }
+        return retval
+    }
+
+    var body: some View {
+        ZStack(alignment: .center, content: {
+
+            Capsule(style: .continuous)
+                .fill(
+                    Color(white:  buttonIsHeld ? 0.25 : 0.75)
+                        .opacity(0.9)
+                )
+            Text(self.title.asChecked(isChecked)
+            )
+            .font(.title2)
+            .fontWeight(.semibold)
+            .foregroundColor(.accentColor)
+        })
+        .frame(width: 320, height: 56)
+//        .gesture(buttonishGesture)
+        .onTapGesture(count: 1, perform: {
+            completion(.success(()))
+        })
+    }
+
+    /*
     var body: some View {
         Button(
             action: {
                 completion(.success(()))
             },
-            label: {
-                Text(self.title.asChecked(isChecked)
-                )
-                .font(.title2)
-                .fontWeight(.semibold)
-            })
-        .frame(minWidth: 320, minHeight: 56.0)
-        .background {
-            Capsule(style: .continuous)
-                .fill(
-                    Color(white: 0.75) //, opacity: 0.25)
-                )
+            label: buttonLabelView()
+            )
+//            label: {
+//                Text(self.title.asChecked(isChecked)
+//                )
+//                .font(.title2)
+//                .fontWeight(.semibold)
+//            })
+//        .border(Color.red)
+//        .frame(width: 320, height: 56)
+//        .background {
+//            Capsule(style: .continuous)
+//                .fill(
+//                    Color(white: 0.75) //, opacity: 0.25)
+//                )
         }
     }
+     */
 }
 
 
@@ -74,6 +135,7 @@ struct YesNoButtonView_Previews: PreviewProvider {
                     Color.gray
                     Color.teal
                 }
+                .rotationEffect(Angle(degrees: 45))
             VStack {
                 Text("TAP \(content.countOne)")
                 YesNoButtonView(title: "Yes",
@@ -83,6 +145,7 @@ struct YesNoButtonView_Previews: PreviewProvider {
                     content.countOne += 1
                 }
                 )
+
                 Spacer(minLength: 12)
                 YesNoButtonView(title: "No",
                                 checked: false,

@@ -14,6 +14,7 @@ struct GenericInstructionView: View {
     let bodyText: String
     let sfBadgeName: String
     var proceedTitle: String?
+    var proceedEnabled: Bool
 
     // And then we'll have to decide how to handle the "proceed" action
     let proceedClosure: (() -> Void)?
@@ -22,11 +23,13 @@ struct GenericInstructionView: View {
          bodyText: String,
          sfBadgeName: String,
          proceedTitle: String? = nil,
+         proceedEnabled: Bool = true,
          proceedClosure: ( () -> Void)? = nil) {
        ( self.titleText, self.bodyText, self.sfBadgeName,
          self.proceedTitle, self.proceedTitle) =
         ( titleText, bodyText, sfBadgeName, proceedTitle, proceedTitle)
         self.proceedClosure = proceedClosure
+        self.proceedEnabled = proceedEnabled
     }
 
     var body: some View {
@@ -55,10 +58,11 @@ struct GenericInstructionView: View {
                         .minimumScaleFactor(/*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                     Spacer()
 
-                    if let title = proceedTitle {
-                        Button(title) {
+                    if let proceedTitle {
+                        Button(proceedTitle) {
                             proceedClosure?()
                         }
+                        .disabled(!proceedEnabled)
                     }
                 }
                 Spacer()

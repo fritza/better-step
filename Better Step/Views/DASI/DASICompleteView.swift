@@ -35,21 +35,17 @@ struct DASICompleteView: View, ReportingPhase {
 
     @EnvironmentObject private var responses: DASIResponseList
     @EnvironmentObject private var questions: DASIPageSelection
-//    @EnvironmentObject private var phaseManager: PhaseManager
 
     var allItemsAnswered: Bool {
         return responses.unknownResponseIDs.isEmpty
     }
 
     var nextSteps: String {
-        if
-        allItemsAnswered
-//            phaseManager.allTasksFinished
-        {
-            return "\nPlease proceed to the “Report” view to submit your information to the team."
+        if allItemsAnswered {
+            return "\nTap “Continue” to complete your report."
         }
         else {
-            return "\nNow select the “Walk” tab below to proceed to the walking portion of the exercise."
+            return "\nUse the “← Back” button to review your answers."
         }
     }
 
@@ -65,38 +61,27 @@ struct DASICompleteView: View, ReportingPhase {
     var body: some View {
         VStack {
             GenericInstructionView(
-                titleText: "x",
+                titleText: nil,
                 bodyText: instructions, // + completionText,
-                sfBadgeName: "checkmark.square")
+                sfBadgeName: "checkmark.square",
+                proceedTitle: "Continue",
+                proceedEnabled: allItemsAnswered
+            ) {
+                // Upon tap of the proceed button
+                completion(.success(responses))
+            }
             .padding()
         }
         .navigationTitle("Survey Complete")
         .toolbar {
-// TODO: Replace with ToolbarItem
-            ToolbarItemGroup(placement: .navigationBarLeading) {
+            // TODO: Replace with ToolbarItem
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") {
                     questions.decrement()
                 }
             }
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 gearBarItem()
-            }
-        }
-        .onAppear{
-            // IF ALL ARE ANSWERED
-            if allItemsAnswered {
-                collectedDASI = true
-                completion(.success(responses))
-#warning("Find some way to preserve DASI-finished")
-//
-//                AppStage.shared
-//                    .completionSet
-//                    .insert(.dasi)
-                // FIXME: Also, why is this in onAppear?
-                // TODO: Maybe create the report data on completionSet changing.
-            }
-            else {
-                completion(.failure(AppPhaseErrors.shortageOfDASIResponsesBy(responses.unknownResponseIDs.count)))
             }
         }
     }
@@ -109,9 +94,9 @@ struct DASICompleteView_Previews: PreviewProvider {
                 _ in
             }
             // FIXME: These will need better initializer
-                .environmentObject(DASIPageSelection(.completion))
-                .environmentObject(DASIResponseList())
-//            .environmentObject(PhaseManager())
+            .environmentObject(DASIPageSelection(.completion))
+            .environmentObject(DASIResponseList())
+            //            .environmentObject(PhaseManager())
         }
     }
 }

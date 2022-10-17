@@ -52,7 +52,7 @@ struct DASIQuestionView: View {
 
                 Spacer()
                 YesNoStack(
-//                    boundState: self.$answerState,
+                    answer: reportContents.responseForQuestion(identifier: envt.questionIdentifier!)!,
                     completion: { state in
                         guard let answer = try? state.get() else {
                             print(#function, "- got an error answer.")

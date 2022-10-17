@@ -18,11 +18,14 @@ struct YesNoStack: View, ReportingPhase {
     let completion: ClosureType
 
 
-    @State var currentAnswer = AnswerState.unknown
+    let currentAnswer: AnswerState
+//    @State var currentAnswer = AnswerState.unknown
 //    @Binding var boundState: ClosureType
 
-    init(completion: @escaping ClosureType) {
+    init(answer: AnswerState,
+         completion: @escaping ClosureType) {
         self.completion = completion
+        self.currentAnswer = answer
     }
 
 
@@ -40,11 +43,11 @@ struct YesNoStack: View, ReportingPhase {
     var body: some View {
         VStack {
             YesNoButtonView(title: "Yes", checked: (currentAnswer == .yes)) { yesAnswer in
-                currentAnswer = .yes
+//                currentAnswer = .yes
                 completion(.success(.yes))
             }
             YesNoButtonView(title: "No" , checked: (currentAnswer == .no )) { noAnswer in
-                currentAnswer = .no
+//                currentAnswer = .no
                 completion(.success(.no))
             }
             Spacer()
@@ -64,7 +67,7 @@ struct YesNoStack_Previews: PreviewProvider {
     @State static var illegalCount : Int = 0
     static var previews: some View {
         VStack {
-            YesNoStack(completion: { answerYesOrNo in
+            YesNoStack(answer: .unknown, completion: { answerYesOrNo in
                 let rawAnswer = try! answerYesOrNo.get()
                 switch rawAnswer {
                 case .yes: yesCount += 1
