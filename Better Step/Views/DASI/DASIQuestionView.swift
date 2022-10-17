@@ -78,10 +78,10 @@ struct DASIQuestionView: View {
                     updateForNewBinding()
                 }
                 .disabled(envt.selected <= DASIStages.minPresenting)
-                gearBarItem()
             }
 // TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarTrailing) {
+                gearBarItem()
                 Button("Next →") {
                     envt.increment()
                     updateForNewBinding()

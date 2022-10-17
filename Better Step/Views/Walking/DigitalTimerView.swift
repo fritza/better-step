@@ -117,6 +117,11 @@ struct DigitalTimerView: View, ReportingPhase {
             }
             .padding()
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                gearBarItem()
+            }
+        }
         .task {
             // warning: The result is discardable.
             // You should have harvested the data result already.

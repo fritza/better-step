@@ -8,6 +8,7 @@
 import SwiftUI
 
 // TODO: Present the questions as a page-mode Picker.
+#warning("Untangle the question paging from usability phase nav")
 
 /// A  sequence of open-intertitial → questions → close-interstitial phases
 ///
@@ -43,6 +44,9 @@ struct UsabilityContainer: View, ReportingPhase {
                 questionID: pageSelection.questionID,
                 selectedAnswer: $pageSelection.currentResponse)
             { newAnswer in
+
+                #warning("Distinguish Usability increment from usability ended")
+
                 pageSelection.increment()
             }   // Questions destination
             .toolbar {

@@ -121,6 +121,11 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
 //                    label: (isRunning) ? "Reset" : "Start",
 //                    running: $isRunning)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    gearBarItem()
+                }
+            }
             .padding()
 
             // MARK: Clock status

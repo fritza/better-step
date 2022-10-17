@@ -77,6 +77,8 @@ struct DASICompleteView: View, ReportingPhase {
                 Button("← Back") {
                     questions.decrement()
                 }
+            }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 gearBarItem()
             }
         }
