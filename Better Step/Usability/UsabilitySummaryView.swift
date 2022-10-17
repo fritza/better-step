@@ -18,7 +18,13 @@ let bgColors: [UIColor] = [
     ]
 
 /// A `View` listing all usability questions and the user's responses.
-struct UsabilitySummaryView: View {
+struct UsabilitySummaryView: View, ReportingPhase {
+    typealias SuccessValue = Void
+    let completion: ClosureType
+    init(_ completion: @escaping ClosureType) {
+        self.completion = completion
+    }
+
     // FIXME: Conform UsabilityContainer to own, not envt, its controller.
     @EnvironmentObject var controller: UsabilityPageSelection
 
@@ -76,11 +82,14 @@ struct UsabilitySummaryView: View {
 struct UsabilitySummaryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-                UsabilitySummaryView()
-                    .environmentObject(
-                        UsabilityPageSelection(phase: .summary,
-                                            questionID: 1))
-                    .padding()
+            UsabilitySummaryView {
+                _ in
+                print("UsabilitySummaryView completed.")
             }
+                .environmentObject(
+                    UsabilityPageSelection(phase: .summary,
+                                           questionID: 1))
+                .padding()
+        }
     }
 }

@@ -31,29 +31,25 @@ struct Better_StepApp: App {
 #if false
             TopContainerView()
 
-#elseif true
+#elseif false
             NavigationView<WalkingContainerView> {
                 WalkingContainerView { _ in
                 }
             }
             .environmentObject(MotionManager(phase: .walk_1))
-#elseif false
-            NavigationView {
-                SweepSecondView(duration: 10, onCompletion: {
-                    print("ss complete")
-                })
-                .navigationTitle("Walking")
-                .padding()
-            }
-            //                .reversionToolbar($showRewindAlert)
-#elseif false
-            SurveyContainerView(completion: {
+#elseif true
+            SurveyContainerView() {
                 result in
-                if let answerList = try? result.get() {
-                    // Save the answer list.
-                    temporaryDASIStorage = answerList.csvLine!
+                if let answerList = try? result.get(),
+                   let temporaryDASIStorage = answerList.csvLine
+                {
+                    print("SurveyController succeeded:", temporaryDASIStorage)
+                    // TODO: Save the answer list.
                 }
-            })
+                else {
+                    print("SurveyController failed")
+                }
+            }
 //            .environmentObject(DASIPageSelection())
 //            .environmentObject(DASIResponseList())
 

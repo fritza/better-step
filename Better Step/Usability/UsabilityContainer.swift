@@ -28,6 +28,7 @@ struct UsabilityContainer: View, ReportingPhase {
         List {
             questionPresentationView()
             openingInterstitialView()
+            usabilitySummaryView()
             closingInterstitialView()
         }
         .environmentObject(pageSelection)
@@ -101,6 +102,34 @@ struct UsabilityContainer: View, ReportingPhase {
                 Button("← Back") { pageSelection.decrement() }
             }
         }
+    }
+
+    // MARK: Summary (optional, debug-only)
+    func usabilitySummaryView() -> some View {
+        NavigationLink("", tag: UsabilityPhase.summary, selection: $pageSelection.currentPhase) {
+            UsabilitySummaryView {
+                _ in
+
+print("Usability Summary completed.")
+      // FIXME: Untangle container phase from sequence phase.
+
+
+
+
+            }
+            .navigationBarBackButtonHidden(true)
+
+            // NOTE: Expected String
+            //       as the success value of
+            //       UsabilityInterstitialView.
+            //       (is Void)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("← Back") { pageSelection.decrement() }
+            }
+        }
+
     }
 }
 
