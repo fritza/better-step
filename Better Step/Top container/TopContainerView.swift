@@ -128,17 +128,6 @@ struct TopContainerView: View {
     }
 }
 
-// MARK: - Dummies
-enum DummyFailures: Error {
-    case onboardFailure
-    case walkingFailure
-    case dasiFailure
-    case usabilityFailure
-    case conclusionFailure
-    case failingFailure
-}
-
-
 // MARK: - Preview
 struct TopContainerView_Previews: PreviewProvider {
     static var previews: some View {
