@@ -9,13 +9,12 @@ import SwiftUI
 
 
 /// Workflow container for onboarding views.
-///
-/// Unlike the other containers, this _might_ not be a `ReportingPhase`.
 struct OnboardContainerView: View, ReportingPhase {
-    @State private var correctStage: Int?
+    @State private var correctTask: Int?
+    @State private var shouldWarnOfReversion: Bool = false
     var finishedInterstitialInfo: InterstitialInfo
 
-    typealias SuccessValue = Void
+    typealias SuccessValue = String
     let completion: ClosureType
 
     init(completion: @escaping ClosureType) {
@@ -31,26 +30,49 @@ You’ll be repeating the timed walks you did last time. There will be no need t
         )
 
         if SubjectID.id == SubjectID.unSet {
-            correctStage = OnboardStages.firstGreeting.rawValue
+            correctTask = OnboardTasks.firstGreeting.rawValue
         }
         else {
-            correctStage = OnboardStages.laterGreeting.rawValue
+            correctTask = OnboardTasks.laterGreeting.rawValue
         }
     }
 
-    enum OnboardStages: Int {
+    enum OnboardTasks: Int {
         case firstGreeting // include testing subjectID.
         case laterGreeting
         case greetingHandoff
     }
 
+    #if true
+
+    #error("test this")
+
     var body: some View {
+        NavigationView {
+            ApplicationOnboardView() { result in
+                if let finished = try? result.get() {
+                    SubjectID.id = finished
+                    completion(.success(finished))
+                    correctTask = OnboardTasks.greetingHandoff.rawValue
+                }
+                // FIXME: what happens upon failure?
+            }
+            .reversionToolbar($shouldWarnOfReversion)
+            .reversionAlert(next: $correctTask,
+                            shouldShow: $shouldWarnOfReversion)
+
+        }
+        .padding()
+    }
+    #else
+    var body: some View {
+        NavigationView {
+
         TabView(selection: $correctStage) {
             ApplicationOnboardView() { result in
                 if let finished = try? result.get() {
                     SubjectID.id = finished
                     completion(.success(()))
-//                    correctStage = OnboardStages.greetingHandoff.rawValue
                 }
                 // FIXME: what happens upon failure?
             }
@@ -64,6 +86,8 @@ You’ll be repeating the timed walks you did last time. There will be no need t
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
+        }
+    #endif
 }
 
 struct OnboardContainerView_Previews: PreviewProvider {

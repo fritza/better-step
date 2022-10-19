@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+extension Text {
+    static func decorate(_ str: String,
+                         with intents: InlinePresentationIntent) -> Text {
+        var attrString = AttributedString(str)
+        attrString.inlinePresentationIntent = intents
+        return Text(attrString)
+    }
+}
+
 struct ReversionAlert: ViewModifier {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
@@ -15,18 +24,17 @@ struct ReversionAlert: ViewModifier {
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
     var collectedUsability: Bool = false
 
-    @Binding var nextPhase: TopPhases?
     @Binding var shouldShow: Bool
-
-    init(next: Binding<TopPhases?>, show: Binding<Bool>) {
-        _nextPhase = next
+    @Binding var nextTask: Int?
+    init(next: Binding<Int?>, show: Binding<Bool>) {
+        _nextTask = next
         _shouldShow = show
     }
 
     func body(content: Content) -> some View {
         content
             .alert("Starting Over", isPresented: $shouldShow) {
-                Button("Reset" , role: .destructive) {
+                Button("Clear All" , role: .destructive) {
                     // Forget user and progress
                     subjectID = SubjectID.unSet
 
@@ -34,17 +42,18 @@ struct ReversionAlert: ViewModifier {
                     /*
                     collectedDASI = false
                     collectedUsability = false
-                    nextPhase = .onboarding
+                    nextTask = .onboarding
                      */
                 }
-                Button("Rewind") {
+                Button("Keep Subject") {
                     // The user and progress are ok,
                     // just wind back to the first screen
-                    nextPhase = .onboarding
+                    nextTask = OnboardContainerView.OnboardTasks.laterGreeting.rawValue
                 }
             }
         message: {
-            Text("Do you want to rewind (restart as the same subject), or reset (restart with user and progress cleared)?\nYou cannot undo this.") }
+            Text("Do you want a new subject, or the same subject with data cleared?\nYou cannot undo this.")
+        }
     }
 }
 
@@ -59,7 +68,9 @@ struct ReversionToolbar: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button()
-                    { shouldShow = true }
+                    {
+                        shouldShow = true
+                    }
                 label: {
                     Label("configure", systemImage: "gear")
                 }
@@ -74,7 +85,7 @@ extension View {
         modifier(ReversionToolbar(show))
     }
 
-    func reversionAlert(next: Binding<TopPhases?>, shouldShow: Binding<Bool>) -> some View {
+    func reversionAlert(next: Binding<Int?>, shouldShow: Binding<Bool>) -> some View {
         modifier(ReversionAlert(next: next, show: shouldShow))
     }
 }

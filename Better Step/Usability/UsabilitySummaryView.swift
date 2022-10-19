@@ -12,6 +12,7 @@
  =================================== */
 
 import SwiftUI
+#if INCLUDE_USABILITY_SUMMARY
 
 let bgColors: [UIColor] = [
     
@@ -93,3 +94,4 @@ struct UsabilitySummaryView_Previews: PreviewProvider {
         }
     }
 }
+#endif

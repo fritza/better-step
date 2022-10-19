@@ -85,10 +85,14 @@ struct TopContainerView: View {
 
     static let defaultPhase = TopPhases.onboarding
     @State var currentPhase: TopPhases?
+    @State var currentFailingPhase: TopPhases?
 
     @State var usabilityFormResults: WalkInfoForm?
 
     @State var showRewindAlert = false
+
+    @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
+        .firstGreeting.rawValue
 
     init() {
         self.currentPhase = Self.defaultPhase
@@ -109,7 +113,7 @@ struct TopContainerView: View {
                 failed_view()
             }
             .navigationTitle("Should not see")
-            .reversionAlert(next      : $currentPhase,
+            .reversionAlert(next      : $KILLME_reversionTask,
                             shouldShow: $showRewindAlert)
         }
         .onAppear {

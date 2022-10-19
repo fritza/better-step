@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct ApplicationOnboardView: View, ReportingPhase {
-    let item: TaskInterstitialDecodable
-    var completion: ((Result<String, Error>) -> Void)
+    typealias SuccessValue = String
+    var completion: ClosureType
 
+    let item: TaskInterstitialDecodable
     @State private var submissionRemarks = ""
     @State private var idInProgress: String
+    @State private var shouldWarnOfReversion = false
+
+    var fieldIsEmpty: Bool {
+
+//#error("Bind the temp subject ID so idInProgress is updated.")
+
+
+        guard let trimmedValue = idInProgress.trimmed else { return true }
+        return trimmedValue.isEmpty // trimmedValue.isEmpty
+    }
+
+
     var stringIsValid: Bool {
         guard let trimmable = idInProgress.trimmed else { return false }
         // TODO: Shouldn't we trim it in the field?
@@ -26,7 +39,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
     ///   - info: An ``InterstitialInfo`` specifying text and symbol content.
     ///   - callback: A closure to be called when the action button (**Next**, **Continue**, etc.) is tapped.
     init?(info: TaskInterstitialDecodable? = nil,
-         proceedCallback callback: @escaping ((Result<String, Error>) -> Void)) {
+         proceedCallback callback: @escaping ClosureType) {
         self.completion = callback
         idInProgress = SubjectID.id
         if let info { item = info }
@@ -67,24 +80,34 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .frame(height: 120)
                     .symbolRenderingMode(.hierarchical)
 
-                TaggedField(subject: SubjectID.id) {
+                Spacer()
+
+
+                TaggedField(string: $idInProgress, callback: {
                     // TODO: Handle .failure.
                     result in
                     if let newID = try? result.get() {
                         SubjectID.id = newID
                     }
                     completion(.success(SubjectID.id))
-                }
+                })
+//
+//                TaggedField(subject: SubjectID.id) {
+//                    // TODO: Handle .failure.
+//                    result in
+//                    if let newID = try? result.get() {
+//                        SubjectID.id = newID
+//                    }
+//                    completion(.success(SubjectID.id))
+//                }
                 // MARK: The action button
                 Spacer()
                 Button("Submit") {
                     completion(.success("S101"))
                 }
-                Spacer()
-                Text("Setting the ID should change the landing page and omit the DASI/usability phases. For beta, the gear button can reset the app.\n\nA subject ID is required but not yet enforced.")
-                    .font(.caption).minimumScaleFactor(0.5).foregroundColor(.red)
-            .navigationTitle("Welcome")
-        }
+                .disabled(fieldIsEmpty)
+                .navigationTitle("Welcome")
+            }
     }
 }
 

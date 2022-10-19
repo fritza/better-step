@@ -11,7 +11,7 @@ struct TaggedField: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
 
-    @State var subject: String
+    @Binding var stringInProgress: String
     @State var showComment: Bool = false
     // ShowInstructions lags the subject string by one.
     // I think this has to do with _both_ updating the
@@ -19,14 +19,15 @@ struct TaggedField: View, ReportingPhase {
     // (existing pre-change?) value.
     @State var showInstructions: Bool = true
     var canSubmitText: Bool {
-        return subject.trimmed?.isAlphanumeric ?? false
+        return stringInProgress.trimmed?.isAlphanumeric ?? false
     }
 
 //    @Binding var subject: String
 
-    init(subject: String,
+    init(string: Binding<String>,
          callback: @escaping ClosureType) {
-        self.subject = subject
+//        self.subject = subject
+        self._stringInProgress = string
         self.completion = callback
     }
 
@@ -34,12 +35,12 @@ struct TaggedField: View, ReportingPhase {
         VStack {
             ZStack(alignment: .trailing) {
                 TextField("IGNORED 1",
-                          text: $subject,
+                          text: $stringInProgress,
                           prompt: Text("reporting address"))
                     .keyboardType(.emailAddress)
                     .textFieldStyle(.roundedBorder)
                 Button(action: {
-                    subject = ""
+                    stringInProgress = ""
 
                 }) {
                     Image(systemName: "multiply.circle.fill")
@@ -53,34 +54,10 @@ struct TaggedField: View, ReportingPhase {
 //                    self.showInstructions = !canSubmitText
 //                })
                 .onSubmit {
-                    completion(.success(subject))
+                    completion(.success(stringInProgress))
                 }
                 .padding([.trailing], 2)
             }
-
-//            Button("Proceed") {
-//                if canSubmitText {
-//                    showComment = true
-//                    closeCallback(subject.trimmed!)
-//                    showInstructions = false
-//                }
-//            }
-//            .disabled(!self.canSubmitText)
-//            if showComment {
-//                Text("Closed with \(subject)")
-//                    .foregroundColor(.red)
-//            }
-
-//            if showInstructions {
-//                Spacer()
-//                Text("Your ID consists of letters and numbers, no punctuation or spacing.")
-//                    .font(.body)
-//                    .foregroundColor(.red)
-//                    .lineLimit(6)
-//                    .minimumScaleFactor(0.5)
-//                    .frame(width: 300, height: 80)
-//            }
-
         }
         .onSubmit(of: .text) {
             showComment.toggle()
@@ -97,10 +74,10 @@ final class HoldsAString: ObservableObject {
 
 struct TaggedField_Previews: PreviewProvider {
     static let holder = HoldsAString(subject: "Thirsday")
-    static var content = ""
+    @State static var content = "Erewhon"
     static var previews: some View {
         NavigationView {
-            TaggedField(subject: "Erewhon", callback: { result in
+            TaggedField(string: $content, callback: { result in
                 print("Hello?", result)
             })
             .frame(width: 300, height: 48)
