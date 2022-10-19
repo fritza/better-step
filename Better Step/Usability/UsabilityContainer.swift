@@ -28,7 +28,9 @@ struct UsabilityContainer: View, ReportingPhase {
         List {
             questionPresentationView()
             openingInterstitialView()
+#if INCLUDE_USABILITY_SUMMARY
             usabilitySummaryView()
+#endif
             closingInterstitialView()
         }
         .environmentObject(pageSelection)
@@ -104,14 +106,15 @@ struct UsabilityContainer: View, ReportingPhase {
         }
     }
 
+#if INCLUDE_USABILITY_SUMMARY
     // MARK: Summary (optional, debug-only)
     func usabilitySummaryView() -> some View {
         NavigationLink("", tag: UsabilityPhase.summary, selection: $pageSelection.currentPhase) {
             UsabilitySummaryView {
                 _ in
 
-print("Usability Summary completed.")
-      // FIXME: Untangle container phase from sequence phase.
+                print("Usability Summary completed.")
+                // FIXME: Untangle container phase from sequence phase.
 
 
 
@@ -131,6 +134,7 @@ print("Usability Summary completed.")
         }
 
     }
+#endif
 }
 
 // MARK: - Previews
