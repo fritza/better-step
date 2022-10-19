@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct TaggedField: View, ReportingPhase {
-    typealias SuccessValue = String
-    let completion: ClosureType
+struct TaggedField: View {
+    //}, ReportingPhase {
+//    typealias SuccessValue = String
+//    let completion: ClosureType
 
     @Binding var stringInProgress: String
+
     @State var showComment: Bool = false
     // ShowInstructions lags the subject string by one.
     // I think this has to do with _both_ updating the
@@ -22,18 +24,30 @@ struct TaggedField: View, ReportingPhase {
         return stringInProgress.trimmed?.isAlphanumeric ?? false
     }
 
-//    @Binding var subject: String
-
-    init(string: Binding<String>,
-         callback: @escaping ClosureType) {
+    init(string: Binding<String>
+//         , callback: @escaping ClosureType)
+    )
+    {
 //        self.subject = subject
         self._stringInProgress = string
-        self.completion = callback
+//        self.completion = callback
     }
 
     var body: some View {
         VStack {
             ZStack(alignment: .trailing) {
+                // Upon <return>, the enclosing class
+                // will get .onSubmit, and should get its
+                // answer string through the "string" binding.
+
+                // The enclosing class is expected to have a
+                // submit button as well. Again, use the bound
+                // "string".
+
+                // Both handlers must report the final value up
+                // the callback chain.
+
+                // JUST DECIDE: The Onboard Container should set SubjectID
                 TextField("IGNORED 1",
                           text: $stringInProgress,
                           prompt: Text("reporting address"))
@@ -41,7 +55,6 @@ struct TaggedField: View, ReportingPhase {
                     .textFieldStyle(.roundedBorder)
                 Button(action: {
                     stringInProgress = ""
-
                 }) {
                     Image(systemName: "multiply.circle.fill")
                         .renderingMode(.template)
@@ -53,14 +66,11 @@ struct TaggedField: View, ReportingPhase {
 //                    self.showComment = false
 //                    self.showInstructions = !canSubmitText
 //                })
-                .onSubmit {
-                    completion(.success(stringInProgress))
-                }
+//                .onSubmit {
+//                    completion(.success(stringInProgress))
+//                }
                 .padding([.trailing], 2)
             }
-        }
-        .onSubmit(of: .text) {
-            showComment.toggle()
         }
     }
 }
@@ -77,9 +87,7 @@ struct TaggedField_Previews: PreviewProvider {
     @State static var content = "Erewhon"
     static var previews: some View {
         NavigationView {
-            TaggedField(string: $content, callback: { result in
-                print("Hello?", result)
-            })
+            TaggedField(string: $content)
             .frame(width: 300, height: 48)
         }
     }

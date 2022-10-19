@@ -26,7 +26,7 @@ enum AppStorageKeys: String {
     /// `Bool` whether to include the usability survey
     case includeUsabilitySurvey
 
-    #error("Use this key:")
+    #warning("Use this key:")
     /// Whether this is the first run of the app and needs to collect SubjectID, DASI, and Usability
     case hasNeverCompleted
     /// The last known subject ID.

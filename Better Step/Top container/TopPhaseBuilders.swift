@@ -18,7 +18,7 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (onboarding_view)",
             tag: TopPhases.onboarding, selection: $currentPhase) {
-                ApplicationOnboardView() { result in
+                ApplicationOnboardView(string: $someStringOrOther) { result in
                     guard let newID = try? result.get() else {
                         self.currentFailingPhase = currentPhase
                         self.currentPhase = .failed

@@ -98,6 +98,7 @@ struct TopContainerView: View {
         self.currentPhase = Self.defaultPhase
     }
 
+    @State var someStringOrOther = ""
     var body: some View {
         NavigationView {
             VStack {
@@ -108,6 +109,7 @@ struct TopContainerView: View {
                 usability_view()
 
 //                usabilityForm_view()
+                // usability form is in the usability container.
 
                 conclusion_view()
                 failed_view()

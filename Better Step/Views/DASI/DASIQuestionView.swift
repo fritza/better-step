@@ -54,7 +54,7 @@ struct DASIQuestionView: View {
                 YesNoStack(
                     answer: reportContents.responseForQuestion(identifier: envt.questionIdentifier!)!,
                     completion: { state in
-                        #error("Why kill all completions of YesNoStack?")
+                        #warning("Why kill all completions of YesNoStack?")
                         preconditionFailure("Can't Happen at \(#function) - \(#fileID):\(#line)")
                         guard let answer = try? state.get() else {
                             print(#function, "- got an error answer.")

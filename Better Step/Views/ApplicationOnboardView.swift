@@ -8,26 +8,32 @@
 import SwiftUI
 
 struct ApplicationOnboardView: View, ReportingPhase {
+    @Namespace var appOnboardSpace
+    enum Focusables: Hashable {
+        case idField
+        case submitButton
+    }
+
     typealias SuccessValue = String
     var completion: ClosureType
 
     let item: TaskInterstitialDecodable
+
     @State private var submissionRemarks = ""
-    @State private var idInProgress: String
     @State private var shouldWarnOfReversion = false
+    @Binding private var targetString   : String
+    @FocusState private var currentFocus: Focusables?
 
     var fieldIsEmpty: Bool {
 
-//#error("Bind the temp subject ID so idInProgress is updated.")
 
-
-        guard let trimmedValue = idInProgress.trimmed else { return true }
+        guard let trimmedValue = targetString.trimmed else { return true }
         return trimmedValue.isEmpty // trimmedValue.isEmpty
     }
 
 
     var stringIsValid: Bool {
-        guard let trimmable = idInProgress.trimmed else { return false }
+        guard let trimmable = targetString.trimmed else { return false }
         // TODO: Shouldn't we trim it in the field?
         // Probably not, the text would squirt out from under the user.
 
@@ -38,12 +44,15 @@ struct ApplicationOnboardView: View, ReportingPhase {
     /// - Parameters:
     ///   - info: An ``InterstitialInfo`` specifying text and symbol content.
     ///   - callback: A closure to be called when the action button (**Next**, **Continue**, etc.) is tapped.
-    init?(info: TaskInterstitialDecodable? = nil,
-         proceedCallback callback: @escaping ClosureType) {
-        self.completion = callback
-        idInProgress = SubjectID.id
-        if let info { item = info }
-        else {
+    init?(
+        string: Binding<String>,
+        info: TaskInterstitialDecodable? = nil,
+        proceedCallback callback: @escaping ClosureType) {
+            self.completion = callback
+            _targetString = string
+            //        idInProgress = SubjectID.id
+            if let info { item = info }
+            else {
             do {
                 guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
                     throw FileStorageErrors.cantFindURL(#function)
@@ -60,8 +69,17 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 return nil
             }
         }
+
+        currentFocus = .idField
+
         // The JSON title is ignored in favor of whatever presenting ViewBuilder puts into the navigationTitle.
     }
+
+    private func propagateSuccess() {
+        SubjectID.id = targetString
+        completion(.success(targetString))
+    }
+
 
     // MARK: - body
     var body: some View {
@@ -83,30 +101,38 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 Spacer()
 
 
-                TaggedField(string: $idInProgress, callback: {
-                    // TODO: Handle .failure.
-                    result in
-                    if let newID = try? result.get() {
-                        SubjectID.id = newID
-                    }
-                    completion(.success(SubjectID.id))
-                })
-//
-//                TaggedField(subject: SubjectID.id) {
+                TaggedField(string: $targetString)
+//                            , callback: { _ in })
+                            // callback ISN'T USED!
+                            // and probably shouldn't be
+                            // TODO: Consider RPhase for TaggedField.
 //                    // TODO: Handle .failure.
 //                    result in
 //                    if let newID = try? result.get() {
 //                        SubjectID.id = newID
+//                        currentFocus = nil
 //                    }
 //                    completion(.success(SubjectID.id))
-//                }
+//                })
+                .onSubmit {
+
+                    propagateSuccess()
+
+//                    print("Submission from the field.") // RIGHT PLACE! RESPONDS TO RETURN
+                    // PROBLEM: this ends the process, but does so without
+                }
+                .focused($currentFocus,
+                         equals: .idField)
+
+
                 // MARK: The action button
                 Spacer()
-                Button("Submit") {
-                    completion(.success("S101"))
-                }
+                Button("Submit", action: propagateSuccess)
+//                {propagate(success: targetString)}
                 .disabled(fieldIsEmpty)
                 .navigationTitle("Welcome")
+                .focused($currentFocus,
+                         equals: .submitButton)
             }
     }
 }
@@ -129,15 +155,27 @@ struct OnboardView_Previews: PreviewProvider {
         }
     }
 
+    final class Edited: ObservableObject {
+        @State var editedText: String = ""
+    }
+    static let edits = Edited()
+
     static var previews: some View {
         NavigationView {
-            ApplicationOnboardView(info: configuration()!, proceedCallback: { result in
-                if let newID = try? result.get() {
-                    print("Returned", newID)
-                }
-            })
-            .frame(width: .infinity)//, height: 300)
-            .padding()
+            VStack {
+                ApplicationOnboardView(
+                    string: edits.$editedText,
+                    info: configuration()!, proceedCallback: { result in
+                    if let newID = try? result.get() {
+                        edits.editedText = newID
+                        print("Returned", newID)
+                    }
+                })
+                .frame(width: .infinity)//, height: 300)
+                .padding()
+
+                Text("value is \(edits.editedText)")
+            }
         }
     }
 }

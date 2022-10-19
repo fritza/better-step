@@ -45,15 +45,23 @@ You’ll be repeating the timed walks you did last time. There will be no need t
 
     #if true
 
-    #error("test this")
+    @State var workingString = "xxx"
 
     var body: some View {
         NavigationView {
-            ApplicationOnboardView() { result in
+            ApplicationOnboardView(string: $workingString) { result in
+                // Success result is a String with the proposed subject ID.
+                // The received ID.
+
+                #warning("sep/responsibility between OnboardContainer and AppOnboard View")
+                // TODO: This container should be the setter for SubjectID.
+                //       Instead it's set in the onboard view.
                 if let finished = try? result.get() {
-                    SubjectID.id = finished
+//                    SubjectID.id = finished
                     completion(.success(finished))
-                    correctTask = OnboardTasks.greetingHandoff.rawValue
+
+                    // THIS SHOULD TRIGGER THE WALK PHASE
+//                    correctTask = OnboardTasks.greetingHandoff.rawValue
                 }
                 // FIXME: what happens upon failure?
             }
