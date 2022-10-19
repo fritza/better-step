@@ -27,8 +27,10 @@ import Foundation
 struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertible {
     /// Ths ID for this page, automatically assigned, and **one-based**.
     public let id: Int
-    /// The introductory text for the page
-    public let intro: String
+    /// The introductory text for the page, above the icon.
+    public let introAbove: String
+    /// The introductory text for the page, below the icon.
+    public let introBelow: String
     // FIXME: Shouldn't have just one text area.
     /// The label on the regular "proceed" `Button` at bottom.
     public let proceedTitle: String
@@ -39,9 +41,11 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
     /// Element-wise initialization.
     ///
     /// `InterstitialInfo` should have no public initializers, but this one has to be exposed for previewing.
-    internal init(id: Int, intro: String, proceedTitle: String, pageTitle: String, systemImage: String?) {
+    internal init(id: Int,
+                  introAbove: String, introBelow: String, proceedTitle: String, pageTitle: String, systemImage: String?) {
         self.id = id
-        self.intro = intro
+        self.introAbove = introAbove
+        self.introBelow = introBelow
         self.proceedTitle = proceedTitle
         self.pageTitle = pageTitle
         self.systemImage = systemImage
@@ -55,11 +59,13 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
     ///   - id: The ID assigned from an `InterstitialList`
     fileprivate init(_ stub: TaskInterstitialDecodable,
                      id: Int) {
-        self.init(id: id,
-                  intro: stub.intro.addControlCharacters,
-                  proceedTitle: stub.proceedTitle,
-                  pageTitle: stub.pageTitle,
-                  systemImage: stub.systemImage)
+        self.init(
+            id: id,
+            introAbove: stub.introAbove.addControlCharacters,
+            introBelow: stub.introBelow.addControlCharacters,
+            proceedTitle: stub.proceedTitle,
+            pageTitle: stub.pageTitle,
+            systemImage: stub.systemImage)
     }
 
     var description: String {
@@ -84,7 +90,8 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
 ///
 /// See ``InterstitialInfo`` for details on the properties.
 struct TaskInterstitialDecodable: Codable {
-    let intro: String
+    let introAbove: String
+    let introBelow: String
     // TODO: Should proceedTitle ever be nil?
     let proceedTitle: String
     let pageTitle: String
@@ -92,7 +99,9 @@ struct TaskInterstitialDecodable: Codable {
 
     // TODO: See if this is ever needed.
     var unescaped: TaskInterstitialDecodable {
-        return TaskInterstitialDecodable(intro: self.intro.addControlCharacters,
+        return TaskInterstitialDecodable(
+            introAbove: self.introAbove.addControlCharacters,
+            introBelow: self.introBelow.addControlCharacters,
                                          proceedTitle: proceedTitle,
                                          pageTitle: pageTitle,
                                          systemImage: systemImage)

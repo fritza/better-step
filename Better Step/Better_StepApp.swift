@@ -55,22 +55,16 @@ struct Better_StepApp: App {
             }
             .environmentObject(MotionManager(phase: .walk_1))
 #elseif true
-            /*
-             Tuesday 1-5
-             */
-//            NavigationView {
-                OnboardContainerView() { result in
-                    if let newID = try? result.get() {
-                        print("Returned", newID)
-                    }
-                    else {
-                        print("Got no result.")
-                    }
+            OnboardContainerView() { result in
+                if let newID = try? result.get() {
+                    print("Returned:", newID)
                 }
-//            }
-            //                .frame(width: 800)//, height: 300)
+                else {
+                    print("Got no result.")
+                }
+            }
             .padding()
-        //            .reversionToolbar($shouldWarnOfReversion)
+            //            .reversionToolbar($shouldWarnOfReversion)
 #else
         TabView(
             selection:

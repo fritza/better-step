@@ -61,14 +61,6 @@ struct TaggedField: View {
                         .foregroundColor(.gray)
                         .opacity(0.5)
                 }
-//                .onChange(of: subject, perform: { newText in
-//                    closeCallback(subject.trimmed!)
-//                    self.showComment = false
-//                    self.showInstructions = !canSubmitText
-//                })
-//                .onSubmit {
-//                    completion(.success(stringInProgress))
-//                }
                 .padding([.trailing], 2)
             }
         }

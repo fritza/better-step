@@ -1,14 +1,16 @@
 [
     {
         "pageTitle": "Welcome.",
-        "intro": "We deeply appreciate your help in making [OUR APP] the best tool to measure the activity of patients and research volunteers like you.||First, we need to match you to the information you'll send. You were given a Subject ID. Please enter it below.",
+        "introAbove": "We deeply appreciate your help in making [OUR APP] the best tool to measure the activity of patients and research volunteers like you.",
+        "introBelow": "First, we need to match you to the information you'll send. You were given a Subject ID. Please enter it here:",
         "systemImage": "hand.wave",
         "proceedTitle": "Done"
     },
 
     {
         "pageTitle": "Thanks!",
-        "intro": "That concludes your session with [OUR APP].|| You can close the app now.",
+        "introAbove": "That concludes your session with [OUR APP].",
+        "introBelow": "You can close the app now.",
         "systemImage": "hand.wave",
         "proceedTitle": "Done"
     }

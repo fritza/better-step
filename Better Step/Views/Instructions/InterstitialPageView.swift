@@ -27,7 +27,7 @@ struct InterstitialPageView: View {
     var body: some View {
         VStack {
             // MARK: Instructional text
-            Text(item.intro)
+            Text(item.introAbove)
                 .font(.body)
                 .minimumScaleFactor(0.75)
             Spacer(minLength: 30)
@@ -39,9 +39,11 @@ struct InterstitialPageView: View {
                 .frame(height: 200)
                 .symbolRenderingMode(.hierarchical)
             Spacer()
-            // MARK: Disclaimer
-            // FIXME: Remove once the issues are resolved.
-            Text("No “Back” button, should that be wanted. A possibly unwanted feature: swipe across the screen to change the page.").font(.caption).minimumScaleFactor(0.5).foregroundColor(.red)
+            Text(item.introBelow)
+                .font(.body)
+                .minimumScaleFactor(0.75)
+            Spacer()
+
             // MARK: The action button
             Button(item.proceedTitle, action: proceedCallback)
         }
@@ -51,7 +53,7 @@ struct InterstitialPageView: View {
 
 // MARK: - Preview
 struct InterstitialPageView_Previews: PreviewProvider {
-    static let sampleIInfo = InterstitialInfo(id: 3, intro: "This is the instructional text.\nIt may be very long.", proceedTitle: "Continue", pageTitle: "Exercise with a longer top.", systemImage: "figure.walk")
+    static let sampleIInfo = InterstitialInfo(id: 3, introAbove: "This is the instructional text.\nIt may be very long.", introBelow: "", proceedTitle: "Continue", pageTitle: "Exercise with a longer top.", systemImage: "figure.walk")
 
     static var previews: some View {
         NavigationView {

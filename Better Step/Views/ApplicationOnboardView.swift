@@ -19,18 +19,15 @@ struct ApplicationOnboardView: View, ReportingPhase {
 
     let item: TaskInterstitialDecodable
 
-    @State private var submissionRemarks = ""
-    @State private var shouldWarnOfReversion = false
-    @Binding private var targetString   : String
+    @State      private var submissionRemarks = ""
+    @State      private var shouldWarnOfReversion = false
+    @Binding    private var targetString   : String
     @FocusState private var currentFocus: Focusables?
 
     var fieldIsEmpty: Bool {
-
-
         guard let trimmedValue = targetString.trimmed else { return true }
         return trimmedValue.isEmpty // trimmedValue.isEmpty
     }
-
 
     var stringIsValid: Bool {
         guard let trimmable = targetString.trimmed else { return false }
@@ -50,30 +47,27 @@ struct ApplicationOnboardView: View, ReportingPhase {
         proceedCallback callback: @escaping ClosureType) {
             self.completion = callback
             _targetString = string
-            //        idInProgress = SubjectID.id
             if let info { item = info }
             else {
-            do {
-                guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
-                    throw FileStorageErrors.cantFindURL(#function)
+                do {
+                    guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
+                        throw FileStorageErrors.cantFindURL(#function)
+                    }
+                    let jsonData = try Data(contentsOf: url)
+                    let rawList = try JSONDecoder()
+                        .decode([TaskInterstitialDecodable].self,
+                                from: jsonData)
+                    item = rawList.first!
                 }
-                let jsonData = try Data(contentsOf: url)
-                let rawList = try JSONDecoder()
-                    .decode([TaskInterstitialDecodable].self,
-                            from: jsonData)
-                item = rawList.first!
+                catch {
+                    print("Bad decoding:", error)
+                    fatalError("trying to decode \(error)")
+                    return nil
+                }
             }
-            catch {
-                print("Bad decoding:", error)
-                fatalError("trying to decode \(error)")
-                return nil
-            }
+            currentFocus = .idField
+            // The JSON title is ignored in favor of whatever presenting ViewBuilder puts into the navigationTitle.
         }
-
-        currentFocus = .idField
-
-        // The JSON title is ignored in favor of whatever presenting ViewBuilder puts into the navigationTitle.
-    }
 
     private func propagateSuccess() {
         SubjectID.id = targetString
@@ -86,7 +80,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
             // TODO: Copied directly from InterstitialPageView
             VStack {
                 // MARK: Instructional text
-                Text(item.intro.addControlCharacters)
+                Text(item.introAbove.addControlCharacters)
                     .font(.body)
                     .minimumScaleFactor(0.75)
                 Spacer(minLength: 30)
@@ -99,27 +93,15 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .symbolRenderingMode(.hierarchical)
 
                 Spacer()
-
+                Text(item.introBelow.addControlCharacters)
+                    .font(.body)
+                    .minimumScaleFactor(0.75)
+                Spacer()
 
                 TaggedField(string: $targetString)
-//                            , callback: { _ in })
-                            // callback ISN'T USED!
-                            // and probably shouldn't be
-                            // TODO: Consider RPhase for TaggedField.
-//                    // TODO: Handle .failure.
-//                    result in
-//                    if let newID = try? result.get() {
-//                        SubjectID.id = newID
-//                        currentFocus = nil
-//                    }
-//                    completion(.success(SubjectID.id))
-//                })
                 .onSubmit {
-
+                    guard !targetString.isEmpty else { return }
                     propagateSuccess()
-
-//                    print("Submission from the field.") // RIGHT PLACE! RESPONDS TO RETURN
-                    // PROBLEM: this ends the process, but does so without
                 }
                 .focused($currentFocus,
                          equals: .idField)
@@ -168,7 +150,6 @@ struct OnboardView_Previews: PreviewProvider {
                     info: configuration()!, proceedCallback: { result in
                     if let newID = try? result.get() {
                         edits.editedText = newID
-                        print("Returned", newID)
                     }
                 })
                 .frame(width: .infinity)//, height: 300)
