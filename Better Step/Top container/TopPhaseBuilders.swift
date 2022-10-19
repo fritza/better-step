@@ -19,11 +19,15 @@ extension TopContainerView {
             "SHOULDN'T SEE (onboarding_view)",
             tag: TopPhases.onboarding, selection: $currentPhase) {
                 ApplicationOnboardView() { result in
-                    guard let newID = try? result.get() else { self.currentPhase = .failed; return }
+                    guard let newID = try? result.get() else {
+                        self.currentFailingPhase = currentPhase
+                        self.currentPhase = .failed
+                        return
+                    }
                     currentPhase = .walking
                     SubjectID.id = newID
                     assert(SubjectID.id == newID)
-                }!
+                }
                 .reversionToolbar($showRewindAlert)
                 .navigationTitle("Welcome")
                 .padding()
@@ -101,7 +105,10 @@ extension TopContainerView {
             "SHOULDN'T SEE (usability_view)",
             tag: TopPhases.usability, selection: $currentPhase) {
                 UsabilityContainer { result in
-                    guard let csv = try? result.get() else { self.currentPhase = .failed; return }
+                    guard let csv = try? result.get() else {
+                        self.currentFailingPhase = TopPhases.usability
+                        self.currentPhase = .failed
+                        return }
                     print("Answers:"   , csv)
                     self.currentPhase = .conclusion
                     self.collectedUsability = true
@@ -122,7 +129,9 @@ extension TopContainerView {
             tag: TopPhases.usabilityForm, selection: $currentPhase) {
                 WalkInfoForm {
                     result in
-                    guard let infoResult = try? result.get() else { self.currentPhase = .failed; return}
+                    guard let infoResult = try? result.get() else {
+self.currentFailedPhase = currentPhase
+         self.currentPhase = .failed; return}
                     print(infoResult.where, infoResult.distance)
                     self.currentPhase = .conclusion
                     self.collectedUsability = true
@@ -141,6 +150,7 @@ extension TopContainerView {
             "SHOULDN'T SEE (conclusion_view)",
             tag: TopPhases.conclusion, selection: $currentPhase) {
                 ConclusionView { _ in
+                    self.currentFailingPhase = .conclusion
                     self.currentPhase = .failed
                 }
                 .navigationTitle("Finished")
@@ -149,15 +159,14 @@ extension TopContainerView {
             .hidden()
     }
 
-    @ViewBuilder func failed_view() -> some View
+    @ViewBuilder
+    func failed_view() -> some View
     {
         // MARK: Failed
         NavigationLink(
             "SHOULDN'T SEE (failed_view)",
-            tag: TopPhases.failed, selection: $currentPhase) {
-                FailureView { _ in
-                    self.currentPhase = .failed
-                }
+            tag: TopPhases.failed, selection: self.$currentFailingPhase) {
+                FailureView(failing: TopPhases.walking) { _ in  }
                 .reversionToolbar($showRewindAlert)
                 .navigationTitle("FAILED")
                 .padding()
