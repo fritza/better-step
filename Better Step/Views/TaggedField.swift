@@ -53,6 +53,9 @@ struct TaggedField: View {
                           prompt: Text("reporting address"))
                     .keyboardType(.emailAddress)
                     .textFieldStyle(.roundedBorder)
+                    .keyboardType(.asciiCapable)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
                 Button(action: {
                     stringInProgress = ""
                 }) {
