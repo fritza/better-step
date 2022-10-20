@@ -90,6 +90,7 @@
 		1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823D28DBBC3F0038353E /* ZIPFoundation */; };
 		1FA2824028DBBC800038353E /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823F28DBBC800038353E /* RealModule */; };
 		1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
+		1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */; };
 		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
 		1FC7477328E787AD00817041 /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
 		1FC7477428E787AD00817041 /* AAA.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476D28E7694E00817041 /* AAA.ahap */; };
@@ -173,6 +174,7 @@
 		1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
+		1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDestruction.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhaseBuilders.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 			children = (
 				1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */,
 				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
+				1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */,
 				1FB684F927F252BA00612924 /* Numeric+extensions.swift */,
 				1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */,
 				1FD4568A279F208400B5429A /* FileManager+extensions.swift */,
@@ -759,6 +762,7 @@
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
 				1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */,
 				1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */,
+				1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */,
 				1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */,
 				1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,

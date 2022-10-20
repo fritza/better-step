@@ -37,8 +37,8 @@ struct ReversionAlert: ViewModifier {
                 Button("Clear All" , role: .destructive) {
                     // Forget user and progress
                     subjectID = SubjectID.unSet
-
-                    AppStorageKeys.resetSubjectData()
+                    Destroy.subject.post()
+//                    AppStorageKeys.resetSubjectData()
                     /*
                     collectedDASI = false
                     collectedUsability = false
@@ -46,8 +46,8 @@ struct ReversionAlert: ViewModifier {
                      */
                 }
                 Button("Keep Subject") {
-                    // The user and progress are ok,
-                    // just wind back to the first screen
+                    Destroy.dataForSubject.post()
+
                     nextTask = OnboardContainerView.OnboardTasks.laterGreeting.rawValue
                 }
             }
