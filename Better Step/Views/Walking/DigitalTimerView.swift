@@ -133,10 +133,12 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .onAppear {
             do {
+#if !DEBUG
                 try MorseHaptic.aaa.play()
-                }
+#endif
+            }
             catch {
-                #if DEBUG
+#if DEBUG
                 print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
                 #endif
             }
@@ -144,8 +146,9 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .onDisappear() {
             do {
+#if !DEBUG
                 try MorseHaptic.nnn.play()
-
+#endif
                 Task {
                     //                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
                     completion(.success(motionManager.asyncBuffer))

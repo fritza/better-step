@@ -55,6 +55,11 @@ struct Better_StepApp: App {
             }
             .environmentObject(MotionManager(phase: .walk_1))
 #elseif true
+            TopContainerView()
+                .environmentObject(NotificationSetup())
+
+
+            /*
             OnboardContainerView() { result in
                 if let newID = try? result.get() {
                     print("Returned:", newID)
@@ -68,6 +73,7 @@ struct Better_StepApp: App {
 
 
             //            .reversionToolbar($shouldWarnOfReversion)
+             */
 #else
             TabView(
                 selection:

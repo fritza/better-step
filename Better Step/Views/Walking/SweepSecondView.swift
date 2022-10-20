@@ -41,7 +41,7 @@ struct SweepSecondView: View, ReportingPhase {
         units: [.seconds, .fraction]
         )
 
-    @Environment(\.colorScheme) private static var colorScheme: ColorScheme
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @StateObject var timer: Timekeeper = Timekeeper(Self.timeKeeperSpec)
 
     /// The closure provided by client code at `init` to notify it of expiration
@@ -96,7 +96,7 @@ struct SweepSecondView: View, ReportingPhase {
                 .stroke(lineWidth: 1.0)
                 .foregroundColor(.gray)
             SubsecondHandView(fractionalSecond: timer.fraction)
-                            .foregroundColor((Self.colorScheme == .light) ? .black : .gray)
+                            .foregroundColor((colorScheme == .light) ? .black : .gray)
             numericOverlay(
                 edge: size.short * 0.6
             )
