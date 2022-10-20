@@ -132,6 +132,7 @@ struct WalkingContainerView: View {
             demo_summaryView()
 #endif
         }   // VStack
+//        .environmentObject(MotionManager(phase: .walk_1))
 //        .onAppear {
 //        }
     } // body
@@ -160,13 +161,22 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (countdown_1)",
             tag: WalkingState.countdown_1, selection: $state) {
+
+                // FIXME: Have the ssv report .completed as .success.
                 SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    success in
-                    switch success {
-                    case .success(_):
+                    result in
+                    guard case let .failure(err) = result,
+                          let timerError = err as? Timekeeper.Status else {
+                        preconditionFailure("“sucess” Can't Happen. It's a void")// state = .walk_1
+                    }
+                    switch timerError {
+                    case .completed:
                         state = .walk_1
-                    case .failure:
+                    case .cancelled:
                         state = .interstitial_1
+                    default:
+                        preconditionFailure("error \(timerError) Can't Happen.")// state = .walk_1
+
                     }
                 }
                 // TODO: Compare countdown_2View() modifiers
@@ -200,6 +210,7 @@ extension WalkingContainerView {
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
+            .environmentObject(MotionManager(phase: ownPhase))
             .hidden()
     }
 
