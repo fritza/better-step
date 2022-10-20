@@ -1,13 +1,15 @@
 [
 	{
 		"pageTitle": "Regular Walk Complete!",
-		"intro": "If you need to rest, take a break.||When you're ready to continue, tab the button labeled “Continue.”",
+		"introAbove": "If you need to rest, take a break.",
+        "introBelow":   "When you're ready to continue, tab the button labeled “Continue.”",
 		"systemImage": "pause.circle",
 		"proceedTitle": "Continue"
 	},
 	{
 		"pageTitle": "Fast Pace Walk",
-		"intro": "Next, walk for two minutes as quickly as you safely can.||As before,||^• Tap the Continue button for a countdown.|^• Keep the phone in hand or side pocket.|^• Start walking at the signal.||When time is up, the app will sound a horn.",
+		"introAbove": "Next, walk for two minutes as quickly as you safely can.",
+        "introBelow":   "||As before,||^• Tap the Continue button for a countdown.|^• Keep the phone in hand or side pocket.|^• Start walking at the signal.||When time is up, the app will sound a horn.",
 		"systemImage": "chevron.forward",
 		"proceedTitle": "Start"
 	}

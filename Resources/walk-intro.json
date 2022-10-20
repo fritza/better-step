@@ -8,15 +8,15 @@
     },
     {
         "pageTitle": "Important Reminders",
-        "introBelow": "",
-        "introAbove": "Wear the shoes you normally wear when you walk.||You should NOT wear slippers.||Use a walking aid (such as a cane or walker) if you need one.",
+        "introBelow": "You should NOT wear slippers.||Use a walking aid (such as a cane or walker) if you need one.",
+        "introAbove": "Wear the shoes you normally wear when you walk.",
         "systemImage": "figure.walk",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "Where you Should Walk",
-        "introBelow": "",
-        "introAbove": "Find a long room or hallway (about 30 feet).||Make sure the path is clear.",
+        "introBelow": "Make sure the path is clear.",
+        "introAbove": "Find a long room or hallway (about 30 feet).",
         "systemImage": "arrow.up.arrow.down.circle",
         "proceedTitle": "Next"
     },
@@ -43,8 +43,8 @@
     },
     {
         "pageTitle": "Usual Pace — Get Ready",
-        "introBelow": "",
-        "introAbove": "When you are ready, tap Start. You will hear a countdown and a starting horn.||Put the phone in your front pants pocket, or carry it in your hand.||Walk at your usual pace for 2 minutes; the phone will alert you when time is up.",
+        "introBelow": "Put the phone in your front pants pocket, or carry it in your hand.||Walk at your usual pace for 2 minutes; the phone will alert you when time is up.",
+        "introAbove": "When you are ready, tap Start. You will hear a countdown and a starting horn.",
         "systemImage": "chevron.forward.2",
         "proceedTitle": "Start"
     }

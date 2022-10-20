@@ -1,7 +1,8 @@
 [
 	{
 		"pageTitle": "Fast walk complete",
-		"intro": "(WILL REPLACE) Now that you‘ve tried [OUR APP], we'd like your opinion on how easy it was to use.||You'll be asked how much you agree with some statements, from 1 (Not at all) to 7 (Excellent)",
+		"introAbove": "(WILL REPLACE) Now that you‘ve tried [OUR APP], we'd like your opinion on how easy it was to use.",
+        "introBelow": "You'll be asked how much you agree with some statements, from 1 (Not at all) to 7 (Excellent)",
 		"systemImage": "filemenu.and.cursorarrow",
 		"proceedTitle": "Next"
 	}
