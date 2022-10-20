@@ -67,7 +67,6 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     /// The `SubjectID` as just that `String`. client code should use `.subject`
     static let unsafeSubjectID: Destroy = .init(rawValue: 32768)
 
-
     // MARK: Compound tasks
     /// Clear out  the elements of`.firstRunData`, then the `SubjectID`.
     static let firstRunData : Destroy = [.DASI, .usability]

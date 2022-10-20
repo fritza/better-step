@@ -21,6 +21,7 @@ struct SubjectID {
             }
         }
         set {
+            if notificationTicket == nil { catchClearNotifications() }
             UserDefaults.standard.set(newValue, forKey: AppStorageKeys.subjectID.rawValue)
         }
     }
@@ -38,5 +39,47 @@ struct SubjectID {
 
     static var validated: String {
         return validate(string: id)
+    }
+
+    static var notificationTicket: NSObjectProtocol?
+    static func catchClearNotifications() {
+        let dCenter = NotificationCenter.default
+        notificationTicket = dCenter.addObserver(
+            forName: Destroy.unsafeSubjectID.notificationID,
+            object: nil, queue: .current) {
+                _ in
+                SubjectID.id = Self.unSet
+            }
+    }
+}
+
+
+final class NotificationSetup: ObservableObject {
+    init() {
+        clearDataNotices = Self.catchClearFirstRun()
+    }
+    /// Hold on to the notification handlers for (fist-run datum) -> destroy
+    var clearDataNotices: [NSObjectProtocol]!
+    static func catchClearFirstRun() -> [NSObjectProtocol] {
+        var accum: [NSObjectProtocol] = []
+        let dCenter = NotificationCenter.default
+
+        // TODO: Should I set hasNeverCompleted if the walk is negated?
+        let ofConcern = [
+            Destroy.DASI, Destroy.usability,
+            //Destroy.walk
+        ]
+        for message in ofConcern {
+            let catcher = dCenter
+                .addObserver(
+                    forName: message.notificationID,
+                    object: nil,
+                    queue: .current) {_ in
+                        UserDefaults.standard
+                            .set(true, forKey: AppStorageKeys.hasNeverCompleted.rawValue)
+                    }
+            accum.append(catcher)
+        }
+        return accum
     }
 }

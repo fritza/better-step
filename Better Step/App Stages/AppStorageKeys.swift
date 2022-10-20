@@ -17,6 +17,8 @@ enum AppStorageKeys: String {
     case reportAsMagnitude
     /// `String` the email address to receive report archive files.
     case reportingEmail
+
+    // FIXME: The include... keys should be obsolete.
     /// `Bool` whether to include the timed walk
     case includeWalk
     /// `Bool` whether to include a second timed walk
