@@ -142,7 +142,6 @@
 		1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkInfoForm.swift; sourceTree = "<group>"; };
 		1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityPageSelection.swift; sourceTree = "<group>"; };
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
-		1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseManager.swift; sourceTree = "<group>"; };
 		1F2432D727FDF88E008A5418 /* InstructionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPageView.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
@@ -275,7 +274,6 @@
 			children = (
 				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
-				1F2432CA27FD0CAC008A5418 /* PhaseManager.swift */,
 				1FB2F53728D133B600593692 /* Time */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1FB2F54328D2619D00593692 /* Top container */,
