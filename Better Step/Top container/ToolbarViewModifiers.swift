@@ -16,6 +16,13 @@ extension Text {
     }
 }
 
+#warning("Of what use is Keep Subject?")
+/// View modifier that presents an alert taking reset (user/data) commands.
+///
+/// There are three buttons.
+/// - **Cancel** dismisses the alert without further effect.
+/// - **Keep Subject** removes all data for the `Subject`,
+/// - **Clear All** removes the `Subject` itself, deleting the data and restoring first-run behavior.
 struct ReversionAlert: ViewModifier {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet

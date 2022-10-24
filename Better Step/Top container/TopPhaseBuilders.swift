@@ -77,6 +77,8 @@ extension TopContainerView {
             "SHOULDN'T SEE (dasi_view)",
             tag: TopPhases.dasi, selection: $currentPhase) {
                 SurveyContainerView({
+                    // This is a little high on the hierarchy
+                    // (SurveyContainerView knows when to commit the data)
                     result in
                     if let answerList = try? result.get() {
                         // Save the answer list.
