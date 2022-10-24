@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuestionContentView: View {
-    let content: String
+    //    let content: String
     let questionIndex: Int
     var text: String {
         DASIQuestion
@@ -21,76 +21,89 @@ struct QuestionContentView: View {
     }
 }
 
-struct DASIQuestionView: View {
-    @EnvironmentObject var pageSelection : DASIPageSelection
+struct DASIQuestionView: View, ReportingPhase {
+    typealias SuccessValue = (DASIState, DASIResponseList)
+    // .landing for underflow, .completion for overflow.
+    init(answerList: DASIResponseList, _ completion: @escaping ClosureType) {
+        self.answerState = .unknown
+        self.answerList = answerList
+        self.completion = completion
+    }
+
+    let completion: ClosureType
     @EnvironmentObject var reportContents: DASIResponseList
+    @State var pageNumber: Int = 1
     @State var answerState: AnswerState
 
-    func updateForNewBinding() {
-        let answerState: AnswerState
-        if let qID = pageSelection.questionIdentifier,
-           let state = reportContents
-            .responseForQuestion(identifier: qID) {
-            answerState = state
-        }
-        else {
-            answerState = .unknown
-        }
-        self.answerState = answerState
-    }
+    var answerList: DASIResponseList
 
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
     var body: some View {
         VStack {
-            if pageSelection.questionIdentifier != nil {
-                QuestionContentView(
-                    content: "Do you have difficulty?",
-                    questionIndex:
-                        pageSelection.questionIdentifier!)
-                .padding()
+            QuestionContentView(
+                questionIndex: pageNumber)
+            .padding()
 
-                Spacer()
-                YesNoStack(
-                    answer: reportContents.responseForQuestion(identifier: pageSelection.questionIdentifier!)!,
-                    completion: { state in
-                        guard let answer = try? state.get() else {
-                            print(#function, "- got an error answer.")
-                            return
-                        }
-                        reportContents
-                            .didRespondToQuestion(
-                                id: pageSelection.questionIdentifier!,
-                                with: answer)
-                        pageSelection.increment()
-                        updateForNewBinding()
+            Spacer()
+
+            YesNoStack(
+                answer: reportContents.responseForQuestion(identifier: pageNumber)!,
+                completion: { state in
+                    guard let answer = try? state.get() else {
+                        print(#function, "- got an error answer.")
+                        return
                     }
-                )
-                .frame(height: 130)
-                .padding()
-            }
-        }
-        .toolbar {
-// TODO: Replace with ToolbarItem
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button("← Back") {
-                    pageSelection.decrement()
-                    updateForNewBinding()
+                    reportContents
+                        .didRespondToQuestion(
+                            id: pageNumber,
+                            with: answer)
+                    if pageNumber >= DASIStages.maxIdentifier {
+                        completion(
+                            .success((.completed, reportContents))
+                        )
+                    }
+                    else {
+                        pageNumber += 1
+                    }
                 }
-                .disabled(pageSelection.selected <= DASIStages.minPresenting)
+            )
+            .frame(height: 130)
+            .padding()
+        }
+
+        .animation(.easeInOut, value: pageNumber)
+
+        .toolbar {
+            // TODO: Replace with ToolbarItem
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("← Back") {
+                    if pageNumber <= DASIStages.minIdentifier {
+                        completion(
+                            .success((.landing, reportContents))
+                        )
+                    }
+                    else {
+                        pageNumber -= 1
+                    }
+                }
             }
-// TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 gearBarItem()
                 Button("Next →") {
-                    pageSelection.increment()
-                    updateForNewBinding()
+                    if pageNumber >= DASIStages.maxIdentifier {
+                        completion(
+                            .success((.completed, reportContents))
+                        )
+                    }
+                    else {
+                        pageNumber += 1
+                    }
                 }
-                .disabled(pageSelection.selected >= DASIStages.maxPresenting)
             }
         }
         .navigationTitle(
-            "Question \(pageSelection.questionIdentifier?.description ?? "NO ID"):"
+            "Question \(pageNumber):"
         )
     }
 }
@@ -98,10 +111,12 @@ struct DASIQuestionView: View {
 struct DASIQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DASIQuestionView(answerState: .yes)
+            DASIQuestionView(answerList: DASIResponseList()) {_ in
+                print("Question done")
+            }
         }
-        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
-        .environmentObject(DASIResponseList())
+//        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
+//        .environmentObject(DASIResponseList())
     }
 }
 

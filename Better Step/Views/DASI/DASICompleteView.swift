@@ -24,8 +24,7 @@ fileprivate let endIncompleteText = """
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View, ReportingPhase {
-    typealias SuccessValue = DASIResponseList
-
+    typealias SuccessValue = (DASIState, DASIResponseList)
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
 
     let completion: ClosureType
@@ -34,7 +33,7 @@ struct DASICompleteView: View, ReportingPhase {
     }
 
     @EnvironmentObject private var responses: DASIResponseList
-    @EnvironmentObject private var pager    : DASIPageSelection
+//    @EnvironmentObject private var pager    : DASIPageSelection
 
     var allItemsAnswered: Bool {
         return responses.unknownResponseIDs.isEmpty
@@ -68,7 +67,7 @@ struct DASICompleteView: View, ReportingPhase {
                 proceedEnabled: allItemsAnswered
             ) {
                 // Upon tap of the proceed button
-                completion(.success(responses))
+                completion(.success((.completed, responses)))
             }
             .padding()
         }
@@ -77,7 +76,9 @@ struct DASICompleteView: View, ReportingPhase {
             // TODO: Replace with ToolbarItem
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") {
-                    pager.decrement()
+                    completion(
+                        .success((.question, responses))
+                    )
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -93,7 +94,7 @@ struct DASICompleteView_Previews: PreviewProvider {
             DASICompleteView() {
                 _ in
             }
-            .environmentObject(DASIPageSelection(.completion))
+//            .environmentObject(DASIPageSelection(.completion))
             .environmentObject(DASIResponseList())
             //            .environmentObject(PhaseManager())
         }

@@ -22,6 +22,11 @@ struct MorseHaptic: RawRepresentable {
     /// Singleton haptic engine
     static var engine   : CHHapticEngine!
 
+    static let supportsHaptics: Bool = {
+        let capabilities = CHHapticEngine.capabilitiesForHardware()
+        return capabilities.supportsHaptics // capabilities.supportsAudio
+    }()
+
     // MARK: Initialization
     /// Initialize all properties (except `chPattern)` from the base name..
     init?(rawValue: String) {
@@ -88,6 +93,7 @@ struct MorseHaptic: RawRepresentable {
 
     /// Play the pattern.
     mutating func play() throws {
+        guard Self.supportsHaptics else { return }
         // Remember that the engine will hold on to the
         // player for the duration. There's no need
         // to assign it to a variable.
@@ -98,10 +104,12 @@ struct MorseHaptic: RawRepresentable {
     }
 
     // MARK: Prepared haptic patterns
-#if !DEBUG
+// if !DEBUG
     /// A haptic for Morse `._  ._  ._` as described in `AAA.ahap`.
-    static var aaa = MorseHaptic(rawValue: "AAA")!
+//    static var aaa = MorseHaptic(rawValue: "AAA")!
+    static var aaa = MorseHaptic(rawValue: "AAAbeep")
     /// A haptic for Morse `_.  _.  _.` as described in `NNN.ahap`.
-    static var nnn = MorseHaptic(rawValue: "NNN")!
-#endif
+//    static var nnn = MorseHaptic(rawValue: "NNN")!
+    static var nnn = MorseHaptic(rawValue: "NNNbeep")
+// endif
 }

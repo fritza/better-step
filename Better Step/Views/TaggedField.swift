@@ -70,7 +70,7 @@ struct TaggedField: View {
     }
 }
 
-private final class HoldsAString: ObservableObject {
+fileprivate final class HoldsAString: ObservableObject {
     @State var someSubjectID: String
     init(subject: String) {
         someSubjectID = subject
@@ -78,7 +78,7 @@ private final class HoldsAString: ObservableObject {
 }
 
 struct TaggedField_Previews: PreviewProvider {
-    static let holder = HoldsAString(subject: "Thirsday")
+    fileprivate static let holder = HoldsAString(subject: "Thursday")
     @State static var content = "Erewhon"
     static var previews: some View {
         NavigationView {

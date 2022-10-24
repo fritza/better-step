@@ -121,6 +121,5 @@ fileprivate final class AudioPlaybackDelegate: NSObject, AVAudioPlayerDelegate {
     // TODO: should the delegate be hidden from clients?
     //       should there be an end-of-audio callback?
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        print("End of sound.")
     }
 }

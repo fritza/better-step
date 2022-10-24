@@ -12,6 +12,7 @@
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
+		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */; };
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
@@ -56,7 +57,6 @@
 		1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
-		1FA2821228DBBB270038353E /* DASIPageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */; };
 		1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */; };
 		1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
@@ -148,6 +148,7 @@
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
+		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60B0A1276FCE410026D28B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
@@ -457,6 +458,7 @@
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */,
+				1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */,
 			);
 			path = DASI;
 			sourceTree = "<group>";
@@ -752,6 +754,7 @@
 				1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */,
 				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
 				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
+				1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */,
 				1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */,
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
 				1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */,
@@ -792,7 +795,6 @@
 				1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
-				1FA2821228DBBB270038353E /* DASIPageSelection.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
