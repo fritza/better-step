@@ -17,14 +17,13 @@ struct Better_StepApp: App {
 
     @State var shouldWarnOfReversion : Bool = false
 
-
-#warning("Add a DASI container.")
-    // Provide for its reading/writing responses in App Storage? As I recall, Dan would like those results to cohabit with Usability.
-    // Isn't there a can-advance/completed handler that responds to both DASI and usability being complete?
-
-    // FIXME: DASIPageSelection and DASIResponseList -> DASI container.
-    //    @StateObject var dasiPages        = DASIPageSelection()
-    //    @StateObject var dasiResponseList = DASIResponseList()
+    // WARNIING: This DASIPageSelection shouldn't have to be
+    // so low in the hierarchy. However, the DASI stack adamantly failed
+    // to find what I believe to have been a propertly-set instance.
+    //
+    // Doesn't work here. Moving the creation and environmentObject()
+    // to a static in TopContainerView.
+//    static let dasiPageSelection = DASIPageSelection(.landing)
 
     static func onboardInfo() -> TaskInterstitialDecodable {
         do {
@@ -46,34 +45,24 @@ struct Better_StepApp: App {
     var body: some Scene {
         WindowGroup {
 #if false
-//            TopContainerView()
+            NavigationView {
+                WalkingContainerView {
+                    response in print("Response =", response)
+                }
+            }
+#elseif true
+            NavigationView {
+                SurveyContainerView {
+                    _ in
+                }
+                .environmentObject(MotionManager(phase: .walk_1))
+                .environmentObject(NotificationSetup())
+            }
 
 #elseif false
-            NavigationView<WalkingContainerView> {
-                WalkingContainerView { _ in
-                }
-            }
-            .environmentObject(MotionManager(phase: .walk_1))
-#elseif true
             TopContainerView()
                 .environmentObject(NotificationSetup())
-
-
-            /*
-            OnboardContainerView() { result in
-                if let newID = try? result.get() {
-                    print("Returned:", newID)
-                }
-                else {
-                    print("Got no result.")
-                }
-            }
-            .padding()
-            .environmentObject(NotificationSetup())
-
-
-            //            .reversionToolbar($shouldWarnOfReversion)
-             */
+//                .environmentObject(DASIResponseList())
 #else
             TabView(
                 selection:
@@ -120,10 +109,7 @@ struct Better_StepApp: App {
                     }
                     .tag(BSTAppStages.configuration)
             }
-            .environmentObject(dasiPages)
-            .environmentObject(dasiResponseList)
-            .environmentObject(SurveyResponses())   // FIXME: Load these for restoration
-            //            .environmentObject(fileCoordinator)
+
             .environmentObject(appStage)
             .environmentObject(WalkingSequence())
             .environmentObject(phaseManager)

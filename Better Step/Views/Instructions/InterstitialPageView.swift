@@ -47,6 +47,7 @@ struct InterstitialPageView: View {
             // MARK: The action button
             Button(item.proceedTitle, action: proceedCallback)
         }
+        .padding()
         .navigationTitle(item.pageTitle)
     }
 }

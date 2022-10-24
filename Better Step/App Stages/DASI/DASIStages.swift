@@ -9,6 +9,18 @@ import Foundation
 
 // MARK: - DASIStages
 
+/*
+ Legitimacy of yse of DASIStages:
+
+ In general, the constants for indices and bounds.
+
+ ??
+    question identifier
+    refers to question?
+
+ */
+
+
 /// Application of `QuestionID` to navigation through the stages of the DASI phase of the app. The intended use is a `@State` or a `@StateObject` property to be bound to the root survey view. The child views set the value, the root changes the view binding.
 ///
 ///
@@ -19,7 +31,7 @@ import Foundation
 /// - `.presenting(questionID:)`: The survey-response view for the question with the 1-based question identifier.
 ///
 ///- note: All references to DASI questions are by `QuestionID`.
-enum DASIStages {
+enum DASIStages: CustomStringConvertible {
     // ~Index represents place in the questions array.
     // These are guaranteed to be valid, as they rely on the range of array indices, not the identifiers.
     static let startIndex = 0
@@ -58,10 +70,11 @@ enum DASIStages {
             return nil
         }
     }
+
     /// `false` iff the stage is `.landing` or `.completion`,
-    var refersToQuestion: Bool {
-        ![.landing, .completion].contains(self)
-    }
+//    var refersToQuestion: Bool {
+//        ![.landing, .completion].contains(self)
+//    }
 
     // MARK: Arithmetic
 
@@ -70,7 +83,7 @@ enum DASIStages {
     ///
     /// `.landing` has no effect. `.completion` backs off to the last of the `QuestionID`s. .`presenting(question:)` backs off to the previous question, or to .landing if the QuestionID is at the minimum.
     @discardableResult
-    mutating func goBack() -> DASIStages {
+    mutating func decremented() -> DASIStages {
         let retval: DASIStages
         switch self {
         case .landing:
@@ -90,7 +103,7 @@ enum DASIStages {
     ///
     /// `.completion` has no effect. `.landing` advances to the first of the `QuestionID`s. .`presenting(questionID:)` advances to the next `QuestionID`, or to `.completion` if the `QuestionID` is at the maximum.
     @discardableResult
-    mutating func goForward() -> DASIStages {
+    mutating func incremented() -> DASIStages {
         let retval: DASIStages
         switch self {
         case .landing:
@@ -106,6 +119,7 @@ enum DASIStages {
         return retval
     }
 
+    /*
     /// Set `self` to represent a given question, by 1-based id.
     ///
     /// The jump is to `.presenting` states _only._
@@ -119,9 +133,10 @@ enum DASIStages {
         self = candidate
         return self
     }
+     */
 }
 
-extension DASIStages: CustomStringConvertible {
+extension DASIStages {
     var description: String {
         switch self {
         case .landing: return "Greeting"
@@ -132,7 +147,8 @@ extension DASIStages: CustomStringConvertible {
     }
 }
 
-extension DASIStages: Comparable, Hashable, Strideable {
+extension DASIStages: Comparable, Hashable, Strideable
+{
     // MARK: - Equatable
     /// Protocol compliance
     static func == (lhs: DASIStages, rhs: DASIStages) -> Bool {
@@ -187,13 +203,13 @@ extension DASIStages: Comparable, Hashable, Strideable {
         if n == 0 { return self }
         else if n > 0 {
             for _ in (1...n) {
-                retval.goForward()
+                retval.incremented()
             }
             return retval
         }
         else {
             for _ in 1...n {
-                retval.goBack()
+                retval.decremented()
             }
             return retval
         }
@@ -206,13 +222,13 @@ extension DASIStages: Comparable, Hashable, Strideable {
         var cursor = self
         if other < self {
             while cursor > other {
-                cursor.goBack()
+                cursor.decremented()
                 retval -= 1
             }
         }
         else if other > self {
             while cursor > other {
-                cursor.goForward()
+                cursor.incremented()
                 retval += 1
             }
         }

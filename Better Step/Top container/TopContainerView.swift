@@ -119,12 +119,6 @@ struct TopContainerView: View {
                             shouldShow: $showRewindAlert)
         }
         .onAppear {
-
-#if DEBUG
-            AppStorageKeys.resetSubjectData()
-#endif
-
-
             if subjectID == SubjectID.unSet {
                 currentPhase = .onboarding
             }

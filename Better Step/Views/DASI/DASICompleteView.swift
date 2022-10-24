@@ -34,7 +34,7 @@ struct DASICompleteView: View, ReportingPhase {
     }
 
     @EnvironmentObject private var responses: DASIResponseList
-    @EnvironmentObject private var questions: DASIPageSelection
+    @EnvironmentObject private var pager    : DASIPageSelection
 
     var allItemsAnswered: Bool {
         return responses.unknownResponseIDs.isEmpty
@@ -77,7 +77,7 @@ struct DASICompleteView: View, ReportingPhase {
             // TODO: Replace with ToolbarItem
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") {
-                    questions.decrement()
+                    pager.decrement()
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -93,7 +93,6 @@ struct DASICompleteView_Previews: PreviewProvider {
             DASICompleteView() {
                 _ in
             }
-            // FIXME: These will need better initializer
             .environmentObject(DASIPageSelection(.completion))
             .environmentObject(DASIResponseList())
             //            .environmentObject(PhaseManager())

@@ -17,23 +17,25 @@ import SwiftUI
 struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
-    init(_ completion: @escaping ClosureType) {
-        self.completion = completion
+    init(_ result: @escaping ClosureType) {
+        self.completion = result
     }
 
-    @StateObject var pageSelection = UsabilityPageSelection()
+    @StateObject var pageSelection = UsabilityPageSelection(phase: .start, questionID: 1)
     // Sets selection to .start, question 1.
 
     var body: some View {
         List {
             questionPresentationView()
+            // UsabilityView
             openingInterstitialView()
+            // UsabilityInterstitialView "Usability"
 #if INCLUDE_USABILITY_SUMMARY
             usabilitySummaryView()
 #endif
             closingInterstitialView()
+//            UsabilityInterstitialView "Completed"
         }
-        .environmentObject(pageSelection)
     }
 
     // MARK: - Links to phase views
@@ -60,7 +62,7 @@ struct UsabilityContainer: View, ReportingPhase {
                     Button("Next →") { pageSelection.increment() }
                 }
             }
-
+            .environmentObject(pageSelection)
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -78,6 +80,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 systemImageName: "checkmark.circle",
                 continueTitle: "Continue",
                 completion: { _ in  })
+            .environmentObject(pageSelection)
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -104,6 +107,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 Button("← Back") { pageSelection.decrement() }
             }
         }
+        .environmentObject(pageSelection)
     }
 
 #if INCLUDE_USABILITY_SUMMARY
@@ -132,7 +136,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 Button("← Back") { pageSelection.decrement() }
             }
         }
-
+        .environmentObject(pageSelection)
     }
 #endif
 }
@@ -144,7 +148,6 @@ struct UsabilityContainer_Previews: PreviewProvider {
             UsabilityContainer() { _ in }
         }
         .environmentObject(UsabilityPageSelection(phase: .start, questionID: 1))
-        //        .environmentObject(DASIPageSelection())
         .previewDevice(.init(stringLiteral: "iPhone 12"))
         .previewDevice(.init(stringLiteral: "iPhone SE (3rd generation)"))
     }

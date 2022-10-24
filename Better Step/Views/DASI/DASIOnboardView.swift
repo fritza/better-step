@@ -7,15 +7,20 @@
 
 import SwiftUI
 
-struct DASIOnboardView: View {
-static let instructions = """
+struct DASIOnboardView: View, ReportingPhase {
+    typealias SuccessValue = ()
+    let completion: ClosureType
+
+    static let instructions = """
 In this part of the assessment, you will be asked \(DASIQuestion.count) questions about how well you do with various activities.
 
 Answer “Yes” or “No” to each. You will be able to move backward and forward through the questions, but you must respond to all for this exercise to be complete.
 """
 
-    @EnvironmentObject var envt: DASIPageSelection
-    @State var shouldShow = false
+    @EnvironmentObject var pager: DASIPageSelection
+    init(completion: @escaping ClosureType) {
+        self.completion = completion
+    }
 
     // TODO: Add the forward/back bar.
 
@@ -26,8 +31,9 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
                 titleText: "Activity Survey",
                 bodyText: Self.instructions,
                 sfBadgeName: "checkmark.square",
-                proceedTitle: "Continue") {
-                    envt.increment()
+                proceedTitle: "Continue",
+                proceedEnabled: true) {
+                    pager.pagerState = .question
                 }
                 .padding()
                 .navigationBarHidden(true)
@@ -37,9 +43,9 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
     }
 }
 
-struct DASIOnboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DASIOnboardView()
-            .environmentObject(DASIPageSelection(.landing))
+    struct DASIOnboardView_Previews: PreviewProvider {
+        static var previews: some View {
+            DASIOnboardView(completion: { _ in })
+                .environmentObject(DASIPageSelection(.landing))
+        }
     }
-}

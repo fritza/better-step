@@ -70,7 +70,7 @@ struct TaggedField: View {
     }
 }
 
-final class HoldsAString: ObservableObject {
+private final class HoldsAString: ObservableObject {
     @State var someSubjectID: String
     init(subject: String) {
         someSubjectID = subject

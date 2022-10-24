@@ -39,6 +39,7 @@ struct SubsecondHandView: View {
                     anchor: UnitPoint(x: 0.5, y: 0.05))
                 .offset(midpoint(within: proxy))
                 .frame(width: 2.0, height: proxy.size.short/2.0, alignment: .center)
+                .shadow(radius: 4.0)
         }
     }
 }

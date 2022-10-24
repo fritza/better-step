@@ -88,7 +88,6 @@ extension TopContainerView {
                         self.collectedDASI = true
                     }
                 })
-                .navigationTitle("(not) DASI")
                 .reversionToolbar($showRewindAlert)
                 .padding()
             }

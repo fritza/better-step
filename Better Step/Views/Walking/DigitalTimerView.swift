@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - DigitalTimerView
 private let digitalNarrative = """
-“Cancel” will stop the count but not dispatch to a recovery page.
+“Cancel” will stop the count, and ought to bounce to the introduction to walking, but this has not been rigorously tested.
 """
 
 // FIXME: Add an Error that describes cancellation.
@@ -51,7 +51,7 @@ struct DigitalTimerView: View, ReportingPhase {
     // DAMMIT:
     // Stored property 'completion' within struct cannot have a global actor; this is an error in Swift 6
 
-    @EnvironmentObject private var motionManager: MotionManager
+    private var motionManager: MotionManager
 
     init(duration: TimeInterval,
          walkingState: WalkingState,
@@ -64,6 +64,7 @@ struct DigitalTimerView: View, ReportingPhase {
         assert(walkingState == .walk_1 || walkingState == .walk_2,
         "\(fileID):\(line): Unexpected walking state: \(walkingState)"
         )
+        self.motionManager = MotionManager(phase: walkingState)
         self.walkingState = walkingState
         self.completion = completion
     }
@@ -133,22 +134,22 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .onAppear {
             do {
-#if !DEBUG
-                try MorseHaptic.aaa.play()
-#endif
+// if !DEBUG
+                try MorseHaptic.aaa?.play()
+// endif
             }
             catch {
-#if DEBUG
+// if DEBUG
                 print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
-                #endif
+// endif
             }
             timer.start()
         }
         .onDisappear() {
             do {
-#if !DEBUG
-                try MorseHaptic.nnn.play()
-#endif
+// if !DEBUG
+                try MorseHaptic.nnn?.play()
+// endif
                 Task {
                     //                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
                     completion(.success(motionManager.asyncBuffer))

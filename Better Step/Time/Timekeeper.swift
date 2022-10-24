@@ -44,7 +44,7 @@ enum CountdownConstants {
     static let secondsRoundingFactor = 100.0
 
     /// Delay in displaying `SweepSecondView` till the ``AudioMilestone`` catches up.
-    static let sweepSecondDelay = 1.2
+    static let sweepSecondDelay = 1.1
 }
 
 
@@ -288,9 +288,6 @@ final class Timekeeper: ObservableObject {
     // MARK: Minutes
     /// Sink downsteam from the root timer publisher, setting `self.minutes`.
     private func handleMinutes() {
-#if DEBUG
-        print("Enter", #function, "- \(#fileID):\(#line)")
-#endif
         rootPublisher
             .map { $0.minute }
             .removeDuplicates()
@@ -311,9 +308,6 @@ final class Timekeeper: ObservableObject {
     // MARK: Seconds
     /// Sink downsteam from the root timer publisher, setting `self.seconds`.
     private func handleSeconds() {
-#if DEBUG
-print("Enter", #function, "- \(#fileID):\(#line)")
-#endif
         rootPublisher
             .map { $0.second }
             .removeDuplicates()
@@ -334,9 +328,6 @@ print("Enter", #function, "- \(#fileID):\(#line)")
     // MARK: "mm:ss"
     /// Sink downsteam from the root timer publisher, converting to `mm:ss` and setting `self.minuteSecondString`.
     private func handleMinSeconds() {
-#if DEBUG
-print("Enter", #function, "- \(#fileID):\(#line)")
-#endif
         rootPublisher
             .map {
                 minSecFrac in
@@ -364,9 +355,6 @@ print("Enter", #function, "- \(#fileID):\(#line)")
 // MARK: Fraction
     /// Sink downsteam from the root timer publisher, setting `self.fraction` to the reported fraction-within second..
     private func handleFractions() {
-#if DEBUG
-print("Enter", #function, "- \(#fileID):\(#line)")
-#endif
         rootPublisher
             .map { $0.fraction }
             .sink { completion in

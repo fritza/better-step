@@ -167,7 +167,7 @@ extension WalkingContainerView {
                     result in
                     guard case let .failure(err) = result,
                           let timerError = err as? Timekeeper.Status else {
-                        preconditionFailure("“sucess” Can't Happen. It's a void")// state = .walk_1
+                        preconditionFailure("“sucess” Can't Happen. It's a void")
                     }
                     switch timerError {
                     case .completed:
@@ -210,7 +210,7 @@ extension WalkingContainerView {
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
-            .environmentObject(MotionManager(phase: ownPhase))
+//            .environmentObject(MotionManager(phase: ownPhase))
             .hidden()
     }
 
@@ -245,12 +245,18 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (countdown_2)",
             tag: WalkingState.countdown_2, selection: $state) {
                 SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    success in
-                    switch success {
-                    case .success(_):
+                    result in
+                    guard case let .failure(err) = result,
+                          let timerError = err as? Timekeeper.Status else {
+                        preconditionFailure("“sucess” Can't Happen. It's a void")
+                    }
+                    switch timerError {
+                    case .completed:
                         state = .walk_2
-                    case .failure:
-                        state = .interstitial_2
+                    case .cancelled:
+                        state = .interstitial_1
+                    default:
+                        preconditionFailure("error \(timerError) Can't Happen.")// state = .walk_1
                     }
                 }.padding()
                     .navigationBarBackButtonHidden(true)

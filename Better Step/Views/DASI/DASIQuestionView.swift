@@ -22,13 +22,13 @@ struct QuestionContentView: View {
 }
 
 struct DASIQuestionView: View {
-    @EnvironmentObject var envt: DASIPageSelection
+    @EnvironmentObject var pageSelection : DASIPageSelection
     @EnvironmentObject var reportContents: DASIResponseList
     @State var answerState: AnswerState
 
     func updateForNewBinding() {
         let answerState: AnswerState
-        if let qID = envt.questionIdentifier,
+        if let qID = pageSelection.questionIdentifier,
            let state = reportContents
             .responseForQuestion(identifier: qID) {
             answerState = state
@@ -43,28 +43,26 @@ struct DASIQuestionView: View {
     // before it's time to report.
     var body: some View {
         VStack {
-            if envt.questionIdentifier != nil {
+            if pageSelection.questionIdentifier != nil {
                 QuestionContentView(
                     content: "Do you have difficulty?",
                     questionIndex:
-                        envt.questionIdentifier!)
+                        pageSelection.questionIdentifier!)
                 .padding()
 
                 Spacer()
                 YesNoStack(
-                    answer: reportContents.responseForQuestion(identifier: envt.questionIdentifier!)!,
+                    answer: reportContents.responseForQuestion(identifier: pageSelection.questionIdentifier!)!,
                     completion: { state in
-                        #warning("Why kill all completions of YesNoStack?")
-                        preconditionFailure("Can't Happen at \(#function) - \(#fileID):\(#line)")
                         guard let answer = try? state.get() else {
                             print(#function, "- got an error answer.")
                             return
                         }
                         reportContents
                             .didRespondToQuestion(
-                                id: envt.questionIdentifier!,
+                                id: pageSelection.questionIdentifier!,
                                 with: answer)
-                        envt.increment()
+                        pageSelection.increment()
                         updateForNewBinding()
                     }
                 )
@@ -76,23 +74,23 @@ struct DASIQuestionView: View {
 // TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button("← Back") {
-                    envt.decrement()
+                    pageSelection.decrement()
                     updateForNewBinding()
                 }
-                .disabled(envt.selected <= DASIStages.minPresenting)
+                .disabled(pageSelection.selected <= DASIStages.minPresenting)
             }
 // TODO: Replace with ToolbarItem
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 gearBarItem()
                 Button("Next →") {
-                    envt.increment()
+                    pageSelection.increment()
                     updateForNewBinding()
                 }
-                .disabled(envt.selected >= DASIStages.maxPresenting)
+                .disabled(pageSelection.selected >= DASIStages.maxPresenting)
             }
         }
         .navigationTitle(
-            "Question \(envt.questionIdentifier?.description ?? "NO ID"):"
+            "Question \(pageSelection.questionIdentifier?.description ?? "NO ID"):"
         )
     }
 }
@@ -102,7 +100,7 @@ struct DASIQuestionView_Previews: PreviewProvider {
         NavigationView {
             DASIQuestionView(answerState: .yes)
         }
-        .environmentObject(DASIPageSelection(.presenting(questionID: 2)))
+        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
         .environmentObject(DASIResponseList())
     }
 }
