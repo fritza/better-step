@@ -75,6 +75,8 @@ enum TopPhases: String, CaseIterable, Comparable {
 
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
+///
+/// - note: All contained `Views` are expected to use the `reversionToolbar` modifier to attach a gear toolbar button, and set `showRewindAlert` to trigger the one-and-only `.reversionAlert`, which can reset data.
 struct TopContainerView: View {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
