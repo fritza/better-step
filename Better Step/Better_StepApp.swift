@@ -58,7 +58,7 @@ struct Better_StepApp: App {
                 .environmentObject(MotionManager(phase: .walk_1))
                 .environmentObject(NotificationSetup())
             }
-#elseif true
+#elseif false
             NavigationView {
                 UsabilityContainer {
                     _ in
@@ -67,7 +67,7 @@ struct Better_StepApp: App {
                 //                .environmentObject(NotificationSetup())
             }
 
-#elseif false
+#elseif true
             TopContainerView()
                 .environmentObject(NotificationSetup())
 //                .environmentObject(DASIResponseList())

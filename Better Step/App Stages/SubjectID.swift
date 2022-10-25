@@ -58,6 +58,7 @@ final class NotificationSetup: ObservableObject {
     init() {
         clearDataNotices = Self.catchClearFirstRun()
     }
+    
     /// Hold on to the notification handlers for (fist-run datum) -> destroy
     var clearDataNotices: [NSObjectProtocol]!
     static func catchClearFirstRun() -> [NSObjectProtocol] {

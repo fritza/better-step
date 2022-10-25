@@ -83,20 +83,32 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
         Notification.Name("Destroy_\(rawValue)")
     }
 
+    /// For any `Destroy` object key, look up the scalar records to destroy.
     private static let compounds: [Destroy : [Destroy]] = {
         var retval: [Destroy : [Destroy]]
-        retval = [.walk : [.walk], .unsafeSubjectID: [.unsafeSubjectID],
-                  .DASI : [.DASI], .usability: [.usability],
+        retval = [
+            // Destroy of walk kills walk data only
+            .walk : [.walk],
+            .unsafeSubjectID: [.unsafeSubjectID],
+            // Destroy of DASI kills DASI survey data only
+            .DASI : [.DASI],
+            // Destroy of usability kills usability survey data only
+            .usability: [.usability],
+            // Destroy of first-run data kills the surveys only
+            .firstRunData:
+                [.DASI, .usability],
 
-            .firstRunData: [.DASI, .usability],
-                  .dataForSubject: [.DASI, .usability, .walk],
-                  // IMPORTANT: .unsafeSubjectID must be the last element.
-                  .subject: [.DASI, .usability, .walk, .unsafeSubjectID]
+            // Destroy of data for subject kill surveys _and_ the walks.
+            .dataForSubject: [.DASI, .usability, .walk],
+            // Destroy of subject destroys surveys, walks, and subject ID
+            // IMPORTANT: .unsafeSubjectID must be the last element.
+                .subject: [.DASI, .usability, .walk, .unsafeSubjectID]
         ]
 
         return retval
     }()
 
+    /// Post notifications of all scalar deletions in the option set.
     func post() {
         let center = NotificationCenter.default
         guard let tasks = Self.compounds[self] else { fatalError() }
@@ -106,6 +118,7 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     }
 
     // Do I want a Publisher?
+    /// A Combine `Publisher` for triggered destroys. Not clear it's useful.
     var publisher: NotificationCenter.Publisher {
         NotificationCenter.default
             .publisher(for: self.notificationID)

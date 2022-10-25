@@ -47,7 +47,9 @@ struct ApplicationOnboardView: View, ReportingPhase {
         proceedCallback callback: @escaping ClosureType) {
             self.completion = callback
             _targetString = string
-            if let info { item = info }
+            if let info {
+                item = info
+            }
             else {
                 do {
                     guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
@@ -155,7 +157,7 @@ struct OnboardView_Previews: PreviewProvider {
                 .frame(width: .infinity)//, height: 300)
                 .padding()
 
-                Text("value is \(edits.editedText)")
+//                Text("value is \(edits.editedText)")
             }
         }
     }

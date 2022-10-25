@@ -37,6 +37,13 @@ extension TopContainerView {
 
     /// **Top-level** view for the walkiing phase.
     ///
+    /// This phase controller also determines the successor to the walk.
+    ///
+    /// *  If DASI must still be done, go to DASI
+    /// *  If Usability is still to be done, go Usability.
+    /// * If neither, go to DASI
+    /// * If both, go to conclusion.
+    ///
     /// The phase controller handles the stages (intro, walk 1, intertitial, walk 2, exit).
     @ViewBuilder func walking_view() -> some View {
         // MARK: Walking
@@ -50,6 +57,7 @@ extension TopContainerView {
                               "- WalkingContainerView came back with an error:",
                               error.localizedDescription)
                     }
+
                     let nextPhase: TopPhases
                     switch (d: collectedDASI, u: collectedUsability) {
                     case (d: false, u: _):
@@ -62,13 +70,14 @@ extension TopContainerView {
                         // dasi, usability, go comclusion
                         nextPhase = .conclusion
                     }
+
                     self.currentPhase = nextPhase
                 }
-//                    .navigationTitle("Walking")
-                    .padding()
-                    .reversionToolbar($showRewindAlert)
+                //                    .navigationTitle("Walking")
+                .padding()
+                .reversionToolbar($showRewindAlert)
             })
-            .hidden()
+        .hidden()
     }
 
     /// **Top-level** view for the DASI-survey phase
@@ -116,7 +125,6 @@ extension TopContainerView {
                 }
                 .navigationTitle("Usability")
                 .padding()
-                .reversionToolbar($showRewindAlert)
             }
             .hidden()
     }

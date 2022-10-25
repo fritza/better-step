@@ -7,6 +7,12 @@
 
 import Foundation
 
+// TODO: These are only for ResetStatus.
+//        Move ResetStatus somewhere that
+//        already uses these modules.
+import SwiftUI
+import Combine
+
 // MARK: - @AppStorage
 enum AppStorageKeys: String {
     /// How long the timed walk is to last, in _minutes,_ e.g. 6.
@@ -54,6 +60,12 @@ enum AppStorageKeys: String {
             defaults.set(false, forKey: key)
         }
     }
+}
+
+final class ResetStatus: ObservableObject {
+    public static let shared = ResetStatus()
+    @State var resetAlertVisible: Bool
+    init() { resetAlertVisible = false }
 }
 
 /**

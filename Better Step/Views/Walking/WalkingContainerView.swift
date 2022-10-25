@@ -103,11 +103,12 @@ struct WalkingContainerView: View {
      ((Result<SuccessValue, Error>) -> Void)!
      */
     @EnvironmentObject var motionManager: MotionManager
-    @State var state: WalkingState? = .interstitial_1
+    @State var state: WalkingState?
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
 
     init(completion: @escaping WCVClosure) {
+        self.state = .interstitial_1
         self.completion = completion
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared

@@ -31,6 +31,7 @@ import SwiftUI
 ### struct DASIResponseList
 
 An `ObservableObject` intended to be the `@EnvironmentObject` for the DASI project. It takes the Subject ID and initializes its `[DASIUserResponse]` array of `answers`.
+ - -Warning: `@Environmentobject` does not work in this use.
 
  It serves as the façade for the user's responses to the questions.
 
