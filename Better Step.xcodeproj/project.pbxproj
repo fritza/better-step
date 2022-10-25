@@ -160,7 +160,6 @@
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
-		1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIPageSelection.swift; sourceTree = "<group>"; };
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
 		1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButtonView.swift; sourceTree = "<group>"; };
 		1FA281CE28DBBA160038353E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -442,7 +441,6 @@
 				1F8A338027E122130093C896 /* DASIUserResponse.swift */,
 				1FA3B8C727D7C4170058F1AF /* DASIStages.swift */,
 				1FD45690279F40B600B5429A /* DASIResponseList.swift */,
-				1F8A337D27DFEE400093C896 /* DASIPageSelection.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1F2432DF27FE11D9008A5418 /* DASIQuestions.json */,
 				1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */,
