@@ -15,22 +15,20 @@ enum DASIState {
 
 struct SurveyContainerView: View, ReportingPhase {
     static var cancellables: Set<AnyCancellable> = []
+    @State var resetAlertVisible: Bool = false
 
     typealias SuccessValue = DASIResponseList
     let completion: ClosureType
 
-    @State var dasiPhaseState: DASIState? = .landing
+    @State          var dasiPhaseState: DASIState? = .landing
+    @StateObject    var responses = DASIResponseList()
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
     }
-/*
- /Users/fritza/Personal-Projects/bstep-isolation/better-step/Better Step/Views/DASI/SurveyContainerView.swift:20 Accessing StateObject's object without being installed on a View. This will create a new instance each time.
 
- */
 #warning("Be sure to initialize Pages and Response list")
 //    @StateObject    var pager     = DASIPageSelection(.landing)
-    @StateObject    var responses = DASIResponseList()
 
     // FIXME: YUCK! if this doesn't easily work…
     // Oh gosh — what would I have to do to make it a navigable view like the top level?
@@ -41,6 +39,8 @@ struct SurveyContainerView: View, ReportingPhase {
             Text(
                 "SHOULD NOT APPEAR"
             )
+
+
 
             // MARK: Landing page
             landingPageView()

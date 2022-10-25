@@ -81,12 +81,12 @@ extension SurveyContainerView {
             tag: DASIState.question,
             selection: $dasiPhaseState,
             destination: {
-                DASIQuestionView(answerList: responses) {
-                    result in
-                    if let pair = try? result.get() {
-                        switch pair.0 {
-                        case .landing:
-                            dasiPhaseState = .landing
+                DASIQuestionView() {
+                        result in
+                        if let pair = try? result.get() {
+                            switch pair.0 {
+                            case .landing:
+                                dasiPhaseState = .landing
                         case .completed:
                             dasiPhaseState = .completed
                         default: fatalError()

@@ -18,11 +18,15 @@ struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
     init(_ result: @escaping ClosureType) {
+        pageNumber = 1
         self.completion = result
     }
 
+    @State var pageNumber: Int
     @StateObject var pageSelection = UsabilityPageSelection(phase: .start, questionID: 1)
     // Sets selection to .start, question 1.
+
+    @State var recommendedPostReset: Int?
 
     var body: some View {
         List {
@@ -36,33 +40,78 @@ struct UsabilityContainer: View, ReportingPhase {
             closingInterstitialView()
 //            UsabilityInterstitialView "Completed"
         }
+        .reversionAlert(next: $recommendedPostReset,
+                        shouldShow:
+                            ResetStatus.shared.$resetAlertVisible)
     }
 
     // MARK: - Links to phase views
 
     // MARK: Question
     // FIXME: This isn't a @ViewBuilder?!
+    @ViewBuilder
     func questionPresentationView() -> some View {
         NavigationLink("",
                        tag: UsabilityPhase.questions,
                        selection: $pageSelection.currentPhase) {
             UsabilityView(
+
+
+                // FIXME: Handle the question indexing.
+
+
                 questionID: pageSelection.questionID,
                 selectedAnswer: $pageSelection.currentResponse)
             { newAnswer in
 
-                #warning("Distinguish Usability increment from usability ended")
+#warning("Distinguish Usability increment from usability ended")
 
                 pageSelection.increment()
             }   // Questions destination
+
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("← Back") {
+                        if pageNumber > 1 {
+                            pageNumber -= 1
+                        }
+                        pageSelection.decrement() }
+                }
+
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+//                    ReversionButton(
+//                        shouldShow: ResetStatus
+//                            .shared
+//                            .$resetAlertVisible
+//                    )
+                    Button("Next →") {
+                        if pageNumber < UsabilityQuestion.count {
+                            pageNumber += 1
+                        }
+                        pageSelection.increment()
+                    }
+                }
+            })
+            /*
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") { pageSelection.decrement() }
+                    Button("← Back") {
+                        if pageNumber > 1 {
+                            pageNumber -= 1
+                        }
+                        pageSelection.decrement() }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Next →") { pageSelection.increment() }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
+                    Button("Next →") {
+                        if pageNumber < UsabilityQuestion.count {
+                            pageNumber += 1
+                        }
+                        pageSelection.increment()
+                    }
                 }
             }
+             */
             .environmentObject(pageSelection)
             .navigationBarBackButtonHidden(true)
         }
@@ -81,6 +130,11 @@ struct UsabilityContainer: View, ReportingPhase {
                 systemImageName: "checkmark.circle",
                 continueTitle: "Continue",
                 completion: { _ in  })
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
+                    }
+                }
             .environmentObject(pageSelection)
             .navigationBarBackButtonHidden(true)
         }
@@ -88,7 +142,8 @@ struct UsabilityContainer: View, ReportingPhase {
 
     // MARK: Closing
     func closingInterstitialView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.end, selection: $pageSelection.currentPhase) {
+        NavigationLink("", tag: UsabilityPhase.end,
+                       selection: $pageSelection.currentPhase) {
             UsabilityInterstitialView(
                 titleText: "Completed",
                 bodyText: usabilityOutCopy,
@@ -102,10 +157,15 @@ struct UsabilityContainer: View, ReportingPhase {
             //       as the success value of
             //       UsabilityInterstitialView.
             //       (is Void)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("← Back") { pageSelection.decrement() }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("← Back") { pageSelection.decrement() }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReversionButton(
+                        shouldShow: ResetStatus.shared
+                            .$resetAlertVisible)
+                }
             }
         }
         .environmentObject(pageSelection)
@@ -121,9 +181,6 @@ struct UsabilityContainer: View, ReportingPhase {
                 print("Usability Summary completed.")
                 // FIXME: Untangle container phase from sequence phase.
 
-
-
-
             }
             .navigationBarBackButtonHidden(true)
 
@@ -136,9 +193,12 @@ struct UsabilityContainer: View, ReportingPhase {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") { pageSelection.decrement() }
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
+            }
+            .environmentObject(pageSelection)
         }
-        .environmentObject(pageSelection)
-    }
+        }
 #endif
 }
 

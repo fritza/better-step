@@ -80,13 +80,20 @@ enum TopPhases: String, CaseIterable, Comparable {
 struct TopContainerView: View {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
+
     @AppStorage(AppStorageKeys.collectedDASI.rawValue)
     var collectedDASI: Bool = false
+    
     @AppStorage(AppStorageKeys.collectedUsability.rawValue)
     var collectedUsability: Bool = false
 
     static let defaultPhase = TopPhases.onboarding
-    @State var currentPhase: TopPhases?
+    @State var currentPhase: TopPhases? {
+        didSet {
+            print("top currentPhase changes to", currentPhase?.rawValue ?? "NONE")
+            print()
+        }
+    }
     @State var currentFailingPhase: TopPhases?
 
     @State var usabilityFormResults: WalkInfoForm?
@@ -121,10 +128,20 @@ struct TopContainerView: View {
                             shouldShow: $showRewindAlert)
         }
         .onAppear {
+
+
+
+            SubjectID.id = SubjectID.unSet
+
+
+
             if subjectID == SubjectID.unSet {
                 currentPhase = .onboarding
             }
-            else { currentPhase = .walking }
+            else {
+                SubjectID.id = "FIXME"
+                currentPhase = .walking
+            }
         }
 //        .onDisappear { currentPhase?.save() }
     }

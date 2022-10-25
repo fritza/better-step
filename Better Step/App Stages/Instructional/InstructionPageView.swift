@@ -53,17 +53,25 @@ struct InstructionPageView_Previews: PreviewProvider {
                 .navigationTitle("Welcome")
                 .padding()
                 .toolbar {
-                    ToolbarItem(id: "Next", placement: .navigationBarTrailing, showsByDefault: true) {
-                        Button("Next") {
-
-                        }
-                    }
-// TODO: Replace with ToolbarItem
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        Button("Back") {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button("Next →") {
 
                         }
                         gearBarItem()
+
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("← Back") {
+
+                        }
+
+//                    ToolbarItem(id: "Next", placement: .navigationBarTrailing, showsByDefault: true) {
+//                        Button("Next") {
+//
+//                        }
+//                        gearBarItem()
+//                    }
+//                        ReversionButton(shouldShow: $resetAlertVisible)
                     }
                 }
         }

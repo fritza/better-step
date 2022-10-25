@@ -24,18 +24,25 @@ struct QuestionContentView: View {
 struct DASIQuestionView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
     // .landing for underflow, .completion for overflow.
-    init(answerList: DASIResponseList, _ completion: @escaping ClosureType) {
+    init(
+//        answerList: DASIResponseList,
+
+//         resetAlertVisible: Binding<Bool>,
+         _ completion: @escaping ClosureType) {
         self.answerState = .unknown
-        self.answerList = answerList
+//        self.answerList = answerList
         self.completion = completion
+//        _resetAlertVisible = resetAlertVisible
     }
 
     let completion: ClosureType
-    @EnvironmentObject var reportContents: DASIResponseList
+    @EnvironmentObject var answerList: DASIResponseList
+//    @State var answerList = DASIResponseList()
+
     @State var pageNumber: Int = 1
     @State var answerState: AnswerState
 
-    var answerList: DASIResponseList
+//    var answerList: DASIResponseList = DASIResponseList()
 
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
@@ -48,19 +55,19 @@ struct DASIQuestionView: View, ReportingPhase {
             Spacer()
 
             YesNoStack(
-                answer: reportContents.responseForQuestion(identifier: pageNumber)!,
+                answer: answerList.responseForQuestion(identifier: pageNumber)!,
                 completion: { state in
                     guard let answer = try? state.get() else {
                         print(#function, "- got an error answer.")
                         return
                     }
-                    reportContents
+                    answerList
                         .didRespondToQuestion(
                             id: pageNumber,
                             with: answer)
                     if pageNumber >= DASIStages.maxIdentifier {
                         completion(
-                            .success((.completed, reportContents))
+                            .success((.completed, answerList))
                         )
                     }
                     else {
@@ -80,7 +87,7 @@ struct DASIQuestionView: View, ReportingPhase {
                 Button("← Back") {
                     if pageNumber <= DASIStages.minIdentifier {
                         completion(
-                            .success((.landing, reportContents))
+                            .success((.landing, answerList))
                         )
                     }
                     else {
@@ -88,19 +95,19 @@ struct DASIQuestionView: View, ReportingPhase {
                     }
                 }
             }
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                gearBarItem()
-                Button("Next →") {
-                    if pageNumber >= DASIStages.maxIdentifier {
-                        completion(
-                            .success((.completed, reportContents))
-                        )
-                    }
-                    else {
-                        pageNumber += 1
-                    }
-                }
-            }
+//            ToolbarItemGroup(placement: .navigationBarTrailing) {
+//                ReversionAlert(shouldShow: $resetAlertVisible)
+//                Button("Next →") {
+//                    if pageNumber >= DASIStages.maxIdentifier {
+//                        completion(
+//                            .success((.completed, reportContents))
+//                        )
+//                    }
+//                    else {
+//                        pageNumber += 1
+//                    }
+//                }
+//            }
         }
         .navigationTitle(
             "Question \(pageNumber):"
@@ -109,9 +116,10 @@ struct DASIQuestionView: View, ReportingPhase {
 }
 
 struct DASIQuestionView_Previews: PreviewProvider {
+    @State static var resetAlertVisible: Bool = false
     static var previews: some View {
         NavigationView {
-            DASIQuestionView(answerList: DASIResponseList()) {_ in
+            DASIQuestionView() {_ in
                 print("Question done")
             }
         }

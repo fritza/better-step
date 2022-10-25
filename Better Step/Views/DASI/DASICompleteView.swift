@@ -26,13 +26,16 @@ fileprivate let endIncompleteText = """
 struct DASICompleteView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+    @EnvironmentObject private var responses: DASIResponseList
 
     let completion: ClosureType
-    init(_ completion: @escaping ClosureType) {
+    init(// responses: DASIResponseList,
+         _ completion: @escaping ClosureType
+         ) {
         self.completion = completion
+//        self.responses = responses
     }
 
-    @EnvironmentObject private var responses: DASIResponseList
 //    @EnvironmentObject private var pager    : DASIPageSelection
 
     var allItemsAnswered: Bool {
@@ -83,6 +86,7 @@ struct DASICompleteView: View, ReportingPhase {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 gearBarItem()
+// FIXME: Use the view modifier
             }
         }
     }

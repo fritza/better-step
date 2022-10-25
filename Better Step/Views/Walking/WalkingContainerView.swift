@@ -10,7 +10,14 @@ import UniformTypeIdentifiers
 import CoreMotion
 
 /* TODO: Handle cancellation.
+
+
+ Better Step:
+
+ Did the walking phase skip the second walk?
+
  */
+#warning("Did this skip the second walk?")
 
 protocol HasVoidCompletion {
     var completion: ()->Void { get }
@@ -117,7 +124,6 @@ struct WalkingContainerView: View {
     //    ) {
     //        self.completion = completion
     //    }
-
 
     var body: some View {
         //        NavigationView {

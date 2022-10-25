@@ -44,30 +44,41 @@ struct ReversionAlert: ViewModifier {
     func body(content: Content) -> some View {
         content
             .alert("Starting Over", isPresented: $shouldShow) {
-                Button("Clear All" , role: .destructive) {
-                    // Forget user and progress
-                    subjectID = SubjectID.unSet
-                    Destroy.subject.post()
-//                    AppStorageKeys.resetSubjectData()
-                    /*
-                    collectedDASI = false
-                    collectedUsability = false
-                    nextTask = .onboarding
-                     */
-                }
-                Button("Keep Subject") {
+//                Button("Clear All" , role: .destructive) {
+//                    // Forget user and progress
+//                    subjectID = SubjectID.unSet
+//                    Destroy.subject.post()
+//
+//                }
+                Button("First Run" , role: .destructive) {
                     Destroy.dataForSubject.post()
-
                     nextTask = OnboardContainerView.OnboardTasks.laterGreeting.rawValue
+                }
+
+                Button("Cancel", role: .cancel) {
+                    shouldShow = false
                 }
             }
         message: {
-            Text("Do you want a new subject, or the same subject with data cleared?\nYou cannot undo this.")
+            Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
         }
     }
 }
 
-#warning("Dies reversionToolbar literally do NOTHING but show itself?")
+struct ReversionButton: View {
+    @Binding var shouldShow: Bool
+
+    init(shouldShow: Binding<Bool>) {
+        _shouldShow = shouldShow
+    }
+
+    var body: some View {
+        Button()
+        { ResetStatus.shared.resetAlertVisible = true }
+    label: { Label("configure", systemImage: "gear") }
+    }
+}
+
 /// A modifier that adds a configuration Gear toolbar button that is bever shown if initialized with `shouldShow`.
 ///
 /// The `shouldShow` bindin tracks whether to present a ``ReversionAlert`` should be displayed. If the binding is `true`, then the alert will appear and make reset buttons available.
