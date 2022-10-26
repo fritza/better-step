@@ -35,22 +35,19 @@ struct SurveyContainerView: View, ReportingPhase {
     // Given that there are no optional branches, maybe there is simply no need.
 
     var body: some View {
-        VStack {
-            Text(
-                "SHOULD NOT APPEAR"
-            )
-
-
-
-            // MARK: Landing page
+        switch dasiPhaseState! {
+        case .landing:
             landingPageView()
-            // MARK: Complete page
-            completionPageView()
-            // MARK: Question pages
+
+        case .question:
             questionPageView()
+
+        case .completed:
+            completionPageView()
+
+        case .NONE:
+            fatalError("Unassigned phase in \(#function)")
         }
-//        .environmentObject(self.pager)
-        .environmentObject(self.responses)
     }
 }
 

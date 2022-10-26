@@ -23,26 +23,20 @@ struct QuestionContentView: View {
 
 struct DASIQuestionView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
-    // .landing for underflow, .completion for overflow.
-    init(
-//        answerList: DASIResponseList,
 
-//         resetAlertVisible: Binding<Bool>,
+    // .landing for underflow, .completion for overflow.
+    let completion: ClosureType
+    // answerList is by-reference, but
+    // make it view-persistent out of an abundance.
+    @State var answerList: DASIResponseList
+    @State var pageNumber: Int = 1
+    init(answerList: DASIResponseList,
          _ completion: @escaping ClosureType) {
-        self.answerState = .unknown
-//        self.answerList = answerList
+//        self.answerState = .unknown
+        self.answerList = answerList
         self.completion = completion
-//        _resetAlertVisible = resetAlertVisible
     }
 
-    let completion: ClosureType
-    @EnvironmentObject var answerList: DASIResponseList
-//    @State var answerList = DASIResponseList()
-
-    @State var pageNumber: Int = 1
-    @State var answerState: AnswerState
-
-//    var answerList: DASIResponseList = DASIResponseList()
 
     // FIXME: Verify that the report contents don't go away
     // before it's time to report.
@@ -83,7 +77,7 @@ struct DASIQuestionView: View, ReportingPhase {
 
         .toolbar {
             // TODO: Replace with ToolbarItem
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button("← Back") {
                     if pageNumber <= DASIStages.minIdentifier {
                         completion(
@@ -95,37 +89,29 @@ struct DASIQuestionView: View, ReportingPhase {
                     }
                 }
             }
-//            ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                ReversionAlert(shouldShow: $resetAlertVisible)
-//                Button("Next →") {
-//                    if pageNumber >= DASIStages.maxIdentifier {
-//                        completion(
-//                            .success((.completed, reportContents))
-//                        )
-//                    }
-//                    else {
-//                        pageNumber += 1
-//                    }
-//                }
-//            }
+
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                gearBarItem()
+                Button("Next →") {
+                    pageNumber += 1
+                }
+                .disabled(pageNumber >= DASIStages.maxIdentifier)
+            }
         }
-        .navigationTitle(
-            "Question \(pageNumber):"
-        )
+        .navigationTitle("Question \(pageNumber):")
     }
 }
 
-struct DASIQuestionView_Previews: PreviewProvider {
-    @State static var resetAlertVisible: Bool = false
-    static var previews: some View {
-        NavigationView {
-            DASIQuestionView() {_ in
-                print("Question done")
+    struct DASIQuestionView_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView {
+                DASIQuestionView(answerList: DASIResponseList()) {_ in
+                    print("Question done")
+                }
             }
+            //        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
+            //        .environmentObject(DASIResponseList())
         }
-//        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
-//        .environmentObject(DASIResponseList())
     }
-}
 
 

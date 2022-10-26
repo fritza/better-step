@@ -24,26 +24,22 @@ fileprivate let endIncompleteText = """
 // FIXME: Should there be a Back button?
 
 struct DASICompleteView: View, ReportingPhase {
-    typealias SuccessValue = (DASIState, DASIResponseList)
+    typealias SuccessValue = ()
+
+
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
-    @EnvironmentObject private var responses: DASIResponseList
 
     let completion: ClosureType
-    init(// responses: DASIResponseList,
+    let dasiResponses: DASIResponseList
+    init(responses: DASIResponseList,
          _ completion: @escaping ClosureType
          ) {
         self.completion = completion
-//        self.responses = responses
-    }
-
-//    @EnvironmentObject private var pager    : DASIPageSelection
-
-    var allItemsAnswered: Bool {
-        return responses.unknownResponseIDs.isEmpty
+        self.dasiResponses = responses
     }
 
     var nextSteps: String {
-        if allItemsAnswered {
+        if dasiResponses.isReadyToPublish {
             return "\nTap “Continue” to complete your report."
         }
         else {
@@ -53,8 +49,8 @@ struct DASICompleteView: View, ReportingPhase {
 
     var instructions: String {
         var retval = completionText + nextSteps
-        if !allItemsAnswered {
-            let empties = responses.unknownResponseIDs
+        if !dasiResponses.isReadyToPublish {
+            let empties = dasiResponses.unknownResponseIDs
             retval += startIncompleteText + " " + "\(empties.count)" + endIncompleteText
         }
         return retval
@@ -67,10 +63,10 @@ struct DASICompleteView: View, ReportingPhase {
                 bodyText: instructions, // + completionText,
                 sfBadgeName: "checkmark.square",
                 proceedTitle: "Continue",
-                proceedEnabled: allItemsAnswered
+                proceedEnabled: dasiResponses.isReadyToPublish
             ) {
                 // Upon tap of the proceed button
-                completion(.success((.completed, responses)))
+                completion(.success(()))
             }
             .padding()
         }
@@ -79,9 +75,7 @@ struct DASICompleteView: View, ReportingPhase {
             // TODO: Replace with ToolbarItem
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") {
-                    completion(
-                        .success((.question, responses))
-                    )
+                    completion(.success(()))
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -95,12 +89,9 @@ struct DASICompleteView: View, ReportingPhase {
 struct DASICompleteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DASICompleteView() {
+            DASICompleteView(responses: DASIResponseList()) {
                 _ in
             }
-//            .environmentObject(DASIPageSelection(.completion))
-            .environmentObject(DASIResponseList())
-            //            .environmentObject(PhaseManager())
         }
     }
 }
