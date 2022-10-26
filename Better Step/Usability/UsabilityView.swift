@@ -25,42 +25,36 @@ struct QLimits {
 ///
 /// Clients provide a questin ID and a binding to the response. Responses are also published via the closure the client provides.
 struct UsabilityView: View, ReportingPhase {
-    typealias SuccessValue = (question: Int, response: Int?)
+    @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
+    var tempCSV: String = ""
+
+    typealias SuccessValue = [Int]
     var completion: ClosureType
-
-
-    //    @Binding private var resultingChoice: Int
-    // FIXME: Conform UsabilityContainer to own, not envt, its controller.
-    //    @EnvironmentObject private var controller: UsabilityPageSelection
 
     private let arbitraryCheckmarkEdge: CGFloat =  32
     private let arbitraryButtonWidth  : CGFloat = 240
 
-    /// The ID (not index) of the question currently displayed.
-    @State private var questionID       : Int
+    /// The  index of the question currently displayed.
+    @State private var questionIndex       : Int
     /// The response value (1–7) for the question currently displayed.
-    @State private var currentSelection : Int?
+    @State private var currentSelection : Int
 
-    init(questionID: Int, selectedAnswer: Int? = nil,
+    @State private var responses = [Int](repeating: 0, count: UsabilityQuestion.count)
+    var canIncrement: Bool { questionIndex < (QLimits.endIndex - 1 )}
+    var canDecrement: Bool { questionIndex >  QLimits.startIndex    }
+    var completionValue: SuccessValue { responses }
+
+
+    init(questionIndex: Int, selectedAnswer: Int = 0,
          completion: @escaping ClosureType) {
-        ( self.currentSelection, self.questionID, self.completion ) =
-        (selectedAnswer, questionID,  completion)
+        ( self.currentSelection, self.questionIndex, self.completion ) =
+        (selectedAnswer, questionIndex,  completion)
     }
-
-    /// A `@ViewBuilder` for a title `View`
-    ///
-    /// I have no idea what this is doing here.
-    //    static func TViewBuilder<T: View>(
-    //        @ViewBuilder builder: () -> T
-    //    ) -> some View {
-    //        builder()
-    //    }
 
     @ViewBuilder
     func buttonTitleView(index: Int, width: CGFloat) -> some View {
         HStack(alignment: .center, spacing: 16) {
-            if let currentSelection,
-               index == currentSelection {
+            if index == currentSelection {
                 // If the button index corresponds to
                 // the choice, display a circled checkmark.
                 Image(systemName: "checkmark.circle")
@@ -80,7 +74,6 @@ struct UsabilityView: View, ReportingPhase {
         .alignmentGuide(HorizontalAlignment.center, computeValue: { dims in
             width/2.0
         })
-
         .frame(width: width)
     }
 
@@ -88,15 +81,19 @@ struct UsabilityView: View, ReportingPhase {
     @ViewBuilder
     func ratingsStack() -> some View {
         VStack(alignment: .leading) {
-            ForEach(1..<8) { index in
+            ForEach(1..<8) { visibleIndex in
                 Button {
-                    currentSelection = index
-                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
-                        completion(.success(completionValue))
+                    responses[questionIndex] = visibleIndex
+                    //                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
+                    completion(.success(responses))
+                    if canIncrement {
+                        questionIndex += 1
+                        currentSelection = responses[questionIndex]
                     }
                 }
+                //                }
             label: {
-                buttonTitleView(index: index, width: arbitraryButtonWidth)
+                buttonTitleView(index: visibleIndex, width: arbitraryButtonWidth)
             }       // button label
             }       // ForEach
             .buttonStyle(.bordered)
@@ -104,68 +101,90 @@ struct UsabilityView: View, ReportingPhase {
         }
     }
 
-    var canIncrement: Bool { questionID < (QLimits.endIndex - 1 )}
-    var canDecrement: Bool { questionID >  QLimits.startIndex    }
-    var completionValue: SuccessValue {
-        (question: questionID, response: currentSelection)
-    }
+    @State var idIsEnlarged = false
+    static let unitScale = 1.0
+    static let bigScale  = 1.25
+    @State var boldfaced: Bool = false
+
 
     // MARK: - body
     var body: some View {
-        ratingsStack()
-            .animation(.easeInOut, value: questionID)
-            .onDisappear() {
-                completion(.success(
-                    completionValue
-                ))
-            }
-            .toolbar {
-                // TODO: Replace with ToolbarItem
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    Button("← Back") {
-                        // No need to range-check, the .disabled does that.
-                        completion( .success(completionValue) )
-                        questionID -= 1
-                    }
-                    .disabled(!canDecrement)
-                }
+        VStack {
+            HStack(alignment: .top, spacing: 16) {
+                Text("\(questionIndex+1)")
+                    .font(.largeTitle)
+                    .scaleEffect(idIsEnlarged ? Self.bigScale : Self.unitScale,
+                                 anchor: .center)
 
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    gearBarItem()
-                    Button("Next →") {
-                        completion( .success(completionValue) )
-                        questionID += 1
-                    }
-                    .disabled(canIncrement)
-                }
+                // Watch for the forced unwrap at UsabilityQuestion:subscript
+                Text("\(UsabilityQuestion[questionIndex].text)")
+                    .font(.title2)
             }
-            .navigationTitle("Usability")
-            .navigationBarBackButtonHidden(true)
+            .minimumScaleFactor(0.5)
+            .padding()
+            Divider()
+
+            ratingsStack()
+            Spacer()
+        }
+        .animation(.easeOut, value: questionIndex)
+        .onDisappear() {
+            completion(.success(
+                responses
+            ))
+        }
+
+        .toolbar {
+            // TODO: Replace with ToolbarItem
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button("← Back") {
+                    // No need to range-check, the .disabled does that.
+                    responses[questionIndex] = currentSelection
+                    completion( .success(responses) )
+                    questionIndex -= 1
+                    currentSelection = responses[questionIndex]
+                }
+                .disabled(!canDecrement)
+            }
+
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                gearBarItem()
+                Button("Next →") {
+                    responses[questionIndex] = currentSelection
+                    completion( .success(responses) )
+                    questionIndex += 1
+                    currentSelection = responses[questionIndex]
+                }
+                .disabled(!canIncrement)
+            }
+        }
+        .navigationTitle("Usability")
+        .navigationBarBackButtonHidden(true)
     }
 }
 
     struct UsabilityView_Previews: PreviewProvider {
         static let question = UsabilityQuestion(id: 3, text: "Was this easy to use?")
         static let longQuestion = UsabilityQuestion(id: 4, text: "Compared to the hopes and dreams of your life, has this walking exercise been a help?")
-        
+
         @State static var selectedAnswer = 3
         static var otherSelectedAnswer = 0
 
         static var previews: some View {
             NavigationView {
 
-                UsabilityView(questionID: 0) { resultValue in
-                    guard let pair = try? resultValue.get() else {
+                UsabilityView(questionIndex: 0) { resultValue in
+                    guard let array = try? resultValue.get() else {
                         print("UsabilityView should not fail.")
                         fatalError()
                     }
 
-                    print("value for", pair.0, "is", pair.1 ?? "not selected")
+                    print("value for csv is",
+                          array.map({ "\($0)" }).joined(separator: ",")
+                    )
                 }
 
             }
-//            .environmentObject(UsabilityPageSelection())
-            //            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }
     }

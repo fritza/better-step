@@ -32,8 +32,12 @@ enum AppStorageKeys: String {
     case subjectID
     /// Whether the DASI stage is complete
     case collectedDASI
+
     /// Whether the satisfaction scale substage of the usability phase is complete
     case collectedUsability
+
+    case tempUsabilityIntsCSV
+    
     /// Whether the context form substage of the usability phase is complete.
     case collectedFreehandU
 

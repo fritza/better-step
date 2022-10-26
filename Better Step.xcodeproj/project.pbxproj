@@ -71,7 +71,6 @@
 		1FA2822328DBBB270038353E /* AccelerometryConsuming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */; };
 		1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FA2822528DBBB270038353E /* TopPhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */; };
-		1FA2822628DBBB270038353E /* UsabilityPageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1328D4D76900547C7A /* UsabilityPageSelection.swift */; };
 		1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
 		1FA2822B28DBBB940038353E /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 		1FA2822C28DBBB940038353E /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* usability-intro.json */; };
@@ -730,7 +729,6 @@
 			files = (
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */,
-				1FA2822628DBBB270038353E /* UsabilityPageSelection.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
 				1FA2821E28DBBB270038353E /* ToolbarViewModifiers.swift in Sources */,

@@ -7,199 +7,102 @@
 
 import SwiftUI
 
-// TODO: Present the questions as a page-mode Picker.
-#warning("Untangle the question paging from usability phase nav")
+#warning("Access to State outside View?")
+/*
+ 2022-10-26 10:24:45.053459-0500 Better Step[96717:948341] [SwiftUI] Accessing State's value outside of being installed on a View. This will result in a constant Binding of the initial value and will not update.
+ */
+
+enum UsabilityState: Int, CaseIterable {
+    case intro, questions
+#if INCLUDE_USABILITY_SUMMARY
+    case report
+#endif
+    case closing
+
+    static let csvPrefix = "PSSUQ"
+}
+
+// FIXME: Why?
+enum UsabilityPhase: // AppStages,
+    CaseIterable, Comparable
+//CaseIterable, Comparable, Hashable
+{
+    case start, questions, end, summary
+    static let csvPrefix = "PSSUQ"
+}
+
+
+
 
 /// A  sequence of open-intertitial → questions → close-interstitial phases
-///
-/// The ``UsabilityPageSelection`` takes care of navigating among the phases and
-/// the usability questions, including recording the responses.
 struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
-    init(_ result: @escaping ClosureType) {
-        pageNumber = 1
-        self.completion = result
-    }
+    @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
+    var tempCSV: String = ""
 
-    @State var pageNumber: Int
-    @StateObject var pageSelection = UsabilityPageSelection(phase: .start, questionID: 1)
-    // Sets selection to .start, question 1.
-
+    @State var currentState: UsabilityState
     @State var recommendedPostReset: Int?
 
-    var body: some View {
-        List {
-            questionPresentationView()
-            // UsabilityView
-            openingInterstitialView()
-            // UsabilityInterstitialView "Usability"
-#if INCLUDE_USABILITY_SUMMARY
-            usabilitySummaryView()
-#endif
-            closingInterstitialView()
-//            UsabilityInterstitialView "Completed"
-        }
-        .reversionAlert(next: $recommendedPostReset,
-                        shouldShow:
-                            ResetStatus.shared.$resetAlertVisible)
+    init(state: UsabilityState = .intro,
+         //         questionIndex: Int = 0,
+         result: @escaping ClosureType) {
+        //        pageIndex = questionIndex
+        self.completion = result
+        self.currentState = state
     }
+
+    // TODO: Remove pageIndex
+    //    @State var pageIndex: Int
+
+    var body: some View {
+        Group {
+            switch currentState {
+            case .intro:
+                GenericInstructionView(
+                    titleText: "Usability",
+                    bodyText: usabilityInCopy,
+                    sfBadgeName: "person.crop.circle.badge.questionmark",
+                    proceedTitle: "Continue",
+                    proceedEnabled: true) {
+                        currentState = .questions
+                    }
+
+            case .questions :                 UsabilityView(questionIndex: 0) { resultValue in
+                guard let array = try? resultValue.get() else {
+                    print("UsabilityView should not fail.")
+                    fatalError()
+                }
+                tempCSV = array.csvLine
+                if array.allSatisfy({ $0 != 0 }) {
+                    currentState = .closing
+                }
+            }
+
+            case .closing   :
+                UsabilityInterstitialView(
+                    titleText: "Completed",
+                    bodyText: usabilityOutCopy,
+                    systemImageName: "checkmark.circle",
+                    continueTitle: "Continue", completion: {
+                        _ in  completion(.success("???"))
+                    })
+
+            default: Text("Can't happen.")
+            }   // switch
+        }   // Group
+        .navigationBarBackButtonHidden(true)
+    }       // body
 
     // MARK: - Links to phase views
 
     // MARK: Question
     // FIXME: This isn't a @ViewBuilder?!
-    @ViewBuilder
-    func questionPresentationView() -> some View {
-        NavigationLink("",
-                       tag: UsabilityPhase.questions,
-                       selection: $pageSelection.currentPhase) {
-            UsabilityView(
 
-
-                // FIXME: Handle the question indexing.
-
-
-                questionID: pageSelection.questionID,
-                selectedAnswer: $pageSelection.currentResponse)
-            { newAnswer in
-
-#warning("Distinguish Usability increment from usability ended")
-
-                pageSelection.increment()
-            }   // Questions destination
-
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") {
-                        if pageNumber > 1 {
-                            pageNumber -= 1
-                        }
-                        pageSelection.decrement() }
-                }
-
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                    ReversionButton(
-//                        shouldShow: ResetStatus
-//                            .shared
-//                            .$resetAlertVisible
-//                    )
-                    Button("Next →") {
-                        if pageNumber < UsabilityQuestion.count {
-                            pageNumber += 1
-                        }
-                        pageSelection.increment()
-                    }
-                }
-            })
-            /*
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") {
-                        if pageNumber > 1 {
-                            pageNumber -= 1
-                        }
-                        pageSelection.decrement() }
-                }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
-                    Button("Next →") {
-                        if pageNumber < UsabilityQuestion.count {
-                            pageNumber += 1
-                        }
-                        pageSelection.increment()
-                    }
-                }
-            }
-             */
-            .environmentObject(pageSelection)
-            .navigationBarBackButtonHidden(true)
-        }
+    private var responses = [Int](repeating: 0, count: UsabilityQuestion.count)
+    var csvLine: String {
+        return "\(UsabilityState.csvPrefix),\(SubjectID.id)," + responses.csvLine
     }
-
-    // TODO: Re-entry; incomplete answers.
-    //       Shouldn't dump into the opening again, should it?
-    // It's probably good-enough, one of the purposes of G-Bars is to be pre-integration.
-
-    // MARK: Opening
-    func openingInterstitialView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.start, selection: $pageSelection.currentPhase) {
-            UsabilityInterstitialView(
-                titleText: "Usability",
-                bodyText: usabilityInCopy, //"This space for rent",
-                systemImageName: "checkmark.circle",
-                continueTitle: "Continue",
-                completion: { _ in  })
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
-                    }
-                }
-            .environmentObject(pageSelection)
-            .navigationBarBackButtonHidden(true)
-        }
-    }
-
-    // MARK: Closing
-    func closingInterstitialView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.end,
-                       selection: $pageSelection.currentPhase) {
-            UsabilityInterstitialView(
-                titleText: "Completed",
-                bodyText: usabilityOutCopy,
-                systemImageName: "checkmark.circle",
-                continueTitle: "Continue", completion: {
-                    _ in  completion(.success("???"))
-                })
-            .navigationBarBackButtonHidden(true)
-
-            // NOTE: Expected String
-            //       as the success value of
-            //       UsabilityInterstitialView.
-            //       (is Void)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("← Back") { pageSelection.decrement() }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReversionButton(
-                        shouldShow: ResetStatus.shared
-                            .$resetAlertVisible)
-                }
-            }
-        }
-        .environmentObject(pageSelection)
-    }
-
-#if INCLUDE_USABILITY_SUMMARY
-    // MARK: Summary (optional, debug-only)
-    func usabilitySummaryView() -> some View {
-        NavigationLink("", tag: UsabilityPhase.summary, selection: $pageSelection.currentPhase) {
-            UsabilitySummaryView {
-                _ in
-
-                print("Usability Summary completed.")
-                // FIXME: Untangle container phase from sequence phase.
-
-            }
-            .navigationBarBackButtonHidden(true)
-
-            // NOTE: Expected String
-            //       as the success value of
-            //       UsabilityInterstitialView.
-            //       (is Void)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("← Back") { pageSelection.decrement() }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(shouldShow: ResetStatus.shared.$resetAlertVisible)
-            }
-            .environmentObject(pageSelection)
-        }
-        }
-#endif
 }
 
 // MARK: - Previews
@@ -208,7 +111,6 @@ struct UsabilityContainer_Previews: PreviewProvider {
         NavigationView {
             UsabilityContainer() { _ in }
         }
-        .environmentObject(UsabilityPageSelection(phase: .start, questionID: 1))
         .previewDevice(.init(stringLiteral: "iPhone 12"))
         .previewDevice(.init(stringLiteral: "iPhone SE (3rd generation)"))
     }

@@ -13,8 +13,6 @@ import SwiftUI
 struct UsabilityInterstitialView: View, ReportingPhase {
     typealias SuccessValue = Void
 
-    // FIXME: Conform UsabilityContainer to own, not envt, its pageSelection.
-    @EnvironmentObject var pageSelection: UsabilityPageSelection
     @State var showNotIntegratedAlert = false
 
     // TODO: Turn these into a Decodable struct.
@@ -49,8 +47,9 @@ struct UsabilityInterstitialView: View, ReportingPhase {
             // (ignoring the ugliness around the toolbar)
 
             Button(continueTitle) {
-                if pageSelection.canIncrement { pageSelection.increment()
-                }
+                #warning("increment in interstitial")
+//                if pageSelection.canIncrement { pageSelection.increment()
+//                }
             }
             .accessibilityLabel("continuation button")
         }
@@ -105,13 +104,6 @@ struct UsabilityInterstitialView_Previews: PreviewProvider {
                         print(str)
                     }
             }
-            .environmentObject(
-                UsabilityPageSelection(phase: .end, questionID: 8)
-            )
-//            .previewDevice(PreviewDevice(
-//                rawValue:
-//                    "iPhone SE (3rd generation)"
-//            ))
         }
     }
 }

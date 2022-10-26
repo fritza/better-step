@@ -58,16 +58,21 @@ struct Better_StepApp: App {
                 .environmentObject(MotionManager(phase: .walk_1))
                 .environmentObject(NotificationSetup())
             }
-#elseif false
+#elseif true
             NavigationView {
-                UsabilityContainer {
-                    _ in
+                UsabilityContainer { resultValue in
+                    guard let array = try? resultValue.get() else {
+                        print("UsabilityView should not fail.")
+                        fatalError()
+                    }
+
+                    print("value for csv is",
+                          array.map({ "\($0)" }).joined(separator: ","))
                 }
-                //                .environmentObject(MotionManager(phase: .walk_1))
-                //                .environmentObject(NotificationSetup())
             }
 
-#elseif true
+
+#elseif false
             TopContainerView()
                 .environmentObject(NotificationSetup())
 //                .environmentObject(DASIResponseList())

@@ -89,7 +89,7 @@ struct UsabilitySummaryView_Previews: PreviewProvider {
             }
                 .environmentObject(
                     UsabilityPageSelection(phase: .summary,
-                                           questionID: 1))
+                                           questionIndex: 1))
                 .padding()
         }
     }

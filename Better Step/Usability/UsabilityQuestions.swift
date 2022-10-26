@@ -46,7 +46,7 @@ struct UsabilityQuestion: Decodable, Identifiable {
     }()
 
     static subscript(id: Int) -> UsabilityQuestion {
-        allQuestions.first(where: { $0.id == id } )!
+        allQuestions.first(where: { $0.id-1 == id } )!
     }
 
     // MARK: - Instance properties
