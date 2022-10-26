@@ -173,7 +173,7 @@
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB2F54628D261FF00593692 /* TopPhaseBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhaseBuilders.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectID.swift; sourceTree = "<group>"; };
-		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStorageKeys.swift; path = "Better Step/App Stages/AppStorageKeys.swift"; sourceTree = "<group>"; };
+		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
 		1FC7476C28E7694E00817041 /* N.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = N.ahap; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingAccelerometry.swift; sourceTree = "<group>"; };
 		1FC7477828EB59F300817041 /* CoreMotion+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+async.swift"; sourceTree = "<group>"; };
 		1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IncomingAccelerometry+Marshalling.swift"; sourceTree = "<group>"; };
-		1FC7477E28EDE90F00817041 /* ZIPProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZIPProgress.swift; path = "Better Step/ZIPProgress.swift"; sourceTree = "<group>"; };
+		1FC7477E28EDE90F00817041 /* ZIPProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPProgress.swift; sourceTree = "<group>"; };
 		1FC7478028EDFB2E00817041 /* WalkingContainerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingContainerResult.swift; sourceTree = "<group>"; };
 		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
@@ -242,9 +242,6 @@
 		1F0B6745276FA6C900011A7E = {
 			isa = PBXGroup;
 			children = (
-				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
-				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
-				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
 				1F0B6750276FA6C900011A7E /* Better Step */,
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
@@ -270,6 +267,7 @@
 			children = (
 				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
 				1FB2F53728D133B600593692 /* Time */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1FB2F54328D2619D00593692 /* Top container */,
@@ -466,6 +464,7 @@
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1F1C4DF728D3A42000547C7A /* AccelerometryConsuming.swift */,
 				1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */,
 				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
@@ -490,6 +489,7 @@
 			children = (
 				1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */,
 				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
+				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
 				1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */,
 				1FB684F927F252BA00612924 /* Numeric+extensions.swift */,
 				1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */,
