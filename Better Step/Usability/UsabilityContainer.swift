@@ -22,15 +22,27 @@ enum UsabilityState: Int, CaseIterable {
     static let csvPrefix = "PSSUQ"
 }
 
-// FIXME: Why?
-enum UsabilityPhase: // AppStages,
-    CaseIterable, Comparable
-//CaseIterable, Comparable, Hashable
-{
-    case start, questions, end, summary
-    static let csvPrefix = "PSSUQ"
-}
+/*
+ let usabilityInCopy = """
+ In this part of the session, we’d like to hear from you on how easy this app was to use, so we can improve future versions.
+ 
+ You will be asked for you view of \(UsabilityQuestion.count.spelled) features of the app, responding from 1 (dissatisfied) to 7 (very satisfied).
+ 
+ You must complete this survey before going on with the app, but you will be asked to complete it only once.
+ """
 
+ private let viewTitle = "Usability"
+
+ let usabilityOutCopy = """
+ Thank you for your feedback.
+
+ Use the Back button if you want to review your answers. You will not be able to revise your answers after you tap Continue.
+ """
+
+ private let systemImageName = "person.crop.circle.badge.questionmark"
+ private let continueTitle = "Continue"
+
+ */
 
 
 
@@ -80,6 +92,7 @@ struct UsabilityContainer: View, ReportingPhase {
             }
 
             case .closing   :
+                // TODO: Remove UsabilityInterstitialView.
                 UsabilityInterstitialView(
                     titleText: "Completed",
                     bodyText: usabilityOutCopy,
