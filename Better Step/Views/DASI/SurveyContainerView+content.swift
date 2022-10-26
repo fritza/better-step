@@ -9,94 +9,68 @@ import Foundation
 import SwiftUI
 
 extension SurveyContainerView {
+    // MARK: - Landing
     @ViewBuilder
     func landingPageView() -> some View {
-        NavigationLink(
-            tag: DASIState.landing,
-            selection: $dasiPhaseState,
-            destination: {
-                DASIOnboardView() { _ in
-                    dasiPhaseState = .question
-                }
-                .navigationBarBackButtonHidden(true)
-            },
-            label: {EmptyView()}
-        )
-        .hidden()
+        DASIOnboardView() { result in
+            switch result {
+
+            case .failure(_):
+                fatalError("\(#function) - error Can't Happen.")
+            case .success(_):
+                dasiPhaseState = .question
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 
+
+    // MARK: - Completion
     @ViewBuilder
     func completionPageView() -> some View {
-        NavigationLink(
-            tag: DASIState.completed,
-            selection: $dasiPhaseState,
-            destination: {
+        DASICompleteView(responses: responses) {
+            result in
+            switch result {
+            case .success(_):
+                let completedCSV = responses.csvLine
+                csvStash = completedCSV!
+                // TODO: See if the unwrap is okay.
 
-                // This code passes the responses up to the top-level container.
-                // That's high; this SurveyContainerView
-                // already knows when to commit the data
-                // TODO: Stop the DASI reporting chain here.
-                // See also TopPhaseBuilders, casi_view()
-
-                DASICompleteView() {
-                    result in
-                    if let pair = try? result.get() {
-                        switch pair.0 {
-                        case .completed:
-                            completion(.success(pair.1))
-                        case .question:
-                            dasiPhaseState = .question
-                        default: fatalError()
-                        }
-                    }
-
-                    /*
-                    switch result {
-                    case let .success(answers):
-                        print("Got", answers.answers.count)
-                        completion(.success(answers))
-
-                    case let .failure(error):
-                        if case let AppPhaseErrors.shortageOfDASIResponsesBy(shortage) = error {
-                            print("Short by", shortage)
-                        }
-                        else {
-                            print("Unknown:", error)
-                            print()
-                        }
-                        completion(.failure(error))
-                    }
-                    */
-                }
-                .navigationBarBackButtonHidden(true)
-            },
-            label: {EmptyView()}
-        )
-        .hidden()
+            case .failure(_):
+                fatalError("Shouldn’t get an error from DASICompleteView.")
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 
+/*
+ var nextSteps: String {
+     if allItemsAnswered {
+         return "\nTap “Continue” to complete your report."
+     }
+     else {
+         return "\nUse the “← Back” button to review your answers."
+     }
+ }
+ The calling
+ */
+
+
+    // MARK: - Questions
     @ViewBuilder
     func questionPageView() -> some View {
-        NavigationLink(
-            tag: DASIState.question,
-            selection: $dasiPhaseState,
-            destination: {
-                DASIQuestionView() {
-                        result in
-                        if let pair = try? result.get() {
-                            switch pair.0 {
-                            case .landing:
-                                dasiPhaseState = .landing
-                        case .completed:
-                            dasiPhaseState = .completed
-                        default: fatalError()
-                        }
-                    }
+        DASIQuestionView(answerList: responses) {
+            result in
+            if let pair = try? result.get() {
+                switch pair.0 {
+                case .landing:
+                    dasiPhaseState = .landing
+                case .completed:
+                    dasiPhaseState = .completed
+                default: fatalError()
                 }
-                    .navigationBarBackButtonHidden(true)
-            },
-            label: { EmptyView() }
-        )
-        .hidden()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }

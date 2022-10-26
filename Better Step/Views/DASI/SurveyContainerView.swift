@@ -14,14 +14,14 @@ enum DASIState {
 }
 
 struct SurveyContainerView: View, ReportingPhase {
-    static var cancellables: Set<AnyCancellable> = []
-    @State var resetAlertVisible: Bool = false
-
+    // TODO: Query whether SurveyContainerView needs to be a ReportingPhase.
     typealias SuccessValue = DASIResponseList
     let completion: ClosureType
 
     @State          var dasiPhaseState: DASIState? = .landing
     @StateObject    var responses = DASIResponseList()
+    @AppStorage(AppStorageKeys.temporaryDASIResults.rawValue) var csvStash: String = ""
+
 
     init(_ closure: @escaping ClosureType) {
         completion = closure

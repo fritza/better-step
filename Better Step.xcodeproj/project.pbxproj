@@ -43,7 +43,6 @@
 		1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
 		1FA281FF28DBBB270038353E /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
 		1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
-		1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */; };
 		1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA281D028DBBA160038353E /* Better_StepApp.swift */; };
 		1FA2820528DBBB270038353E /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
@@ -752,7 +751,6 @@
 				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
 				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
 				1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */,
-				1FA2820128DBBB270038353E /* DASIReportFile.swift in Sources */,
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
 				1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */,
 				1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */,

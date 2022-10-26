@@ -24,15 +24,6 @@ enum AppStorageKeys: String {
     /// `String` the email address to receive report archive files.
     case reportingEmail
 
-    // FIXME: The include... keys should be obsolete.
-    /// `Bool` whether to include the timed walk
-    case includeWalk
-    /// `Bool` whether to include a second timed walk
-    case includeSecondWalk
-    /// `Bool` whether to include the DASI survey
-    case includeDASISurvey
-    /// `Bool` whether to include the usability survey
-    case includeUsabilitySurvey
 
     #warning("Use this key:")
     /// Whether this is the first run of the app and needs to collect SubjectID, DASI, and Usability
@@ -45,6 +36,8 @@ enum AppStorageKeys: String {
     case collectedUsability
     /// Whether the context form substage of the usability phase is complete.
     case collectedFreehandU
+
+    case temporaryDASIResults
 
     /// `Int` allowable length of timed walk _in minutes._ Do not confuse with the `walkInMinutes` preference key,  which is the specific duration to use.
     static let dasiWalkRange = (1...10)
