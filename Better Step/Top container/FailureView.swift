@@ -44,9 +44,36 @@ struct FailureView: View, ReportingPhase {
 
     typealias SuccessValue = Void
     let completion: ClosureType
-    init(failing: TopPhases, closure: @escaping ClosureType) {
+    let error: Error?
+    init(failing: TopPhases, error: Error? = nil, closure: @escaping ClosureType) {
         self.fallbackPhase = failing
         completion = closure
+        self.error = error
+    }
+
+    var formattedBodyText: String {
+        var insertion = ""
+        if let phaseName = Self.phasesAndNames.first(where: {
+            pair in
+            pair.key == fallbackPhase
+        })?.value {
+            insertion = "(\(phaseName)) "
+        }
+
+        if let error {
+            return """
+The app could not recover from an error in the stage \(insertion)that couldn't collect its data:
+
+\(error.localizedDescription)
+"""
+        }
+        else {
+            return """
+Because this session was cancelled, the app must go back to a stage (\(insertion)) for you to try again.
+
+If you want to retry from the start, tap the ⚙️ button.
+"""
+        }
     }
 
     var explanation: String {

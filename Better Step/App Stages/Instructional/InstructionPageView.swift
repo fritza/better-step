@@ -58,7 +58,6 @@ struct InstructionPageView_Previews: PreviewProvider {
 
                         }
                         gearBarItem()
-
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("← Back") {

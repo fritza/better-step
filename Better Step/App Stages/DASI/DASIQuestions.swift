@@ -84,11 +84,6 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
 
     // WARNING: the ID is 1-based
     public static let questions: [DASIQuestion] = {
-//        let bundlePath = Bundle.main.bundlePath
-//        let durl = Bundle.main.url(
-//            forResource: Self.jsonBasename,
-//            withExtension: "json")
-
         guard let dasiURL = Bundle.main.url(
             forResource: Self.jsonBasename, withExtension: "json") else {
                 preconditionFailure("Could not find DASIQuestions.json")

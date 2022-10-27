@@ -8,6 +8,13 @@
 import SwiftUI
 
 // MARK: - InterstitialPageView
+
+// TODO: Replace GenericInstructionView with this.
+//       which DOES NOT have introAbove and introBelow
+
+#warning("Replace GenericInstructionView")
+
+
 /// A `View` that presents a single page derived from ``InterstitialInfo``:  text, SF Symbols name, Action button; plus a callback when the action button is tapped.
 struct InterstitialPageView: View {
     let item: InterstitialInfo

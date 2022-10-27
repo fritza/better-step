@@ -25,23 +25,6 @@ struct Better_StepApp: App {
     // to a static in TopContainerView.
 //    static let dasiPageSelection = DASIPageSelection(.landing)
 
-    static func onboardInfo() -> TaskInterstitialDecodable {
-        do {
-            guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
-                throw FileStorageErrors.cantFindURL(#function)
-            }
-            let jsonData = try Data(contentsOf: url)
-            let rawList = try JSONDecoder()
-                .decode([TaskInterstitialDecodable].self,
-                        from: jsonData)
-            return rawList.first!
-        }
-        catch {
-            print("Bad decoding:", error)
-            fatalError("trying to decode \(error.localizedDescription)")
-        }
-    }
-
     var body: some Scene {
         WindowGroup {
 #if false

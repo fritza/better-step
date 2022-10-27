@@ -85,7 +85,10 @@ extension TopContainerView {
         NavigationLink(
             "SHOULDN'T SEE (dasi_view)",
             tag: TopPhases.dasi, selection: $currentPhase) {
+#warning("Proceed to FailureView if result is failure")
                 SurveyContainerView({
+
+
                     // This is a little high on the hierarchy
                     // (SurveyContainerView knows when to commit the data)
                     result in
@@ -93,9 +96,10 @@ extension TopContainerView {
                         // Save the answer list.
                         let surveyContents = answerList.csvLine!
                         print()
+
 // FIXME: do something with the CSV line.
                         // TODO: Make next-phase and DASI flags dynamic
-                        self.currentPhase = .usabilityForm
+                        self.currentPhase = .conclusion // .usabilityForm
                         self.collectedDASI = true
                     }
                 })

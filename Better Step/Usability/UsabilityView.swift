@@ -127,7 +127,7 @@ struct UsabilityView: View, ReportingPhase {
             ratingsStack()
             Spacer()
         }
-        .animation(.easeOut, value: questionIndex)
+//        .animation(.easeOut, value: questionIndex)
         .onDisappear() {
             completion(.success(
                 responses
