@@ -14,7 +14,7 @@ protocol ReportingPhase {
 
     var completion: ClosureType { get }
 
-//    var completion: ((Result<SuccessValue, Error>) -> Void)! { get }
+    //    var completion: ((Result<SuccessValue, Error>) -> Void)! { get }
     // Each phase must report completion.
     // Meaning it must call the completion closure.
     // The container can expect the reporter's result/failure
@@ -32,7 +32,7 @@ enum TopPhases: String, CaseIterable, Comparable {
 
     //  WalkingContainerView
     case usability
-    case usabilityForm
+    //    case usabilityForm
 
     case dasi
     /// Interstitial at the end of the user activities
@@ -58,10 +58,10 @@ enum TopPhases: String, CaseIterable, Comparable {
         lhs.rawValue == rhs.rawValue
     }
 
-//    func save() {
-//        let defaults = UserDefaults.standard
-//        defaults.set(rawValue, forKey: "phaseToken")
-//    }
+    //    func save() {
+    //        let defaults = UserDefaults.standard
+    //        defaults.set(rawValue, forKey: "phaseToken")
+    //    }
 
     static let `default`: TopPhases = .onboarding
     static func savedPhase() -> TopPhases {
@@ -75,8 +75,6 @@ enum TopPhases: String, CaseIterable, Comparable {
 
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
-///
-/// - note: All contained `Views` are expected to use the `reversionToolbar` modifier to attach a gear toolbar button, and set `showRewindAlert` to trigger the one-and-only `.reversionAlert`, which can reset data.
 struct TopContainerView: View {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
@@ -95,9 +93,7 @@ struct TopContainerView: View {
         }
     }
     @State var currentFailingPhase: TopPhases?
-
     @State var usabilityFormResults: WalkInfoForm?
-
     @State var showRewindAlert = false
 
     @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
@@ -107,43 +103,121 @@ struct TopContainerView: View {
         self.currentPhase = Self.defaultPhase
     }
 
-    @State var someStringOrOther = ""
+
+    // TODO: Do I provide the NavigationView?
     var body: some View {
         NavigationView {
-            VStack {
-                onboarding_view()
-                walking_view()
+            switch self.currentPhase ?? .onboarding {
+                // MARK: - Onboarding
+            case .onboarding:
+                OnboardContainerView {
+                    result in
+                    do {
+                        SubjectID.id = try result.get()
+                        self.currentPhase = .walking
+                    }
+                    catch {
+                        fatalError("Can't fail out of an onboarding view")
+                    }
+                }
 
-                dasi_view()
-                usability_view()
+                // MARK: - Walking
+            case .walking:
+#warning("WalkingContainerView is not a RepotingPhase.")
 
-//                usabilityForm_view()
-                // usability form is in the usability container.
+                WalkingContainerView { error in
+                    if let error {
+                        print("Walk failed:", error)
+                        self.currentPhase = .failed
+                    }
+                    else if !collectedDASI {
+                        self.currentPhase = .dasi
+                    }
+                    else if !collectedUsability {
+                        self.currentPhase = .usability
+                    }
+                    else {
+                        self.currentPhase = .conclusion
+                    }
+                }
 
-                conclusion_view()
-                failed_view()
+
+                // MARK: - Usability
+            case .usability:
+                UsabilityContainer { result in
+                    switch result {
+                    case .success(_)
+                        //                        let scoringVector)
+                        :
+
+                        // TODO: Save the usability vector
+                        // (or pass the string along to
+                        // something that will write a file)
+                        if !collectedDASI {
+                            self.currentPhase = .dasi
+                        }
+                        else {
+                            self.currentPhase = .conclusion
+                        }
+                        // FIXME: Add the usability form
+                        //        to the usability container.
+
+                    case .failure(let error):
+                        // TODO: Maybe pass the error into the failure view?
+                        self.currentPhase = .failed
+                    }
+                }
+
+                // MARK: - DASI
+            case .dasi:
+                SurveyContainerView { response in
+                    do {
+                        let responseList = try response.get()
+                        if !collectedUsability {
+                            self.currentPhase = .usability
+                        }
+                        else {
+                            self.currentPhase = .conclusion
+                        }
+                    }
+                    catch {
+                        self.currentPhase = .failed
+                        // TODO: Maybe pass the error into the failure view?
+                    }
+                }
+
+                // MARK: - Conclusion (success)
+            case .conclusion:
+                ConclusionView { _ in
+                    self.currentPhase = .onboarding
+                }
+                .navigationTitle("Finished")
+                //                .reversionToolbar($showRewindAlert)
+
+                // MARK: - Failure (app-wide)
+            case .failed:
+                FailureView(failing: TopPhases.walking) { _ in
+                    // FIXME: Dump all data
+                }
+                //                .reversionToolbar($showRewindAlert)
+                .navigationTitle("FAILED")
+                .padding()
             }
-            .navigationTitle("Should not see")
-            .reversionAlert(next      : $KILLME_reversionTask,
-                            shouldShow: $showRewindAlert)
         }
-        .onAppear {
+        .alert("Starting Over", isPresented: ResetStatus.shared.$resetAlertVisible) {
 
-
-
-            SubjectID.id = SubjectID.unSet
-
-
-
-            if subjectID == SubjectID.unSet {
-                currentPhase = .onboarding
+            Button("First Run" , role: .destructive) {
+                Destroy.dataForSubject.post()
             }
-            else {
-                SubjectID.id = "FIXME"
-                currentPhase = .walking
+
+            Button("Cancel", role: .cancel) {
+                //                    shouldShow = false
             }
         }
-//        .onDisappear { currentPhase?.save() }
+    message: {
+        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
+    }
+
     }
 }
 

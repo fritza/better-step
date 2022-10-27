@@ -16,7 +16,6 @@ struct ReportView: View {
     @State private var showingAlert = false
 
     var body: some View {
-        NavigationView {
             VStack {
                 Spacer()
                 Text("Instructions")
@@ -36,7 +35,6 @@ struct ReportView: View {
                 }
             })
             .navigationTitle("Reporting")
-        }
     }
 }
 

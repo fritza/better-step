@@ -22,29 +22,6 @@ enum UsabilityState: Int, CaseIterable {
     static let csvPrefix = "PSSUQ"
 }
 
-/*
- let usabilityInCopy = """
- In this part of the session, we’d like to hear from you on how easy this app was to use, so we can improve future versions.
- 
- You will be asked for you view of \(UsabilityQuestion.count.spelled) features of the app, responding from 1 (dissatisfied) to 7 (very satisfied).
- 
- You must complete this survey before going on with the app, but you will be asked to complete it only once.
- """
-
- private let viewTitle = "Usability"
-
- let usabilityOutCopy = """
- Thank you for your feedback.
-
- Use the Back button if you want to review your answers. You will not be able to revise your answers after you tap Continue.
- """
-
- private let systemImageName = "person.crop.circle.badge.questionmark"
- private let continueTitle = "Continue"
-
- */
-
-
 
 /// A  sequence of open-intertitial → questions → close-interstitial phases
 struct UsabilityContainer: View, ReportingPhase {
@@ -59,19 +36,17 @@ struct UsabilityContainer: View, ReportingPhase {
     init(state: UsabilityState = .intro,
          //         questionIndex: Int = 0,
          result: @escaping ClosureType) {
-        //        pageIndex = questionIndex
         self.completion = result
         self.currentState = state
     }
 
-    // TODO: Remove pageIndex
-    //    @State var pageIndex: Int
-
     var body: some View {
 #if true
-        NavigationView {
+        VStack {
             Color.red
+                .navigationTitle("UC-level title")
         }
+
 #else
         Group {
             switch currentState {

@@ -44,39 +44,47 @@ struct Better_StepApp: App {
                     print("value for csv is",
                           array.map({ "\($0)" }).joined(separator: ","))
                 }
+                .toolbar {
+                    ToolbarItem {
+                        Button("N") {
+                            print("beep")
+                        }
+                    }
+                }
             }
 
+            // TODO: Nav bars persisting -> EnvironmentObjects?
 
 #elseif false
-            TopContainerView()
-                .environmentObject(NotificationSetup())
-//                .environmentObject(DASIResponseList())
+        TopContainerView()
+            .environmentObject(NotificationSetup())
+        //                .environmentObject(DASIResponseList())
 #else
-            TabView(
-                selection:
-                    $aStage.currentSelection
-            ) {
-                // MARK: - DASI
-                if includeDASIPersistent {
-                    SurveyContainerView()
-                        .badge(BSTAppStages
-                            .dasi.tabBadge)
-                        .tabItem {
-                            Image(systemName: BSTAppStages.dasi.imageName)
-                            Text(BSTAppStages.dasi.visibleName)
-                        }
-                        .tag(BSTAppStages.dasi)
-                }
-
-                // MARK: - Timed Walk
-                WalkingContainerView()
-                // TODO: Add walk-related environmentObjects as soon as known.
-                    .badge(BSTAppStages.walk.tabBadge)
+        TabView(
+            selection:
+                $aStage.currentSelection
+        ) {
+            // MARK: - DASI
+            if includeDASIPersistent {
+                SurveyContainerView()
+                    .badge(BSTAppStages
+                        .dasi.tabBadge)
                     .tabItem {
-                        Image(systemName: BSTAppStages.walk.imageName)
-                        Text(BSTAppStages.walk.visibleName)
+                        Image(systemName: BSTAppStages.dasi.imageName)
+                        Text(BSTAppStages.dasi.visibleName)
                     }
-                    .tag(BSTAppStages.walk)
+                    .tag(BSTAppStages.dasi)
+            }
+
+            // MARK: - Timed Walk
+            WalkingContainerView()
+            // TODO: Add walk-related environmentObjects as soon as known.
+                .badge(BSTAppStages.walk.tabBadge)
+                .tabItem {
+                    Image(systemName: BSTAppStages.walk.imageName)
+                    Text(BSTAppStages.walk.visibleName)
+                }
+                .tag(BSTAppStages.walk)
 
                 // MARK: - Reporting
                 // TODO: Add report-related environmentObjects as soon as known.
