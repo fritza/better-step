@@ -41,13 +41,6 @@ struct UsabilityContainer: View, ReportingPhase {
     }
 
     var body: some View {
-#if true
-        VStack {
-            Color.red
-                .navigationTitle("UC-level title")
-        }
-
-#else
         Group {
             switch currentState {
             case .intro:
@@ -86,7 +79,8 @@ struct UsabilityContainer: View, ReportingPhase {
         }
         // Group
         .navigationBarBackButtonHidden(true)
-        #endif
+        .symbolRenderingMode(.hierarchical)
+
     }       // body
 
     // MARK: - Links to phase views
