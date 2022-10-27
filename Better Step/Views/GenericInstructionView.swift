@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+// TODO: Yield to InterstitialPageView
+//       which has introAbove and introBelow
+#warning("Yield to InterstitialPageView")
+
 struct GenericInstructionView: View {
     private let imageScale: CGFloat = 0.6
 
@@ -53,7 +57,7 @@ struct GenericInstructionView: View {
                             height: proxy.size.width * imageScale, alignment: .center)
                     Spacer()
                     Text(bodyText)
-                        .font(.body)
+                        .font(.title3)
                         .padding()
                         .minimumScaleFactor(/*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
                     Spacer()
@@ -75,8 +79,8 @@ struct GenericInstructionView: View {
 struct GenericInstructionView_Previews: PreviewProvider {
     static var previews: some View {
         GenericInstructionView(
-            titleText: "Survey",
-            bodyText: "Just do what we tell you and nobody gets hurt.",
+            titleText: "☠️ Survey ☠️",
+            bodyText: "REPLACE WITH InterstitialPageView.\n\nJust do what we tell you and nobody gets hurt.",
             sfBadgeName: "trash.slash",
             proceedTitle: "Go!") { // do something
             }

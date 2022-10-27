@@ -33,14 +33,6 @@ struct Better_StepApp: App {
                     response in print("Response =", response)
                 }
             }
-#elseif false
-            NavigationView {
-                SurveyContainerView {
-                    _ in
-                }
-                .environmentObject(MotionManager(phase: .walk_1))
-                .environmentObject(NotificationSetup())
-            }
 #elseif true
             NavigationView {
                 UsabilityContainer { resultValue in

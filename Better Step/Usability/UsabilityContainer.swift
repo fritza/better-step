@@ -68,6 +68,11 @@ struct UsabilityContainer: View, ReportingPhase {
     //    @State var pageIndex: Int
 
     var body: some View {
+#if true
+        NavigationView {
+            Color.red
+        }
+#else
         Group {
             switch currentState {
             case .intro:
@@ -103,8 +108,10 @@ struct UsabilityContainer: View, ReportingPhase {
 
             default: Text("Can't happen.")
             }   // switch
-        }   // Group
+        }
+        // Group
         .navigationBarBackButtonHidden(true)
+        #endif
     }       // body
 
     // MARK: - Links to phase views
