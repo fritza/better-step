@@ -28,7 +28,7 @@ extension TopContainerView {
                     SubjectID.id = newID
                     assert(SubjectID.id == newID)
                 }
-                .reversionToolbar($showRewindAlert)
+//                .reversionToolbar($showRewindAlert)
                 .navigationTitle("Welcome")
                 .padding()
             }
@@ -75,7 +75,6 @@ extension TopContainerView {
                 }
                 //                    .navigationTitle("Walking")
                 .padding()
-                .reversionToolbar($showRewindAlert)
             })
         .hidden()
     }
@@ -103,7 +102,6 @@ extension TopContainerView {
                         self.collectedDASI = true
                     }
                 })
-                .reversionToolbar($showRewindAlert)
                 .padding()
             }
             .hidden()
@@ -167,7 +165,6 @@ self.currentFailedPhase = currentPhase
                     self.currentPhase = .failed
                 }
                 .navigationTitle("Finished")
-                .reversionToolbar($showRewindAlert)
             }
             .hidden()
     }
@@ -180,7 +177,6 @@ self.currentFailedPhase = currentPhase
             "SHOULDN'T SEE (failed_view)",
             tag: TopPhases.failed, selection: self.$currentFailingPhase) {
                 FailureView(failing: TopPhases.walking) { _ in  }
-                .reversionToolbar($showRewindAlert)
                 .navigationTitle("FAILED")
                 .padding()
             }

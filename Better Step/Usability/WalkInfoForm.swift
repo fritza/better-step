@@ -159,7 +159,8 @@ struct WalkInfoForm: View, ReportingPhase {
                 .padding()
         })
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                reversionToolbarButton()
                 Button("Submit") {
                     completion(.success(WalkInfoResult(where: "Toolbar Submit", distance: 200)))
                 }

@@ -43,12 +43,10 @@ You’ll be repeating the timed walks you did last time. There will be no need t
         case laterGreeting
         case greetingHandoff
     }
-
-    #if true
     @State var workingString = SubjectID.id
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ApplicationOnboardView(string: $workingString) { result in
                 // Success result is a String with the proposed subject ID.
                 // The received ID.
@@ -65,37 +63,13 @@ You’ll be repeating the timed walks you did last time. There will be no need t
                 }
                 // FIXME: what happens upon failure?
             }
-            .reversionToolbar($shouldWarnOfReversion)
-            .reversionAlert(next: $correctTask,
-                            shouldShow: $shouldWarnOfReversion)
-
-        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    reversionToolbarButton()
+                }
+            }
         .padding()
     }
-    #else
-    var body: some View {
-        NavigationView {
-
-        TabView(selection: $correctStage) {
-            ApplicationOnboardView() { result in
-                if let finished = try? result.get() {
-                    SubjectID.id = finished
-                    completion(.success(()))
-                }
-                // FIXME: what happens upon failure?
-            }
-            .tag(OnboardStages.firstGreeting.rawValue)
-
-            InterstitialPageView(info: finishedInterstitialInfo) {
-                completion(.success(()))
-            }
-            .tag (OnboardStages.laterGreeting.rawValue)
-
-        }
-        .tabViewStyle(.page(indexDisplayMode: .never))
-    }
-        }
-    #endif
 }
 
 struct OnboardContainerView_Previews: PreviewProvider {

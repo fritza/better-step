@@ -43,7 +43,8 @@ struct ReversionAlert: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .alert("Starting Over", isPresented: $shouldShow) {
+            .alert("Starting Over", isPresented: ResetStatus.shared.$resetAlertVisible) {
+//                .alert("Starting Over", isPresented: $shouldShow) {
 //                Button("Clear All" , role: .destructive) {
 //                    // Forget user and progress
 //                    subjectID = SubjectID.unSet
@@ -66,22 +67,25 @@ struct ReversionAlert: ViewModifier {
 }
 
 struct ReversionButton: View {
-    @Binding var shouldShow: Bool
+    @Binding var shouldShowAlert: Bool
 
     init(shouldShow: Binding<Bool>) {
-        _shouldShow = shouldShow
+        _shouldShowAlert = shouldShow
     }
 
     var body: some View {
         Button()
-        { ResetStatus.shared.resetAlertVisible = true }
+        {
+            shouldShowAlert = true
+            ResetStatus.shared.resetAlertVisible = true
+        }
     label: { Label("configure", systemImage: "gear") }
     }
 }
 
 /// A modifier that adds a configuration Gear toolbar button that is bever shown if initialized with `shouldShow`.
 ///
-/// The `shouldShow` bindin tracks whether to present a ``ReversionAlert`` should be displayed. If the binding is `true`, then the alert will appear and make reset buttons available.
+/// The `shouldShow` binding tracks whether to present a ``ReversionAlert`` . If the binding is `true`, then the alert will appear and make reset buttons available.
 struct ReversionToolbar: ViewModifier {
     @Binding var shouldShow: Bool
 
@@ -92,32 +96,32 @@ struct ReversionToolbar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button()
-                    {
-                        shouldShow = true
-                    }
-                label: {
-                    Label("configure", systemImage: "gear")
+                    reversionToolbarButton()
                 }
+                /*
+                 Button()
+                 { shouldShow = true }
+                label: { Label("configure", systemImage: "gear") }
                 }
+                */
             }
             .navigationBarBackButtonHidden(true)
     }
 }
 
-extension View {
-    /// Add a "Gear" button to the toolbar. The button in ``ReversionToolbar`` sets a binding that revieals a ``ReversionAlert``, in which the buttons perform rewind/discard options.
-    /// - note: client code must attach a ``RevisionToolbar`` to set the alert's visibility, and a ``RevisionAlert`` to appear and commit the rewind/reset actions.
-    func reversionToolbar(_ show: Binding<Bool>) -> some View {
-        modifier(ReversionToolbar(show))
-    }
-
-    /// Present an alert that acts to rewind application state in response to its buttons.
-    ///
-    /// The binding passed into ``ReversionAlert`` is to control display of the alert.
-    /// - note: client code must attach a ``RevisionToolbar`` to set the alert's visibility, and a ``RevisionAlert`` to appear and commit the rewind/reset actions.
-    func reversionAlert(next: Binding<Int?>, shouldShow: Binding<Bool>) -> some View {
-        modifier(ReversionAlert(next: next, show: shouldShow))
+func reversionToolbarButton() -> some View {
+        Button()
+        {
+            ResetStatus.shared.resetAlertVisible = false
+        }
+    label: {
+        Label("configure", systemImage: "gear")
     }
 }
 
+/*
+ I want something that will produce a trailing ToolbarItemGroup with gear button
+ followed by an optional Button.
+
+
+ */

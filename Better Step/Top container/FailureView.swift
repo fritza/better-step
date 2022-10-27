@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - Conclusion View
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
@@ -25,6 +26,7 @@ struct ConclusionView: View, ReportingPhase {
     }
 }
 
+// MARK: - Failure View
 
 /// Display a next-steps page with a "Revert" button that directs the user to the entry to DASI, or Usability, or Walk, depending on what failed.
 ///
@@ -37,7 +39,7 @@ struct FailureView: View, ReportingPhase {
 ]
 
     let fallbackPhase: TopPhases
-    @State var showRewindAlert = false
+//    @State var showRewindAlert = false
     @State var shouldAlertDisclaimer = false
 
     // TODO: Is this the place to name the next step?
@@ -101,7 +103,11 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                         shouldAlertDisclaimer = true
                     }
             }
-            .reversionToolbar($showRewindAlert)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    reversionToolbarButton()
+                }
+            }
             .navigationBarTitle("Recovery")
         }
         .alert("Not complete", isPresented: $shouldAlertDisclaimer, actions: {},
@@ -132,6 +138,7 @@ If you’re seeing this, the last thing you did resulted in a programming error.
 }
  */
 
+// MARK: - Previews
 struct FailureView_Previews: PreviewProvider {
     static var previews: some View {
             FailureView(failing: .walking) {

@@ -65,6 +65,11 @@ final class ResetStatus: ObservableObject {
     init() { resetAlertVisible = false }
 }
 
+
+//ResetStatus.shared.resetAlertVisible
+
+
+
 /**
  # About inspection mode
 

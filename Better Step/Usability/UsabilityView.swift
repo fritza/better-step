@@ -148,7 +148,7 @@ struct UsabilityView: View, ReportingPhase {
             }
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                gearBarItem()
+               reversionToolbarButton()
                 Button("Next →") {
                     responses[questionIndex] = currentSelection
                     completion( .success(responses) )

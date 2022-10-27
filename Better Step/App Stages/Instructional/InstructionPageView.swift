@@ -54,10 +54,9 @@ struct InstructionPageView_Previews: PreviewProvider {
                 .padding()
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        reversionToolbarButton()
                         Button("Next →") {
-
                         }
-                        gearBarItem()
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("← Back") {

@@ -79,7 +79,7 @@ struct DASICompleteView: View, ReportingPhase {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                gearBarItem()
+                reversionToolbarButton()
 // FIXME: Use the view modifier
             }
         }

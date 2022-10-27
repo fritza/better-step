@@ -120,7 +120,7 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                gearBarItem()
+                reversionToolbarButton()
             }
         }
         .task {
