@@ -79,7 +79,8 @@ struct UsabilityContainer: View, ReportingPhase {
         }
         // Group
         .navigationBarBackButtonHidden(true)
-        .symbolRenderingMode(.hierarchical)
+//        .environment(\.symbolRenderingMode, .hierarchical)
+//        .symbolRenderingMode(.hierarchical)
 
     }       // body
 

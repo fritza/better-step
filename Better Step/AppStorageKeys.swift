@@ -62,7 +62,7 @@ enum AppStorageKeys: String {
 final class ResetStatus: ObservableObject {
     public static let shared = ResetStatus()
     @State var resetAlertVisible: Bool
-    init() { resetAlertVisible = false }
+    private init() { resetAlertVisible = false }
 }
 
 

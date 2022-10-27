@@ -204,7 +204,8 @@ struct TopContainerView: View {
                 .padding()
             }
         }
-        .alert("Starting Over", isPresented: ResetStatus.shared.$resetAlertVisible) {
+        .alert("Starting Over",
+               isPresented: ResetStatus.shared.$resetAlertVisible) {
 
             Button("First Run" , role: .destructive) {
                 Destroy.dataForSubject.post()

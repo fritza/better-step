@@ -44,14 +44,8 @@ struct Better_StepApp: App {
                     print("value for csv is",
                           array.map({ "\($0)" }).joined(separator: ","))
                 }
-                .toolbar {
-                    ToolbarItem {
-                        Button("N") {
-                            print("beep")
-                        }
-                    }
-                }
             }
+            .environment(\.symbolRenderingMode, .hierarchical)
 
             // TODO: Nav bars persisting -> EnvironmentObjects?
 

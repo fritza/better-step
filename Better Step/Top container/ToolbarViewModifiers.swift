@@ -16,6 +16,8 @@ extension Text {
     }
 }
 
+#if false
+
 #warning("Of what use is Keep Subject?")
 /// View modifier that presents an alert taking reset (user/data) commands. Its buttons trigger a kind of rewind/erasure.
 ///
@@ -82,7 +84,6 @@ struct ReversionButton: View {
     label: { Label("configure", systemImage: "gear") }
     }
 }
-
 /// A modifier that adds a configuration Gear toolbar button that is bever shown if initialized with `shouldShow`.
 ///
 /// The `shouldShow` binding tracks whether to present a ``ReversionAlert`` . If the binding is `true`, then the alert will appear and make reset buttons available.
@@ -108,11 +109,12 @@ struct ReversionToolbar: ViewModifier {
             .navigationBarBackButtonHidden(true)
     }
 }
+#endif
 
 func reversionToolbarButton() -> some View {
         Button()
         {
-            ResetStatus.shared.resetAlertVisible = false
+            ResetStatus.shared.resetAlertVisible = true
         }
     label: {
         Label("configure", systemImage: "gear")

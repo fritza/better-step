@@ -34,7 +34,7 @@ struct UsabilityInterstitialView: View, ReportingPhase {
                     .scaledToFit()
                     .foregroundColor(.accentColor)
                     .frame(width: 200)
-                    .symbolRenderingMode(.hierarchical)
+//                    .symbolRenderingMode(.hierarchical)
                 Spacer()
             }
             .accessibilityLabel("icon")

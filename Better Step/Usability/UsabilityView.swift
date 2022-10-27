@@ -58,7 +58,7 @@ struct UsabilityView: View, ReportingPhase {
                 // If the button index corresponds to
                 // the choice, display a circled checkmark.
                 Image(systemName: "checkmark.circle")
-                    .symbolRenderingMode(.hierarchical)
+//                    .symbolRenderingMode(.hierarchical)
             }
             else {
                 // Not selected: fill the checkmark's place with something the same size.

@@ -44,7 +44,7 @@ struct InterstitialPageView: View {
                 .scaledToFit()
                 .foregroundColor(.accentColor)
                 .frame(height: 200)
-                .symbolRenderingMode(.hierarchical)
+//                .symbolRenderingMode(.hierarchical)
             Spacer()
             Text(item.introBelow)
                 .font(.body)

@@ -92,7 +92,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .scaledToFit()
                     .foregroundColor(.accentColor)
                     .frame(height: 120)
-                    .symbolRenderingMode(.hierarchical)
+//                    .symbolRenderingMode(.hierarchical)
 
                 Spacer()
                 Text(item.introBelow.addControlCharacters)
