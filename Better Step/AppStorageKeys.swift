@@ -26,9 +26,9 @@ enum AppStorageKeys: String {
 
 
     #warning("Use this key:")
-    /// Whether this is the first run of the app and needs to collect SubjectID, DASI, and Usability
-    case hasNeverCompleted
-    /// The last known subject ID.
+    /// If `false`, this is the first run of the app and needs to collect SubjectID, DASI, and Usability
+    case hasCompletedSurveys
+    /// The last known subject ID
     case subjectID
     /// Whether the DASI stage is complete
     case collectedDASI
@@ -57,22 +57,25 @@ enum AppStorageKeys: String {
             defaults.set(false, forKey: key)
         }
     }
-}
 
-final class ResetStatus: ObservableObject, CustomStringConvertible {
-
-    static var shared: ResetStatus = ResetStatus()
-
-    var description: String {
-        "ResetStatus(\(resetAlertVisible))"
+    func negate() {
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: self.rawValue)
     }
 
-    var resetAlertVisible: Bool
-    func set() { resetAlertVisible = true }
-    init() { resetAlertVisible = false }
-}
 
-let globalResetStatus= ResetStatus()
+    /// Remove or replace a value from `UserDefaults`.
+    ///
+    /// Replacement counts as “erasure” even though it's simply assignment, because
+    /// * some initial values are in-band, such as `SubjectID`, which is initially `unSet` ( `""`)
+    /// * using the function clarifies the intention.
+    /// - Parameters:
+    ///   - newValue: If not `nil` (the default) save this value under the key.
+    func eraseDefault() {
+        let ud = UserDefaults.standard
+        ud.removeObject(forKey: self.rawValue)
+    }
+}
 
 /**
  # About inspection mode

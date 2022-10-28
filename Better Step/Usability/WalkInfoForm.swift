@@ -44,9 +44,6 @@ struct WalkInfoForm: View, ReportingPhase {
         return content
     }
 
-    @EnvironmentObject var resetState: ResetStatus
-
-
     @State private var whereWalked: WhereWalked = .atHome
     @State private var howWalked: HowWalked = .straightLine
     @State private var lengthOfCourse: Int? = nil
@@ -184,6 +181,5 @@ struct WalkInfoForm_Previews: PreviewProvider {
 
                 .navigationTitle("Walking Info")
         }
-        .environmentObject(ResetStatus())
     }
 }

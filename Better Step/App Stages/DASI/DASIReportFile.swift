@@ -105,7 +105,7 @@ final class DASIReportFile {
     ///
     /// **Do not** use this in the class life cycle. The file is supposed
     /// to survive after it has been built.
-    private func remove() throws {
+    func remove() throws {
         try FileManager.default
             .deleteIfPresent(destinationURL)
     }

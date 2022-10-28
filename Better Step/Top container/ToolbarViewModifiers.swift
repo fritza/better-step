@@ -35,6 +35,9 @@ struct ReversionAlert: ViewModifier {
 
                 Button("First Run" , role: .destructive) {
                     Destroy.dataForSubject.post()
+
+                    let nc = NotificationCenter.default
+                    nc.post(name: ForceAppReversion, object: nil)
                 }
 
                 Button("Cancel", role: .cancel) {

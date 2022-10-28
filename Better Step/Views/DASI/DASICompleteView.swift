@@ -28,8 +28,6 @@ struct DASICompleteView: View, ReportingPhase {
 
 
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
-    @EnvironmentObject var resetState: ResetStatus
-
     let completion: ClosureType
     let dasiResponses: DASIResponseList
     init(responses: DASIResponseList,
@@ -95,7 +93,6 @@ struct DASICompleteView_Previews: PreviewProvider {
             DASICompleteView(responses: DASIResponseList()) {
                 _ in
             }
-            .environmentObject(ResetStatus())
         }
     }
 }

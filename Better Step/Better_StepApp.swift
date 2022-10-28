@@ -13,7 +13,7 @@ import Combine
 struct Better_StepApp: App {
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
     @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
-    @AppStorage(AppStorageKeys.hasNeverCompleted.rawValue)  var hasNeverCompleted : Bool = true
+    @AppStorage(AppStorageKeys.hasCompletedSurveys.rawValue)  var hasCompletedSurveys : Bool = true
 
     @State var shouldWarnOfReversion : Bool = false
 
