@@ -41,6 +41,8 @@ struct DigitalTimerView: View, ReportingPhase {
         units: [.mmSecondsString]
         )
 
+    @EnvironmentObject var resetState: ResetStatus
+
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?
 
@@ -120,7 +122,7 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                reversionToolbarButton()
+                reversionToolbarButton(for: resetState)
             }
         }
         .task {
@@ -195,6 +197,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
             }
                 .padding()
                 .environmentObject(MotionManager(phase: .walk_1))
+                .environmentObject(ResetStatus())
         }
     }
 }

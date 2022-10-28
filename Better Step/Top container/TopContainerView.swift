@@ -94,7 +94,7 @@ struct TopContainerView: View {
     }
     @State var currentFailingPhase: TopPhases?
     @State var usabilityFormResults: WalkInfoForm?
-    @State var showRewindAlert = false
+//    @State var showRewindAlert = false
 
     @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
         .firstGreeting.rawValue
@@ -204,8 +204,16 @@ struct TopContainerView: View {
                 .padding()
             }
         }
+
+
+        // for testing only, moved this to UsabilityContainer.
+
+
         .alert("Starting Over",
-               isPresented: ResetStatus.shared.$resetAlertVisible) {
+                              isPresented:
+               $showRewindAlert
+               //ResetStatus.shared.$resetAlertVisible
+        ) {
 
             Button("First Run" , role: .destructive) {
                 Destroy.dataForSubject.post()

@@ -59,16 +59,20 @@ enum AppStorageKeys: String {
     }
 }
 
-final class ResetStatus: ObservableObject {
-    public static let shared = ResetStatus()
-    @State var resetAlertVisible: Bool
-    private init() { resetAlertVisible = false }
+final class ResetStatus: ObservableObject, CustomStringConvertible {
+
+    static var shared: ResetStatus = ResetStatus()
+
+    var description: String {
+        "ResetStatus(\(resetAlertVisible))"
+    }
+
+    var resetAlertVisible: Bool
+    func set() { resetAlertVisible = true }
+    init() { resetAlertVisible = false }
 }
 
-
-//ResetStatus.shared.resetAlertVisible
-
-
+let globalResetStatus= ResetStatus()
 
 /**
  # About inspection mode

@@ -34,6 +34,7 @@ struct UsabilityView: View, ReportingPhase {
     private let arbitraryCheckmarkEdge: CGFloat =  32
     private let arbitraryButtonWidth  : CGFloat = 240
 
+    @EnvironmentObject var resetState: ResetStatus
     /// The  index of the question currently displayed.
     @State private var questionIndex       : Int
     /// The response value (1–7) for the question currently displayed.
@@ -148,7 +149,8 @@ struct UsabilityView: View, ReportingPhase {
             }
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-               reversionToolbarButton()
+
+               reversionToolbarButton(for: resetState)
                 Button("Next →") {
                     responses[questionIndex] = currentSelection
                     completion( .success(responses) )
@@ -185,6 +187,7 @@ struct UsabilityView: View, ReportingPhase {
                 }
 
             }
+            .environmentObject(ResetStatus())
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }
     }

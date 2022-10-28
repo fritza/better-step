@@ -44,6 +44,9 @@ struct WalkInfoForm: View, ReportingPhase {
         return content
     }
 
+    @EnvironmentObject var resetState: ResetStatus
+
+
     @State private var whereWalked: WhereWalked = .atHome
     @State private var howWalked: HowWalked = .straightLine
     @State private var lengthOfCourse: Int? = nil
@@ -160,7 +163,7 @@ struct WalkInfoForm: View, ReportingPhase {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                reversionToolbarButton()
+                reversionToolbarButton(for: resetState)
                 Button("Submit") {
                     completion(.success(WalkInfoResult(where: "Toolbar Submit", distance: 200)))
                 }
@@ -175,7 +178,9 @@ struct WalkInfoForm_Previews: PreviewProvider {
             WalkInfoForm {
                 _ in // nothing
             }
+
                 .navigationTitle("Walking Info")
         }
+        .environmentObject(ResetStatus())
     }
 }

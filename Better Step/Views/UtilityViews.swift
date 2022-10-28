@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/*
 func gearBarItem(action: (() -> Void)? = nil) -> some View {
     Button {
         ResetStatus.shared.resetAlertVisible = true
@@ -15,3 +16,4 @@ label: {
     Label("configuration", systemImage: "gear")
 }
 }
+*/

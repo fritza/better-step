@@ -28,6 +28,7 @@ struct DASICompleteView: View, ReportingPhase {
 
 
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+    @EnvironmentObject var resetState: ResetStatus
 
     let completion: ClosureType
     let dasiResponses: DASIResponseList
@@ -79,7 +80,7 @@ struct DASICompleteView: View, ReportingPhase {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                reversionToolbarButton()
+                reversionToolbarButton(for: resetState)
 // FIXME: Use the view modifier
             }
         }
@@ -92,6 +93,7 @@ struct DASICompleteView_Previews: PreviewProvider {
             DASICompleteView(responses: DASIResponseList()) {
                 _ in
             }
+            .environmentObject(ResetStatus())
         }
     }
 }

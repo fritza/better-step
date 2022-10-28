@@ -41,6 +41,7 @@ struct FailureView: View, ReportingPhase {
     let fallbackPhase: TopPhases
 //    @State var showRewindAlert = false
     @State var shouldAlertDisclaimer = false
+    @EnvironmentObject var resetState: ResetStatus
 
     // TODO: Is this the place to name the next step?
 
@@ -105,7 +106,7 @@ Because this session was cancelled, the app must go back to the stage \(insertio
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    reversionToolbarButton()
+                    reversionToolbarButton(for: resetState)
                 }
             }
             .navigationBarTitle("Recovery")
@@ -144,5 +145,6 @@ struct FailureView_Previews: PreviewProvider {
             FailureView(failing: .walking) {
                 _ in
             }
+            .environmentObject(ResetStatus())
     }
 }

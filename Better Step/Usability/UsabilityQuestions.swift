@@ -24,6 +24,7 @@ struct UsabilityQuestion: Decodable, Identifiable {
     static private(set) var idRange = 0..<endID
     static var count = allQuestions.count
 
+    
 
     // I'm not going to get in trouble by referencing the indices
     // before allQuestions loads, am I?

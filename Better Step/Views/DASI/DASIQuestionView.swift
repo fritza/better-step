@@ -30,6 +30,9 @@ struct DASIQuestionView: View, ReportingPhase {
     // make it view-persistent out of an abundance.
     @State var answerList: DASIResponseList
     @State var pageNumber: Int = 1
+
+    @EnvironmentObject var resetState: ResetStatus
+
     init(answerList: DASIResponseList,
          _ completion: @escaping ClosureType) {
 //        self.answerState = .unknown
@@ -92,7 +95,7 @@ struct DASIQuestionView: View, ReportingPhase {
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                gearBarItem()
-                reversionToolbarButton()
+                reversionToolbarButton(for: resetState)
                 Button("Next →") {
                     pageNumber += 1
                 }
@@ -110,6 +113,7 @@ struct DASIQuestionView: View, ReportingPhase {
                     print("Question done")
                 }
             }
+            .environmentObject(ResetStatus())
             //        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
             //        .environmentObject(DASIResponseList())
         }

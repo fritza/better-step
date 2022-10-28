@@ -14,6 +14,8 @@ struct OnboardContainerView: View, ReportingPhase {
     @State private var shouldWarnOfReversion: Bool = false
     var finishedInterstitialInfo: InterstitialInfo
 
+    @EnvironmentObject var resetState: ResetStatus
+
     typealias SuccessValue = String
     let completion: ClosureType
 
@@ -65,7 +67,7 @@ You’ll be repeating the timed walks you did last time. There will be no need t
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    reversionToolbarButton()
+                    reversionToolbarButton(for: resetState)
                 }
             }
         .padding()
@@ -77,5 +79,6 @@ struct OnboardContainerView_Previews: PreviewProvider {
         OnboardContainerView() {
             _ in print("nothing to do")
         }
+        .environmentObject(ResetStatus())
     }
 }
