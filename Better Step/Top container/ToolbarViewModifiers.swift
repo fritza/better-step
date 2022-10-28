@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Combine
+
+let ForceAppReversion = Notification.Name("ForceAppReversion")
 
 extension Text {
     static func decorate(_ str: String,
@@ -23,9 +26,6 @@ struct ReversionAlert: ViewModifier {
     init(_ show: Binding<Bool>) {
         _shouldShow = show
     }
-//    init(_ state: Binding<ResetStatus>) {
-//        _resetState = state
-//    }
 
     func body(content: Content) -> some View {
         content
@@ -53,21 +53,20 @@ extension View {
     }
 }
 
-func reversionToolbarButton(for resetStatus: ResetStatus) -> some View {
-        Button()
-        {
-            resetStatus.set()
-//            ResetStatus.shared.set()
-            //resetAlertVisible = true
+
+struct ReversionButton: View {
+    @Binding var toToggle: Bool
+    init(toBeSet: Binding<Bool>) {
+        _toToggle = toBeSet
+    }
+
+    var body: some View {
+        Button() {
+            toToggle = true
         }
     label: {
         Label("configure", systemImage: "gear")
     }
+
+    }
 }
-
-/*
- I want something that will produce a trailing ToolbarItemGroup with gear button
- followed by an optional Button.
-
-
- */

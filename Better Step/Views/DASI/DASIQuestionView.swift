@@ -30,6 +30,7 @@ struct DASIQuestionView: View, ReportingPhase {
     // make it view-persistent out of an abundance.
     @State var answerList: DASIResponseList
     @State var pageNumber: Int = 1
+    @State var showReversionAlert = false
 
     @EnvironmentObject var resetState: ResetStatus
 
@@ -95,13 +96,14 @@ struct DASIQuestionView: View, ReportingPhase {
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                gearBarItem()
-                reversionToolbarButton(for: resetState)
+                ReversionButton(toBeSet: $showReversionAlert)
                 Button("Next →") {
                     pageNumber += 1
                 }
                 .disabled(pageNumber >= DASIStages.maxIdentifier)
             }
         }
+        .reversionAlert(on: $showReversionAlert)
         .navigationTitle("Question \(pageNumber):")
     }
 }

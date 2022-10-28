@@ -40,6 +40,8 @@ struct UsabilityView: View, ReportingPhase {
     /// The response value (1–7) for the question currently displayed.
     @State private var currentSelection : Int
 
+    @State var showResetAlert = false
+
     @State private var responses = [Int](repeating: 0, count: UsabilityQuestion.count)
     var canIncrement: Bool { questionIndex < (QLimits.endIndex - 1 )}
     var canDecrement: Bool { questionIndex >  QLimits.startIndex    }
@@ -150,7 +152,7 @@ struct UsabilityView: View, ReportingPhase {
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 
-               reversionToolbarButton(for: resetState)
+                ReversionButton(toBeSet: $showResetAlert)
                 Button("Next →") {
                     responses[questionIndex] = currentSelection
                     completion( .success(responses) )
@@ -160,6 +162,7 @@ struct UsabilityView: View, ReportingPhase {
                 .disabled(!canIncrement)
             }
         }
+        .reversionAlert(on: $showResetAlert)
         .navigationTitle("Usability")
         .navigationBarBackButtonHidden(true)
     }

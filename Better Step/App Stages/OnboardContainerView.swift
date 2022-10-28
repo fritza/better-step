@@ -67,10 +67,11 @@ You’ll be repeating the timed walks you did last time. There will be no need t
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    reversionToolbarButton(for: resetState)
+                    ReversionButton(toBeSet: $shouldWarnOfReversion)
                 }
             }
-        .padding()
+            .reversionAlert(on: $shouldWarnOfReversion)
+            .padding()
     }
 }
 

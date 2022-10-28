@@ -94,13 +94,36 @@ struct TopContainerView: View {
     }
     @State var currentFailingPhase: TopPhases?
     @State var usabilityFormResults: WalkInfoForm?
-//    @State var showRewindAlert = false
+    //    @State var showRewindAlert = false
 
     @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
         .firstGreeting.rawValue
 
+    @State var showReversionAlert: Bool
+    @State var reversionNoticeHandler: NSObjectProtocol!
+
+    // FIXME: mutation won't go well, will it.
+    func registerReversionHandler() {
+        guard reversionNoticeHandler == nil else {
+            print("better not be more than one!")
+            return
+        }
+
+        let dCenter = NotificationCenter.default
+        reversionNoticeHandler =
+        dCenter.addObserver(forName: ForceAppReversion,
+                            object: nil, queue: .current) {
+            notice in
+            currentPhase = Self.defaultPhase
+
+            // FIXME: Surely we'd have to rewind all the subordinate views?
+        }
+    }
+
     init() {
+        showReversionAlert = false
         self.currentPhase = Self.defaultPhase
+        registerReversionHandler()
     }
 
 
@@ -207,25 +230,24 @@ struct TopContainerView: View {
 
 
         // for testing only, moved this to UsabilityContainer.
+        .reversionAlert(on: $showReversionAlert)
 
-
-        .alert("Starting Over",
-                              isPresented:
-               $showRewindAlert
-               //ResetStatus.shared.$resetAlertVisible
-        ) {
-
-            Button("First Run" , role: .destructive) {
-                Destroy.dataForSubject.post()
-            }
-
-            Button("Cancel", role: .cancel) {
-                //                    shouldShow = false
-            }
-        }
-    message: {
-        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
-    }
+        //
+        //        .alert("Starting Over",
+        //               isPresented: $showReversionAlert
+        //        ) {
+        //
+        //            Button("First Run" , role: .destructive) {
+        //                Destroy.dataForSubject.post()
+        //            }
+        //
+        //            Button("Cancel", role: .cancel) {
+        //                //                    shouldShow = false
+        //            }
+        //        }
+        //    message: {
+        //        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
+        //    }
 
     }
 }

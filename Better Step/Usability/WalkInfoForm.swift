@@ -53,6 +53,8 @@ struct WalkInfoForm: View, ReportingPhase {
     @State private var effort: EffortWalked = .somewhat
     @State private var fearOfFalling: Bool = false
 
+    @State private var shouldShowReversionAlert = false
+
     var body: some View {
         Form {
             // MARK: Home or not
@@ -163,12 +165,13 @@ struct WalkInfoForm: View, ReportingPhase {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                reversionToolbarButton(for: resetState)
+                ReversionButton(toBeSet: $shouldShowReversionAlert)
                 Button("Submit") {
                     completion(.success(WalkInfoResult(where: "Toolbar Submit", distance: 200)))
                 }
             }
         }
+        .reversionAlert(on: $shouldShowReversionAlert)
     }
 }
 

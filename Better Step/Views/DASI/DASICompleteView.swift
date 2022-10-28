@@ -57,6 +57,8 @@ struct DASICompleteView: View, ReportingPhase {
         return retval
     }
 
+    @State var shouldShowReversion = false
+
     var body: some View {
         VStack {
             GenericInstructionView(
@@ -80,7 +82,7 @@ struct DASICompleteView: View, ReportingPhase {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                reversionToolbarButton(for: resetState)
+                ReversionButton(toBeSet: $shouldShowReversion)
 // FIXME: Use the view modifier
             }
         }

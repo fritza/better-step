@@ -5,6 +5,9 @@
 //  Created by Fritz Anderson on 10/20/22.
 //
 
+
+#error("Rewind the app to the start")
+
 import Foundation
 
 // This is in the Extensions group because `Destroy` is a generic service like the Formatting extensions.
@@ -21,22 +24,35 @@ final class Destroyer {
         notificationHandlers.append(retval)
     }
 
+
     var notificationHandlers: [NSObjectProtocol] = []
 
+    /// Install `Notification` handlers for scalar ``Destroy`` cases.
     init() {
         addHandler(which: .unsafeSubjectID) { _ in
-            print("destroying subject ID")
+            SubjectID.id = SubjectID.unSet
         }
 
         addHandler(which: .DASI) { _ in
-            print("destroying DASI")
+            AppStorageKeys.temporaryDASIResults.eraseDefault()
+            AppStorageKeys.collectedDASI.negate()
+            AppStorageKeys.hasCompletedSurveys.negate()
+            // TODO: There's no file yet
+            #warning("Many files aren'r erased")
         }
 
         addHandler(which: .usability) { _ in
-            print("destroying usability")
+            AppStorageKeys.tempUsabilityIntsCSV.eraseDefault()
+            AppStorageKeys.collectedFreehandU.negate()
+            AppStorageKeys.collectedUsability.negate()
+            AppStorageKeys.hasCompletedSurveys.negate()
         }
 
         addHandler(which: .walk) { _ in
+
+            #warning("No deletion of walk files.")
+            // Trace back from the IncomngAccelerometry output to find the files.
+
             print("destroying walk")
         }
     }
@@ -44,10 +60,13 @@ final class Destroyer {
 
 /// An `OptionSet` that identifies  data sets that should to be removed when the `gear` toolbar item is tapped.
 ///
-/// Sending `post()` to an instance of `Destroy` sends a notification that that class of data is to be removed, so the user can restore first-run behavior.
-/// Some cases are compound: `.firstRunData`, for intance is _both_ `.DASI` and `.usability` When posted, the `NotificationCenter` will send the two out separately.
+/// There are two kinds of target sets.
+/// * **scalar** cases are discrete targets for deletion, like DASI.
+/// * **compound** cases are consist of more than one scalar case. `firstRunData`, for instance, contains both DASI and the Usability surveys.
 ///
-/// _see_ ``Destroyer`` in this source file for an example.
+/// Sending `post()` to a scalar case of ``Destroy`` posts a single `Notification` that that particular record is to be removed. Compund vases run through the component cases one by one.
+///
+/// _see_ ``Destroyer`` for an example.
 /// - warning: Maintainers who want to add or edit cases of `Destroy` _must_ make sure that `.unsafeSubjectID` comes last wherever it is used.
 struct Destroy: OptionSet, RawRepresentable, Hashable {
 /// `RawRepresentable` adoption
@@ -87,22 +106,31 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     private static let compounds: [Destroy : [Destroy]] = {
         var retval: [Destroy : [Destroy]]
         retval = [
-            // Destroy of walk kills walk data only
+            /// Destroy of walk kills walk data only
             .walk : [.walk],
-            .unsafeSubjectID: [.unsafeSubjectID],
-            // Destroy of DASI kills DASI survey data only
+
+            /// Destroy of DASI kills DASI survey data only
             .DASI : [.DASI],
-            // Destroy of usability kills usability survey data only
+
+            /// Destroy of usability kills usability survey data only
             .usability: [.usability],
-            // Destroy of first-run data kills the surveys only
+
+            /// Destroy of first-run data kills the surveys (DASI, usability) only
             .firstRunData:
                 [.DASI, .usability],
 
-            // Destroy of data for subject kill surveys _and_ the walks.
+            /// Destroy of data for subject kill surveys _and_ the walks.
             .dataForSubject: [.DASI, .usability, .walk],
-            // Destroy of subject destroys surveys, walks, and subject ID
-            // IMPORTANT: .unsafeSubjectID must be the last element.
-                .subject: [.DASI, .usability, .walk, .unsafeSubjectID]
+
+            /// Invalidate (blank ATW) the subject-ID string.
+            ///
+            /// - note: This is “unsafe” because it just changes the string and orphans all the associated data.
+            ///
+            /// - warning: In composing task rosters (as for `.subject`, `unsafeSubjectID` must appear _last,_ because data deletion may depend on having reference to the ID.
+                .unsafeSubjectID: [.unsafeSubjectID],
+
+            /// Destroy of subject destroys surveys, walks, and subject ID
+            .subject: [.DASI, .usability, .walk, .unsafeSubjectID]
         ]
 
         return retval
@@ -122,5 +150,9 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     var publisher: NotificationCenter.Publisher {
         NotificationCenter.default
             .publisher(for: self.notificationID)
+    }
+
+    static func rewindTheApp() {
+        //
     }
 }

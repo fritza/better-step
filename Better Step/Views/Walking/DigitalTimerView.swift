@@ -46,6 +46,8 @@ struct DigitalTimerView: View, ReportingPhase {
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?
 
+    @State private var showReversionAlert = false
+
     var walkingState: WalkingState
 
     typealias SuccessValue = IncomingAccelerometry
@@ -122,9 +124,10 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                reversionToolbarButton(for: resetState)
+                ReversionButton(toBeSet: $showReversionAlert)
             }
         }
+        .reversionAlert(on: $showReversionAlert)
         .task {
             // warning: The result is discardable.
             // You should have harvested the data result already.
