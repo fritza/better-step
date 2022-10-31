@@ -38,7 +38,7 @@ extension IncomingAccelerometry {
     /// A `Data` instance containing the entire text of a CSV `String`
     ///
     /// This is a simple wrapper that takes the result of `allAsCSV(withPrefix:)` and renders it as bytes.
-    ///   - parameter prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``TimedWalkObserver/marshalledRecords(withPrefix:)``
+    ///   - parameter prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
     func allAsTaggedData() -> Data {
         let content = allTaggedCSV()
         guard let data = content.data(using: .utf8) else { fatalError("Could not derive Data from the CSV string") }
@@ -56,7 +56,7 @@ extension IncomingAccelerometry {
 
     /// Write all CSV records into a file.
     /// - Parameters:
-    ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``marshalledRecords(withPrefix:)``
+    ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. `
     ///   - url: The location of the new file.
     func write(phase: WalkingState, to url: URL) throws {
         // TODO: Make it async
@@ -69,7 +69,7 @@ extension IncomingAccelerometry {
     /// Marshall all the `CMAccelerometerData` data and write it out to a named file in the Documents directory.
     /// - Parameters:
     ///   - fileName: The base name of the target file as a `String`. No extension will be added.
-    ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. _See_ the note at ``marshalledRecords(withPrefix:)``
+    ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
     func writeToFile(named fileName: String,
                      phase: WalkingState) throws {
         precondition(!fileName.isEmpty,

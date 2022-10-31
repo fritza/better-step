@@ -15,7 +15,7 @@ import CoreMotion
 /// - ``acceleration``
 /// - ``csvLine
 
-/// Adopters provide getters for the properties of ``CMAccelerometerData`` (`timestamp` and `acceleration`). Allows for initializable equivalents suitable for testing.
+/// Adopters provide getters for the properties of `CMAccelerometerData` (`timestamp` and `acceleration`). Allows for initializable equivalents suitable for testing.
 protocol AccelerometerDataContent: NSObject & CSVRepresentable {
     /// The time recorded, in `TimeInterval` since an epoch related to restart time.
     var timestamp: TimeInterval { get }

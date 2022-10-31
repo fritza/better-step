@@ -30,6 +30,8 @@ import Combine
 /// A `View` that displays a circle containing a sweep-second hand and a digit, representing a countdown in seconds.
 ///
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct SweepSecondView: View, ReportingPhase {
     typealias SuccessValue = ()
 

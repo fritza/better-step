@@ -23,6 +23,9 @@ fileprivate let endIncompleteText = """
 
 // FIXME: Should there be a Back button?
 
+/// The screen presented to the user at the end of the DASI phase
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct DASICompleteView: View, ReportingPhase {
     typealias SuccessValue = ()
 

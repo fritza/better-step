@@ -28,6 +28,8 @@ struct WalkInfoResult {
 }
 
 /// A `Form` for the post-usability survey asking about the condition of the subject and the chosen walking area.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is ``WalkInfoResult``.
 struct WalkInfoForm: View, ReportingPhase {
     typealias SuccessValue = WalkInfoResult
     let completion: ClosureType

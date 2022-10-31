@@ -15,7 +15,7 @@ fileprivate enum PlaybackConstants {
 }
 
 /// Player for a named audio file in the main bundle.
-/// - note: The volume of an ``AVAudioPlayer``is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.
+/// - note: The volume of an `AVAudioPlayer`is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.
 final class AudioMilestone
 {
     enum Errors: Error {
@@ -75,13 +75,6 @@ final class AudioMilestone
         // MARK: Session init
         let session = AVAudioSession.sharedInstance()
         self.session = session
-        /*
-        try session.setCategory(.playAndRecord,
-                                mode: .voicePrompt,
-                                options:  [.defaultToSpeaker])
-         THE FOLLOWING HAD WORKED BEFORE:
-        try asession.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers, .defaultToSpeaker])
-         */
         try session.setCategory(.playAndRecord, mode: .spokenAudio, options: [.duckOthers, .defaultToSpeaker])
 
         // MARK: Player init
@@ -98,7 +91,7 @@ final class AudioMilestone
     }
 
     /// Start playing the data loaded from the audio file.
-    /// - throws: `.avCantStart` if ``AVAudioPlayer/play()`` returns `false`.
+    /// - throws: ``.avCantStart`` if `AVAudioPlayer/play()` returns `false`.
     func play() throws {
         guard let player else { throw Errors.avCantStart }
         player.currentTime = 0.0

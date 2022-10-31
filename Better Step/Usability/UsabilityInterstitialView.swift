@@ -12,6 +12,8 @@ import SwiftUI
 // FIXME: All the interstitial views are getting redundant.
 
 /// This is mostly redundant of `DASIInterstitialView`, except that one is a DASI depencency, and it doesn't do the right thing about the toolbar.
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct UsabilityInterstitialView: View, ReportingPhase {
     typealias SuccessValue = Void
 

@@ -51,7 +51,7 @@ final class CSVArchiver {
 
     /// **URL** of the working directory that receives the `.csv` files and the `.zip` archive.
     ///
-    /// The directory is created by ``createWorkingDirectory()``
+    /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
     lazy var containerDirectory: URL! = {
         do {
             try FileManager.default

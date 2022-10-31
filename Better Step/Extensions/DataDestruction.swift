@@ -5,11 +5,9 @@
 //  Created by Fritz Anderson on 10/20/22.
 //
 
-
-#error("Rewind the app to the start")
-
 import Foundation
 
+/*
 // This is in the Extensions group because `Destroy` is a generic service like the Formatting extensions.
 
 /// Example of applying handlers to `Destroy` notifications.
@@ -59,6 +57,7 @@ final class Destroyer {
         }
     }
 }
+*/
 
 // Determine whether to have a top-down ForceAppReversion
 // ("App, reset!" -> "Walk, reset", ...)

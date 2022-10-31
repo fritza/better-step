@@ -7,11 +7,10 @@
 
 import SwiftUI
 
+/// A `TextField` that adds a clear button (**⊗**).
+///
+/// The `String` result is observed by a `Binding`.
 struct TaggedField: View {
-    //}, ReportingPhase {
-//    typealias SuccessValue = String
-//    let completion: ClosureType
-
     @Binding var stringInProgress: String
 
     @State var showComment: Bool = false

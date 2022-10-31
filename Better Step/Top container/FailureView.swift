@@ -8,9 +8,18 @@
 import SwiftUI
 
 // MARK: - Conclusion View
+/// A view that annpunces the successful completion of the workflow.
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
+    #warning("completion closure is never called.")
+    // SuccessValue is Void, but this view sends
+    // a .failure to the container. Why?
+    // Possibly because conclusion is a dead end.
+
+
     init(_ closure: @escaping ClosureType) {
         completion = closure
     }
@@ -20,7 +29,8 @@ struct ConclusionView: View, ReportingPhase {
             Text("Congratulations, you're done.")
             Button("Complete") {
                 completion(.failure(AppPhaseErrors.NOS))
-                // Why do I have to instantiate Void?
+                // FIXME: Reform ConclusionView to succeed
+                // with ()
             }
         }
     }
@@ -31,6 +41,9 @@ struct ConclusionView: View, ReportingPhase {
 /// Display a next-steps page with a "Revert" button that directs the user to the entry to DASI, or Usability, or Walk, depending on what failed.
 ///
 /// Instantiated for the TopPhases.failed tag.
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// - bug: The completion closure **is never called.**
 struct FailureView: View, ReportingPhase {
     static let phasesAndNames: KeyValuePairs<TopPhases, String> = [
         .walking    : "timed walk",
@@ -41,7 +54,6 @@ struct FailureView: View, ReportingPhase {
     let fallbackPhase: TopPhases
 //    @State var showRewindAlert = false
     @State var shouldAlertDisclaimer = false
-//    @EnvironmentObject var resetState: ResetStatus
 
     // TODO: Is this the place to name the next step?
 
@@ -49,6 +61,8 @@ struct FailureView: View, ReportingPhase {
 
     typealias SuccessValue = Void
     let completion: ClosureType
+    #warning("Completion closure is never called.")
+
     let error: Error?
     init(failing: TopPhases, error: Error? = nil, closure: @escaping ClosureType) {
         self.fallbackPhase = failing
@@ -120,34 +134,11 @@ Because this session was cancelled, the app must go back to the stage \(insertio
     }
 }
 
-
-/*
-struct FailureView: View, ReportingPhase {
-    typealias SuccessValue = Void
-    let completion: ClosureType
-    let failedPhase: TopPhases
-    init(failing: TopPhases, _ closure: @escaping ClosureType) {
-        failedPhase = failing
-        completion = closure
-    }
-
-    var body: some View {
-        VStack {
-            Text("""
-If you’re seeing this, the last thing you did resulted in a programming error. Let fritza@uchicago.edu know.
-""")
-        }
-        .navigationBarTitle("App Failed")
-    }
-}
- */
-
 // MARK: - Previews
 struct FailureView_Previews: PreviewProvider {
     static var previews: some View {
             FailureView(failing: .walking) {
                 _ in
             }
-            .environmentObject(ResetStatus())
     }
 }

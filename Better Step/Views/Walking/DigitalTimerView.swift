@@ -32,6 +32,9 @@ private let digitalNarrative = """
  - ``body``
  */
 
+/// Displays a coundown clock in the form `mm:ss`. Initializes, starts, and observes both `MotionManager` and `Timekeeper`.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is ``IncomingAccelerometry``.
 struct DigitalTimerView: View, ReportingPhase {
     static let timeKeeperSpec = Timekeeper.TimingSpec(
         duration: CountdownConstants.walkDuration,
@@ -40,8 +43,6 @@ struct DigitalTimerView: View, ReportingPhase {
         roundingScale: CountdownConstants.secondsRoundingFactor,
         units: [.mmSecondsString]
         )
-
-//    @EnvironmentObject var resetState: ResetStatus
 
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?
@@ -200,7 +201,6 @@ struct DigitalTimerView_Previews: PreviewProvider {
             }
                 .padding()
                 .environmentObject(MotionManager(phase: .walk_1))
-                .environmentObject(ResetStatus())
         }
     }
 }

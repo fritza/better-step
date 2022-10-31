@@ -21,6 +21,9 @@ struct QuestionContentView: View {
     }
 }
 
+/// Present a question number, question text, and a yes/no button stack.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is (``DASIState``, ``DASIResponseList``).
 struct DASIQuestionView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
 
@@ -31,8 +34,6 @@ struct DASIQuestionView: View, ReportingPhase {
     @State var answerList: DASIResponseList
     @State var pageNumber: Int = 1
     @State var showReversionAlert = false
-
-//    @EnvironmentObject var resetState: ResetStatus
 
     init(answerList: DASIResponseList,
          _ completion: @escaping ClosureType) {
@@ -115,9 +116,6 @@ struct DASIQuestionView: View, ReportingPhase {
                     print("Question done")
                 }
             }
-//            .environmentObject(ResetStatus())
-            //        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
-            //        .environmentObject(DASIResponseList())
         }
     }
 

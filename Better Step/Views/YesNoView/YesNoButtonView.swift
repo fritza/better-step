@@ -16,6 +16,9 @@ extension String {
     }
 }
 
+/// A button-like `View` that presents text (expected **Yes** or **No**) that calls back when it is tapped.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`. The client gets norification of the tap, and knows whether it is **Yes** or **No** because the completion closure  knows which button the tap belongs to.
 struct YesNoButtonView: View, ReportingPhase {
     typealias SuccessValue = ()
     let title: String

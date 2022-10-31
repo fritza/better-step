@@ -13,41 +13,28 @@ import SwiftUI
  I think it might be best to bind the button selection so the stack sets/unsets the answer in client code.
  */
 
+/// A stack of `YesNoButtonView`s, one **Yes**, one **No**
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is ``AnswerState`` (enum, `.yes`, `.no`, `.unknown`). Clients cannot access the currently-selected state, only listen for completions as the value changes.
 struct YesNoStack: View, ReportingPhase {
     typealias SuccessValue = AnswerState
     let completion: ClosureType
 
+    private let currentAnswer: AnswerState
 
-    let currentAnswer: AnswerState
-//    @State var currentAnswer = AnswerState.unknown
-//    @Binding var boundState: ClosureType
-
+    /// Create the view with an initial ``AnswerState`` (which may be `.unknown`)
     init(answer: AnswerState,
          completion: @escaping ClosureType) {
         self.completion = completion
         self.currentAnswer = answer
     }
 
-
-
-//    func selectButton(id button: YesNoButton) {
-//        switch button.id {
-//        case 1: currentAnswer  = .yes
-//        case 2: currentAnswer  = .no
-//        default: currentAnswer = .unknown
-//        }
-//        boundState = currentAnswer
-//        completion(currentAnswer)
-//    }
-
     var body: some View {
         VStack {
             YesNoButtonView(title: "Yes", checked: (currentAnswer == .yes)) { yesAnswer in
-//                currentAnswer = .yes
                 completion(.success(.yes))
             }
             YesNoButtonView(title: "No" , checked: (currentAnswer == .no )) { noAnswer in
-//                currentAnswer = .no
                 completion(.success(.no))
             }
             Spacer()
@@ -56,15 +43,15 @@ struct YesNoStack: View, ReportingPhase {
     }
 }
 
-final class YNUState: ObservableObject {
+private final class YNUState: ObservableObject {
     @State var answer: AnswerState = .no
 }
 
 struct YesNoStack_Previews: PreviewProvider {
-    static let ynuState = YNUState()
-    @State static var yesCount: Int = 0
-    @State static var noCount : Int = 0
-    @State static var illegalCount : Int = 0
+    fileprivate static let ynuState = YNUState()
+    @State private static var yesCount      : Int = 0
+    @State private static var noCount       : Int = 0
+    @State private static var illegalCount  : Int = 0
     static var previews: some View {
         VStack {
             YesNoStack(answer: .unknown, completion: { answerYesOrNo in

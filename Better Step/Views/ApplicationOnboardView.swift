@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// Presented at the beginning of the workflow if no ``SubjectID`` for the user is known.
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is `String`.
 struct ApplicationOnboardView: View, ReportingPhase {
     @Namespace var appOnboardSpace
     enum Focusables: Hashable {

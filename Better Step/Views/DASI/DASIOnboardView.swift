@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// The first user-visible display in the DASI phase.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct DASIOnboardView: View, ReportingPhase {
     typealias SuccessValue = ()
     let completion: ClosureType

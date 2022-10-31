@@ -23,17 +23,19 @@ enum UsabilityState: Int, CaseIterable {
 }
 
 
-/// A  sequence of open-intertitial → questions → close-interstitial phases
+/// A  sequence of open-intertitial → questions → close-interstitial phases. Each solicits a `1...7` rating.
+///
+/// Its `SuccessValue` as a ``ReportingPhase`` is `String`, a CSV line of responses to the 1–7 ratings.
 struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
+    #warning("UsabilityContainer does not complete.")
     @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
 
     @State var currentState: UsabilityState
     @State var recommendedPostReset: Int?
     @State var shouldDisplayReversionAlert = false
-    //    @StateObject var shouldDisplay = ResetStatus()
 
     init(state: UsabilityState = .intro,
          //         questionIndex: Int = 0,

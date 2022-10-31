@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK: - InterstitalPageTabView
 /// A view that flips through ``InterstitialPageView``s using `TabView`’s `page` style.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct InterstitalPageContainerView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType

@@ -72,7 +72,6 @@ struct InstructionPageView_Previews: PreviewProvider {
 //                        ReversionButton(shouldShow: $resetAlertVisible)
                     }
                 }
-                .environmentObject(ResetStatus())
         }
     }
 }

@@ -21,7 +21,7 @@ public struct MinSecFormatter {
         case negativeMinutes
         /// Caller passed seconds >= 60 to a formatter taking minutes and seconds.
         ///
-        /// May be overridden if ``Self.throwSecondsOverflow`` is `false` (the default).
+        /// May be overridden if `private let Self.throwSecondsOverflow` is `false` (the default).
         case secondsOverflow
     }
 

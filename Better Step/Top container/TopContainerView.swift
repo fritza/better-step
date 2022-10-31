@@ -75,6 +75,8 @@ enum TopPhases: String, CaseIterable, Comparable {
 
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
+///
+///
 struct TopContainerView: View {
     @AppStorage(AppStorageKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
@@ -133,6 +135,8 @@ struct TopContainerView: View {
             switch self.currentPhase ?? .onboarding {
                 // MARK: - Onboarding
             case .onboarding:
+                // OnboardContainerView suceeds with String.
+                // That's the entered Subject ID.
                 OnboardContainerView {
                     result in
                     do {
@@ -213,6 +217,8 @@ struct TopContainerView: View {
             case .conclusion:
                 ConclusionView { _ in
                     self.currentPhase = .onboarding
+                    // FIXME: Reform ConclusionView to succeed
+                    // with ()
                 }
                 .navigationTitle("Finished")
                 //                .reversionToolbar($showRewindAlert)
@@ -225,30 +231,12 @@ struct TopContainerView: View {
                 //                .reversionToolbar($showRewindAlert)
                 .navigationTitle("FAILED")
                 .padding()
+                // FailureView's completion is NEVER CALLED.
+                // Probably because this is a terminal state
+                // and you can use the gear button to reset.
             }
         }
-
-
-        // for testing only, moved this to UsabilityContainer.
         .reversionAlert(on: $showReversionAlert)
-
-        //
-        //        .alert("Starting Over",
-        //               isPresented: $showReversionAlert
-        //        ) {
-        //
-        //            Button("First Run" , role: .destructive) {
-        //                Destroy.dataForSubject.post()
-        //            }
-        //
-        //            Button("Cancel", role: .cancel) {
-        //                //                    shouldShow = false
-        //            }
-        //        }
-        //    message: {
-        //        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
-        //    }
-
     }
 }
 

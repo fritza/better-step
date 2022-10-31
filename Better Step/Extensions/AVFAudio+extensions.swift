@@ -40,7 +40,7 @@ extension AVAudioSession.Category: CustomStringConvertible {
     }
 }
 
-/// Encapsulates the ``AVAudioSession/.setCategory(_:mode:options:)``  parameters.
+/// Encapsulates the `AVAudioSession/.setCategory(_:mode:options:)`  parameters.
 struct CatModeOpts: CustomStringConvertible {
     internal init(cat: AVAudioSession.Category,
                   mode: AVAudioSession.Mode = .default,

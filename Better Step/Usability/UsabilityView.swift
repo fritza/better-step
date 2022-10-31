@@ -23,7 +23,9 @@ struct QLimits {
 
 /// The core of the usability-survey stack. Present the text of a question and collect the user's response via 7 buttons on a scale.
 ///
-/// Clients provide a questin ID and a binding to the response. Responses are also published via the closure the client provides.
+/// Clients provide a question ID and a binding to the response. Responses are also published via the closure the client provides.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is `[Int]`.
 struct UsabilityView: View, ReportingPhase {
     @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
@@ -34,7 +36,6 @@ struct UsabilityView: View, ReportingPhase {
     private let arbitraryCheckmarkEdge: CGFloat =  32
     private let arbitraryButtonWidth  : CGFloat = 240
 
-//    @EnvironmentObject var resetState: ResetStatus
     /// The  index of the question currently displayed.
     @State private var questionIndex       : Int
     /// The response value (1–7) for the question currently displayed.
@@ -190,7 +191,6 @@ struct UsabilityView: View, ReportingPhase {
                 }
 
             }
-            .environmentObject(ResetStatus())
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }
     }

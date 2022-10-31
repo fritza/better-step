@@ -36,7 +36,6 @@ extension Text {
 /// - note: This functionality is _for testing only._ Testers need to start over from scratch; subjects should not.
 /// - warning: Probably reversion should be `Destroy`, not the `ForceAppReversion` `Notification`
 struct ReversionAlert: ViewModifier {
-//    @Binding var resetState: ResetStatus
     @Binding var shouldShow: Bool
 
     init(_ show: Binding<Bool>) {

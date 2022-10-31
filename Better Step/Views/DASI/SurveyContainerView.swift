@@ -13,6 +13,9 @@ enum DASIState {
     case landing, question, completed, NONE
 }
 
+/// A container for the DASI workflow: Intro screen, questions, and final screen.
+///
+/// The `SuccessValue` as a ``ReportingPhase`` is ``DASIResponseList``.
 struct SurveyContainerView: View, ReportingPhase {
     // TODO: Query whether SurveyContainerView needs to be a ReportingPhase.
     typealias SuccessValue = DASIResponseList
