@@ -33,7 +33,7 @@ struct UsabilityContainer: View, ReportingPhase {
     @State var currentState: UsabilityState
     @State var recommendedPostReset: Int?
     @State var shouldDisplayReversionAlert = false
-    @StateObject var shouldDisplay = ResetStatus()
+    //    @StateObject var shouldDisplay = ResetStatus()
 
     init(state: UsabilityState = .intro,
          //         questionIndex: Int = 0,
@@ -80,37 +80,13 @@ struct UsabilityContainer: View, ReportingPhase {
             }   // switch
         }
         // Group
-
-
-        .environmentObject(shouldDisplay)
-
-        #if false
-        .reversionAlert(on: $shouldDisplay.resetAlertVisible)
-//        .reversionAlert(on: $shouldDisplay)
-        #else
-        .alert("Starting Over",
-               isPresented:
-                $shouldDisplay.resetAlertVisible
-//               ResetStatus.shared.resetAlertVisible
-        ) {
-
-            Button("First Run" , role: .destructive) {
-                Destroy.dataForSubject.post()
+        .reversionAlert(on: $shouldDisplayReversionAlert)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ReversionButton(toBeSet: $shouldDisplayReversionAlert)
             }
-
-            Button("Cancel", role: .cancel) {
-                //                    shouldShow = false
-            }
-        }
-    message: {
-        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
-    }
-        #endif
-
-    .navigationBarBackButtonHidden(true)
-        //        .environment(\.symbolRenderingMode, .hierarchical)
-        //        .symbolRenderingMode(.hierarchical)
-
+        }   // toolbar
+        .navigationBarBackButtonHidden(true)
     }       // body
 
     // MARK: - Links to phase views

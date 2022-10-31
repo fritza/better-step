@@ -10,6 +10,15 @@ import Combine
 
 let ForceAppReversion = Notification.Name("ForceAppReversion")
 
+#warning("Determine whether to destroy bottom-up (Destroy) or top-doen (ForceAppReversion)")
+// Determine whether to have a top-down ForceAppReversion
+// ("App, reset!" -> "Walk, reset", ...)
+// or a bottom-up, per-task reversion (static Destroy OptionSet
+// ("Walk, reset!" + "DASI, reset!")
+// _Is_ there room for both? Destroy has a nifty touch-all-bases
+// effect, but maybe not global things like rewinding the
+// top phase to onboarding.
+
 extension Text {
     static func decorate(_ str: String,
                          with intents: InlinePresentationIntent) -> Text {
@@ -19,6 +28,13 @@ extension Text {
     }
 }
 
+
+
+/// View modifier that binds to a `Bool`. When `true`, an alert appears asking the user whether the app should be reset to virgin state.
+///
+/// The proceed button (“First Run” ATW) triggers a ``Destroy`` of all data, then broadcasts a `ForceAppReversion` notification.
+/// - note: This functionality is _for testing only._ Testers need to start over from scratch; subjects should not.
+/// - warning: Probably reversion should be `Destroy`, not the `ForceAppReversion` `Notification`
 struct ReversionAlert: ViewModifier {
 //    @Binding var resetState: ResetStatus
     @Binding var shouldShow: Bool

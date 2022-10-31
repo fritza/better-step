@@ -41,7 +41,7 @@ struct DigitalTimerView: View, ReportingPhase {
         units: [.mmSecondsString]
         )
 
-    @EnvironmentObject var resetState: ResetStatus
+//    @EnvironmentObject var resetState: ResetStatus
 
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?

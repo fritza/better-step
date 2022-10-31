@@ -17,17 +17,19 @@ import Foundation
 /// `Destroy` is an `OptionSet` that covers all permutations of what data should be destroyed in this application.
 private
 final class Destroyer {
-    func addHandler(which: Destroy,
-                    handler: @escaping ((Notification) -> Void)) {
+    #warning("Why is “which” passed in as a compound?")
+    private func addHandler(which: Destroy,
+                            handler: @escaping ((Notification) -> Void)) {
         let dCenter = NotificationCenter.default
-        let retval = dCenter.addObserver(forName: which.notificationID, object: nil, queue: .current, using: handler)
+        let retval = dCenter.addObserver(
+            forName: which.notificationID, object: nil, queue: .current, using: handler)
         notificationHandlers.append(retval)
     }
 
 
     var notificationHandlers: [NSObjectProtocol] = []
 
-    /// Install `Notification` handlers for scalar ``Destroy`` cases.
+    /// Install `Notification` handlers for the
     init() {
         addHandler(which: .unsafeSubjectID) { _ in
             SubjectID.id = SubjectID.unSet
@@ -58,16 +60,25 @@ final class Destroyer {
     }
 }
 
+// Determine whether to have a top-down ForceAppReversion
+// ("App, reset!" -> "Walk, reset", ...)
+// or a bottom-up, per-task reversion (static Destroy OptionSet
+// ("Walk, reset!" + "DASI, reset!")
+//
+// WAIT! the only source of notifications is the .post() function.
+//    Never mind (I hope).
+#warning("Determine whether to destroy bottom-up (Destroy) or top-down (ForceAppReversion)")
+
 /// An `OptionSet` that identifies  data sets that should to be removed when the `gear` toolbar item is tapped.
 ///
 /// There are two kinds of target sets.
 /// * **scalar** cases are discrete targets for deletion, like DASI.
 /// * **compound** cases are consist of more than one scalar case. `firstRunData`, for instance, contains both DASI and the Usability surveys.
 ///
-/// Sending `post()` to a scalar case of ``Destroy`` posts a single `Notification` that that particular record is to be removed. Compund vases run through the component cases one by one.
+/// Sending `post()` to a scalar case of ``Destroy`` posts a single “`Notification_\(rawValue)`” to signal to clients that the data they manage should be deleted.  These will be for scalars only;` post()` breaks compunds to scalars; clients will never see notifications for compounds
 ///
 /// _see_ ``Destroyer`` for an example.
-/// - warning: Maintainers who want to add or edit cases of `Destroy` _must_ make sure that `.unsafeSubjectID` comes last wherever it is used.
+/// - warning: `.unsafeSubjectID` and `unsafeAppStatus` should appeaar in that order at the ends of coumpounds if those are desired.
 struct Destroy: OptionSet, RawRepresentable, Hashable {
 /// `RawRepresentable` adoption
     let rawValue: Int
@@ -76,15 +87,19 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
         self.rawValue = rawValue
     }
 
-    // MARK: Scalar tasks
+    // MARK: - Scalar tasks
     /// Remove all walk data (first and second). There is no cas in which only a single walk will be wound back.
     static let walk         : Destroy = .init(rawValue: 16)
     /// Remove results of the DASI survey
     static let DASI         : Destroy = .init(rawValue: 1)
     /// Remove results  (scalar and detail) of the usability survey
     static let usability    : Destroy = .init(rawValue: 2)
-    /// The `SubjectID` as just that `String`. client code should use `.subject`
+
+    /// The stored `SubjectID` string and nothing else, orphaning  collected data. Clients should use `.subject` instead.
     static let unsafeSubjectID: Destroy = .init(rawValue: 32768)
+
+    /// Remove the `TopPhases` phase ID, and only that, orphaning the SubjectID and the collected data. Clients should use `.all` instead.
+    static let unsafeAppState : Destroy = .init(rawValue: 65536)
 
     // MARK: Compound tasks
     /// Clear out  the elements of`.firstRunData`, then the `SubjectID`.
@@ -94,6 +109,8 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     static let dataForSubject: Destroy = firstRunData.union([.walk])
     // ... plus the subject itself.
     static let subject      : Destroy = dataForSubject.union([.unsafeSubjectID])
+    static let all          : Destroy = subject.union([.unsafeAppState])
+
 
     /// Both the DASI and usability surveys.
 
@@ -125,12 +142,16 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
             /// Invalidate (blank ATW) the subject-ID string.
             ///
             /// - note: This is “unsafe” because it just changes the string and orphans all the associated data.
-            ///
-            /// - warning: In composing task rosters (as for `.subject`, `unsafeSubjectID` must appear _last,_ because data deletion may depend on having reference to the ID.
                 .unsafeSubjectID: [.unsafeSubjectID],
 
             /// Destroy of subject destroys surveys, walks, and subject ID
-            .subject: [.DASI, .usability, .walk, .unsafeSubjectID]
+            ///
+            /// - warning:In a compound task list,  `unsafeSubjectID` (if desired) must be added last, followed by `revertAppStatus` (if desired): Data deletion may depend on the existing app state and subject ID.
+
+            .subject: [.DASI, .usability, .walk, .unsafeSubjectID],
+
+            /// Destroy all of the `all` data; and set app status to .onboarding.
+            .all: [.DASI, .usability, .walk, .unsafeSubjectID, .unsafeAppState]
         ]
 
         return retval
@@ -150,9 +171,5 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     var publisher: NotificationCenter.Publisher {
         NotificationCenter.default
             .publisher(for: self.notificationID)
-    }
-
-    static func rewindTheApp() {
-        //
     }
 }
