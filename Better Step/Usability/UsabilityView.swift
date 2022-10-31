@@ -34,7 +34,7 @@ struct UsabilityView: View, ReportingPhase {
     private let arbitraryCheckmarkEdge: CGFloat =  32
     private let arbitraryButtonWidth  : CGFloat = 240
 
-    @EnvironmentObject var resetState: ResetStatus
+//    @EnvironmentObject var resetState: ResetStatus
     /// The  index of the question currently displayed.
     @State private var questionIndex       : Int
     /// The response value (1–7) for the question currently displayed.

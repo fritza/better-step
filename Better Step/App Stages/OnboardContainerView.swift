@@ -14,7 +14,7 @@ struct OnboardContainerView: View, ReportingPhase {
     @State private var shouldWarnOfReversion: Bool = false
     var finishedInterstitialInfo: InterstitialInfo
 
-    @EnvironmentObject var resetState: ResetStatus
+//    @EnvironmentObject var resetState: ResetStatus
 
     typealias SuccessValue = String
     let completion: ClosureType

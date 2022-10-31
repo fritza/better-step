@@ -32,7 +32,7 @@ struct DASIQuestionView: View, ReportingPhase {
     @State var pageNumber: Int = 1
     @State var showReversionAlert = false
 
-    @EnvironmentObject var resetState: ResetStatus
+//    @EnvironmentObject var resetState: ResetStatus
 
     init(answerList: DASIResponseList,
          _ completion: @escaping ClosureType) {
@@ -115,7 +115,7 @@ struct DASIQuestionView: View, ReportingPhase {
                     print("Question done")
                 }
             }
-            .environmentObject(ResetStatus())
+//            .environmentObject(ResetStatus())
             //        .environmentObject(DASIPageSelection(.presenting(questionID: 1)))
             //        .environmentObject(DASIResponseList())
         }
