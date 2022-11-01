@@ -161,6 +161,9 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
         let center = NotificationCenter.default
         guard let tasks = Self.compounds[self] else { fatalError() }
         for task: Destroy in tasks {
+            #if DEBUG
+            print("Sending Destroy", task)
+            #endif
             center.post(name: task.notificationID, object: nil)
         }
     }
@@ -170,5 +173,24 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
     var publisher: NotificationCenter.Publisher {
         NotificationCenter.default
             .publisher(for: self.notificationID)
+    }
+}
+
+extension Destroy: CustomStringConvertible {
+    private static let names: [Destroy:String] = [
+        .walk           : "Walking",
+        .DASI           : "DASI",
+        .usability      : "Usability",
+        .unsafeSubjectID: "UNSAFE SubjectID",
+        .unsafeAppState : "UNSAFE App state",
+        ]
+
+    var description: String {
+        if let primitiveName = Self.names[self] {
+            return "Destroy \(primitiveName)"
+        }
+        else {
+            return "Destroy ompound(\(self.rawValue))"
+        }
     }
 }
