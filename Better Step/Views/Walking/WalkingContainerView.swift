@@ -125,6 +125,28 @@ struct WalkingContainerView: View {
     //        self.completion = completion
     //    }
 
+    var notificationHandlers: NSObjectProtocol?
+
+    func registerDataDeletion() {
+        let dCenter = NotificationCenter.default
+
+        // TODO: Should I set hasCompletedSurveys if the walk is negated?
+        let catcher = dCenter
+            .addObserver(
+                forName: Destroy.walk.notificationID,
+                object: nil,
+                queue: .current)
+        { _ in
+            // Stop the playback
+            AudioMilestone.shared.stop()
+
+            // Delete what's at the output URL,
+            // which should amount to everything,
+            // .csv, .zip ...
+            CSVArchiver.clearSharedArchiver()
+        }
+    }
+
     var body: some View {
         //        NavigationView {
         VStack {
@@ -140,8 +162,9 @@ struct WalkingContainerView: View {
 #endif
         }   // VStack
 //        .environmentObject(MotionManager(phase: .walk_1))
-//        .onAppear {
-//        }
+        .onAppear {
+            registerDataDeletion()
+        }
     } // body
 }
 

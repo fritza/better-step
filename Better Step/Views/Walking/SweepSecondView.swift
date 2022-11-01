@@ -45,6 +45,7 @@ struct SweepSecondView: View, ReportingPhase {
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @StateObject var timer: Timekeeper = Timekeeper(Self.timeKeeperSpec)
+    @State private var showReversionAlert = false
 
     /// The closure provided by client code at `init` to notify it of expiration
     let completion: ClosureType
@@ -155,6 +156,12 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                     print(#function, ":", #line, "- attempt to play countdown audio failed:", error.localizedDescription)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReversionButton(toBeSet: $showReversionAlert)
+                }
+            }
+            .reversionAlert(on: $showReversionAlert)
             .navigationTitle("Start in…")
         }
     }
