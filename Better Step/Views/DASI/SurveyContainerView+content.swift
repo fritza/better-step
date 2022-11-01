@@ -31,10 +31,12 @@ extension SurveyContainerView {
         DASICompleteView(responses: responses) {
             result in
             switch result {
-            case .success(_):
+                // TODO: Audit for correct response list
+            case .success(let responseList):
                 let completedCSV = responses.csvLine
                 tempCSV = completedCSV!
                 // TODO: See if the unwrap is okay.
+                completion(.success(responseList))
 
             case .failure(_):
                 fatalError("Shouldn’t get an error from DASICompleteView.")

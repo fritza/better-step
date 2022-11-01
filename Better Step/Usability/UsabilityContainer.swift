@@ -27,9 +27,10 @@ enum UsabilityState: Int, CaseIterable {
 ///
 /// Its `SuccessValue` as a ``ReportingPhase`` is `String`, a CSV line of responses to the 1–7 ratings.
 struct UsabilityContainer: View, ReportingPhase {
-    typealias SuccessValue = String
+    typealias SuccessValue = (scores: String, specifics: String)
     let completion: ClosureType
-    #warning("UsabilityContainer does not complete.")
+
+#warning("SuccessValue should be one or two lines of CSV.")
     @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
 
@@ -41,9 +42,7 @@ struct UsabilityContainer: View, ReportingPhase {
     private var notificationHandler: NSObjectProtocol?
 
 
-
     init(state: UsabilityState = .intro,
-         //         questionIndex: Int = 0,
          result: @escaping ClosureType) {
         self.completion = result
         self.currentState = state
@@ -64,7 +63,8 @@ struct UsabilityContainer: View, ReportingPhase {
                         currentState = .questions
                     }
 
-            case .questions :                 UsabilityView(questionIndex: 0) { resultValue in
+            case .questions :
+                UsabilityView(questionIndex: 0) { resultValue in
                 guard let array = try? resultValue.get() else {
                     print("UsabilityView should not fail.")
                     fatalError()
@@ -73,7 +73,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 if array.allSatisfy({ $0 != 0 }) {
                     currentState = .closing
                 }
-                }
+            }
 
                 // MARK: Closing
             case .closing   :
@@ -82,11 +82,17 @@ struct UsabilityContainer: View, ReportingPhase {
                     titleText: "Completed",
                     bodyText: usabilityOutCopy,
                     systemImageName: "checkmark.circle",
-                    continueTitle: "Continue", completion: {
-                        _ in  completion(.success("???"))
+                    continueTitle: "Continue",
+                    completion: {
+                        _ in
+                        completion(
+                            .success(
+                                (scores: tempCSV,
+                                 specifics: "")
+                        )
                     })
-        }
-        // Group
+            }
+        }  // Group
         .reversionAlert(on: $shouldDisplayReversionAlert)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -101,7 +107,8 @@ struct UsabilityContainer: View, ReportingPhase {
     // MARK: Question
     // FIXME: This isn't a @ViewBuilder?!
 
-    private var responses = [Int](repeating: 0, count: UsabilityQuestion.count)
+    private var responses = [Int](repeating: 0,
+                                  count: UsabilityQuestion.count)
     var csvLine: String {
         return "\(UsabilityState.csvPrefix),\(SubjectID.id)," + responses.csvLine
     }
@@ -123,8 +130,6 @@ extension UsabilityContainer {
         }
         return catcher
     }
-
-
 }
 
 // MARK: - Previews

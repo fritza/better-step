@@ -192,6 +192,8 @@ struct TopContainerView: View {
                 UsabilityContainer { result in
                     switch result {
                     case .success(_):
+                        // SuccessValue is
+                        // (scores: String, specifics: String)
                         collectedUsability = true
                         if !collectedDASI {
                             self.currentPhase = .dasi

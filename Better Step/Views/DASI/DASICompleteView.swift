@@ -27,7 +27,7 @@ fileprivate let endIncompleteText = """
 ///
 /// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
 struct DASICompleteView: View, ReportingPhase {
-    typealias SuccessValue = ()
+    typealias SuccessValue = DASIResponseList
 
 
     @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
@@ -70,7 +70,8 @@ struct DASICompleteView: View, ReportingPhase {
                 proceedEnabled: dasiResponses.isReadyToPublish
             ) {
                 // Upon tap of the proceed button
-                completion(.success(()))
+                // TODO: Audit for correct response list
+                completion(.success(dasiResponses))
             }
             .padding()
         }
@@ -79,7 +80,8 @@ struct DASICompleteView: View, ReportingPhase {
             // TODO: Replace with ToolbarItem
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("← Back") {
-                    completion(.success(()))
+                    // TODO: Audit for correct response list
+                    completion(.success(dasiResponses))
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
