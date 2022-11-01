@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 protocol ReportingPhase {
     associatedtype SuccessValue
@@ -73,6 +74,21 @@ enum TopPhases: String, CaseIterable, Comparable {
     }
 }
 
+extension TopPhases: CustomStringConvertible {
+    static let phaseNames: [TopPhases:String] = [
+        .conclusion :    "conclusion",
+        .onboarding :    "onboarding",
+        .dasi       :    "dasi",
+        .failed     :    "failed",
+        .usability  :    "usability",
+        .walking    :    "walking",
+    ]
+
+    var description: String {
+        return Self.phaseNames[self]!
+    }
+}
+
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 ///
@@ -89,19 +105,32 @@ struct TopContainerView: View {
 
     static let defaultPhase = TopPhases.onboarding
     @State var currentPhase: TopPhases? {
+        willSet {
+            print("Current phase FROM", currentPhase?.description ?? "nil")
+        }
         didSet {
-            print("top currentPhase changes to", currentPhase?.rawValue ?? "NONE")
-            print()
+            print("Current phase TO", currentPhase?.description ?? "nil")
         }
     }
-    @State var currentFailingPhase: TopPhases?
+
+//    init(subjectID: String, collectedDASI: Bool, collectedUsability: Bool, currentPhase: TopPhases? = nil) {
+//        self.subjectID = subjectID
+//        self.collectedDASI = collectedDASI
+//        self.collectedUsability = collectedUsability
+//        self.currentPhase = currentPhase
+//    }
+
+    init() {
+
+    }
+
     @State var usabilityFormResults: WalkInfoForm?
     //    @State var showRewindAlert = false
 
     @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
         .firstGreeting.rawValue
 
-    @State var showReversionAlert: Bool
+    @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
 
     // FIXME: mutation won't go well, will it.
@@ -122,11 +151,7 @@ struct TopContainerView: View {
         }
     }
 
-    init() {
-        showReversionAlert = false
-        self.currentPhase = Self.defaultPhase
-        registerReversionHandler()
-    }
+    #warning("Make .navigationTitle consistent.")
 
 
     // TODO: Do I provide the NavigationView?
@@ -173,13 +198,7 @@ struct TopContainerView: View {
             case .usability:
                 UsabilityContainer { result in
                     switch result {
-                    case .success(_)
-                        //                        let scoringVector)
-                        :
-
-                        // TODO: Save the usability vector
-                        // (or pass the string along to
-                        // something that will write a file)
+                    case .success(_):
                         if !collectedDASI {
                             self.currentPhase = .dasi
                         }
@@ -235,6 +254,11 @@ struct TopContainerView: View {
                 // Probably because this is a terminal state
                 // and you can use the gear button to reset.
             }
+        }
+        .onAppear {
+            showReversionAlert = false
+            self.currentPhase = Self.defaultPhase
+            registerReversionHandler()
         }
         .reversionAlert(on: $showReversionAlert)
     }

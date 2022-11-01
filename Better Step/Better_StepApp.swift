@@ -33,7 +33,7 @@ struct Better_StepApp: App {
                     response in print("Response =", response)
                 }
             }
-#elseif true
+#elseif false
             NavigationView {
                 UsabilityContainer { resultValue in
                     guard let array = try? resultValue.get() else {
@@ -49,7 +49,10 @@ struct Better_StepApp: App {
 
             // TODO: Nav bars persisting -> EnvironmentObjects?
 
-#elseif false
+#elseif true
+            // TODO: remove some of these #cases.
+            // TODO: Respond to the per-task deletion notifications
+
         TopContainerView()
             .environmentObject(NotificationSetup())
         //                .environmentObject(DASIResponseList())

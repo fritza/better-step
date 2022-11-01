@@ -30,7 +30,6 @@
 		1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
 		1FA281F028DBBB270038353E /* MorseHaptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70328DA720500EC2593 /* MorseHaptic.swift */; };
-		1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */; };
 		1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */; };
 		1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
 		1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */; };
@@ -168,6 +167,7 @@
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDestruction.swift; sourceTree = "<group>"; };
+		1FA9EA152910646000498D01 /* SimplifiedTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplifiedTopView.swift; path = "Better Step/SimplifiedTopView.swift"; sourceTree = SOURCE_ROOT; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectID.swift; sourceTree = "<group>"; };
@@ -393,6 +393,7 @@
 		1FB2F54328D2619D00593692 /* Top container */ = {
 			isa = PBXGroup;
 			children = (
+				1FA9EA152910646000498D01 /* SimplifiedTopView.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F09EE3128DB745900CFBE4B /* FailureView.swift */,
 				1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */,
@@ -732,7 +733,6 @@
 				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
 				1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */,
 				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
-				1FA281F128DBBB270038353E /* UtilityViews.swift in Sources */,
 				1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */,
 				1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */,
 				1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */,
