@@ -189,12 +189,10 @@
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
 		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
 		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
-		1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportFile.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
 		1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMExtensionsTests.swift; sourceTree = "<group>"; };
-		1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerSubjectFileCoordinator.swift; sourceTree = "<group>"; };
 		1FF3543E2790A96C000894B8 /* AccelerometerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerItem.swift; sourceTree = "<group>"; };
 		1FF354402790A99E000894B8 /* XYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYZ.swift; sourceTree = "<group>"; };
 		1FF3544A2791FCFF000894B8 /* CoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotion.swift; sourceTree = "<group>"; };
@@ -435,7 +433,6 @@
 				1FD45690279F40B600B5429A /* DASIResponseList.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1F2432DF27FE11D9008A5418 /* DASIQuestions.json */,
-				1FDE826027E3B45F00CD8368 /* DASIReportFile.swift */,
 			);
 			path = DASI;
 			sourceTree = "<group>";
@@ -517,7 +514,6 @@
 		1FFB30DF277BE5090099AE5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1FF3543B278FA9C2000894B8 /* PerSubjectFileCoordinator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
