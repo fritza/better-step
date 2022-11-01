@@ -29,12 +29,6 @@ struct Better_StepApp: App {
         WindowGroup {
 #if false
             NavigationView {
-                WalkingContainerView {
-                    response in print("Response =", response)
-                }
-            }
-#elseif false
-            NavigationView {
                 UsabilityContainer { resultValue in
                     guard let array = try? resultValue.get() else {
                         print("UsabilityView should not fail.")
@@ -56,61 +50,6 @@ struct Better_StepApp: App {
         TopContainerView()
             .environmentObject(NotificationSetup())
         //                .environmentObject(DASIResponseList())
-#else
-        TabView(
-            selection:
-                $aStage.currentSelection
-        ) {
-            // MARK: - DASI
-            if includeDASIPersistent {
-                SurveyContainerView()
-                    .badge(BSTAppStages
-                        .dasi.tabBadge)
-                    .tabItem {
-                        Image(systemName: BSTAppStages.dasi.imageName)
-                        Text(BSTAppStages.dasi.visibleName)
-                    }
-                    .tag(BSTAppStages.dasi)
-            }
-
-            // MARK: - Timed Walk
-            WalkingContainerView()
-            // TODO: Add walk-related environmentObjects as soon as known.
-                .badge(BSTAppStages.walk.tabBadge)
-                .tabItem {
-                    Image(systemName: BSTAppStages.walk.imageName)
-                    Text(BSTAppStages.walk.visibleName)
-                }
-                .tag(BSTAppStages.walk)
-
-                // MARK: - Reporting
-                // TODO: Add report-related environmentObjects as soon as known.
-                Text("Reporting Tab")
-                    .badge(BSTAppStages.report.tabBadge)
-                    .tabItem {
-                        Image(systemName: BSTAppStages.report.imageName)
-                        Text(BSTAppStages.report.visibleName)
-                    }
-                    .tag(BSTAppStages.report)
-
-                // MARK: - Setup
-                SetupView()
-                // TODO: Add configuration-related environmentObjects as soon as known.
-                    .tabItem {
-                        Image(systemName: BSTAppStages.configuration.imageName)
-                        Text(BSTAppStages.configuration.visibleName)
-                    }
-                    .tag(BSTAppStages.configuration)
-            }
-
-            .environmentObject(appStage)
-            .environmentObject(WalkingSequence())
-            .environmentObject(phaseManager)
-
-            .environmentObject(NotificationSetup())
-
-#warning("Move MotionManager environment var closer to the walk container")
-            .environmentObject(MotionManager(phase: .walk_1))
 #endif
         }
     }

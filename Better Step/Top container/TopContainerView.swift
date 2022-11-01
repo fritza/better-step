@@ -113,13 +113,6 @@ struct TopContainerView: View {
         }
     }
 
-//    init(subjectID: String, collectedDASI: Bool, collectedUsability: Bool, currentPhase: TopPhases? = nil) {
-//        self.subjectID = subjectID
-//        self.collectedDASI = collectedDASI
-//        self.collectedUsability = collectedUsability
-//        self.currentPhase = currentPhase
-//    }
-
     init() {
 
     }
