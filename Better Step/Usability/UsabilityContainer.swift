@@ -53,6 +53,7 @@ struct UsabilityContainer: View, ReportingPhase {
     var body: some View {
         Group {
             switch currentState {
+                // MARK: Intro
             case .intro:
                 GenericInstructionView(
                     titleText: "Usability",
@@ -72,8 +73,9 @@ struct UsabilityContainer: View, ReportingPhase {
                 if array.allSatisfy({ $0 != 0 }) {
                     currentState = .closing
                 }
-            }
+                }
 
+                // MARK: Closing
             case .closing   :
                 // TODO: Remove UsabilityInterstitialView.
                 UsabilityInterstitialView(
@@ -83,9 +85,6 @@ struct UsabilityContainer: View, ReportingPhase {
                     continueTitle: "Continue", completion: {
                         _ in  completion(.success("???"))
                     })
-
-            default: Text("Can't happen.")
-            }   // switch
         }
         // Group
         .reversionAlert(on: $shouldDisplayReversionAlert)

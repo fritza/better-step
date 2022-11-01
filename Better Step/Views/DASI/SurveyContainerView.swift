@@ -68,6 +68,8 @@ struct SurveyContainerView: View, ReportingPhase {
             questionPageView()
 
         case .completed:
+            // FIXME: Consider storing the DASI response here.
+            // instead of the top container.
             completionPageView()
 
         case .NONE:

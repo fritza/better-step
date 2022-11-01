@@ -81,6 +81,9 @@ struct UsabilityView: View, ReportingPhase {
         .frame(width: width)
     }
 
+    // TODO: A brief pause when a buttonis tapped
+    //       to display the check and give an
+    //       impression that something has happened.
     /// Stack of 7 buttons for the user's selection.
     @ViewBuilder
     func ratingsStack() -> some View {

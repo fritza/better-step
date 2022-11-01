@@ -192,6 +192,7 @@ struct TopContainerView: View {
                 UsabilityContainer { result in
                     switch result {
                     case .success(_):
+                        collectedUsability = true
                         if !collectedDASI {
                             self.currentPhase = .dasi
                         }
@@ -211,6 +212,10 @@ struct TopContainerView: View {
             case .dasi:
                 SurveyContainerView { response in
                     do {
+                        collectedDASI = true
+                        // FIXME: Consider storing the DASI response here.
+                        // IS stored (in UserDefaults)
+                        // by SurveyContainerView.completionPageView
                         let responseList = try response.get()
                         if !collectedUsability {
                             self.currentPhase = .usability
