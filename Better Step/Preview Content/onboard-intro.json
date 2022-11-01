@@ -1,7 +1,8 @@
 [
     {
         "pageTitle": "Welcome.",
-        "introAbove": "We deeply appreciate your help in making [OUR APP] the best tool to measure the activity of patients and research volunteers like you."
+12345678
+        "introAbove": "We deeply appreciate…||(The gear button on many screens allows you to restart the workflow.)",
         "introBelow": "First, we need to match you to the information you'll send. You were given a Subject ID. Please enter it here:",
         "systemImage": "hand.wave",
         "proceedTitle": "Done"
