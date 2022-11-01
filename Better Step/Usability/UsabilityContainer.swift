@@ -37,11 +37,17 @@ struct UsabilityContainer: View, ReportingPhase {
     @State var recommendedPostReset: Int?
     @State var shouldDisplayReversionAlert = false
 
+    // Holder for the block that handles Destroy.usability.
+    private var notificationHandler: NSObjectProtocol?
+
+
+
     init(state: UsabilityState = .intro,
          //         questionIndex: Int = 0,
          result: @escaping ClosureType) {
         self.completion = result
         self.currentState = state
+        notificationHandler = registerDataDeletion()
     }
 
     var body: some View {
@@ -100,6 +106,26 @@ struct UsabilityContainer: View, ReportingPhase {
     var csvLine: String {
         return "\(UsabilityState.csvPrefix),\(SubjectID.id)," + responses.csvLine
     }
+}
+
+extension UsabilityContainer {
+    func registerDataDeletion() -> NSObjectProtocol {
+        let dCenter = NotificationCenter.default
+
+        // TODO: Should I set hasCompletedSurveys if the walk is negated?
+        let catcher = dCenter
+            .addObserver(
+                forName: Destroy.usability.notificationID,
+                object: nil,
+                queue: .current)
+        { _ in
+            // WARNING: TEMPORARY, using AppStorage for the completed survey.
+            tempCSV = ""
+        }
+        return catcher
+    }
+
+
 }
 
 // MARK: - Previews

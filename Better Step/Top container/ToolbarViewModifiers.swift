@@ -49,11 +49,17 @@ struct ReversionAlert: ViewModifier {
             ) {
 
                 Button("First Run" , role: .destructive) {
-                    Destroy.dataForSubject.post()
+                    Destroy.all.post()
 
                     let nc = NotificationCenter.default
                     nc.post(name: ForceAppReversion, object: nil)
                 }
+                /*
+                 This should hit the following primitives:
+                 .DASI, .usability, .walk,
+                 .unsafeSubjectID,  -- SubjectID
+                 .unsafeAppState
+                 */
 
                 Button("Cancel", role: .cancel) {
                     //                    shouldShow = false

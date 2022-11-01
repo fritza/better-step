@@ -23,15 +23,37 @@ struct SurveyContainerView: View, ReportingPhase {
 
     @State          var dasiPhaseState: DASIState? = .landing
     @StateObject    var responses = DASIResponseList()
-    @AppStorage(AppStorageKeys.temporaryDASIResults.rawValue) var csvStash: String = ""
+    @AppStorage(AppStorageKeys.temporaryDASIResults.rawValue) var tempCSV: String = ""
 
+    var notificationHandler: NSObjectProtocol?
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
+        notificationHandler = registerDataDeletion()
     }
 
 #warning("Be sure to initialize Pages and Response list")
 //    @StateObject    var pager     = DASIPageSelection(.landing)
+
+
+    // MARK: - Destruction
+
+    func registerDataDeletion()
+    -> NSObjectProtocol {
+        let dCenter = NotificationCenter.default
+
+        // TODO: Should I set hasCompletedSurveys if the walk is negated?
+        let catcher = dCenter
+            .addObserver(
+                forName: Destroy.DASI.notificationID,
+                object: nil,
+                queue: .current) {
+                    _ in tempCSV = ""
+                }
+        return catcher
+    }
+
+
 
     // FIXME: YUCK! if this doesn't easily work…
     // Oh gosh — what would I have to do to make it a navigable view like the top level?
@@ -51,6 +73,7 @@ struct SurveyContainerView: View, ReportingPhase {
         case .NONE:
             fatalError("Unassigned phase in \(#function)")
         }
+
     }
 }
 

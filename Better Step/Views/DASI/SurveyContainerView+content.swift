@@ -33,7 +33,7 @@ extension SurveyContainerView {
             switch result {
             case .success(_):
                 let completedCSV = responses.csvLine
-                csvStash = completedCSV!
+                tempCSV = completedCSV!
                 // TODO: See if the unwrap is okay.
 
             case .failure(_):

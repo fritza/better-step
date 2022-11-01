@@ -27,7 +27,21 @@ import ZIPFoundation
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
 final class CSVArchiver {
-    static let shared = try! CSVArchiver()
+    static var opt_shared: CSVArchiver?
+    static var shared: CSVArchiver = {
+        if let opt_shared { return opt_shared }
+        opt_shared = try! CSVArchiver()
+        return opt_shared!
+    }()
+
+    static func clearSharedArchiver() {
+        if let container = shared.containerDirectory {
+            try?
+            FileManager.default
+                .deleteObjects(at: [ container ])
+        }
+        opt_shared = nil
+    }
 
     /// Invariant: time of creation of the export set
     let timestamp = Date().iso
@@ -43,6 +57,20 @@ final class CSVArchiver {
             accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
         self.csvArchive = _archive
+    }
+
+    /// Empty the container and its filesystem storage.
+    ///
+    func reset() {
+        // This may be tricky.
+
+        // 1. Delete the working directory,
+        // which should get rid of the intermediates
+        // and the ZIP file.
+
+
+        // 2. Reset the archiver.
+        // Can we do this just by
     }
 
     // Step 1: Create the destination directory
