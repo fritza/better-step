@@ -8,19 +8,6 @@
 import SwiftUI
 import Combine
 
-protocol ReportingPhase {
-    associatedtype SuccessValue
-    typealias ResultValue = Result<SuccessValue,Error>
-    typealias ClosureType = (ResultValue) -> Void
-
-    var completion: ClosureType { get }
-
-    //    var completion: ((Result<SuccessValue, Error>) -> Void)! { get }
-    // Each phase must report completion.
-    // Meaning it must call the completion closure.
-    // The container can expect the reporter's result/failure
-}
-
 // onboarding, walking, dasi, usability, conclusion / failed
 
 enum TopPhases: String, CaseIterable, Comparable {

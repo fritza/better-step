@@ -89,6 +89,7 @@ struct UsabilityContainer: View, ReportingPhase {
                             .success(
                                 (scores: tempCSV,
                                  specifics: "")
+                            )
                         )
                     })
             }

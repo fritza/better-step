@@ -86,6 +86,7 @@
 		1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
 		1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */; };
+		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
 		1FC7477328E787AD00817041 /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
 		1FC7477428E787AD00817041 /* AAA.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476D28E7694E00817041 /* AAA.ahap */; };
@@ -168,6 +169,7 @@
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDestruction.swift; sourceTree = "<group>"; };
 		1FA9EA152910646000498D01 /* SimplifiedTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplifiedTopView.swift; path = "Better Step/SimplifiedTopView.swift"; sourceTree = SOURCE_ROOT; };
+		1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingPhase.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectID.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		1FB2F54328D2619D00593692 /* Top container */ = {
 			isa = PBXGroup;
 			children = (
+				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1FA9EA152910646000498D01 /* SimplifiedTopView.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F09EE3128DB745900CFBE4B /* FailureView.swift */,
@@ -775,6 +778,7 @@
 				1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */,
 				1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */,
 				1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */,
+				1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
