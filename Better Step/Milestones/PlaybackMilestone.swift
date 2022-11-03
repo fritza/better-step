@@ -14,6 +14,8 @@ fileprivate enum PlaybackConstants {
     static let volume       = 0.6
 }
 
+#if ALLOW_AVAUDIO
+
 /// Player for a named audio file in the main bundle.
 /// - note: The volume of an `AVAudioPlayer`is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.
 final class AudioMilestone
@@ -116,3 +118,4 @@ fileprivate final class AudioPlaybackDelegate: NSObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
     }
 }
+#endif

@@ -149,12 +149,14 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                     repeats: false) { _ in
                         timer.start()
                 }
+#if ALLOW_AVAUDIO
                 do {
                     try AudioMilestone.shared.play()
                 }
                 catch {
                     print(#function, ":", #line, "- attempt to play countdown audio failed:", error.localizedDescription)
                 }
+#endif
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

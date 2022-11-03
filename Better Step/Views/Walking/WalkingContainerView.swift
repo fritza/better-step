@@ -117,8 +117,11 @@ struct WalkingContainerView: View {
     init(completion: @escaping WCVClosure) {
         self.state = .interstitial_1
         self.completion = completion
+
+#if ALLOW_AVAUDIO
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
+#endif
 
         notificationHandlers = registerDataDeletion()
     }
@@ -139,8 +142,10 @@ struct WalkingContainerView: View {
                 object: nil,
                 queue: .current)
         { _ in
+#if ALLOW_AVAUDIO
             // Stop the playback
             AudioMilestone.shared.stop()
+#endif
 
             // Delete what's at the output URL,
             // which should amount to everything,
@@ -166,7 +171,34 @@ struct WalkingContainerView: View {
         }   // VStack
 //        .environmentObject(MotionManager(phase: .walk_1))
         .onAppear {
-            registerDataDeletion()
+//            notificationHandlers =  registerDataDeletion()
+
+            // Prevent sleep
+            // See the completion calls for the setting to false
+
+
+
+/*
+
+
+            assert(UIApplication.shared.isIdleTimerDisabled == false,
+            "before setting 'disabled', timer-disabled should be false")
+            UIApplication.shared.isIdleTimerDisabled = true
+#if DEBUG
+            print("\(#function): \(#fileID):\(#line)", "Disabled the timer")
+#endif
+
+*/
+
+
+
+        }
+        .onDisappear {
+            // Permit sleep
+//            UIApplication.shared.isIdleTimerDisabled = false
+//            #if DEBUG
+//            print(#function, ": \(#fileID):\(#line)", "Enabling the timer")
+//            #endif
         }
     } // body
 }
@@ -314,6 +346,15 @@ extension WalkingContainerView {
                 InterstitalPageContainerView(
                     // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
                     listing: end_walkingContentList, selection: 1) { result in
+
+/*
+                        print("\(#function): \(#fileID):\(#line)", "Enabling the timer")
+                        assert(UIApplication.shared.isIdleTimerDisabled == true,
+                        "Before setting enabled, 'disabled' should be true")
+
+                        UIApplication.shared.isIdleTimerDisabled = false
+*/
+
                         switch result {
                         case .success(_)        : completion(nil)
                         case .failure(let error): completion(error)
