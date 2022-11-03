@@ -47,22 +47,13 @@ struct ReversionAlert: ViewModifier {
             .alert("Starting Over",
                    isPresented:  $shouldShow
             ) {
-
                 Button("First Run" , role: .destructive) {
                     Destroy.all.post()
-
-                    let nc = NotificationCenter.default
-                    nc.post(name: ForceAppReversion, object: nil)
+                    NotificationCenter.default
+                        .post(name: ForceAppReversion,
+                              object: nil)
                 }
-                /*
-                 This should hit the following primitives:
-                 .DASI, .usability, .walk,
-                 .unsafeSubjectID,  -- SubjectID
-                 .unsafeAppState
-                 */
-
                 Button("Cancel", role: .cancel) {
-                    //                    shouldShow = false
                 }
             }
     message: {
@@ -91,6 +82,5 @@ struct ReversionButton: View {
     label: {
         Label("configure", systemImage: "gear")
     }
-
     }
 }

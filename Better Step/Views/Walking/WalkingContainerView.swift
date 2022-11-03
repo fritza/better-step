@@ -169,7 +169,8 @@ struct WalkingContainerView: View {
             demo_summaryView()
 #endif
         }   // VStack
-//        .environmentObject(MotionManager(phase: .walk_1))
+
+        // NEW: appear/disappear prevent/permit sleep.
         .onAppear {
 //            notificationHandlers =  registerDataDeletion()
 

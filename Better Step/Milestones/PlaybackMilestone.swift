@@ -6,6 +6,8 @@
 //
 
 import Foundation
+#if ALLOW_AVAUDIO
+
 import AVFoundation
 
 fileprivate enum PlaybackConstants {
@@ -13,8 +15,6 @@ fileprivate enum PlaybackConstants {
     static let `extension`  = "m4a"
     static let volume       = 0.6
 }
-
-#if ALLOW_AVAUDIO
 
 /// Player for a named audio file in the main bundle.
 /// - note: The volume of an `AVAudioPlayer`is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.

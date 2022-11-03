@@ -6,6 +6,9 @@
 //
 
 import Foundation
+
+#if ALLOW_AVAUDIO
+
 import AVFAudio
 
 extension AVAudioSession.Mode: CustomStringConvertible {
@@ -63,3 +66,4 @@ struct CatModeOpts: CustomStringConvertible {
         try  session.setCategory(cat, mode: mode, options: opts)
     }
 }
+#endif
