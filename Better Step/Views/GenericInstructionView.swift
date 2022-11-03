@@ -9,7 +9,7 @@ import SwiftUI
 
 // TODO: Yield to InterstitialPageView
 //       which has introAbove and introBelow
-#warning("Yield to InterstitialPageView")
+#warning("Replace with InterstitialPageView")
 
 struct GenericInstructionView: View {
     private let imageScale: CGFloat = 0.6

@@ -12,7 +12,7 @@ import SwiftUI
 // TODO: Replace GenericInstructionView with this.
 //       which DOES NOT have introAbove and introBelow
 
-#warning("Replace GenericInstructionView")
+#warning("Replace GenericInstructionView with InterstitialPageView")
 
 
 /// A `View` that presents a single page derived from ``InterstitialInfo``:  text, SF Symbols name, Action button; plus a callback when the action button is tapped.

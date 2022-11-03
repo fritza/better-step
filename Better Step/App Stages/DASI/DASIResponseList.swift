@@ -56,7 +56,7 @@ enum DASIReportErrors: Error {
     case missingDASIHeader(String)
     case wrongNumberOfResponseElements(Int, Int)
     case outputHandleNotInitialized
-    #warning("only one DASIReportErrors is used.")
+
     case couldntCreateDASIFile
 }
 

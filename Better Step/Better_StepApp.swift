@@ -27,30 +27,12 @@ struct Better_StepApp: App {
 
     var body: some Scene {
         WindowGroup {
-#if false
-            NavigationView {
-                UsabilityContainer { resultValue in
-                    guard let array = try? resultValue.get() else {
-                        print("UsabilityView should not fail.")
-                        fatalError()
-                    }
-
-                    print("value for csv is",
-                          array.map({ "\($0)" }).joined(separator: ","))
-                }
-            }
-            .environment(\.symbolRenderingMode, .hierarchical)
-
-            // TODO: Nav bars persisting -> EnvironmentObjects?
-
-#elseif true
             // TODO: remove some of these #cases.
             // TODO: Respond to the per-task deletion notifications
 
-        TopContainerView()
-            .environmentObject(NotificationSetup())
-        //                .environmentObject(DASIResponseList())
-#endif
+            TopContainerView()
+                .environmentObject(NotificationSetup())
+            //                .environmentObject(DASIResponseList())
         }
     }
 }

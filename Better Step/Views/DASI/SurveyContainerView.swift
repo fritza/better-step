@@ -32,9 +32,6 @@ struct SurveyContainerView: View, ReportingPhase {
         notificationHandler = registerDataDeletion()
     }
 
-#warning("Be sure to initialize Pages and Response list")
-//    @StateObject    var pager     = DASIPageSelection(.landing)
-
 
     // MARK: - Destruction
 

@@ -7,66 +7,6 @@
 
 import Foundation
 
-/*
-// This is in the Extensions group because `Destroy` is a generic service like the Formatting extensions.
-
-/// Example of applying handlers to `Destroy` notifications.
-///
-/// `Destroy` is an `OptionSet` that covers all permutations of what data should be destroyed in this application.
-private
-final class Destroyer {
-    #warning("Why is “which” passed in as a compound?")
-    private func addHandler(which: Destroy,
-                            handler: @escaping ((Notification) -> Void)) {
-        let dCenter = NotificationCenter.default
-        let retval = dCenter.addObserver(
-            forName: which.notificationID, object: nil, queue: .current, using: handler)
-        notificationHandlers.append(retval)
-    }
-
-
-    var notificationHandlers: [NSObjectProtocol] = []
-
-    /// Install `Notification` handlers for the
-    init() {
-        addHandler(which: .unsafeSubjectID) { _ in
-            SubjectID.id = SubjectID.unSet
-        }
-
-        addHandler(which: .DASI) { _ in
-            AppStorageKeys.temporaryDASIResults.eraseDefault()
-            AppStorageKeys.collectedDASI.negate()
-            AppStorageKeys.hasCompletedSurveys.negate()
-            // TODO: There's no file yet
-            #warning("Many files aren'r erased")
-        }
-
-        addHandler(which: .usability) { _ in
-            AppStorageKeys.tempUsabilityIntsCSV.eraseDefault()
-            AppStorageKeys.collectedFreehandU.negate()
-            AppStorageKeys.collectedUsability.negate()
-            AppStorageKeys.hasCompletedSurveys.negate()
-        }
-
-        addHandler(which: .walk) { _ in
-
-            #warning("No deletion of walk files.")
-            // Trace back from the IncomngAccelerometry output to find the files.
-
-            print("destroying walk")
-        }
-    }
-}
-*/
-
-// Determine whether to have a top-down ForceAppReversion
-// ("App, reset!" -> "Walk, reset", ...)
-// or a bottom-up, per-task reversion (static Destroy OptionSet
-// ("Walk, reset!" + "DASI, reset!")
-//
-// WAIT! the only source of notifications is the .post() function.
-//    Never mind (I hope).
-#warning("Determine whether to destroy bottom-up (Destroy) or top-down (ForceAppReversion)")
 
 /// An `OptionSet` that identifies  data sets that should to be removed when the `gear` toolbar item is tapped.
 ///
