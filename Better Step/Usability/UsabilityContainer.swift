@@ -50,7 +50,7 @@ struct UsabilityContainer: View, ReportingPhase {
     }
 
     var body: some View {
-        Group {
+        VStack {
             switch currentState {
                 // MARK: Intro
             case .intro:

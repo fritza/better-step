@@ -119,6 +119,8 @@ struct WalkingContainerView: View {
         self.completion = completion
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
+
+        notificationHandlers = registerDataDeletion()
     }
     //((Result<[CMAccelerometerData], Error>) -> Void)!
     //    ) {
@@ -127,7 +129,7 @@ struct WalkingContainerView: View {
 
     var notificationHandlers: NSObjectProtocol?
 
-    func registerDataDeletion() {
+    func registerDataDeletion() -> NSObjectProtocol {
         let dCenter = NotificationCenter.default
 
         // TODO: Should I set hasCompletedSurveys if the walk is negated?
@@ -145,6 +147,7 @@ struct WalkingContainerView: View {
             // .csv, .zip ...
             CSVArchiver.clearSharedArchiver()
         }
+        return catcher
     }
 
     var body: some View {
