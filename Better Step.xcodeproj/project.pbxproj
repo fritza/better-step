@@ -272,7 +272,6 @@
 				1FF3543D2790A958000894B8 /* Storage */,
 				1FCBA9FD2835AA040088EAF2 /* Usability */,
 				1F8A337F27E119A30093C896 /* App Stages */,
-				1FFB30DF277BE5090099AE5E /* Model */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1F60E70028DA71AC00EC2593 /* Milestones */,
 				1FFB30DE277BE4FA0099AE5E /* Views */,
@@ -512,13 +511,6 @@
 				1F1C4E0728D3DB0500547C7A /* TaggedField.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		1FFB30DF277BE5090099AE5E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		1FFB30E9277F89A70099AE5E /* YesNoView */ = {
