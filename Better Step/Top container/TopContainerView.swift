@@ -131,115 +131,117 @@ struct TopContainerView: View {
         }
     }
 
-    #warning("Make .navigationTitle consistent.")
+#warning("Make .navigationTitle consistent.")
 
 
     // TODO: Do I provide the NavigationView?
     var body: some View {
         NavigationView {
-            switch self.currentPhase ?? .onboarding {
-                // MARK: - Onboarding
-            case .onboarding:
-                // OnboardContainerView suceeds with String.
-                // That's the entered Subject ID.
-                OnboardContainerView {
-                    result in
-                    do {
-                        SubjectID.id = try result.get()
-                        self.currentPhase = .walking
+            VStack {
+                switch self.currentPhase ?? .onboarding {
+                    // MARK: - Onboarding
+                case .onboarding:
+                    // OnboardContainerView suceeds with String.
+                    // That's the entered Subject ID.
+                    OnboardContainerView {
+                        result in
+                        do {
+                            SubjectID.id = try result.get()
+                            self.currentPhase = .walking
+                        }
+                        catch {
+                            fatalError("Can't fail out of an onboarding view")
+                        }
                     }
-                    catch {
-                        fatalError("Can't fail out of an onboarding view")
-                    }
-                }
 
-                // MARK: - Walking
-            case .walking:
+                    // MARK: - Walking
+                case .walking:
 #warning("WalkingContainerView is not a RepotingPhase.")
 
-                WalkingContainerView { error in
-                    if let error {
-                        print("Walk failed:", error)
-                        self.currentPhase = .failed
-                    }
-                    else if !collectedDASI {
-                        self.currentPhase = .dasi
-                    }
-                    else if !collectedUsability {
-                        self.currentPhase = .usability
-                    }
-                    else {
-                        self.currentPhase = .conclusion
-                    }
-                }
-
-
-                // MARK: - Usability
-            case .usability:
-                UsabilityContainer { result in
-                    switch result {
-                    case .success(_):
-                        // SuccessValue is
-                        // (scores: String, specifics: String)
-                        collectedUsability = true
-                        if !collectedDASI {
+                    WalkingContainerView { error in
+                        if let error {
+                            print("Walk failed:", error)
+                            self.currentPhase = .failed
+                        }
+                        else if !collectedDASI {
                             self.currentPhase = .dasi
                         }
-                        else {
-                            self.currentPhase = .conclusion
-                        }
-                        // FIXME: Add the usability form
-                        //        to the usability container.
-
-                    case .failure(let error):
-                        // TODO: Maybe pass the error into the failure view?
-                        self.currentPhase = .failed
-                    }
-                }
-
-                // MARK: - DASI
-            case .dasi:
-                SurveyContainerView { response in
-                    do {
-                        collectedDASI = true
-                        // FIXME: Consider storing the DASI response here.
-                        // IS stored (in UserDefaults)
-                        // by SurveyContainerView.completionPageView
-                        let responseList = try response.get()
-                        if !collectedUsability {
+                        else if !collectedUsability {
                             self.currentPhase = .usability
                         }
                         else {
                             self.currentPhase = .conclusion
                         }
                     }
-                    catch {
-                        self.currentPhase = .failed
-                        // TODO: Maybe pass the error into the failure view?
+
+
+                    // MARK: - Usability
+                case .usability:
+                    UsabilityContainer { result in
+                        switch result {
+                        case .success(_):
+                            // SuccessValue is
+                            // (scores: String, specifics: String)
+                            collectedUsability = true
+                            if !collectedDASI {
+                                self.currentPhase = .dasi
+                            }
+                            else {
+                                self.currentPhase = .conclusion
+                            }
+                            // FIXME: Add the usability form
+                            //        to the usability container.
+
+                        case .failure(let error):
+                            // TODO: Maybe pass the error into the failure view?
+                            self.currentPhase = .failed
+                        }
                     }
-                }
 
-                // MARK: - Conclusion (success)
-            case .conclusion:
-                ConclusionView { _ in
-                    self.currentPhase = .onboarding
-                    // FIXME: Reform ConclusionView to succeed
-                    // with ()
-                }
-                .navigationTitle("Finished")
-                //                .reversionToolbar($showRewindAlert)
+                    // MARK: - DASI
+                case .dasi:
+                    SurveyContainerView { response in
+                        do {
+                            collectedDASI = true
+                            // FIXME: Consider storing the DASI response here.
+                            // IS stored (in UserDefaults)
+                            // by SurveyContainerView.completionPageView
+                            let responseList = try response.get()
+                            if !collectedUsability {
+                                self.currentPhase = .usability
+                            }
+                            else {
+                                self.currentPhase = .conclusion
+                            }
+                        }
+                        catch {
+                            self.currentPhase = .failed
+                            // TODO: Maybe pass the error into the failure view?
+                        }
+                    }
 
-                // MARK: - Failure (app-wide)
-            case .failed:
-                FailureView(failing: TopPhases.walking) { _ in
-                    // FIXME: Dump all data
+                    // MARK: - Conclusion (success)
+                case .conclusion:
+                    ConclusionView { _ in
+                        self.currentPhase = .onboarding
+                        // FIXME: Reform ConclusionView to succeed
+                        // with ()
+                    }
+                    .navigationTitle("Finished")
+                    //                .reversionToolbar($showRewindAlert)
+
+                    // MARK: - Failure (app-wide)
+                case .failed:
+                    FailureView(failing: TopPhases.walking) { _ in
+                        // FIXME: Dump all data
+                    }
+                    //                .reversionToolbar($showRewindAlert)
+                    .navigationTitle("FAILED")
+                    .padding()
+                    // FailureView's completion is NEVER CALLED.
+                    // Probably because this is a terminal state
+                    // and you can use the gear button to reset.
                 }
-                //                .reversionToolbar($showRewindAlert)
-                .navigationTitle("FAILED")
-                .padding()
-                // FailureView's completion is NEVER CALLED.
-                // Probably because this is a terminal state
-                // and you can use the gear button to reset.
             }
         }
         .onAppear {

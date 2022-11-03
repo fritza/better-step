@@ -111,7 +111,7 @@ struct UsabilityContainer: View, ReportingPhase {
     private var responses = [Int](repeating: 0,
                                   count: UsabilityQuestion.count)
     var csvLine: String {
-        return "\(UsabilityState.csvPrefix),\(SubjectID.id)," + responses.csvLine
+        return "\(UsabilityState.csvPrefix),\(SubjectID.id),  \(responses.csvLine)"
     }
 }
 
