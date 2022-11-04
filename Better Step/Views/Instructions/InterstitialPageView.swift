@@ -16,9 +16,11 @@ import SwiftUI
 
 
 /// A `View` that presents a single page derived from ``InterstitialInfo``:  text, SF Symbols name, Action button; plus a callback when the action button is tapped.
-struct InterstitialPageView: View {
+struct InterstitialPageView: View, Identifiable {
     let item: InterstitialInfo
     let proceedCallback: () -> Void
+
+    let id: Int
 
     /// Initialize the view given the content information and a button-action closure
     /// - Parameters:
@@ -28,6 +30,7 @@ struct InterstitialPageView: View {
          proceedCallback callback: @escaping () -> Void) {
         item = info
         self.proceedCallback = callback
+        id = info.id
     }
 
     // MARK: - body

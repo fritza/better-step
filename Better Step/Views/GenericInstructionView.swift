@@ -47,6 +47,7 @@ struct GenericInstructionView: View {
                         Text(tText)
                             .font(.largeTitle)
                             .fontWeight(.semibold)
+                            .tag("title_text")
                         Spacer()
                     }
                     Image(systemName: sfBadgeName)
@@ -55,11 +56,13 @@ struct GenericInstructionView: View {
                         .foregroundColor(.accentColor)
                         .frame(
                             height: proxy.size.width * imageScale, alignment: .center)
+                        .tag("image")
                     Spacer()
                     Text(bodyText)
                         .font(.title3)
                         .padding()
                         .minimumScaleFactor(/*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                        .tag("body_text")
                     Spacer()
 
                     if let proceedTitle {
@@ -67,6 +70,7 @@ struct GenericInstructionView: View {
                             proceedClosure?()
                         }
                         .disabled(!proceedEnabled)
+                        .tag("continue")
                     }
                 }
                 Spacer()
