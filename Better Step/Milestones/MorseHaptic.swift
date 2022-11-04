@@ -105,11 +105,12 @@ struct MorseHaptic: RawRepresentable {
 
     // MARK: Prepared haptic patterns
 // if !DEBUG
-    /// A haptic for Morse `._  ._  ._` as described in `AAA.ahap`.
-//    static var aaa = MorseHaptic(rawValue: "AAA")!
+    /// A haptic for Morse `._  ._  ._` as described in `AAAbeep.ahap`.
     static var aaa = MorseHaptic(rawValue: "AAAbeep")
-    /// A haptic for Morse `_.  _.  _.` as described in `NNN.ahap`.
-//    static var nnn = MorseHaptic(rawValue: "NNN")!
+//    static var aaa = MorseHaptic(rawValue: "AAA")!
+
+    /// A haptic for Morse `_.  _.  _.` as described in `NNNbeep.ahap`.
     static var nnn = MorseHaptic(rawValue: "NNNbeep")
+//    static var nnn = MorseHaptic(rawValue: "NNN")!
 // endif
 }
