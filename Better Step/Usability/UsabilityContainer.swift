@@ -93,7 +93,7 @@ struct UsabilityContainer: View, ReportingPhase {
                         )
                     })
             }
-        }  // Group
+        }  // VStack
         .reversionAlert(on: $shouldDisplayReversionAlert)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -104,10 +104,6 @@ struct UsabilityContainer: View, ReportingPhase {
     }       // body
 
     // MARK: - Links to phase views
-
-    // MARK: Question
-    // FIXME: This isn't a @ViewBuilder?!
-
     private var responses = [Int](repeating: 0,
                                   count: UsabilityQuestion.count)
     var csvLine: String {

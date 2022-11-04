@@ -74,32 +74,17 @@ struct DigitalTimerView: View, ReportingPhase {
         self.completion = completion
     }
 
-    // FIXME: Test this.
+    /// Respond to timer-ended events by posting `success`/`failure` through `completion()`, and setting `isIdleTimerDisabled` to `false`.
     fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
         switch stat {
-        case .cancelled      : completion(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
-        case .completed      : completion(.success(self.motionManager.asyncBuffer))
+        case .cancelled      :
+            completion(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
+
+        case .completed      :
+            completion(.success(self.motionManager.asyncBuffer))
         default: break
         }
 }
-        /*
-        if stat == .expired {
-//            ANYTHING
-        }
-        else if stat == .running {
-        }
-
-        // If the timer halts, stop collecting.
-        switch timer.status {
-        case .cancelled, .expired:
-            motionManager.halt()
-            // Now that it's stopped, you're ready to write a CSV file
-            // Do not call reset or clearRecords, you need those for writing.
-
-        default: break
-        }
-    }
-         */
 
     var body: some View {
         GeometryReader { proxy in
@@ -140,26 +125,16 @@ struct DigitalTimerView: View, ReportingPhase {
         }
         .onAppear {
             do {
-// if !DEBUG
                 try MorseHaptic.aaa?.play()
-// endif
             }
             catch {
-// if DEBUG
                 print(#function, "line", #line, "can't play the haptic:", error.localizedDescription)
-// endif
             }
             timer.start()
         }
         .onDisappear() {
             do {
-// if !DEBUG
                 try MorseHaptic.nnn?.play()
-// endif
-                Task {
-                    //                    let allData = await motionManager.asyncBuffer.allAsTaggedData()
-                    completion(.success(motionManager.asyncBuffer))
-                }
             }
             catch {
                 print("DigitalTimerView:\(#line) error on write/haptic: \(error)")
@@ -179,10 +154,6 @@ struct DigitalTimerView: View, ReportingPhase {
             "Normal Walk" : "Fast Walk"
         )
     }
-
-//    func start() {
-//        timer.start()
-//    }
 }
 
 // MARK: - Preview

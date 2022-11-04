@@ -125,7 +125,7 @@ struct TopContainerView: View {
         dCenter.addObserver(forName: ForceAppReversion,
                             object: nil, queue: .current) {
             notice in
-            currentPhase = Self.defaultPhase
+//            currentPhase = Self.defaultPhase
 
             // FIXME: Surely we'd have to rewind all the subordinate views?
         }
@@ -183,11 +183,11 @@ struct TopContainerView: View {
                             // SuccessValue is
                             // (scores: String, specifics: String)
                             collectedUsability = true
-                            if !collectedDASI {
-                                self.currentPhase = .dasi
+                            if collectedDASI {
+                                self.currentPhase = .conclusion
                             }
                             else {
-                                self.currentPhase = .conclusion
+                                self.currentPhase = .dasi
                             }
                             // FIXME: Add the usability form
                             //        to the usability container.
@@ -224,8 +224,6 @@ struct TopContainerView: View {
                 case .conclusion:
                     ConclusionView { _ in
                         self.currentPhase = .onboarding
-                        // FIXME: Reform ConclusionView to succeed
-                        // with ()
                     }
                     .navigationTitle("Finished")
                     //                .reversionToolbar($showRewindAlert)

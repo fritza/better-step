@@ -122,13 +122,8 @@ struct WalkingContainerView: View {
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
 #endif
-
         notificationHandlers = registerDataDeletion()
     }
-    //((Result<[CMAccelerometerData], Error>) -> Void)!
-    //    ) {
-    //        self.completion = completion
-    //    }
 
     var notificationHandlers: NSObjectProtocol?
 
@@ -172,34 +167,8 @@ struct WalkingContainerView: View {
 
         // NEW: appear/disappear prevent/permit sleep.
         .onAppear {
-//            notificationHandlers =  registerDataDeletion()
-
-            // Prevent sleep
-            // See the completion calls for the setting to false
-
-
-
-/*
-
-
-            assert(UIApplication.shared.isIdleTimerDisabled == false,
-            "before setting 'disabled', timer-disabled should be false")
-            UIApplication.shared.isIdleTimerDisabled = true
-#if DEBUG
-            print("\(#function): \(#fileID):\(#line)", "Disabled the timer")
-#endif
-
-*/
-
-
-
         }
         .onDisappear {
-            // Permit sleep
-//            UIApplication.shared.isIdleTimerDisabled = false
-//            #if DEBUG
-//            print(#function, ": \(#fileID):\(#line)", "Enabling the timer")
-//            #endif
         }
     } // body
 }
@@ -214,6 +183,12 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (interstitial_1)",
             tag: WalkingState.interstitial_1, selection: $state) {
                 InterstitalPageContainerView(listing: instructionContentList, selection: 1) {_ in
+                    UIApplication.shared.isIdleTimerDisabled = true
+                    // See the completion calls for the setting to false
+        #if DEBUG
+                    print("\(#function): \(#fileID):\(#line)", "Disabled the timer when completed from Interstitial 1")
+        #endif
+
                     self.state = .countdown_1
                 }.padding()
                     .navigationBarBackButtonHidden(true)
@@ -260,23 +235,22 @@ extension WalkingContainerView {
                 DigitalTimerView(duration: CountdownConstants.walkDuration,
                                  walkingState: ownPhase) {
                     result  in
-                    switch result {
+                    UIApplication.shared.isIdleTimerDisabled = false
 
+                    switch result {
                     case .failure(_):   // Should be AppPhaseErrors.walkingPhaseProbablyKilled
                         state = nextPhaseBad
-                        return
 
-                    case .success(let incoming):
+                    case .success(let asyncBuffer):
                         let wcrS = WalkingContainerResult.shared
-                        wcrS[ownPhase] = incoming
+                        wcrS[ownPhase] = asyncBuffer
                         wcrS.exportWalksIfReady()
+                        state = nextPhaseGood
                     }
-
-                    state = nextPhaseGood
+// NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
-//            .environmentObject(MotionManager(phase: ownPhase))
             .hidden()
     }
 
@@ -296,6 +270,12 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (interstitial_2)",
             tag: WalkingState.interstitial_2, selection: $state) {
                 InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) { _ in
+                    UIApplication.shared.isIdleTimerDisabled = true
+                    // See the completion calls for the setting to false
+        #if DEBUG
+                    print("\(#function): \(#fileID):\(#line)", "Disabled the timer when completed from Interstitial 2")
+        #endif
+
                     // → .countdown_2
                     self.state = .countdown_2
                 }.padding()
@@ -347,15 +327,6 @@ extension WalkingContainerView {
                 InterstitalPageContainerView(
                     // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
                     listing: end_walkingContentList, selection: 1) { result in
-
-/*
-                        print("\(#function): \(#fileID):\(#line)", "Enabling the timer")
-                        assert(UIApplication.shared.isIdleTimerDisabled == true,
-                        "Before setting enabled, 'disabled' should be true")
-
-                        UIApplication.shared.isIdleTimerDisabled = false
-*/
-
                         switch result {
                         case .success(_)        : completion(nil)
                         case .failure(let error): completion(error)

@@ -14,11 +14,6 @@ import SwiftUI
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
-    #warning("completion closure is never called.")
-    // SuccessValue is Void, but this view sends
-    // a .failure to the container. Why?
-    // Possibly because conclusion is a dead end.
-
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
