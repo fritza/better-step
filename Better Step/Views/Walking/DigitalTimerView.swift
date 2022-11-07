@@ -90,16 +90,18 @@ struct DigitalTimerView: View, ReportingPhase {
         GeometryReader { proxy in
             VStack {
                 // Instructions
-                Text(digitalNarrative)
-                    .foregroundColor(.red)
                 Spacer()
-                // MM:SS to screen
-                Text(timer.minuteSecondString)
-//                Text(minSecString ?? "xx:xx")
-                    .font(.system(size: 100, weight: .ultraLight))
-                    .minimumScaleFactor(0.5)
-                    .monospacedDigit()
 
+                // MM:SS to screen
+                HStack {
+                    Spacer()
+                    Text(timer.minuteSecondString)
+                        .font(.system(size: 120, weight: .ultraLight))
+                        .minimumScaleFactor(0.5)
+                        .monospacedDigit()
+                        .frame(minWidth: 220, idealWidth: 260, maxWidth: 400)
+                    Spacer()
+                }
                 // Start/stop
                 Spacer()
                 Button("Cancel") {
