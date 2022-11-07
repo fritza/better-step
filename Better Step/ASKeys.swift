@@ -18,7 +18,6 @@ enum ASKeys: String {
     /// `String` the email address to receive report archive files.
     case reportingEmail
 
-
     /// If `false`, this is the first run of the app and needs to collect SubjectID, DASI, and Usability
     case hasCompletedSurveys
     /// The last known subject ID
@@ -30,6 +29,11 @@ enum ASKeys: String {
     case collectedUsability
 
     case tempUsabilityIntsCSV
+
+    /// `String`, an identifier for the last-completed phase.
+    /// 
+    ///     The phases are strictly ordered, so this obsoletes many of the "collected/completed" keys.
+    case phaseProgress
     
     /// Whether the context form substage of the usability phase is complete.
     case collectedFreehandU

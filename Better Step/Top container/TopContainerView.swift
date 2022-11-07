@@ -10,77 +10,16 @@ import Combine
 
 // onboarding, walking, dasi, usability, conclusion / failed
 
-enum TopPhases: String, CaseIterable, Comparable {
-    case onboarding
-    //  `ApplicationOnboardView`.
-    //  There are two distinct onboarding tasks:
-    //  * New user, greet and collect ID
-    //  * detailed explanation (probably different when new)
-    case walking
-
-    //  WalkingContainerView
-    case usability
-    //    case usabilityForm
-
-    case dasi
-    /// Interstitial at the end of the user activities
-    case conclusion
-
-    case failed
-
-    //  NOT surveyWrapperView.
-
-    static func < (lhs: TopPhases, rhs: TopPhases) -> Bool {
-        guard lhs.rawValue != rhs.rawValue else{ return false }
-        // By here they arent equal.
-        // Across all cases, if lhs is the first-encountered,
-        // lhs < rhs. If first match is rhs, lhs > rhs.
-        for phase in TopPhases.allCases {
-            if      lhs.rawValue == phase.rawValue { return true }
-            else if rhs.rawValue == phase.rawValue { return false }
-        }
-        return false
-    }
-
-    static func == (lhs: TopPhases, rhs: TopPhases) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
-
-    //    func save() {
-    //        let defaults = UserDefaults.standard
-    //        defaults.set(rawValue, forKey: "phaseToken")
-    //    }
-
-    static let `default`: TopPhases = .onboarding
-    static func savedPhase() -> TopPhases {
-        let defaults = UserDefaults.standard
-        if let string = defaults.string(forKey: "phaseToken") {
-            return TopPhases(rawValue: string)!
-        }
-        return Self.default
-    }
-}
-
-extension TopPhases: CustomStringConvertible {
-    static let phaseNames: [TopPhases:String] = [
-        .conclusion :    "conclusion",
-        .onboarding :    "onboarding",
-        .dasi       :    "dasi",
-        .failed     :    "failed",
-        .usability  :    "usability",
-        .walking    :    "walking",
-    ]
-
-    var description: String {
-        return Self.phaseNames[self]!
-    }
-}
 
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 ///
 ///
 struct TopContainerView: View {
+    @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
+    @AppStorage(ASKeys.collectedDASI.rawValue) static var collectedDASI: Bool =  false
+    @AppStorage(ASKeys.collectedUsability.rawValue) static var collectedUsability: Bool =  false
+
     @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
