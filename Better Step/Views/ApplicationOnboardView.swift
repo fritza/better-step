@@ -23,6 +23,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
     let item: TaskInterstitialDecodable
 
     @State      private var submissionRemarks = ""
+    /// Throughout the app, there will be a `@State` `Bool` controlling the visibility of an alert for winding the app back to a virgin state.
     @State      private var shouldWarnOfReversion = false
     @Binding    private var targetString   : String
     @FocusState private var currentFocus: Focusables?

@@ -29,6 +29,8 @@ extension Text {
 }
 
 
+// TODO: Standardize the name for `shouldShow` in client code.
+
 
 /// View modifier that binds to a `Bool`. When `true`, an alert appears asking the user whether the app should be reset to virgin state.
 ///
