@@ -8,13 +8,25 @@
 import Foundation
 import Combine
 
-/// Holds two ``IncomingAccelerometry``s, for both walk speeds.
+/// Holds two ``IncomingAccelerometry``s, for both walk speeds. There is no public initializer; use `WalkingContainerResult.shared`.
 ///
 /// ``WalkingContainerResult``receives an `IncomingAccelerometry` for each `.walk_n` stage. When it's full, the data is ready to export. It's awkward, but it allows ``WalkingContainerView/walk_N_View(ownPhase:nextPhaseGood:nextPhaseBad:)`` to fill in the per-walk result by index rather than hard-code it.
-public final class WalkingContainerResult: ObservableObject {
-    @Published var walk_1: IncomingAccelerometry?
-    @Published var walk_2: IncomingAccelerometry?
+///
+/// Use the singleton `WalkingContainerResult.shared`.
+public final class WalkingContainerResult {
+    /// Completed data from the first (slow) walk.
+    private var walk_1: IncomingAccelerometry?
+    /// Completed data from the first (fast) walk.
+    private var walk_2: IncomingAccelerometry?
 
+    /// Initializer; not for public use, use `.shared` instead.
+    private init(walk_1: IncomingAccelerometry? = nil,
+                 walk_2: IncomingAccelerometry? = nil) {
+        self.walk_1 = walk_1
+        self.walk_2 = walk_2
+    }
+
+    /// The singleton `WalkingContainerResult`; there is no public initializer.
     public static let shared = WalkingContainerResult()
 
     /// The walk data (``IncomingAccelerometry`` x2) is ready for export when both walk records have been filled.
@@ -30,15 +42,6 @@ public final class WalkingContainerResult: ObservableObject {
             try? await walk_1.addToArchive()
             try? await walk_2.addToArchive()
             // FIXME: do something about export failures.
-        }
-        return true
-    }
-
-
-    public func exportEitherWalk() -> Bool {
-        guard let walk = walk_1 ?? walk_2 else { return false }
-        Task.detached {
-            try? await walk.addToArchive()
         }
         return true
     }

@@ -142,9 +142,11 @@ struct OnboardView_Previews: PreviewProvider {
         }
     }
 
+    /// **Used in a preview only.**
     final class Edited: ObservableObject {
         @State var editedText: String = ""
     }
+
     static let edits = Edited()
 
     static var previews: some View {
