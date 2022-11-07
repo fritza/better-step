@@ -77,7 +77,7 @@ struct TopContainerView: View {
     var body: some View {
         NavigationView {
             VStack {
-                switch self.currentPhase ?? .onboarding {
+                switch self.currentPhase ?? .entry.followingPhase! {
                     // MARK: - Onboarding
                 case .onboarding:
                     // OnboardContainerView suceeds with String.
@@ -96,17 +96,10 @@ struct TopContainerView: View {
                     // MARK: - Walking
                 case .walking:
 #warning("WalkingContainerView is not a RepotingPhase.")
-
                     WalkingContainerView { error in
                         if let error {
                             print("Walk failed:", error)
                             self.currentPhase = .failed
-                        }
-                        else if !collectedDASI {
-                            self.currentPhase = .dasi
-                        }
-                        else if !collectedUsability {
-                            self.currentPhase = .usability
                         }
                         else {
                             self.currentPhase = .conclusion
@@ -141,17 +134,15 @@ struct TopContainerView: View {
                 case .dasi:
                     SurveyContainerView { response in
                         do {
-                            collectedDASI = true
                             // FIXME: Consider storing the DASI response here.
                             // IS stored (in UserDefaults)
                             // by SurveyContainerView.completionPageView
-                            let responseList = try response.get()
-                            if !collectedUsability {
-                                self.currentPhase = .usability
-                            }
-                            else {
-                                self.currentPhase = .conclusion
-                            }
+
+                            let dasiResponse = try response.get()
+                            TopContainerView.collectedDASI = true
+                            TopPhases.latestPhase = TopPhases.usability.rawValue
+
+                            self.currentPhase = currentPhase?.followingPhase
                         }
                         catch {
                             self.currentPhase = .failed
@@ -162,7 +153,7 @@ struct TopContainerView: View {
                     // MARK: - Conclusion (success)
                 case .conclusion:
                     ConclusionView { _ in
-                        self.currentPhase = .onboarding
+                        self.currentPhase = .entry.followingPhase
                     }
                     .navigationTitle("Finished")
                     //                .reversionToolbar($showRewindAlert)
@@ -178,12 +169,14 @@ struct TopContainerView: View {
                     // FailureView's completion is NEVER CALLED.
                     // Probably because this is a terminal state
                     // and you can use the gear button to reset.
+                default:
+                    preconditionFailure("Should not be able to reach phase \(self.currentPhase?.description ?? "N/A")")
                 }
             }
         }
         .onAppear {
             showReversionAlert = false
-            self.currentPhase = Self.defaultPhase
+            self.currentPhase = .entry.followingPhase
             registerReversionHandler()
         }
         .reversionAlert(on: $showReversionAlert)

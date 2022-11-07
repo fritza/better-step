@@ -17,7 +17,7 @@ struct SubjectID {
                 return fromStore
             }
             else {
-                return ""
+                return Self.unSet
             }
         }
         set {
