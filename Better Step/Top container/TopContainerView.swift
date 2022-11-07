@@ -81,13 +81,13 @@ extension TopPhases: CustomStringConvertible {
 ///
 ///
 struct TopContainerView: View {
-    @AppStorage(AppStorageKeys.subjectID.rawValue)
+    @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
-    @AppStorage(AppStorageKeys.collectedDASI.rawValue)
+    @AppStorage(ASKeys.collectedDASI.rawValue)
     var collectedDASI: Bool = false
     
-    @AppStorage(AppStorageKeys.collectedUsability.rawValue)
+    @AppStorage(ASKeys.collectedUsability.rawValue)
     var collectedUsability: Bool = false
 
     static let defaultPhase = TopPhases.onboarding

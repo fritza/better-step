@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - @AppStorage
-enum AppStorageKeys: String {
+enum ASKeys: String {
     /// How long the timed walk is to last, in _minutes,_ e.g. 6.
     case walkInMinutes
     /// The frequency in Hertz (e.g. 120) for sampling the accelerometer.
@@ -41,9 +41,9 @@ enum AppStorageKeys: String {
 
     static func resetSubjectData() {
         let defaults = UserDefaults.standard
-        defaults.set("", forKey: AppStorageKeys.subjectID.rawValue)
+        defaults.set("", forKey: ASKeys.subjectID.rawValue)
 
-        let stringPrefs: [AppStorageKeys] = [.collectedDASI, .collectedFreehandU, .collectedUsability]
+        let stringPrefs: [ASKeys] = [.collectedDASI, .collectedFreehandU, .collectedUsability]
         let keys = stringPrefs.map(\.rawValue)
         for key in keys {
             defaults.set(false, forKey: key)

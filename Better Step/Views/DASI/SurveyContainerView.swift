@@ -23,7 +23,7 @@ struct SurveyContainerView: View, ReportingPhase {
 
     @State          var dasiPhaseState: DASIState? = .landing
     @StateObject    var responses = DASIResponseList()
-    @AppStorage(AppStorageKeys.temporaryDASIResults.rawValue) var tempCSV: String = ""
+    @AppStorage(ASKeys.temporaryDASIResults.rawValue) var tempCSV: String = ""
 
     var notificationHandler: NSObjectProtocol?
 

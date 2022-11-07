@@ -24,7 +24,7 @@
 		1FA281E028DBBB270038353E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
 		1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
 		1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
-		1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* AppStorageKeys.swift */; };
+		1FA281E528DBBB270038353E /* ASKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* ASKeys.swift */; };
 		1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */; };
 		1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
 		1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
@@ -170,7 +170,7 @@
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
 		1FB684E527F225A300612924 /* SubjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectID.swift; sourceTree = "<group>"; };
-		1FB684E827F225EC00612924 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
+		1FB684E827F225EC00612924 /* ASKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKeys.swift; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
 		1FC7476C28E7694E00817041 /* N.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = N.ahap; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 			children = (
 				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
-				1FB684E827F225EC00612924 /* AppStorageKeys.swift */,
+				1FB684E827F225EC00612924 /* ASKeys.swift */,
 				1FB2F53728D133B600593692 /* Time */,
 				1FF3544F27921191000894B8 /* Extensions */,
 				1FB2F54328D2619D00593692 /* Top container */,
@@ -742,7 +742,7 @@
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
-				1FA281E528DBBB270038353E /* AppStorageKeys.swift in Sources */,
+				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
 				1FA2821A28DBBB270038353E /* AccelerometerItem.swift in Sources */,
 				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
 				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,

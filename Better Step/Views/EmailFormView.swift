@@ -54,7 +54,7 @@ struct EmailFormView: View {
 }
 
 final class AddressHolder: ObservableObject {
-    @AppStorage(AppStorageKeys.reportingEmail.rawValue) var email: String = ""
+    @AppStorage(ASKeys.reportingEmail.rawValue) var email: String = ""
 }
 
 struct EmailFormView_Previews: PreviewProvider {

@@ -31,7 +31,7 @@ struct UsabilityContainer: View, ReportingPhase {
     let completion: ClosureType
 
 #warning("SuccessValue should be one or two lines of CSV.")
-    @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
+    @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
 
     @State var currentState: UsabilityState

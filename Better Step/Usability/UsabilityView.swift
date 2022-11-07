@@ -27,7 +27,7 @@ struct QLimits {
 ///
 /// The `SuccessValue` as a ``ReportingPhase`` is `[Int]`.
 struct UsabilityView: View, ReportingPhase {
-    @AppStorage(AppStorageKeys.tempUsabilityIntsCSV.rawValue)
+    @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
 
     typealias SuccessValue = [Int]

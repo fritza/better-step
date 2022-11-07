@@ -12,7 +12,7 @@ struct SubjectID {
     static var id: String {
         get {
             if let fromStore = UserDefaults.standard
-                .string(forKey: AppStorageKeys.subjectID.rawValue)
+                .string(forKey: ASKeys.subjectID.rawValue)
             {
                 return fromStore
             }
@@ -22,7 +22,7 @@ struct SubjectID {
         }
         set {
             if notificationTicket == nil { handleUserIDNotice() }
-            UserDefaults.standard.set(newValue, forKey: AppStorageKeys.subjectID.rawValue)
+            UserDefaults.standard.set(newValue, forKey: ASKeys.subjectID.rawValue)
         }
     }
 
@@ -80,7 +80,7 @@ final class NotificationSetup: ObservableObject {
                     object: nil,
                     queue: .current) {_ in
                         UserDefaults.standard
-                            .set(false, forKey: AppStorageKeys.hasCompletedSurveys.rawValue)
+                            .set(false, forKey: ASKeys.hasCompletedSurveys.rawValue)
                     }
             accum.append(catcher)
         }

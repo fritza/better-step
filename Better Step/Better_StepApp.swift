@@ -11,9 +11,9 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    @AppStorage(AppStorageKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
-    @AppStorage(AppStorageKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
-    @AppStorage(AppStorageKeys.hasCompletedSurveys.rawValue)  var hasCompletedSurveys : Bool = true
+    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
+    @AppStorage(ASKeys.hasCompletedSurveys.rawValue)  var hasCompletedSurveys : Bool = true
 
     @State var shouldWarnOfReversion : Bool = false
 
