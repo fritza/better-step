@@ -34,27 +34,6 @@ struct YesNoButtonView: View, ReportingPhase {
     }
 
     let lightGray = Color(white: 0.875, opacity: 1.0)
-
-    /*
-    @ViewBuilder
-    func buttonLabelView() -> some View {
-        ZStack(alignment: .center, content: {
-
-            Capsule(style: .continuous)
-                .fill(
-                    Color(white: 0.75) //, opacity: 0.25)
-                )
-
-            Text(self.title.asChecked(isChecked)
-            )
-            .font(.title2)
-            .fontWeight(.semibold)
-//            .foregroundColor(.accentColor)
-        }
-        )
-
-    }
-     */
     @GestureState var buttonIsHeld: Bool = false
 
     var buttonishGesture: some Gesture {
@@ -120,13 +99,15 @@ struct YesNoButtonView: View, ReportingPhase {
 
 
 struct YesNoButtonView_Previews: PreviewProvider {
+    // NOTE: Had been ObservableObject, apparently not needed for @Published.
+    // BUT : Using ObeervableObject anyway to experiment with @StateObject.
     final class TapCount: ObservableObject {
         @Published var countOne: Int = 0
-
         @Published var countTwo: Int = 0
     }
 
-    static let content = TapCount()
+//    static let content = TapCount()
+    @StateObject static var content = TapCount()
 
     static var previews: some View {
         ZStack {
