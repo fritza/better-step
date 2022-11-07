@@ -16,20 +16,14 @@ import Combine
 ///
 ///
 struct TopContainerView: View {
-    @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
-    @AppStorage(ASKeys.collectedDASI.rawValue) static var collectedDASI: Bool =  false
-    @AppStorage(ASKeys.collectedUsability.rawValue) static var collectedUsability: Bool =  false
+    @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
+    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
+    @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
+    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
 
     @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
-    @AppStorage(ASKeys.collectedDASI.rawValue)
-    var collectedDASI: Bool = false
-    
-    @AppStorage(ASKeys.collectedUsability.rawValue)
-    var collectedUsability: Bool = false
-
-    static let defaultPhase = TopPhases.onboarding
     @State var currentPhase: TopPhases? {
         willSet {
             print("Current phase FROM", currentPhase?.description ?? "nil")
@@ -40,7 +34,7 @@ struct TopContainerView: View {
     }
 
     init() {
-
+        currentPhase = TopPhases.entry.followingPhase
     }
 
     @State var usabilityFormResults: WalkInfoForm?
@@ -86,7 +80,8 @@ struct TopContainerView: View {
                         result in
                         do {
                             SubjectID.id = try result.get()
-                            self.currentPhase = .walking
+                            self.currentPhase = self.currentPhase?.followingPhase
+                            latestPhase = TopPhases.onboarding.rawValue
                         }
                         catch {
                             fatalError("Can't fail out of an onboarding view")
@@ -102,10 +97,11 @@ struct TopContainerView: View {
                             self.currentPhase = .failed
                         }
                         else {
-                            self.currentPhase = .conclusion
+                            TopPhases.latestPhase = TopPhases.walking.rawValue
+                            self.currentPhase = currentPhase?.followingPhase
+                            self.performedWalk = true
                         }
                     }
-
 
                     // MARK: - Usability
                 case .usability:
@@ -114,13 +110,9 @@ struct TopContainerView: View {
                         case .success(_):
                             // SuccessValue is
                             // (scores: String, specifics: String)
+                            currentPhase = currentPhase?.followingPhase
                             collectedUsability = true
-                            if collectedDASI {
-                                self.currentPhase = .conclusion
-                            }
-                            else {
-                                self.currentPhase = .dasi
-                            }
+                            latestPhase = TopPhases.usability.rawValue
                             // FIXME: Add the usability form
                             //        to the usability container.
 
@@ -139,9 +131,8 @@ struct TopContainerView: View {
                             // by SurveyContainerView.completionPageView
 
                             let dasiResponse = try response.get()
-                            TopContainerView.collectedDASI = true
+                            collectedDASI = true
                             TopPhases.latestPhase = TopPhases.usability.rawValue
-
                             self.currentPhase = currentPhase?.followingPhase
                         }
                         catch {
@@ -154,6 +145,7 @@ struct TopContainerView: View {
                 case .conclusion:
                     ConclusionView { _ in
                         self.currentPhase = .entry.followingPhase
+                        latestPhase = TopPhases.conclusion.rawValue
                     }
                     .navigationTitle("Finished")
                     //                .reversionToolbar($showRewindAlert)

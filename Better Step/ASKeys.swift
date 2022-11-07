@@ -30,6 +30,9 @@ enum ASKeys: String {
 
     case tempUsabilityIntsCSV
 
+    /// A single shared interpretation of what constitutes completion of the walk.
+    case perfomedWalk
+
     /// `String`, an identifier for the last-completed phase.
     /// 
     ///     The phases are strictly ordered, so this obsoletes many of the "collected/completed" keys.
