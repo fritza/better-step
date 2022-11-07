@@ -54,7 +54,7 @@ struct FailureView: View, ReportingPhase {
 
     typealias SuccessValue = Void
     let completion: ClosureType
-    #warning("Completion closure is never called.")
+    // Warning: Completion closure is never called.")
 
     let error: Error?
     init(failing: TopPhases, error: Error? = nil, closure: @escaping ClosureType) {

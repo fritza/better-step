@@ -10,7 +10,6 @@ import Combine
 
 let ForceAppReversion = Notification.Name("ForceAppReversion")
 
-#warning("Determine whether to destroy bottom-up (Destroy) or top-doen (ForceAppReversion)")
 // Determine whether to have a top-down ForceAppReversion
 // ("App, reset!" -> "Walk, reset", ...)
 // or a bottom-up, per-task reversion (static Destroy OptionSet

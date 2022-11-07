@@ -14,7 +14,7 @@
 import SwiftUI
 #if INCLUDE_USABILITY_SUMMARY
 
-#warning("Completion closure is not called.")
+// FIXME: For UsabilitySummaryView - completion is not called.
 
 
 

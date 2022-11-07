@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-#warning("Access to State outside View?")
 /*
  2022-10-26 10:24:45.053459-0500 Better Step[96717:948341] [SwiftUI] Accessing State's value outside of being installed on a View. This will result in a constant Binding of the initial value and will not update.
  */
@@ -29,8 +28,6 @@ enum UsabilityState: Int, CaseIterable {
 struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = (scores: String, specifics: String)
     let completion: ClosureType
-
-#warning("SuccessValue should be one or two lines of CSV.")
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""
 

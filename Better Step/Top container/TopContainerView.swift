@@ -64,7 +64,7 @@ struct TopContainerView: View {
         }
     }
 
-#warning("Make .navigationTitle consistent.")
+// TODO: Make .navigationTitle consistent
 
 
     // TODO: Do I provide the NavigationView?
@@ -90,7 +90,7 @@ struct TopContainerView: View {
 
                     // MARK: - Walking
                 case .walking:
-#warning("WalkingContainerView is not a RepotingPhase.")
+// FIXME: WalkingContainerView is not a RepotingPhase.")
                     WalkingContainerView { error in
                         if let error {
                             print("Walk failed:", error)

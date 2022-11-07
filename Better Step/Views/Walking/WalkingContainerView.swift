@@ -9,15 +9,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 import CoreMotion
 
-/* TODO: Handle cancellation.
-
-
- Better Step:
-
- Did the walking phase skip the second walk?
-
- */
-#warning("Did this skip the second walk?")
+// FIXME: Handle cancellation.
 
 protocol HasVoidCompletion {
     var completion: ()->Void { get }
