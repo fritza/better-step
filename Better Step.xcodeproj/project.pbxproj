@@ -184,7 +184,6 @@
 		1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IncomingAccelerometry+Marshalling.swift"; sourceTree = "<group>"; };
 		1FC7477E28EDE90F00817041 /* ZIPProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPProgress.swift; sourceTree = "<group>"; };
 		1FC7478028EDFB2E00817041 /* WalkingContainerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingContainerResult.swift; sourceTree = "<group>"; };
-		1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
@@ -497,7 +496,6 @@
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1FCBAA12283BEE160088EAF2 /* UtilityViews.swift */,
 				1FDBB3F9281C494F00D0A7E9 /* Instructions */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1F1701A52777B65A00E510AE /* EmailFormView.swift */,
