@@ -23,9 +23,7 @@ struct ConclusionView: View, ReportingPhase {
         VStack {
             Text("Congratulations, you're done.")
             Button("Complete") {
-                completion(.failure(AppPhaseErrors.NOS))
-                // FIXME: Reform ConclusionView to succeed
-                // with ()
+                completion(.success(()))
             }
         }
     }
