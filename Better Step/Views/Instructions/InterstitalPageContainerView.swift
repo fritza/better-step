@@ -49,6 +49,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
                         )
                     }
                 }
+                .animation(.easeInOut, value: selectedPage)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
