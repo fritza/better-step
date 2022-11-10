@@ -58,7 +58,8 @@ struct TopContainerView: View {
         dCenter.addObserver(forName: ForceAppReversion,
                             object: nil, queue: .current) {
             notice in
-//            currentPhase = Self.defaultPhase
+            currentPhase = .entry
+            TopPhases.resetToFirst()
 
             // FIXME: Surely we'd have to rewind all the subordinate views?
         }
