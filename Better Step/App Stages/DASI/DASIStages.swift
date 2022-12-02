@@ -178,6 +178,8 @@ extension DASIStages: Comparable, Hashable, Strideable
         }
     }
 
+    // MARK: Strideable
+    /// `Strideable` compliance.
     func advanced(by n: Int) -> DASIStages {
         // n > 0
         var retval: DASIStages = self
@@ -197,6 +199,7 @@ extension DASIStages: Comparable, Hashable, Strideable
         }
     }
 
+    /// `Strideable` compliance.
     func distance(to other: DASIStages) -> Int {
         if self == other { return 0 }
 

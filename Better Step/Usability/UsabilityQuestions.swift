@@ -10,11 +10,12 @@ import UIKit
 
 /// The list of usability questions.
 ///
-/// The _type_ responds to an Int subscript, but it is _not_ a `Collection`.
+/// `UsabilityQuestion.self` responds to an `Int` subscript, but it is _not_ a `Collection`.
 struct UsabilityQuestion: Decodable, Identifiable {
     // MARK: - Type properties
     private static let baseFileName = "USurveyQuestions"
 
+    /// Bounds of question index (zero-based)
     static let startIndex = 0
     static var endIndex: Int { allQuestions.count }
     static private(set) var indexRange = 0..<endIndex
@@ -51,7 +52,9 @@ struct UsabilityQuestion: Decodable, Identifiable {
     }
 
     // MARK: - Instance properties
+    /// The 1-based identfier (not 0-based index) of the question. A `Decodable` key.
     let id: Int
+    /// The text of a question.  A `Decodable` key.
     let text: String
 }
 

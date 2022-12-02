@@ -29,13 +29,17 @@ struct UsabilityContainer: View, ReportingPhase {
     typealias SuccessValue = (scores: String, specifics: String)
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
+    /// Return CSV value for reporting success.
     var tempCSV: String = ""
 
+    /// Top-level-in-usability phase `intro`, `questions`, (`report`), `closing`
     @State var currentState: UsabilityState
-    @State var recommendedPostReset: Int?
+    /// Whether the "reversion" (back to beginning with no subject) dialog should be shown.
+    ///
+    /// See ``ViewModifier/reversionAlert(on:) ``for the `ViewModifier`.
     @State var shouldDisplayReversionAlert = false
 
-    // Holder for the block that handles Destroy.usability.
+    /// Holder for the block that handles Destroy.usability.
     private var notificationHandler: NSObjectProtocol?
 
 

@@ -78,11 +78,16 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
     static let jsonBasename = "DASIQuestions"
 
     // TODO: Consider making this into a Collection
+    /// The 1-based identifier for the question
     public var id   : Int       // 1-based
+    /// The content for the question (Can you…?)
     public let text : String
+    /// The DASI-scale score for answering **yes**.
     public let score: Double
 
     // WARNING: the ID is 1-based
+    /// All `DASIQuestions` read froom `(jsonBasename).json`
+    /// as a zero-indexed array. Be careful of mixing array-indexing and item ID.
     public static let questions: [DASIQuestion] = {
         guard let dasiURL = Bundle.main.url(
             forResource: Self.jsonBasename, withExtension: "json") else {
@@ -96,7 +101,8 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
     /// Number of questions in the survey
     public static var count: Int { questions.count }
 
-    /// The question with the given ID.
+    /// The `DASIQuestion` with the given ID in the global `questions` collection.
+    /// - parameter souughtID: The one-based identifier for the desired question.
     /// - precondition: ID out-of-range is a fatal error.
     public static func with(id soughtID: Int) -> DASIQuestion {
         guard let retval = questions.first(where: { question in
@@ -106,7 +112,7 @@ public struct DASIQuestion: Identifiable, Codable, Comparable {
         return retval
     }
 
-    // MARK: Comparable cmopliance
+    // MARK: Comparable compliance
     public static func == (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id == rhs.id }
     public static func <  (lhs: DASIQuestion, rhs: DASIQuestion) -> Bool { lhs.id <  rhs.id }
 }

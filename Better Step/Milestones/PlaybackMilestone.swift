@@ -16,7 +16,7 @@ fileprivate enum PlaybackConstants {
     static let volume       = 0.6
 }
 
-/// Player for a named audio file in the main bundle.
+/// Player for a named audio file in the main bundle. It is a “milestone” in that it is to be lined up with the timing of other actions, such as a spoken countdown over a view depicting it.
 /// - note: The volume of an `AVAudioPlayer`is selectable(`0.0 ... 1.0`), but for now it is hard-coded; making it configuratble would be an Exciting Future Direction.
 final class AudioMilestone
 {

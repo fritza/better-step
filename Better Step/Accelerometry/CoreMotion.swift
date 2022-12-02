@@ -57,9 +57,11 @@ struct AccelerometerState: Availability {
         self.cmManager = manager
     }
 
+    /// Whether the device is capable of accelerometry
     var available: Bool {
         cmManager.isAccelerometerAvailable
         }
+    /// Whether the device is recording accelerometry.
     var active   : Bool  {
         cmManager.isAccelerometerActive
         }
