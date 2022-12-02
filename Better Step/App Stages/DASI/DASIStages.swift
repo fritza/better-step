@@ -31,7 +31,7 @@ import Foundation
 /// - `.presenting(questionID:)`: The survey-response view for the question with the 1-based question identifier.
 ///
 ///- note: All references to DASI questions are by `QuestionID`.
-enum DASIStages: CustomStringConvertible {
+enum DASIStages {
     // ~Index represents place in the questions array.
     // These are guaranteed to be valid, as they rely on the range of array indices, not the identifiers.
     static let startIndex = 0
@@ -41,8 +41,9 @@ enum DASIStages: CustomStringConvertible {
     // min and max denote least and greatest valid .presenting question identifiers.
     // WARNING: These assume the identifers are numbered 1...answer count.
 
-    static let minIdentifier = startIndex + 1
-    static let maxIdentifier = endIndex
+
+    static let minIdentifier   = startIndex + 1
+    static let maxIdentifier   = endIndex
     static let identifierRange = (minIdentifier...maxIdentifier)
 
     static let minPresenting   = DASIStages.presenting(
@@ -71,13 +72,7 @@ enum DASIStages: CustomStringConvertible {
         }
     }
 
-    /// `false` iff the stage is `.landing` or `.completion`,
-//    var refersToQuestion: Bool {
-//        ![.landing, .completion].contains(self)
-//    }
-
     // MARK: Arithmetic
-
 
     /// Mutate `self` to the stage before it. Return to `nil` if there is no preceding stage.
     ///
@@ -118,25 +113,12 @@ enum DASIStages: CustomStringConvertible {
         self = retval
         return retval
     }
-
-    /*
-    /// Set `self` to represent a given question, by 1-based id.
-    ///
-    /// The jump is to `.presenting` states _only._
-    /// - Parameter questionID: The ID (1-based) of the question to be represented.
-    /// - precondition: The index must be in the range of question identifiers.
-    /// - Returns: The represented `DASIStages` after the move.
-    mutating func goTo(questionID: Int) -> DASIStages {
-        let candidate = Self.presenting(questionID: questionID)
-        precondition(Self.presentingRange.contains(candidate),
-                     "\(#function) the requested ID \(questionID) is out of range.")
-        self = candidate
-        return self
-    }
-     */
 }
 
-extension DASIStages {
+
+// MARK: CustomStringConvertible
+extension DASIStages: CustomStringConvertible {
+    /// `CustomStringConvertible` comlpliance
     var description: String {
         switch self {
         case .landing: return "Greeting"

@@ -30,14 +30,13 @@ enum CMTimeInterval {
 // MARK: - Available / Active
 /// Wrapper for the availability and activity of some facility.
 protocol Availability {
-    var cmManager: CMMotionManager { get }
     var available: Bool { get }
     var active   : Bool { get }
 }
 
 /// Availability (has any Core Motion and active status for the device
 struct DeviceState: Availability {
-    private(set) var cmManager: CMMotionManager
+    private var cmManager: CMMotionManager
 
     init(_ manager: CMMotionManager) {
         self.cmManager = manager
@@ -53,8 +52,7 @@ struct DeviceState: Availability {
 
 /// Availability (has accelerometers) and active status (collecting) for the inertial platform
 struct AccelerometerState: Availability {
-    private(set) var cmManager: CMMotionManager
-
+    private var cmManager: CMMotionManager
     init(_ manager: CMMotionManager) {
         self.cmManager = manager
     }

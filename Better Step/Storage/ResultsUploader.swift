@@ -183,9 +183,9 @@ enum UploadResultKeys: String, Hashable {
 }
 
 extension ResultsUploader {
-    func sendUploadNotice(name: Notification.Name,
+    func sendUploadNotice(name  : Notification.Name,
                           server: String,
-                          error: Error? = nil) {
+                          error : Error? = nil) {
         var userInfo: [UploadResultKeys: Any] = [
             .fileNameKey  : name,
             .serverNameKey: server]
