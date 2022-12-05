@@ -14,7 +14,10 @@ struct WalkInfoForm: View, ReportingPhase {
     typealias SuccessValue = WalkInfoResult
     let completion: ClosureType
 
-    init(_ completion: @escaping ClosureType) {
+    @State var representedInfo: SuccessValue
+
+    init(representing: SuccessValue, _ completion: @escaping ClosureType) {
+        self.representedInfo = representing
         self.completion = completion
     }
 
@@ -34,10 +37,29 @@ struct WalkInfoForm: View, ReportingPhase {
 
     @State private var shouldShowReversionAlert = false
 
+@ViewBuilder
+    var whereWalkedSection: some View {
+        Section {
+            VStack {
+                Text("Where did you perform your walks?")
+                Picker("Where did you walk?",
+                       selection: $whereWalked) {
+                    Text("At Home")
+                        .tag(WhereWalked.atHome)
+                    Text("Away from home")
+                        .tag(WhereWalked.awayFromHome)
+                }
+                       .pickerStyle(.segmented)
+            }
+        }
+    }
+
+
     var body: some View {
         Form {
             // MARK: Home or not
-            Section {
+            whereWalkedSection
+          /*  Section {
                 VStack {
                     Text("Where did you perform your walks?")
                     Picker("Where did you walk?",
@@ -50,6 +72,7 @@ struct WalkInfoForm: View, ReportingPhase {
                            .pickerStyle(.segmented)
                 }
             }  // Home/away section
+           */
             /*
             Section {
                 VStack(alignment: .leading) {
@@ -136,7 +159,7 @@ struct WalkInfoForm: View, ReportingPhase {
             }  // falling section
         }
         .onSubmit {
-            completion(.success(WalkInfoResult(where: "Home", distance: 200)))
+            completion(.success(representedInfo))
         }
         .safeAreaInset(edge: .top, content: {
             Text("Tell us about your walking conditions — where you chose for your walk, and how you felt while performing it.")
@@ -146,7 +169,7 @@ struct WalkInfoForm: View, ReportingPhase {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ReversionButton(toBeSet: $shouldShowReversionAlert)
                 Button("Submit") {
-                    completion(.success(WalkInfoResult(where: "Toolbar Submit", distance: 200)))
+                    completion(.success(representedInfo))
                 }
             }
         }
@@ -157,7 +180,14 @@ struct WalkInfoForm: View, ReportingPhase {
 struct WalkInfoForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WalkInfoForm {
+            WalkInfoForm(
+                representing:
+                    WalkInfoResult()
+                    .with(
+                        \.where,
+                         value: .atHome)
+            )
+            {
                 _ in // nothing
             }
 
