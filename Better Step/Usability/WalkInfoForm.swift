@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-enum WhereWalked: String, Hashable {
-    case atHome, awayFromHome
-}
-
-enum HowWalked: String, Hashable {
-    case straightLine, backAndForth
-}
-
-enum EffortWalked: String, Hashable, CaseIterable {
-    case light, somewhat, hard
-    case veryHard = "Very Hard"
-}
-
-struct WalkInfoResult {
-    let `where`: String
-    let distance: Int
-
-    // FIXME: Incomplete
-}
-
 /// A `Form` for the post-usability survey asking about the condition of the subject and the chosen walking area.
 ///
 /// The `SuccessValue` as a ``ReportingPhase`` is ``WalkInfoResult``.

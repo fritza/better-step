@@ -16,6 +16,7 @@ enum UsabilityState: Int, CaseIterable {
 #if INCLUDE_USABILITY_SUMMARY
     case report
 #endif
+    case surveyForm
     case closing
 
     static let csvPrefix = "PSSUQ"
@@ -76,8 +77,10 @@ struct UsabilityContainer: View, ReportingPhase {
                 }
             }
 
-                // MARK: Closing
-            case .closing   :
+
+                // FIXME: Add a survey container.
+            case .surveyForm,
+                    .closing   :
                 // TODO: Remove UsabilityInterstitialView.
                 UsabilityInterstitialView(
                     titleText: "Completed",
