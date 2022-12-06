@@ -9,41 +9,44 @@ import SwiftUI
 
 /// A `Form` for the post-usability survey asking about the condition of the subject and the chosen walking area.
 ///
-/// The `SuccessValue` as a ``ReportingPhase`` is ``WalkInfoResult``.
+/// The `SuccessValue` as a ``ReportingPhase`` is `Void`, just a notification that the form has been committed.
 struct WalkInfoForm: View, ReportingPhase {
-    typealias SuccessValue = WalkInfoResult
+    typealias SuccessValue = Void
     let completion: ClosureType
 
-    @State var representedInfo: SuccessValue
+    @EnvironmentObject var walkInfoContent: WalkInfoResult
 
-    init(representing: SuccessValue, _ completion: @escaping ClosureType) {
-        self.representedInfo = representing
+    init(_ completion: @escaping ClosureType) {
         self.completion = completion
     }
 
     var summary: String {
         var content = "Info: "
-        print((whereWalked == .atHome) ? "Home" : "Away",
+        print((walkInfoContent.where == .atHome) ? "Home" : "Away",
               terminator: " ", to: &content)
-        print("Length:", lengthOfCourse ?? -1, terminator: " ", to: &content)
+        print("Length:", walkInfoContent.lengthOfCourse ?? -1, terminator: " ", to: &content)
         return content
     }
 
-    @State private var whereWalked: WhereWalked = .atHome
-    @State private var howWalked: HowWalked = .straightLine
-    @State private var lengthOfCourse: Int? = nil
-    @State private var effort: EffortWalked = .somewhat
-    @State private var fearOfFalling: Bool = false
+//    @State private var whereWalked: WhereWalked = .atHome
+//    @State private var howWalked: HowWalked = .straightLine
+//    @State private var lengthOfCourse: Int? = nil
+//    @State private var effort: EffortWalked = .somewhat
+//    @State private var fearOfFalling: Bool = false
 
     @State private var shouldShowReversionAlert = false
 
-@ViewBuilder
+    /*
+     NOT HAPPY with no longer having room for an invalid/empty length flag (⚠️). Nor that while the field format rejects non-numerics, it doesn't show the rejection.
+     */
+
+    @ViewBuilder
     var whereWalkedSection: some View {
         Section {
             VStack {
                 Text("Where did you perform your walks?")
                 Picker("Where did you walk?",
-                       selection: $whereWalked) {
+                       selection: $walkInfoContent.where) {
                     Text("At Home")
                         .tag(WhereWalked.atHome)
                     Text("Away from home")
@@ -54,112 +57,109 @@ struct WalkInfoForm: View, ReportingPhase {
         }
     }
 
+    @ViewBuilder
+    var walkingLengthSection: some View {
+        Section {
+            VStack(alignment: .leading) {
+                Text("How far did you walk, in feet?").lineLimit(2)
+                    .minimumScaleFactor(0.75)
+                HStack {
+//                    if walkInfoContent.distance == nil { Text("⚠️") }
+                    Spacer()
+                    TextField("feet", value: $walkInfoContent.distance, format: .number)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.numberPad)
+                        .frame(width: 80)
+                }
+            }
+        }
+    }
+
+
+
+    @ViewBuilder
+    var courseLengthSection: some View {
+        Section {
+            VStack(alignment: .leading) {
+                Text("About how long was the area you walked in, in feet?").lineLimit(2)
+                    .minimumScaleFactor(0.75)
+                HStack {
+                    if walkInfoContent.lengthOfCourse == nil { Text("⚠️") }
+                    Spacer()
+                    TextField("feet", value: $walkInfoContent.lengthOfCourse, format: .number)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.numberPad)
+                        .frame(width: 80)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    var doubledSection: some View {
+        Section {
+            VStack {
+                Text("Did you walk back-and-forth, or in a straight line?")
+                    .minimumScaleFactor(0.6)
+                Picker("How did you walk?",
+                       selection: $walkInfoContent.howWalked) {
+                    Text("Back and Forth")
+                        .tag(HowWalked.backAndForth)
+                    Text("In a Straight Line")
+                        .tag(HowWalked.straightLine)
+                }
+                       .pickerStyle(.segmented)
+            }
+        }  // Back-and-forth section
+
+    }
+
+    @ViewBuilder
+    var effortSection: some View {
+        Section {
+            // FIXME: The app won't let you recover
+            //        if you don't change the answer.
+            Picker("How hard was your body working?", selection: $walkInfoContent.effort) {
+                ForEach(EffortWalked.allCases, id: \.rawValue) { effort in
+                    Text(effort.rawValue.capitalized)
+                        .tag(effort)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    var fallingSection: some View {
+        Section {
+            VStack {
+                Text("Were you concerned about falling during the walks?")
+                    .minimumScaleFactor(0.6)
+                Picker("Concerned about falling?",
+                       selection: $walkInfoContent.fearOfFalling) {
+                    Text("Yes")
+                        .tag(true)
+                    Text("No")
+                        .tag(false)
+                }
+                       .pickerStyle(.segmented)
+            }
+        }  // falling section
+    }
 
     var body: some View {
+
+// EXPECT walkInfoContent == nil
+
         Form {
-            // MARK: Home or not
             whereWalkedSection
-          /*  Section {
-                VStack {
-                    Text("Where did you perform your walks?")
-                    Picker("Where did you walk?",
-                           selection: $whereWalked) {
-                        Text("At Home")
-                            .tag(WhereWalked.atHome)
-                        Text("Away from home")
-                            .tag(WhereWalked.awayFromHome)
-                    }
-                           .pickerStyle(.segmented)
-                }
-            }  // Home/away section
-           */
-            /*
-            Section {
-                VStack(alignment: .leading) {
-                    Text("About how long was the area you walked in, in feet?").lineLimit(2)
-                        .minimumScaleFactor(0.75)
-                    HStack {
-                        if lengthOfCourse == nil { Text("⚠️") }
-                        Spacer()
-                        TextField("feet", value: $lengthOfCourse, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .keyboardType(.numberPad)
-                            .frame(width: 80)
-                    }
-                }
-            }  // length of runway section
-             */
-
-/*
- NOT HAPPY with no longer having room for an invalid/empty length flag (⚠️). Nor that while the field format rejects non-numerics, it doesn't show the rejection.
- */
-
-            // MARK: Length of course
-            Section {
-                TextField("feet", value: $lengthOfCourse, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .keyboardType(.numberPad)
-//                    .frame(width: 80)
-                // Prepend the question text to the number.
-                    .safeAreaInset(edge: .leading,
-                                   spacing: 12.0
-                    ) {
-                        Text("In feet, about how long was the area you walked in?")
-                            .foregroundColor(
-                                (lengthOfCourse == nil) ?
-                                    .red : .primary
-                            )
-                            .frame(maxWidth: 240)
-                    }
-            }
-            // Length of runway
-
-            // MARK: Straight or doubled
-            Section {
-                VStack {
-                    Text("Did you walk back-and-forth, or in a straight line?")
-                        .minimumScaleFactor(0.6)
-                    Picker("How did you walk?",
-                           selection: $howWalked) {
-                        Text("Back and Forth")
-                            .tag(HowWalked.backAndForth)
-                        Text("In a Straight Line")
-                            .tag(HowWalked.straightLine)
-                    }
-                    .pickerStyle(.segmented)                }
-            }  // Back-and-forth section
-
-            // MARK: Effort
-            Section {
-                // FIXME: The app won't let you recover
-                //        if you don't change the answer.
-                Picker("How hard was your body working?", selection: $effort) {
-                    ForEach(EffortWalked.allCases, id: \.rawValue) { effort in
-                        Text(effort.rawValue.capitalized)
-                            .tag(effort)
-                    }
-                }
-            }   // Effort section
-
-            // MARK: Falling
-            Section {
-                VStack {
-                    Text("Were you concerned about falling during the walks?")
-                        .minimumScaleFactor(0.6)
-                    Picker("Concerned about falling?",
-                           selection: $fearOfFalling) {
-                        Text("Yes")
-                            .tag(true)
-                        Text("No")
-                            .tag(false)
-                    }
-                           .pickerStyle(.segmented)
-
-                }
-            }  // falling section
+            courseLengthSection
+            doubledSection
+            walkingLengthSection
+            effortSection
+            fallingSection
         }
         .onSubmit {
-            completion(.success(representedInfo))
+            completion(.success(()))
         }
         .safeAreaInset(edge: .top, content: {
             Text("Tell us about your walking conditions — where you chose for your walk, and how you felt while performing it.")
@@ -169,7 +169,7 @@ struct WalkInfoForm: View, ReportingPhase {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ReversionButton(toBeSet: $shouldShowReversionAlert)
                 Button("Submit") {
-                    completion(.success(representedInfo))
+                    completion(.success(()))
                 }
             }
         }
@@ -177,21 +177,33 @@ struct WalkInfoForm: View, ReportingPhase {
     }
 }
 
+final class DisplayWalkInfo: View, ObservableObject {
+//    @State var represented: WalkInfoResult
+    @EnvironmentObject var result: WalkInfoResult
+//
+//    init(representing: WalkInfoResult) {
+//        represented = representing
+//    }
+
+    var body: some View {
+        Text("\(result.description)")
+//            .environmentObject(represented)
+    }
+}
+
 struct WalkInfoForm_Previews: PreviewProvider {
+    static var walkResult = WalkInfoResult()
+
     static var previews: some View {
         NavigationView {
-            WalkInfoForm(
-                representing:
-                    WalkInfoResult()
-                    .with(
-                        \.where,
-                         value: .atHome)
-            )
-            {
+            DisplayWalkInfo() //representing: walkResult)
+            WalkInfoForm() {
                 _ in // nothing
+
             }
 
-                .navigationTitle("Walking Info")
+            .navigationTitle("Walking Info")
         }
+        .environmentObject(walkResult)
     }
 }

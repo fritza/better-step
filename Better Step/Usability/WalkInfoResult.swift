@@ -21,20 +21,13 @@ enum EffortWalked: String, Hashable, CaseIterable {
     case veryHard = "Very Hard"
 }
 
-struct WalkInfoResult {
-    // One ptoblem with private(set) is that callers
-    // of .with(_:for:) can't pass a writeable
-    // keypath for properties that are locked against
-    // the caller.
-
-    /*fileprivate(set)*/ var `where`            : WhereWalked
-    /*fileprivate(set)*/ var distance           : Int
-
-    /*fileprivate(set)*/ var howWalked          : HowWalked
-    /*fileprivate(set)*/ var lengthOfCourse     : Int?
-
-    /*fileprivate(set)*/ var effort             : EffortWalked
-    /*fileprivate(set)*/ var fearOfFalling      : Bool
+class WalkInfoResult: ObservableObject, CustomStringConvertible {
+    @Published var `where`            : WhereWalked
+    @Published var distance           : Int
+    @Published var howWalked          : HowWalked
+    @Published var lengthOfCourse     : Int?
+    @Published var effort             : EffortWalked
+    @Published var fearOfFalling      : Bool
 
    init() {
        self.`where`        = .atHome
@@ -45,14 +38,13 @@ struct WalkInfoResult {
        self.fearOfFalling  = false
    }
 
-
-
-   func with<T>(_ path: WritableKeyPath<Self, T>,
-                value: T)
-    -> WalkInfoResult {
-       var retval = self
-       retval[keyPath: path] = value
-       return retval
-   }
+    var description: String {
+        var retval = "WalkInfoResult("
+        print(self.where, self.howWalked, self.distance,
+              separator: ", ",
+              terminator: "",
+              to: &retval)
+        return retval + ")"
+    }
 
 }
