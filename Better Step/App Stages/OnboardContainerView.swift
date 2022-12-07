@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Workflow container for onboarding views.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `String`.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `String`.
 struct OnboardContainerView: View, ReportingPhase {
     @State private var correctTask: Int?
     @State private var shouldWarnOfReversion: Bool = false

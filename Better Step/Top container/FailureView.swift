@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Conclusion View
 /// A view that annpunces the successful completion of the workflow.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
@@ -35,7 +35,7 @@ struct ConclusionView: View, ReportingPhase {
 ///
 /// Instantiated for the TopPhases.failed tag.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 /// - bug: The completion closure **is never called.**
 struct FailureView: View, ReportingPhase {
     static let phasesAndNames: KeyValuePairs<TopPhases, String> = [

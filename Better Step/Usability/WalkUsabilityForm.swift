@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 // MARK: - WalkUsabilityForm
+/// Editor for all usability data except for the 1–7 ratings.
+///
+/// Its ``ReportingPhase`` result type is ``WalkInfoResult``.
 struct WalkUsabilityForm: View, ReportingPhase {
     @Namespace var lastFormSection
     typealias SuccessValue = WalkInfoResult

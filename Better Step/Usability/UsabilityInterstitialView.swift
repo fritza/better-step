@@ -13,7 +13,7 @@ import SwiftUI
 
 /// This is mostly redundant of `DASIInterstitialView`, except that one is a DASI depencency, and it doesn't do the right thing about the toolbar.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 struct UsabilityInterstitialView: View, ReportingPhase {
     typealias SuccessValue = Void
 

@@ -23,7 +23,7 @@ struct QuestionContentView: View {
 
 /// Present a question number, question text, and a yes/no button stack.
 ///
-/// The `SuccessValue` as a ``ReportingPhase`` is (``DASIState``, ``DASIResponseList``).
+/// The ``SuccessValue`` as a ``ReportingPhase`` is `(DASIState`, `DASIResponseList)`.
 struct DASIQuestionView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
 

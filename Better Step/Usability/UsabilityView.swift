@@ -25,7 +25,7 @@ struct QLimits {
 ///
 /// Clients provide a question ID and a binding to the response. Responses are also published via the closure the client provides.
 ///
-/// The `SuccessValue` as a ``ReportingPhase`` is `[Int]`.
+/// The ``SuccessValue`` as a ``ReportingPhase`` is `[Int]`.
 struct UsabilityView: View, ReportingPhase {
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     var tempCSV: String = ""

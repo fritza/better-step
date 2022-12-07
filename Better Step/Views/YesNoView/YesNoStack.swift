@@ -15,7 +15,7 @@ import SwiftUI
 
 /// A stack of `YesNoButtonView`s, one **Yes**, one **No**
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is ``AnswerState`` (enum, `.yes`, `.no`, `.unknown`). Clients cannot access the currently-selected state, only listen for completions as the value changes.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is ``AnswerState`` (`.yes`, `.no`, `.unknown`).
 struct YesNoStack: View, ReportingPhase {
     typealias SuccessValue = AnswerState
     let completion: ClosureType

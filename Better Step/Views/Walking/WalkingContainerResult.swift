@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-/// Holds two ``IncomingAccelerometry``s, for both walk speeds. There is no public initializer; use `WalkingContainerResult.shared`.
+/// Holds two `IncomingAccelerometry`s, for both walk speeds. There is no public initializer; use ``WalkingContainerResult.shared``.
 ///
-/// ``WalkingContainerResult``receives an `IncomingAccelerometry` for each `.walk_n` stage. When it's full, the data is ready to export. It's awkward, but it allows ``WalkingContainerView/walk_N_View(ownPhase:nextPhaseGood:nextPhaseBad:)`` to fill in the per-walk result by index rather than hard-code it.
+/// ``WalkingContainerResult``receives an ``IncomingAccelerometry`` for each `.walk_n` stage. When it's full, the data is ready to export. It's awkward, but it allows ``WalkingContainerView/walk_N_View(ownPhase:nextPhaseGood:nextPhaseBad:)`` to fill in the per-walk result by index rather than hard-code it.
 ///
 /// Use the singleton `WalkingContainerResult.shared`.
 public final class WalkingContainerResult {
@@ -29,7 +29,7 @@ public final class WalkingContainerResult {
     /// The singleton `WalkingContainerResult`; there is no public initializer.
     public static let shared = WalkingContainerResult()
 
-    /// The walk data (``IncomingAccelerometry`` x2) is ready for export when both walk records have been filled.
+    /// The walk data (`IncomingAccelerometry` x2) is ready for export when both walk records have been filled.
     public var readyForExport: Bool { walk_1 != nil && walk_2 != nil }
 
     /// If there are two completed walks in the record, convert them to CSV, write them to files, and add them to the accelerometry `.zip` file.

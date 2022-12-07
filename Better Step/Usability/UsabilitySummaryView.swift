@@ -24,7 +24,7 @@ let bgColors: [UIColor] = [
 
 /// A `View` listing all usability questions and the user's responses.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `Void`. **Completion closure is not called.** This one is serious.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `Void`. **Completion closure is not called.** This one is serious.
 /// - note Available only if `INCLUDE_USABILITY_SUMMARY` is set at compule time.
 struct UsabilitySummaryView: View, ReportingPhase {
     typealias SuccessValue = Void

@@ -23,7 +23,7 @@ import Combine
 ///
 /// Note that the timer can't be paused, only canceled. After cancellation, the only thing to be done is to create a new timer, and assign it the full duration.
 ///
-/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// The ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 struct SweepSecondView: View, ReportingPhase {
     typealias SuccessValue = ()
 

@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - InterstitalPageTabView
-/// A view that flips through ``InterstitialPageView``s using `TabView`’s `page` style.
+/// A view that flips through `InterstitialPageView`s using `TabView`’s `page` style.
 ///
-/// The `SuccessValue` as a ``ReportingPhase`` is `Void`.
+/// The ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 struct InterstitalPageContainerView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
@@ -22,9 +22,9 @@ struct InterstitalPageContainerView: View, ReportingPhase {
 
     private let listing: InterstitialList
 
-    /// Initialize a ``InterstitialPageView``with a list of ``InterstitialInfo`` and an initial page selection.
+    /// Initialize an `InterstitialPageView`with a list of `InterstitialInfo` and an initial page selection.
     /// - Parameters:
-    ///   - listing: An ``InterstitialList`` containing the details of the page sequence
+    ///   - listing: An `InterstitialList` containing the details of the page sequence
     ///   - selection: The **ID** (one-based) of the initially-selected page.
     init(listing: InterstitialList, selection: Int, callback: @escaping ClosureType) {
         self.listing = listing

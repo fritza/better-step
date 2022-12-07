@@ -10,11 +10,16 @@ import Foundation
 infix operator ≈≈  : ComparisonPrecedence
 infix operator !≈≈ : ComparisonPrecedence
 
+/// Adopters respond whether two instances are _almost_ equal.
+///
+/// For `BinaryFloatingPoint` numbers, ≈≈ succeeds if the difference between the operands is less than ε (defined in this source) as a proportion of the greater.
+/// - note: The operator is a pair of the "approximately equal" character (`≈`,  **⌥X **on EN\_us keyboard). Most monofonts do not make this clear,
 public protocol RoughlyEquatable {
     static func ≈≈ (lhs: Self, rhs: Self) -> Bool
 }
 
 extension RoughlyEquatable {
+    ///  `!≈≈` is the negation of `≈≈`
     public static func !≈≈ (lhs: Self, rhs: Self) -> Bool {
         !(lhs ≈≈ rhs)
     }

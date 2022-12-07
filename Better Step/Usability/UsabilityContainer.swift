@@ -25,8 +25,10 @@ enum UsabilityState: Int, CaseIterable {
 
 /// A  sequence of open-intertitial → questions → close-interstitial phases. Each solicits a `1...7` rating.
 ///
-/// Its `SuccessValue` as a ``ReportingPhase`` is `String`, a CSV line of responses to the 1–7 ratings.
+/// Its ``SuccessValue`` as a ``ReportingPhase`` is `(scores: String, specifics: String)`, a CSV line of responses to the 1–7 ratings.
 struct UsabilityContainer: View, ReportingPhase {
+// FIXME: The second, "specifics" SuccessValue isn't used.
+
     typealias SuccessValue = (scores: String, specifics: String)
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
