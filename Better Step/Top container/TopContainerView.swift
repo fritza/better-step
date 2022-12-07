@@ -37,7 +37,7 @@ struct TopContainerView: View {
         currentPhase = TopPhases.entry.followingPhase
     }
 
-    @State var usabilityFormResults: WalkInfoForm?
+//    @State var usabilityFormResults: WalkInfoForm?
     //    @State var showRewindAlert = false
 
     @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks

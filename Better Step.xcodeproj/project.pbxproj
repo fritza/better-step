@@ -29,7 +29,6 @@
 		1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
 		1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
 		1FA281E528DBBB270038353E /* ASKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* ASKeys.swift */; };
-		1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */; };
 		1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
 		1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
 		1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C727D7C4170058F1AF /* DASIStages.swift */; };
@@ -139,7 +138,6 @@
 		1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityView.swift; sourceTree = "<group>"; };
 		1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilitySummaryView.swift; sourceTree = "<group>"; };
 		1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityContainer.swift; sourceTree = "<group>"; };
-		1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkInfoForm.swift; sourceTree = "<group>"; };
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoResult.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
@@ -412,7 +410,6 @@
 				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
 				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
 				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
-				1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */,
 				1F432769293AAC8000F2AFB0 /* WalkInfoContainer.swift */,
 				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
 				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
@@ -734,7 +731,6 @@
 				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
 				1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */,
 				1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */,
-				1FA281E628DBBB270038353E /* WalkInfoForm.swift in Sources */,
 				1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */,
 				1FA281E028DBBB270038353E /* FailureView.swift in Sources */,
 				1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */,
