@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+#error("Misleading names "WalkInfo"~ for information on USABILITY AS TO walking.")
+
 typealias WalkInfoCompletion = (Int) -> Void
 
 struct NumberedPageView: View {
