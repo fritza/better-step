@@ -100,6 +100,7 @@
 		1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477E28EDE90F00817041 /* ZIPProgress.swift */; };
 		1FC7478228EDFD0F00817041 /* WalkingContainerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7478028EDFB2E00817041 /* WalkingContainerResult.swift */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
+		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
 		1FF354552799D47A000894B8 /* AccelerometerItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545227977302000894B8 /* AccelerometerItemTests.swift */; };
@@ -195,6 +196,7 @@
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
 		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
 		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
+		1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkUsabilityForm.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
 		1FF1331227A0BE78004D6647 /* DASIReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIReportTests.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				1F1C4E1228D4D76900547C7A /* WalkInfoForm.swift */,
 				1F432769293AAC8000F2AFB0 /* WalkInfoContainer.swift */,
 				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
+				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
 				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
 				1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */,
 				1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */,
@@ -737,6 +740,7 @@
 				1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */,
 				1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */,
 				1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */,
+				1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */,
 				1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */,
 				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
 				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
