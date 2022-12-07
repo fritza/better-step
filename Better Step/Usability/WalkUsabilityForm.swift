@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: - WalkUsabilityForm
 struct WalkUsabilityForm: View, ReportingPhase {
     @Namespace var lastFormSection
     typealias SuccessValue = WalkInfoResult
@@ -40,24 +41,31 @@ struct WalkUsabilityForm: View, ReportingPhase {
                 .lineLimit(2)
                 .minimumScaleFactor(0.75)
             HStack {
-                //                    if walkInfoContent.distance == nil { Text("⚠️") }
                 Spacer()
                 TextField("feet", value: $walkingData.distance, format: .number)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.numberPad)
                     .frame(width: 80)
+                // "Left"-justify the field contents.
+                    .multilineTextAlignment(.trailing)
+                // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
+                //       ATW, the modifier works, but be resigned to that stopping (one hopes
+                //       without breakage).
             }
         }
     }
 
     @ViewBuilder private var howMuchEffortStack: some View {
-//        VStack {
-            Picker("How hard was your body working?", selection: $walkingData.effort) {
+        VStack(alignment: .leading) {
+            Text("How hard").fontWeight(.heavy) +
+            Text(" was your body working?")
+
+            Picker("", selection: $walkingData.effort) {
                 ForEach(EffortWalked.allCases, id: \.rawValue) { effort in
                     Text(effort.rawValue.capitalized)
                         .tag(effort)
                 }
-//            }
+            }
         }
     }
 
@@ -127,9 +135,12 @@ struct WalkUsabilityForm: View, ReportingPhase {
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.numberPad)
                     .frame(width: 80)
-                //                                .padding()
+                // "Left"-justify the field contents.
+                    .multilineTextAlignment(.trailing)
+                // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
+                //       ATW, the modifier works, but be resigned to that stopping (one hopes
+                //       without breakage).
             }
-            //                        }
 
         }
     }
@@ -178,9 +189,11 @@ struct WalkUsabilityForm: View, ReportingPhase {
 
 struct WalkUsabilityForm_Previews: PreviewProvider {
     static var previews: some View {
-        WalkUsabilityForm {
-            _ in print("POP!")
+        NavigationView {
+            WalkUsabilityForm {
+                _ in print("POP!")
+            }
+            .environmentObject(WalkInfoResult())
         }
-        .environmentObject(WalkInfoResult())
     }
 }
