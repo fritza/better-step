@@ -15,21 +15,8 @@ struct WalkUsabilityForm: View, ReportingPhase {
 
     @EnvironmentObject var walkingData: WalkInfoResult
 
-    @State var seeingBottomCount: Int = 0
-    @State var hasSeenBottom: Bool = false
-    @State var shouldDisplayDoneAlert: Bool = false
-
     init(_ reporting: @escaping ClosureType) {
         completion = reporting
-    }
-
-
-
-    // FIXME: Still doesn't help.
-    //        The proxy goes out of scope in the
-    //        .toolbar definition.
-    func scrollToBottom(of proxy: ScrollViewProxy) {
-        proxy.scrollTo(lastFormSection, anchor: .bottom)
     }
 
     // MARK: - How you did
@@ -164,15 +151,12 @@ struct WalkUsabilityForm: View, ReportingPhase {
                     .tag(HowWalked.straightLine)
             }
                    .pickerStyle(.segmented)
-                   .onAppear {
-                       seeingBottomCount += 1
-                       hasSeenBottom = seeingBottomCount >= 2
-                   }
         }
 
     }
 
 
+    // MARK: - body
     var body: some View {
         ScrollViewReader { scrollProxy in
             Form {
@@ -182,33 +166,13 @@ struct WalkUsabilityForm: View, ReportingPhase {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-
-                        if !hasSeenBottom {
-                            shouldDisplayDoneAlert = true
-                            hasSeenBottom = true
-
-
-                            // The Done button is tapped.
-                            // Has the user scrolled down all the way before?
-                            //   (hasSeenBottom)
-                            // If not, put the alert up.
-                        }
-                        else {
-                            completion(.success(walkingData))
-                        }
+                        completion(.success(walkingData))
                     }
                 }
             }
             .background(.thinMaterial)
         }
-            .alert("Scroll Down",
-                   isPresented: $shouldDisplayDoneAlert,
-                   actions: {},
-                   message: {
-                Text("Please scroll down to review your answers to the items at the end of this list.")
-            }
-            )
-            .navigationTitle("Your Walks")
+        .navigationTitle("Your Walks")
     }
 }
 
