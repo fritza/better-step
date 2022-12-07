@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A unique identifier, assigned by the study, for the user and her data. It does _not_ adopt ``Identifiable``.
+/// A unique identifier, assigned by the study, for the user and her data. It does _not_ adopt `Identifiable`.
 ///
 /// The identifier itself is just a `String`. but this type validates it and handles `Destroy` `Notification`s to restore the ID to `unset`. A special in-band value for no-known-ID instead of `nil` is to make it easier to initialize `UserDefaults`.
 /// - note: All methods are `static` — `SubjectID` wraps a singleton `String`.

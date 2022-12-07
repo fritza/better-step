@@ -13,7 +13,6 @@
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F3BD02A29392E3700442A63 /* ResultsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BD02929392E3700442A63 /* ResultsUploader.swift */; };
-		1F43276A293AAC8000F2AFB0 /* WalkInfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F432769293AAC8000F2AFB0 /* WalkInfoContainer.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
@@ -143,7 +142,6 @@
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
 		1F3BD02929392E3700442A63 /* ResultsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsUploader.swift; sourceTree = "<group>"; };
-		1F432769293AAC8000F2AFB0 /* WalkInfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoContainer.swift; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
 		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -408,7 +406,6 @@
 				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
 				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
 				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
-				1F432769293AAC8000F2AFB0 /* WalkInfoContainer.swift */,
 				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
 				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
 				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
@@ -750,7 +747,6 @@
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
-				1F43276A293AAC8000F2AFB0 /* WalkInfoContainer.swift in Sources */,
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
 				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
