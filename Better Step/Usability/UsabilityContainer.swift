@@ -39,7 +39,7 @@ struct UsabilityContainer: View, ReportingPhase {
     @State var currentState: UsabilityState
     /// Whether the "reversion" (back to beginning with no subject) dialog should be shown.
     ///
-    /// See ``ViewModifier/reversionAlert(on:) ``for the `ViewModifier`.
+    /// See ``reversionAlert(on:)`` for the `ViewModifier`.
     @State var shouldDisplayReversionAlert = false
 
     /// Holder for the block that handles Destroy.usability.

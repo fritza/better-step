@@ -40,7 +40,7 @@ enum CountdownConstants {
     /// Duration in ns between `Task.sleep(nanoseconds:)` updates of the `AsyncStream` values for `for async`. Twice as frequent as the requested update (.`timerTick` interval.
     static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC) / 2.0)
 
-    /// `Timer`-provided second marks arrive at unlimited precision. `Timekeeper` rounds thest to this fraction of a second.
+    /// `Timer`-provided second marks arrive at unlimited precision. ``Timekeeper`` rounds thest to this fraction of a second.
     static let secondsRoundingFactor = 100.0
 
     /// Delay in displaying `SweepSecondView` till the ``AudioMilestone`` catches up.
@@ -89,7 +89,7 @@ enum CountdownConstants {
 
 
 // MARK: - class Timekeeper
-/// Common source of truth for a countdown timer. `Timekeeper` breaks the clock time into minutes, seconds, and other components that clients can use to populate `View`s.
+/// Common source of truth for a countdown timer. ``Timekeeper`` breaks the clock time into minutes, seconds, and other components that clients can use to populate `View`s.
 final class Timekeeper: ObservableObject {
     /// Status fof the life cycle of the object.
     ///
@@ -112,7 +112,7 @@ final class Timekeeper: ObservableObject {
 
     /// Parameters for a countdown (duration, tick interval, tolerance, rounding, units requested).
     ///
-    /// Initialize `TimeKeeper` with a `TimingSpec`. `Timekeeper` has an additional initializer for specifying these as parameters.
+    /// Initialize `TimeKeeper` with a `TimingSpec`. ``Timekeeper`` has an additional initializer for specifying these as parameters.
     struct TimingSpec {
         // MARK: - TimingSpec
         let duration, increment, tolerance, roundingScale : TimeInterval
@@ -133,7 +133,7 @@ final class Timekeeper: ObservableObject {
     /// Units (by-minute, by-second, by-fraction) for which Combine `Publisher`s will be created..
     ///
     /// Clients should not examine publishers whose unuts have not been requested. The clock will not update them.
-    /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ generate a stream for the string `"mm:ss"`. _See_ ``Timekeeper/start()``.
+    /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, ``Timekeeper`` will _additonally_ generate a stream for the string `"mm:ss"`. _See_ ``Timekeeper/start()``.
     struct Units: RawRepresentable, OptionSet, CustomStringConvertible {
         // MARK: - Units
         let rawValue: Int
@@ -176,7 +176,7 @@ final class Timekeeper: ObservableObject {
     @Published var fraction: TimeInterval
 
     // MARK Initializers
-    /// Initialize a `Timekeeper` with internal state variables specified individually.
+    /// Initialize a ``Timekeeper`` with internal state variables specified individually.
     ///
     /// For details on the parameters, see `Timer`.
     /// - Parameters:
@@ -184,7 +184,7 @@ final class Timekeeper: ObservableObject {
     ///   - increment: The increment within the duration at which the underlying `Timer` emits time. Default is `CountdownConstants.timerTick`, (`1/30` of a second ATW).
     ///   - tolerance: The maximum amount the emitted time may vary from the strict increment. See `Timer`. Defaults to `CountdownConstants.timerTolerance` (`1/240` second ATW).
     ///   - roundingScale: The divisor by which to round the Timer's reported time . Defaults to `100.0` (`5.12345 -> 5.123`)
-    ///   - units: The time components to be updated during the lifetime of the `Timekeeper`.  `seconds`, for instance, will not be updated if `.seconds` is not included. If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ update `"mm:ss"` (`minuteSecondString`). Not defaulted.
+    ///   - units: The time components to be updated during the lifetime of the ``Timekeeper``.  `seconds`, for instance, will not be updated if `.seconds` is not included. If  `Units` contains _both_ `.minutes` and `.seconds`, ``Timekeeper`` will _additonally_ update `"mm:ss"` (`minuteSecondString`). Not defaulted.
     convenience init(duration       : TimeInterval,
                      increment      : TimeInterval = CountdownConstants.timerTick,
                      tolerance      : TimeInterval = CountdownConstants.timerTolerance,
@@ -196,7 +196,7 @@ final class Timekeeper: ObservableObject {
         self.init(specs)
     }
 
-    /// Initialize a `Timekeeper` from a `TimingSpec` `struct` encompassing all the configuration values. _See_ ``Timekeeper/TimingSpec`` for defaults.
+    /// Initialize a ``Timekeeper`` from a `TimingSpec` `struct` encompassing all the configuration values. _See_ ``Timekeeper/TimingSpec`` for defaults.
     init(_ spec: TimingSpec) {
         self.duration      = spec.duration
         self.increment     = spec.increment
@@ -214,7 +214,7 @@ final class Timekeeper: ObservableObject {
     ///
     /// `status` will be set to `.running`. Countdown will cpmmence immediately. It will stop (and set a `.failure` completion) upon `cancel()` or expiration..
     /// - warning: Properties not among the requested uinits are undefined
-    /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, `Timekeeper` will _additonally_ generate a stream to update `minuteSecondString` (`"mm:ss"`).
+    /// - note: If  `Units` contains _both_ `.minutes` and `.seconds`, ``Timekeeper`` will _additonally_ generate a stream to update `minuteSecondString` (`"mm:ss"`).
     func start() {
         status = .running
 

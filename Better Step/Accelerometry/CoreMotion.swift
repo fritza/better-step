@@ -68,7 +68,7 @@ struct AccelerometerState: Availability {
 }
 
 // MARK: - Top-level queue status
-/// The run status of a `MotionManager`: Running, halted, illegal, or error
+/// The run status of a ``MotionManager``: Running, halted, illegal, or error
 enum Lifecycle: Equatable {
     case idle, running, error(Error), broken
     static func == (lhs: Lifecycle, rhs: Lifecycle) -> Bool {
@@ -87,7 +87,7 @@ enum Lifecycle: Equatable {
 // MARK: - MotionManager
 /// Wrapper around `CMMotionManager` with convenient start / stop / `AsyncSequence` for accelerometry,
 final class MotionManager: ObservableObject {
-    /// Access to the singleton `MotionManager`.
+    /// Access to the singleton ``MotionManager``.
     ///
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
 

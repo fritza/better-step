@@ -38,6 +38,11 @@ public enum UploadServerCreds {
 }
 
 // MARK: - ResultsUploader
+
+/// Upload locakdata provided by a `file:///` URL to a particular server, ATW the Better Step database.
+///
+/// Credentials and remotes are drawn from ``UploadServerCreds``
+
 public class ResultsUploader // : Hashable
 {
     /*
@@ -53,14 +58,17 @@ public class ResultsUploader // : Hashable
 
     // FIXME: Must retain this instance while it's active.
 
-    let session = URLSession.shared
-    let dataRequest: URLRequest
-    let dataURL: URL
+    /// The `URLSession` to generate the upload request and handle the `URLSessonDelegate`'s authentication callback.
+    private let session = URLSession.shared
+    private let dataRequest: URLRequest
+
+    /// A **file** URL providing the data to be uploaded,
+    private let dataURL: URL
 
     // let uploadPayload: Data
     // Is this needed beyond init(payload:)?
 
-    let notificationHandlers: [AnyObject?]
+    private let notificationHandlers: [AnyObject?]
 
     init(from url: URL) throws {
         dataURL = url
@@ -89,18 +97,15 @@ public class ResultsUploader // : Hashable
         notificationHandlers = [nGood, nBad]
     }
 
-    deinit {
-         print("ResultsUploader deinitializing.")
-    }
-
+    /// Set up the data task for the upload, and its delegate. Commence the upload.
     func proceed() {
-//        Self.uploaders.insert(self)
         let task = session.dataTask(
             with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
         task.delegate = UploadTaskDelegate()
         task.resume()
     }
 
+    /// Completion code for the `POST`, as specified for ``URLSessionDataTask``.
     fileprivate func resultFunction(data: Data?,
                                     response: URLResponse?,
                                     error: Error?) {
@@ -150,7 +155,7 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
         password    : UploadServerCreds.password,
         persistence : .forSession)
 
-    /// ``URLSessionTaskDelegate`` adoption for authorization challenges.
+    /// `URLSessionTaskDelegate` adoption for authorization challenges.
     public func urlSession(_ session: URLSession,
                            task: URLSessionTask,
                            didReceive challenge: URLAuthenticationChallenge,
@@ -183,6 +188,9 @@ enum UploadResultKeys: String, Hashable {
 }
 
 extension ResultsUploader {
+    /// Broadcast the completion (successful or not) of the upload through `NotificationCenter`
+    ///
+    /// ATW, the available names are ``UploadFailedNotification`` and ``UploadCompleteNotification``.
     func sendUploadNotice(name  : Notification.Name,
                           server: String,
                           error : Error? = nil) {

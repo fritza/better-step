@@ -12,7 +12,7 @@ import Collections
 // MARK: - IncomingAccelerometry
 
 
-/// Async-safe deque  holding ``Sequence``s of  ``CMAccelerometryData``
+/// Async-safe deque  holding `Sequence`s of  `CMAccelerometryData`
 public actor IncomingAccelerometry {
 
 // MARK: Properties
@@ -37,14 +37,14 @@ public actor IncomingAccelerometry {
     // MARK: Store/recall
     /// Append a data point to the buffer.
     /// - Parameter accData: The data to append to the buffer.
-    /// - note: ``CMAccelerometerData`` is the acceleration forces, _plus_ a timestamp.
+    /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
     func receive(_ accData: CMAccelerometerData) {
         buffer.append(accData)
     }
 
     /// If a `CMAccelerometerData` is available, remove it and yield it to the caller; otherwise wait.
-    /// - note: ``CMAccelerometerData`` is the acceleration forces, _plus_ a timestamp.
-    /// - Returns: The oldest  ``CMAccelerometerData`` in the queue
+    /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
+    /// - Returns: The oldest  `CMAccelerometerData` in the queue
     /// - throws: `Task` cancellation errors.
     func pop() async throws -> CMAccelerometerData? {
         while buffer.isEmpty {
@@ -55,8 +55,8 @@ public actor IncomingAccelerometry {
     }
 
     /// Remove all data in the queue and return it as an array.
-    /// - note: ``CMAccelerometerData`` is the acceleration forces, _plus_ a timestamp.
-    /// - Returns: An array of ``CMAccelerometerData``
+    /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
+    /// - Returns: An array of `CMAccelerometerData`
     func popAll()  -> [CMAccelerometerData] {
         // This isn't async?!
         let content = all()
@@ -65,7 +65,7 @@ public actor IncomingAccelerometry {
     }
 
     /// Return all data from the queue without removing them.
-    /// - returns: All ``CMAccelerometerData`` in the queue.
+    /// - returns: All `CMAccelerometerData` in the queue.
     func all() -> [CMAccelerometerData] {
         let number = buffer.count
         let content = buffer[..<number]

@@ -22,7 +22,10 @@ import CoreMotion
 
 
 // MARK: - CSVConvertible
+
+/// Adopters convert their data to a CSV stribg
 protocol CSVConvertible: Codable, Timestamped {
+    /// `Self` rendered into CSV.
     var csv: String { get }
 }
 

@@ -11,10 +11,6 @@ import CoreMotion
 
 // FIXME: Handle cancellation.
 
-protocol HasVoidCompletion {
-    var completion: ()->Void { get }
-}
-
 // MARK: - WalkingState
 public enum WalkingState: String, CaseIterable // , BSTAppStages
 {

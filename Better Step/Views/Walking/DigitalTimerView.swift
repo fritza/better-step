@@ -32,7 +32,7 @@ private let digitalNarrative = """
  - ``body``
  */
 
-/// Displays a coundown clock in the form `mm:ss`. Initializes, starts, and observes both `MotionManager` and `Timekeeper`.
+/// Displays a coundown clock in the form `mm:ss`. Initializes, starts, and observes both ``MotionManager`` and ``Timekeeper``.
 ///
 /// The ``SuccessValue`` as a ``ReportingPhase`` is ``IncomingAccelerometry``.
 struct DigitalTimerView: View, ReportingPhase {

@@ -93,7 +93,7 @@ final class AudioMilestone
     }
 
     /// Start playing the data loaded from the audio file.
-    /// - throws: ``.avCantStart`` if `AVAudioPlayer/play()` returns `false`.
+    /// - throws: ``Errors.avCantStart`` if `AVAudioPlayer/play()` returns `false`.
     func play() throws {
         guard let player else { throw Errors.avCantStart }
         player.currentTime = 0.0

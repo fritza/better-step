@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-/// Holds two `IncomingAccelerometry`s, for both walk speeds. There is no public initializer; use ``WalkingContainerResult.shared``.
+/// Holds two `IncomingAccelerometry`s, for both walk speeds. There is no public initializer; use ``WalkingContainerResult```.shared`.
 ///
 /// ``WalkingContainerResult``receives an ``IncomingAccelerometry`` for each `.walk_n` stage. When it's full, the data is ready to export. It's awkward, but it allows ``WalkingContainerView/walk_N_View(ownPhase:nextPhaseGood:nextPhaseBad:)`` to fill in the per-walk result by index rather than hard-code it.
 ///

@@ -15,8 +15,6 @@ import Foundation
 /// * **compound** cases are consist of more than one scalar case. `firstRunData`, for instance, contains both DASI and the Usability surveys.
 ///
 /// Sending `post()` to a scalar case of ``Destroy`` posts a single “`Notification_\(rawValue)`” to signal to clients that the data they manage should be deleted.  These will be for scalars only;` post()` breaks compunds to scalars; clients will never see notifications for compounds
-///
-/// _see_ ``Destroyer`` for an example.
 /// - warning: `.unsafeSubjectID` and `unsafeAppStatus` should appeaar in that order at the ends of coumpounds if those are desired.
 struct Destroy: OptionSet, RawRepresentable, Hashable {
 /// `RawRepresentable` adoption
