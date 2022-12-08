@@ -14,7 +14,12 @@ extension IncomingAccelerometry {
 
     private func marshalledRecords() -> [String] {
         let all = self.all()
-        let strings = all.map(\.csvLine)
+        guard !all.isEmpty else { return [] }
+        let firstStamp = all.first()!.timeStamp
+        let deltaT = all.tinker(path: \.timestamp) { stampIn in
+            stampIn - firstStamp
+        }
+        let strings = deltaT.map(\.csvLine)
         return strings
     }
 

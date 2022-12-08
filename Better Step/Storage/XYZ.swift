@@ -9,7 +9,46 @@ import Foundation
 import CoreMotion
 //import CoreMotion
 
-/// Adopters respond to `csvLine` with all relevant values reduced to `String`s and rendered in a comma-separate list.
+/// Adopters assure that the records in a series have a firsl line naming the fields.
+public protocol CSVFileRepresentable {
+    static var csvHeaders: [String] { get }
+
+    // TODO: Decide whether to default headerPrefixed(records:) rather than require it
+    func headerPrefixed(records: [CSVRepresentable]) -> [String]
+}
+
+extension CSVFileRepresentable {
+    // TODO: Decide whether to default headerPrefixed(records:) rather than require it
+
+    /// Render an array of csv-representable objects as an array of formatted `String` records.
+    /// - Parameter records: An array of csv-representable objects, corresponding to records (e,g, accelerometry readings) in the output file.
+    /// - Returns: An array of `String`s, each representing a single data point (or line in the CSV report).
+    func headerPrefixed(records: [CSVRepresentable]) -> [String] {
+
+        // Maybe accept a column number for the timestamp
+        // value, if any
+        // There ought to be in the ultimate (everything after series tag and user ID) array of representables, but does this ever get so fractional lines (sted whole record at a time) get split and come in piecemeal?
+
+//        var headerLine = [Self.csvHeaders.csvLine]
+        var initial = Self.csvHeaders.csvLine
+        var result: [String] = [initial]
+
+        for record in records {
+            let newItem = record.csvLine
+            result.append(newItem)
+        }
+
+        let retval = records.reduce(into: [Self.csvHeaders.csvLine]) { partialResult, record in
+           return partialResult.append(record.csvLine)
+        }
+
+        return result
+    }
+}
+
+/// Adopters respond to `csvLine` with all relevant values reduced to `String`s and rendered in a comma-separated list.
+///
+/// This has nothing to do with marshalling a whole data series. It does not have a standard prefix (series, subject, timestamp).
 public protocol CSVRepresentable {
     /// The salient values of the receiver, rendered as `String`s separated by commas.
     var csvLine: String { get }

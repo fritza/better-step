@@ -51,16 +51,17 @@ extension BinaryInteger {
 
 private func numberFormatter(places: Int) -> NumberFormatter {
     let retval = NumberFormatter()
-    retval.minimumIntegerDigits = 1
-    retval .minimumFractionDigits = places
+    retval.minimumIntegerDigits   = 1
+    retval.minimumFractionDigits  = places
     retval.maximumFractionDigits  = places
     return retval
 }
 
-private let _rounded    = numberFormatter(places: 0)
-private let _pointThree = numberFormatter(places: 3)
-private let _pointFive  = numberFormatter(places: 5)
-private let _pointEight = numberFormatter(places: 8)
+private let _rounded    = numberFormatter(places:  0)
+private let _pointThree = numberFormatter(places:  3)
+private let _pointFour  = numberFormatter(places:  4)
+private let _pointFive  = numberFormatter(places:  5)
+private let _pointEight = numberFormatter(places:  8)
 private let _pointTen   = numberFormatter(places: 10)
 
 
@@ -68,14 +69,17 @@ extension BinaryFloatingPoint {
     /// Self to three places after the decimal. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
     var pointThree: String { _pointThree.string(from: self as! NSNumber)! }
     /// Self to five places after the decimal. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
+    var pointFour: String  { _pointFour .string(from: self as! NSNumber)! }
+    /// Self to four places after the decimal. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
     var pointFive: String  { _pointFive .string(from: self as! NSNumber)! }
     /// Self to eight places after the decimal. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
     var pointEight: String { _pointEight.string(from: self as! NSNumber)! }
     /// Self to ten places after the decimal. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
     var pointTen: String   { _pointTen  .string(from: self as! NSNumber)! }
     /// Self rounded to integer. Assumes `self` can be force-cast to `NSNumber` and the formatted string is non-nil
-    var rounded: String   { _rounded.string(from: self as! NSNumber)! }
+    var rounded: String    { _rounded.string(from: self as! NSNumber)! }
     /// Render a `BinaryFloatingPoint` (_e.g._`Double`) as a spelled-out `String`
+    ///
     var spelled: String {
         let asSeconds = Int(Double(self).rounded())
         return asSeconds.spelled
