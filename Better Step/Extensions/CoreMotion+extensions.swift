@@ -9,7 +9,7 @@ import Foundation
 
 import CoreMotion
 
-extension CMAcceleration: CustomStringConvertible {
+extension CMAcceleration: CustomStringConvertible, XYZ {
     public var description: String {
         "Acc(\(x.pointThree), \(y.pointThree), \(z.pointThree))"
     }

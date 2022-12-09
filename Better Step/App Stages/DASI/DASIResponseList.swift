@@ -173,7 +173,7 @@ final class DASIResponseList: ObservableObject {
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
-    var csvLine: String? {
+    public var csvLine: String? {
         let okayResponseValues: Set<AnswerState> = [.no, .yes]
         let usableResponses = answers
             .filter {

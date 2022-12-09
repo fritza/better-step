@@ -9,6 +9,7 @@ import Foundation
 import CoreMotion
 //import CoreMotion
 
+/*
 /// Adopters assure that the records in a series have a firsl line naming the fields.
 public protocol CSVFileRepresentable {
     static var csvHeaders: [String] { get }
@@ -45,6 +46,7 @@ extension CSVFileRepresentable {
         return result
     }
 }
+*/
 
 /// Adopters respond to `csvLine` with all relevant values reduced to `String`s and rendered in a comma-separated list.
 ///
@@ -72,6 +74,8 @@ public protocol Timestamped {
 
 extension Double: CSVRepresentable {
     /// Remder the receiver as a `String` with five digits after the decimal.
+    ///
+    /// Note: The intended use of floating `CSVRepresentable` is for elements of an acceleration vector, which is required to have exactly five decimal places.
     public var csvLine: String { self.pointFive }
 }
 
@@ -101,8 +105,11 @@ public protocol XYZ: CSVRepresentable {
 
 extension XYZ {
     /// `CSVRepresentable` default: render each component as `Double`, and join them with comma for a separator.
-    var csvLine: String {
-        [x, y, z].map(\.csvLine).joined(separator: ",")
+    public var csvLine: String {
+        [x, y, z]
+            .map(\.pointFive)
+            .map(\.csvLine)
+            .joined(separator: ",")
     }
 }
 

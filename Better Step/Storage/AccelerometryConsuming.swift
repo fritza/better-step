@@ -8,6 +8,7 @@
 import Foundation
 import CoreMotion
 
+/*
 /// ## Topics
 ///
 /// ### Properties
@@ -57,6 +58,7 @@ extension CMAccelerometerData: CSVRepresentable {
     }
 }
 
+
 // MARK: - AccelerometryConsuming
 
 /// ## Topics
@@ -101,4 +103,4 @@ extension AccelerometryConsuming {
         return strings
     }
 }
-
+ */

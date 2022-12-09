@@ -112,7 +112,7 @@ struct UsabilityContainer: View, ReportingPhase {
     // MARK: - Links to phase views
     private var responses = [Int](repeating: 0,
                                   count: UsabilityQuestion.count)
-    var csvLine: String {
+    public var csvLine: String {
         return "\(UsabilityState.csvPrefix),\(SubjectID.id),  \(responses.csvLine)"
     }
 }
