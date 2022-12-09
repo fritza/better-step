@@ -46,7 +46,7 @@ extension TimedXYZRepresentable {
 ///
 /// Callers supply the time component explicitly, or omitting it for `0.0`, or implicitly from `CMAccelerometerData`.
 public struct CMFlattened: TimedXYZRepresentable, CSVRepresentable, CustomStringConvertible {
-    let x, y, z, timestamp: Double
+    public let x, y, z, timestamp: Double
 
     /// Initialize from all scalar component values.
     /// - parameters:

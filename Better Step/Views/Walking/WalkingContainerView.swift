@@ -232,10 +232,17 @@ extension WalkingContainerView {
                     case .success(let asyncBuffer):
                         let wcrS = WalkingContainerResult.shared
                         wcrS[ownPhase] = asyncBuffer
-                        wcrS.exportWalksIfReady()
+                        guard let phasePrefix = ownPhase.csvPrefix,
+                              phasePrefix.hasPrefix("walk")
+                        else {
+                            fatalError("got unknown phase “\(ownPhase.rawValue)”")
+                        }
+                        wcrS.exportWalksIfReady(
+                            tag: phasePrefix,
+                            subjectID: SubjectID.id)
                         state = nextPhaseGood
                     }
-// NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
+                    // NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }

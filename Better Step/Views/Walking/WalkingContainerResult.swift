@@ -35,12 +35,12 @@ public final class WalkingContainerResult {
     /// If there are two completed walks in the record, convert them to CSV, write them to files, and add them to the accelerometry `.zip` file.
     /// - returns: whether two values were present, and therefore ready. This does _not_ reflect the archive’s successful creation.
     @discardableResult
-    public func exportWalksIfReady() -> Bool {
+    public func exportWalksIfReady(tag: String, subjectID: String) -> Bool {
         guard let walk_1, let walk_2 else { return false }
         Task.detached {
             // NOTE: we know both are filled because of the guard.
-            try? await walk_1.addToArchive()
-            try? await walk_2.addToArchive()
+            try? await walk_1.addToArchive(tag: tag, subjectID: SubjectID.id)
+            try? await walk_2.addToArchive(tag: tag, subjectID: SubjectID.id)
             // FIXME: do something about export failures.
         }
         return true
