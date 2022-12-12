@@ -7,6 +7,7 @@
 
 import Foundation
 
+// NOT USED
 extension Array where Element: CSVRepresentable {
     func headerPrefixed(headers: [String]? = nil) -> [String] {
         guard !isEmpty else { return [] }
@@ -24,6 +25,7 @@ extension Array where Element: CSVRepresentable {
     }
 }
 
+// NOT USED
 struct TransmissionFormatter {
                  let taskTag         : String
                  let subjectIDString : String
@@ -34,6 +36,7 @@ struct TransmissionFormatter {
 // the timestamp is the
 
 
+    // NOT USED
     init(tag: String, subjectID: String, timestampPresent: Bool,
          headers headerArray: [String] = []) {
         (taskTag, subjectIDString, hasLeadingTime, headers) =
@@ -50,7 +53,7 @@ struct TransmissionFormatter {
         // includes the stamp value.
     }
 
-    // Format the
+    // NOT USED
     mutating func format<CSVR>(dataLine: [CSVR]) -> String?
     where CSVR: CSVRepresentable
     {
@@ -70,6 +73,13 @@ struct TransmissionFormatter {
 }
 
 extension Array {
+    // NOT USED
+
+    /// Set a property of the members of the `Element`s of an `Array`
+    /// - Parameters:
+    ///   - path: A  keypath identifying the property to be edited.
+    ///   - mod: A closure that provides the substitute for each element.
+    /// - Returns: This `Array` with the elements altered according to `mod`.
     func tinker<T>(
         path: WritableKeyPath<Element, T>,
         mod: (T) -> T) -> [Element]

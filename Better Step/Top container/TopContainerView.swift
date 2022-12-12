@@ -45,6 +45,7 @@ struct TopContainerView: View {
 
     @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
+    // TODO: Put up an alert when pedometry is not authorized.
 
     // FIXME: mutation won't go well, will it.
     func registerReversionHandler() {

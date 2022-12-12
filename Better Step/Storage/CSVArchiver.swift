@@ -8,22 +8,9 @@
 import Foundation
 import ZIPFoundation
 
-// Where do I receive this notification?
-
-/*
- 1. The outer loop for archiving is a per-tag process of generating data and adding it to the archive.
- 2. The generator is CSVArchiver. There is one per archive chunk, one per tag. It's a persistent object.
- 3. DigitalTimerView
- 4. It cannot be a TimedWalk observer; a fresh one is constructed with each DigitalTimerView
- 5. MotionManager (.shared) generates the records for the chunk. It emits to TimedWalkObserver (start() async), which starts and stops it.
- 6. TimedWalkObserver appends each measurement (CMAccelerometerData) by comsumer.append()
- 7. Consumer (TimedWalkObserver) is an array of AccelerometerDataContent.
- 8. AccelerometerDataContent is a protocol that matches CMAccelerometerData.
- 9. CMAccelerometerData can emit a .csvLine (CSVRepresentable).
- */
-
-//var completedTags: [String] = []
-
+// TODO: Normalized walk accelerations
+//       First timestamp in the array should
+//       be subtracted from all elements.
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
 final class CSVArchiver {

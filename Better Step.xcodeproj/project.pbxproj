@@ -18,6 +18,8 @@
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
+		1F88683129479FF700085EC7 /* ArchiveStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* ArchiveStructure.swift */; };
+		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */; };
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
@@ -152,6 +154,8 @@
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
+		1F88683029479FF700085EC7 /* ArchiveStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveStructure.swift; sourceTree = "<group>"; };
+		1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayPedometry.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
@@ -325,13 +329,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		1F2432D427FDF843008A5418 /* Instructional */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Instructional;
-			sourceTree = "<group>";
-		};
 		1F60E70028DA71AC00EC2593 /* Milestones */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,7 +349,6 @@
 			children = (
 				1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */,
 				1FB684E527F225A300612924 /* SubjectID.swift */,
-				1F2432D427FDF843008A5418 /* Instructional */,
 				1FDE828A27EA463B00CD8368 /* DASI */,
 			);
 			path = "App Stages";
@@ -460,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				1F56E73229427C97001708F3 /* CSVRendering.swift */,
+				1F88683029479FF700085EC7 /* ArchiveStructure.swift */,
 				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
 				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
@@ -475,6 +472,7 @@
 				1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */,
 				1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */,
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
+				1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */,
 				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
 			);
 			path = Accelerometry;
@@ -714,6 +712,7 @@
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
+				1F88683129479FF700085EC7 /* ArchiveStructure.swift in Sources */,
 				1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
 				1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */,
@@ -771,6 +770,7 @@
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
+				1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
 			);
