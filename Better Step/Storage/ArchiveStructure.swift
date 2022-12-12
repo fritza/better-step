@@ -15,7 +15,7 @@
 import Foundation
 import ZIPFoundation
 
-enum SeriesTag: String, Hashable {
+public enum SeriesTag: String, Hashable {
     // Possibly CustomStringConvertible.
     // Possibly CaseIterable.
 
@@ -28,20 +28,75 @@ enum SeriesTag: String, Hashable {
 
     static let needForFirstRun: Set<SeriesTag> = [
         .firstWalk, .secondWalk,
-            .dasi, .use, .sevenDayRecord
+            .dasi, .usability, .sevenDayRecord
         ]
     static let neededForLaterRuns: Set<SeriesTag> = [ .firstWalk, .secondWalk, .sevenDayRecord
         ]
+
+    static let _yyyy_mm_dd: DateFormatter = {
+        let retval = DateFormatter()
+        retval.dateFormat = "yyyy-MM-dd"
+        return retval
+    }()
+
+    func dataFileName(subjectID: String, date: Date = Date()) -> String {
+        let formattedDate = Self._yyyy_mm_dd.string(from: date)
+        return "\(subjectID)_\(formattedDate)_\(self.rawValue)"
+    }
+
+    func csvPrefix(subjectID: String, timing: TimeInterval) -> [String] {
+        return [self.rawValue, subjectID, timing.pointFour]
+    }
 }
 
 
-
-
-
-final class PhaseStorage
-// Possibly an ObservableObject, we'll see.
+/// Maintain the data associated with completed phases of the workflow.
+///
+/// Watch completion of all necessary stages by observing `.isComplete`.
+public final class PhaseStorage: ObservableObject
 {
+    public enum CompletionGoal {
+        case firstRun
+        case secondRun
+    }
+
+    private var completionDictionary: [SeriesTag:Data]
+    private var goal                : CompletionGoal
+    public  var isComplete          : Bool
+
+    public init(goal: CompletionGoal) {
+        completionDictionary = [:]
+        self.goal = goal
+        self.isComplete = false
+    }
+
+
+   private func checkCompletion() {
+        // Do all of what I've finished...
+        let finishedKeys = Set(completionDictionary.keys)
+        // appear in the list of what should be finished?
+        let superset = (goal == .firstRun) ? SeriesTag.needForFirstRun : SeriesTag.needForFirstRun
+        let isCompeted = finishedKeys.isSubset(of: superset)
+        isComplete = isCompeted
+    }
+
+
+    public func series(_ tag: SeriesTag, completedWith data: Data) {
+        guard !completionDictionary.keys.contains(tag) else {
+            preconditionFailure("\(#function) - Attempt to re-insert \(tag.rawValue)")
+        }
+        completionDictionary[tag] = data
+        checkCompletion()
+    }
+
 }
 
 
 
+//    var completed: Bool {
+//        // Do all of what I've finished...
+//        let finishedKeys = Set(completionDictionary.keys)
+//        // appear in the list of what should be finished?
+//        let superset = (goal == .firstRun) ? SeriesTag.needForFirstRun : SeriesTag.needForFirstRun
+//        return finishedKeys.isSubset(of: superset)
+//    }
