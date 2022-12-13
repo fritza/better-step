@@ -11,6 +11,11 @@
  However, it has only now become clear how to integrate the files-as-Data into Archive files with common code; and to share a consistent date, series, and subject ID; plus file names.
  */
 
+/*
+ Who should do the file names?
+ Can we see if we can leave CSVArchiver alone for that?
+ */
+
 
 import Foundation
 import ZIPFoundation
@@ -28,10 +33,10 @@ public enum SeriesTag: String, Hashable {
 
     static let needForFirstRun: Set<SeriesTag> = [
         .firstWalk, .secondWalk,
-            .dasi, .usability, .sevenDayRecord
-        ]
+        .dasi, .usability, .sevenDayRecord
+    ]
     static let neededForLaterRuns: Set<SeriesTag> = [ .firstWalk, .secondWalk, .sevenDayRecord
-        ]
+    ]
 
     static let _yyyy_mm_dd: DateFormatter = {
         let retval = DateFormatter()
@@ -60,7 +65,8 @@ public final class PhaseStorage: ObservableObject
         case secondRun
     }
 
-    private var completionDictionary: [SeriesTag:Data]
+    typealias CompDict = [SeriesTag:Data]
+    private var completionDictionary: CompDict
     private var goal                : CompletionGoal
     public  var isComplete          : Bool
 
@@ -71,7 +77,7 @@ public final class PhaseStorage: ObservableObject
     }
 
 
-   private func checkCompletion() {
+    private func checkCompletion() {
         // Do all of what I've finished...
         let finishedKeys = Set(completionDictionary.keys)
         // appear in the list of what should be finished?

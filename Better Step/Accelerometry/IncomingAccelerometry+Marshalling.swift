@@ -9,7 +9,7 @@ import Foundation
 
 extension IncomingAccelerometry {
     private var tagAndID: String {
-        "\(phase.csvPrefix!),\(SubjectID.id)"
+        "\(String(describing: phase.csvPrefix)),\(SubjectID.id)"
     }
 
     private func marshalledRecords(tag: String, subjectID: String) -> [String] {
@@ -106,9 +106,6 @@ extension IncomingAccelerometry {
         try write(phase: phase, to: destURL,
                   tag: tag, subjectID: subjectID)
     }
-
-    // FIXME: - URGENT - get a way to have a global subject ID.
-    static var lastData = try! CSVArchiver()
 
     func outputBaseName(walkState: WalkingState) -> String {
         let isoDate = Date().iso
