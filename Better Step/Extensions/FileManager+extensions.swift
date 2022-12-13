@@ -10,6 +10,7 @@ import Foundation
 public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
+    case cantCreateFileTagged(SeriesTag)
     case cantFindURL(String)
     case cantReadDictionaryAt(URL)
     case uploadEmptyData(String)

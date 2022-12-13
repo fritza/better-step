@@ -121,7 +121,7 @@ final class MotionManager: ObservableObject {
     var asyncBuffer: IncomingAccelerometry
 
     // MARK: - Initialization and start
-    init(phase: WalkingState) {
+    init(phase: SeriesTag) {
         // temp to avoid configuration through self
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = CountdownConstants.hzInterval
