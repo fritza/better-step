@@ -12,12 +12,14 @@ import CoreMotion
 // FIXME: Handle cancellation.
 
 // MARK: - WalkingState
+/// Names tasks _within the walk phase,_ as distinct from ``SeriesTag``, which identifies reportable data series.
 public enum WalkingState: String, CaseIterable // , BSTAppStages
 {
     case interstitial_1, countdown_1, walk_1
     case interstitial_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
 
+    /// The first field in an CSV data report, and the last element of a series data file name.
     public var csvPrefix: String? {
         switch self {
         case .walk_1: return "w_1"

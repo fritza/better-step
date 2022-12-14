@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
+		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
@@ -137,6 +138,7 @@
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoResult.swift; sourceTree = "<group>"; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
+		1F2B8AA9294A54F500075248 /* SeriesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesTag.swift; sourceTree = "<group>"; };
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
+				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
 				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
 				1FF354402790A99E000894B8 /* XYZ.swift */,
 				1F56E73529439626001708F3 /* TimedXYZ.swift */,
@@ -745,6 +748,7 @@
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
 				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
+				1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */,
 				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
 				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,
 				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,

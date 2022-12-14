@@ -20,39 +20,6 @@
 import Foundation
 import ZIPFoundation
 
-public enum SeriesTag: String, Hashable {
-    // Possibly CustomStringConvertible.
-    // Possibly CaseIterable.
-
-    case firstWalk      = "walk_1"
-    case secondWalk     = "walk_2"
-    case dasi           = "dasi"
-    case usability      = "use"
-
-    case sevenDayRecord = "sevenDay"
-
-    static let needForFirstRun: Set<SeriesTag> = [
-        .firstWalk, .secondWalk,
-        .dasi, .usability, .sevenDayRecord
-    ]
-    static let neededForLaterRuns: Set<SeriesTag> = [ .firstWalk, .secondWalk, .sevenDayRecord
-    ]
-
-    static let _yyyy_mm_dd: DateFormatter = {
-        let retval = DateFormatter()
-        retval.dateFormat = "yyyy-MM-dd"
-        return retval
-    }()
-
-    func dataFileName(subjectID: String, date: Date = Date()) -> String {
-        let formattedDate = Self._yyyy_mm_dd.string(from: date)
-        return "\(subjectID)_\(formattedDate)_\(self.rawValue)"
-    }
-
-    func csvPrefix(subjectID: String, timing: TimeInterval) -> [String] {
-        return [self.rawValue, subjectID, timing.pointFour]
-    }
-}
 
 
 /// Maintain the data associated with completed phases of the workflow.
