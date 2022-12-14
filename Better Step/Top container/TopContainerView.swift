@@ -37,12 +37,6 @@ struct TopContainerView: View {
         currentPhase = TopPhases.entry.followingPhase
     }
 
-//    @State var usabilityFormResults: WalkInfoForm?
-    //    @State var showRewindAlert = false
-
-    @State var KILLME_reversionTask: Int? = OnboardContainerView.OnboardTasks
-        .firstGreeting.rawValue
-
     @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
     // TODO: Put up an alert when pedometry is not authorized.
@@ -72,7 +66,7 @@ struct TopContainerView: View {
     // TODO: Do I provide the NavigationView?
     var body: some View {
         NavigationView {
-#if false
+#if true
             VStack {
                 switch self.currentPhase ?? .entry.followingPhase! {
                     // MARK: - Onboarding
@@ -93,19 +87,13 @@ struct TopContainerView: View {
 
                     // MARK: - Walking
                 case .walking:
-                    // FIXME: WalkingContainerView is not a RepotingPhase.")
-                    WalkingContainerView { error in
-                        if let error {
-                            print("Walk failed:", error)
-                            self.currentPhase = .failed
-                        }
-                        else {
-                            TopPhases.latestPhase = TopPhases.walking.rawValue
-                            self.currentPhase = currentPhase?.followingPhase
-                            self.performedWalk = true
-                        }
+                    // NO. the container view is able
+                    // to collect more than one completion.
+                    WalkingContainerView() {
+                        _ in
+                        currentPhase = currentPhase?.followingPhase
                     }
-
+                    
                     // MARK: - Usability
                 case .usability:
                     UsabilityContainer { result in
@@ -158,23 +146,19 @@ struct TopContainerView: View {
                     FailureView(failing: TopPhases.walking) { _ in
                         // FIXME: Dump all data
                     }
-                    .reversionToolbar($showRewindAlert)
                     .navigationTitle("FAILED")
                     .padding()
-                    // FailureView's completion is NEVER CALLED.
-                    // Probably because this is a terminal state
-                    // and you can use the gear button to reset.
 
                 default:
                     preconditionFailure("Should not be able to reach phase \(self.currentPhase?.description ?? "N/A")")
                 }   // Switch on currentPhase
-                    .onAppear {
-                        showReversionAlert = false
-                        self.currentPhase = .entry.followingPhase
-                        registerReversionHandler()
-                    }       // NavigationView modified
-                    .reversionAlert(on: $showReversionAlert)
             }       // VStack
+            .onAppear {
+                showReversionAlert = false
+                self.currentPhase = .entry.followingPhase
+                registerReversionHandler()
+            }       // NavigationView modified
+            .reversionAlert(on: $showReversionAlert)
 #else
             VStack {
                 WalkUsabilityForm() { _ in }
