@@ -85,16 +85,16 @@ extension WalkingContainerView {
                         state = nextPhaseBad
 
                     case .success(let asyncBuffer):
-                        let wcrS = WalkingContainerResult.shared
-                        wcrS[ownPhase] = asyncBuffer
-                        guard let phasePrefix = ownPhase.csvPrefix,
-                              phasePrefix.hasPrefix("walk")
-                        else {
-                            fatalError("got unknown phase “\(ownPhase.rawValue)”")
+                        Task {
+                            let resultData =
+                            await asyncBuffer
+                                .allAsTaggedData(
+                                    tag: ownPhase.seriesTag!, subjectID: SubjectID.id
+                                )
+
+                            PhaseStorage.shared
+                                .series(ownPhase.seriesTag!, completedWith: resultData)
                         }
-                        wcrS.exportWalksIfReady(
-                            tag: phasePrefix,
-                            subjectID: SubjectID.id)
                         state = nextPhaseGood
                     }
                     // NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
@@ -177,13 +177,16 @@ extension WalkingContainerView {
                 InterstitalPageContainerView(
                     // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
                     listing: end_walkingContentList, selection: 1) { result in
+
+                        let passedVal: Result<SuccessValue, Error>
                         switch result {
-                        case .success(_)        : completion(nil)
-                        case .failure(let error): completion(error)
+                        case .success(_)        :
+                            passedVal = .success(.sevenDayRecord)
+                        case .failure(let error):
+                            passedVal = .failure(error)
                         }
-                        // FIXME: Can't pass an error back through completion.
-                        //                        completion(nil)
-                        //                        self.state = .interstitial_1
+
+                        completion(passedVal)
                     }
             }.padding() // completion closure for end_walkingList
             .navigationBarBackButtonHidden(true)

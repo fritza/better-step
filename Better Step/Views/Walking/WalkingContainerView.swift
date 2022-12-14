@@ -98,9 +98,9 @@ let csvUTTString = "public.comma-separated-values-text"
 ///  - note: `demo_summaryView()` is presented only if the `INCLUDE_WALK_TERMINAL` compilation flag is set.
 
 
-struct WalkingContainerView: View {
-    typealias WCVClosure = ((Error?) -> Void)
-    var completion: WCVClosure
+struct WalkingContainerView: View, ReportingPhase {
+    typealias SuccessValue = SeriesTag
+    var completion: ClosureType
 
     /*
      ((Result<SuccessValue, Error>) -> Void)!
@@ -110,9 +110,9 @@ struct WalkingContainerView: View {
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
 
-    init(completion: @escaping WCVClosure) {
+    init(reporter: @escaping ClosureType) {
         self.state = .interstitial_1
-        self.completion = completion
+        self.completion = reporter
 
 #if ALLOW_AVAUDIO
         // The idea is to get AVAudioPlayer to preheat:
@@ -177,9 +177,7 @@ struct WalkingContainerView_Previews: PreviewProvider {
 
             WalkingContainerView() {
                 error in
-                if let error {
-                    print("Error!", error)
-                }
+                print("Error!", error)
             }
         }
         .environmentObject(MotionManager())
