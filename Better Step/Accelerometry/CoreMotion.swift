@@ -93,21 +93,23 @@ final class MotionManager: ObservableObject {
 
     // MARK: Properties
     /// The active-walk phase for which `self` collects data. Used to pre-fill data identifiers on CSV records and file names.
-    var walkingState: WalkingState = .walk_1
+//    var seriesTag: SeriesTag = .firstWalk
 //    var walkingState: WalkingState? = nil
     /// Reset status and accelerometer queue to as-new condition
     /// - parameter newPhase: the walk `WalkingState` identifying the next walking task the object is to serve.
     /// - returns: An array of the `CMAccelerometerData` that had been in the queue. Can be ignored.
     @discardableResult
-    func reset(newPhase: WalkingState) async -> [CMAccelerometerData] {
+//    func reset(newPhase: SeriesTag)
+    func reset() async -> [CMAccelerometerData]
+    {
         // warning: The result is discardable.
         // You should have harvested the data result already.
         let retval = await asyncBuffer.popAll()
-        walkingState = newPhase
+//        seriesTag = newPhase
         return retval
     }
 
-
+    #warning("Distinguish walking task from series")
 
     static var census = 0
 
@@ -121,7 +123,9 @@ final class MotionManager: ObservableObject {
     var asyncBuffer: IncomingAccelerometry
 
     // MARK: - Initialization and start
-    init(phase: SeriesTag) {
+//    init(phase: SeriesTag)
+    init()
+    {
         // temp to avoid configuration through self
         let cmManager = CMMotionManager()
         cmManager.accelerometerUpdateInterval = CountdownConstants.hzInterval
@@ -129,7 +133,7 @@ final class MotionManager: ObservableObject {
 
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
-        asyncBuffer = IncomingAccelerometry(phase: phase)
+        asyncBuffer = IncomingAccelerometry()
     }
 
     var accelerometryAvailable: Bool {

@@ -8,10 +8,6 @@
 import Foundation
 
 extension IncomingAccelerometry {
-    private var tagAndID: String {
-        "\(String(describing: phase.csvPrefix)),\(SubjectID.id)"
-    }
-
     private func marshalledRecords(tag: String, subjectID: String) -> [String] {
         let all = self.all()
 
@@ -89,6 +85,7 @@ extension IncomingAccelerometry {
         //        Self.registerFilePath(url.path)
     }
 
+    /*
     /// Marshall all the `CMAccelerometerData` data and write it out to a named file in the Documents directory.
     /// - Parameters:
     ///   - fileName: The base name of the target file as a `String`. No extension will be added.
@@ -106,16 +103,17 @@ extension IncomingAccelerometry {
         try write(phase: phase, to: destURL,
                   tag: tag, subjectID: subjectID)
     }
-
     func outputBaseName(walkState: WalkingState) -> String {
         let isoDate = Date().iso
         let state = walkState.csvPrefix
         // Force-unwrap: The phase _will_ be .walk_N, which _will_ have a prefix.
         return "Sample-\(state!):\(isoDate)"
     }
+     */
+    #warning("Port walkState to seriesTag")
 
-    //    func writeToFile(walkState: WalkingState) throws {
-    //        precondition(walkState == .walk_2 || walkState == .walk_1,
+    //    func writeToFile(walkState: SeriesTag) throws {
+    //        precondition(walkState == .firstWalk || walkState == .secondWalk,
     //                     "Unexpected walk state \(walkState)"
     //        )
     //        let baseName = outputBaseName(walkState: walkState)

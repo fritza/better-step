@@ -21,11 +21,19 @@ public enum WalkingState: String, CaseIterable // , BSTAppStages
 
     /// The first field in an CSV data report, and the last element of a series data file name.
     public var csvPrefix: String? {
-        switch self {
-        case .walk_1: return "w_1"
-        case .walk_2: return "w_2"
+        guard let seriesTag else { fatalError("\(#function) - tag not known from \(self.rawValue)") }
+        return seriesTag.rawValue
+    }
 
-        default: return nil
+    /// The reporting phase corresponding to this `WalkingState`.
+    ///
+    ///  `WalkingState` names a sequence of tasks, two of which lead to reports of data series.
+    ///  - returns: The data-series tag corresponding to `.walk_1` and `.walk_2`; otherwise `nil`.
+    var seriesTag: SeriesTag? {
+        switch self {
+        case .walk_1: return SeriesTag.firstWalk
+        case .walk_2: return SeriesTag.secondWalk
+        default     : return nil
         }
     }
 }
@@ -219,11 +227,15 @@ extension WalkingContainerView {
 
     @ViewBuilder
     func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
+        #warning("Check collision between in-walk task and in-app phase")
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(ownPhase.csvPrefix!))",
-            tag: ownPhase, selection: $state) {
-                DigitalTimerView(duration: CountdownConstants.walkDuration,
-                                 walkingState: ownPhase) {
+            tag: ownPhase, selection: $state)
+        {
+            DigitalTimerView(
+                duration: CountdownConstants
+                    .walkDuration,
+                walkingState: ownPhase) {
                     result  in
                     UIApplication.shared.isIdleTimerDisabled = false
 
@@ -246,8 +258,8 @@ extension WalkingContainerView {
                     }
                     // NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
                 }.padding()
-                    .navigationBarBackButtonHidden(true)
-            }
+                .navigationBarBackButtonHidden(true)
+        }
             .hidden()
     }
 
@@ -259,6 +271,7 @@ extension WalkingContainerView {
                     nextPhaseGood: .interstitial_2,
                     nextPhaseBad : .interstitial_1)
     }
+    #warning("Check collision between SeriesTag and walk phase")
 
     /// A `NavigationLink` for the interstitial view between the two walk sequences (`interstitial_2`)
     @ViewBuilder
@@ -336,41 +349,48 @@ extension WalkingContainerView {
             .navigationBarBackButtonHidden(true)
             .hidden()
     }
+}
 
-    // MARK: - Preview
-    struct WalkingContainerView_Previews: PreviewProvider {
+// MARK: - Preview
+struct WalkingContainerView_Previews: PreviewProvider {
 
-        static var previews: some View {
+    static var previews: some View {
+        NavigationView {
+
             WalkingContainerView() {
-                _ in
+                error in
+                if let error {
+                    print("Error!", error)
+                }
             }
-            .environmentObject(MotionManager(phase: .walk_2))
         }
+        .environmentObject(MotionManager())
+        //            .environmentObject(MotionManager(phase: .walk_2))
     }
 }
 
-    /*      SHOW-ACTIVITY button
-     Button {
-     shouldShowActivity = true
-     }
-     label: { Label(
-     "Tap to Export",
-     systemImage: "square.and.arrow.up")
-     }
-     .buttonStyle(.bordered)
-     */
+/*      SHOW-ACTIVITY button
+ Button {
+ shouldShowActivity = true
+ }
+ label: { Label(
+ "Tap to Export",
+ systemImage: "square.and.arrow.up")
+ }
+ .buttonStyle(.bordered)
+ */
 
 
-    /*
+/*
 
-     }   // NavigationView
-     .sheet(isPresented: $shouldShowActivity, content: {
-     ActivityUIController(
-     //                    data: walkingData,
-     data: "01234 N/A 56789".data(using: .utf8)!,
-     text: "01234 N/A 56789"
-     //textEquivalent)
-     )
-     }) // .sheet content
+ }   // NavigationView
+ .sheet(isPresented: $shouldShowActivity, content: {
+ ActivityUIController(
+ //                    data: walkingData,
+ data: "01234 N/A 56789".data(using: .utf8)!,
+ text: "01234 N/A 56789"
+ //textEquivalent)
+ )
+ }) // .sheet content
 
-     */
+ */

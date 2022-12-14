@@ -20,14 +20,10 @@ public actor IncomingAccelerometry {
     /// The `WalkingState` currently feeding the actor.
     ///
     /// Needed because there is no other way for storage clients to knpw which walk the data represents, and therefore how to tag it for naming and CSV.
-    let phase: SeriesTag
-
-    #warning("is .phase used?")
-
     /// Create an `IncomingAccelerometry` serving a particular walking task.
     /// - Parameter phase: The task (walks 1 or 2) for which the actor is collecting data.
-    init(phase: SeriesTag) {
-        self.phase = phase
+    init() {
+        
     }
 
     private var buffer = Deque<CMAccelerometerData>(

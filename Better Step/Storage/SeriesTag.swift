@@ -19,6 +19,9 @@ extension Date {
     }
 }
 
+/// Names phases corresponding 1:1 with the reported data streams.
+///
+/// These name
 public enum SeriesTag: String, Hashable {
     // Possibly CustomStringConvertible.
     // Possibly CaseIterable.

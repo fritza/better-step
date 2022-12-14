@@ -25,7 +25,7 @@ public enum AppPhaseErrors: Error {
     case subjectIDInvalid(String)
     case shortageOfDASIResponsesBy(Int)
 
-    case walkingPhaseProbablyKilled(WalkingState)
+    case walkingPhaseProbablyKilled(SeriesTag)
 
     case NOS
 }

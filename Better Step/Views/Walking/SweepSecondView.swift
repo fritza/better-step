@@ -173,10 +173,6 @@ struct SweepSecondView_Previews: PreviewProvider {
                     print("Failed with error", error)
                 }
             }
-//            .environmentObject(MotionManager(phase: .countdown_1))
-//            .environmentObject(
-//                Timekeeper(SweepSecondView.timeKeeperSpec)
-//            )
             .frame(width: 300)
         }
     }

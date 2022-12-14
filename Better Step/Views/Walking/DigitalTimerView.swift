@@ -69,7 +69,7 @@ struct DigitalTimerView: View, ReportingPhase {
         assert(walkingState == .walk_1 || walkingState == .walk_2,
         "\(fileID):\(line): Unexpected walking state: \(walkingState)"
         )
-        self.motionManager = MotionManager(phase: walkingState)
+        self.motionManager = MotionManager()
         self.walkingState = walkingState
         self.completion = completion
     }
@@ -78,7 +78,12 @@ struct DigitalTimerView: View, ReportingPhase {
     fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
         switch stat {
         case .cancelled      :
-            completion(.failure(AppPhaseErrors.walkingPhaseProbablyKilled(self.walkingState)))
+            completion(
+                .failure(
+                    AppPhaseErrors
+                        .walkingPhaseProbablyKilled(
+                            self.walkingState.seriesTag!))
+            )
 
         case .completed      :
             completion(.success(self.motionManager.asyncBuffer))
@@ -119,7 +124,7 @@ struct DigitalTimerView: View, ReportingPhase {
         .task {
             // warning: The result is discardable.
             // You should have harvested the data result already.
-            await self.motionManager.reset(newPhase: self.walkingState)
+            await self.motionManager.reset()
 
             self.motionManager.start()
             // This appends CMAccelerometerData to
@@ -163,7 +168,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DigitalTimerView(duration: CountdownConstants.walkDuration,
-                             walkingState: .walk_2) {
+                             walkingState: .walk_1) {
                 result in
                 switch result {
                 case .success:
@@ -173,7 +178,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
                 }
             }
                 .padding()
-                .environmentObject(MotionManager(phase: .walk_1))
+                .environmentObject(MotionManager())
         }
     }
 }
