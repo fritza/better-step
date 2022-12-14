@@ -8,7 +8,7 @@
 import Foundation
 
 extension IncomingAccelerometry {
-    private func marshalledRecords(tag: String, subjectID: String) -> [String] {
+    private func marshalledRecords(tag: SeriesTag, subjectID: String) -> [String] {
         let all = self.all()
 
         // firstRecord = CMAccelerometerData
@@ -36,7 +36,7 @@ extension IncomingAccelerometry {
     /// Supplementary marshalling which adds  prefix to each line.
     /// - Returns: An array of `Strings` consisting of `\_prefix` + "," + `marshalled record`.
     /// - warning:Removing a comma from the end of `\_prefix` is a choice of convenience over edge cases.  Clients that _want_ to interpose a comma will find there's no clean way to do it.
-    private func taggedRecords(tag: String, subjectID: String) -> [String] {
+    private func taggedRecords(tag: SeriesTag, subjectID: String) -> [String] {
 #warning("taggedRecords not needed.")
         let plainMarshalling = marshalledRecords(
             tag: tag, subjectID: subjectID)
@@ -46,7 +46,7 @@ extension IncomingAccelerometry {
     /// A `String` containing each line of the CSV data
     ///
     /// - Returns: A single `String`, each line being the marshalling of the `CMAccelerometerData` records
-    private func allTaggedCSV(tag: String, subjectID: String) -> String {
+    private func allTaggedCSV(tag: SeriesTag, subjectID: String) -> String {
         return taggedRecords(tag: tag, subjectID: subjectID)
             .joined(separator: "\r\n")
     }
@@ -55,7 +55,7 @@ extension IncomingAccelerometry {
     ///
     /// This is a simple wrapper that takes the result of `allAsCSV(withPrefix:)` and renders it as bytes.
     ///   - parameter prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
-    func allAsTaggedData(tag: String, subjectID: String) -> Data {
+    func allAsTaggedData(tag: SeriesTag, subjectID: String) -> Data {
         let content = allTaggedCSV(tag: tag, subjectID: subjectID)
         guard let data = content.data(using: .utf8) else { fatalError("Could not derive Data from the CSV string") }
         return data
@@ -63,11 +63,17 @@ extension IncomingAccelerometry {
 
     // MARK: Writing
 
+    #warning("translate to PhaseStorage")
     func addToArchive(tag: String, subjectID: String) throws {
+        #if true
+fatalError("to be ported")
+        #else
         // TODO: Throwing
         let data = allAsTaggedData(tag: tag, subjectID: subjectID)
         try CSVArchiver.shared
             .addToArchive(data: data, forPhase: phase)
+        #endif
+
     }
 
     /// Write all CSV records into a file.
@@ -75,7 +81,7 @@ extension IncomingAccelerometry {
     ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. `
     ///   - url: The location of the new file.
     func write(phase: WalkingState, to url: URL,
-               tag: String, subjectID: String
+               tag: SeriesTag, subjectID: String
     )
     throws {
         // TODO: Make it async
