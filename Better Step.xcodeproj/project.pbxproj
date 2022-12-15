@@ -175,7 +175,6 @@
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
 		1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDestruction.swift; sourceTree = "<group>"; };
-		1FA9EA152910646000498D01 /* SimplifiedTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplifiedTopView.swift; path = "Better Step/SimplifiedTopView.swift"; sourceTree = SOURCE_ROOT; };
 		1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingPhase.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
@@ -388,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
-				1FA9EA152910646000498D01 /* SimplifiedTopView.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F09EE3128DB745900CFBE4B /* FailureView.swift */,
 				1F87E1A22919979C000908AE /* TopPhases.swift */,
