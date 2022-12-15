@@ -19,7 +19,8 @@ import Combine
 enum CountdownConstants {
     /// Total duration of a walk phase. This may be shorter in debugging views, because waiting a whole two minutes just to check out the view is a drag.
 #if DEBUG
-    static let walkDuration    = 120.0             // 15.0
+    static let walkDuration    = 120.0
+// Would like this to be 20 or something, but I suspect the transitiion tp walk_2 isn't possible until the walk_1 audio is finished.
 #else
     static let walkDuration    = 120.0
 #endif
