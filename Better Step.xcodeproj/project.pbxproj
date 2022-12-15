@@ -148,7 +148,6 @@
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
 		1F3BD02929392E3700442A63 /* ResultsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsUploader.swift; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
-		1F56E73229427C97001708F3 /* CSVRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVRendering.swift; sourceTree = "<group>"; };
 		1F56E73529439626001708F3 /* TimedXYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedXYZ.swift; sourceTree = "<group>"; };
 		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -461,7 +460,6 @@
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				1F56E73229427C97001708F3 /* CSVRendering.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
