@@ -89,7 +89,7 @@ extension WalkingContainerView {
                             let resultData =
                             await asyncBuffer
                                 .allAsTaggedData(
-                                    tag: ownPhase.seriesTag!, subjectID: SubjectID.id
+                                    tag: ownPhase.seriesTag!
                                 )
 
                             PhaseStorage.shared

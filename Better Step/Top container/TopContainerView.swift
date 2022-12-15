@@ -42,8 +42,23 @@ struct TopContainerView: View {
         }
     }
 
+    func dummyPedometry() ->  Pedometry {
+        let retval = Pedometry {
+            result in
+            let string = try! result.get()
+            let line = string.csvLine
+            let strData = line.data(using: .utf8)!
+            // FIXME: Why can't csvData work on [String]?
+            PhaseStorage.shared
+                .series(.sevenDayRecord, completedWith: strData)
+        }
+        return retval
+    }
+
     init() {
         currentPhase = TopPhases.entry.followingPhase
+
+        // MARK: - (MOCKED) 7-day pedometry
     }
 
     @State var showReversionAlert: Bool = false
@@ -93,6 +108,10 @@ struct TopContainerView: View {
                             fatalError("Can't fail out of an onboarding view")
                         }
                     }
+                    .onDisappear {
+                        dummyPedometry()
+                            .proceed()
+                    }
 
                     // MARK: - Walking
                 case .walking:
@@ -124,16 +143,26 @@ struct TopContainerView: View {
 
                     // MARK: - DASI
                 case .dasi:
-                    SurveyContainerView { response in
+                    SurveyContainerView {
+                        responseResult in
                         do {
                             // FIXME: Consider storing the DASI response here.
                             // IS stored (in UserDefaults)
                             // by SurveyContainerView.completionPageView
 
-                            let dasiResponse = try response.get()
+
+
                             collectedDASI = true
                             TopPhases.latestPhase = TopPhases.usability.rawValue
                             self.currentPhase = currentPhase?.followingPhase
+
+
+
+                            let dasiResponse = try responseResult.get()
+                            let csvd = dasiResponse.csvData
+
+                            PhaseStorage.shared
+                                .series(.dasi, completedWith: csvd)
                         }
                         catch {
                             self.currentPhase = .failed
