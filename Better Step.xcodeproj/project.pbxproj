@@ -11,6 +11,7 @@
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
 		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */; };
+		1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */; };
 		1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
@@ -141,6 +142,7 @@
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F2B8AA9294A54F500075248 /* SeriesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesTag.swift; sourceTree = "<group>"; };
 		1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalkingContainer+Phases.swift"; sourceTree = "<group>"; };
+		1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = SevenDaysMockup.csv; sourceTree = "<group>"; };
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
 				1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */,
 				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
+				1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */,
 			);
 			path = Accelerometry;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
 				1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */,
 				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
+				1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */,
 				1FA281D528DBBA170038353E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1018,7 +1022,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG ALLOW_AVAUDIO";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG ALLOW_AVAUDIO DUMMY_PEDOMETRY";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1054,7 +1058,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "FOR_BETTER_ST ALLOW_AVAUDIO";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "FOR_BETTER_ST ALLOW_AVAUDIO DUMMY_PEDOMETRY";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
