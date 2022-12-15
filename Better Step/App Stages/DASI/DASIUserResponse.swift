@@ -48,7 +48,7 @@ struct DASIUserResponse: Identifiable, Codable {
 }
 
 // MARK: - String representation
-extension DASIUserResponse: Comparable, Hashable, CustomStringConvertible {
+extension DASIUserResponse: Comparable, Hashable, CustomStringConvertible, CSVRepresentable {
     /// `Equatable` adoption
     static func == (lhs: DASIUserResponse, rhs: DASIUserResponse) -> Bool { lhs.id == rhs.id }
     /// `Comparable` adoption
@@ -74,6 +74,10 @@ extension DASIUserResponse: Comparable, Hashable, CustomStringConvertible {
             String(describing: id),
             String(describing: response)
         ]
+    }
+
+    public var csvLine: String {
+        self.response.description
     }
 
     /// `CustomStringConvertible` adoption

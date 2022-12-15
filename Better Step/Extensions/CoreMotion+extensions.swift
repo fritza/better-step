@@ -36,3 +36,18 @@ extension CMAcceleration: CustomStringConvertible, XYZ {
 
     static let zero = CMAcceleration(x: 0.0, y: 0.0, z: 0.0)
 }
+
+extension CMAcceleration: CSVRepresentable {
+    public var csvLine: String {
+        (self as XYZ).csvLine
+    }
+}
+
+extension CMAccelerometerData: CSVRepresentable {
+    @objc
+    public override var csvLine: String {
+        let accelPart = acceleration.csvLine
+        let timestampPart = timestamp.pointFive
+        return timestampPart + "," + accelPart
+    }
+}

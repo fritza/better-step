@@ -7,46 +7,6 @@
 
 import Foundation
 import CoreMotion
-//import CoreMotion
-
-/*
-/// Adopters assure that the records in a series have a firsl line naming the fields.
-public protocol CSVFileRepresentable {
-    static var csvHeaders: [String] { get }
-
-    // TODO: Decide whether to default headerPrefixed(records:) rather than require it
-    func headerPrefixed(records: [CSVRepresentable]) -> [String]
-}
-
-extension CSVFileRepresentable {
-    // TODO: Decide whether to default headerPrefixed(records:) rather than require it
-
-    /// Render an array of csv-representable objects as an array of formatted `String` records.
-    /// - Parameter records: An array of csv-representable objects, corresponding to records (e,g, accelerometry readings) in the output file.
-    /// - Returns: An array of `String`s, each representing a single data point (or line in the CSV report).
-    func headerPrefixed(records: [CSVRepresentable]) -> [String] {
-
-        // Maybe accept a column number for the timestamp
-        // value, if any
-        // There ought to be in the ultimate (everything after series tag and user ID) array of representables, but does this ever get so fractional lines (sted whole record at a time) get split and come in piecemeal?
-
-//        var headerLine = [Self.csvHeaders.csvLine]
-        var initial = Self.csvHeaders.csvLine
-        var result: [String] = [initial]
-
-        for record in records {
-            let newItem = record.csvLine
-            result.append(newItem)
-        }
-
-        let retval = records.reduce(into: [Self.csvHeaders.csvLine]) { partialResult, record in
-           return partialResult.append(record.csvLine)
-        }
-
-        return result
-    }
-}
-*/
 
 /// Adopters respond to `csvLine` with all relevant values reduced to `String`s and rendered in a comma-separated list.
 ///
@@ -54,6 +14,15 @@ extension CSVFileRepresentable {
 public protocol CSVRepresentable {
     /// The salient values of the receiver, rendered as `String`s separated by commas.
     var csvLine: String { get }
+}
+
+extension CSVRepresentable {
+    var csvData: Data {
+        guard let data = csvLine.data(using: .utf8) else {
+            fatalError("can't derive data from \(csvLine)")
+        }
+        return data
+    }
 }
 
 // MARK: - Timestamped
@@ -113,17 +82,12 @@ extension XYZ {
     }
 }
 
-
 extension Array where Element: CSVRepresentable {
-    /// Render the receiver by getting the CSV representations of its components, and joining them all with commas.
     public var csvLine: String {
-        let consolidated = self.map { element -> String in
-            switch element {
-            case is String:
-                return element as! String
-            default: return element.csvLine
-            }
-        }
-        return consolidated.joined(separator: ",")
+        guard !self.isEmpty else { return "" }
+        let representables =
+        self.map(\.csvLine)
+            .joined(separator: ",")
+        return representables
     }
 }

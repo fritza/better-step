@@ -34,7 +34,7 @@ extension SurveyContainerView {
                 // TODO: Audit for correct response list
             case .success(let responseList):
                 let completedCSV = responses.csvLine
-                tempCSV = completedCSV!
+                tempCSV = completedCSV
                 // TODO: See if the unwrap is okay.
                 completion(.success(responseList))
 

@@ -43,6 +43,8 @@ enum ASKeys: String {
 
     case temporaryDASIResults
 
+    case daysSince7DayReport
+
     /// `Int` allowable length of timed walk _in minutes._ Do not confuse with the `walkInMinutes` preference key,  which is the specific duration to use.
     static let dasiWalkRange = (1...10)
 

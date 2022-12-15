@@ -49,8 +49,11 @@ public final class WalkingContainerResult {
 #if OUTPUT_ASYNC
     @discardableResult
     public func asyncExportWalksIfReady() async -> Bool {
-        guard let walk_1, let walk_2 else { return false }
-
+#if true
+        fatalError("to be ported")
+#else
+        guard let accData1, let accData2 else { return false }
+#warning("see if PhaseStorage is better")
         let exportValue = await Task<Void, Error> {
             try await accData1.addToArchive()
             try await accData2.addToArchive()

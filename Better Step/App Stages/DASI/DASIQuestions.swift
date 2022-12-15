@@ -15,7 +15,7 @@ import Foundation
 ///
 /// `.unknown`, therefore, represents a question not yet answered.
 /// - note: `DASIQuestion` and `AnswerState` are meant to be immutable. Audit the code to make sure of it.
-enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
+enum AnswerState: String, Codable, Equatable, CustomStringConvertible, CSVRepresentable {
     case unknown, yes, no
 
     /// `CustomStringConvertible` adoption. Single-character `String`,  "•",  "Y", "N"
@@ -62,6 +62,10 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible {
         case .no:
             return 2
         }
+    }
+
+    public var csvLine: String {
+        self.description
     }
 }
 

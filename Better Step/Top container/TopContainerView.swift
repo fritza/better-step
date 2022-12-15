@@ -21,6 +21,15 @@ struct TopContainerView: View {
     @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
     @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
 
+
+    // FIXME: Necessary
+
+    @AppStorage(ASKeys.daysSince7DayReport.rawValue) var daysSince7DayReport = 0
+
+
+
+
+
     @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
@@ -72,7 +81,7 @@ struct TopContainerView: View {
                     // MARK: - Onboarding
                 case .onboarding:
                     // OnboardContainerView suceeds with String.
-                    // That's the entered Subject ID.
+                    // That's theThat's the entered Subject ID.
                     OnboardContainerView {
                         result in
                         do {
@@ -141,7 +150,7 @@ struct TopContainerView: View {
                     .navigationTitle("Finished")
                     //                .reversionToolbar($showRewindAlert)
                     //
-                    // MARK: - Failure (app-wide)
+                    // MARK: - Conclusion (failed)
                 case .failed:
                     FailureView(failing: TopPhases.walking) { _ in
                         // FIXME: Dump all data
@@ -149,6 +158,7 @@ struct TopContainerView: View {
                     .navigationTitle("FAILED")
                     .padding()
 
+                    // MARK: - no such phase
                 default:
                     preconditionFailure("Should not be able to reach phase \(self.currentPhase?.description ?? "N/A")")
                 }   // Switch on currentPhase
@@ -157,6 +167,11 @@ struct TopContainerView: View {
                 showReversionAlert = false
                 self.currentPhase = .entry.followingPhase
                 registerReversionHandler()
+
+                // Report the 7-day summary
+                // SeriesTag.sevenDayRecord
+
+
             }       // NavigationView modified
             .reversionAlert(on: $showReversionAlert)
 #else

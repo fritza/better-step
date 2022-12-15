@@ -171,7 +171,7 @@ extension PhaseStorage {
     }
 }
 
-#warning("lift the #if")
+#warning("Expose ComponentWriter?")
 #if false
 // MARK: - ComponentWriter
 

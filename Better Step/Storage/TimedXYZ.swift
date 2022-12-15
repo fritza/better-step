@@ -32,14 +32,10 @@ extension TimedXYZRepresentable {
     ///   - seriesTag: The “tag” string identifying the record series: “`walk_1`”,“`walk_2`”, etc.)
     ///   - subjectID: The unique ID of the subject observed in the study.
     /// - Returns: A CSV line representing series, subject, time, x, y, and z.
-    public func wholeAccelerometryLine(
-        seriesTag: SeriesTag,
-        subjectID: String) -> String {
-            return    [seriesTag.rawValue, subjectID].csvLine +
-        "," +
+    public func wholeAccelerometryLine() -> String {
         self.csvLine
-#warning("port string tag to SeriesTag")
     }
+#warning("Replace with .csvLine")
 }
 
 /// Renders time-x-y-z vectors as fields for a CSV record.

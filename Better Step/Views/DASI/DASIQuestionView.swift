@@ -26,9 +26,9 @@ struct QuestionContentView: View {
 /// The ``SuccessValue`` as a ``ReportingPhase`` is `(DASIState`, `DASIResponseList)`.
 struct DASIQuestionView: View, ReportingPhase {
     typealias SuccessValue = (DASIState, DASIResponseList)
-
     // .landing for underflow, .completion for overflow.
     let completion: ClosureType
+
     // answerList is by-reference, but
     // make it view-persistent out of an abundance.
     @State var answerList: DASIResponseList

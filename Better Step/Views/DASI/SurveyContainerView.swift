@@ -68,11 +68,11 @@ struct SurveyContainerView: View, ReportingPhase {
             // FIXME: Consider storing the DASI response here.
             // instead of the top container.
             completionPageView()
+            // Completion calls my response closure
 
         case .NONE:
             fatalError("Unassigned phase in \(#function)")
         }
-
     }
 }
 

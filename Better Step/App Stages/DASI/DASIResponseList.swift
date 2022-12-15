@@ -64,7 +64,7 @@ enum DASIReportErrors: Error {
 /// Responses to all DASI questions. Records changes to each response. Encodes the response list into the data for a CSV file. This is the data model _only,_ without regard for how it is to be stored.
 ///
 /// Observable.
-final class DASIResponseList: ObservableObject {
+final class DASIResponseList: ObservableObject, CSVRepresentable {
     public private(set) var answers: [DASIUserResponse]
 
     /// Create `DASIResponses, filling all items in with `.unlnown`.
@@ -173,32 +173,38 @@ final class DASIResponseList: ObservableObject {
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
-    public var csvLine: String? {
-        let okayResponseValues: Set<AnswerState> = [.no, .yes]
-        let usableResponses = answers
-            .filter {
-                okayResponseValues.contains($0.response)
-            }
-        // TODO: Consider whether < answers.count is an error.
-        guard let firstUsable = usableResponses.first
-        else { return nil }
+    public var csvLine: String {
+        let completedAnswers = answers.filter { $0.response != .unknown }
+        precondition(completedAnswers.count == answers.count,
+        "Got here with missing answers")
+        let arrayOfAnswers = answers.map(\.csvLine)
+        return "\(SeriesTag.dasi.rawValue),\(SubjectID.id)" + arrayOfAnswers.csvLine
 
-        let firstTimestamp = firstUsable.timestamp.iso
+//        let okayResponseValues: Set<AnswerState> = [.no, .yes]
+//        let usableResponses = answers
+//            .filter {
+//                okayResponseValues.contains($0.response)
+//            }
+//        // Now it's an array of "y", "n", etc.
+//        // TODO: Consider whether < answers.count is an error.
+//        guard let firstUsable = usableResponses.first
+//        else { return nil }
+//
+//        let firstTimestamp = firstUsable.timestamp.iso
+//
+//        let numberedResponses = usableResponses
+//            .sorted(by: { $0.id < $1.id })
+//            .map {
+//                String(describing: $0.response)
+//            }
+//
+//        let components: [String] = [numberedResponses].recordsPrefixed(tag: .dasi)
+//        return components
+//        [SubjectID.id] + [firstTimestamp] + numberedResponses
 
-        let numberedResponses = usableResponses
-            .sorted(by: { $0.id < $1.id })
-            .map {
-                String(describing: $0.id)
-                + ","
-                + String(describing: $0.response)
-            }
+//        assert(components.count == 2+DASIQuestion.count,
+//               "Expected \(2+DASIQuestion.count) response items, got \(components.count)")
 
-        let components: [String] =
-        [SubjectID.id] + [firstTimestamp] + numberedResponses
-
-        assert(components.count == 2+DASIQuestion.count,
-               "Expected \(2+DASIQuestion.count) response items, got \(components.count)")
-
-        return components.joined(separator: ",")
+//        return components.joined(separator: ",")
     }
 }
