@@ -87,6 +87,7 @@ extension WalkingContainerView {
                     case .success(let asyncBuffer):
                         Task {
                             let resultData =
+                            // Very odd. Isn't there another way to pack up data?
                             await asyncBuffer
                                 .allAsTaggedData(
                                     tag: ownPhase.seriesTag!

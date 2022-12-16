@@ -112,11 +112,11 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 // MARK: - Sequencing
 extension TopPhases {
     /// Whether the app has been run to cimpletion before.
-    static var firstRunComplete: Bool {
+    static var surveysAreComplete: Bool {
         // "allSatisfy" looks absurd, but maybe kinder to later maintainers.
-       return
-        [collectedDASI, collectedUsability, SubjectID.id != SubjectID.unSet]
+        let retval = [collectedDASI, collectedUsability, SubjectID.id != SubjectID.unSet]
             .allSatisfy( {$0} )
+       return retval
     }
 
     /// The `TopPhases` succeeding  `self`. Returns `nil` if  his ohase has no known successor.
@@ -124,12 +124,19 @@ extension TopPhases {
     /// "No suuccessor" is a sensible response for `conclusion` and `failed`.
     var followingPhase: TopPhases? {
         switch self {
-        case .entry                : return Self.firstRunComplete ? .greeting : .onboarding
+        
+        case .entry                 :
+            let subjectIDSet = (SubjectID.id != SubjectID.unSet)
+            return subjectIDSet ? .greeting : .onboarding
+        
         case .greeting, .onboarding : return .walking
+        
         case .walking              :
-            return Self.firstRunComplete ?
+            return Self.surveysAreComplete ?
                 .conclusion : .dasi
+        
         case .dasi                 : return .usability
+        
         case .usability            :
             return .conclusion
             // conclusion and failed don't have a next move.

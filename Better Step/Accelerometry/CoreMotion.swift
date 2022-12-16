@@ -100,7 +100,7 @@ final class MotionManager: ObservableObject {
     /// - returns: An array of the `CMAccelerometerData` that had been in the queue. Can be ignored.
     @discardableResult
 //    func reset(newPhase: SeriesTag)
-    func reset() async -> [CMAccelerometerData]
+    func reset() async -> [XYZT]
     {
         // warning: The result is discardable.
         // You should have harvested the data result already.
@@ -119,7 +119,8 @@ final class MotionManager: ObservableObject {
     private let deviceState : DeviceState
     private let accState: AccelerometerState
 
-    typealias CMDataStream = AsyncStream<CMAccelerometerData>
+//    typealias CMDataStream = AsyncStream<CMAccelerometerData>
+    typealias CMDataStream = AsyncStream<XYZT>
     var asyncBuffer: IncomingAccelerometry
 
     // MARK: - Initialization and start
@@ -156,12 +157,19 @@ final class MotionManager: ObservableObject {
     }()
 
     func start() {
+#if DEBUG
+        fatalError("MotionManager.start() unimplmented for debugging")
+#else
+        assert(accelerometryAvailable && accelerometryActive)
+        
         cmMotionManager.startAccelerometerUpdates(to: Self.opsQueue, withHandler: accelerometryHandler)
+#endif
         lifecycle = .running
     }
-
-    private func accelerometryHandler(newElement: CMAccelerometerData?,
-                                      error: Error?)
+    
+    private func accelerometryHandler(
+        newElement: TimedXYZRepresentable?,
+        error: Error?)
     {
         guard lifecycle == .running else { return }
         if let error { lifecycle = .error(error) }

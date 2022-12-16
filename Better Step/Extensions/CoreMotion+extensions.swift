@@ -51,7 +51,12 @@ extension CMAccelerometerData: CSVRepresentable, TimedXYZRepresentable {
         return timestampPart + "," + accelPart
     }
     
-    var asXYZT: XYZT {
+    public var asXYZT: XYZT {
         XYZT(x: acceleration.x, y: acceleration.y, z: acceleration.z, t: timestamp)
     }
+    
+    public var x: Double { acceleration.x }
+    public var y: Double { acceleration.y }
+    public var z: Double { acceleration.z }
+    public var t: Double { timestamp      }
 }
