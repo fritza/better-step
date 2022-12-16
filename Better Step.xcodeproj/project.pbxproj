@@ -15,11 +15,11 @@
 		1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
-		1F3BD02A29392E3700442A63 /* ResultsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BD02929392E3700442A63 /* ResultsUploader.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
-		1F56E73629439626001708F3 /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
+		1F6456F3294CF5A90064DADA /* ResultsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BD02929392E3700442A63 /* ResultsUploader.swift */; };
+		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
@@ -738,9 +738,9 @@
 				1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */,
 				1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */,
 				1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */,
+				1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */,
 				1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
-				1F3BD02A29392E3700442A63 /* ResultsUploader.swift in Sources */,
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
@@ -757,7 +757,6 @@
 				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
 				1FA2820428DBBB270038353E /* Better_StepApp.swift in Sources */,
-				1F56E73629439626001708F3 /* TimedXYZ.swift in Sources */,
 				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
 				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
 				1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */,
@@ -774,6 +773,7 @@
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */,
+				1F6456F3294CF5A90064DADA /* ResultsUploader.swift in Sources */,
 				1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
