@@ -30,8 +30,8 @@ fatalError("to be ported")
         }()
 
         static func clearSharedArchiver() {
-#if true
-fatalError("to be ported")
+#if true  
+            #warning("to be ported")
 #else
             if let container = shared.containerDirectory {
                 try?

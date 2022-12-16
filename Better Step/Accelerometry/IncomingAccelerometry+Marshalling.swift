@@ -8,46 +8,30 @@
 import Foundation
 
 extension IncomingAccelerometry {
-    private func marshalledRecords(tag: SeriesTag, subjectID: String) -> [String] {
+    private func marshalledRecords(tag: SeriesTag) -> [String] {
+        let common = "\(tag.rawValue),\(SubjectID.id),"
         let all = self.all()
-
         // firstRecord = CMAccelerometerData
-        guard let firstRecord = all.first else {
-            return []
-        }
-        let firstStamp = firstRecord.timestamp
-
-        let offsetByTime = all
-            .map { xyzt in
-                let acc = xyzt.acceleration
-                let newValue = CMFlattened(
-                    acc.x, acc.y, acc.z,
-                    time: xyzt.timestamp - firstStamp)
-                return newValue
-            }
-            .map {
-                timedXYZ in
-                return timedXYZ.wholeAccelerometryLine(
-                    seriesTag: tag, subjectID: subjectID)
-            }
-        return offsetByTime
+        let retval = all.map(\.csvLine)
+            .map { common + $0 }
+        return retval
     }
 
     /// Supplementary marshalling which adds  prefix to each line.
     /// - Returns: An array of `Strings` consisting of `\_prefix` + "," + `marshalled record`.
     /// - warning:Removing a comma from the end of `\_prefix` is a choice of convenience over edge cases.  Clients that _want_ to interpose a comma will find there's no clean way to do it.
-    private func taggedRecords(tag: SeriesTag, subjectID: String) -> [String] {
-#warning("taggedRecords not needed.")
+    func taggedRecords(tag: SeriesTag) -> [String] {
         let plainMarshalling = marshalledRecords(
-            tag: tag, subjectID: subjectID)
+            tag: tag)
         return plainMarshalling
     }
 
     /// A `String` containing each line of the CSV data
     ///
     /// - Returns: A single `String`, each line being the marshalling of the `CMAccelerometerData` records
-    private func allTaggedCSV(tag: SeriesTag, subjectID: String) -> String {
-        return taggedRecords(tag: tag, subjectID: subjectID)
+    private func allTaggedCSV(tag: SeriesTag) -> String {
+        #warning("Replace with [CSVRepresentable].recordsPrefixed")
+        return taggedRecords(tag: tag)
             .joined(separator: "\r\n")
     }
 
@@ -55,10 +39,8 @@ extension IncomingAccelerometry {
     ///
     /// This is a simple wrapper that takes the result of `allAsCSV(withPrefix:)` and renders it as bytes.
     ///   - parameter prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
-    func allAsTaggedData(tag: SeriesTag, subjectID: String) -> Data {
-        let content = allTaggedCSV(tag: tag, subjectID: subjectID)
-        guard let data = content.data(using: .utf8) else { fatalError("Could not derive Data from the CSV string") }
-        return data
+    func allAsTaggedData(tag: SeriesTag) -> Data {
+        return allTaggedCSV(tag: tag).data(using: .utf8)!
     }
 
     // MARK: Writing
@@ -86,7 +68,7 @@ fatalError("to be ported")
     throws {
         // TODO: Make it async
         let fm = FileManager.default
-        let data = allAsTaggedData(tag: tag, subjectID: subjectID)
+        let data = allAsTaggedData(tag: tag)
         try fm.deleteAndCreate(at: url, contents: data)
         //        Self.registerFilePath(url.path)
     }
