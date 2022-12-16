@@ -91,6 +91,7 @@
 		1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */; };
 		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
+		1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCEEE8294CD4ED00A4D86F /* ApplicationGreetingView.swift */; };
 		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
 		1FC7477328E787AD00817041 /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
 		1FC7477428E787AD00817041 /* AAA.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476D28E7694E00817041 /* AAA.ahap */; };
@@ -182,6 +183,7 @@
 		1FB684E827F225EC00612924 /* ASKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKeys.swift; sourceTree = "<group>"; };
 		1FB684F927F252BA00612924 /* Numeric+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+extensions.swift"; sourceTree = "<group>"; };
 		1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreMotion+extensions.swift"; sourceTree = "<group>"; };
+		1FBCEEE8294CD4ED00A4D86F /* ApplicationGreetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationGreetingView.swift; sourceTree = "<group>"; };
 		1FC7476C28E7694E00817041 /* N.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = N.ahap; sourceTree = "<group>"; };
 		1FC7476D28E7694E00817041 /* AAA.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = AAA.ahap; sourceTree = "<group>"; };
 		1FC7476E28E7694E00817041 /* A.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = A.ahap; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				1F60B0A1276FCE410026D28B /* ReportView.swift */,
 				1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */,
 				1F8A065727A4841400477379 /* ApplicationOnboardView.swift */,
+				1FBCEEE8294CD4ED00A4D86F /* ApplicationGreetingView.swift */,
 				1F1C4E0728D3DB0500547C7A /* TaggedField.swift */,
 			);
 			path = Views;
@@ -775,6 +778,7 @@
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */,
+				1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
 			);
