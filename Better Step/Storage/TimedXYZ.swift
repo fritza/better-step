@@ -8,7 +8,25 @@
 import Foundation
 import CoreMotion
 
+/// Adoprers present `x`, `y`, `z`, and t as flat properties, and can translate themselves into the minimal ``XYZT`` value.
 protocol TimedXYZRepresentable: XYZ & Timestamped & CSVRepresentable {
+    /// Reduce the space and time vector to the minimal ``XYZT`` value.
+    var asXYZT: XYZT { get }
+}
+
+/// Minimal instantiation of space and time coordinates.
+///
+/// Per compliance with ``TimedXYZRepresentable``, and through that ``CSVRepresentable``, it implements ``asXYZT`` and ``csvLine``.
+struct XYZT: TimedXYZRepresentable, CustomStringConvertible {
+    let x, y, z, t: Double
+    var asXYZT: XYZT { return self }
+    var csvLine: String {
+        "\(t.pointFour),\(x.pointFive),\(y.pointFive),\(z.pointFive)"
+    }
+    
+    var description: String {
+        "XYZT: t: \(t.pointFour), x: \(x.pointFive), y: \(y.pointFive), z: \(z.pointFive)"
+    }
 }
 
 extension TimedXYZRepresentable {
@@ -16,6 +34,7 @@ extension TimedXYZRepresentable {
     //       to represent the acceleration-vector
     //       segment of csvLine?
 
+    // This is, I hope, a default implementation that adopters (if identified) can supersede.
     public var csvLine: String {
         let vectorPart: String = (self as XYZ).csvLine
         // vectorPart carries the elements as .pointFive;

@@ -43,11 +43,15 @@ extension CMAcceleration: CSVRepresentable {
     }
 }
 
-extension CMAccelerometerData: CSVRepresentable {
+extension CMAccelerometerData: CSVRepresentable, TimedXYZRepresentable {
     @objc
     public override var csvLine: String {
         let accelPart = acceleration.csvLine
         let timestampPart = timestamp.pointFive
         return timestampPart + "," + accelPart
+    }
+    
+    var asXYZT: XYZT {
+        XYZT(x: acceleration.x, y: acceleration.y, z: acceleration.z, t: timestamp)
     }
 }

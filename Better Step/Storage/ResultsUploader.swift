@@ -39,7 +39,7 @@ public enum UploadServerCreds {
 
 // MARK: - ResultsUploader
 
-/// Upload locakdata provided by a `file:///` URL to a particular server, ATW the Better Step database.
+/// Upload local data provided by a `file:///` URL to a particular server, ATW the Better Step database.
 ///
 /// Credentials and remotes are drawn from ``UploadServerCreds``
 

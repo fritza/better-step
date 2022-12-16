@@ -26,7 +26,7 @@ public actor IncomingAccelerometry {
         
     }
 
-    private var buffer = Deque<CMAccelerometerData>(
+    private var buffer = Deque<XYZT>(
         minimumCapacity: numericCast(CMTimeInterval.minBufferCapacity))
     /// How many data points have been collected but not consumed.
     var count: Int {
@@ -37,15 +37,15 @@ public actor IncomingAccelerometry {
     /// Append a data point to the buffer.
     /// - Parameter accData: The data to append to the buffer.
     /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
-    func receive(_ accData: CMAccelerometerData) {
-        buffer.append(accData)
+    func receive(_ accData: XYZTRepresentable) {
+        buffer.append(accData.asXYZT)
     }
 
     /// If a `CMAccelerometerData` is available, remove it and yield it to the caller; otherwise wait.
     /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
     /// - Returns: The oldest  `CMAccelerometerData` in the queue
     /// - throws: `Task` cancellation errors.
-    func pop() async throws -> CMAccelerometerData? {
+    func pop() async throws -> XYZT? {
         while buffer.isEmpty {
             try Task.checkCancellation()
             try await Task.sleep(nanoseconds: CountdownConstants.nanoSleep)
@@ -56,7 +56,7 @@ public actor IncomingAccelerometry {
     /// Remove all data in the queue and return it as an array.
     /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
     /// - Returns: An array of `CMAccelerometerData`
-    func popAll()  -> [CMAccelerometerData] {
+    func popAll()  -> [XYZT] {
         // This isn't async?!
         let content = all()
         buffer.removeFirst(content.count)
@@ -65,7 +65,7 @@ public actor IncomingAccelerometry {
 
     /// Return all data from the queue without removing them.
     /// - returns: All `CMAccelerometerData` in the queue.
-    func all() -> [CMAccelerometerData] {
+    func all() -> [XYZT] {
         let number = buffer.count
         let content = buffer[..<number]
         return Array(content)
