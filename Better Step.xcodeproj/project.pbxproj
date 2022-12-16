@@ -62,7 +62,6 @@
 		1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB31092787997E0099AE5E /* MinSecFormatter.swift */; };
 		1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */; };
 		1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */; };
-		1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */; };
 		1FA2821728DBBB270038353E /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B0A1276FCE410026D28B /* ReportView.swift */; };
 		1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F53828D133E700593692 /* MinSecAndFraction.swift */; };
 		1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */; };
@@ -196,7 +195,6 @@
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
 		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
-		1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionArrows.swift; sourceTree = "<group>"; };
 		1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkUsabilityForm.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
@@ -416,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */,
-				1FDBB3FC281C49A200D0A7E9 /* InstructionArrows.swift */,
 				1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */,
 				1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */,
 				1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */,
@@ -719,7 +716,6 @@
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
 				1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */,
-				1FA2821628DBBB270038353E /* InstructionArrows.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
 				1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */,
 				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
