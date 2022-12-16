@@ -53,7 +53,8 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
 
     /// The name of the notification assigned to this case
     var notificationID: Notification.Name {
-        Notification.Name("Destroy_\(rawValue)")
+        Notification.Name(
+            "Destroy_\(Self.names[self]!)")
     }
 
     /// For any `Destroy` object key, look up the scalar records to destroy.
@@ -100,7 +101,7 @@ struct Destroy: OptionSet, RawRepresentable, Hashable {
         guard let tasks = Self.compounds[self] else { fatalError() }
         for task: Destroy in tasks {
             #if DEBUG
-            print("Sending Destroy", task)
+            print("Sending", task)
             #endif
             center.post(name: task.notificationID, object: nil)
         }

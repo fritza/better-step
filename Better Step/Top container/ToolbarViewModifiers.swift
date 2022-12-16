@@ -49,6 +49,10 @@ struct ReversionAlert: ViewModifier {
                    isPresented:  $shouldShow
             ) {
                 Button("First Run" , role: .destructive) {
+                    
+                    SubjectID.id = SubjectID.unSet
+                    
+                    
                     Destroy.all.post()
                     NotificationCenter.default
                         .post(name: ForceAppReversion,

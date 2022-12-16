@@ -1,5 +1,5 @@
 //
-//  ExTopPhases.swift
+//  TopPhases.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 11/7/22.
@@ -11,15 +11,15 @@ import SwiftUI
 // MARK: - TopPhases
 
 /**
- A `TopPhases` represents a major phase of the application, such as onboarding (`greeting`)  or the two timed walks (`walking`). It is `RawRepresentable`, but _not_ `OptionSet`.
+ A `TopPhases` represents a major phase of the application, such as onboarding (`greeting`)  or the two timed walks (`walking`). It is_not_ `OptionSet`.
 
- A _phase_ (e.g. walking) consists in one or more _tasks_ (e.g. intro, **first walk**, interstitial, *second walk**, closing).
-
- Tasks report their results (first walk) to a manager for the parent phase (walking phase).
-
- When all phase data (both walks) has accumulated, the phase _ought_ to report the result as `Data` to be written to the archive; this isn't done yet.
-
- - bug: **?** `@AppStorage` for phase results _ought_ to be the concern of the respective phase code. This is not finished..
+ There are three levels of sequencing.
+ 
+ - `SeriesTag` identifies the five reporting files. It should not be used for sequencing UI views.
+ 
+ - `TopPhases` identifies the major stage (phase) of the user experience. For example, `walking` stands for the `WalkingContainerView`, which itself manages the sequence of views (instructions, twp walks…) within that topic. A phase may or may not represent any data stream. There are two for walking, one for usability, and none for the greeting phase.
+ 
+ - `WalkingState` is an example of naming sub-tasks within a phase. `WalkingState` includes `countdown_1`, `walk_1`, `interstitial_2`, and so on.  `TopPhases`, which `TopContainerView` uses to name the top-level sequence of phases within the app  is a special case.
  */
 struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 

@@ -13,6 +13,12 @@ import Foundation
 /// - note: All methods are `static` — `SubjectID` wraps a singleton `String`.
 /// - warning: Always use `unset` (atw an empty `String`) to indicate the absence of any known `SubjectID`.
 struct SubjectID {
+    init() {
+        // FIXME: No idea how and where to receive deletion calls for unsafe SubjectID deletion.
+        if SubjectID.notificationTicket == nil {
+            Self.handleUserIDNotice()
+        }
+    }
     /// The `String` value indicating no valid contents.
     static let unSet = ""
     /// The `String` value of the ID.
@@ -24,11 +30,13 @@ struct SubjectID {
                 return fromStore
             }
             else {
+                UserDefaults.standard
+                    .set(Self.unSet, forKey: ASKeys.subjectID.rawValue)
+//                    .set(Self.unSet, forkey)
                 return Self.unSet
             }
         }
         set {
-            if notificationTicket == nil { handleUserIDNotice() }
             UserDefaults.standard.set(newValue, forKey: ASKeys.subjectID.rawValue)
         }
     }
@@ -55,10 +63,24 @@ struct SubjectID {
 
     // MARK:  Notifications
     private static var notificationTicket: NSObjectProtocol?
+    = {
+        let dCenter = NotificationCenter.default
+        let noticeID = Destroy.unsafeSubjectID.notificationID
+        let noticeString = noticeID.rawValue
+        let retval = dCenter.addObserver(
+            forName: Destroy.unsafeSubjectID.notificationID,
+            object: nil, queue: .current) {
+                _ in
+                SubjectID.id = Self.unSet
+            }
+        return retval
+    }()
 
     /// Set up a `Notification` handler for `Destroy.unsafeSubjectID`, deleting the subject ID string _and only that,_ from `UserDefaults`.
     static func handleUserIDNotice() {
         let dCenter = NotificationCenter.default
+        let noticeID = Destroy.unsafeSubjectID.notificationID
+        let noticeString = noticeID.rawValue
         notificationTicket = dCenter.addObserver(
             forName: Destroy.unsafeSubjectID.notificationID,
             object: nil, queue: .current) {

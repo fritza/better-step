@@ -11,8 +11,14 @@ import Foundation
 // Whew. A notification.
 /// `Notification` that a CSV file has been created and saved.
 let ZIPDataWriteCompletion = Notification.Name(rawValue: "zipDataWriteCompletion")
+
 /// `Notification` that a CSV file has been inserted into the `Archive`.
 let ZIPDataArchiveCompletion = Notification.Name(rawValue: "zipDataArchiveCompletion")
+
+// Attempt to write a task csv failed.
+let SeriesWriteFailed = Notification.Name(rawValue: "SeriesWriteFailed")
+// Attempt to write a task csv failed.
+let SeriesWriteSucceeded = Notification.Name(rawValue: "SeriesWriteSucceeded")
 
 enum ZIPProgressKeys: String {
     /// `nil` or the `Error` result .
@@ -22,6 +28,8 @@ enum ZIPProgressKeys: String {
     /// The `URL` of the saved/archived  `.csv` file.
     case fileURL
 
+    /*
+    // REFORM: PORT!
     static func reading(_ dict: [ZIPProgressKeys: Any],
                         error: inout Error?,
                         phase: inout WalkingState?,
@@ -34,14 +42,16 @@ enum ZIPProgressKeys: String {
         phase = WalkingState(rawValue: csvPrefix)!
         fileURL = dict[.fileURL] as? URL
     }
+     */
 
     static func dictionary(error: Error) -> [ZIPProgressKeys:Any] {
         return [ZIPProgressKeys.error: error]
     }
 
-    static func dictionary(phase: WalkingState, url: URL) -> [ZIPProgressKeys:Any] {
+    static func dictionary(phase: SeriesTag, url: URL) -> [ZIPProgressKeys:Any] {
         return [ZIPProgressKeys.error: error,
-                ZIPProgressKeys.phase: phase.csvPrefix!,
+                ZIPProgressKeys.phase: phase,
+
                 ZIPProgressKeys.fileURL: url]
     }
 }
