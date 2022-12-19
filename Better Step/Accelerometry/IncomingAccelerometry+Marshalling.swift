@@ -74,42 +74,4 @@ extension IncomingAccelerometry {
         try fm.deleteAndCreate(at: url, contents: data)
         //        Self.registerFilePath(url.path)
     }
-
-    /*
-    /// Marshall all the `CMAccelerometerData` data and write it out to a named file in the Documents directory.
-    /// - Parameters:
-    ///   - fileName: The base name of the target file as a `String`. No extension will be added.
-    ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
-    func writeToFile(named fileName: String,
-                     phase: WalkingState,
-                     tag: String, subjectID: String) throws {
-        precondition(!fileName.isEmpty,
-                     "\(#function): empty prefix string")
-        let destURL = try FileManager.default
-            .docsDirectory(create: true)
-            .appendingPathComponent(fileName)
-            .appendingPathExtension("csv")
-
-        try write(phase: phase, to: destURL,
-                  tag: tag, subjectID: subjectID)
-    }
-    func outputBaseName(walkState: WalkingState) -> String {
-        let isoDate = Date().iso
-        let state = walkState.csvPrefix
-        // Force-unwrap: The phase _will_ be .walk_N, which _will_ have a prefix.
-        return "Sample-\(state!):\(isoDate)"
-    }
-     */
-    #warning("Port walkState to seriesTag")
-
-    //    func writeToFile(walkState: SeriesTag) throws {
-    //        precondition(walkState == .firstWalk || walkState == .secondWalk,
-    //                     "Unexpected walk state \(walkState)"
-    //        )
-    //        let baseName = outputBaseName(walkState: walkState)
-    //        try writeToFile(
-    //            named: baseName,
-    //            linesPrefixedWith: "\(walkState.csvPrefix!),Sample")
-    //    }
-
 }

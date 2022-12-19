@@ -28,22 +28,6 @@ enum ZIPProgressKeys: String {
     /// The `URL` of the saved/archived  `.csv` file.
     case fileURL
 
-    /*
-    // REFORM: PORT!
-    static func reading(_ dict: [ZIPProgressKeys: Any],
-                        error: inout Error?,
-                        phase: inout WalkingState?,
-                        fileURL: inout URL?) {
-        (error, phase, fileURL) = (nil, nil, nil)
-        if let e = dict[.error] as? Error {
-            error = e; return
-        }
-        let csvPrefix = dict[.phase] as! String
-        phase = WalkingState(rawValue: csvPrefix)!
-        fileURL = dict[.fileURL] as? URL
-    }
-     */
-
     static func dictionary(error: Error) -> [ZIPProgressKeys:Any] {
         return [ZIPProgressKeys.error: error]
     }

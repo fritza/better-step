@@ -48,13 +48,6 @@ public enum SeriesTag: String, Hashable {
         "\(subjectID)_\(date.ymd)_\(self.rawValue)"
     }
 
-    ///  The first three fields of CSV data for this data series.
-    ///
-    ///  All series share the same format, even if they don't have an associated time interval.
-    public func csvPrefix(subjectID: String, timing: TimeInterval) -> [String] {
-        return [self.rawValue, subjectID, timing.pointFour]
-    }
-
     /// The walk-task sequence code that produces the data for this series.
     ///
     /// For instance, the data-collection task for `firstWalk` is `.walk_1`.
