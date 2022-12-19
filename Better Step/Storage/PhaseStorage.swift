@@ -70,14 +70,16 @@ public final class PhaseStorage: ObservableObject
         // Do all of what I've finished...
         let finishedKeys = Set(completionDictionary.keys)
         // appear in the list of what should be finished?
-        let superset = (goal == .firstRun) ? SeriesTag.neededForFirstRun : SeriesTag.neededForLaterRuns
-        let isCompleted = finishedKeys.isSubset(of: superset)
+        let keysToBeFinished = (goal == .firstRun) ? SeriesTag.neededForFirstRun : SeriesTag.neededForLaterRuns
+        
+        let intersection = finishedKeys.intersection(keysToBeFinished)
+        let isCompleted = intersection == keysToBeFinished
         isComplete = isCompleted
     }
 
 
     public func series(_ tag: SeriesTag, completedWith data: Data) {
-        guard !completionDictionary.keys.contains(tag) else {
+        guard !completionDictionary.keys.contains(tag) else {   // Really? Not permit correction?
             preconditionFailure("\(#function) - Attempt to re-insert \(tag.rawValue)")
         }
         completionDictionary[tag] = data

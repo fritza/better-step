@@ -112,6 +112,11 @@ struct TopContainerView: View {
                         dummyPedometry()
                             .proceed()
                     }
+                    
+                case .greeting:
+                    ApplicationGreetingView {_ in 
+                        self.currentPhase = .walking
+                    }
 
                     // MARK: - Walking
                 case .walking:
@@ -119,7 +124,8 @@ struct TopContainerView: View {
                     // to collect more than one completion.
                     WalkingContainerView() {
                         _ in
-                        currentPhase = currentPhase?.followingPhase
+                        let whatFollows = currentPhase?.followingPhase
+                        currentPhase = whatFollows
                     }
                     
                     // MARK: - Usability
