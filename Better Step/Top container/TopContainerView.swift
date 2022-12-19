@@ -80,6 +80,7 @@ struct TopContainerView: View {
             currentPhase = .entry
             TopPhases.resetToFirst()
 
+            SubjectID.id = SubjectID.unSet
             // FIXME: Surely we'd have to rewind all the subordinate views?
         }
     }
