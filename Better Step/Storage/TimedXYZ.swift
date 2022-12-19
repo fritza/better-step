@@ -35,6 +35,21 @@ public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Has
    public var description: String {
         "XYZT: t: \(t.pointFour), x: \(x.pointFive), y: \(y.pointFive), z: \(z.pointFive)"
     }
+    
+    #if DEBUG
+    static func sampleData() throws -> [XYZT]? {
+        guard let url = Bundle.main
+            .url(forResource: "TextXYZT", withExtension: "json")
+        else {
+            return nil
+        }
+        let sampleData = try Data(contentsOf: url)
+        let xyztArray = try JSONDecoder()
+            .decode([XYZT].self, from: sampleData)
+        
+        return xyztArray
+    }
+    #endif
 }
 
 extension TimedXYZRepresentable {

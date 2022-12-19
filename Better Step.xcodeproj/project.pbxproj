@@ -21,6 +21,7 @@
 		1F6456F3294CF5A90064DADA /* ResultsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BD02929392E3700442A63 /* ResultsUploader.swift */; };
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
+		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
@@ -157,6 +158,7 @@
 		1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMilestone.swift; sourceTree = "<group>"; };
 		1F60E70328DA720500EC2593 /* MorseHaptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseHaptic.swift; sourceTree = "<group>"; };
 		1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUIController.swift; sourceTree = "<group>"; };
+		1F6456F7294D29FA0064DADA /* TestXYZT.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestXYZT.json; sourceTree = SOURCE_ROOT; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
 				1FF354402790A99E000894B8 /* XYZ.swift */,
 				1F56E73529439626001708F3 /* TimedXYZ.swift */,
+				1F6456F7294D29FA0064DADA /* TestXYZT.json */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */,
 				1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */,
 				1FA2823128DBBB940038353E /* second-walk-intro.json in Resources */,
+				1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */,
 				1FC7477428E787AD00817041 /* AAA.ahap in Resources */,
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
 				1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */,

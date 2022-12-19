@@ -10,7 +10,14 @@ import Foundation
 extension IncomingAccelerometry {
     private func marshalledRecords(tag: SeriesTag) -> [String] {
         let common = "\(tag.rawValue),\(SubjectID.id),"
+        
+        #if DEBUG
+        guard let all = try? XYZT.sampleData() else {
+            preconditionFailure("Failed to load/decode “TextXYZT.json”")
+        }
+        #else
         let all = self.all()
+        #endif
         // firstRecord = CMAccelerometerData
         let retval = all.map(\.csvLine)
             .map { common + $0 }
@@ -47,15 +54,10 @@ extension IncomingAccelerometry {
 
     #warning("translate to PhaseStorage")
     func addToArchive(tag: String, subjectID: String) throws {
-        #if true
-fatalError("to be ported")
-        #else
-        // TODO: Throwing
-        let data = allAsTaggedData(tag: tag, subjectID: subjectID)
+        // TODO: sonstructive response to the throw.
+        let data = allAsTaggedData(tag: tag)
         try CSVArchiver.shared
             .addToArchive(data: data, forPhase: phase)
-        #endif
-
     }
 
     /// Write all CSV records into a file.
