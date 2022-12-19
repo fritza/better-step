@@ -106,7 +106,7 @@ extension PhaseStorage {
 extension PhaseStorage {
     /// The base name (without extension) of a data file for a given subject, date, and phase: `subjectID_date_series`.
     ///     - parameter phase: The phase for which the subject data is enclosed.
-    func dataFileBasename(phase: SeriesTag) -> String {
+    func csvFileBasename(phase: SeriesTag) -> String {
         /// Date is defaulted to today.
         phase.dataFileBasename(subjectID: subjectID)
     }
@@ -114,9 +114,9 @@ extension PhaseStorage {
     /// The full name of the CSV file containing the subject's performance of a given phase on a given day.
     /// - Parameter phase: The phase to be reported on.
     /// - Returns: A file name of the form `subjectID_date_series.csv`
-    func dataFileFilename(phase: SeriesTag) -> String {
-        return dataFileBasename(phase: phase) + ".csv"
-    }
+//    func dataFileFilename(phase: SeriesTag) -> String {
+//        return csvFileBasename(phase: phase) + ".csv"
+//    }
 
 
     /// The name of the directory within `/tmp` into which the data files are to be written and the .zip archive is to be created.
@@ -135,25 +135,50 @@ extension PhaseStorage {
             .appendingPathComponent(containerDirectoryName)
         return tempDirURL
     }
+    
+    /// Create the container directory (holds the .zip and .csv files) _if it doesn't already exist._
+    /// - bug: The test is for whether anything, directory _or file,_ already exists. This will be trouble once the app tries to insert files into it.
+    func createContainerDirectory() -> URL {
+        guard !FileManager.default
+            .somethingExists(atURL: containerDirectoryURL).exists
+        else {
+            return containerDirectoryURL
+        }
+        do {
+            try FileManager.default
+                .createDirectory(
+                    at: containerDirectoryURL,
+                    withIntermediateDirectories: true)
+        }
+        catch {
+            preconditionFailure(error.localizedDescription)
+        }
+        return containerDirectoryURL
+    }
+    #warning("Whether to overwrite dir/file isn't considered")
 
-
-    /// Generata the base (no trailing .csv) name for a data file, building up
-    /// - Parameters:
-    ///   - phase: The  phase from which the .csv is to be name
-    ///   - date: The date on which the report is made; if nil (default), today's date (e.g. 2023-01-30) is used.
-    /// - Returns: The base name of a file for this subject, date, and phase. No directory path, no extension.
-    /// - note: The `date` parameter is _ignored._
-    func csvBaseName(phase: SeriesTag,
-                      date: Date = Date()) -> String {
-        let retval = dataFileBasename(phase: phase)
-        return retval
+//    /// Generata the base (no trailing .csv) name for a data file, building up
+//    /// - Parameters:
+//    ///   - phase: The  phase from which the .csv is to be name
+//    ///   - date: The date on which the report is made; if nil (default), today's date (e.g. 2023-01-30) is used.
+//    /// - Returns: The base name of a file for this subject, date, and phase. No directory path, no extension.
+//    /// - note: The `date` parameter is _ignored._
+//    func csvBaseName(phase: SeriesTag,
+//                      date: Date = Date()) -> String {
+//        let retval = dataFileBasename(phase: phase)
+//        return retval
+//    }
+    
+    func csvFileName(for tag: SeriesTag) -> String {
+        let baseName = csvFileBasename(phase: tag)
+        return baseName + ".csv"
     }
 
     /// The (proposed or actual) URL for a .csv data file given subject name, date, and phase.
     /// - Parameter tag: The phase in which the data was collected
     /// - Returns: A `file:/` URL for that `.csv` data file.
     func csvFileURL(for tag: SeriesTag) -> URL {
-        let baseName = dataFileBasename(phase: tag)
+        let baseName = csvFileBasename(phase: tag)
         let csvName = baseName + ".csv"
         var destURL = containerDirectoryURL
         destURL
@@ -162,95 +187,3 @@ extension PhaseStorage {
     }
 
 }
-
-extension PhaseStorage {
-    // CSV content
-
-    func csvPrefix(phase: SeriesTag,
-                   timing: TimeInterval)
-    -> [String] {
-        return [phase.rawValue, subjectID, timing.pointFour]
-    }
-}
-
-#warning("Expose ComponentWriter?")
-#if false
-// MARK: - ComponentWriter
-
-final class ComponentWriter {
-    let subjectID: String
-    let formattedDate: String
-
-    private weak var storage: PhaseStorage?
-    //    Make PhaseStorage the façade for this whole process.
-
-
-    init(goal: PhaseStorage.CompletionGoal,
-         subject: String,
-         dateString: String,
-         storage: PhaseStorage) {
-        self.subjectID = subject
-        self.formattedDate = dateString
-        self.storage = storage
-    }
-
-    func writeCompletions(in structure: PhaseStorage) throws {
-        try structure.forEachPhase {
-            [weak self] tag, data in
-            guard let self else { return }
-            // TODO: Or throw?
-            guard let storage = self.storage else {
-                throw AppPhaseErrors.cantGetArchiveData
-            }
-
-            #warning("dataBaseName is not a good symbol.")
-
-            let baseName = storage.dataBaseName(phase: tag)
-            let csvName = baseName + ".csv"
-            var destURL = storage.destinationDirectoryURL
-            destURL
-                .appendPathComponent(csvName)
-
-            //
-
-
-            try FileManager.default
-                .deleteAndCreate(at: destURL,
-                                 contents: storage.data(for: tag)
-                )
-
-            // Notify the write of the file
-            let params = ZIPProgressKeys.dictionary(
-                phase: tag, url: destURL)
-            NotificationCenter.default
-                .post(name: ZIPDataWriteCompletion,
-                      object: self, userInfo: params)
-
-
-        } // forEachPhase
-    }       // writeComponents(in:)
-
-
-    func destinationFileURL(tag: SeriesTag) -> URL! {
-        guard let storage = self.storage else {
-            return nil
-        }
-        let baseName = storage.dataBaseName(phase: tag)
-        let csvName = baseName + ".csv"
-        var destURL = storage.destinationDirectoryURL
-        destURL
-            .appendPathComponent(csvName)
-        return destURL
-    }
-
-}
-#endif
-
-
-//    var completed: Bool {
-//        // Do all of what I've finished...
-//        let finishedKeys = Set(completionDictionary.keys)
-//        // appear in the list of what should be finished?
-//        let superset = (goal == .firstRun) ? SeriesTag.needForFirstRun : SeriesTag.needForFirstRun
-//        return finishedKeys.isSubset(of: superset)
-//    }

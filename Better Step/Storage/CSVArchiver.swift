@@ -83,64 +83,21 @@ fatalError("to be ported")
     /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
     /// **BUT NOT HERE!**
     lazy var containerDirectory: URL! = {
-        do {
-            try FileManager.default
-                .createDirectory(
-                    at: destinationDirectoryURL,
-                    withIntermediateDirectories: true)
-        }
-        catch {
-            preconditionFailure(error.localizedDescription)
-        }
-        return destinationDirectoryURL
-
+//        do {
+//            try FileManager.default
+//                .createDirectory(
+//                    at: destinationDirectoryURL,
+//                    withIntermediateDirectories: true)
+//        }
+//        catch {
+//            preconditionFailure(error.localizedDescription)
+//        }
+//        return destinationDirectoryURL
+        // Still has to be a lazy variable
+        // Because you don't want to create thr
+        // directory twice
+        return PhaseStorage.shared.createContainerDirectory()
     }()
-
-    /*
-     /// **Create** the file directory to receive the `.csv` files.
-     ///
-     /// Name/URL from ``containerDirectory``
-     private func createWorkingDirectory() -> URL {
-     do {
-     try FileManager.default
-     .createDirectory(
-     at: destinationDirectoryURL,
-     withIntermediateDirectories: true)
-     }
-     catch {
-     preconditionFailure(error.localizedDescription)
-     }
-     return destinationDirectoryURL
-     }
-     */
-
-    /*
-     /// Write data into one `.csv` file in the working directory .
-     /// - Parameters:
-     ///   - data: The content of the file to archive.
-     ///   - tag: A short `String` distinguishing the phase (walk 1 or 2) of collection. Expected to be derived from WalkingPhase
-     func writeFile(data : Data,
-     forPhase phase: SeriesTag) throws -> URL {
-     // TODO: Replace duplicate-named files with the new one.
-     // Create and write a csv file for the data.
-     let taggedURL = csvFileURL(phase: phase)
-     let success = FileManager.default
-     .createFile(
-     atPath: taggedURL.path,
-     contents: data)
-     if !success {
-     throw FileStorageErrors.cantCreateFileAt(taggedURL)
-     }
-
-     // Notify the write of the file
-     let params = ZIPProgressKeys.dictionary(
-     phase: phase, url: taggedURL)
-     NotificationCenter.default
-     .post(name: ZIPDataWriteCompletion,
-     object: self, userInfo: params)
-     return taggedURL
-     }
-     */
 
     /// Write a file containing CSV content data into the uniform holding file for one run of a walk challenge
     /// - Parameters:
@@ -320,6 +277,10 @@ extension CSVArchiver {
         let retval = URL(fileURLWithPath: temporaryPath, isDirectory: true)
             .appendingPathComponent(directoryName,
                                     isDirectory: true)
+        
+        assert(retval == PhaseStorage.shared.containerDirectoryURL)
+        
+        
         return retval
     }
 
@@ -347,12 +308,4 @@ extension CSVArchiver {
             .lastPathComponent
     }
 
-
-
-#warning("Who uses csvFileURL?")
-    /// Destination (wrapper) directory **plus** per-exercise `.csv` name
-    func csvFileURL(phase: SeriesTag) -> URL {
-        phaseStorage
-            .csvFileURL(for: phase)
-    }
 }
