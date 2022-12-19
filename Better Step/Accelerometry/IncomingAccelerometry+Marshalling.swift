@@ -53,11 +53,11 @@ extension IncomingAccelerometry {
     // MARK: Writing
 
     #warning("translate to PhaseStorage")
-    func addToArchive(tag: String, subjectID: String) throws {
+    func addToArchive(subjectID: String, tag: SeriesTag) throws {
         // TODO: sonstructive response to the throw.
         let data = allAsTaggedData(tag: tag)
         try CSVArchiver.shared
-            .addToArchive(data: data, forPhase: phase)
+            .addToArchive(data: data, forPhase: tag)
     }
 
     /// Write all CSV records into a file.
