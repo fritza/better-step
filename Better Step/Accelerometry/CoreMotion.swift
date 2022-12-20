@@ -109,8 +109,6 @@ final class MotionManager: ObservableObject {
         return retval
     }
 
-    #warning("Distinguish walking task from series")
-
     static var census = 0
 
     var lastTimeStamp: TimeInterval = -TimeInterval.infinity

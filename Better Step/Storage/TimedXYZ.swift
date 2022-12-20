@@ -51,15 +51,3 @@ public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Has
     }
     #endif
 }
-
-extension TimedXYZRepresentable {
-    /// Convenience method for assembling a full record in an accelerometry report.
-    /// - Parameters:
-    ///   - seriesTag: The “tag” string identifying the record series: “`walk_1`”,“`walk_2`”, etc.)
-    ///   - subjectID: The unique ID of the subject observed in the study.
-    /// - Returns: A CSV line representing series, subject, time, x, y, and z.
-    public func wholeAccelerometryLine() -> String {
-        self.csvLine
-    }
-#warning("Replace with .csvLine")
-}

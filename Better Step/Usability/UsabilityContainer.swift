@@ -18,8 +18,6 @@ enum UsabilityState: Int, CaseIterable {
 #endif
     case surveyForm
     case closing
-
-    static let csvPrefix = "PSSUQ"
 }
 
 

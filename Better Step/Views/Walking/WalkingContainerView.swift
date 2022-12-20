@@ -19,14 +19,6 @@ public enum WalkingState: String, CaseIterable // , BSTAppStages
     case interstitial_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
 
-    /// The first field in an CSV data report, and the last element of a series data file name.
-    public var csvPrefix: String? {
-        guard let tag = self.seriesTag else {
-            fatalError("\(#function) - tag not known from \(self.rawValue)")
-        }
-        return tag.rawValue
-    }
-
     /// The reporting phase corresponding to this `WalkingState`.
     ///
     ///  `WalkingState` names a sequence of tasks, two of which lead to reports of data series.
