@@ -11,11 +11,11 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    @AooStorage(ASKeys.completedFirstRun) var completedFirstRun: Bool = false
+    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
     
-    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
-    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
-    @AppStorage(ASKeys.hasCompletedSurveys.rawValue)  var hasCompletedSurveys : Bool = true
+//    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+//    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool = false
+//    @AppStorage(ASKeys.hasCompletedSurveys.rawValue)  var hasCompletedSurveys : Bool = true
 
     @State var shouldWarnOfReversion : Bool = false
 

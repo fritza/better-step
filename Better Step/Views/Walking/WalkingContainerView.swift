@@ -102,7 +102,9 @@ struct WalkingContainerView: View, ReportingPhase {
         didSet {
             print("Walking State goes from",
                   oldValue?.rawValue ?? "<N/A>",
-                  "to", state?.rawValue ?? "<N/A>")
+                  "to",
+                  state?.rawValue ?? "<N/A>"
+            )
         }
     }
     @State private var shouldShowActivity = false

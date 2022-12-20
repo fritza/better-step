@@ -37,11 +37,17 @@ final class Pedometry: ReportingPhase {
         else {
             fatalError("Could not find SevenDaysMockup.csv")
         }
-
+#warning("No exercise or name on the records or the file name.")
         let fileContent = try! String(contentsOf: sampleURL)
         let records = fileContent.components(separatedBy: "\n").dropLast()
         // FIXME: Remove empty string at end.
-        let tagged = records.map { "\(SeriesTag.sevenDayRecord.rawValue),\(SubjectID.id)," + $0 }
+        let tagged = records.map { tagline in
+            let expanded =  "\(SeriesTag.sevenDayRecord.rawValue),\(SubjectID.id)," + tagline
+            return expanded
+        }
+        
+        
+        
         let result: ResultValue = .success(tagged)
         completion(result)
     }

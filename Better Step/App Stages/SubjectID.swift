@@ -88,7 +88,7 @@ struct SubjectID {
     static func handleUserIDNotice() {
         let dCenter = NotificationCenter.default
         let noticeID = Destroy.unsafeSubjectID.notificationID
-        let noticeString = noticeID.rawValue
+//        let noticeString = noticeID.rawValue
         notificationTicket = dCenter.addObserver(
             forName: Destroy.unsafeSubjectID.notificationID,
             object: nil, queue: .current) {

@@ -23,15 +23,17 @@ import SwiftUI
  */
 struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 
+    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
+    
     // MARK: AppStorage
 
     /// The last-ciompleted phase for state restoration. **Belongs at top.**
     @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
     ///  The accumulated responses to the DASI Survey. **Move to the DASI phase code.**
-    @AppStorage(ASKeys.collectedDASI.rawValue) static var collectedDASI: Bool =  false
-    /// The accimiulated usability results. **Belongs in `UsabilityContainer`, which BTW should be edited to include the survey form.**
-    @AppStorage(ASKeys.collectedUsability.rawValue) static var collectedUsability: Bool =  false
-
+//    @AppStorage(ASKeys.collectedDASI.rawValue) static var collectedDASI: Bool =  false
+//    /// The accimiulated usability results. **Belongs in `UsabilityContainer`, which BTW should be edited to include the survey form.**
+//    @AppStorage(ASKeys.collectedUsability.rawValue) static var collectedUsability: Bool =  false
+//
     /// `CustomStringConvertible` adoption.
     var description: String {
         guard let retval = Self.TPAndString
@@ -52,16 +54,19 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 /// Restore the completion state (current phase, DASI complete, usability complete) to initial.
     static func resetToFirst() {
         latestPhase = TopPhases.entry.rawValue
-        collectedDASI = false
-        collectedUsability = false
+        ASKeys.hasCompleted = false
+//        completedFirstRun = false
+//        collectedDASI = false
+        
+//        collectedUsability = false
 //        firstUse = true
     }
 
     /// Restore the completion state as when a first run has been completed (onboarding done).
     static func resetToLater() {
         latestPhase = TopPhases.entry.rawValue
-        collectedDASI = true
-        collectedUsability = true
+//        collectedDASI = true
+//        collectedUsability = true
 //        firstUse = false
     }
 
@@ -111,21 +116,10 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 
 // MARK: - Sequencing
 extension TopPhases {
-    /// Whether the app has been run to cimpletion before.
-    static var surveysAreComplete: Bool {
-        // FIXME: We care about survey completion on first run
-        //        Check that.
-        
-        // "allSatisfy" looks absurd, but maybe kinder to later maintainers.
-        let retval = [collectedDASI, collectedUsability, SubjectID.id != SubjectID.unSet]
-            .allSatisfy( {$0} )
-       return retval
-    }
-
     /// The `TopPhases` succeeding  `self`. Returns `nil` if  his ohase has no known successor.
     ///
     /// "No suuccessor" is a sensible response for `conclusion` and `failed`.
-    var followingPhase: TopPhases? {
+    var followingPhase: TopPhases {
         switch self {
         
         case .entry                 :
@@ -135,7 +129,7 @@ extension TopPhases {
         case .greeting, .onboarding : return .walking
         
         case .walking              :
-            return Self.surveysAreComplete ?
+            return completedFirstRun ?
                 .conclusion : .dasi
         
         case .dasi                 : return .usability
@@ -143,7 +137,7 @@ extension TopPhases {
         case .usability            :
             return .conclusion
             // conclusion and failed don't have a next move.
-        default                     : return nil
+        default                     : return self
         }
     }
 }

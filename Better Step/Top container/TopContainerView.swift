@@ -17,9 +17,10 @@ import Combine
 ///
 struct TopContainerView: View {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
-    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
-    @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
-    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
+    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
+//    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
+//    @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
+//    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
 
 
     // FIXME: Necessary
@@ -33,12 +34,12 @@ struct TopContainerView: View {
     @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
-    @State var currentPhase: TopPhases? {
+    @State var currentPhase: TopPhases {
         willSet {
-            print("Current phase FROM", currentPhase?.description ?? "nil")
+            print("Current phase FROM", currentPhase.description ?? "nil")
         }
         didSet {
-            print("Current phase TO", currentPhase?.description ?? "nil")
+            print("Current phase TO", currentPhase.description ?? "nil")
         }
     }
 
@@ -93,7 +94,7 @@ struct TopContainerView: View {
         NavigationView {
 #if true
             VStack {
-                switch self.currentPhase ?? .entry.followingPhase! {
+                switch self.currentPhase {
                     // MARK: - Onboarding
                 case .onboarding:
                     // OnboardContainerView suceeds with String.
@@ -102,7 +103,7 @@ struct TopContainerView: View {
                         result in
                         do {
                             SubjectID.id = try result.get()
-                            self.currentPhase = self.currentPhase?.followingPhase
+                            self.currentPhase = self.currentPhase.followingPhase
                             latestPhase = TopPhases.onboarding.rawValue
                         }
                         catch {
@@ -118,6 +119,12 @@ struct TopContainerView: View {
                     ApplicationGreetingView {_ in 
                         self.currentPhase = .walking
                     }
+                    .onDisappear {
+                        #warning("Just dump it into an async Task")
+                        
+                        dummyPedometry()
+                            .proceed()
+                    }
 
                     // MARK: - Walking
                 case .walking:
@@ -125,7 +132,7 @@ struct TopContainerView: View {
                     // to collect more than one completion.
                     WalkingContainerView() {
                         _ in
-                        let whatFollows = currentPhase?.followingPhase
+                        let whatFollows = currentPhase.followingPhase
                         currentPhase = whatFollows
                     }
                     
@@ -136,8 +143,8 @@ struct TopContainerView: View {
                         case .success(_):
                             // SuccessValue is
                             // (scores: String, specifics: String)
-                            currentPhase = currentPhase?.followingPhase
-                            collectedUsability = true
+                            currentPhase = currentPhase.followingPhase
+//                            collectedUsability = true
                             latestPhase = TopPhases.usability.rawValue
                             // FIXME: Add the usability form
                             //        to the usability container.
@@ -159,9 +166,9 @@ struct TopContainerView: View {
 
 
 
-                            collectedDASI = true
+//                            collectedDASI = true
                             TopPhases.latestPhase = TopPhases.usability.rawValue
-                            self.currentPhase = currentPhase?.followingPhase
+                            self.currentPhase = currentPhase.followingPhase
 
 
 
@@ -196,12 +203,13 @@ struct TopContainerView: View {
 
                     // MARK: - no such phase
                 default:
-                    preconditionFailure("Should not be able to reach phase \(self.currentPhase?.description ?? "N/A")")
+                    preconditionFailure("Should not be able to reach phase \(self.currentPhase.description ?? "N/A")")
                 }   // Switch on currentPhase
             }       // VStack
+            // MARK: - onAppear {}
             .onAppear {
                 showReversionAlert = false
-                self.currentPhase = .entry.followingPhase
+//                self.currentPhase = .entry.followingPhase
                 registerReversionHandler()
 
                 // Report the 7-day summary

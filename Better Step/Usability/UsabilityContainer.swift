@@ -75,6 +75,15 @@ struct UsabilityContainer: View, ReportingPhase {
                 if array.allSatisfy({ $0 != 0 }) {
                     currentState = .closing
                 }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
             }
 
 

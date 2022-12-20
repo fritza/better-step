@@ -51,8 +51,9 @@ struct UsabilityInterstitialView: View, ReportingPhase {
             // (ignoring the ugliness around the toolbar)
 
             Button(continueTitle) {
-                #warning("increment in interstitial")
-//                if pageSelection.canIncrement { pageSelection.increment()
+                
+                completion(.success(()))
+                //                if pageSelection.canIncrement { pageSelection.increment()
 //                }
             }
             .accessibilityLabel("continuation button")

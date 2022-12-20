@@ -30,7 +30,7 @@ struct DASICompleteView: View, ReportingPhase {
     typealias SuccessValue = DASIResponseList
 
 
-    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
+//    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
     let completion: ClosureType
     let dasiResponses: DASIResponseList
     init(responses: DASIResponseList,

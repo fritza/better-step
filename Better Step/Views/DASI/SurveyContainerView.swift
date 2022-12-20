@@ -32,11 +32,16 @@ struct SurveyContainerView: View, ReportingPhase {
         notificationHandler = registerDataDeletion()
     }
 
+    
 
     // MARK: - Destruction
 
     func registerDataDeletion()
     -> NSObjectProtocol {
+
+        // FIXME: Substitute wiping the file.
+        //        How in general do you wipe out stage files?
+        
         let dCenter = NotificationCenter.default
 
         // TODO: Should I set hasCompletedSurveys if the walk is negated?
