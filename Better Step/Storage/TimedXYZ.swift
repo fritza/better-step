@@ -39,7 +39,7 @@ public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Has
     #if DEBUG
     static func sampleData() throws -> [XYZT]? {
         guard let url = Bundle.main
-            .url(forResource: "TextXYZT", withExtension: "json")
+            .url(forResource: "TestXYZT", withExtension: "json")
         else {
             return nil
         }

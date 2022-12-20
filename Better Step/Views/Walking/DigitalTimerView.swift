@@ -76,6 +76,9 @@ struct DigitalTimerView: View, ReportingPhase {
 
     /// Respond to timer-ended events by posting `success`/`failure` through `completion()`, and setting `isIdleTimerDisabled` to `false`.
     fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
+        #if DEBUG
+        completion(.success(self.motionManager.asyncBuffer))
+        #else
         switch stat {
         case .cancelled      :
             completion(
@@ -89,7 +92,8 @@ struct DigitalTimerView: View, ReportingPhase {
             completion(.success(self.motionManager.asyncBuffer))
         default: break
         }
-}
+        #endif
+    }
 
     var body: some View {
         GeometryReader { proxy in

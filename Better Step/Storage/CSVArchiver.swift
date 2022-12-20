@@ -92,6 +92,11 @@ final class CSVArchiver {
                 }
             }
             .store(in: &cancellables)
+        // FIXME: This does not create the ZIP archive.
+        // TODO: There is no provision for cleaning up
+        //       after creating, archiving, and sending
+        //       the content.
+        // TODO: COMPLETION is the truth about first/later run
     }
     
     
@@ -123,13 +128,14 @@ final class CSVArchiver {
     /// - Parameters:
     ///   - data: The data to write
     ///   - tag: The `WalkingState` for the walk phase.
+   /*
     func addToArchive(data: Data, forPhase phase: SeriesTag) throws {
 
 #if false
         fatalError("to be ported")
 #else
         do {
-            phaseStorage
+            PhaseStorage.shared
                 .series(phase, completedWith: data)
 
 
@@ -155,7 +161,7 @@ final class CSVArchiver {
         }
 #endif
     }
-
+*/
     static let noticeTagWriteKey = "writeResult"
     static let noticeTagWriteErrorKey = "tagWriteErrorKey"
 
@@ -209,8 +215,12 @@ final class CSVArchiver {
 
 extension CSVArchiver {
 
+    /*
     // See "writeOneFile" below
     func writeAllArchives() throws -> Bool {
+        
+        assertionFailure("Should not enter \(#function)")
+        
         #warning("Potential circularity berween PhaseStorage and CSVArchiver .shared")
         guard PhaseStorage.shared.isComplete else {  return false }
         try
@@ -241,10 +251,13 @@ extension CSVArchiver {
         // Write their data
         return true
     }
-
+    
     private func writeOneFile(
         for seriesTag: SeriesTag,
         data: Data) throws {
+            
+            assertionFailure("Should not enter \(#function)")
+            
             let taggedURL =
             PhaseStorage.shared.csvFileURL(
                 for: seriesTag)
@@ -266,7 +279,8 @@ extension CSVArchiver {
                       object: self, userInfo: params)
 
         }
-
+     */
+    
     /// Assemble and compress the file data and write it to a `.zip` file.
     ///
     /// Posts `ZIPCompletionNotice` with the URL of the product `.zip`.
@@ -289,7 +303,8 @@ extension CSVArchiver {
 // MARK: - Directory names
 extension CSVArchiver {
     var directoryName: String {
-        "\(SubjectID.id)_\(timestamp)"
+        PhaseStorage.shared.containerDirectoryName
+//        "\(SubjectID.id)_\(timestamp)"
     }
 
     /// Child directory of temporaties diectory, named uniquely for this package of `.csv` files.

@@ -156,7 +156,7 @@ final class MotionManager: ObservableObject {
 
     func start() {
 #if DEBUG
-        fatalError("MotionManager.start() unimplmented for debugging")
+        print(#function, "Entry")
 #else
         assert(accelerometryAvailable && accelerometryActive)
         

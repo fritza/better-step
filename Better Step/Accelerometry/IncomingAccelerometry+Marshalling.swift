@@ -13,7 +13,7 @@ extension IncomingAccelerometry {
         
         #if DEBUG
         guard let all = try? XYZT.sampleData() else {
-            preconditionFailure("Failed to load/decode “TextXYZT.json”")
+            preconditionFailure("Failed to load/decode “TestXYZT.json”")
         }
         #else
         let all = self.all()
@@ -38,8 +38,10 @@ extension IncomingAccelerometry {
     /// - Returns: A single `String`, each line being the marshalling of the `CMAccelerometerData` records
     private func allTaggedCSV(tag: SeriesTag) -> String {
         #warning("Replace with [CSVRepresentable].recordsPrefixed")
-        return taggedRecords(tag: tag)
+        let records = taggedRecords(tag: tag)
+        let retval  = records
             .joined(separator: "\r\n")
+        return retval
     }
 
     /// A `Data` instance containing the entire text of a CSV `String`
@@ -47,19 +49,32 @@ extension IncomingAccelerometry {
     /// This is a simple wrapper that takes the result of `allAsCSV(withPrefix:)` and renders it as bytes.
     ///   - parameter prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted.
     func allAsTaggedData(tag: SeriesTag) -> Data {
-        return allTaggedCSV(tag: tag).data(using: .utf8)!
+        let allRecords = allTaggedCSV(tag: tag)
+        let retval = allRecords.data(using: .utf8)!
+        return retval
     }
 
     // MARK: Writing
 
-    #warning("translate to PhaseStorage")
+    /*
+     
+     IncomingAccelerometry no longer interacts directly with
+     PhaseStorage.
+     
+     Which is strange, how does the completed data get into the
+     series(_:completedWith:) method at all?
+     
+     AMSWER: WalkingContainerView.walk_N_View(ownPhase:
+     
     func addToArchive(subjectID: String, tag: SeriesTag) throws {
         // TODO: sonstructive response to the throw.
         let data = allAsTaggedData(tag: tag)
-        try CSVArchiver.shared
-            .addToArchive(data: data, forPhase: tag)
-    }
+//        try CSVArchiver.shared
+//            .addToArchive(data: data, forPhase: tag)
 
+        PhaseStorage.shared.series(tag, completedWith: data)
+
+    }
     /// Write all CSV records into a file.
     /// - Parameters:
     ///   - prefix: A fragment of CSV that will be added to the front of each record. Any trailing comma at the end will be omitted. `
@@ -74,4 +89,5 @@ extension IncomingAccelerometry {
         try fm.deleteAndCreate(at: url, contents: data)
         //        Self.registerFilePath(url.path)
     }
+     */
 }

@@ -113,6 +113,9 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 extension TopPhases {
     /// Whether the app has been run to cimpletion before.
     static var surveysAreComplete: Bool {
+        // FIXME: We care about survey completion on first run
+        //        Check that.
+        
         // "allSatisfy" looks absurd, but maybe kinder to later maintainers.
         let retval = [collectedDASI, collectedUsability, SubjectID.id != SubjectID.unSet]
             .allSatisfy( {$0} )

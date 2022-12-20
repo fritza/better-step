@@ -28,17 +28,18 @@ Tap “Continue” to proceed.
     }
     
     var body: some View {
-            GenericInstructionView(titleText: Self.title,
-                                   // TODO: A way to pass an additon of styled Text.
-                                   bodyText: Self.upperText,
-                                   sfBadgeName: Self.systemImageName,
-                                   proceedTitle: "Continie",
-                                   proceedClosure: {
+        GenericInstructionView(
+            titleText: Self.title,
+            // TODO: A way to pass an additon of styled Text.
+            bodyText: Self.upperText,
+            sfBadgeName: Self.systemImageName,
+            proceedTitle: "Continue",
+            proceedClosure: {
                 self.completion(
                     .success(
                         ()
                     )
-            )})
+                )})
     }
 }
 

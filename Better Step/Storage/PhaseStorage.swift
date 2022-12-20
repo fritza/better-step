@@ -80,6 +80,12 @@ public final class PhaseStorage: ObservableObject
 
 
     public func series(_ tag: SeriesTag, completedWith data: Data) {
+        
+        #if DEBUG
+        print(#function, tag.rawValue, "arrived,", data.count, "bytes.")
+        #endif
+        
+        
         guard keysToBeFinished.contains(tag) else {
             assertionFailure("Strange key upon completion: \(tag.rawValue)")
             return
