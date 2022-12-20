@@ -49,7 +49,7 @@ public final class PhaseStorage: ObservableObject
     }
 
     typealias CompDict = [SeriesTag:Data]
-    private var completionDictionary  : CompDict
+    @Published private(set) var completionDictionary  : CompDict
     private var subjectID             : String
     private var goal                  : CompletionGoal
 
@@ -63,25 +63,31 @@ public final class PhaseStorage: ObservableObject
         self.isComplete = false
         self.subjectID = subject
     }
-
-
+    
+    var keysToBeFinished: Set<CompDict.Key> {
+        (goal == .firstRun) ?
+        SeriesTag.neededForFirstRun :
+        SeriesTag.neededForLaterRuns
+    }
+    
     /// Determine whether all data needed for first or subsequent sessions has arrived. Set the observable `isComplete` accordingly.
     private func checkCompletion() {
         // Do all of what I've finished...
         let finishedKeys = Set(completionDictionary.keys)
         // appear in the list of what should be finished?
-        let keysToBeFinished = (goal == .firstRun) ? SeriesTag.neededForFirstRun : SeriesTag.neededForLaterRuns
-        
-        let intersection = finishedKeys.intersection(keysToBeFinished)
-        let isCompleted = intersection == keysToBeFinished
-        isComplete = isCompleted
+        isComplete = keysToBeFinished.isSubset(of: finishedKeys)
     }
 
 
     public func series(_ tag: SeriesTag, completedWith data: Data) {
-        guard !completionDictionary.keys.contains(tag) else {   // Really? Not permit correction?
-            preconditionFailure("\(#function) - Attempt to re-insert \(tag.rawValue)")
+        guard keysToBeFinished.contains(tag) else {
+            assertionFailure("Strange key upon completion: \(tag.rawValue)")
+            return
         }
+        
+        assert(!completionDictionary.keys.contains(tag),
+        "\(#function) - Attempt to re-insert \(tag.rawValue)")
+        
         completionDictionary[tag] = data
         checkCompletion()
     }
@@ -110,14 +116,6 @@ extension PhaseStorage {
         /// Date is defaulted to today.
         phase.dataFileBasename(subjectID: subjectID)
     }
-
-    /// The full name of the CSV file containing the subject's performance of a given phase on a given day.
-    /// - Parameter phase: The phase to be reported on.
-    /// - Returns: A file name of the form `subjectID_date_series.csv`
-//    func dataFileFilename(phase: SeriesTag) -> String {
-//        return csvFileBasename(phase: phase) + ".csv"
-//    }
-
 
     /// The name of the directory within `/tmp` into which the data files are to be written and the .zip archive is to be created.
     ///

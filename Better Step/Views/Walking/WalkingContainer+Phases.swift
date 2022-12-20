@@ -70,7 +70,7 @@ extension WalkingContainerView {
     @ViewBuilder
     func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
         NavigationLink(
-            "SHOULDN'T SEE (walk_N, \(ownPhase.csvPrefix!))",
+            "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
             tag: ownPhase, selection: $state)
         {
             DigitalTimerView(

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 import ZIPFoundation
 
 // TODO: Normalized walk accelerations
@@ -14,50 +15,41 @@ import ZIPFoundation
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
 final class CSVArchiver {
-    static var opt_shared: CSVArchiver?
+    fileprivate static var _shared: CSVArchiver?
 
     // TODO: Reduce dependency on the shared
     //       OR: have a singleton PhaseStorage, which owns the archiver anyway.
 
         static var shared: CSVArchiver = {
-#if true
-fatalError("to be ported")
-#else
-            if let opt_shared { return opt_shared }
-            opt_shared = try! CSVArchiver(storage: phaseStorage)
-            return opt_shared!
-#endif
+            if let _shared { return _shared }
+            _shared = try! CSVArchiver()
+            return _shared!
         }()
-
-        static func clearSharedArchiver() {
-#if true  
-            #warning("to be ported")
-#else
-            if let container = shared.containerDirectory {
-                try?
-                FileManager.default
-                    .deleteObjects(at: [ container ])
-            }
-            opt_shared = nil
-#endif
-        }
+    
+    static func clearSharedArchiver() {
+        let _ = try? FileManager.default
+            .deleteObjects(at: [ shared.destinationDirectoryURL ])
+        _shared = nil
+    }
 
     /// Invariant: time of creation of the export set
     let timestamp = Date().iso
     /// The output ZIP archive
     let csvArchive: Archive
-    var phaseStorage: PhaseStorage
 
+    var cancellables: Set<AnyCancellable> = []
+    
     /// Capture file and directory locations and initialize the archive.
     /// - Parameter subject: The ID of the user
-    init(storage: PhaseStorage) throws {
+    init() throws {
         let backingStore = Data()
         guard let _archive = Archive(
             data: backingStore,
             accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
         self.csvArchive = _archive
-        self.phaseStorage = storage
+        
+        setUpCombine()
     }
 
     /// Empty the container and its filesystem storage.
@@ -83,21 +75,49 @@ fatalError("to be ported")
     /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
     /// **BUT NOT HERE!**
     lazy var containerDirectory: URL! = {
-//        do {
-//            try FileManager.default
-//                .createDirectory(
-//                    at: destinationDirectoryURL,
-//                    withIntermediateDirectories: true)
-//        }
-//        catch {
-//            preconditionFailure(error.localizedDescription)
-//        }
-//        return destinationDirectoryURL
-        // Still has to be a lazy variable
-        // Because you don't want to create thr
-        // directory twice
         return PhaseStorage.shared.createContainerDirectory()
     }()
+    
+    func setUpCombine() {
+        PhaseStorage.shared
+            .$completionDictionary
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+            .sink { [self]
+                completions in
+                print(#function,
+                      "We're in business!")
+                for (tag , data) in completions {
+                    write(bytes: data, forPhase: tag)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    
+    func write(bytes data: Data, forPhase tag: SeriesTag) {
+        print("Series", tag.rawValue, " - ", data.count, "bytes")
+        
+        let fileName = PhaseStorage.shared.csvFileName(for: tag)
+        do {
+            let fileURL = PhaseStorage.shared.csvFileURL(for: tag)
+            try FileManager.default
+                .deleteAndCreate(at: fileURL,
+                                 contents: data)
+            // Here's where you start writing things.
+            
+            
+            // DO WE REALLY NEED NOTIFICATIONS of in/completion?
+            // Now that we're accepting all the files at once,
+            // there's nothing more to coordinate, right?
+        }
+        catch {
+            print("in csvArchiver.setUpCombine, can't save \(fileName).")
+            print(error)
+            preconditionFailure("Cannot proceed after FS error")
+        }
+    }
+    
 
     /// Write a file containing CSV content data into the uniform holding file for one run of a walk challenge
     /// - Parameters:
@@ -105,7 +125,7 @@ fatalError("to be ported")
     ///   - tag: The `WalkingState` for the walk phase.
     func addToArchive(data: Data, forPhase phase: SeriesTag) throws {
 
-#if true
+#if false
         fatalError("to be ported")
 #else
         do {
@@ -191,12 +211,13 @@ extension CSVArchiver {
 
     // See "writeOneFile" below
     func writeAllArchives() throws -> Bool {
-        guard phaseStorage.isComplete else {  return false }
+        #warning("Potential circularity berween PhaseStorage and CSVArchiver .shared")
+        guard PhaseStorage.shared.isComplete else {  return false }
         try
-        phaseStorage.forEachPhase { seriesTag, data throws in
+        PhaseStorage.shared.forEachPhase { seriesTag, data throws in
             // Create and populate the file
             let taggedURL =
-            self.phaseStorage.csvFileURL(
+            PhaseStorage.shared.csvFileURL(
                 for: seriesTag)
             let success = FileManager.default
                 .createFile(
@@ -225,7 +246,7 @@ extension CSVArchiver {
         for seriesTag: SeriesTag,
         data: Data) throws {
             let taggedURL =
-            self.phaseStorage.csvFileURL(
+            PhaseStorage.shared.csvFileURL(
                 for: seriesTag)
             let success = FileManager.default
                 .createFile(
@@ -272,7 +293,7 @@ extension CSVArchiver {
     }
 
     /// Child directory of temporaties diectory, named uniquely for this package of `.csv` files.
-    private var destinationDirectoryURL: URL {
+    fileprivate var destinationDirectoryURL: URL {
         let temporaryPath = NSTemporaryDirectory()
         let retval = URL(fileURLWithPath: temporaryPath, isDirectory: true)
             .appendingPathComponent(directoryName,
@@ -303,7 +324,7 @@ extension CSVArchiver {
 
     /// Name of the tagged `.csv` file
     func csvFileName(phase: SeriesTag) -> String {
-        phaseStorage
+        PhaseStorage.shared
             .csvFileURL(for: phase)
             .lastPathComponent
     }
