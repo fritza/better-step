@@ -9,6 +9,10 @@ import Foundation
 
 // MARK: - @AppStorage
 enum ASKeys: String {
+    
+    // If false, present the surveys.
+    case completedFirstRun
+    
     /// How long the timed walk is to last, in _minutes,_ e.g. 6.
     case walkInMinutes
     /// The frequency in Hertz (e.g. 120) for sampling the accelerometer.
