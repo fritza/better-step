@@ -24,8 +24,10 @@ import ZIPFoundation
 /// Maintain the data associated with completed phases of the workflow.
 ///
 /// Watch completion of all necessary stages by observing `.isComplete`.
-public final class PhaseStorage: ObservableObject
+public final class PhaseStorage: ObservableObject, MassDiscardable
 {
+    var reversionHandler: AnyObject?
+    
     @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
     
     static let shared: PhaseStorage = {
@@ -60,7 +62,14 @@ public final class PhaseStorage: ObservableObject
     public init() {
         completionDictionary = [:]
         self.isComplete = false
+        self.reversionHandler = installDiscardable()
         //    self.subjectID = subject
+    }
+    
+    func handleReversion(notice: Notification) {
+#warning("finish PhaseStorage.handleReversion(notice:)")
+        isComplete = false
+        completionDictionary = [:]
     }
     
     var keysToBeFinished: Set<CompDict.Key> {

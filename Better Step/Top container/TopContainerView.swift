@@ -15,7 +15,7 @@ import Combine
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 ///
 ///
-struct TopContainerView: View {
+struct TopContainerView: View, MassDiscardable {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
 //    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
@@ -27,21 +27,27 @@ struct TopContainerView: View {
 
     @AppStorage(ASKeys.daysSince7DayReport.rawValue) var daysSince7DayReport = 0
 
-
-
-
+    var reversionHandler: AnyObject?
+    func handleReversion(notice: Notification) {
+     
+#warning("finish TopContainerView.handleReversion(notice:)")
+        
+        
+        
+    }
 
     @AppStorage(ASKeys.subjectID.rawValue)
     var subjectID: String = SubjectID.unSet
 
-    @State var currentPhase: TopPhases {
-        willSet {
-            print("Current phase FROM", currentPhase.description ?? "nil")
-        }
-        didSet {
-            print("Current phase TO", currentPhase.description ?? "nil")
-        }
-    }
+    @State var currentPhase: TopPhases
+//    {
+//        willSet {
+//            print("Current phase FROM", currentPhase.description ?? "nil")
+//        }
+//        didSet {
+//            print("Current phase TO", currentPhase.description ?? "nil")
+//        }
+//    }
 
     func dummyPedometry() ->  Pedometry {
         let retval = Pedometry {
@@ -58,7 +64,7 @@ struct TopContainerView: View {
 
     init() {
         currentPhase = TopPhases.entry.followingPhase
-
+        self.reversionHandler = installDiscardable()
         // MARK: - (MOCKED) 7-day pedometry
     }
 
