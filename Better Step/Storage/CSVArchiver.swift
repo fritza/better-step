@@ -128,40 +128,6 @@ final class CSVArchiver {
     /// - Parameters:
     ///   - data: The data to write
     ///   - tag: The `WalkingState` for the walk phase.
-   /*
-    func addToArchive(data: Data, forPhase phase: SeriesTag) throws {
-
-#if false
-        fatalError("to be ported")
-#else
-        do {
-            PhaseStorage.shared
-                .series(phase, completedWith: data)
-
-
-            let dataURL = try writeFile(data: data,
-                                        forPhase: phase)
-            try csvArchive.addEntry(
-                with: dataURL.lastPathComponent,
-                fileURL: dataURL)
-
-            // REFORM:
-            let params = ZIPProgressKeys.dictionary(
-                phase: phase, url: dataURL)
-            NotificationCenter.default
-                .post(name: ZIPDataArchiveCompletion,
-                      object: self, userInfo: params)
-        }
-        catch {
-            let params = ZIPProgressKeys.dictionary(error: error)
-            NotificationCenter.default
-                .post(name: ZIPDataArchiveCompletion,
-                      object: self, userInfo: params)
-            throw error
-        }
-#endif
-    }
-*/
     static let noticeTagWriteKey = "writeResult"
     static let noticeTagWriteErrorKey = "tagWriteErrorKey"
 
@@ -191,96 +157,11 @@ final class CSVArchiver {
             .post(name: name, object: self,
                   userInfo: userInfo)
     }
-    //
-    //
-    //
-    //        var userInfo = [Self.noticeTagWriteKey: phase]
-    //        switch result {
-    //        case .failure(let error):
-    //            userInfo[Self.noticeTagWriteErrorKey] = error
-    //                     NotificationCenter.default
-    //                .post(name: SeriesWriteFailed,
-    //                      object: self,
-    //                      userInfo: userInfo)
-    //
-    //                     case .success(let userInfo):
-    //                        NotificationCenter.default
-    //                .post(name: SeriesWriteSucceeded,
-    //                      object: self,
-    //                      userInfo: userInfo)
-    //                     }
 }
 
 #warning("Whoosh. Step through this.")
 
-extension CSVArchiver {
-
-    /*
-    // See "writeOneFile" below
-    func writeAllArchives() throws -> Bool {
-        
-        assertionFailure("Should not enter \(#function)")
-        
-        #warning("Potential circularity berween PhaseStorage and CSVArchiver .shared")
-        guard PhaseStorage.shared.isComplete else {  return false }
-        try
-        PhaseStorage.shared.forEachPhase { seriesTag, data throws in
-            // Create and populate the file
-            let taggedURL =
-            PhaseStorage.shared.csvFileURL(
-                for: seriesTag)
-            let success = FileManager.default
-                .createFile(
-                    atPath: taggedURL.path,
-                    contents: data)
-            if !success {
-                NotificationCenter.default
-                    .post(name: SeriesWriteFailed,
-                          object: self)
-                throw FileStorageErrors
-                    .cantCreateFileTagged(seriesTag)
-            }
-
-            // Broadcast success for current tag.
-            let params = ZIPProgressKeys.dictionary(
-                phase: seriesTag, url: taggedURL)
-            NotificationCenter.default
-                .post(name: ZIPDataWriteCompletion,
-                      object: self, userInfo: params)
-        }
-        // Write their data
-        return true
-    }
-    
-    private func writeOneFile(
-        for seriesTag: SeriesTag,
-        data: Data) throws {
-            
-            assertionFailure("Should not enter \(#function)")
-            
-            let taggedURL =
-            PhaseStorage.shared.csvFileURL(
-                for: seriesTag)
-            let success = FileManager.default
-                .createFile(
-                    atPath: taggedURL.path,
-                    contents: data)
-            if !success {
-                throw FileStorageErrors
-                    .cantCreateFileTagged(seriesTag)
-            }
-
-            // Broadcast success for current tag.
-            let params = ZIPProgressKeys
-                .dictionary(
-                    phase: seriesTag, url: taggedURL)
-            NotificationCenter.default
-                .post(name: ZIPDataWriteCompletion,
-                      object: self, userInfo: params)
-
-        }
-     */
-    
+extension CSVArchiver {    
     /// Assemble and compress the file data and write it to a `.zip` file.
     ///
     /// Posts `ZIPCompletionNotice` with the URL of the product `.zip`.
