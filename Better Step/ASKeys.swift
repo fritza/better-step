@@ -86,7 +86,7 @@ enum ASKeys: String {
     /// Whether the user has completed all phases of the workflow.
     ///
     /// Usually, client code should rely on `@AppStorage` instead, but that's not available from static functions such as ``TopPhases.resetToFirst()``.
-    static var hasCompleted: Bool {
+    static var allPhasesComplete: Bool {
         get {
             UserDefaults.standard
                 .bool(forKey: ASKeys.completedFirstRun.rawValue)
