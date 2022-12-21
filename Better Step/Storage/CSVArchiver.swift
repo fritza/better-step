@@ -100,7 +100,7 @@ final class CSVArchiver {
     }
     
     
-    func write(bytes data: Data, forPhase tag: SeriesTag) {
+    private func write(bytes data: Data, forPhase tag: SeriesTag) {
         print("Series", tag.rawValue, " - ", data.count, "bytes")
         
         let fileName = PhaseStorage.shared.csvFileName(for: tag)
