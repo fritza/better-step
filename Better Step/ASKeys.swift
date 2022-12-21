@@ -12,58 +12,20 @@ enum ASKeys: String {
     
     // If false, present the surveys.
     case completedFirstRun
-    
-    /// How long the timed walk is to last, in _minutes,_ e.g. 6.
-    case walkInMinutes
-    /// The frequency in Hertz (e.g. 120) for sampling the accelerometer.
-    case walkSamplingRate
-    /// If `false`, report acceleration in three axes; otherwise as the vector magnitude.
-    case reportAsMagnitude
-    /// `String` the email address to receive report archive files.
-    case reportingEmail
-    
-    /// If `false`, this is the first run of the app and needs to collect SubjectID, DASI, and Usability
-    //    case hasCompletedSurveys
     /// The last known subject ID
     case subjectID
-    /// Whether the DASI stage is complete
-    //    case collectedDASI
     
-    /// Whether the satisfaction scale substage of the usability phase is complete
-    //    case collectedUsability
-    
-        case tempUsabilityIntsCSV
-    
-    /// A single shared interpretation of what constitutes completion of the walk.
-    //    case perfomedWalk
-    
-    /// `String`, an identifier for the last-completed phase.
-    ///
-    ///     The phases are strictly ordered, so this obsoletes many of the "collected/completed" keys.
+    /// `String`, a `rawValue` for ``SeriesTag``, for the last-completed phase.
     case phaseProgress
     
-    /// Whether the context form substage of the usability phase is complete.
-    //    case collectedFreehandU
-    
-    /// Temporary storage for the singlie-line DASI report.
+    /// **Temporary** storage for the singlie-line DASI report.
     ///
     /// Probably obsoleted by ``ReportingPhase``.
     case temporaryDASIResults
+    /// **Temporary** storage for the single-record CSV for Usability
+    case tempUsabilityIntsCSV
     
-    case daysSince7DayReport
-    
-    /// `Int` allowable length of timed walk _in minutes._ Do not confuse with the `walkInMinutes` preference key,  which is the specific duration to use.
-    //    static let dasiWalkRange = (1...10)
-    
-    //    static func resetSubjectData() {
-    //        let defaults = UserDefaults.standard
-    //        defaults.set("", forKey: ASKeys.subjectID.rawValue)
-    
-    //        let stringPrefs: [ASKeys] = [.collectedDASI, .collectedFreehandU, .collectedUsability]
-    //        let keys = stringPrefs.map(\.rawValue)
-    //        for key in keys {
-    //            defaults.set(false, forKey: key)
-    //        }
+    case _7DayKey
     
     func negate() {
         let ud = UserDefaults.standard
@@ -71,22 +33,47 @@ enum ASKeys: String {
     }
     
     
-    /// Remove or replace a value from `UserDefaults`.
-    ///
-    /// Replacement counts as “erasure” even though it's simply assignment, because
-    /// * some initial values are in-band, such as `SubjectID`, which is initially `unSet` ( `""`)
-    /// * using the function clarifies the intention.
-    /// - Parameters:
-    ///   - newValue: If not `nil` (the default) save this value under the key.
-    func eraseDefault() {
+    /// Remove a value from `UserDefaults`.
+    func removeDefault() {
         let ud = UserDefaults.standard
         ud.removeObject(forKey: self.rawValue)
+    }
+    
+    /// Remove, `false`, or reset all the `ASKeys`
+    static func revertPhaseDefaults() {
+        let ud = UserDefaults.standard
+
+        let boolKeys: [ASKeys] = [
+            .completedFirstRun,
+        ]
+        for key in boolKeys {
+            ud.setValue(false, forKey: key.rawValue)
+        }
+        
+        let nillableKeys: [ASKeys] = [
+            .tempUsabilityIntsCSV,
+            .temporaryDASIResults,
+        ]
+        for key in nillableKeys {
+            key.removeDefault()
+        }
+        
+        Self.spoilLast7DReport()
+        
+        ud.set("", forKey: ASKeys.phaseProgress.rawValue)
+        
+        // This won't be the only place that SubjectID
+        // will be un-set, but it can't hurt.
+        ud.setValue(SubjectID.unSet,
+                    forKey: Self.subjectID.rawValue)
+        
+        isFirstRunComplete = false
     }
     
     /// Whether the user has completed all phases of the workflow.
     ///
     /// Usually, client code should rely on `@AppStorage` instead, but that's not available from static functions such as ``TopPhases.resetToFirst()``.
-    static var allPhasesComplete: Bool {
+    static var isFirstRunComplete: Bool {
         get {
             UserDefaults.standard
                 .bool(forKey: ASKeys.completedFirstRun.rawValue)
@@ -94,6 +81,24 @@ enum ASKeys: String {
         set {
             UserDefaults.standard
                 .setValue(newValue, forKey: ASKeys.completedFirstRun.rawValue)
+        }
+    }
+    static func spoilLast7DReport() {
+        UserDefaults.standard
+            .setValue(0, forKey: ASKeys.completedFirstRun.rawValue)
+    }
+    
+    static var dateOfLast7DReport: Date {
+        get {
+            let stored = UserDefaults.standard
+                .double(forKey: ASKeys._7DayKey.rawValue)
+            return (stored == 0.0) ? Date.distantPast
+            : Date(timeIntervalSinceReferenceDate: stored)
+        }
+        set {
+            let interval = newValue.timeIntervalSinceReferenceDate
+            UserDefaults.standard
+                .setValue(interval, forKey: ASKeys._7DayKey.rawValue)
         }
     }
 }

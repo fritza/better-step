@@ -55,7 +55,7 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
     static func resetToFirst() {
         latestPhase = TopPhases.entry.rawValue
         // Static func can't access @AppStorage.
-        ASKeys.allPhasesComplete = false
+        ASKeys.isFirstRunComplete = false
 //        completedFirstRun = false
 //        collectedDASI = false
         
