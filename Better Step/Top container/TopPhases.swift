@@ -54,7 +54,8 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 /// Restore the completion state (current phase, DASI complete, usability complete) to initial.
     static func resetToFirst() {
         latestPhase = TopPhases.entry.rawValue
-        ASKeys.hasCompleted = false
+        // Static func can't access @AppStorage.
+        ASKeys.allPhasesComplete = false
 //        completedFirstRun = false
 //        collectedDASI = false
         

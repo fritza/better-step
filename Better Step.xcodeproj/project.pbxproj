@@ -26,6 +26,7 @@
 		1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
+		1F891BBC29538F30006C09DF /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */; };
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
@@ -164,6 +165,7 @@
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
 		1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayPedometry.swift; sourceTree = "<group>"; };
+		1F891BBB29538F30006C09DF /* StateReversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateReversion.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				1F891BBB29538F30006C09DF /* StateReversion.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
 				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
@@ -749,6 +752,7 @@
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
+				1F891BBC29538F30006C09DF /* StateReversion.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
