@@ -23,31 +23,22 @@ struct TopContainerView: View, MassDiscardable {
 //    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
 
 
-    // FIXME: Necessary
+    @State var showReversionAlert: Bool = false
+    @State var reversionNoticeHandler: NSObjectProtocol!
+    // TODO: Put up an alert when pedometry is not authorized.
+    @State var currentPhase: TopPhases
 
-    @AppStorage(ASKeys.daysSince7DayReport.rawValue) var daysSince7DayReport = 0
+    
+    // FIXME: Necessary
 
     var reversionHandler: AnyObject?
     func handleReversion(notice: Notification) {
-     
-#warning("finish TopContainerView.handleReversion(notice:)")
-        
-        
-        
+        ASKeys.revertPhaseDefaults()
+        currentPhase = .entry
+        TopPhases.resetToFirst()
+        // I think it's okay _not_ to clear the reversionHandler
     }
 
-    @AppStorage(ASKeys.subjectID.rawValue)
-    var subjectID: String = SubjectID.unSet
-
-    @State var currentPhase: TopPhases
-//    {
-//        willSet {
-//            print("Current phase FROM", currentPhase.description ?? "nil")
-//        }
-//        didSet {
-//            print("Current phase TO", currentPhase.description ?? "nil")
-//        }
-//    }
 
     func dummyPedometry() ->  Pedometry {
         let retval = Pedometry {
@@ -55,42 +46,21 @@ struct TopContainerView: View, MassDiscardable {
             let string = try! result.get()
             let line = string.csvLine
             let strData = line.data(using: .utf8)!
-            // FIXME: Why can't csvData work on [String]?
+            // FIXME: Why couldn't csvData work on [String]?
             PhaseStorage.shared
                 .series(.sevenDayRecord, completedWith: strData)
+            ASKeys.dateOfLast7DReport = Date()
         }
         return retval
     }
 
     init() {
+        // TODO: store and reload the current phase ID.
         currentPhase = TopPhases.entry.followingPhase
-        self.reversionHandler = installDiscardable()
+        self.reversionHandler = self.reversionHandler ?? installDiscardable()
         // MARK: - (MOCKED) 7-day pedometry
     }
 
-    @State var showReversionAlert: Bool = false
-    @State var reversionNoticeHandler: NSObjectProtocol!
-    // TODO: Put up an alert when pedometry is not authorized.
-
-    // FIXME: mutation won't go well, will it.
-    func registerReversionHandler() {
-        guard reversionNoticeHandler == nil else {
-            print("better not be more than one!")
-            return
-        }
-
-        let dCenter = NotificationCenter.default
-        reversionNoticeHandler =
-        dCenter.addObserver(forName: ForceAppReversion,
-                            object: nil, queue: .current) {
-            notice in
-            currentPhase = .entry
-            TopPhases.resetToFirst()
-
-            SubjectID.id = SubjectID.unSet
-            // FIXME: Surely we'd have to rewind all the subordinate views?
-        }
-    }
 
     // TODO: Make .navigationTitle consistent
 
@@ -216,7 +186,6 @@ struct TopContainerView: View, MassDiscardable {
             .onAppear {
                 showReversionAlert = false
 //                self.currentPhase = .entry.followingPhase
-                registerReversionHandler()
 
                 // Report the 7-day summary
                 // SeriesTag.sevenDayRecord

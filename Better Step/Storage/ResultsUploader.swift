@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI  // FIXME: This is just to get @AppStorage.
+// Switch it to UserDefaults and remove the dependency.
 
 // MARK: - UploadServerCreds
 public enum UploadServerCreds {
@@ -45,6 +47,8 @@ public enum UploadServerCreds {
 
 public class ResultsUploader // : Hashable
 {
+    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun = false
+    
     /*
      Let’s talk about object lifetime.
 
@@ -77,6 +81,7 @@ public class ResultsUploader // : Hashable
             throw FileStorageErrors.uploadEmptyData(url.path)
         }
 
+        // Formulate the request
         var request = URLRequest(
             url: UploadServerCreds.uploadURL,
             timeoutInterval: TimeInterval.infinity)
@@ -109,6 +114,9 @@ public class ResultsUploader // : Hashable
     fileprivate func resultFunction(data: Data?,
                                     response: URLResponse?,
                                     error: Error?) {
+        
+        #warning("Consider Combine for this. Consider making sense of this.")
+        
         // Any error means not deleting the .zip file.
         // ON RETRY: We have a sync problem.
         guard
@@ -125,6 +133,7 @@ public class ResultsUploader // : Hashable
         do {
             try FileManager.default
                 .deleteIfPresent(dataURL)
+            completedFirstRun = true
             sendUploadNotice(name: UploadCompleteNotification,
                              server: UploadServerCreds.uploadString)
         }
@@ -191,6 +200,7 @@ extension ResultsUploader {
     /// Broadcast the completion (successful or not) of the upload through `NotificationCenter`
     ///
     /// ATW, the available names are ``UploadFailedNotification`` and ``UploadCompleteNotification``.
+    /// Also ATW, these notifications aren't used, but it seems likely they will be.
     func sendUploadNotice(name  : Notification.Name,
                           server: String,
                           error : Error? = nil) {

@@ -57,18 +57,18 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     //    private var goal                  : CompletionGoal
     
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
-    @Published public  var isComplete : Bool
+    @Published public  var areAllPhasesComplete : Bool
     
     public init() {
         completionDictionary = [:]
-        self.isComplete = false
+        self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
         //    self.subjectID = subject
     }
     
     func handleReversion(notice: Notification) {
 #warning("finish PhaseStorage.handleReversion(notice:)")
-        isComplete = false
+        areAllPhasesComplete = false
         completionDictionary = [:]
     }
     
@@ -79,17 +79,13 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     }
     
     /// Determine whether all data needed for first or subsequent sessions has arrived. Set the observable `isComplete` accordingly.
-    private func checkCompletion() {
+    private func checkCompletion() -> Bool {
         // Do all of what I've finished...
         let finishedKeys = Set(completionDictionary.keys)
         // appear in the list of what should be finished?
         let completed = keysToBeFinished.isSubset(of: finishedKeys)
-        
-        if completed {
-            
-        }
-        
-        isComplete = completed
+        areAllPhasesComplete = completed
+        return completed
     }
     
     
@@ -109,7 +105,12 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
                "\(#function) - Attempt to re-insert \(tag.rawValue)")
         
         completionDictionary[tag] = data
-        checkCompletion()
+        if checkCompletion() {
+            
+            // Send everything to CSVArchiver.
+            
+            
+        }
     }
     
     func data(for series: SeriesTag) -> Data? {
