@@ -15,7 +15,8 @@
 		1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
-		1F373C1A2953A7C000126C9C /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
+		1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
+		1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
@@ -24,7 +25,6 @@
 		1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
-		1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
@@ -723,7 +723,6 @@
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
-				1F88683129479FF700085EC7 /* PhaseStorage.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
 				1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */,
 				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
@@ -751,8 +750,9 @@
 				1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
+				1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
-				1F373C1A2953A7C000126C9C /* StateReversion.swift in Sources */,
+				1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
