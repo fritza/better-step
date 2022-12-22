@@ -85,8 +85,6 @@ final class CSVArchiver {
             .eraseToAnyPublisher()
             .sink { [self]
                 completions in
-                print(#function,
-                      "We're in business!")
                 for (tag , data) in completions {
                     write(bytes: data, forPhase: tag)
                 }

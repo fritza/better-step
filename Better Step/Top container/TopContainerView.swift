@@ -95,10 +95,7 @@ struct TopContainerView: View, MassDiscardable {
                         self.currentPhase = .walking
                     }
                     .onDisappear {
-                        #warning("Just dump it into an async Task")
-                        
-                        dummyPedometry()
-                            .proceed()
+                        dummyPedometry().proceed()
                     }
 
                     // MARK: - Walking

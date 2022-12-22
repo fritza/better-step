@@ -181,32 +181,5 @@ struct WalkingContainerView_Previews: PreviewProvider {
             }
         }
         .environmentObject(MotionManager())
-        //            .environmentObject(MotionManager(phase: .walk_2))
     }
 }
-
-/*      SHOW-ACTIVITY button
- Button {
- shouldShowActivity = true
- }
- label: { Label(
- "Tap to Export",
- systemImage: "square.and.arrow.up")
- }
- .buttonStyle(.bordered)
- */
-
-
-/*
-
- }   // NavigationView
- .sheet(isPresented: $shouldShowActivity, content: {
- ActivityUIController(
- //                    data: walkingData,
- data: "01234 N/A 56789".data(using: .utf8)!,
- text: "01234 N/A 56789"
- //textEquivalent)
- )
- }) // .sheet content
-
- */
