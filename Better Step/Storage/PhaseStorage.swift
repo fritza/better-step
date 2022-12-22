@@ -19,7 +19,6 @@
 
 import Foundation
 import SwiftUI
-import ZIPFoundation
 
 /// Maintain the data associated with completed phases of the workflow.
 ///
@@ -27,6 +26,7 @@ import ZIPFoundation
 public final class PhaseStorage: ObservableObject, MassDiscardable
 {
     var reversionHandler: AnyObject?
+    var archiver: CSVArchiver
     
     @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
     
@@ -59,17 +59,20 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     @Published public  var areAllPhasesComplete : Bool
     
-    public init() {
+    /// Initialize a `PhaseStorage` and a ``CSVArchiver`` for it to write into
+    /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
+    /// - precondition: ``CSVArchiver`` demads that `zipURL` should end in `.zip`.
+    public init(for zipURL: URL) {
         completionDictionary = [:]
+        archiver = CSVArchiver(into: zipURL)
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
-        //    self.subjectID = subject
     }
     
     func handleReversion(notice: Notification) {
-#warning("finish PhaseStorage.handleReversion(notice:)")
         areAllPhasesComplete = false
         completionDictionary = [:]
+        // TODO: Replace the archiver.
     }
     
     var keysToBeFinished: Set<CompDict.Key> {
@@ -105,10 +108,33 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
                "\(#function) - Attempt to re-insert \(tag.rawValue)")
         
         completionDictionary[tag] = data
+
+        // Send everything to CSVArchiver.
         if checkCompletion() {
+            for key in keysToBeFinished {
+                let tag = SeriesTag
+                archiver.add(completionDictionary[key],
+                             filename: csvFileName(for: key))
+            }
             
-            // Send everything to CSVArchiver.
+            
+            
+            
+            // Then make CSVArchiver emit the file.
+            
+            
+            
+            // And export it
+            // `UIActivityViewController` at first
+            // `URLSession` eventually
+            
+            
+            // At that point, `PhaseStorage`, if reused, should clean out its state.
+            // TODO: Is this all the sanitizing PhaseStorage needs?
             completionDictionary = [:]
+            
+        
+            
             
         }
     }

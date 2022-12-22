@@ -141,7 +141,10 @@ struct WalkingContainerView: View, ReportingPhase {
             // Delete what's at the output URL,
             // which should amount to everything,
             // .csv, .zip ...
-            CSVArchiver.clearSharedArchiver()
+//            CSVArchiver.clearSharedArchiver()
+            
+            // No need to propagate the deletion;
+            // It's a notification.
         }
         return catcher
     }
