@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Combine
+//import Combine
 import ZIPFoundation
 
 // TODO: Normalized walk accelerations
@@ -14,127 +14,69 @@ import ZIPFoundation
 //       be subtracted from all elements.
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
-final class CSVArchiver {
-    fileprivate static var _shared: CSVArchiver?
+final class CSVArchiver: MassDiscardable {
+    var reversionHandler: AnyObject?
 
-    // TODO: Reduce dependency on the shared
-    //       OR: have a singleton PhaseStorage, which owns the archiver anyway.
-
-        static var shared: CSVArchiver = {
-            if let _shared { return _shared }
-            _shared = try! CSVArchiver()
-            return _shared!
-        }()
     
-    static func clearSharedArchiver() {
-        let _ = try? FileManager.default
-            .deleteObjects(at: [ shared.destinationDirectoryURL ])
-        _shared = nil
-    }
-
-    /// Invariant: time of creation of the export set
-    let timestamp = Date().iso
+    var archiveURL: URL
     /// The output ZIP archive
-    let csvArchive: Archive
+    let archiver: Archive
 
-    var cancellables: Set<AnyCancellable> = []
+    //    var cancellables: Set<AnyCancellable> = []
     
-    /// Capture file and directory locations and initialize the archive.
-    /// - Parameter subject: The ID of the user
-    init() throws {
-        let backingStore = Data()
-        guard let _archive = Archive(
-            data: backingStore,
+    /// Construct an `Archive` for a `.zip` file at a given URL.
+    /// - Parameter destination: The fully-qualified `URL` for the output `.zip` file.
+    /// - precondition: The URL must refer to a file with the `.zip` extension.
+    init(into destination: URL) throws {
+        precondition(destination.pathExtension == "zip",
+                     "destination URL ...\(destination.lastPathComponent) lacks the “zip” extension.")
+        guard let archive = Archive(
             accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
-        self.csvArchive = _archive
-        
-        setUpCombine()
+        self.archiver = archive
+        self.archiveURL = destination
+        self.reversionHandler = installDiscardable()
     }
-
-    /// Empty the container and its filesystem storage.
+    
+    /// Reverting ``CSVArchiver``means deleting the output
+    /// file it created.
     ///
-    func reset() {
-        // This may be tricky.
-
-        // 1. Delete the working directory,
-        // which should get rid of the intermediates
-        // and the ZIP file.
-
-
-        // 2. Reset the archiver.
-        // Can we do this just by
+    /// Contrast with `deinit`, which _should not_ ever delete the `.zip` file.
+    func handleReversion(notice: Notification) {
+        do {
+            try FileManager.default
+                .deleteIfPresent(archiveURL)
+        }
+        catch {
+            #if DEBUG
+            print(#function, "at \(#fileID):\(#line): FM.deleteIfPresent threw",error)
+            print("\tShould be harmless")
+            #endif
+        }
     }
 
     // Step 1: Create the destination directory
 
-    // MARK: Working Directory
-
-    /// **URL** of the working directory that receives the `.csv` files and the `.zip` archive.
-    ///
-    /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
-    /// **BUT NOT HERE!**
-    lazy var containerDirectory: URL! = {
-        return PhaseStorage.shared.createContainerDirectory()
-    }()
+    // MARK: Notification
     
-    func setUpCombine() {
-        PhaseStorage.shared
-            .$completionDictionary
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-            .sink { [self]
-                completions in
-                for (tag , data) in completions {
-                    write(bytes: data, forPhase: tag)
-                }
-            }
-            .store(in: &cancellables)
-        // FIXME: This does not create the ZIP archive.
-        // TODO: There is no provision for cleaning up
-        //       after creating, archiving, and sending
-        //       the content.
-        // TODO: COMPLETION is the truth about first/later run
-    }
-    
-    
-    private func write(bytes data: Data, forPhase tag: SeriesTag) {
-        print("Series", tag.rawValue, " - ", data.count, "bytes")
-        
-        let fileName = PhaseStorage.shared.csvFileName(for: tag)
-        do {
-            let fileURL = PhaseStorage.shared.csvFileURL(for: tag)
-            try FileManager.default
-                .deleteAndCreate(at: fileURL,
-                                 contents: data)
-            // Here's where you start writing things.
-            
-            
-            // DO WE REALLY NEED NOTIFICATIONS of in/completion?
-            // Now that we're accepting all the files at once,
-            // there's nothing more to coordinate, right?
-        }
-        catch {
-            print("in csvArchiver.setUpCombine, can't save \(fileName).")
-            print(error)
-            preconditionFailure("Cannot proceed after FS error")
-        }
-    }
-    
-
-    /// Write a file containing CSV content data into the uniform holding file for one run of a walk challenge
-    /// - Parameters:
-    ///   - data: The data to write
-    ///   - tag: The `WalkingState` for the walk phase.
+    /// `userInfo` key, for future use, to describe success in a write.
     static let noticeTagWriteKey = "writeResult"
+    /// `userInfo` key for the `Error` responsible for failure to write.
     static let noticeTagWriteErrorKey = "tagWriteErrorKey"
 
     /// Post a success or failure notification
+    ///
+    /// Posts
+    ///  - `SeriesWriteSucceeded` if writing succeeded,
+    ///  - `SeriesWriteFailed` if writing failed.
+    ///
+    /// In a better world, _maybe_ this should be an `async` operation.
     /// - Parameters:
     ///   - phase: The `SeriesTag` for this write operation
-    ///   - result: The result of that operation:, `.failure` or `.success`.
+    ///   - result: The result of that operation:, `Result<[String:Any], Error>`
     ///
-    ///   In the failure case,
+    ///  - warning:  not used.
+    ///
     private func notify(phase: SeriesTag,
                         forResult result:
                         Result<[String: Any], Error>)
@@ -146,6 +88,7 @@ final class CSVArchiver {
         case .success(let dict):
             name = SeriesWriteSucceeded
             userInfo = dict
+            
         case .failure(let error):
             name = SeriesWriteFailed
             userInfo = [CSVArchiver.noticeTagWriteErrorKey: error]
@@ -155,23 +98,50 @@ final class CSVArchiver {
             .post(name: name, object: self,
                   userInfo: userInfo)
     }
+
+    @available(*, unavailable, message: "Not to be used.")
+    /// **URL** of the working directory that receives the `.csv` files and the `.zip` archive.
+    ///
+    /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
+    /// **BUT NOT HERE!**
+    lazy var containerDirectory: URL! = {
+        return PhaseStorage.shared.createContainerDirectory()
+    }()
+
 }
 
-#warning("Whoosh. Step through this.")
-
-extension CSVArchiver {    
+extension CSVArchiver {
+    // MARK: Core API
+    
+    /// Add data under an in-archive name to the archive.
+    /// - seealso: ``exportZIPFile()`
+    func add(_ data: Data, filename: String) throws {
+        try archiver.addEntry(
+            with: filename,
+            type: .file,
+            uncompressedSize: Int64(data.count)) {
+                // "provider"
+                // NO idea whether it's suppsed to be just the whole data.
+                (position: Int64, size: Int) -> Data in
+                return data
+            }
+    }
     /// Assemble and compress the file data and write it to a `.zip` file.
     ///
     /// Posts `ZIPCompletionNotice` with the URL of the product `.zip`.
+    /// - warning: This function totally neglects`` SeriesWriteSucceeded`, `SeriesWriteFailed` if w
+    ///
+    /// - seealso: ``add(_:filename:)``
+    ///
     func exportZIPFile() throws {
-        guard let content = csvArchive.data else {
+        guard let content = archiver.data else {
             throw AppPhaseErrors.cantGetArchiveData
         }
-        try content.write(to: zipFileURL)
-
+        try content.write(to: archiveURL)
+        
         // Notify the export of the `.zip` file
         let params: [ZIPProgressKeys : URL] = [
-            .fileURL :    zipFileURL
+            .fileURL :    archiveURL
         ]
         NotificationCenter.default
             .post(name: ZIPDataWriteCompletion,
@@ -179,28 +149,8 @@ extension CSVArchiver {
     }
 }
 
-// MARK: - Directory names
-extension CSVArchiver {
-    var directoryName: String {
-        PhaseStorage.shared.containerDirectoryName
-//        "\(SubjectID.id)_\(timestamp)"
-    }
 
-    /// Child directory of temporaties diectory, named uniquely for this package of `.csv` files.
-    fileprivate var destinationDirectoryURL: URL {
-        let temporaryPath = NSTemporaryDirectory()
-        let retval = URL(fileURLWithPath: temporaryPath, isDirectory: true)
-            .appendingPathComponent(directoryName,
-                                    isDirectory: true)
-        
-        assert(retval == PhaseStorage.shared.containerDirectoryURL)
-        
-        
-        return retval
-    }
-
-}
-
+#if false
 // MARK: File names
 extension CSVArchiver {
 
@@ -224,3 +174,4 @@ extension CSVArchiver {
     }
 
 }
+#endif

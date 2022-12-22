@@ -22,6 +22,7 @@ public enum AppPhaseErrors: Error {
     case uploadEmptyData(String)
     case cantInitializeZIPArchive
     case cantGetArchiveData
+    case cantInsertDataFile(fileName: String) 
     case subjectIDInvalid(String)
     case shortageOfDASIResponsesBy(Int)
 
