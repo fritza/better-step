@@ -108,7 +108,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         if checkCompletion() {
             
             // Send everything to CSVArchiver.
-            
+            completionDictionary = [:]
             
         }
     }
