@@ -27,7 +27,7 @@ enum UsabilityState: Int, CaseIterable {
 struct UsabilityContainer: View, ReportingPhase {
 // FIXME: The second, "specifics" SuccessValue isn't used.
 
-    typealias SuccessValue = (scores: String, specifics: String)
+    typealias SuccessValue = String
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     /// Return CSV value for reporting success.
@@ -50,11 +50,14 @@ struct UsabilityContainer: View, ReportingPhase {
         self.currentState = state
         notificationHandler = registerDataDeletion()
     }
+    
+    @State var multipleChoices: [Int] = []
+    @State var fullUsabilityCSV = ""
 
     var body: some View {
         VStack {
             switch currentState {
-                // MARK: Intro
+                // MARK: - Intro
             case .intro:
                 GenericInstructionView(
                     titleText: "Usability",
@@ -64,49 +67,58 @@ struct UsabilityContainer: View, ReportingPhase {
                     proceedEnabled: true) {
                         currentState = .questions
                     }
-
+                
+                // MARK: - Questions
             case .questions :
+                // resultValue is Result<[Int], Never>
                 UsabilityView(questionIndex: 0) { resultValue in
-                guard let array = try? resultValue.get() else {
-                    print("UsabilityView should not fail.")
-                    fatalError()
+                    guard let array = try? resultValue.get() else {
+                        print("UsabilityView should not fail.")
+                        fatalError()
+                    }
+                    
+                    /*
+                     tempCSV = array.csvLine
+                     if array.allSatisfy({ $0 != 0 }) {
+                     currentState = .closing
+                     }
+                     */
+                    multipleChoices = array
+                    currentState = .surveyForm
                 }
-                tempCSV = array.csvLine
-                if array.allSatisfy({ $0 != 0 }) {
+                
+                // MARK: - survey form
+            case .surveyForm:
+                WalkUsabilityForm {
+                    result in
+                    // result is Result<String, Never>
+                    let infoResult = try! result.get()
+                    
+                    let prefix = "\(SeriesTag.usability.rawValue),\(SubjectID.id),\(Date().ymd),"
+                    let choiceSection = multipleChoices.csvLine + ","
+                    
+                    fullUsabilityCSV = prefix + choiceSection + infoResult
                     currentState = .closing
                 }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-            }
-
-
-                // FIXME: Add a survey container.
-            case .surveyForm,
-                    .closing   :
+                
+                // MARK: - Closing
+            case .closing   :
                 // TODO: Remove UsabilityInterstitialView.
                 UsabilityInterstitialView(
                     titleText: "Completed",
                     bodyText: usabilityOutCopy,
                     systemImageName: "checkmark.circle",
-                    continueTitle: "Continue",
-                    completion: {
+                    continueTitle: "Continue") {
                         _ in
+                        // Incoming us just an ()
                         completion(
-                            .success(
-                                (scores: tempCSV,
-                                 specifics: "")
-                            )
+                            .success(fullUsabilityCSV)
                         )
-                    })
-            }
-        }  // VStack
+                        let data = fullUsabilityCSV.data(using: .utf8)
+                        PhaseStorage.shared.series(.usability, completedWith: data!)
+                    }
+            }       // switch?
+        }           // VStack
         .reversionAlert(on: $shouldDisplayReversionAlert)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -114,7 +126,7 @@ struct UsabilityContainer: View, ReportingPhase {
             }
         }   // toolbar
         .navigationBarBackButtonHidden(true)
-    }       // body
+}       // body
 
     // MARK: - Links to phase views
     private var responses = [Int](repeating: 0,

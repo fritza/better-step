@@ -92,10 +92,12 @@ struct UsabilityView: View, ReportingPhase {
                 Button {
                     responses[questionIndex] = visibleIndex
                     //                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
-                    completion(.success(responses))
                     if canIncrement {
                         questionIndex += 1
                         currentSelection = responses[questionIndex]
+                    }
+                    else {
+                        completion(.success(responses))
                     }
                 }
                 //                }

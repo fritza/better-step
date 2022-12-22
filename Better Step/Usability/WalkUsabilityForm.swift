@@ -14,7 +14,7 @@ import SwiftUI
 /// Its ``ReportingPhase`` result type is ``WalkInfoResult``.
 struct WalkUsabilityForm: View, ReportingPhase {
     @Namespace var lastFormSection
-    typealias SuccessValue = WalkInfoResult
+    typealias SuccessValue = String
     let completion: ClosureType
 
     @EnvironmentObject var walkingData: WalkInfoResult
@@ -104,6 +104,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
         }
     }
 
+    // MARK: - Where performed
     @ViewBuilder private var wherePerformedStack: some View {
         VStack(alignment: .leading) {
             Group {
@@ -121,6 +122,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
         }
     }
 
+    // MARK: - Length of course
     @ViewBuilder private var lengthOfCourseStack: some View {
         VStack(alignment: .leading) {
             Group {
@@ -148,6 +150,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
         }
     }
 
+    // MARK: - Linear or circuit
     @ViewBuilder private var backAndForthStack: some View {
         VStack(alignment: .leading) {
             Group {
@@ -180,7 +183,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        completion(.success(walkingData))
+                        completion(.success(walkingData.csvLine))
                     }
                 }
             }

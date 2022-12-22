@@ -21,15 +21,27 @@ enum EffortWalked: String, Hashable, CaseIterable {
     case veryHard = "Very Hard"
 }
 
-class WalkInfoResult: ObservableObject, CustomStringConvertible {
+class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertible {    
     @Published var `where`            : WhereWalked
     @Published var distance           : Int
     @Published var howWalked          : HowWalked
     @Published var lengthOfCourse     : Int?
     @Published var effort             : EffortWalked
     @Published var fearOfFalling      : Bool
-
-   init() {
+    
+    var csvLine: String {
+        let values = [`where`.rawValue,
+                      String(distance),
+                      howWalked.rawValue,
+                      String(lengthOfCourse ?? 0),
+                      effort.rawValue,
+                      fearOfFalling ? "Y" : "N"
+        ]
+        let retval = values.csvLine
+        return retval
+    }
+    
+    init() {
        self.`where`        = .atHome
        self.distance       = 100
        self.howWalked      = .straightLine
