@@ -68,7 +68,6 @@ struct TopContainerView: View, MassDiscardable {
     // TODO: Do I provide the NavigationView?
     var body: some View {
         NavigationView {
-#if true
             VStack {
                 switch self.currentPhase {
                     // MARK: - Onboarding
@@ -193,16 +192,7 @@ struct TopContainerView: View, MassDiscardable {
 
             }       // NavigationView modified
             .reversionAlert(on: $showReversionAlert)
-#else
-            VStack {
-                WalkUsabilityForm() { _ in }
-                // TODO: The callback should trigger marshalling
-                //       of the form data, which will be passed up for
-                //       phase results when both are received
-
-            }
             .environmentObject(WalkInfoResult())
-#endif
         } // end VStack
     }
 

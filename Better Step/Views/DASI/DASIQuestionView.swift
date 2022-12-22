@@ -49,6 +49,7 @@ struct DASIQuestionView: View, ReportingPhase {
         VStack {
             QuestionContentView(
                 questionIndex: pageNumber)
+            .multilineTextAlignment(.leading)
             .padding()
 
             Spacer()

@@ -141,7 +141,9 @@ final class MotionManager: ObservableObject, MassDiscardable {
         halt()
         Self.census = 0
         lastTimeStamp = -TimeInterval.infinity
-        _ = asyncBuffer.popAll()
+        Task {
+            await asyncBuffer.clear()
+        }
     }
 
     var accelerometryAvailable: Bool {

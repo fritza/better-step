@@ -35,7 +35,7 @@ protocol MassDiscardable {
     var reversionHandler: AnyObject? { get set }
     // Really? No get?
     
-    func handleReversion(notice: Notification) async
+    func handleReversion(notice: Notification)
 }
 
 extension MassDiscardable {

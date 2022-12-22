@@ -70,4 +70,8 @@ public actor IncomingAccelerometry {
         let content = buffer[..<number]
         return Array(content)
     }
+    
+    func clear() async {
+        buffer.removeAll()
+    }
 }
