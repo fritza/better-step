@@ -166,13 +166,9 @@ final class MotionManager: ObservableObject, MassDiscardable {
     }()
 
     func start() {
-#if DEBUG
-        print(#function, "Entry")
-#else
         assert(accelerometryAvailable && accelerometryActive)
         
         cmMotionManager.startAccelerometerUpdates(to: Self.opsQueue, withHandler: accelerometryHandler)
-#endif
         lifecycle = .running
     }
     
