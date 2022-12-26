@@ -30,27 +30,6 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     
     @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
     
-    static let shared: PhaseStorage = {
-        let defaults = UserDefaults.standard
-        //        let subjectID = SubjectID.id
-        assert(SubjectID.id != SubjectID.unSet,
-               "No subject ID set. Can't Happen.")
-        
-//        let isLaterRun = defaults
-//            .bool(forKey: ASKeys.completedFirstRun.rawValue)
-        // (.bool(forKey:) returns false if undefined.
-        
-        return PhaseStorage(
-            //            goal: isLaterRun ? .secondRun : .firstRun,
-            //            subject: SubjectID.id
-        )
-    }()
-    
-    //    public enum CompletionGoal {
-    //        case firstRun
-    //        case secondRun
-    //    }
-    
     typealias CompDict = [SeriesTag:Data]
     @Published private(set) var completionDictionary  : CompDict = [:]
     //    private var subjectID             : String
@@ -62,19 +41,21 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Initialize a `PhaseStorage` and a ``CSVArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
     /// - precondition: ``CSVArchiver`` demads that `zipURL` should end in `.zip`.
-    public init(for zipURL: URL) {
+    public init() {
         completionDictionary = [:]
-        archiver = CSVArchiver(into: zipURL)
+        archiver = try! CSVArchiver()
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
     }
     
+    /// ``MassDiscardable`` adoption
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
         completionDictionary = [:]
         // TODO: Replace the archiver.
     }
     
+    // MARK: Completion check
     var keysToBeFinished: Set<CompDict.Key> {
         completedFirstRun ?
         SeriesTag.neededForLaterRuns :
@@ -91,58 +72,56 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         return completed
     }
     
+    // MARK: Completion reports
     
-    public func series(_ tag: SeriesTag, completedWith data: Data) {
-        
-#if DEBUG
-        print(#function, tag.rawValue, "arrived,", data.count, "bytes.")
-#endif
-        
-        
+    /// Report to the ``PhaseStorage`` that a phase has completed with data for output.
+    ///
+    /// ``PhaseStorage`` retaine all plase-data pairs until all the phases needed for this session are complete. The results are then passed to ``CSVArchiver``.
+    /// - Parameters:
+    ///   - tag: The  ``SeriesTag`` for the completed phase.
+    ///   - data: The `Data` collected for that phase.
+    public func series(_ tag: SeriesTag, completedWith data: Data) throws {
+        // No report for a phase should come in that isn't part of this session.
         guard keysToBeFinished.contains(tag) else {
             assertionFailure("Strange key upon completion: \(tag.rawValue)")
             return
         }
         
+        // It's a smell if a phase is reported twice.
         assert(!completionDictionary.keys.contains(tag),
                "\(#function) - Attempt to re-insert \(tag.rawValue)")
         
+        // Add the datum for this tag.
         completionDictionary[tag] = data
-
-        // Send everything to CSVArchiver.
+        
+        // If all required tags are accounted for,
+        // send it all to CSVArchiver.
         if checkCompletion() {
-            for key in keysToBeFinished {
-                let tag = SeriesTag
-                archiver.add(completionDictionary[key],
-                             filename: csvFileName(for: key))
+            // Crete the container directory
+            try Self.createContainerDirectory()
+            // All keysToBeFinished have data.
+            for tag in keysToBeFinished {
+                try archiver.add(completionDictionary[tag]!,
+                                 filename: csvFileName(for: tag))
             }
             
+            do {
+                try archiver.exportZIPFile()
+            }
+            catch {
+                print("Wtiting the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
+            }
             
+            // TODO: Emit the archive (CSVArchiver)
+            // CSVArchiver emits all into a single ".zip" via
+            // - `UIActivityViewController` at first,
+            // - `URLSession` eventually
             
-            
-            // Then make CSVArchiver emit the file.
-            
-            
-            
-            // And export it
-            // `UIActivityViewController` at first
-            // `URLSession` eventually
-            
-            
-            // At that point, `PhaseStorage`, if reused, should clean out its state.
+            // No cache of the csv reports is kept.
             // TODO: Is this all the sanitizing PhaseStorage needs?
             completionDictionary = [:]
-            
-        
-            
-            
         }
     }
-    
-    func data(for series: SeriesTag) -> Data? {
-        completionDictionary[series]
-    }
-    
 }
 
 extension PhaseStorage {
@@ -168,40 +147,45 @@ extension PhaseStorage {
     ///
     /// No path other than the name for the directory
     /// - note: The date portion of the name is taken as a year-month-day rendering of the present moment. Strictly speaking, this is a race.
-    var containerDirectoryName: String {
+    static var containerDirectoryName: String {
         let dateRep = Date().ymd
         return "\(SubjectID.id)_\(dateRep)"
     }
     
     /// A `file:` URL for the container directory, concatenating the system  `/tmp` directory and the name of the container directory.
-    var containerDirectoryURL: URL {
+    static var containerDirectoryURL: URL {
         let tempDirPath = NSTemporaryDirectory()
         let tempDirURL = URL(fileURLWithPath: tempDirPath, isDirectory: true)
-            .appendingPathComponent(containerDirectoryName)
+            .appendingPathComponent(Self.containerDirectoryName)
         return tempDirURL
     }
     
     /// Create the container directory (holds the .zip and .csv files) _if it doesn't already exist._
     /// - bug: The test is for whether anything, directory _or file,_ already exists. This will be trouble once the app tries to insert files into it.
-    func createContainerDirectory() -> URL {
+    static func createContainerDirectory() throws {
         guard !FileManager.default
             .somethingExists(atURL: containerDirectoryURL).exists
         else {
-            return containerDirectoryURL
+            throw FileStorageErrors.directoryExistsAlready(containerDirectoryName)
         }
-        do {
-            try FileManager.default
-                .createDirectory(
-                    at: containerDirectoryURL,
-                    withIntermediateDirectories: true)
-        }
-        catch {
-            preconditionFailure(error.localizedDescription)
-        }
-        return containerDirectoryURL
+        try FileManager.default
+            .createDirectory(
+                at: containerDirectoryURL,
+                withIntermediateDirectories: true)
     }
-#warning("Whether to overwrite dir/file isn't considered")
     
+    static var zipOutputURL: URL {
+        let containerName = containerDirectoryURL
+            .lastPathComponent
+        let retval =
+        containerDirectoryURL
+            .appendingPathComponent(containerName)
+            .appendingPathExtension("zip")
+        return retval
+    }
+    
+#warning("Whether to overwrite dir/file isn't considered")
+        
     //    /// Generata the base (no trailing .csv) name for a data file, building up
     //    /// - Parameters:
     //    ///   - phase: The  phase from which the .csv is to be name
@@ -225,10 +209,14 @@ extension PhaseStorage {
     func csvFileURL(for tag: SeriesTag) -> URL {
         let baseName = csvFileBasename(phase: tag)
         let csvName = baseName + ".csv"
-        var destURL = containerDirectoryURL
+        var destURL = Self.containerDirectoryURL
         destURL
             .appendPathComponent(csvName)
         return destURL
     }
+    
+//    func zipFileURL() -> URL {
+//        return containerDirectory
+//    }
     
 }

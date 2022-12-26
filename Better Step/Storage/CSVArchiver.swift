@@ -27,14 +27,11 @@ final class CSVArchiver: MassDiscardable {
     /// Construct an `Archive` for a `.zip` file at a given URL.
     /// - Parameter destination: The fully-qualified `URL` for the output `.zip` file.
     /// - precondition: The URL must refer to a file with the `.zip` extension.
-    init(into destination: URL) throws {
-        precondition(destination.pathExtension == "zip",
-                     "destination URL ...\(destination.lastPathComponent) lacks the “zip” extension.")
-        guard let archive = Archive(
-            accessMode: .create)
+    init() throws {
+        guard let archive = Archive(accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
+        self.archiveURL = PhaseStorage.zipOutputURL
         self.archiver = archive
-        self.archiveURL = destination
         self.reversionHandler = installDiscardable()
     }
     
@@ -98,16 +95,6 @@ final class CSVArchiver: MassDiscardable {
             .post(name: name, object: self,
                   userInfo: userInfo)
     }
-
-    @available(*, unavailable, message: "Not to be used.")
-    /// **URL** of the working directory that receives the `.csv` files and the `.zip` archive.
-    ///
-    /// The directory is created by`createWorkingDirectory()` (`private` in this source file).
-    /// **BUT NOT HERE!**
-    lazy var containerDirectory: URL! = {
-        return PhaseStorage.shared.createContainerDirectory()
-    }()
-
 }
 
 extension CSVArchiver {
@@ -148,29 +135,3 @@ extension CSVArchiver {
                   object: self, userInfo: params)
     }
 }
-
-
-#if false
-// MARK: File names
-extension CSVArchiver {
-
-    /// target `.zip` file name
-    var archiveName: String {
-        "\(directoryName).zip"
-    }
-
-
-    /// Working directory + archive (`.zip`) name
-    var zipFileURL: URL {
-        containerDirectory
-            .appendingPathComponent(archiveName)
-    }
-
-    /// Name of the tagged `.csv` file
-    func csvFileName(phase: SeriesTag) -> String {
-        PhaseStorage.shared
-            .csvFileURL(for: phase)
-            .lastPathComponent
-    }
-}
-#endif

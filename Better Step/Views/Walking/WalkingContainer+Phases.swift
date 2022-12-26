@@ -93,7 +93,7 @@ extension WalkingContainerView {
                                     tag: ownPhase.seriesTag!
                                 )
 
-                            PhaseStorage.shared
+                           try! phaseStorage
                                 .series(ownPhase.seriesTag!, completedWith: resultData)
                         }
                         state = nextPhaseGood

@@ -27,7 +27,9 @@ struct TopContainerView: View, MassDiscardable {
     @State var reversionNoticeHandler: NSObjectProtocol!
     // TODO: Put up an alert when pedometry is not authorized.
     @State var currentPhase: TopPhases
-
+    
+    // TODO: Should this be an ObservedObject?
+    @StateObject var phaseStorage = PhaseStorage()
     
     // FIXME: Necessary
 
@@ -47,8 +49,7 @@ struct TopContainerView: View, MassDiscardable {
             let line = string.csvLine
             let strData = line.data(using: .utf8)!
             // FIXME: Why couldn't csvData work on [String]?
-            PhaseStorage.shared
-                .series(.sevenDayRecord, completedWith: strData)
+            try! phaseStorage.series(.sevenDayRecord, completedWith: strData)
             ASKeys.dateOfLast7DReport = Date()
         }
         return retval
@@ -147,7 +148,7 @@ struct TopContainerView: View, MassDiscardable {
                             let dasiResponse = try responseResult.get()
                             let csvd = dasiResponse.csvData
 
-                            PhaseStorage.shared
+                            try! phaseStorage
                                 .series(.dasi, completedWith: csvd)
                         }
                         catch {
@@ -175,7 +176,7 @@ struct TopContainerView: View, MassDiscardable {
 
                     // MARK: - no such phase
                 default:
-                    preconditionFailure("Should not be able to reach phase \(self.currentPhase.description ?? "N/A")")
+                    preconditionFailure("Should not be able to reach phase \(self.currentPhase.description)")
                 }   // Switch on currentPhase
             }       // VStack
             // MARK: - onAppear {}
@@ -191,6 +192,7 @@ struct TopContainerView: View, MassDiscardable {
             .reversionAlert(on: $showReversionAlert)
             .environmentObject(WalkInfoResult())
         } // end VStack
+        .environmentObject(phaseStorage)
     }
 
 }

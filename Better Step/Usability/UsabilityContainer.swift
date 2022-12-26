@@ -35,6 +35,9 @@ struct UsabilityContainer: View, ReportingPhase {
 
     /// Top-level-in-usability phase `intro`, `questions`, (`report`), `closing`
     @State var currentState: UsabilityState
+    
+    @EnvironmentObject var phaseStorage: PhaseStorage
+    
     /// Whether the "reversion" (back to beginning with no subject) dialog should be shown.
     ///
     /// See ``reversionAlert(on:)`` for the `ViewModifier`.
@@ -115,7 +118,7 @@ struct UsabilityContainer: View, ReportingPhase {
                             .success(fullUsabilityCSV)
                         )
                         let data = fullUsabilityCSV.data(using: .utf8)
-                        PhaseStorage.shared.series(.usability, completedWith: data!)
+                        try! phaseStorage.series(.usability, completedWith: data!)
                     }
             }       // switch?
         }           // VStack
