@@ -182,7 +182,7 @@ struct DigitalTimerView_Previews: PreviewProvider {
                 }
             }
                 .padding()
-                .environmentObject(MotionManager())
+//                .environmentObject(MotionManager())
         }
     }
 }
