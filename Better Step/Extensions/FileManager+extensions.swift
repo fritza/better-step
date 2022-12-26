@@ -11,6 +11,8 @@ public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
     case cantCreateFileTagged(SeriesTag)
+    case fileExistaAlready(String)
+    case directoryExistsAlready(String)
     case cantFindURL(String)
     case cantReadDictionaryAt(URL)
     case uploadEmptyData(String)

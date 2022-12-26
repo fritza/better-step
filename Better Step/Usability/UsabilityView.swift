@@ -136,6 +136,7 @@ struct UsabilityView: View, ReportingPhase {
             ratingsStack()
             Spacer()
         }
+        .multilineTextAlignment(.leading)
 //        .animation(.easeOut, value: questionIndex)
         .onDisappear() {
             completion(.success(
