@@ -150,6 +150,7 @@ extension CSVArchiver {
 }
 
 
+#if false
 // MARK: File names
 extension CSVArchiver {
 
@@ -165,13 +166,11 @@ extension CSVArchiver {
             .appendingPathComponent(archiveName)
     }
 
-#if false
     /// Name of the tagged `.csv` file
     func csvFileName(phase: SeriesTag) -> String {
         PhaseStorage.shared
             .csvFileURL(for: phase)
             .lastPathComponent
     }
-
-#endif
 }
+#endif
