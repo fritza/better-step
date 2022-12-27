@@ -25,12 +25,13 @@ extension WalkingContainerView {
                 InterstitalPageContainerView(listing: instructionContentList, selection: 1) {_ in
                     UIApplication.shared.isIdleTimerDisabled = true
                     // See the completion calls for the setting to false
-        #if DEBUG
+#if DEBUG
                     print("\(#function): \(#fileID):\(#line)", "Disabled the timer when completed from Interstitial 1")
-        #endif
-
+#endif
+                    
                     self.state = .countdown_1
-                }.padding()
+                }
+                .padding()
                     .navigationBarBackButtonHidden(true)
             }
             .hidden()

@@ -122,6 +122,20 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             completionDictionary = [:]
         }
     }
+    
+    static var zipDataExists: Bool {
+        FileManager.default
+            .fileExists(atURL: Self.zipOutputURL)
+    }
+    
+    static func zipContent() throws -> Data {
+        guard zipDataExists else {
+            // No file to be read? Bail.
+            throw FileStorageErrors.cantFindZIP(Self.zipOutputURL.lastPathComponent)
+        }
+        let data = try Data(contentsOf: Self.zipOutputURL)
+        return data
+    }
 }
 
 extension PhaseStorage {
@@ -154,10 +168,20 @@ extension PhaseStorage {
     
     /// A `file:` URL for the container directory, concatenating the system  `/tmp` directory and the name of the container directory.
     static var containerDirectoryURL: URL {
-        let tempDirPath = NSTemporaryDirectory()
-        let tempDirURL = URL(fileURLWithPath: tempDirPath, isDirectory: true)
-            .appendingPathComponent(Self.containerDirectoryName)
-        return tempDirURL
+        do {
+            let docsURL = try FileManager.default
+                .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            return docsURL
+                .appendingPathComponent(Self.containerDirectoryName)
+//
+//            let tempDirPath = NSTemporaryDirectory()
+//            let tempDirURL = URL(fileURLWithPath: tempDirPath, isDirectory: true)
+//                .appendingPathComponent(Self.containerDirectoryName)
+//            return tempDirURL
+        }
+        catch {
+            fatalError("\(#function) = ought to be able to get the user documents directory:\n\t\(error)")
+        }
     }
     
     /// Create the container directory (holds the .zip and .csv files) _if it doesn't already exist._

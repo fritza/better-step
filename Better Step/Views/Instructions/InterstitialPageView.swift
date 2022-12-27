@@ -45,7 +45,6 @@ struct InterstitialPageView: View, Identifiable {
                 .scaledToFit()
                 .foregroundColor(.accentColor)
                 .frame(height: 200)
-//                .symbolRenderingMode(.hierarchical)
             Spacer()
             Text(item.introBelow)
                 .font(.body)
@@ -54,6 +53,7 @@ struct InterstitialPageView: View, Identifiable {
 
             // MARK: The action button
             Button(item.proceedTitle, action: proceedCallback)
+            Spacer()
         }
         .padding()
         .navigationTitle(item.pageTitle)

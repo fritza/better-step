@@ -14,7 +14,7 @@ import ZIPFoundation
 //       be subtracted from all elements.
 
 /// Accumulate data (expected `.csv`) for export into a ZIP archive.
-final class CSVArchiver: MassDiscardable {
+public final class CSVArchiver: MassDiscardable {
     var reversionHandler: AnyObject?
 
     
@@ -27,7 +27,7 @@ final class CSVArchiver: MassDiscardable {
     /// Construct an `Archive` for a `.zip` file at a given URL.
     /// - Parameter destination: The fully-qualified `URL` for the output `.zip` file.
     /// - precondition: The URL must refer to a file with the `.zip` extension.
-    init() throws {
+   public init() throws {
         guard let archive = Archive(accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
         self.archiveURL = PhaseStorage.zipOutputURL
@@ -57,9 +57,9 @@ final class CSVArchiver: MassDiscardable {
     // MARK: Notification
     
     /// `userInfo` key, for future use, to describe success in a write.
-    static let noticeTagWriteKey = "writeResult"
+    public static let noticeTagWriteKey = "writeResult"
     /// `userInfo` key for the `Error` responsible for failure to write.
-    static let noticeTagWriteErrorKey = "tagWriteErrorKey"
+    public static let noticeTagWriteErrorKey = "tagWriteErrorKey"
 
     /// Post a success or failure notification
     ///
@@ -102,7 +102,7 @@ extension CSVArchiver {
     
     /// Add data under an in-archive name to the archive.
     /// - seealso: ``exportZIPFile()`
-    func add(_ data: Data, filename: String) throws {
+    public func add(_ data: Data, filename: String) throws {
         try archiver.addEntry(
             with: filename,
             type: .file,
@@ -120,10 +120,13 @@ extension CSVArchiver {
     ///
     /// - seealso: ``add(_:filename:)``
     ///
-    func exportZIPFile() throws {
+    public func exportZIPFile() throws {
         guard let content = archiver.data else {
             throw AppPhaseErrors.cantGetArchiveData
         }
+        
+        print("Archive at:", archiveURL)
+        
         try content.write(to: archiveURL)
         
         // Notify the export of the `.zip` file

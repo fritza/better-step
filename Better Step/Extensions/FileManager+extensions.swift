@@ -16,6 +16,7 @@ public enum FileStorageErrors: Error {
     case cantFindURL(String)
     case cantReadDictionaryAt(URL)
     case uploadEmptyData(String)
+    case cantFindZIP(String)
 }
 
 public enum AppPhaseErrors: Error {

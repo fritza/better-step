@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityKit
 
 // MARK: - Conclusion View
 /// A view that annpunces the successful completion of the workflow.
@@ -14,18 +15,41 @@ import SwiftUI
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
+    
+    @State var shouldShowActivity = false
+    @State var activityController: ActivityUIController!
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
     }
 
+    @State var showResetAlert = false
+
     var body: some View {
         VStack {
+            Spacer()
             Text("Congratulations, you're done.")
+            Spacer()
+            Text("Tap ") +
+            Text("Complete").fontWeight(.semibold).foregroundColor(.blue) +
+            Text(" to send a report.")
+            Spacer()
             Button("Complete") {
-                completion(.success(()))
+                shouldShowActivity = true
             }
-        }
+            .sheet(isPresented: $shouldShowActivity,
+                   onDismiss: {
+                self.completion(.success(()))
+            }, content: {
+                ActivityUIController(
+                    data: try! PhaseStorage.zipContent(),
+                    text: PhaseStorage.zipOutputURL.lastPathComponent)
+                .presentationDetents([.medium])
+            })
+            Spacer()
+        }.font(.title2)
+            .reversionAlert(on: $showResetAlert)
+            .navigationTitle("Completed")
     }
 }
 
@@ -113,11 +137,12 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                         shouldAlertDisclaimer = true
                     }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReversionButton(toBeSet: $showAlert)
-                }
-            }
+            .reversionAlert(on: $showAlert)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    ReversionButton(toBeSet: $showAlert)
+//                }
+//            }
             .navigationBarTitle("Recovery")
         }
         .alert("Not complete", isPresented: $shouldAlertDisclaimer, actions: {},
@@ -133,5 +158,16 @@ struct FailureView_Previews: PreviewProvider {
             FailureView(failing: .walking) {
                 _ in
             }
+    }
+}
+
+struct ConclusionView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        NavigationView {
+            ConclusionView {
+                _ in
+            }
+        }
     }
 }

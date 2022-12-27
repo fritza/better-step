@@ -166,7 +166,8 @@ final class MotionManager: ObservableObject, MassDiscardable {
     }()
 
     func start() {
-        assert(accelerometryAvailable && accelerometryActive)
+        // TODO: Fail gracefully on incapable device
+//        assert(accelerometryAvailable && accelerometryActive)
         
         cmMotionManager.startAccelerometerUpdates(to: Self.opsQueue, withHandler: accelerometryHandler)
         lifecycle = .running
