@@ -46,9 +46,7 @@ public enum UploadServerCreds {
 /// Credentials and remotes are drawn from ``UploadServerCreds``
 
 public class ResultsUploader // : Hashable
-{
-    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun = false
-    
+{    
     /*
      Let’s talk about object lifetime.
 
@@ -133,7 +131,7 @@ public class ResultsUploader // : Hashable
         do {
             try FileManager.default
                 .deleteIfPresent(dataURL)
-            completedFirstRun = true
+            ASKeys.isFirstRunComplete = true
             sendUploadNotice(name: UploadCompleteNotification,
                              server: UploadServerCreds.uploadString)
         }

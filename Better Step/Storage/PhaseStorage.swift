@@ -27,9 +27,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
 {
     var reversionHandler: AnyObject?
     var archiver: CSVArchiver
-    
-    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
-    
+        
     typealias CompDict = [SeriesTag:Data]
     @Published private(set) var completionDictionary  : CompDict = [:]
     //    private var subjectID             : String
@@ -57,7 +55,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     
     // MARK: Completion check
     var keysToBeFinished: Set<CompDict.Key> {
-        completedFirstRun ?
+        ASKeys.isFirstRunComplete ?
         SeriesTag.neededForLaterRuns :
         SeriesTag.neededForFirstRun
     }
@@ -107,6 +105,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             
             do {
                 try archiver.exportZIPFile()
+                ASKeys.isFirstRunComplete = true
             }
             catch {
                 print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
@@ -129,11 +128,12 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     }
     
     static func zipContent() throws -> Data {
+        let zoURL = Self.zipOutputURL
         guard zipDataExists else {
             // No file to be read? Bail.
-            throw FileStorageErrors.cantFindZIP(Self.zipOutputURL.lastPathComponent)
+            throw FileStorageErrors.cantFindZIP(zoURL.lastPathComponent)
         }
-        let data = try Data(contentsOf: Self.zipOutputURL)
+        let data = try Data(contentsOf: zoURL)
         return data
     }
 }
@@ -188,14 +188,21 @@ extension PhaseStorage {
     /// Create the container directory (holds the .zip and .csv files) _if it doesn't already exist._
     /// - bug: The test is for whether anything, directory _or file,_ already exists. This will be trouble once the app tries to insert files into it.
     static func createContainerDirectory() throws {
-        guard !FileManager.default
-            .somethingExists(atURL: containerDirectoryURL).exists
-        else {
-            throw FileStorageErrors.directoryExistsAlready(containerDirectoryName)
+        // fm for convenience; containerURL to avoid
+        // re-evaluation.
+        let fm = FileManager.default
+        let containerURL = containerDirectoryURL
+        
+        if fm.somethingExists(atURL: containerURL).exists
+        {
+            // TODO: Does this ever throw?
+            //       If so, how to handle it?
+            _ = try? fm
+                .removeItem(at: containerURL)
         }
-        try FileManager.default
+        try fm
             .createDirectory(
-                at: containerDirectoryURL,
+                at: containerURL,
                 withIntermediateDirectories: true)
     }
     
@@ -208,9 +215,7 @@ extension PhaseStorage {
             .appendingPathExtension("zip")
         return retval
     }
-    
-#warning("Whether to overwrite dir/file isn't considered")
-        
+            
     //    /// Generata the base (no trailing .csv) name for a data file, building up
     //    /// - Parameters:
     //    ///   - phase: The  phase from which the .csv is to be name

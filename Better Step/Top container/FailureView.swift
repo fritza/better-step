@@ -31,7 +31,7 @@ struct ConclusionView: View, ReportingPhase {
             Text("Congratulations, you're done.")
             Spacer()
             Text("Tap ") +
-            Text("Complete").fontWeight(.semibold).foregroundColor(.blue) +
+            Text("Subnmit").fontWeight(.semibold).foregroundColor(.blue) +
             Text(" to send a report.")
             Spacer()
             Button("Submit") {
@@ -41,10 +41,12 @@ struct ConclusionView: View, ReportingPhase {
                    onDismiss: {
                 self.completion(.success(()))
             }, content: {
-                ActivityUIController(
-                    data: try! PhaseStorage.zipContent(),
-                    text: PhaseStorage.zipOutputURL.lastPathComponent)
-                .presentationDetents([.medium])
+                ActivityUIController(url: PhaseStorage.zipOutputURL)
+                    .presentationDetents([.medium])
+                
+                // FIXME:
+                #warning("Repeating on the same calendar day overwrites the outpput directory")
+                
             })
             Spacer()
         }.font(.title2)

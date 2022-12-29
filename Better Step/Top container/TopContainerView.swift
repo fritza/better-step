@@ -17,7 +17,6 @@ import Combine
 ///
 struct TopContainerView: View, MassDiscardable {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
-    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
 //    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
 //    @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
 //    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false

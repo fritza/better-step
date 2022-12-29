@@ -21,10 +21,7 @@ import SwiftUI
  
  - `WalkingState` is an example of naming sub-tasks within a phase. `WalkingState` includes `countdown_1`, `walk_1`, `interstitial_2`, and so on.  `TopPhases`, which `TopContainerView` uses to name the top-level sequence of phases within the app  is a special case.
  */
-struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
-
-    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
-    
+struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {    
     // MARK: AppStorage
 
     /// The last-ciompleted phase for state restoration. **Belongs at top.**
@@ -121,24 +118,26 @@ extension TopPhases {
     ///
     /// "No suuccessor" is a sensible response for `conclusion` and `failed`.
     var followingPhase: TopPhases {
+        
+        
         switch self {
         
         case .entry                 :
-            let subjectIDSet = (SubjectID.id != SubjectID.unSet)
-            return subjectIDSet ? .greeting : .onboarding
-        
-        case .greeting, .onboarding : return .walking
+//            let subjectIDSet = (SubjectID.id != SubjectID.unSet)
+//            return subjectIDSet ? .greeting : .onboarding
+            return ASKeys.isFirstRunComplete ? .greeting : .onboarding
+
+        case .greeting, .onboarding: return .walking
         
         case .walking              :
-            return completedFirstRun ?
+            return ASKeys.isFirstRunComplete ?
                 .conclusion : .dasi
         
         case .dasi                 : return .usability
         
-        case .usability            :
-            return .conclusion
+        case .usability            : return .conclusion
             // conclusion and failed don't have a next move.
-        default                     : return self
+        default                    : return self
         }
     }
 }

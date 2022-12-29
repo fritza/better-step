@@ -11,7 +11,7 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    @AppStorage(ASKeys.completedFirstRun.rawValue) var completedFirstRun: Bool = false
+//    @AppStorage(ASKeys.unsafeCompletedFirstRun.rawValue) var completedFirstRun: Bool = false
     
 //    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool = false
 //    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool = false

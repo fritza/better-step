@@ -11,7 +11,9 @@ import Foundation
 enum ASKeys: String {
     
     // If false, present the surveys.
-    case completedFirstRun
+    // "Unsafe" because all clients should use ASKeys.isFirstRunComplete instead.
+    // isFirstRunComplete is a wrapper on unsafeCompletedFirstRun storage
+    case unsafeCompletedFirstRun
     /// The last known subject ID
     case subjectID
     
@@ -44,7 +46,7 @@ enum ASKeys: String {
         let ud = UserDefaults.standard
 
         let boolKeys: [ASKeys] = [
-            .completedFirstRun,
+            .unsafeCompletedFirstRun,
         ]
         for key in boolKeys {
             ud.setValue(false, forKey: key.rawValue)
@@ -76,16 +78,16 @@ enum ASKeys: String {
     static var isFirstRunComplete: Bool {
         get {
             UserDefaults.standard
-                .bool(forKey: ASKeys.completedFirstRun.rawValue)
+                .bool(forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
         }
         set {
             UserDefaults.standard
-                .setValue(newValue, forKey: ASKeys.completedFirstRun.rawValue)
+                .setValue(newValue, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
         }
     }
     static func spoilLast7DReport() {
         UserDefaults.standard
-            .setValue(0, forKey: ASKeys.completedFirstRun.rawValue)
+            .setValue(0, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
     }
     
     static var dateOfLast7DReport: Date {
