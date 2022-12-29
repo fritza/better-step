@@ -23,6 +23,7 @@ struct QLimits {
 
 // TODO: remove the slide-from-leading animation
 //       or make it conistent with the DASI animation
+//       (Turns out this is a DASI note, make it consistent with earlier behavior.
 
 // TODO: Anchor the button stack from the bottom
 //       Instead of having it animate up and down

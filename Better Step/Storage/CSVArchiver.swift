@@ -17,8 +17,17 @@ import ZIPFoundation
 public final class CSVArchiver: MassDiscardable {
     var reversionHandler: AnyObject?
 
-    
-    var archiveURL: URL
+    lazy var archiveURL: URL = {
+        // Just setting the archive URL
+        // upon init runs the danger that
+        // SubjectID.id is unset (""). making
+        // all write operations to filenames that
+        // lack the subject ID.
+        // FIXME: Extremely bad idea to hope
+        //        for a complete SubjectID if you
+        //        wait until first use.
+        return PhaseStorage.zipOutputURL
+    }()
     /// The output ZIP archive
     let archiver: Archive
 
@@ -30,7 +39,7 @@ public final class CSVArchiver: MassDiscardable {
    public init() throws {
         guard let archive = Archive(accessMode: .create)
         else { throw AppPhaseErrors.cantInitializeZIPArchive }
-        self.archiveURL = PhaseStorage.zipOutputURL
+//        self.archiveURL = PhaseStorage.zipOutputURL
         self.archiver = archive
         self.reversionHandler = installDiscardable()
     }

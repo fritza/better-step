@@ -9,6 +9,11 @@ import SwiftUI
 import Combine
 
 
+// TODO: remove the slide-from-leading animation
+//       or make it conistent with the Other animation
+//       (Correctly or not this was attached to Usability container.)
+
+
 enum DASIState {
     case landing, question, completed, NONE
 }
