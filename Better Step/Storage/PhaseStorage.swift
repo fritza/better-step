@@ -109,7 +109,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
                 try archiver.exportZIPFile()
             }
             catch {
-                print("Wtiting the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
+                print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
             }
             
             // TODO: Emit the archive (CSVArchiver)
@@ -163,6 +163,7 @@ extension PhaseStorage {
     /// - note: The date portion of the name is taken as a year-month-day rendering of the present moment. Strictly speaking, this is a race.
     static var containerDirectoryName: String {
         let dateRep = Date().ymd
+        assert(SubjectID.id != SubjectID.unSet)
         return "\(SubjectID.id)_\(dateRep)"
     }
     

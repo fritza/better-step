@@ -1,37 +1,54 @@
 import SwiftUI
 //import Better_Step
-import ZIPFoundation
-
-
-let tag = SeriesTag.dasi
-print(tag)
-
-//let oneTag = SeriesTag.usability
-
-//let bundleURL = Bundle.main.bundleURL
-//print(bundleURL.path)
-//
-////FileManager.default.whatsThere(at: bundleURL)
-//let exist = FileManager.default
-////    .fileExists(atPath: bundleURL.path)
-//    .fileExists(atURL: bundleURL)
-//print(exist)
-
-
-
-//
-//do {
-//    print("Doing the ZA!")
-//}
-//catch {
-//    print("Creating CSVArchiver failed:", error)
-//}
+//import ZIPFoundation
 
 /*
- Found this candidate (/Users/fritza/Personal-Projects/bstep-isolation/better-step/Better Step/Extensions/FileManager+extensions.swift)
- */
+struct TField: View {
+    @Binding var string: String
+    
+    init(_ str: Binding<String>) {
+        _string = str
+    }
+    
+    var body: some View {
+        VStack {
+            Text("Content = \(string)")
+            Text("For rent")
+        }
+    }
+}
 
 
-/*
- Found this candidate (/Users/fritza/Personal-Projects/bstep-isolation/better-step/Playgrounds/ZIPGround.playground/Sources/FileManager+extensions.swift)
- */
+struct StringShower: View {
+    @State var result: String
+    
+    var body: some View {
+        VStack {
+//            Text("Result = \(result)")
+            Divider()
+            TField($result)
+        }
+    }
+}
+*/
+struct BoneSimple: View {
+    @State var editable: String = "S"
+    var body: some View {
+        VStack {
+            Text(editable)
+            Text("For rent. Again.")
+        }
+    }
+}
+
+//let theView = StringShower(result: "initial")
+//    .frame(width: 340, height: 340)
+
+let theView = BoneSimple(editable: "BoneString")
+    .frame(width: 340, height: 340)
+
+
+import PlaygroundSupport
+PlaygroundPage.current.needsIndefiniteExecution = true
+
+PlaygroundPage.current.setLiveView(theView)

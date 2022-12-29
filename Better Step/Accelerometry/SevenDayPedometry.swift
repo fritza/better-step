@@ -42,6 +42,7 @@ final class Pedometry: ReportingPhase {
         let records = fileContent.components(separatedBy: "\n").dropLast()
         // FIXME: Remove empty string at end.
         let tagged = records.map { tagline in
+            assert(SubjectID.id != SubjectID.unSet)
             let expanded =  "\(SeriesTag.sevenDayRecord.rawValue),\(SubjectID.id)," + tagline
             return expanded
         }

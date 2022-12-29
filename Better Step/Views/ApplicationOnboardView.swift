@@ -77,7 +77,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
         }
 
     private func propagateSuccess() {
-        SubjectID.id = targetString
+//        SubjectID.id = targetString
         completion(.success(targetString))
     }
 
@@ -164,7 +164,7 @@ struct OnboardView_Previews: PreviewProvider {
                 .frame(width: .infinity)//, height: 300)
                 .padding()
 
-//                Text("value is \(edits.editedText)")
+                Text("value is '\(edits.editedText)'")
             }
         }
     }

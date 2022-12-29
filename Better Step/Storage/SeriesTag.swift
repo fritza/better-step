@@ -45,7 +45,8 @@ public enum SeriesTag: String, Hashable {
 
     /// The base name for the `.csv` records file from the subject ID, date, and this phase's prefix code.
     public func dataFileBasename(date: Date = Date()) -> String {
-        "\(SubjectID.id)_\(date.ymd)_\(self.rawValue)"
+        assert(SubjectID.id != SubjectID.unSet)
+        return "\(SubjectID.id)_\(date.ymd)_\(self.rawValue)"
     }
 
     /// The walk-task sequence code that produces the data for this series.

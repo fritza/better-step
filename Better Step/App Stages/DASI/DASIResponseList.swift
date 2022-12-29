@@ -178,6 +178,7 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
         precondition(completedAnswers.count == answers.count,
         "Got here with missing answers")
         let arrayOfAnswers = answers.map(\.csvLine)
+        assert(SubjectID.id != SubjectID.unSet)
         return "\(SeriesTag.dasi.rawValue),\(SubjectID.id)," + arrayOfAnswers.csvLine
 
 //        let okayResponseValues: Set<AnswerState> = [.no, .yes]

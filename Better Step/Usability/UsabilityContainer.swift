@@ -94,6 +94,9 @@ struct UsabilityContainer: View, ReportingPhase {
             case .surveyForm:
                 WalkUsabilityForm {
                     result in
+                    
+                    assert(SubjectID.id != SubjectID.unSet)
+                    
                     // result is Result<String, Never>
                     let infoResult = try! result.get()
                     
@@ -135,6 +138,8 @@ struct UsabilityContainer: View, ReportingPhase {
     private var responses = [Int](repeating: 0,
                                   count: UsabilityQuestion.count)
     public var csvLine: String {
+        assert(SubjectID.id != SubjectID.unSet)
+
         return "\(SeriesTag.usability.rawValue),\(SubjectID.id),\(responses.csvLine)"
     }
 }
