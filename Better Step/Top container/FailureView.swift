@@ -34,7 +34,7 @@ struct ConclusionView: View, ReportingPhase {
             Text("Complete").fontWeight(.semibold).foregroundColor(.blue) +
             Text(" to send a report.")
             Spacer()
-            Button("Complete") {
+            Button("Submit") {
                 shouldShowActivity = true
             }
             .sheet(isPresented: $shouldShowActivity,

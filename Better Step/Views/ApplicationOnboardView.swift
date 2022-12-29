@@ -77,7 +77,10 @@ struct ApplicationOnboardView: View, ReportingPhase {
         }
 
     private func propagateSuccess() {
-//        SubjectID.id = targetString
+        // Propagate the result string (from onSubmit or Submit button)
+        // downstream to OnboardContainerView,
+        // which propagates to TopContainerView,
+        // which sets SubjectID.id.
         completion(.success(targetString))
     }
 

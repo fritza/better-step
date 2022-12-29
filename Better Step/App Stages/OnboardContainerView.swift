@@ -52,11 +52,15 @@ You’ll be repeating the timed walks you did last time. There will be no need t
 
     var body: some View {
 //        NavigationView {
-            ApplicationOnboardView(string: $workingString) { result in
+            ApplicationOnboardView(string: $workingString) {
+                string in
                 // Success result is a String with the proposed subject ID.
                 // The received ID.
 
-                if let finished = try? result.get() {
+                if let finished = try? string.get() {
+                    // Propagate Onboerd View's (upstream)
+                    // result to TopContainerView (downstream)
+                    // which will set SubjectID.id
                     completion(.success(finished))
                 }
                 // FIXME: what happens upon failure?
@@ -73,8 +77,12 @@ You’ll be repeating the timed walks you did last time. There will be no need t
 
 struct OnboardContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardContainerView() {
-            _ in print("nothing to do")
+        VStack {
+            Text("Subject ID: '\(SubjectID.id)'")
+                .font(.caption).foregroundColor(.red)
+            OnboardContainerView() {
+                _ in print("nothing to do")
+            }
         }
     }
 }

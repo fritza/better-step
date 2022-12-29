@@ -23,34 +23,16 @@ struct TaggedField: View {
         return stringInProgress.trimmed?.isAlphanumeric ?? false
     }
 
-    init(string: Binding<String>
-//         , callback: @escaping ClosureType)
-    )
-    {
-//        self.subject = subject
+    init(string: Binding<String>) {
         self._stringInProgress = string
-//        self.completion = callback
     }
 
     var body: some View {
         VStack {
             ZStack(alignment: .trailing) {
-                // Upon <return>, the enclosing class
-                // will get .onSubmit, and should get its
-                // answer string through the "string" binding.
-
-                // The enclosing class is expected to have a
-                // submit button as well. Again, use the bound
-                // "string".
-
-                // Both handlers must report the final value up
-                // the callback chain.
-
-                // JUST DECIDE: The Onboard Container should set SubjectID
                 TextField("IGNORED 1",
                           text: $stringInProgress,
-                          prompt: Text("reporting address"))
-                    .keyboardType(.emailAddress)
+                          prompt: Text("Your Subject ID"))
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.asciiCapable)
                     .autocorrectionDisabled()
@@ -77,12 +59,16 @@ fileprivate final class HoldsAString: ObservableObject {
 }
 
 struct TaggedField_Previews: PreviewProvider {
-    fileprivate static let holder = HoldsAString(subject: "Thursday")
-    @State static var content = "Erewhon"
+//    fileprivate static let holder = HoldsAString(subject: "Thursday")
+//    @State static var content = "Erewhon"
+    @StateObject fileprivate static var holder = HoldsAString(subject: "Saturday")
     static var previews: some View {
         NavigationView {
-            TaggedField(string: $content)
-            .frame(width: 300, height: 48)
+            VStack {
+                TaggedField(string: holder.$someSubjectID)
+                    .frame(width: 300, height: 48)
+                Text("current: '\(holder.someSubjectID)'")
+            }
         }
     }
 }

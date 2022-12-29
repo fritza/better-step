@@ -21,6 +21,17 @@ struct QLimits {
     static let indexRange = (startIndex ..< endIndex)
 }
 
+// TODO: remove the slide-from-leading animation
+//       or make it conistent with the DASI animation
+
+// TODO: Anchor the button stack from the bottom
+//       Instead of having it animate up and down
+//       with the height of the question text.
+//
+// TODO: Keep the content of the stack from animating
+//       (special case of previous.
+
+
 /// The core of the usability-survey stack. Present the text of a question and collect the user's response via 7 buttons on a scale.
 ///
 /// Clients provide a question ID and a binding to the response. Responses are also published via the closure the client provides.

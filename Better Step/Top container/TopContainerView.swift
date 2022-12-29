@@ -78,6 +78,8 @@ struct TopContainerView: View, MassDiscardable {
                     OnboardContainerView {
                         result in
                         do {
+                            // Absorb OnboardContainerView's (upstream)
+                            // SET SubjectID.id (Terminal).
                             SubjectID.id = try result.get()
                             self.currentPhase = self.currentPhase.followingPhase
                             latestPhase = TopPhases.onboarding.rawValue
