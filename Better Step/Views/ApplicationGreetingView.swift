@@ -40,6 +40,7 @@ Tap “Continue” to proceed.
                         ()
                     )
                 )})
+        .padding()
     }
 }
 

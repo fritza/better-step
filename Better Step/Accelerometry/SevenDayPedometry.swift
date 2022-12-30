@@ -6,167 +6,182 @@
 //
 
 import Foundation
-import CoreMotion
+import HealthKit
+import Algorithms
 
-// define "last seven days" as date range from midnight ending yesterday, to midnight seven days before.
-//
-// The report will need dates, not intervals.
-// (CERTAINLY Z to account for DST, but one at a time.)
-//
-// The .csv file should have one record per day
-//      each record has SeriesTag, subject ID,
-//      (empty) interval, date, count.
-//
+// MARK: - StepsOnDate
+/// Aggregation of a `Date` and a step count.
+///
+/// `StepsOnDate` sorts ascending by date.
+struct StepsOnDate: CSVRepresentable, Comparable
+{
+    // MARK: Properties
+    let steps: Int
+    let date : Date
 
-/*
- Now, wasn't I able to collect thousands of records from elsewhere in Core Motion?
- */
-
-
-final class Pedometry: ReportingPhase {
-    typealias SuccessValue = [String]
-    var completion: ClosureType
-    init(_ closure: @escaping ClosureType) {
-        completion = closure
+    // MARK: CSVRepresentable
+    var csvLine: String {
+        // TODO: Why doesn't the [CSVRepresentable] -> csvLine work here?
+        
+        // SeriesTag.sevenDayRecord
+        let components: [String] = [
+            SeriesTag.sevenDayRecord.rawValue,
+            SubjectID.id,
+            date.ymd,
+            String(steps)
+            ]
+        return components.joined(separator: ",")
     }
-
-    func proceed() {
-        let mb = Bundle.main
-        guard let sampleURL =
-                mb.url(forResource: "SevenDaysMockup", withExtension: "csv")
-        else {
-            fatalError("Could not find SevenDaysMockup.csv")
-        }
-#warning("No exercise or name on the records or the file name.")
-        let fileContent = try! String(contentsOf: sampleURL)
-        let records = fileContent.components(separatedBy: "\n").dropLast()
-        // FIXME: Remove empty string at end.
-        let tagged = records.map { tagline in
-            assert(SubjectID.id != SubjectID.unSet)
-            let expanded =  "\(SeriesTag.sevenDayRecord.rawValue),\(SubjectID.id)," + tagline
-            return expanded
-        }
-        
-        
-        
-        let result: ResultValue = .success(tagged)
-        completion(result)
-    }
-
-    let calendar = Calendar(identifier: .gregorian)
-    func dayRange() -> [String] {
-        return (0...6).map {
-            days in
-            return calendar.date(byAdding: .day, value: -days, to: Date())!
-        }
-        .map(\.ymd)
+    
+    // MARK: Comparable
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.date < rhs.date
     }
 }
-/*
-#else
-final class Pedometry: ReportingPhase {
-    typealias SuccessValue = CMPedometerData
 
-    /// The shared pedometry service, or `nil` if none is available.
-    static let cmPedometer: CMPedometer? =
-    {
-        // TODO: Put up an alert when pedometry is not authorized.
-        guard CMPedometer.isStepCountingAvailable(),
-        CMPedometer.authorizationStatus() == .authorized else
-        { return nil }
-        return CMPedometer()
-    }()
-
-    static let calendar = Locale.current.calendar
-
-
-    // FIXME: Unresolved problem of n-day history
-    static let dayCount = 7
-    // To-wit: Do we submit this set if the previous isn't stale yet? And do we have since-last, or the whole 7 days again.
-    // Also bear in mind that when you ask CM back to "7 days ago" it's subject to a 7-day cutoff (I understand this to be if it's noon today, then the oldest and the current daily records will be truncated by half.
-
-
+// MARK: - PedometryFromHealthKit
+/// Collects the previous _n_ (atw 7) days' step counts, reduces them to `Data`, and returns that through a completion closure.
+///
+/// The list of step counts are for the sum of a day, midnight-to-midnight, ending with the midnight that commences the current day.
+final class PedometryFromHealthKit: ReportingPhase {
+    // MARK: ReportingPhase
+    typealias SuccessValue = Data
     let completion: ClosureType
-    #warning("")
-
-//    {
-//        // TODO: Why a computed property?
-//
-//        let rightNow = Date()
-//        let differencs = DateComponents(day: Self.dayCount)
-//        let lastMidnight = Self.calendar.startOfDay(for: rightNow)
-//
-//        guard let sevenDaysBefore = Self.calendar.date(
-//            byAdding: .day, value: -7, to: lastMidnight) else {
-//            fatalError("Can't calculate ~7 days before last midnight")
-//        }
-//    }
-
-    init?(_ closure: @escaping ClosureType) {
-        guard
-            Self.cmPedometer != nil,
-            CMPedometer.authorizationStatus() == .authorized
-        else { return nil }
-        self.completion = closure
+    
+    // MARK: Statics
+    static let gregorian = Calendar(identifier: .gregorian)
+    static let store = HKHealthStore()
+    static let hkStepsType = HKSampleType.quantityType(forIdentifier: .stepCount)!
+    
+    static func securePermission(completed: @escaping (Result<Bool, Error>) -> Void) {
+        let perms = Set([
+            HKObjectType.quantityType(forIdentifier: .stepCount)!
+        ])
+        store
+            .requestAuthorization(toShare: perms, read: perms) { approved, error in
+                if let error {
+                    print("\(#function):\(#line): auth error =", error)
+                    completed(Result.failure(error))
+                    return
+                }
+                
+                if approved {
+                    print("\(#function):\(#line):", approved ? "approved" : "refused")
+                    completed(Result.success(approved))
+                    return
+                }
+            }
+        // FIXME: getRequestStatusForAuthrization
     }
-
-    func dateSpan(completion: @escaping PedometerCallback) {
-        // Return some kind of begin/end interval by calendar date
-        // Return it at an interval.
-        guard let pedometer = Self.cmPedometer else {
-            fatalError("Attempt to read the pedometer when not available.")
+    
+    // MARK: Properties
+    /// The expected number of days. ``PedometryBuffer``’s completion closure reports the results afther this many have been retrieved.
+    let dayCount: Int
+    
+    private lazy var buffer: PedometryBuffer! = {
+        let pBuffer = PedometryBuffer(capacity: 7) {
+            data in
+            let success = try! data.get()
+            self.completion(ResultValue.success(success))
         }
-
-        let rightNow = Date()
-        let differencs = DateComponents(day: Self.dayCount)
-        let lastMidnight = Self.calendar.startOfDay(for: rightNow)
-
-        guard let sevenDaysBefore = Self.calendar.date(
-            byAdding: .day, value: -7, to: lastMidnight) else {
-            fatalError("Can't calculate ~7 days before last midnight")
-        }
-
-        // SEE BELOW [*1*] for the need to drop partials at one or both ende.
-
+        return pBuffer
+    }()
+    
+    // MARK: Init
+    /// Initialize with a count of days and completion callback once that many days are accounted for.
+    ///
+    /// Start the process by calling ``proceed()``.
+    /// - Parameters:
+    ///   - days: The number of days to query for and report
+    ///   - callback: The closure that will receive the resulting CSV data.
+    init(forDays days: Int,
+         callback: @escaping ClosureType) {
+        dayCount = days
+        completion = callback
     }
-
+    
+    // MARK: Proceed
+    /// Initiate the fetches for the past `dayCount` days.
     func proceed() {
-        // TODO: Make this async.
-        pedometer.queryPedometerData(
-            from: sevenDaysBefore,
-            to: lastMidnight)
-        { pedData, error in
-            // It's escaping. You can't really signal failure.
-            let retval: ResultValue
-            if let error {
-                retval = .failure(error)
-            }
-            else if let pedData {
-
-
-
-
-                retval = .success(pedData)
-            }
-            else {
-                fatalError("\(#function) completion: Neither data nor error")
-            }
-            completion(retval)
+        let predicates = predicates(count: dayCount)
+        for predicate in predicates {
+            execute(onePredicate: predicate)
         }
     }
-
-    #warning("Add a phase for the 7-day walk")
+    
+    // MARK: Details
+    /// Construct predicates for the daily step-count totals.
+    /// - Parameter count: The number of daily predicates (and therefore days) to match.
+    /// - Returns: `Array<NSPredicate>` containing query predicates for each of the past `count` days.
+    private func predicates(count: Int = 7) -> [NSPredicate] {
+        let rightNow = Date()
+        let differencs = DateComponents(day: count)
+        let lastMidnight = Self.gregorian.startOfDay(for: rightNow)
+        let components = Self.gregorian.dateComponents([.day, .month, .year], from: lastMidnight)
+        
+        let predicates = (0...count)
+            .map {
+                Self.gregorian.date(
+                    byAdding: .day, value: -$0,
+                    to: lastMidnight)!
+            }
+            .adjacentPairs()
+            .map {
+                HKQuery.predicateForSamples(withStart: $0.0, end: $0.1)
+            }
+        return predicates
+    }
+    
+    /// Perform a query for a single day (single predicate).
+    ///
+    /// HealthKit will report the day's results through a completion function (``hkQueryCompletion(query:stats:error)``)
+    /// - Parameter predicate: The selection predicate for a full day, midnight-to-midnight.
+    private func execute(onePredicate predicate: NSPredicate) {
+        let query = HKStatisticsQuery(
+            quantityType: Self.hkStepsType,
+            quantitySamplePredicate: predicate,
+            
+            options: .cumulativeSum,
+            completionHandler: hkQueryCompletion(query:stats:error:))
+        Self.store.execute(query)
+    }
+    
+    /// Completion of a query counting steps for a single day.
+    ///
+    /// See the documentation for `HKStatisticsQuery` for a description of its completion closure.
+    ///
+    /// - If an error occurred, that is logged.
+    /// - If no resulting statistics are found, log it and don't process this result.
+    /// - If the statistics don't yeid the sum, log and exit.
+    ///
+    /// Incoming records are converted to ``StepsOnDate`` and inserted into the ``PedometryBuffer`` actor “`buffer`.”
+    private func hkQueryCompletion(query: HKStatisticsQuery, stats: HKStatistics?, error: Error?) {
+        // Error? Log, then proceed regardless.
+        if let error {
+            print("\(#function):\(#line) - query returned an error:", error)
+        }
+        // No result? Log and abandon the function.
+        guard let stats else {
+            print("\(#function):\(#line) - Can't retrieve data for one day.")
+            // TODO: Improve the log by giving the day or date
+            return
+        }
+        
+        // Can't get a sum of steps? Log and abandon.
+        // TODO: make the `else` clause a fatal error.
+        guard let sum = stats.sumQuantity() else {
+            print("\(#function):\(#line) - Can't get sumQuantity from step stats..")
+            return
+        }
+        let steps = sum.doubleValue(for: HKUnit.count())
+        let start = stats.startDate
+        
+        let record = StepsOnDate(
+            steps: Int(steps.rounded()),
+            date: start)
+        
+        Task {
+            await buffer.insert(datum: record)
+        }
+    }
 }
-
-#endif
- */
-
-/*
- [*1*]
- "Only the past seven days worth of data is stored and available for you to retrieve. Specifying a start date that is more than seven days in the past returns only the available data."
- ASK DAN.
- */
-// This iteration sucks everything in. The partials _should_ be evident.
-// Exactly 7 days before that midnight may run into partial days,
-// because I doubt you can rely on "7 midnights ago" still having any
-// data on record.

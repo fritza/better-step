@@ -70,7 +70,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         return completed
     }
     
-    // MARK: Completion reports
+    // MARK: - Completion reports
     
     /// Report to the ``PhaseStorage`` that a phase has completed with data for output.
     ///

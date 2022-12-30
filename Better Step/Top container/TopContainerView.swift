@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import HealthKit
 
 // onboarding, walking, dasi, usability, conclusion / failed
 
@@ -17,11 +18,7 @@ import Combine
 ///
 struct TopContainerView: View, MassDiscardable {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
-//    @AppStorage(ASKeys.collectedDASI.rawValue) var collectedDASI: Bool =  false
-//    @AppStorage(ASKeys.perfomedWalk.rawValue)  var performedWalk: Bool =  false
-//    @AppStorage(ASKeys.collectedUsability.rawValue) var collectedUsability: Bool =  false
-
-
+    
     @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
     // TODO: Put up an alert when pedometry is not authorized.
@@ -31,7 +28,7 @@ struct TopContainerView: View, MassDiscardable {
     @StateObject var phaseStorage = PhaseStorage()
     
     // FIXME: Necessary
-
+    
     var reversionHandler: AnyObject?
     func handleReversion(notice: Notification) {
         ASKeys.revertPhaseDefaults()
@@ -39,32 +36,42 @@ struct TopContainerView: View, MassDiscardable {
         TopPhases.resetToFirst()
         // I think it's okay _not_ to clear the reversionHandler
     }
-
-
-    func dummyPedometry() ->  Pedometry {
-        let retval = Pedometry {
-            result in
-            let string = try! result.get()
-            let line = string.csvLine
-            let strData = line.data(using: .utf8)!
-            // FIXME: Why couldn't csvData work on [String]?
-            try! phaseStorage.series(.sevenDayRecord, completedWith: strData)
-            ASKeys.dateOfLast7DReport = Date()
+    
+    @State var showNoPermission = false
+    
+    func tryRealPedometry() {
+        PedometryFromHealthKit.securePermission { resultBoolError in
+            switch resultBoolError {
+            case .failure(let error):
+                print("\(#function):\(#line): auth error =", error)
+                
+            case .success(let okay) where okay:
+                let collector = PedometryFromHealthKit(forDays: 7) { dataResult in
+                    let data = try! dataResult.get()
+                    return try! phaseStorage.series(
+                        .sevenDayRecord,
+                        completedWith: data)
+                }
+                
+                collector.proceed()
+                
+            case .success:
+                print("\(#function):\(#line): refused")
+                showNoPermission = true
+                // TODO: Put up an alert explaining why this is Bad.
+            }
         }
-        return retval
     }
-
+    
     init() {
         // TODO: store and reload the current phase ID.
         currentPhase = TopPhases.entry.followingPhase
         self.reversionHandler = self.reversionHandler ?? installDiscardable()
         // MARK: - (MOCKED) 7-day pedometry
     }
-
-
+    
     // TODO: Make .navigationTitle consistent
-
-
+    
     // TODO: Do I provide the NavigationView?
     var body: some View {
         NavigationView {
@@ -88,18 +95,17 @@ struct TopContainerView: View, MassDiscardable {
                         }
                     }
                     .onDisappear {
-                        dummyPedometry()
-                            .proceed()
+                        tryRealPedometry()
                     }
                     
                 case .greeting:
-                    ApplicationGreetingView {_ in 
+                    ApplicationGreetingView {_ in
                         self.currentPhase = .walking
                     }
                     .onDisappear {
-                        dummyPedometry().proceed()
+                        tryRealPedometry()
                     }
-
+                    
                     // MARK: - Walking
                 case .walking:
                     // NO. the container view is able
@@ -118,17 +124,16 @@ struct TopContainerView: View, MassDiscardable {
                             // SuccessValue is
                             // (scores: String, specifics: String)
                             currentPhase = currentPhase.followingPhase
-//                            collectedUsability = true
                             latestPhase = TopPhases.usability.rawValue
                             // FIXME: Add the usability form
                             //        to the usability container.
-
+                            
                         case .failure:
                             // TODO: Maybe pass the error into the failure view?
                             self.currentPhase = .failed
                         } // switch on callback result
                     }  // UsabilityContainer
-
+                    
                     // MARK: - DASI
                 case .dasi:
                     SurveyContainerView {
@@ -137,18 +142,15 @@ struct TopContainerView: View, MassDiscardable {
                             // FIXME: Consider storing the DASI response here.
                             // IS stored (in UserDefaults)
                             // by SurveyContainerView.completionPageView
-
-
-
-//                            collectedDASI = true
+                                                        
                             TopPhases.latestPhase = TopPhases.usability.rawValue
                             self.currentPhase = currentPhase.followingPhase
-
-
-
+                            
+                            
+                            
                             let dasiResponse = try responseResult.get()
                             let csvd = dasiResponse.csvData
-
+                            
                             try! phaseStorage
                                 .series(.dasi, completedWith: csvd)
                         }
@@ -157,7 +159,7 @@ struct TopContainerView: View, MassDiscardable {
                             // TODO: Maybe pass the error into the failure view?
                         }
                     }
-
+                    
                     // MARK: - Conclusion (success)
                 case .conclusion:
                     ConclusionView { _ in
@@ -174,28 +176,34 @@ struct TopContainerView: View, MassDiscardable {
                     }
                     .navigationTitle("FAILED")
                     .padding()
-
+                    
                     // MARK: - no such phase
                 default:
                     preconditionFailure("Should not be able to reach phase \(self.currentPhase.description)")
                 }   // Switch on currentPhase
             }       // VStack
-            // MARK: - onAppear {}
+                    // MARK: - onAppear {}
             .onAppear {
                 showReversionAlert = false
-//                self.currentPhase = .entry.followingPhase
-
+                //                self.currentPhase = .entry.followingPhase
+                
                 // Report the 7-day summary
                 // SeriesTag.sevenDayRecord
-
-
+                
+                
             }       // NavigationView modified
             .reversionAlert(on: $showReversionAlert)
             .environmentObject(WalkInfoResult())
         } // end VStack
+        .alert("No Daily Records",
+               isPresented: $showNoPermission, actions: { },
+               message: {
+            Text("Without your permission, [OUR APP] cannot report your seven-day step counts.\n\nTo allow these reports, enable them in\n\nSettings > Privacy & Securoty > Health\nor\nHealth > Browse > Activity > Steps")
+        })
         .environmentObject(phaseStorage)
+        
     }
-
+    
 }
 // MARK: - Preview
 struct TopContainerView_Previews: PreviewProvider {
