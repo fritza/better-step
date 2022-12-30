@@ -31,7 +31,7 @@ struct ConclusionView: View, ReportingPhase {
             Text("Congratulations, you're done.")
             Spacer()
             Text("Tap ") +
-            Text("Subnmit").fontWeight(.semibold).foregroundColor(.blue) +
+            Text("Submit").fontWeight(.semibold).foregroundColor(.blue) +
             Text(" to send a report.")
             Spacer()
             Button("Submit") {

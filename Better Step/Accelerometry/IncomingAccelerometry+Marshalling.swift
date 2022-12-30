@@ -12,7 +12,7 @@ extension IncomingAccelerometry {
         assert(SubjectID.id != SubjectID.unSet)
         let common = "\(tag.rawValue),\(SubjectID.id),"
         
-        #if DEBUG
+        #if false
         guard let all = try? XYZT.sampleData() else {
             preconditionFailure("Failed to load/decode “TestXYZT.json”")
         }
