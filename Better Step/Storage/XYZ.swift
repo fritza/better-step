@@ -82,11 +82,31 @@ extension XYZ {
     }
 }
 
+struct AnyCSVRepresentable
+//<CSV: CSVRepresentable>
+: CSVRepresentable
+{
+    private let base: any CSVRepresentable
+    
+    init<T:CSVRepresentable>(_ baseValue: T) {
+        base = baseValue
+    }
+    var csvLine: String {
+        base.csvLine
+        //        (base as! CSVRepresentable).csvLine
+    }
+}
+
+extension CSVRepresentable {
+    func eraseToAny() -> AnyCSVRepresentable /*<Self>*/ {
+        return AnyCSVRepresentable(self)
+    }
+}
+
 extension Array where Element: CSVRepresentable {
     public var csvLine: String {
         guard !self.isEmpty else { return "" }
-        let representables =
-        self.map(\.csvLine)
+        let representables = self.map(\.csvLine)
             .joined(separator: ",")
         return representables
     }
