@@ -95,30 +95,28 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
-            // Crete the container directory
-            try Self.createContainerDirectory()
-            // All keysToBeFinished have data.
-            for tag in keysToBeFinished {
-                try archiver.add(completionDictionary[tag]!,
-                                 filename: csvFileName(for: tag))
-            }
-            
-            do {
-                try archiver.exportZIPFile()
-                ASKeys.isFirstRunComplete = true
-            }
-            catch {
-                print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
-            }
-            
-            // TODO: Emit the archive (CSVArchiver)
-            // CSVArchiver emits all into a single ".zip" via
-            // - `UIActivityViewController` at first,
-            // - `URLSession` eventually
-            
+            try createArchive()
             // No cache of the csv reports is kept.
             // TODO: Is this all the sanitizing PhaseStorage needs?
             completionDictionary = [:]
+        }
+    }
+    
+    func createArchive() throws {
+        // Crete the container directory
+        try Self.createContainerDirectory()
+        // All keysToBeFinished have data.
+        for tag in keysToBeFinished {
+            try archiver.add(completionDictionary[tag]!,
+                             filename: csvFileName(for: tag))
+        }
+        
+        do {
+            try archiver.exportZIPFile()
+            ASKeys.isFirstRunComplete = true
+        }
+        catch {
+            print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
         }
     }
     
