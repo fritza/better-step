@@ -17,6 +17,7 @@
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
+		1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
@@ -150,6 +151,8 @@
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
 		1F3BD02929392E3700442A63 /* ResultsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsUploader.swift; sourceTree = "<group>"; };
+		1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometryBuffer.swift; sourceTree = "<group>"; };
+		1F415DEC295F938A00F49E82 /* Better Step.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Better Step.entitlements"; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
 		1F56E73529439626001708F3 /* TimedXYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedXYZ.swift; sourceTree = "<group>"; };
 		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1F415DEC295F938A00F49E82 /* Better Step.entitlements */,
 				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1FB684E827F225EC00612924 /* ASKeys.swift */,
@@ -486,6 +490,7 @@
 		1FF354492791FCD1000894B8 /* Accelerometry */ = {
 			isa = PBXGroup;
 			children = (
+				1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */,
 				1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */,
 				1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */,
 				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
@@ -778,6 +783,7 @@
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
 				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
 				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
+				1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */,
 				1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */,
 				1FA281F528DBBB270038353E /* CSVArchiver.swift in Sources */,
 				1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */,
@@ -1010,6 +1016,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1049,6 +1056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
