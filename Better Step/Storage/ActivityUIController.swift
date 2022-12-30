@@ -35,6 +35,19 @@ struct ActivityUIController: UIViewControllerRepresentable {
     init(url: URL, text: String) {
         activityItems = [url, text]
     }
+    
+    init(url: URL? = nil,
+         text: String? = nil,
+         data: Data? = nil) {
+        var items: [Any] = []
+        if let url  { items.append(url)  }
+        if let text { items.append(text) }
+        if let data { items.append(data) }
+        precondition(!items.isEmpty,
+                     "\(#function) - must have at least one item.")
+        activityItems = items
+    }
+    
 }
 
 
