@@ -58,7 +58,9 @@ final class PedometryFromHealthKit: ReportingPhase {
             HKObjectType.quantityType(forIdentifier: .stepCount)!
         ])
         store
-            .requestAuthorization(toShare: perms, read: perms) { approved, error in
+            .requestAuthorization(
+                toShare: nil,
+                read: perms) { approved, error in
                 if let error {
                     print("\(#function):\(#line): auth error =", error)
                     completed(Result.failure(error))
@@ -110,26 +112,36 @@ final class PedometryFromHealthKit: ReportingPhase {
     }
     
     // MARK: Details
+    
+    private func dayLimits(_ count: Int = 7) -> [(Date, Date)] {
+        let rightNow = Date()
+        let lastMidnight = Self.gregorian.startOfDay(for: rightNow)
+        let dayPairs = (0...count)
+            .map {
+                let previousDate =
+                Self.gregorian.date(
+                    byAdding: .day, value: -$0,
+                    to: lastMidnight)!
+                return previousDate
+            }
+            .reversed()
+            .adjacentPairs()
+
+        return Array(dayPairs)
+    }
+    
     /// Construct predicates for the daily step-count totals.
     /// - Parameter count: The number of daily predicates (and therefore days) to match.
     /// - Returns: `Array<NSPredicate>` containing query predicates for each of the past `count` days.
     private func predicates(count: Int = 7) -> [NSPredicate] {
-        let rightNow = Date()
-        let differencs = DateComponents(day: count)
-        let lastMidnight = Self.gregorian.startOfDay(for: rightNow)
-        let components = Self.gregorian.dateComponents([.day, .month, .year], from: lastMidnight)
-        
-        let predicates = (0...count)
-            .map {
-                Self.gregorian.date(
-                    byAdding: .day, value: -$0,
-                    to: lastMidnight)!
+        let pairs = dayLimits(count)
+        let preds = pairs
+            .map { (begin, end) in
+                let query = HKQuery.predicateForSamples(withStart: begin, end: end,
+                                                        options: [.strictEndDate, .strictStartDate])
+                return query
             }
-            .adjacentPairs()
-            .map {
-                HKQuery.predicateForSamples(withStart: $0.0, end: $0.1)
-            }
-        return predicates
+        return preds
     }
     
     /// Perform a query for a single day (single predicate).
