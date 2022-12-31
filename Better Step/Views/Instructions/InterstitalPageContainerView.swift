@@ -68,7 +68,10 @@ struct InterstitalPageTabView_Previews: PreviewProvider {
         NavigationView {
             InterstitalPageContainerView(
                 listing: try! InterstitialList(
-                    baseName: "walk-intro"),
+                    baseName:
+//                        "walk-intro"
+                    "second-walk-intro"
+                ),
                 selection: 1,  callback: {_ in})
 
             .padding()

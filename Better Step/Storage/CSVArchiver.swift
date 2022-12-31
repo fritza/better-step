@@ -115,7 +115,8 @@ extension CSVArchiver {
         try archiver.addEntry(
             with: filename,
             type: .file,
-            uncompressedSize: Int64(data.count)) {
+            uncompressedSize: Int64(data.count),
+            compressionMethod: .deflate) {
                 // "provider"
                 // NO idea whether it's suppsed to be just the whole data.
                 (position: Int64, size: Int) -> Data in
