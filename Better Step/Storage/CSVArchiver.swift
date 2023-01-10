@@ -112,16 +112,24 @@ extension CSVArchiver {
     /// Add data under an in-archive name to the archive.
     /// - seealso: ``exportZIPFile()`
     public func add(_ data: Data, filename: String) throws {
-        try archiver.addEntry(
-            with: filename,
-            type: .file,
-            uncompressedSize: Int64(data.count),
-            compressionMethod: .deflate) {
-                // "provider"
-                // NO idea whether it's suppsed to be just the whole data.
-                (position: Int64, size: Int) -> Data in
-                return data
-            }
+        do {
+            try archiver.addEntry(
+                with: filename,
+                type: .file,
+                uncompressedSize: Int64(data.count),
+                compressionMethod: .deflate) {
+                    // "provider"
+                    // This take s an offset into the
+                    //
+                    (position: Int64, size: Int) -> Data in
+                    return data
+                }
+        }
+        catch {
+            // debugging only.
+            print(#function, "- ended in error:", error)
+            throw error
+        }
     }
     /// Assemble and compress the file data and write it to a `.zip` file.
     ///

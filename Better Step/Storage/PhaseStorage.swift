@@ -103,6 +103,9 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     }
     
     func createArchive() throws {
+        // ACTIVATE AN ERROR BREAKPOINT
+
+        
         // Crete the container directory
         try Self.createContainerDirectory()
         // All keysToBeFinished have data.
@@ -117,6 +120,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         }
         catch {
             print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
+            throw error
         }
     }
     
