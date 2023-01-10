@@ -22,18 +22,20 @@ enum EffortWalked: String, Hashable, CaseIterable {
 }
 
 class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertible {    
+    // Removed per drubin email 3 Jan 2023 deprecating
+    // the text fields as too error-prone
+    //    @Published var distance           : Int
+    //    @Published var lengthOfCourse     : Int?
     @Published var `where`            : WhereWalked
-    @Published var distance           : Int
     @Published var howWalked          : HowWalked
-    @Published var lengthOfCourse     : Int?
     @Published var effort             : EffortWalked
     @Published var fearOfFalling      : Bool
     
     var csvLine: String {
         let values = [`where`.rawValue,
-                      String(distance),
+//                      String(distance),
                       howWalked.rawValue,
-                      String(lengthOfCourse ?? 0),
+//                      String(lengthOfCourse ?? 0),
                       effort.rawValue,
                       fearOfFalling ? "Y" : "N"
         ]
@@ -43,16 +45,16 @@ class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertibl
     
     init() {
        self.`where`        = .atHome
-       self.distance       = 100
+//       self.distance       = 100
        self.howWalked      = .straightLine
-       self.lengthOfCourse = 30
+//       self.lengthOfCourse = 30
        self.effort         = .somewhat
        self.fearOfFalling  = false
    }
 
     var description: String {
         var retval = "WalkInfoResult("
-        print(self.where, self.howWalked, self.distance,
+        print(self.where, self.howWalked, // self.distance,
               separator: ", ",
               terminator: "",
               to: &retval)

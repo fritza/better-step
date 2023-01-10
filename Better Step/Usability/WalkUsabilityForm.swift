@@ -27,13 +27,14 @@ struct WalkUsabilityForm: View, ReportingPhase {
     @ViewBuilder private var howYouDidSection: some View {
         Section("How you did") {
             VStack(alignment: .leading, spacing: 16) {
-                howFarWalkedStack
+//                howFarWalkedStack
                 howMuchEffortStack
                 mightFallStack
             }
         }
     }
 
+    #if false
     @ViewBuilder private var howFarWalkedStack: some View {
         VStack(alignment: .leading) {
             Group {
@@ -57,6 +58,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
             }
         }
     }
+    #endif
 
     @ViewBuilder private var howMuchEffortStack: some View {
         VStack(alignment: .leading) {
@@ -98,7 +100,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
     @ViewBuilder private var whereYouWalkedSection: some View {
         Section("Where you walked") {
             wherePerformedStack
-            lengthOfCourseStack
+//            lengthOfCourseStack
             backAndForthStack
                 .tag(lastFormSection)
         }
@@ -122,6 +124,9 @@ struct WalkUsabilityForm: View, ReportingPhase {
         }
     }
 
+    #if false
+    // Removed per drubin email 3 Jan 2023 deprecating
+    // the text fields as too error-prone
     // MARK: - Length of course
     @ViewBuilder private var lengthOfCourseStack: some View {
         VStack(alignment: .leading) {
@@ -149,6 +154,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
 
         }
     }
+    #endif
 
     // MARK: - Linear or circuit
     @ViewBuilder private var backAndForthStack: some View {
