@@ -67,7 +67,7 @@ struct ContentView: View {
                 Spacer()
                 ForEach (piffles, id: \.name) {
                     piff in
-                    PiffleStack(piff)
+                    PiffleRow(piff)
                 }
                 Spacer()
             }
