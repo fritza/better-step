@@ -25,6 +25,14 @@
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
+		1F66584C296E29F400EE75FE /* Exercise_ZIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */; };
+		1F66584E296E29F500EE75FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66584D296E29F400EE75FE /* ContentView.swift */; };
+		1F665850296E29F600EE75FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F66584F296E29F600EE75FE /* Assets.xcassets */; };
+		1F665853296E29F600EE75FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F665852296E29F600EE75FE /* Preview Assets.xcassets */; };
+		1F665858296E2A6100EE75FE /* Nonsense.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F665857296E2A6100EE75FE /* Nonsense.json */; };
+		1F66585A296E2F9900EE75FE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F665859296E2F9900EE75FE /* ZIPFoundation */; };
+		1F66585C296E32DA00EE75FE /* PiffleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585B296E32DA00EE75FE /* PiffleStack.swift */; };
+		1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585D296E357600EE75FE /* ZIPFactory.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -164,6 +172,14 @@
 		1F60E70328DA720500EC2593 /* MorseHaptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseHaptic.swift; sourceTree = "<group>"; };
 		1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUIController.swift; sourceTree = "<group>"; };
 		1F6456F7294D29FA0064DADA /* TestXYZT.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestXYZT.json; sourceTree = SOURCE_ROOT; };
+		1F665849296E29F400EE75FE /* Exercise ZIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Exercise ZIP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise_ZIPApp.swift; sourceTree = "<group>"; };
+		1F66584D296E29F400EE75FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1F66584F296E29F600EE75FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F665852296E29F600EE75FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1F665857296E2A6100EE75FE /* Nonsense.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Nonsense.json; sourceTree = "<group>"; };
+		1F66585B296E32DA00EE75FE /* PiffleStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiffleStack.swift; sourceTree = "<group>"; };
+		1F66585D296E357600EE75FE /* ZIPFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPFactory.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
@@ -233,6 +249,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F665846296E29F400EE75FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F66585A296E2F9900EE75FE /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FA281CB28DBBA160038353E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,6 +283,7 @@
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
 				1FA281CF28DBBA160038353E /* Better Step */,
+				1F66584A296E29F400EE75FE /* Exercise ZIP */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 			);
@@ -270,6 +295,7 @@
 				1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */,
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
 				1FA281CE28DBBA160038353E /* Better Step.app */,
+				1F665849296E29F400EE75FE /* Exercise ZIP.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,6 +389,28 @@
 				1FC7476F28E7694E00817041 /* NNN.ahap */,
 			);
 			path = Milestones;
+			sourceTree = "<group>";
+		};
+		1F66584A296E29F400EE75FE /* Exercise ZIP */ = {
+			isa = PBXGroup;
+			children = (
+				1F66585B296E32DA00EE75FE /* PiffleStack.swift */,
+				1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */,
+				1F66585D296E357600EE75FE /* ZIPFactory.swift */,
+				1F66584D296E29F400EE75FE /* ContentView.swift */,
+				1F665857296E2A6100EE75FE /* Nonsense.json */,
+				1F66584F296E29F600EE75FE /* Assets.xcassets */,
+				1F665851296E29F600EE75FE /* Preview Content */,
+			);
+			path = "Exercise ZIP";
+			sourceTree = "<group>";
+		};
+		1F665851296E29F600EE75FE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1F665852296E29F600EE75FE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1F8A337F27E119A30093C896 /* App Stages */ = {
@@ -591,6 +639,26 @@
 			productReference = 1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1F665848296E29F400EE75FE /* Exercise ZIP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F665856296E29F600EE75FE /* Build configuration list for PBXNativeTarget "Exercise ZIP" */;
+			buildPhases = (
+				1F665845296E29F400EE75FE /* Sources */,
+				1F665846296E29F400EE75FE /* Frameworks */,
+				1F665847296E29F400EE75FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Exercise ZIP";
+			packageProductDependencies = (
+				1F665859296E2F9900EE75FE /* ZIPFoundation */,
+			);
+			productName = "Exercise ZIP";
+			productReference = 1F665849296E29F400EE75FE /* Exercise ZIP.app */;
+			productType = "com.apple.product-type.application";
+		};
 		1FA281CD28DBBA160038353E /* Better Step */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */;
@@ -624,7 +692,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					1F0B675D276FA6CA00011A7E = {
@@ -634,6 +702,9 @@
 					1F0B6767276FA6CA00011A7E = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 1F0B674D276FA6C900011A7E;
+					};
+					1F665848296E29F400EE75FE = {
+						CreatedOnToolsVersion = 14.2;
 					};
 					1FA281CD28DBBA160038353E = {
 						CreatedOnToolsVersion = 14.0;
@@ -663,6 +734,7 @@
 				1FA281CD28DBBA160038353E /* Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
+				1F665848296E29F400EE75FE /* Exercise ZIP */,
 			);
 		};
 /* End PBXProject section */
@@ -679,6 +751,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F665847296E29F400EE75FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F665853296E29F600EE75FE /* Preview Assets.xcassets in Resources */,
+				1F665858296E2A6100EE75FE /* Nonsense.json in Resources */,
+				1F665850296E29F600EE75FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +809,17 @@
 			files = (
 				1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */,
 				1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F665845296E29F400EE75FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F66584E296E29F500EE75FE /* ContentView.swift in Sources */,
+				1F66585C296E32DA00EE75FE /* PiffleStack.swift in Sources */,
+				1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */,
+				1F66584C296E29F400EE75FE /* Exercise_ZIPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1103,68 @@
 			};
 			name = Release;
 		};
+		1F665854296E29F600EE75FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Exercise ZIP/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Exercise-ZIP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1F665855296E29F600EE75FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Exercise ZIP/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Exercise-ZIP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		1FA281DA28DBBA170038353E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1125,6 +1280,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		1F665856296E29F600EE75FE /* Build configuration list for PBXNativeTarget "Exercise ZIP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F665854296E29F600EE75FE /* Debug */,
+				1F665855296E29F600EE75FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1180,6 +1344,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F665859296E2F9900EE75FE /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		1FA2823328DBBC3F0038353E /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
