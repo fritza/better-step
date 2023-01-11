@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if !HAS_PHASES
 public enum FileStorageErrors: Error {
     case plainFileAtURL(URL)
     case cantCreateFileAt(URL)
@@ -25,14 +26,40 @@ public enum AppPhaseErrors: Error {
     case uploadEmptyData(String)
     case cantInitializeZIPArchive
     case cantGetArchiveData
+    case cantInsertDataFile(fileName: String)
+    case subjectIDInvalid(String)
+    case shortageOfDASIResponsesBy(Int)
+    case walkingPhaseProbablyKilled(SeriesTag)
+    
+    case NOS
+}
+
+#else
+
+public enum FileStorageErrors: Error {
+    case plainFileAtURL(URL)
+    case cantCreateFileAt(URL)
+    case fileExistaAlready(String)
+    case directoryExistsAlready(String)
+    case cantFindURL(String)
+    case cantReadDictionaryAt(URL)
+    case uploadEmptyData(String)
+    case cantFindZIP(String)
+}
+
+public enum AppPhaseErrors: Error {
+    case noSubjectID
+    case cantLoadData(URL)
+    case uploadEmptyData(String)
+    case cantInitializeZIPArchive
+    case cantGetArchiveData
     case cantInsertDataFile(fileName: String) 
     case subjectIDInvalid(String)
     case shortageOfDASIResponsesBy(Int)
 
-    case walkingPhaseProbablyKilled(SeriesTag)
-
     case NOS
 }
+#endif
 
 extension FileManager {
     // TODO: Should ~Exist be async?

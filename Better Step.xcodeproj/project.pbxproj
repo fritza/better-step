@@ -33,6 +33,7 @@
 		1F66585A296E2F9900EE75FE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F665859296E2F9900EE75FE /* ZIPFoundation */; };
 		1F66585C296E32DA00EE75FE /* PiffleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585B296E32DA00EE75FE /* PiffleStack.swift */; };
 		1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585D296E357600EE75FE /* ZIPFactory.swift */; };
+		1F66585F296F431500EE75FE /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -818,6 +819,7 @@
 			files = (
 				1F66584E296E29F500EE75FE /* ContentView.swift in Sources */,
 				1F66585C296E32DA00EE75FE /* PiffleStack.swift in Sources */,
+				1F66585F296F431500EE75FE /* FileManager+extensions.swift in Sources */,
 				1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */,
 				1F66584C296E29F400EE75FE /* Exercise_ZIPApp.swift in Sources */,
 			);
@@ -1128,6 +1130,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Exercise-ZIP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG HAS_PHASES";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1159,6 +1162,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Exercise-ZIP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = HAS_PHASES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
