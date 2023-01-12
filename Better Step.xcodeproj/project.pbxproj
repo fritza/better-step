@@ -404,16 +404,16 @@
 		1F66584A296E29F400EE75FE /* Exercise ZIP */ = {
 			isa = PBXGroup;
 			children = (
-				1F665864296F672500EE75FE /* ZIPProgressView.swift */,
+				1F66584F296E29F600EE75FE /* Assets.xcassets */,
+				1F66584D296E29F400EE75FE /* ContentView.swift */,
+				1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */,
+				1F665857296E2A6100EE75FE /* Nonsense.json */,
 				1F665860296F600C00EE75FE /* PerPiffleView.swift */,
 				1F66585B296E32DA00EE75FE /* PiffleRow.swift */,
-				1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */,
 				1F665862296F63DF00EE75FE /* PNavStack.swift */,
-				1F66585D296E357600EE75FE /* ZIPFactory.swift */,
-				1F66584D296E29F400EE75FE /* ContentView.swift */,
-				1F665857296E2A6100EE75FE /* Nonsense.json */,
-				1F66584F296E29F600EE75FE /* Assets.xcassets */,
 				1F665851296E29F600EE75FE /* Preview Content */,
+				1F66585D296E357600EE75FE /* ZIPFactory.swift */,
+				1F665864296F672500EE75FE /* ZIPProgressView.swift */,
 			);
 			path = "Exercise ZIP";
 			sourceTree = "<group>";
@@ -465,11 +465,11 @@
 		1FB2F54328D2619D00593692 /* Top container */ = {
 			isa = PBXGroup;
 			children = (
-				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
-				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F09EE3128DB745900CFBE4B /* FailureView.swift */,
-				1F87E1A22919979C000908AE /* TopPhases.swift */,
+				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */,
+				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
+				1F87E1A22919979C000908AE /* TopPhases.swift */,
 			);
 			path = "Top container";
 			sourceTree = "<group>";
@@ -480,11 +480,11 @@
 				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
 				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
 				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
-				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
-				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
 				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
 				1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */,
 				1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */,
+				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
+				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
 			);
 			path = Usability;
 			sourceTree = "<group>";
@@ -534,17 +534,17 @@
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				1F66586729709D4900EE75FE /* ZIPArchiver.swift */,
-				1F891BBB29538F30006C09DF /* StateReversion.swift */,
-				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
-				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
-				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
+				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
-				1FF354402790A99E000894B8 /* XYZ.swift */,
-				1F56E73529439626001708F3 /* TimedXYZ.swift */,
+				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
+				1F891BBB29538F30006C09DF /* StateReversion.swift */,
 				1F6456F7294D29FA0064DADA /* TestXYZT.json */,
+				1F56E73529439626001708F3 /* TimedXYZ.swift */,
+				1FF354402790A99E000894B8 /* XYZ.swift */,
+				1F66586729709D4900EE75FE /* ZIPArchiver.swift */,
+				1FC7477E28EDE90F00817041 /* ZIPProgress.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -552,12 +552,12 @@
 		1FF354492791FCD1000894B8 /* Accelerometry */ = {
 			isa = PBXGroup;
 			children = (
-				1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */,
+				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
+				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
 				1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */,
 				1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */,
-				1FF3544A2791FCFF000894B8 /* CoreMotion.swift */,
+				1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */,
 				1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */,
-				1FC7477828EB59F300817041 /* CoreMotion+async.swift */,
 				1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */,
 			);
 			path = Accelerometry;
@@ -567,13 +567,13 @@
 			isa = PBXGroup;
 			children = (
 				1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */,
-				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
-				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
-				1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */,
-				1FB684F927F252BA00612924 /* Numeric+extensions.swift */,
 				1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */,
-				1FD4568A279F208400B5429A /* FileManager+extensions.swift */,
 				1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */,
+				1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */,
+				1FD4568A279F208400B5429A /* FileManager+extensions.swift */,
+				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
+				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
+				1FB684F927F252BA00612924 /* Numeric+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
