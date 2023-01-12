@@ -140,7 +140,6 @@
 		1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitalPageContainerView.swift; sourceTree = "<group>"; };
 		1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialPageView.swift; sourceTree = "<group>"; };
 		1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
-		1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVArchiver.swift; sourceTree = "<group>"; };
 		1F1C4DFB28D3A65B00547C7A /* AVFAudio+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVFAudio+extensions.swift"; sourceTree = "<group>"; };
 		1F1C4DFE28D3BD6700547C7A /* usability-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "usability-intro.json"; sourceTree = "<group>"; };
 		1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "second-walk-intro.json"; sourceTree = "<group>"; };
@@ -534,7 +533,6 @@
 			isa = PBXGroup;
 			children = (
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
-				1F1C4DF928D3A51200547C7A /* CSVArchiver.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
 				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
