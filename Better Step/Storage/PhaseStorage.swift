@@ -25,8 +25,11 @@ import SwiftUI
 /// Watch completion of all necessary stages by observing `.isComplete`.
 public final class PhaseStorage: ObservableObject, MassDiscardable
 {
+    static let shared = PhaseStorage()
+    
     var reversionHandler: AnyObject?
-    var archiver: CSVArchiver
+//    var archiver: ZIPArchiver
+    let stickyYMDTag: String // "yyyy-mm-dd"
         
     typealias CompDict = [SeriesTag:Data]
     @Published private(set) var completionDictionary  : CompDict = [:]
@@ -36,21 +39,29 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     @Published public  var areAllPhasesComplete : Bool
     
-    /// Initialize a `PhaseStorage` and a ``CSVArchiver`` for it to write into
+    /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
-    /// - precondition: ``CSVArchiver`` demads that `zipURL` should end in `.zip`.
     public init() {
-        completionDictionary = [:]
-        archiver = try! CSVArchiver()
+        assert(SubjectID.id != SubjectID.unSet)
+        stickyYMDTag = Date().ymd
+//        archiver = try! ZIPArchiver(
+//            destinationURL: zipOutputURL)
+        
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
+        completionDictionary = [:]
     }
+    
+    lazy var archiver: ZIPArchiver = {
+        let retval = try! ZIPArchiver(destinationURL: zipOutputURL)
+        return retval
+    }()
     
     /// ``MassDiscardable`` adoption
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
         completionDictionary = [:]
-        // TODO: Replace the archiver.
+        ASKeys.isFirstRunComplete = false
     }
     
     // MARK: Completion check
@@ -59,6 +70,32 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         SeriesTag.neededForLaterRuns :
         SeriesTag.neededForFirstRun
     }
+    
+    lazy var zipOutputURL: URL = {
+        let docsURL = try! FileManager.default
+            .url(for: .documentDirectory,
+                 in: .userDomainMask,
+                 appropriateFor: nil, create: true)
+        return docsURL
+            .appendingPathComponent(zipFileName)
+    }()
+    
+    func csvFileName(for phase: SeriesTag) -> String {
+        // The csv form is:
+        // phase_subject_yyyy-mm-dd.csv
+        // The zip form is:
+        // subject_yyyy-mm-dd.zip
+        
+        return "\(phase.rawValue)_\(SubjectID.id)_\(stickyYMDTag)"
+        + ".cav"
+    }
+    
+    var zipFileName: String {
+        let userNameComponent = SubjectID.id
+        return "\(userNameComponent)_\(stickyYMDTag)"
+        + ".zip"
+    }
+
     
     /// Determine whether all data needed for first or subsequent sessions has arrived. Set the observable `isComplete` accordingly.
     private func checkCompletion() -> Bool {
@@ -95,49 +132,43 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
+            // We have everything.
+            // Write the archive out
             try createArchive()
-            // No cache of the csv reports is kept.
-            // TODO: Is this all the sanitizing PhaseStorage needs?
-            completionDictionary = [:]
+            // Remove all state, just as in a revert-all.
+            handleReversion(
+                notice: Notification(name: RevertAllNotice))
         }
     }
     
     func createArchive() throws {
-        // ACTIVATE AN ERROR BREAKPOINT
-
-        
-        // Crete the container directory
-        try Self.createContainerDirectory()
         // All keysToBeFinished have data.
         for tag in keysToBeFinished {
             try archiver.add(completionDictionary[tag]!,
-                             filename: csvFileName(for: tag))
+                             named: csvFileName(for: tag))
         }
-        
-        do {
-            try archiver.exportZIPFile()
-            ASKeys.isFirstRunComplete = true
-        }
-        catch {
-            print("Writing the zip file “\(Self.zipOutputURL.lastPathComponent)”\n\n\tFailed: \(error)")
-            throw error
-        }
+        try archiver.saveArchive()
+        ASKeys.isFirstRunComplete = true
     }
     
-    static var zipDataExists: Bool {
-        FileManager.default
-            .fileExists(atURL: Self.zipOutputURL)
+    func writeArchive() throws {
+        let data = archiver.archivedData
     }
     
-    static func zipContent() throws -> Data {
-        let zoURL = Self.zipOutputURL
-        guard zipDataExists else {
-            // No file to be read? Bail.
-            throw FileStorageErrors.cantFindZIP(zoURL.lastPathComponent)
-        }
-        let data = try Data(contentsOf: zoURL)
-        return data
-    }
+//    var zipDataExists: Bool {
+//        FileManager.default
+//            .fileExists(atURL: zipOutputURL)
+//    }
+//
+//    static func zipContent() throws -> Data {
+//        let zoURL = shared.zipOutputURL
+//        guard shared.zipDataExists else {
+//            // No file to be read? Bail.
+//            throw FileStorageErrors.cantFindZIP(zoURL.lastPathComponent)
+//        }
+//        let data = try Data(contentsOf: zoURL)
+//        return data
+//    }
 }
 
 extension PhaseStorage {
@@ -149,106 +180,4 @@ extension PhaseStorage {
                 try closure(k, v)
             }
         }
-}
-
-extension PhaseStorage {
-    /// The base name (without extension) of a data file for a given subject, date, and phase: `subjectID_date_series`.
-    ///     - parameter phase: The phase for which the subject data is enclosed.
-    func csvFileBasename(phase: SeriesTag) -> String {
-        /// Date is defaulted to today.
-        phase.dataFileBasename()
-    }
-    
-    /// The name of the directory within `/tmp` into which the data files are to be written and the .zip archive is to be created.
-    ///
-    /// No path other than the name for the directory
-    /// - note: The date portion of the name is taken as a year-month-day rendering of the present moment. Strictly speaking, this is a race.
-    static var containerDirectoryName: String {
-        let dateRep = Date().ymd
-        assert(SubjectID.id != SubjectID.unSet)
-        return "\(SubjectID.id)_\(dateRep)"
-    }
-    
-    /// A `file:` URL for the container directory, concatenating the system  `/tmp` directory and the name of the container directory.
-    static var containerDirectoryURL: URL {
-        do {
-            let docsURL = try FileManager.default
-                .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            return docsURL
-                .appendingPathComponent(Self.containerDirectoryName)
-//
-//            let tempDirPath = NSTemporaryDirectory()
-//            let tempDirURL = URL(fileURLWithPath: tempDirPath, isDirectory: true)
-//                .appendingPathComponent(Self.containerDirectoryName)
-//            return tempDirURL
-        }
-        catch {
-            fatalError("\(#function) = ought to be able to get the user documents directory:\n\t\(error)")
-        }
-    }
-    
-    /// Create the container directory (holds the .zip and .csv files) _if it doesn't already exist._
-    /// - bug: The test is for whether anything, directory _or file,_ already exists. This will be trouble once the app tries to insert files into it.
-    static func createContainerDirectory() throws {
-        // fm for convenience; containerURL to avoid
-        // re-evaluation.
-        let fm = FileManager.default
-        let containerURL = containerDirectoryURL
-        
-        if fm.somethingExists(atURL: containerURL).exists
-        {
-            // TODO: Does this ever throw?
-            //       If so, how to handle it?
-            _ = try? fm
-                .removeItem(at: containerURL)
-        }
-        try fm
-            .createDirectory(
-                at: containerURL,
-                withIntermediateDirectories: true)
-    }
-    
-    static var zipOutputURL: URL {
-        let containerName = containerDirectoryURL
-            .lastPathComponent
-        let retval =
-        containerDirectoryURL
-            .appendingPathComponent(containerName)
-            .appendingPathExtension("zip")
-        return retval
-    }
-            
-    //    /// Generata the base (no trailing .csv) name for a data file, building up
-    //    /// - Parameters:
-    //    ///   - phase: The  phase from which the .csv is to be name
-    //    ///   - date: The date on which the report is made; if nil (default), today's date (e.g. 2023-01-30) is used.
-    //    /// - Returns: The base name of a file for this subject, date, and phase. No directory path, no extension.
-    //    /// - note: The `date` parameter is _ignored._
-    //    func csvBaseName(phase: SeriesTag,
-    //                      date: Date = Date()) -> String {
-    //        let retval = dataFileBasename(phase: phase)
-    //        return retval
-    //    }
-    
-    func csvFileName(for tag: SeriesTag) -> String {
-        let baseName = csvFileBasename(phase: tag)
-        return baseName + ".csv"
-    }
-    
-    /// The (proposed or actual) URL for a .csv data file given subject name, date, and phase.
-    /// - Parameter tag: The phase in which the data was collected
-    /// - Returns: A `file:/` URL for that `.csv` data file.
-    func csvFileURL(for tag: SeriesTag) -> URL {
-        let baseName = csvFileBasename(phase: tag)
-        let csvName = baseName + ".csv"
-        var destURL = Self.containerDirectoryURL
-        destURL
-            .appendPathComponent(csvName)
-        return destURL
-    }
-    
-//    func zipFileURL() -> URL {
-//        return containerDirectory
-//    }
-    
 }

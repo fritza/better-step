@@ -7,7 +7,7 @@
 
 import Foundation
 
-private let _yyyy_mm_dd: DateFormatter = {
+let _yyyy_mm_dd: DateFormatter = {
     let retval = DateFormatter()
     retval.dateFormat = "yyyy-MM-dd"
     return retval

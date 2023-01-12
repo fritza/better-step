@@ -98,7 +98,6 @@ struct WalkingContainerView: View, ReportingPhase {
      ((Result<SuccessValue, Error>) -> Void)!
      */
     @EnvironmentObject var motionManager: MotionManager
-    @EnvironmentObject var phaseStorage: PhaseStorage
     @State var state: WalkingState? {
         didSet {
             print("Walking State goes from",

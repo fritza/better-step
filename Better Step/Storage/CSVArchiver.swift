@@ -26,7 +26,7 @@ public final class CSVArchiver: MassDiscardable {
         // FIXME: Extremely bad idea to hope
         //        for a complete SubjectID if you
         //        wait until first use.
-        return PhaseStorage.zipOutputURL
+        return PhaseStorage.shared.zipOutputURL
     }()
     /// The output ZIP archive
     let archiver: Archive

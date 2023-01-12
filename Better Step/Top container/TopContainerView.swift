@@ -25,7 +25,7 @@ struct TopContainerView: View, MassDiscardable {
     @State var currentPhase: TopPhases
     
     // TODO: Should this be an ObservedObject?
-    @StateObject var phaseStorage = PhaseStorage()
+//    @StateObject var phaseStorage = PhaseStorage()
     
     // FIXME: Necessary
     
@@ -48,7 +48,7 @@ struct TopContainerView: View, MassDiscardable {
             case .success(let okay) where okay:
                 let collector = PedometryFromHealthKit(forDays: 7) { dataResult in
                     let data = try! dataResult.get()
-                    return try! phaseStorage.series(
+                    return try! PhaseStorage.shared.series(
                         .sevenDayRecord,
                         completedWith: data)
                 }
@@ -151,7 +151,7 @@ struct TopContainerView: View, MassDiscardable {
                             let dasiResponse = try responseResult.get()
                             let csvd = dasiResponse.csvData
                             
-                            try! phaseStorage
+                            try! PhaseStorage.shared
                                 .series(.dasi, completedWith: csvd)
                         }
                         catch {
@@ -199,9 +199,7 @@ struct TopContainerView: View, MassDiscardable {
                isPresented: $showNoPermission, actions: { },
                message: {
             Text("Without your permission, [OUR APP] cannot report your seven-day step counts.\n\nTo allow these reports, enable them in\n\nSettings > Privacy & Securoty > Health\nor\nHealth > Browse > Activity > Steps")
-        })
-        .environmentObject(phaseStorage)
-        
+        })        
     }
     
 }

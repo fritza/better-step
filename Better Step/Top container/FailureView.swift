@@ -41,12 +41,8 @@ struct ConclusionView: View, ReportingPhase {
                    onDismiss: {
                 self.completion(.success(()))
             }, content: {
-                ActivityUIController(url: PhaseStorage.zipOutputURL)
+                ActivityUIController(url: PhaseStorage.shared.zipOutputURL)
                     .presentationDetents([.medium])
-                
-                // FIXME:
-                #warning("Repeating on the same calendar day overwrites the outpput directory")
-                
             })
             Spacer()
         }.font(.title2)
