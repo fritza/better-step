@@ -38,6 +38,7 @@
 		1F665863296F63DF00EE75FE /* PNavStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665862296F63DF00EE75FE /* PNavStack.swift */; };
 		1F665865296F672500EE75FE /* ZIPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665864296F672500EE75FE /* ZIPProgressView.swift */; };
 		1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
+		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -188,6 +189,7 @@
 		1F665860296F600C00EE75FE /* PerPiffleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPiffleView.swift; sourceTree = "<group>"; };
 		1F665862296F63DF00EE75FE /* PNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNavStack.swift; sourceTree = "<group>"; };
 		1F665864296F672500EE75FE /* ZIPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPProgressView.swift; sourceTree = "<group>"; };
+		1F66586729709D4900EE75FE /* ZIPArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPArchiver.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 		1FF3543D2790A958000894B8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				1F66586729709D4900EE75FE /* ZIPArchiver.swift */,
 				1F891BBB29538F30006C09DF /* StateReversion.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
@@ -872,6 +875,7 @@
 				1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */,
 				1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */,
 				1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */,
+				1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */,

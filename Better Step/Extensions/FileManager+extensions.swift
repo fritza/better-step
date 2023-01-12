@@ -25,6 +25,8 @@ public enum AppPhaseErrors: Error {
     case cantLoadData(URL)
     case uploadEmptyData(String)
     case cantInitializeZIPArchive
+    case cantYieldZIPData
+    case cantCreateZIPArchive
     case cantGetArchiveData
     case cantInsertDataFile(fileName: String)
     case subjectIDInvalid(String)
