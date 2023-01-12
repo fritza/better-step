@@ -38,11 +38,13 @@ final class ZipFactory {
         
         try archiver
             .addEntry(with: piffle.name,
-                      type: .file, uncompressedSize: Int64(data.count),
+                      type: .file,
+                      uncompressedSize: Int64(data.count),
                     // CHECK: .deflate doesn't break the archiver.
-//                      compressionMethod: .deflate,
+                      compressionMethod: .deflate,
                       provider: { position, size in
                 return data
             })
+        print(#function, "made it through")
     }
 }

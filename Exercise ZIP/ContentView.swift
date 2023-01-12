@@ -18,7 +18,7 @@ enum PifflErrors: Error {
 }
 
 
-struct Piffle: Codable {
+struct Piffle: Codable, Hashable {
     let name: String
     let content: String
     
@@ -47,6 +47,8 @@ struct ContentView: View {
     @State var piffles: [Piffle]
     @State var error: Error?
     
+    
+    
     init(source: String) {
         do {
             piffles = try Piffle.load(from: source)
@@ -68,16 +70,22 @@ struct ContentView: View {
                 ForEach (piffles, id: \.name) {
                     piff in
                     PiffleRow(piff)
+                    NavigationLink("More…", value: piff)
                 }
                 Spacer()
+                NavigationLink("ZIP",
+                               value: piffles)
             }
         }
-        .padding()
+        .navigationTitle("Piffle List")
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(source: "Nonsense.json")
+        NavigationStack {
+            ContentView(source: "Nonsense.json")
+                .padding()
+        }
     }
 }

@@ -34,6 +34,10 @@
 		1F66585C296E32DA00EE75FE /* PiffleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585B296E32DA00EE75FE /* PiffleRow.swift */; };
 		1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66585D296E357600EE75FE /* ZIPFactory.swift */; };
 		1F66585F296F431500EE75FE /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
+		1F665861296F600C00EE75FE /* PerPiffleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665860296F600C00EE75FE /* PerPiffleView.swift */; };
+		1F665863296F63DF00EE75FE /* PNavStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665862296F63DF00EE75FE /* PNavStack.swift */; };
+		1F665865296F672500EE75FE /* ZIPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665864296F672500EE75FE /* ZIPProgressView.swift */; };
+		1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -181,6 +185,9 @@
 		1F665857296E2A6100EE75FE /* Nonsense.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Nonsense.json; sourceTree = "<group>"; };
 		1F66585B296E32DA00EE75FE /* PiffleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiffleRow.swift; sourceTree = "<group>"; };
 		1F66585D296E357600EE75FE /* ZIPFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPFactory.swift; sourceTree = "<group>"; };
+		1F665860296F600C00EE75FE /* PerPiffleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPiffleView.swift; sourceTree = "<group>"; };
+		1F665862296F63DF00EE75FE /* PNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNavStack.swift; sourceTree = "<group>"; };
+		1F665864296F672500EE75FE /* ZIPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPProgressView.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
@@ -395,8 +402,11 @@
 		1F66584A296E29F400EE75FE /* Exercise ZIP */ = {
 			isa = PBXGroup;
 			children = (
+				1F665864296F672500EE75FE /* ZIPProgressView.swift */,
+				1F665860296F600C00EE75FE /* PerPiffleView.swift */,
 				1F66585B296E32DA00EE75FE /* PiffleRow.swift */,
 				1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */,
+				1F665862296F63DF00EE75FE /* PNavStack.swift */,
 				1F66585D296E357600EE75FE /* ZIPFactory.swift */,
 				1F66584D296E29F400EE75FE /* ContentView.swift */,
 				1F665857296E2A6100EE75FE /* Nonsense.json */,
@@ -819,8 +829,12 @@
 			files = (
 				1F66584E296E29F500EE75FE /* ContentView.swift in Sources */,
 				1F66585C296E32DA00EE75FE /* PiffleRow.swift in Sources */,
+				1F665861296F600C00EE75FE /* PerPiffleView.swift in Sources */,
+				1F665865296F672500EE75FE /* ZIPProgressView.swift in Sources */,
+				1F665863296F63DF00EE75FE /* PNavStack.swift in Sources */,
 				1F66585F296F431500EE75FE /* FileManager+extensions.swift in Sources */,
 				1F66585E296E357600EE75FE /* ZIPFactory.swift in Sources */,
+				1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */,
 				1F66584C296E29F400EE75FE /* Exercise_ZIPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

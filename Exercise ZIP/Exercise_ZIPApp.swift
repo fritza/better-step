@@ -9,9 +9,22 @@ import SwiftUI
 
 @main
 struct Exercise_ZIPApp: App {
+    @State var currentTag: Int = 0
     var body: some Scene {
         WindowGroup {
-            ContentView(source: "Nonsense.zip")
+            PNavStack()
         }
     }
 }
+
+/*
+static let piff: Piffle = {
+    let retval = try! Piffle.load(from: "Nonsense.json")
+    return retval[0]
+}()
+
+static var previews: some View {
+    PiffleRow(piff)
+}
+*/
+
