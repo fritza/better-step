@@ -99,9 +99,6 @@ struct ZIPProgressView: View {
             // WARNING: no check for activityURL == nil
             ActivityUIController(url: activityURL)
                 .presentationDetents([.medium])
-            
-            // FIXME:
-#warning("Repeating on the same calendar day overwrites the outpput directory")
         })
 
         

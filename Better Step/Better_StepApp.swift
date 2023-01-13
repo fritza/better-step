@@ -33,7 +33,7 @@ struct Better_StepApp: App {
             // TODO: Respond to the per-task deletion notifications
 
 //            TopContainerView()
-            ReleaseExerciseView(isUnderWay: false)
+            ReleaseExerciseView()
         }
     }
 }
