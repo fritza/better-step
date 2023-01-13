@@ -8,28 +8,60 @@
 import SwiftUI
 
 struct ReleaseExerciseView: View {
+    enum SaveResult {
+        case idle, inWork, success(Int), failed
+    }
+    
     @State var isUnderWay: Bool
+    @State var showActivitySheet: Bool
+    @State var archiveProgress: SaveResult
+    
+    init() {
+        isUnderWay = false
+        showActivitySheet = false
+        archiveProgress = .idle
+    }
     
     var body: some View {
         VStack (spacing: 24) {
             Text("Test for uploading")
             Button("Proceed") {
+                let inFiles = InputFile.loadData(from: jsonTaggedNames)
+                InputFile.present(files: inFiles)
+                
                 isUnderWay = true
+//                try! PhaseStorage.shared.createArchive()
+                showActivitySheet = true
                 // Trigger the uploads
             }
-            Text(isUnderWay ? "in work" : "completed")
+            switch archiveProgress {
+            case .idle: Text("Waiting")
+            case .failed: Text("Failed").foregroundColor(.red)
+            case .success(let count):
+                Text("Wrote \(count) bytes")
+            case .inWork:
+                Text("In process…")
+            }
         }
-        .onChange(of: isUnderWay) { newValue in
+        .onReceive(PhaseStorage.shared.$archiveHasBeenWritten) {
+            newValue in
             if newValue {
-                // isUnderWay is now true.
-                let inFiles = InputFile.loadData(from: jsonTaggedNames)
+                let archiveData = PhaseStorage.shared.archiver.archivedData
                 
-                InputFile.present(files: inFiles)
+                archiveProgress = .success(archiveData?.count ?? 0)
+                showActivitySheet = true
             }
             else {
-                // Is under way has changed to false
+                archiveProgress = .idle
             }
         }
+        .sheet(isPresented: $showActivitySheet,
+               onDismiss: {
+            archiveProgress = .idle
+        }, content: {
+            ActivityUIController(url: PhaseStorage.shared.zipOutputURL)
+                .presentationDetents([.medium])
+        })
     }
 }
 
