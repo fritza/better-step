@@ -40,6 +40,8 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     @Published public  var areAllPhasesComplete : Bool
     
+    @Published public private(set) var archiveHasBeenWritten: Bool
+    
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
     public init() {
@@ -49,6 +51,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
 //            destinationURL: zipOutputURL)
         
         self.areAllPhasesComplete = false
+        self.archiveHasBeenWritten = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
     }
@@ -61,6 +64,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// ``MassDiscardable`` adoption
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
+        archiveHasBeenWritten = false
         completionDictionary = [:]
         ASKeys.isFirstRunComplete = false
     }
@@ -89,7 +93,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         assert(SubjectID.id != SubjectID.unSet)
 
         return "\(phase.rawValue)_\(SubjectID.id)_\(stickyYMDTag)"
-        + ".cav"
+        + ".csv"
     }
     
     var zipFileName: String {
@@ -153,31 +157,17 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         }
         try archiver.saveArchive()
         ASKeys.isFirstRunComplete = true
+        archiveHasBeenWritten = true
     }
     
-    func writeArchive() throws {
-        do {
-            try archiver.saveArchive()
-        }
-        catch {
-            print(#fileID, ":", #line, "- error saving the archive:", error)
-            print()
-        }
-    }
-    
-//    var zipDataExists: Bool {
-//        FileManager.default
-//            .fileExists(atURL: zipOutputURL)
-//    }
-//
-//    static func zipContent() throws -> Data {
-//        let zoURL = shared.zipOutputURL
-//        guard shared.zipDataExists else {
-//            // No file to be read? Bail.
-//            throw FileStorageErrors.cantFindZIP(zoURL.lastPathComponent)
+//    func writeArchive() throws {
+//        do {
+//            try archiver.saveArchive()
 //        }
-//        let data = try Data(contentsOf: zoURL)
-//        return data
+//        catch {
+//            print(#fileID, ":", #line, "- error saving the archive:", error)
+//            print()
+//        }
 //    }
 }
 
