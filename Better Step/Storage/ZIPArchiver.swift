@@ -31,21 +31,18 @@ class ZIPArchiver: MassDiscardable {
     private let outputURL: URL
     
     /// Create a ``ZIPArchiver``  in "create" mode.
+    /// - parameter url: The complete URL, uncluding file name, of the archive to be created.
     /// - throws: ``AppPhaseErrors.cantCreateZIPArchive`` if `ZIPFoundation` can't create its `Archive`.
     init(destinationURL url: URL) throws {
         // FIXME: verify that the URL is not an existing directory.
-        guard let arch = Archive(accessMode: .create) else {
-            throw AppPhaseErrors.cantInitializeZIPArchive
+        
+        // From README.md:
+        guard let archive = Archive(url: url, accessMode: .create) else  {
+            throw AppPhaseErrors.cantCreateZIPArchive
         }
-        self.archiver = arch
+        
+        self.archiver = archive
         self.outputURL = url
-    }
-    
-    convenience init(destinationPath path: String) throws {
-        guard let dest = URL(string: path) else {
-            fatalError("\(#function):\(#line): No URL yield from “\(path)”")
-        }
-        try self.init(destinationURL: dest)
     }
     
     // MARK: - MassDiscardable
@@ -72,20 +69,12 @@ class ZIPArchiver: MassDiscardable {
                       provider: { position, size in
                 return data
             })
-    }
     
-    /// Compress and add  a `String` to the archive under a given file name.
-    /// - Parameters:
-    ///   - string: The string to encode
-    ///   - fileName: The "file" name that identifies `data` in the archive.
-    /// - throws: Errors from `ZIPFoundation`.
-    func add(string: String, named fileName: String) throws {
-        guard let data = string.data(using: .utf8) else {
-            fatalError("\(#fileID):\(#line) - can't convert internal String to Data")
-        }
-        try self.add(data, named: fileName)
+    /*
+     progress: Progress? = nil, provider: Provider) throws {
+     */
     }
-    
+        
     // MARK: - Output
     var archivedData: Data? {
         archiver.data
