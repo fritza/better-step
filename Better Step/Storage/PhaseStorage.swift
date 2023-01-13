@@ -32,9 +32,10 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     let stickyYMDTag: String // "yyyy-mm-dd"
         
     typealias CompDict = [SeriesTag:Data]
+    /// A dictionary that maps phases to the data they generate.
+    ///
+    /// `checkCompletion` compares the key set with the phases reported complete, to trigger saving the data.
     @Published private(set) var completionDictionary  : CompDict = [:]
-    //    private var subjectID             : String
-    //    private var goal                  : CompletionGoal
     
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     @Published public  var areAllPhasesComplete : Bool
@@ -155,7 +156,13 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     }
     
     func writeArchive() throws {
-        let data = archiver.archivedData
+        do {
+            try archiver.saveArchive()
+        }
+        catch {
+            print(#fileID, ":", #line, "- error saving the archive:", error)
+            print()
+        }
     }
     
 //    var zipDataExists: Bool {
