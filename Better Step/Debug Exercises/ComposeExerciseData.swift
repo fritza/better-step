@@ -19,8 +19,9 @@ let jsonNames = [
 
 let jsonTaggedNames: [(String, SeriesTag)] =
 zip(jsonNames,
-    [.firstWalk, .secondWalk, .dasi,
-        .usability, .sevenDayRecord])
+    SeriesTag.neededForLaterRuns
+)
+
 .map {
     name, phase -> (String, SeriesTag) in
     return (name, phase)
@@ -37,12 +38,14 @@ struct InputFile {
     let phase   : SeriesTag
     
     init(base: String, phase: SeriesTag) {
+        // Force phase and subject ID environment.
+        // I hope
         if SubjectID.id == SubjectID.unSet {
             SubjectID.id = "sample"
         }
+        ASKeys.isFirstRunComplete = true
         
-        let stdDefts = UserDefaults.standard
-        let val = stdDefts.bool(forKey: ASKeys.completedFirstRun.rawValue)
+        
         
         let mainBundle = Bundle.main
         guard let jsonURL = mainBundle
