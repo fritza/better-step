@@ -85,12 +85,15 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // phase_subject_yyyy-mm-dd.csv
         // The zip form is:
         // subject_yyyy-mm-dd.zip
-        
+        assert(SubjectID.id != SubjectID.unSet)
+
         return "\(phase.rawValue)_\(SubjectID.id)_\(stickyYMDTag)"
         + ".cav"
     }
     
     var zipFileName: String {
+        assert(SubjectID.id != SubjectID.unSet)
+
         let userNameComponent = SubjectID.id
         return "\(userNameComponent)_\(stickyYMDTag)"
         + ".zip"

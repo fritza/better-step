@@ -22,7 +22,7 @@ struct StepsOnDate: CSVRepresentable, Comparable
     // MARK: CSVRepresentable
     var csvLine: String {
         // TODO: Why doesn't the [CSVRepresentable] -> csvLine work here?
-        
+        assert(SubjectID.id != SubjectID.unSet)
         // SeriesTag.sevenDayRecord
         let components: [String] = [
             SeriesTag.sevenDayRecord.rawValue,
