@@ -32,8 +32,8 @@ struct Better_StepApp: App {
             // TODO: remove some of these #cases.
             // TODO: Respond to the per-task deletion notifications
 
-//            TopContainerView()
-            ReleaseExerciseView()
+            TopContainerView()
+//            ReleaseExerciseView()
         }
     }
 }
