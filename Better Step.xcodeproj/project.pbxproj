@@ -311,22 +311,22 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
-				1F415DEC295F938A00F49E82 /* Better Step.entitlements */,
-				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
-				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
-				1FB684E827F225EC00612924 /* ASKeys.swift */,
-				1FB2F53728D133B600593692 /* Time */,
-				1FF3544F27921191000894B8 /* Extensions */,
-				1FB2F54328D2619D00593692 /* Top container */,
-				1FF3543D2790A958000894B8 /* Storage */,
-				1FCBA9FD2835AA040088EAF2 /* Usability */,
-				1F8A337F27E119A30093C896 /* App Stages */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
-				1F60E70028DA71AC00EC2593 /* Milestones */,
-				1FFB30DE277BE4FA0099AE5E /* Views */,
+				1F8A337F27E119A30093C896 /* App Stages */,
+				1FB684E827F225EC00612924 /* ASKeys.swift */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
+				1F415DEC295F938A00F49E82 /* Better Step.entitlements */,
+				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
+				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1FF3544E27920A3B000894B8 /* config-mini.plist */,
+				1FF3544F27921191000894B8 /* Extensions */,
+				1F60E70028DA71AC00EC2593 /* Milestones */,
 				1F0B6757276FA6CA00011A7E /* Preview Content */,
+				1FF3543D2790A958000894B8 /* Storage */,
+				1FB2F53728D133B600593692 /* Time */,
+				1FB2F54328D2619D00593692 /* Top container */,
+				1FCBA9FD2835AA040088EAF2 /* Usability */,
+				1FFB30DE277BE4FA0099AE5E /* Views */,
 			);
 			path = "Better Step";
 			sourceTree = "<group>";
