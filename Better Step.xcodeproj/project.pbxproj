@@ -39,6 +39,8 @@
 		1F665865296F672500EE75FE /* ZIPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665864296F672500EE75FE /* ZIPProgressView.swift */; };
 		1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
+		1F66586C2971C47400EE75FE /* ComposeExerciseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */; };
+		1F66586E2971CFF200EE75FE /* ReleaseExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -188,6 +190,8 @@
 		1F665862296F63DF00EE75FE /* PNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNavStack.swift; sourceTree = "<group>"; };
 		1F665864296F672500EE75FE /* ZIPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPProgressView.swift; sourceTree = "<group>"; };
 		1F66586729709D4900EE75FE /* ZIPArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPArchiver.swift; sourceTree = "<group>"; };
+		1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeExerciseData.swift; sourceTree = "<group>"; };
+		1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseExerciseView.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1F66586A2971C44300EE75FE /* Debug Exercises */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1FB684E827F225EC00612924 /* ASKeys.swift */,
@@ -422,6 +427,15 @@
 				1F665852296E29F600EE75FE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1F66586A2971C44300EE75FE /* Debug Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */,
+				1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */,
+			);
+			path = "Debug Exercises";
 			sourceTree = "<group>";
 		};
 		1F8A337F27E119A30093C896 /* App Stages */ = {
@@ -847,6 +861,7 @@
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
+				1F66586C2971C47400EE75FE /* ComposeExerciseData.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
 				1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */,
 				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
@@ -888,6 +903,7 @@
 				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,
 				1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */,
 				1FA281F028DBBB270038353E /* MorseHaptic.swift in Sources */,
+				1F66586E2971CFF200EE75FE /* ReleaseExerciseView.swift in Sources */,
 				1FA2821728DBBB270038353E /* ReportView.swift in Sources */,
 				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
