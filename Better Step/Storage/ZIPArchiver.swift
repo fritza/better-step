@@ -30,6 +30,12 @@ class ZIPArchiver: MassDiscardable {
     private var archiver: Archive
     private let outputURL: URL
     
+    /// The directory to receive the csv and zip files.
+    /// - note: The caller is responsible for ensuring it exists.
+    var containmentURL: URL {
+        outputURL.deletingLastPathComponent()
+    }
+    
     /// Create a ``ZIPArchiver``  in "create" mode.
     /// - parameter url: The complete URL, uncluding file name, of the archive to be created.
     /// - throws: ``AppPhaseErrors.cantCreateZIPArchive`` if `ZIPFoundation` can't create its `Archive`.
@@ -61,18 +67,25 @@ class ZIPArchiver: MassDiscardable {
     ///   - fileName: The "file" name that identifies `data` in the archive.
     /// - throws: Errors from `ZIPFoundation`.
     func add(_ data: Data, named fileName: String) throws {
-        try archiver
-            .addEntry(with: fileName,
-                      type: .file,
-                      uncompressedSize: Int64(data.count),
-                      compressionMethod: .deflate,
-                      provider: { position, size in
-                return data
-            })
-    
-    /*
-     progress: Progress? = nil, provider: Provider) throws {
-     */
+        assert(fileName.hasSuffix(".csv"),
+        "the proposed file name “\(fileName)” has the wrong extension.")
+        
+        let fileURL = containmentURL
+            .appending(component: fileName)
+        // Create a file containing the CSV,
+        // using the set name for the activity,
+        // date, and subject.
+        try FileManager.default
+            .deleteAndCreate(at: fileURL,
+                             contents: data)
+        
+        do {
+            try archiver.addEntry(with: fileName, relativeTo: containmentURL, compressionMethod: .deflate)
+        }
+        catch {
+            print("Can’t add file", fileName, "-", error)
+            throw AppPhaseErrors.cantInsertDataFile(fileName: fileName)
+        }
     }
         
     // MARK: - Output
