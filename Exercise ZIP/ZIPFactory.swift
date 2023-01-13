@@ -4,16 +4,20 @@
 //
 //  Created by Fritz Anderson on 1/10/23.
 //
+//  App Exercise ZIP ONLY.
+//  See ZIPArchiver.swift for Better Step.
 
 import Foundation
 import ZIPFoundation
 
+/// Create a ZIPFoundation Archive to be assembled and emitted solely as `Data`
+///
+/// In other words, all "files" in the archiving process are in-memory `Data`.
+/// - warning: App Exercise ZIP **ONLY**. See ZIPArchiver.swift for Better Step.,
+
 final class ZipFactory {
     let archiver: Archive
     
-    /// Create a ZIPFoundation Archive to be assembled and emitted solely as `Data`
-    ///
-    /// In other words, all "files" in the archiving process are in-memory `Data`.
     init() throws {
         guard let archive = Archive(accessMode: .create)
         else { throw PifflErrors.badArchive }
@@ -27,6 +31,9 @@ final class ZipFactory {
         guard let retval = archiver.data else { throw PifflErrors.badArchive }
         return retval
     }
+    
+    //  App Exercise ZIP ONLY.
+    //  See ZIPArchiver.swift for Better Step.
     
     /// Take the `Data` representation of a ``Piffle`` add it to the archive under its `name` attribute.
     ///
@@ -48,3 +55,6 @@ final class ZipFactory {
         print(#function, "made it through")
     }
 }
+
+//  App Exercise ZIP ONLY.
+//  See ZIPArchiver.swift for Better Step.
