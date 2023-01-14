@@ -22,21 +22,64 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (interstitial_1)",
             tag: WalkingState.interstitial_1, selection: $state) {
-                InterstitalPageContainerView(listing: instructionContentList, selection: 1) {_ in
-                    UIApplication.shared.isIdleTimerDisabled = true
-                    // See the completion calls for the setting to false
-#if DEBUG
-                    print("\(#function): \(#fileID):\(#line)", "Disabled the timer when completed from Interstitial 1")
-#endif
-                    
-                    self.state = .countdown_1
-                }
-                .padding()
+                InterstitalPageContainerView(
+                    listing: instructionContentList,
+                    selection: 1) {_ in
+                        self.state = .volume_1
+                        UIApplication.shared.isIdleTimerDisabled = true
+                    }
+                    .padding()
                     .navigationBarBackButtonHidden(true)
             }
             .hidden()
     }
+    
+    // MARK: - Volume warning
+    
+    /// Common code for displaying the raise-volume page.
+    /// - parameters:
+    ///     - current: The stage in the walk order for this display.
+    ///     - next:    The stage to follow this one.
+    @ViewBuilder
+    private func volumeView(_ current: WalkingState,
+                    next: WalkingState) -> some View {
+        Text("Common volume view unimplemented.")
+        #warning("Common volume view unimplemented.")
+/*
+        NavigationLink(
+            "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
+            tag: ownPhase, selection: $state)
+*/
+        
+        NavigationLink("SHOULDN'T SEE link for generic volume_nView", tag: current,
+                       selection: $state) {
+            VolumePageView {
+                _ in
+                self.state = next
+                // First attempt, allow the screen to go
+                // dark.
+                // UIApplication.shared
+                //    .isIdleTimerDisabled = true
+            }
+            .padding()
+            .navigationBarBackButtonHidden(true)
+        }
+                       .hidden()
+    }
+    
+    /// Display the raise-volume pge the _first_ time.
+    @ViewBuilder
+    func volume_1View() -> some View {
+        volumeView(.volume_1, next: .countdown_1)
+    }
+    
+    /// Display the raise-volume pge the _second_ time.
+    @ViewBuilder
+    func volume_2View() -> some View {
+        volumeView(.volume_2, next: .countdown_2)
+    }
 
+    // MARK: - Countdowns
     /// A `NavigationLink` for the first pre-walk countdown (`countdown_1`)
     @ViewBuilder
     func countdown_1View() -> some View {
@@ -57,7 +100,8 @@ extension WalkingContainerView {
                     case .cancelled:
                         state = .interstitial_1
                     default:
-                        preconditionFailure("error \(timerError) Can't Happen.")// state = .walk_1
+                        preconditionFailure("error \(timerError) Can't Happen.")
+                        // state = .walk_1
 
                     }
                 }
@@ -68,7 +112,14 @@ extension WalkingContainerView {
             .hidden()
     }
 
+    // MARK: - Walks 1 and 2
     @ViewBuilder
+    /// Common code for conducting the timed (mm:ss) walk.
+    /// - Parameters:
+    ///   - ownPhase: The walking-container tag this code executes.
+    ///   - nextPhaseGood: The tag for the walk phase if the walk proceded to the end.
+    ///   - nextPhaseBad: The tag for the walk phase if the walk proceded was cancelled..
+    /// - Returns: The `View` that displays the walk timer.
     func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
@@ -106,8 +157,10 @@ extension WalkingContainerView {
             .hidden()
     }
 
-
-    /// A `NavigationLink` for the first timed walk (`walk_1`)
+    
+    /// A `NavigationLink` for the first timed walk (`walk_1`, success → `.interstitial_2`, cancellation: → `.interstitial_1` )
+    ///
+    /// Implemented in terms of `walk_N_View`
     @ViewBuilder
     func walk_1View() -> some View {
         walk_N_View(ownPhase     : .walk_1,
@@ -123,20 +176,14 @@ extension WalkingContainerView {
             tag: WalkingState.interstitial_2, selection: $state) {
                 InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) { _ in
                     UIApplication.shared.isIdleTimerDisabled = true
-                    // See the completion calls for the setting to false
-        #if DEBUG
-                    print("\(#function): \(#fileID):\(#line)", "Disabled the timer when completed from Interstitial 2")
-        #endif
-
-                    // → .countdown_2
-                    self.state = .countdown_2
+                    self.state = .volume_2
                 }.padding()
                     .navigationBarBackButtonHidden(true)
             }
             .hidden()
     }
 
-    /// A `NavigationLink` for the second pre-walk countdown (`countdown_2`)
+    /// A `NavigationLink` for the second, sweep-second, pre-walk countdown (`countdown_2`)
     @ViewBuilder
     func countdown_2View() -> some View {
         NavigationLink(
@@ -163,6 +210,8 @@ extension WalkingContainerView {
     }
 
     /// A `NavigationLink` for the second timed walk (`walk_2`)
+    ///
+    /// Implemented in terms of `walk_N_View, ` success → `.ending_interstitial`, cancellation: → `.interstitial_1` )
     func walk_2View() -> some View {
         walk_N_View(ownPhase     : .walk_2,
                     nextPhaseGood: .ending_interstitial,

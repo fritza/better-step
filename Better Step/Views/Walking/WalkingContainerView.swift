@@ -15,8 +15,8 @@ import CoreMotion
 /// Names tasks _within the walk phase,_ as distinct from ``SeriesTag``, which identifies reportable data series.
 public enum WalkingState: String, CaseIterable // , BSTAppStages
 {
-    case interstitial_1, countdown_1, walk_1
-    case interstitial_2, countdown_2, walk_2
+    case interstitial_1, volume_1, countdown_1, walk_1
+    case interstitial_2, volume_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
 
     /// The reporting phase corresponding to this `WalkingState`.
@@ -150,15 +150,20 @@ struct WalkingContainerView: View, ReportingPhase {
     }
 
     var body: some View {
-        //        NavigationView {
         VStack {
             interstitial_1View()
+            // the volume view OUGHT to come BEFORE the final view in the sequence (the final view refers specifically to proceeding with the walk).
+            volume_1View()
             countdown_1View()
             walk_1View()
+            
             interstitial_2View()
+            volume_2View()
             countdown_2View()
             walk_2View()
+            
             ending_interstitialView()
+            // the volume view OUGHT to come BEFORE the final view in the sequence (the final view refers specifically to proceeding with the walk).
 #if INCLUDE_WALK_TERMINAL
             demo_summaryView()
 #endif

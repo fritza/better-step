@@ -18,6 +18,7 @@
 		1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
 		1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
 		1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */; };
+		1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51BC7F297230F700BE418A /* VolumePageView.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
 		1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */; };
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
@@ -49,7 +50,6 @@
 		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
 		1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D728DBBA170038353E /* Preview Assets.xcassets */; };
 		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
-		1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */; };
 		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FA281E028DBBB270038353E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
 		1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
@@ -167,6 +167,7 @@
 		1F3BD02929392E3700442A63 /* ResultsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsUploader.swift; sourceTree = "<group>"; };
 		1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometryBuffer.swift; sourceTree = "<group>"; };
 		1F415DEC295F938A00F49E82 /* Better Step.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Better Step.entitlements"; sourceTree = "<group>"; };
+		1F51BC7F297230F700BE418A /* VolumePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumePageView.swift; sourceTree = "<group>"; };
 		1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatEquatable.swift; sourceTree = "<group>"; };
 		1F56E73529439626001708F3 /* TimedXYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedXYZ.swift; sourceTree = "<group>"; };
 		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
@@ -231,7 +232,6 @@
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
-		1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionRoot.swift; sourceTree = "<group>"; };
 		1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkUsabilityForm.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
@@ -504,10 +504,10 @@
 		1FDBB3F9281C494F00D0A7E9 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
-				1FDBB3FA281C498600D0A7E9 /* InstructionRoot.swift */,
 				1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */,
 				1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */,
 				1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */,
+				1F51BC7F297230F700BE418A /* VolumePageView.swift */,
 			);
 			path = Instructions;
 			sourceTree = "<group>";
@@ -917,7 +917,6 @@
 				1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */,
 				1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */,
 				1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */,
-				1FA281DE28DBBB270038353E /* InstructionRoot.swift in Sources */,
 				1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
@@ -928,6 +927,7 @@
 				1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */,
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
+				1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
