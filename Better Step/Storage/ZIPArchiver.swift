@@ -42,6 +42,15 @@ class ZIPArchiver: MassDiscardable {
     init(destinationURL url: URL) throws {
         // FIXME: verify that the URL is not an existing directory.
         
+        // My bet is that the archiver wants the file not to exist.
+        do {
+            try FileManager.default.deleteIfPresent(url)
+        }
+        catch {
+            print("\(#function):\(#line) - deleteIfPresent returned an error:", error)
+            throw error
+        }
+        
         // From README.md:
         guard let archive = Archive(url: url, accessMode: .create) else  {
             throw AppPhaseErrors.cantCreateZIPArchive
@@ -95,11 +104,11 @@ class ZIPArchiver: MassDiscardable {
     
     /// Save the acciumulated archive data into `self.outputURL`.
     /// - throws: `AppPhaseErrors.cantGetArchiveData` if no output data is available; various Foundation errors via `FileManager`.
-    func saveArchive() throws {
-        guard let data = archivedData else { throw AppPhaseErrors.cantGetArchiveData }
-        try FileManager.default
-            .deleteAndCreate(at: outputURL,
-                             contents: data)
-    }
+//    func saveArchive() throws {
+//        guard let data = archivedData else { throw AppPhaseErrors.cantGetArchiveData }
+//        try FileManager.default
+//            .deleteAndCreate(at: outputURL,
+//                             contents: data)
+//    }
 }
 

@@ -130,11 +130,18 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             return
         }
         
-        // It's a smell if a phase is reported twice.
-        assert(!completionDictionary.keys.contains(tag),
-               "\(#function) - Attempt to re-insert \(tag.rawValue)")
+        do {
+            try archiver.add(data, named: csvFileName(for: tag))
+            // TODO: Watchdog will likely kill this.
+        }
+        catch {
+            print("\(#fileID):\(#line): Can’t add", data.count, "bytes for", tag.rawValue)
+            print("\t", error)
+            throw error
+        }
         
         // Add the datum for this tag.
+        // TODO: Change this into a Set<SeriesTag>.
         completionDictionary[tag] = data
         
         // If all required tags are accounted for,
@@ -142,23 +149,29 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         if checkCompletion() {
             // We have everything.
             // Write the archive out
-            try createArchive()
-            // Remove all state, just as in a revert-all.
+//            try createArchive()
+//             Remove all state, just as in a revert-all.
+            
+            #warning("Does reverting before everything is done nil-out things still needed?")
             handleReversion(
                 notice: Notification(name: RevertAllNotice))
+            ASKeys.isFirstRunComplete = true
+            // FIXME: Make this async.
+            archiveHasBeenWritten = true
         }
     }
     
-    func createArchive() throws {
-        // All keysToBeFinished have data.
-        for tag in keysToBeFinished {
-            try archiver.add(completionDictionary[tag]!,
-                             named: csvFileName(for: tag))
-        }
-        try archiver.saveArchive()
-        ASKeys.isFirstRunComplete = true
-        archiveHasBeenWritten = true
-    }
+//    func createArchive() throws {
+//        // All keysToBeFinished have data.
+//        for tag in keysToBeFinished {
+//            try archiver.add(completionDictionary[tag]!,
+//                             named: csvFileName(for: tag))
+//        }
+//        try archiver.saveArchive()
+//        ASKeys.isFirstRunComplete = true
+//        archiveHasBeenWritten = true
+//    }
+    
     
 //    func writeArchive() throws {
 //        do {
