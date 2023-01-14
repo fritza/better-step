@@ -36,6 +36,7 @@ struct ConclusionView: View, ReportingPhase {
             Spacer()
             Button("Submit") {
                 shouldShowActivity = true
+                ASKeys.lastCompletionDate = Date()
             }
             .sheet(isPresented: $shouldShowActivity,
                    onDismiss: {

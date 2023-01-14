@@ -26,12 +26,8 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 
     /// The last-ciompleted phase for state restoration. **Belongs at top.**
     @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
-    ///  The accumulated responses to the DASI Survey. **Move to the DASI phase code.**
-//    @AppStorage(ASKeys.collectedDASI.rawValue) static var collectedDASI: Bool =  false
-//    /// The accimiulated usability results. **Belongs in `UsabilityContainer`, which BTW should be edited to include the survey form.**
-//    @AppStorage(ASKeys.collectedUsability.rawValue) static var collectedUsability: Bool =  false
-//
-    /// `CustomStringConvertible` adoption.
+    
+        /// `CustomStringConvertible` adoption.
     var description: String {
         guard let retval = Self.TPAndString
             .first( where: { $0.value == self.rawValue } )

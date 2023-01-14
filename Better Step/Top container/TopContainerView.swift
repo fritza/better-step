@@ -39,7 +39,7 @@ struct TopContainerView: View, MassDiscardable {
     
     @State var showNoPermission = false
     
-    func tryRealPedometry() {
+    func collect7DayPedometry() {
         PedometryFromHealthKit.securePermission { resultBoolError in
             switch resultBoolError {
             case .failure(let error):
@@ -67,12 +67,14 @@ struct TopContainerView: View, MassDiscardable {
         // TODO: store and reload the current phase ID.
         currentPhase = TopPhases.entry.followingPhase
         self.reversionHandler = self.reversionHandler ?? installDiscardable()
-        // MARK: - (MOCKED) 7-day pedometry
     }
     
+    @State private var shouldChallengeHaste_1: Bool = false
+    @State private var shouldChallengeHaste_2: Bool = false
+
     // TODO: Make .navigationTitle consistent
     
-    // TODO: Do I provide the NavigationView?
+    // I provide the NavigationView
     var body: some View {
         NavigationView {
             VStack {
@@ -94,8 +96,45 @@ struct TopContainerView: View, MassDiscardable {
                             fatalError("Can't fail out of an onboarding view")
                         }
                     }
+                    // .onAppear to set shouldChallengeHaste_1:
+                    // See the .onAppear below for the check for whether this
+                    // is a second run in a single calendar day.
+                    
+                    // MARK: - Warn of overwrite
+                    .alert("Starting Over",
+                           isPresented:  $shouldChallengeHaste_1
+                    ) {
+                        Button("Repeat" , role: .destructive) {
+                            shouldChallengeHaste_2 = true
+                        }
+                        Button("Keep", role: .cancel) {
+                        }
+                    }
+                message: {
+                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\nAre you sure you want to do that?")
+                }   // message/alert
+
+
+                    // MARK: - Double-check overwrite
+                .alert("Making Sure…",
+                       isPresented:  $shouldChallengeHaste_2
+                ) {
+                    Button("Yes, Repeat" , role: .destructive) {
+                        shouldChallengeHaste_2 = true
+                    }
+                    Button("Cancel", role: .cancel) {
+                    }
+                }
+                message: {
+                    Text("Are you comfortable with replacing today’s session with another one? This cannot be undone")
+                    // FIXME: - This will override the first-completed flag.
+                }   // haste_2 message/alert
+
+                    // ===================================================
+                    
+                    
                     .onDisappear {
-                        tryRealPedometry()
+                        collect7DayPedometry()
                     }
                     
                 case .greeting:
@@ -103,7 +142,7 @@ struct TopContainerView: View, MassDiscardable {
                         self.currentPhase = .walking
                     }
                     .onDisappear {
-                        tryRealPedometry()
+                        collect7DayPedometry()
                     }
                     
                     // MARK: - Walking
@@ -162,6 +201,7 @@ struct TopContainerView: View, MassDiscardable {
                     
                     // MARK: - Conclusion (success)
                 case .conclusion:
+                    // ConclusionView records the last-completed date.
                     ConclusionView { _ in
                         self.currentPhase = .entry.followingPhase
                         latestPhase = TopPhases.conclusion.rawValue
@@ -185,7 +225,8 @@ struct TopContainerView: View, MassDiscardable {
                     // MARK: - onAppear {}
             .onAppear {
                 showReversionAlert = false
-                //                self.currentPhase = .entry.followingPhase
+                // Alert if this is a fresh run on the same calendar day.
+                shouldChallengeHaste_1 = ASKeys.tooEarlyToRepeat
                 
                 // Report the 7-day summary
                 // SeriesTag.sevenDayRecord

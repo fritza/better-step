@@ -29,6 +29,12 @@ enum ASKeys: String {
     
     case _7DayKey
     
+    /// Represent the arrival at the final scene (ConclusionView)
+    /// as a Date timeIntervalSinceEpoch TimeInterval.
+    ///
+    /// - note: This is _only_ for policing repeated attempts at sessions. Making this a proxy for isFirstRunComplete would be a great idea (nil == first run), but  this is in haste.
+    case lastCompletedDate
+    
     func negate() {
         let ud = UserDefaults.standard
         ud.set(false, forKey: self.rawValue)
@@ -85,6 +91,34 @@ enum ASKeys: String {
                 .setValue(newValue, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
         }
     }
+    
+    // MARK: - Completion date
+    ///  The last date at which the user made it all the way through a session.
+    ///
+    ///  If none has been set this will be `.distantPast`. Client code will use this to determine whether the user should be warned-off from retries within a certain interval (like 1 calendar day?).
+    ///
+    ///  Clients that want to put at timestamp on a fresh completion should use `ASKeys.lastCompletionDate = Date()`
+    static var lastCompletionDate: Date {
+        get {
+            guard let interval = UserDefaults.standard
+                .value(forKey: ASKeys.lastCompletedDate.rawValue) as? TimeInterval
+            else { return .distantPast }
+                let asDate = Date(timeIntervalSince1970: interval)
+            return asDate
+        }
+        set {
+            let since1970 = newValue.timeIntervalSince1970
+            UserDefaults.standard
+                .set(since1970, forKey: ASKeys.lastCompletedDate.rawValue)
+        }
+    }
+    
+    static var tooEarlyToRepeat: Bool {
+        let lastCompletion: String = lastCompletionDate.ymd
+        let todayYMD      : String = Date().ymd
+        return lastCompletion == todayYMD
+    }
+    
     static func spoilLast7DReport() {
         UserDefaults.standard
             .setValue(0, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
