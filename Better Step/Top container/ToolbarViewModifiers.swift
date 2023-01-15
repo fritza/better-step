@@ -62,7 +62,7 @@ struct ReversionAlert: ViewModifier {
                 }
             }
     message: {
-        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\nYou cannot undo this.")
+        Text("Do you want to revert to the first run and collect subject ID, surveys, and walks?\n\nYou cannot undo this.")
     }   // message/alert
     }   // view
 }       // struct

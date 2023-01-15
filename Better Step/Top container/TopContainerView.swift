@@ -101,7 +101,7 @@ struct TopContainerView: View, MassDiscardable {
                     // is a second run in a single calendar day.
                     
                     // MARK: - Warn of overwrite
-                    .alert("Starting Over",
+                    .alert("Repeating a Session",
                            isPresented:  $shouldChallengeHaste_1
                     ) {
                         Button("Repeat" , role: .destructive) {
@@ -111,7 +111,7 @@ struct TopContainerView: View, MassDiscardable {
                         }
                     }
                 message: {
-                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\nAre you sure you want to do that?")
+                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\n\nAre you sure you want to do that?")
                 }   // message/alert
 
 
