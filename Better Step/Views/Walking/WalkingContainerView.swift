@@ -98,15 +98,16 @@ struct WalkingContainerView: View, ReportingPhase {
      ((Result<SuccessValue, Error>) -> Void)!
      */
     @EnvironmentObject var motionManager: MotionManager
-    @State var state: WalkingState? {
-        didSet {
-            print("Walking State goes from",
-                  oldValue?.rawValue ?? "<N/A>",
-                  "to",
-                  state?.rawValue ?? "<N/A>"
-            )
-        }
-    }
+    @State var state: WalkingState?
+//    {
+//        didSet {
+//            print("Walking State goes from",
+//                  oldValue?.rawValue ?? "<N/A>",
+//                  "to",
+//                  state?.rawValue ?? "<N/A>"
+//            )
+//        }
+//    }
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
 

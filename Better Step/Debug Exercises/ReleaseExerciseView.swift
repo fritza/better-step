@@ -43,6 +43,8 @@ struct ReleaseExerciseView: View {
                 Text("In process…")
             }
         }
+        // Ignore error; this file is
+        // not in any build order.
         .onReceive(PhaseStorage.shared.$archiveHasBeenWritten) {
             newValue in
             if newValue {

@@ -25,10 +25,6 @@ struct TopContainerView: View, MassDiscardable {
     @State var currentPhase: TopPhases
     
     // TODO: Should this be an ObservedObject?
-//    @StateObject var phaseStorage = PhaseStorage()
-    
-    // FIXME: Necessary
-    
     var reversionHandler: AnyObject?
     func handleReversion(notice: Notification) {
         ASKeys.revertPhaseDefaults()
@@ -207,7 +203,9 @@ struct TopContainerView: View, MassDiscardable {
                 case .conclusion:
                     // ConclusionView records the last-completed date.
                     ConclusionView { _ in
-                        self.currentPhase = .entry.followingPhase
+                        // Just to make sure:
+                        ASKeys.isFirstRunComplete = true
+                        self.currentPhase = .entry // .followingPhase
                         latestPhase = TopPhases.conclusion.rawValue
                     }
                     .navigationTitle("Finished")
@@ -217,6 +215,7 @@ struct TopContainerView: View, MassDiscardable {
                 case .failed:
                     FailureView(failing: TopPhases.walking) { _ in
                         // FIXME: Dump all data
+                        self.currentPhase = .entry
                     }
                     .navigationTitle("FAILED")
                     .padding()

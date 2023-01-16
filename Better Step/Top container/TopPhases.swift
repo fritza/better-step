@@ -45,6 +45,8 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
  That's the initial state.
  */
 /// Restore the completion state (current phase, DASI complete, usability complete) to initial.
+///
+/// Called only in repsonse to a total reversion.
     static func resetToFirst() {
         latestPhase = TopPhases.entry.rawValue
         // Static func can't access @AppStorage.
@@ -55,15 +57,6 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 //        collectedUsability = false
 //        firstUse = true
     }
-
-    /// Restore the completion state as when a first run has been completed (onboarding done).
-    static func resetToLater() {
-        latestPhase = TopPhases.entry.rawValue
-//        collectedDASI = true
-//        collectedUsability = true
-//        firstUse = false
-    }
-
 
     // Not an OptionSet, but we'll live.
 
@@ -114,13 +107,9 @@ extension TopPhases {
     ///
     /// "No suuccessor" is a sensible response for `conclusion` and `failed`.
     var followingPhase: TopPhases {
-        
-        
         switch self {
         
         case .entry                 :
-//            let subjectIDSet = (SubjectID.id != SubjectID.unSet)
-//            return subjectIDSet ? .greeting : .onboarding
             return ASKeys.isFirstRunComplete ? .greeting : .onboarding
 
         case .greeting, .onboarding: return .walking
