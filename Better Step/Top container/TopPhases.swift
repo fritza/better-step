@@ -126,3 +126,18 @@ extension TopPhases {
         }
     }
 }
+
+/// A "pjhase" `View` for anything not among the static valies of ``TopPhases``. Its sole purpose is to provide a `View` to ``TopContainerView`` that has a completion closure bumping the current phase up to `.entry.followingPhase`.
+struct EmptyPhase: View, ReportingPhase {
+    typealias SuccessValue = Void
+    let completion: ClosureType
+    
+    var body: some View {
+        EmptyView()
+    }
+    
+    init(_ completed: @escaping ClosureType) {
+        completion = completed
+        completion(.success(()))
+    }
+}

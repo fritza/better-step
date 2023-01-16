@@ -205,7 +205,7 @@ struct TopContainerView: View, MassDiscardable {
                     ConclusionView { _ in
                         // Just to make sure:
                         ASKeys.isFirstRunComplete = true
-                        self.currentPhase = .entry // .followingPhase
+                        self.currentPhase = .entry.followingPhase
                         latestPhase = TopPhases.conclusion.rawValue
                     }
                     .navigationTitle("Finished")
@@ -215,14 +215,20 @@ struct TopContainerView: View, MassDiscardable {
                 case .failed:
                     FailureView(failing: TopPhases.walking) { _ in
                         // FIXME: Dump all data
-                        self.currentPhase = .entry
+                        self.currentPhase = .entry.followingPhase
                     }
                     .navigationTitle("FAILED")
                     .padding()
                     
                     // MARK: - no such phase
                 default:
-                    preconditionFailure("Should not be able to reach phase \(self.currentPhase.description)")
+                    // This includes .entry.
+                    // See DocC for ``EmptyPhase``. It's not meant to be visible, it's just a way to set the current phase to .entry.followingPhase 
+                    EmptyPhase { _ in
+                        self.currentPhase = .entry.followingPhase
+                    }
+                    // I sish I could have:
+                    //    currentPhase = .entry.followingPhase
                 }   // Switch on currentPhase
             }       // VStack
                     // MARK: - onAppear {}
