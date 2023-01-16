@@ -69,18 +69,14 @@ public class ResultsUploader // : Hashable
     /// A **file** URL providing the data to be uploaded,
     private let dataURL: URL
 
-    // let uploadPayload: Data
-    // Is this needed beyond init(payload:)?
-//
-//    private let notificationHandlers: [AnyObject?]
-
     private var networkCompletion: UploadFinish
     /// Prepare an upload from a local file
     /// - Parameter url: The `URL` of the file whose contents are to be uploaded.
-    init(from url: URL,
+    init(fromLocalURL url: URL,
          completion: @escaping UploadFinish) throws {
-        dataURL = url
         networkCompletion = completion
+        
+        dataURL = url
         let payload = try Data(contentsOf: url)
         if payload.isEmpty {
             throw FileStorageErrors.uploadEmptyData(url.path)
@@ -90,11 +86,8 @@ public class ResultsUploader // : Hashable
             .uploadURL
             .appending(component: url.lastPathComponent)
         // Form the request
-        var request = URLRequest(
-            url: urlForRemoteFile)
-        
-        // "The body stream and body data in this request object are ignored"
-        // in the case of an upload task.
+        var request = URLRequest(url: urlForRemoteFile)
+        request.httpBody = payload
         request.httpMethod = UploadServerCreds.methodName
         dataRequest = request
     }
@@ -103,23 +96,9 @@ public class ResultsUploader // : Hashable
     
     /// Set up the data task for the upload, and its delegate. Commence the upload.
     func proceed() {
-        // How did I have this as a data task (download)
-        // and not upload task (um, upload)?
-
-        guard let content = try? Data(contentsOf: dataURL) else {
-            print("No data.")
-            return
-        }
-        // It's binary. No string.
-//        guard let asString = String(data: content, encoding: .utf8) ...
-        print("Will send", content.count, "bytes from", dataURL.path, "to", dataRequest.url?.absoluteString ?? "N/A")
-
-
-        let upTask = session.uploadTask(with: dataRequest,
-                                        from: content,
-                                        completionHandler: resultFunction(data:response:error:))
-//        let upTask = session.dataTask(
-//            with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
+        let destination = UploadServerCreds.uploadURL
+        let upTask = session.dataTask(
+            with: dataRequest, completionHandler: resultFunction)
         upTask.delegate = UploadTaskDelegate()
         upTask.resume()
         
@@ -145,8 +124,6 @@ public class ResultsUploader // : Hashable
             !(200..<300).contains(response.statusCode)
         else {
             print("Upload request failed: \(error!.localizedDescription)")
-//            sendUploadNotice(name: UploadFailedNotification,
-//                             server: UploadServerCreds.uploadURL.absoluteString)
             networkCompletion(false)
             return
         }
@@ -161,7 +138,7 @@ public class ResultsUploader // : Hashable
 
 
 
-// MARK: - SessionTaskUploadWalkSession Task dUploadWalkSessionile-upload transactions.
+// MARK: - UploadTaskDelegate
 ///
 /// ATW, the only function is to carrry out the client side of credential exchange via ``urlSession(_:task:didReceive:completionHandler:)``
 /// - todo: Use a dedicated `URLSession`.
@@ -172,17 +149,18 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
                                           URLCredential?) -> Void
 
     /// Permanent, re-usable credentials with the client-to-remote username and password for Basic authorization.
-    public let credential = URLCredential(
+    private let credential = URLCredential(
         user        : UploadServerCreds.userID,
         password    : UploadServerCreds.password,
         persistence : .forSession)
-
+    
     /// `URLSessionTaskDelegate` adoption for authorization challenges.
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didReceive challenge: URLAuthenticationChallenge,
-                           completionHandler: @escaping ChallengeCallback) {
-        let method = challenge.protectionSpace.authenticationMethod
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didReceive challenge: URLAuthenticationChallenge,
+        completionHandler: @escaping ChallengeCallback) {
+            let method = challenge.protectionSpace.authenticationMethod
         // Is the server asking for Basic authentication?
         guard method == NSURLAuthenticationMethodHTTPBasic else {
             // … no, pass it along to whomever might be interested
@@ -192,12 +170,14 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
         // … yes, use `self.credential` to supply username and password.
         completionHandler(.useCredential, credential)
     }
-
+    
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
         print()
     }
 
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession,
+                           task: URLSessionTask,
+                           didCompleteWithError error: Error?) {
         if let error {
             print("Got an error. Client side:", error)
             if let htSession = task.response as? HTTPURLResponse {
@@ -210,12 +190,6 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
     }
 }
 
-// MARK: - completion Notification
-
-// MARK: Names
-//let UploadCompleteNotification = Notification.Name(rawValue: "UploadNotification")
-//let UploadFailedNotification   = Notification.Name(rawValue: "UploadFailedNotification")
-
 // MARK: userInfo keys
 enum UploadResultKeys: String, Hashable {
     case fileNameKey
@@ -224,6 +198,7 @@ enum UploadResultKeys: String, Hashable {
     case errorKey
 }
 
+/*
 // MARK: Firing the notification
 extension ResultsUploader {
     /// Broadcast the completion (successful or not) of the upload through `NotificationCenter`
@@ -244,4 +219,4 @@ extension ResultsUploader {
         NotificationCenter.default.post(notice)
     }
 }
-
+*/
