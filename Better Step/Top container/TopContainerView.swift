@@ -81,6 +81,10 @@ struct TopContainerView: View, MassDiscardable {
                 switch self.currentPhase {
                     // MARK: - Onboarding
                 case .onboarding:
+#warning("Haste alert doesn’t show")
+                    // Why no audio A...N on first run?
+                    // Sounds like a confflict w/ spoken?
+                    
                     // OnboardContainerView suceeds with String.
                     // That's theThat's the entered Subject ID.
                     OnboardContainerView {

@@ -41,7 +41,6 @@
 		1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
 		1F66586C2971C47400EE75FE /* ComposeExerciseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */; };
-		1F66586E2971CFF200EE75FE /* ReleaseExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -903,7 +902,6 @@
 				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,
 				1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */,
 				1FA281F028DBBB270038353E /* MorseHaptic.swift in Sources */,
-				1F66586E2971CFF200EE75FE /* ReleaseExerciseView.swift in Sources */,
 				1FA2821728DBBB270038353E /* ReportView.swift in Sources */,
 				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,

@@ -62,13 +62,15 @@ final class PedometryFromHealthKit: ReportingPhase {
                 toShare: nil,
                 read: perms) { approved, error in
                 if let error {
-                    print("\(#function):\(#line): auth error =", error)
+#if DEBUG
+print("\(#function):\(#line): auth error =", error)
+                    #endif
                     completed(Result.failure(error))
                     return
                 }
                 
                 if approved {
-                    print("\(#function):\(#line):", approved ? "approved" : "refused")
+//                    print("\(#function):\(#line):", approved ? "approved" : "refused")
                     completed(Result.success(approved))
                     return
                 }
@@ -174,7 +176,7 @@ final class PedometryFromHealthKit: ReportingPhase {
         }
         // No result? Log and abandon the function.
         guard let stats else {
-            print("\(#function):\(#line) - Can't retrieve data for one day.")
+//            print("\(#function):\(#line) - Can't retrieve data for one day.")
             // TODO: Improve the log by giving the day or date
             return
         }

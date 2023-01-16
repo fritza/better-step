@@ -38,9 +38,10 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     @Published private(set) var completionDictionary  : CompDict = [:]
     
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
-    @Published public  var areAllPhasesComplete : Bool
+    private var areAllPhasesComplete : Bool
     
-    @Published public private(set) var archiveHasBeenWritten: Bool
+    // Was set but never used.
+//    private var archiveHasBeenWritten: Bool
     
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
@@ -51,7 +52,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
 //            destinationURL: zipOutputURL)
         
         self.areAllPhasesComplete = false
-        self.archiveHasBeenWritten = false
+//        self.archiveHasBeenWritten = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
     }
@@ -64,7 +65,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// ``MassDiscardable`` adoption
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
-        archiveHasBeenWritten = false
+//        archiveHasBeenWritten = false
         completionDictionary = [:]
         ASKeys.isFirstRunComplete = false
     }
@@ -147,41 +148,42 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
-            // We have everything.
-            // Write the archive out
-//            try createArchive()
-//             Remove all state, just as in a revert-all.
-            
-            #warning("Does reverting before everything is done nil-out things still needed?")
             handleReversion(
                 notice: Notification(name: RevertAllNotice))
             ASKeys.isFirstRunComplete = true
             // FIXME: Make this async.
-            archiveHasBeenWritten = true
+//            archiveHasBeenWritten = true
         }
     }
     
-//    func createArchive() throws {
-//        // All keysToBeFinished have data.
-//        for tag in keysToBeFinished {
-//            try archiver.add(completionDictionary[tag]!,
-//                             named: csvFileName(for: tag))
-//        }
-//        try archiver.saveArchive()
-//        ASKeys.isFirstRunComplete = true
-//        archiveHasBeenWritten = true
-//    }
-    
-    
-//    func writeArchive() throws {
-//        do {
-//            try archiver.saveArchive()
-//        }
-//        catch {
-//            print(#fileID, ":", #line, "- error saving the archive:", error)
-//            print()
-//        }
-//    }
+    /// Upon completion of the upload, tear down the archive file and the accumulated-data state
+    /// - Parameter success: whether the upload succeeded.
+    /// - note: At some point  `success` will matter,
+    ///     but this hasn't been thought-out yet.
+    func tearDownFromUpload(havingSucceeded success: Bool = true)
+    {
+        if success {
+        }
+        else {
+//            archiveHasBeenWritten = false
+
+        }
+        
+        // This is identical to
+        // handleReversion(notice:)
+        // FIXME: Meaning of "written" and "complete"?
+        // The following is the state PhaseSrotage
+        // should be in to accept data from a new
+        // session. They are not public
+        // notifications of success.
+//        archiveHasBeenWritten = false
+        areAllPhasesComplete = false
+        completionDictionary = [:]
+        ASKeys.isFirstRunComplete = false
+
+      _ = try? FileManager.default
+            .deleteIfPresent(zipOutputURL)
+    }
 }
 
 extension PhaseStorage {
