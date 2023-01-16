@@ -116,8 +116,23 @@ public class ResultsUploader // : Hashable
         // How did I have this as a data task (download)
         // and not upload task (um, upload)?
         
+        guard let content = try? Data(contentsOf: dataURL) else {
+            print("No data.")
+            return
+        }
+        // It's binary. No string.
+//        guard let asString = String(data: content, encoding: .utf8) ...
+        print("Will send", content.count, "bytes from", dataURL.path, "to", dataRequest.url?.absoluteString ?? "N/A")
+        
+        
+        // I suspect that simply passing the data through
+        // will cure the mysterious attempt to upload
+        // 15 MB and counting of zip.
+        
+        // I further suspect that the .zip file is being deleted prematurely.
+        
         let upTask = session.uploadTask(with: dataRequest,
-                                        fromFile: dataURL,
+                                        from: content,
                                         completionHandler: resultFunction(data:response:error:))
         upTask.delegate = UploadTaskDelegate()
         upTask.resume()
@@ -201,6 +216,23 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
         }
         // … yes, use `self.credential` to supply username and password.
         completionHandler(.useCredential, credential)
+    }
+    
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
+        print()
+    }
+    
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error {
+            print("Got an error. Client side:", error)
+            if let htSession = task.response as? HTTPURLResponse {
+                print("\tServer side:", htSession.statusCode)
+            }
+        }
+        else {
+            print("Completed!")
+        }
     }
 }
 
