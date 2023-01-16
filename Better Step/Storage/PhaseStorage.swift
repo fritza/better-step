@@ -145,10 +145,12 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
-            uploader = try? ResultsUploader(from: zipOutputURL, completion: { success in
+            let upl = try! ResultsUploader(from: zipOutputURL, completion: { success in
                 self.tearDownFromUpload(
                     havingSucceeded: success)
             })
+            uploader = upl
+            upl.proceed()
         }
     }
     
