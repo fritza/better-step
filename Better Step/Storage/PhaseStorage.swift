@@ -40,19 +40,14 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     private var areAllPhasesComplete : Bool
     
-    // Was set but never used.
-//    private var archiveHasBeenWritten: Bool
-    
+    private var uploader: ResultsUploader?
+        
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
     public init() {
         assert(SubjectID.id != SubjectID.unSet)
         stickyYMDTag = Date().ymd
-//        archiver = try! ZIPArchiver(
-//            destinationURL: zipOutputURL)
-        
         self.areAllPhasesComplete = false
-//        self.archiveHasBeenWritten = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
     }
@@ -65,8 +60,10 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// ``MassDiscardable`` adoption
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
-//        archiveHasBeenWritten = false
         completionDictionary = [:]
+        uploader = nil
+        // This is TOTAL reversion,
+        // forget the subject, forget completion.
         ASKeys.isFirstRunComplete = false
     }
     
@@ -148,39 +145,34 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
-            handleReversion(
-                notice: Notification(name: RevertAllNotice))
-            ASKeys.isFirstRunComplete = true
-            // FIXME: Make this async.
-//            archiveHasBeenWritten = true
+            uploader = try? ResultsUploader(from: zipOutputURL, completion: { success in
+                self.tearDownFromUpload(
+                    havingSucceeded: success)
+            })
         }
     }
     
     /// Upon completion of the upload, tear down the archive file and the accumulated-data state
     /// - Parameter success: whether the upload succeeded.
+    /// - warning: releases the uploader from a callback out of the uploader. This might not go well.
     /// - note: At some point  `success` will matter,
     ///     but this hasn't been thought-out yet.
     func tearDownFromUpload(havingSucceeded success: Bool = true)
     {
         if success {
+            // If this session went end-to-end
+            // then at least one has completed.
+            // Record first run completed.
+            ASKeys.isFirstRunComplete = true
         }
-        else {
-//            archiveHasBeenWritten = false
-
-        }
-        
-        // This is identical to
-        // handleReversion(notice:)
-        // FIXME: Meaning of "written" and "complete"?
+        else { }
         // The following is the state PhaseSrotage
         // should be in to accept data from a new
         // session. They are not public
         // notifications of success.
-//        archiveHasBeenWritten = false
         areAllPhasesComplete = false
         completionDictionary = [:]
-        ASKeys.isFirstRunComplete = false
-
+        uploader = nil
       _ = try? FileManager.default
             .deleteIfPresent(zipOutputURL)
     }

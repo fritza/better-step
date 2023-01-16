@@ -39,6 +39,8 @@ public enum UploadServerCreds {
     static let reviewURL    = URL(fileURLWithPath: reviewPage)
 }
 
+typealias UploadFinish = (Bool) -> Void
+
 // MARK: - ResultsUploader
 
 /// Upload local data provided by a `file:///` `URL` to a particular server, ATW the Better Step database.
@@ -72,10 +74,14 @@ public class ResultsUploader // : Hashable
 
     private let notificationHandlers: [AnyObject?]
     
+    private var networkCompletion: UploadFinish
+    
     /// Prepare an upload from a local file
     /// - Parameter url: The `URL` of the file whose contents are to be uploaded.
-    init(from url: URL) throws {
+    init(from url: URL,
+         completion: @escaping UploadFinish) throws {
         dataURL = url
+        networkCompletion = completion
         let payload = try Data(contentsOf: url)
         if payload.isEmpty {
             throw FileStorageErrors.uploadEmptyData(url.path)
@@ -130,23 +136,36 @@ public class ResultsUploader // : Hashable
             print("Upload request failed: \(error!.localizedDescription)")
             sendUploadNotice(name: UploadFailedNotification,
                              server: UploadServerCreds.uploadURL.absoluteString)
+            networkCompletion(false)
             return
         }
 
-        // By here, the source file is away. Delete it.
+        // By here, the source file is away.
+        // Tell the parent PhaseStorage
+        // it can reset to the no-data-collected
+        // state.
         do {
-            try FileManager.default
-                .deleteIfPresent(dataURL)
-            ASKeys.isFirstRunComplete = true
+            networkCompletion(true)
+            // The parent PhaseStorage will have
+            // reset itself and disposed of the
+            // upload file.
             sendUploadNotice(name: UploadCompleteNotification,
                              server: UploadServerCreds.uploadString)
         }
+        
+        // FIXME: Review the need for notifications
+        
+        /*  apparently the above doesn't capture
+         // a failed upload. It seems, therefore,
+         // that the UploadFailedNotification
+         // never gets posted.
         catch {
             print("Can't delete", dataURL.path, "error =", error.localizedDescription)
             sendUploadNotice(name: UploadFailedNotification,
                              server: UploadServerCreds.uploadString, error: error)
             return
         }
+         */
     }
 }
 
