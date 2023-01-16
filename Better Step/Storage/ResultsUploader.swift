@@ -48,7 +48,7 @@ typealias UploadFinish = (Bool) -> Void
 /// Credentials and remotes are drawn from ``UploadServerCreds``
 /// - warning: This code is _not_ safe against interruptions from sleep or relaunch. A `
 public class ResultsUploader // : Hashable
-{    
+{
     /*
      Let’s talk about object lifetime.
 
@@ -73,9 +73,26 @@ public class ResultsUploader // : Hashable
     // Is this needed beyond init(payload:)?
 
     private let notificationHandlers: [AnyObject?]
-    
+
     private var networkCompletion: UploadFinish
-    
+
+    /*
+        init(from url: URL) throws {
+        dataURL = url
+        let payload = try Data(contentsOf: url)
+        if payload.isEmpty {
+            throw FileStorageErrors.uploadEmptyData(url.path)
+        }
+
+        var request = URLRequest(
+            url: UploadServerCreds.uploadURL,
+            timeoutInterval: TimeInterval.infinity)
+        request.httpMethod = UploadServerCreds.methodName
+        request.httpBody = payload
+        dataRequest = request
+    }
+*/
+
     /// Prepare an upload from a local file
     /// - Parameter url: The `URL` of the file whose contents are to be uploaded.
     init(from url: URL,
@@ -87,9 +104,13 @@ public class ResultsUploader // : Hashable
             throw FileStorageErrors.uploadEmptyData(url.path)
         }
 
+        let urlForRemoteFile = UploadServerCreds
+            .uploadURL
+            .appending(component: url.lastPathComponent)
         // Formulate the request
         var request = URLRequest(
-            url: UploadServerCreds.uploadURL,
+            //            url: UploadServerCreds.uploadURL,
+            url: urlForRemoteFile,
             timeoutInterval: TimeInterval.infinity)
         request.httpMethod = UploadServerCreds.methodName
         request.httpBody = payload
@@ -103,19 +124,18 @@ public class ResultsUploader // : Hashable
             }
         let nBad = NotificationCenter.default
             .addObserver(forName: UploadFailedNotification, object: nil, queue: .main) { notice in
-#if DEBUG
-                print(#function, "received a notification named \(notice.name.rawValue)")
-#endif
 //                Self.uploaders.remove(self)
             }
         notificationHandlers = [nGood, nBad]
     }
 
+
+    
     /// Set up the data task for the upload, and its delegate. Commence the upload.
     func proceed() {
         // How did I have this as a data task (download)
         // and not upload task (um, upload)?
-        
+
         guard let content = try? Data(contentsOf: dataURL) else {
             print("No data.")
             return
@@ -123,19 +143,26 @@ public class ResultsUploader // : Hashable
         // It's binary. No string.
 //        guard let asString = String(data: content, encoding: .utf8) ...
         print("Will send", content.count, "bytes from", dataURL.path, "to", dataRequest.url?.absoluteString ?? "N/A")
-        
-        
-        // I suspect that simply passing the data through
-        // will cure the mysterious attempt to upload
-        // 15 MB and counting of zip.
-        
-        // I further suspect that the .zip file is being deleted prematurely.
-        
-        let upTask = session.uploadTask(with: dataRequest,
-                                        from: content,
-                                        completionHandler: resultFunction(data:response:error:))
+
+
+//        let upTask = session.uploadTask(with: dataRequest,
+//                                        from: content,
+//                                        completionHandler: resultFunction(data:response:error:))
+        let upTask = session.dataTask(
+            with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
         upTask.delegate = UploadTaskDelegate()
         upTask.resume()
+        
+        
+        /*
+         func proceed() {
+         let task = session.dataTask(
+         with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
+         task.delegate = UploadTaskDelegate()
+         task.resume()
+         }
+         */
+
     }
 
     /// Completion code for the `POST`, as specified for ``URLSessionDataTask``.
@@ -167,9 +194,9 @@ public class ResultsUploader // : Hashable
             sendUploadNotice(name: UploadCompleteNotification,
                              server: UploadServerCreds.uploadString)
         }
-        
+
         // FIXME: Review the need for notifications
-        
+
         /*  apparently the above doesn't capture
          // a failed upload. It seems, therefore,
          // that the UploadFailedNotification
@@ -217,12 +244,11 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
         // … yes, use `self.credential` to supply username and password.
         completionHandler(.useCredential, credential)
     }
-    
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
+
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
         print()
     }
-    
+
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error {
             print("Got an error. Client side:", error)
