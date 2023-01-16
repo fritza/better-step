@@ -71,28 +71,10 @@ public class ResultsUploader // : Hashable
 
     // let uploadPayload: Data
     // Is this needed beyond init(payload:)?
-
-    private let notificationHandlers: [AnyObject?]
+//
+//    private let notificationHandlers: [AnyObject?]
 
     private var networkCompletion: UploadFinish
-
-    /*
-        init(from url: URL) throws {
-        dataURL = url
-        let payload = try Data(contentsOf: url)
-        if payload.isEmpty {
-            throw FileStorageErrors.uploadEmptyData(url.path)
-        }
-
-        var request = URLRequest(
-            url: UploadServerCreds.uploadURL,
-            timeoutInterval: TimeInterval.infinity)
-        request.httpMethod = UploadServerCreds.methodName
-        request.httpBody = payload
-        dataRequest = request
-    }
-*/
-
     /// Prepare an upload from a local file
     /// - Parameter url: The `URL` of the file whose contents are to be uploaded.
     init(from url: URL,
@@ -107,26 +89,14 @@ public class ResultsUploader // : Hashable
         let urlForRemoteFile = UploadServerCreds
             .uploadURL
             .appending(component: url.lastPathComponent)
-        // Formulate the request
+        // Form the request
         var request = URLRequest(
-            //            url: UploadServerCreds.uploadURL,
-            url: urlForRemoteFile,
-            timeoutInterval: TimeInterval.infinity)
+            url: urlForRemoteFile)
+        
+        // "The body stream and body data in this request object are ignored"
+        // in the case of an upload task.
         request.httpMethod = UploadServerCreds.methodName
-        request.httpBody = payload
         dataRequest = request
-
-        let nGood = NotificationCenter.default
-            .addObserver(forName: UploadCompleteNotification, object: nil, queue: .main) { notice in
-#if DEBUG
-                print(#function, "received a notification named \(notice.name.rawValue)")
-#endif
-            }
-        let nBad = NotificationCenter.default
-            .addObserver(forName: UploadFailedNotification, object: nil, queue: .main) { notice in
-//                Self.uploaders.remove(self)
-            }
-        notificationHandlers = [nGood, nBad]
     }
 
 
@@ -145,14 +115,13 @@ public class ResultsUploader // : Hashable
         print("Will send", content.count, "bytes from", dataURL.path, "to", dataRequest.url?.absoluteString ?? "N/A")
 
 
-//        let upTask = session.uploadTask(with: dataRequest,
-//                                        from: content,
-//                                        completionHandler: resultFunction(data:response:error:))
-        let upTask = session.dataTask(
-            with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
+        let upTask = session.uploadTask(with: dataRequest,
+                                        from: content,
+                                        completionHandler: resultFunction(data:response:error:))
+//        let upTask = session.dataTask(
+//            with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
         upTask.delegate = UploadTaskDelegate()
         upTask.resume()
-        
         
         /*
          func proceed() {
@@ -176,8 +145,8 @@ public class ResultsUploader // : Hashable
             !(200..<300).contains(response.statusCode)
         else {
             print("Upload request failed: \(error!.localizedDescription)")
-            sendUploadNotice(name: UploadFailedNotification,
-                             server: UploadServerCreds.uploadURL.absoluteString)
+//            sendUploadNotice(name: UploadFailedNotification,
+//                             server: UploadServerCreds.uploadURL.absoluteString)
             networkCompletion(false)
             return
         }
@@ -186,28 +155,7 @@ public class ResultsUploader // : Hashable
         // Tell the parent PhaseStorage
         // it can reset to the no-data-collected
         // state.
-        do {
             networkCompletion(true)
-            // The parent PhaseStorage will have
-            // reset itself and disposed of the
-            // upload file.
-            sendUploadNotice(name: UploadCompleteNotification,
-                             server: UploadServerCreds.uploadString)
-        }
-
-        // FIXME: Review the need for notifications
-
-        /*  apparently the above doesn't capture
-         // a failed upload. It seems, therefore,
-         // that the UploadFailedNotification
-         // never gets posted.
-        catch {
-            print("Can't delete", dataURL.path, "error =", error.localizedDescription)
-            sendUploadNotice(name: UploadFailedNotification,
-                             server: UploadServerCreds.uploadString, error: error)
-            return
-        }
-         */
     }
 }
 
@@ -265,8 +213,8 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
 // MARK: - completion Notification
 
 // MARK: Names
-let UploadCompleteNotification = Notification.Name(rawValue: "UploadNotification")
-let UploadFailedNotification   = Notification.Name(rawValue: "UploadFailedNotification")
+//let UploadCompleteNotification = Notification.Name(rawValue: "UploadNotification")
+//let UploadFailedNotification   = Notification.Name(rawValue: "UploadFailedNotification")
 
 // MARK: userInfo keys
 enum UploadResultKeys: String, Hashable {
