@@ -41,10 +41,10 @@ public enum UploadServerCreds {
 
 // MARK: - ResultsUploader
 
-/// Upload local data provided by a `file:///` URL to a particular server, ATW the Better Step database.
+/// Upload local data provided by a `file:///` `URL` to a particular server, ATW the Better Step database.
 ///
 /// Credentials and remotes are drawn from ``UploadServerCreds``
-
+/// - warning: This code is _not_ safe against interruptions from sleep or relaunch. A `
 public class ResultsUploader // : Hashable
 {    
     /*
@@ -71,7 +71,9 @@ public class ResultsUploader // : Hashable
     // Is this needed beyond init(payload:)?
 
     private let notificationHandlers: [AnyObject?]
-
+    
+    /// Prepare an upload from a local file
+    /// - Parameter url: The `URL` of the file whose contents are to be uploaded.
     init(from url: URL) throws {
         dataURL = url
         let payload = try Data(contentsOf: url)
@@ -89,12 +91,15 @@ public class ResultsUploader // : Hashable
 
         let nGood = NotificationCenter.default
             .addObserver(forName: UploadCompleteNotification, object: nil, queue: .main) { notice in
+#if DEBUG
                 print(#function, "received a notification named \(notice.name.rawValue)")
+#endif
             }
         let nBad = NotificationCenter.default
             .addObserver(forName: UploadFailedNotification, object: nil, queue: .main) { notice in
+#if DEBUG
                 print(#function, "received a notification named \(notice.name.rawValue)")
-
+#endif
 //                Self.uploaders.remove(self)
             }
         notificationHandlers = [nGood, nBad]
@@ -102,19 +107,20 @@ public class ResultsUploader // : Hashable
 
     /// Set up the data task for the upload, and its delegate. Commence the upload.
     func proceed() {
-        let task = session.dataTask(
-            with: UploadServerCreds.uploadURL, completionHandler: resultFunction)
-        task.delegate = UploadTaskDelegate()
-        task.resume()
+        // How did I have this as a data task (download)
+        // and not upload task (um, upload)?
+        
+        let upTask = session.uploadTask(with: dataRequest,
+                                        fromFile: dataURL,
+                                        completionHandler: resultFunction(data:response:error:))
+        upTask.delegate = UploadTaskDelegate()
+        upTask.resume()
     }
 
     /// Completion code for the `POST`, as specified for ``URLSessionDataTask``.
     fileprivate func resultFunction(data: Data?,
                                     response: URLResponse?,
                                     error: Error?) {
-        
-        #warning("Consider Combine for this. Consider making sense of this.")
-        
         // Any error means not deleting the .zip file.
         // ON RETRY: We have a sync problem.
         guard
@@ -179,14 +185,13 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
     }
 }
 
-// MARK: - Notification
+// MARK: - completion Notification
 
 // MARK: Names
 let UploadCompleteNotification = Notification.Name(rawValue: "UploadNotification")
 let UploadFailedNotification   = Notification.Name(rawValue: "UploadFailedNotification")
 
 // MARK: userInfo keys
-
 enum UploadResultKeys: String, Hashable {
     case fileNameKey
     case serverNameKey
@@ -194,6 +199,7 @@ enum UploadResultKeys: String, Hashable {
     case errorKey
 }
 
+// MARK: Firing the notification
 extension ResultsUploader {
     /// Broadcast the completion (successful or not) of the upload through `NotificationCenter`
     ///
