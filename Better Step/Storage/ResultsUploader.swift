@@ -89,6 +89,10 @@ public class ResultsUploader // : Hashable
         var request = URLRequest(url: urlForRemoteFile)
         request.httpBody = payload
         request.httpMethod = UploadServerCreds.methodName
+        
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
         dataRequest = request
     }
 
@@ -171,8 +175,8 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
         completionHandler(.useCredential, credential)
     }
     
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
-        print()
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        print("upload: \(totalBytesSent)/\(totalBytesExpectedToSend)")
     }
 
     public func urlSession(_ session: URLSession,
