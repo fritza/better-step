@@ -62,6 +62,18 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         areAllPhasesComplete = false
         completionDictionary = [:]
         uploader = nil
+        
+        SeriesTag.allCases
+            .map { csvFileName(for: $0) }
+            .map { documentsDirectory.appending(component: $0 )  }
+            .forEach { url in
+                try? FileManager.default
+                    .deleteIfPresent(url)
+            }
+        // Delete all product files.
+        _ = try? FileManager.default
+            .deleteIfPresent(zipOutputURL)
+        
         // This is TOTAL reversion,
         // forget the subject, forget completion.
         ASKeys.isFirstRunComplete = false
@@ -74,12 +86,15 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         SeriesTag.neededForFirstRun
     }
     
-    lazy var zipOutputURL: URL = {
-        let docsURL = try! FileManager.default
+    var documentsDirectory: URL {
+        try! FileManager.default
             .url(for: .documentDirectory,
                  in: .userDomainMask,
                  appropriateFor: nil, create: true)
-        return docsURL
+    }
+    
+    lazy var zipOutputURL: URL = {
+        return documentsDirectory
             .appendingPathComponent(zipFileName)
     }()
     
@@ -175,6 +190,15 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         areAllPhasesComplete = false
         completionDictionary = [:]
         uploader = nil
+        
+        SeriesTag.allCases
+            .map { csvFileName(for: $0) }
+            .map { documentsDirectory.appending(component: $0 )  }
+            .forEach { url in
+                try? FileManager.default
+                    .deleteIfPresent(url)
+            }
+        
       _ = try? FileManager.default
             .deleteIfPresent(zipOutputURL)
     }
