@@ -42,15 +42,7 @@ extension WalkingContainerView {
     ///     - next:    The stage to follow this one.
     @ViewBuilder
     private func volumeView(_ current: WalkingState,
-                    next: WalkingState) -> some View {
-        Text("Common volume view unimplemented.")
-        #warning("Common volume view unimplemented.")
-/*
-        NavigationLink(
-            "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
-            tag: ownPhase, selection: $state)
-*/
-        
+                    next: WalkingState) -> some View {        
         NavigationLink("SHOULDN'T SEE link for generic volume_nView", tag: current,
                        selection: $state) {
             VolumePageView {

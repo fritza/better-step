@@ -52,7 +52,8 @@ struct InterstitialPageView: View, Identifiable {
             Spacer()
 
             // MARK: The action button
-            Button(item.proceedTitle, action: proceedCallback)
+            Button(item.proceedTitle,
+                   action: proceedCallback)
             Spacer()
         }
         .padding()
