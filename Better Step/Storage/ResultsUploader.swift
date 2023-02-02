@@ -9,31 +9,37 @@ import Foundation
 import SwiftUI  // FIXME: This is just to get @AppStorage.
 // Switch it to UserDefaults and remove the dependency.
 
-// MARK: - UploadServerCreds
-public enum UploadServerCreds {
-
+// MARK: - UploadCreds
+// TODO: Make UploadCreds decodable
+//       or at least a common source file
+public enum UploadCreds {
     static let methodName = "POST"
-
+    
 #if API_DEV
     // Use for internal test and development
-    static let lastPassName = "ios-s3-apidev"
-    static let uploadString = "https://ios-s3-apidev.uchicago.edu/api/upload"
-    static let userID       = "iosuser"
-    static let password     = "Daf4Df24fshfg"
+    static let lastPassName     = "Step Test Files API (dev and stage)"
+    static let hostString       = "https://steptestfilesdev.uchicago.edu"
+    static let userID           = "iosuser"
+    static let password         = "sliD3gtorydra"
+    //    static let password         = "Daf4Df24fshfg"
+    //    rneA0drinnita
+    
 #elseif BETA_API
     // Use for TestFlight
-    static let lastPassName = "ios-s3-apistage"
-    static let uploadString = "https://ios-s3-apistage.uchicago.edu/api/upload"
-    static let userID       = "iosuser"
-    static let password     = "Daf4Df24fshfg"
+    static let lastPassName     = "Step Test Files API (dev and stage)"
+    static let hostString       = "https://steptestfilesstage.uchicago.edu"
+    static let userID           = "iosuser"
+    static let password         = "sliD3gtorydra"
+    //    static let password         = "Daf4Df24fshfg"
 #else
     // Public-release (production server)
-    static let lastPassName = "ios-s3-api.uchicago.edu (PROD)"
-    static let uploadString = "https://ios-s3-api.uchicago.edu/api/upload"
-    static let userID       = "iosuser"
-    static let password     = "#jd89DFa882%"
+    static let lastPassName     = "Step Test Files API (PROD)"
+    static let hostString       = "https://steptestfiles.uchicago.edu"
+    static let userID           = "iosuser"
+    static let password         = "yliA7asthwone"
+    //    static let password         = "#jd89DFa882%"
 #endif
-    static let uploadURL    = URL(string: uploadString)!
+    static let uploadURL    = URL(string: hostString)!
 
     static let reviewPage   = "https://ios-s3-apidev.uchicago.edu/files/"
     static let reviewURL    = URL(fileURLWithPath: reviewPage)
@@ -45,7 +51,7 @@ typealias UploadFinish = (Bool) -> Void
 
 /// Upload local data provided by a `file:///` `URL` to a particular server, ATW the Better Step database.
 ///
-/// Credentials and remotes are drawn from ``UploadServerCreds``
+/// Credentials and remotes are drawn from ``UploadCreds``
 /// - warning: This code is _not_ safe against interruptions from sleep or relaunch. A `
 public class ResultsUploader // : Hashable
 {
@@ -75,23 +81,26 @@ public class ResultsUploader // : Hashable
     init(fromLocalURL url: URL,
          completion: @escaping UploadFinish) throws {
         networkCompletion = completion
-        
-        dataURL = url
+        self.dataURL = url
         let payload = try Data(contentsOf: url)
         if payload.isEmpty {
             throw FileStorageErrors.uploadEmptyData(url.path)
         }
 
-        let urlForRemoteFile = UploadServerCreds
+        let urlForRemoteFile = UploadCreds
             .uploadURL
             .appending(component: url.lastPathComponent)
         // Form the request
         var request = URLRequest(url: urlForRemoteFile)
         request.httpBody = payload
-        request.httpMethod = UploadServerCreds.methodName
+        request.httpMethod = UploadCreds.methodName
         
         let boundary = "Boundary-\(UUID().uuidString)"
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+//        func multipartParameter() -> String {
+//            
+//        }
         
         dataRequest = request
     }
@@ -100,7 +109,7 @@ public class ResultsUploader // : Hashable
     
     /// Set up the data task for the upload, and its delegate. Commence the upload.
     func proceed() {
-        let destination = UploadServerCreds.uploadURL
+        let destination = UploadCreds.uploadURL
         let upTask = session.dataTask(
             with: dataRequest, completionHandler: resultFunction)
         upTask.delegate = UploadTaskDelegate()
@@ -154,8 +163,8 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
 
     /// Permanent, re-usable credentials with the client-to-remote username and password for Basic authorization.
     private let credential = URLCredential(
-        user        : UploadServerCreds.userID,
-        password    : UploadServerCreds.password,
+        user        : UploadCreds.userID,
+        password    : UploadCreds.password,
         persistence : .forSession)
     
     /// `URLSessionTaskDelegate` adoption for authorization challenges.
