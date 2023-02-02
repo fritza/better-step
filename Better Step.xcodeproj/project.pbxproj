@@ -47,6 +47,12 @@
 		1F76874D298C636600255D0D /* STestUploading.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F76873D298C636500255D0D /* STestUploading.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F768750298C636600255D0D /* STestUploading.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F76873B298C636500255D0D /* STestUploading.framework */; };
 		1F768751298C636600255D0D /* STestUploading.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F76873B298C636500255D0D /* STestUploading.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F76875F298C64B200255D0D /* PerformUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F768759298C64B100255D0D /* PerformUpload.swift */; };
+		1F768760298C64B200255D0D /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76875A298C64B100255D0D /* SessionDelegate.swift */; };
+		1F768761298C64B200255D0D /* UploadTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76875B298C64B200255D0D /* UploadTaskDelegate.swift */; };
+		1F768762298C64B200255D0D /* UPLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76875C298C64B200255D0D /* UPLData.swift */; };
+		1F768763298C64B200255D0D /* UploadCreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76875D298C64B200255D0D /* UploadCreds.swift */; };
+		1F768764298C64B200255D0D /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76875E298C64B200255D0D /* error-support.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -242,6 +248,12 @@
 		1F76873E298C636500255D0D /* STestUploading.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = STestUploading.docc; sourceTree = "<group>"; };
 		1F768744298C636500255D0D /* STestUploadingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STestUploadingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F76874B298C636600255D0D /* STestUploadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STestUploadingTests.swift; sourceTree = "<group>"; };
+		1F768759298C64B100255D0D /* PerformUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformUpload.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/PerformUpload.swift; sourceTree = "<group>"; };
+		1F76875A298C64B100255D0D /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/SessionDelegate.swift; sourceTree = "<group>"; };
+		1F76875B298C64B200255D0D /* UploadTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadTaskDelegate.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UploadTaskDelegate.swift; sourceTree = "<group>"; };
+		1F76875C298C64B200255D0D /* UPLData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPLData.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UPLData.swift; sourceTree = "<group>"; };
+		1F76875D298C64B200255D0D /* UploadCreds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadCreds.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UploadCreds.swift; sourceTree = "<group>"; };
+		1F76875E298C64B200255D0D /* error-support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "error-support.swift"; path = "../../../DataTaskMinimal/DataTaskMinimal/error-support.swift"; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
@@ -510,6 +522,12 @@
 			isa = PBXGroup;
 			children = (
 				1F76873D298C636500255D0D /* STestUploading.h */,
+				1F76875E298C64B200255D0D /* error-support.swift */,
+				1F768759298C64B100255D0D /* PerformUpload.swift */,
+				1F76875A298C64B100255D0D /* SessionDelegate.swift */,
+				1F76875C298C64B200255D0D /* UPLData.swift */,
+				1F76875D298C64B200255D0D /* UploadCreds.swift */,
+				1F76875B298C64B200255D0D /* UploadTaskDelegate.swift */,
 				1F76873E298C636500255D0D /* STestUploading.docc */,
 			);
 			path = STestUploading;
@@ -1015,7 +1033,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F768760298C64B200255D0D /* SessionDelegate.swift in Sources */,
+				1F768764298C64B200255D0D /* error-support.swift in Sources */,
+				1F76875F298C64B200255D0D /* PerformUpload.swift in Sources */,
+				1F768761298C64B200255D0D /* UploadTaskDelegate.swift in Sources */,
 				1F76873F298C636500255D0D /* STestUploading.docc in Sources */,
+				1F768763298C64B200255D0D /* UploadCreds.swift in Sources */,
+				1F768762298C64B200255D0D /* UPLData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1499,6 +1523,7 @@
 		1FA281DA28DBBA170038353E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1541,6 +1566,7 @@
 		1FA281DB28DBBA170038353E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
