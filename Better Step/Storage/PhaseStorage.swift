@@ -19,6 +19,7 @@
 
 import Foundation
 import SwiftUI
+import STestUploading
 
 /// Maintain the data associated with completed phases of the workflow.
 ///
@@ -26,6 +27,8 @@ import SwiftUI
 public final class PhaseStorage: ObservableObject, MassDiscardable
 {
     static let shared = PhaseStorage()
+    
+    var uploadCompleteTag: NSObjectProtocol?
     
     var reversionHandler: AnyObject?
 //    var archiver: ZIPArchiver
@@ -40,7 +43,9 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
     private var areAllPhasesComplete : Bool
     
-    private var uploader: ResultsUploader?
+//    private var uploader: ResultsUploader?
+    // FIXME: Is there a reason to persist the PerformUpload?
+    private var performStruct: PerformUpload?
         
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
@@ -50,6 +55,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
+        performStruct = nil
     }
     
     lazy var archiver: ZIPArchiver = {
@@ -61,7 +67,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
         completionDictionary = [:]
-        uploader = nil
+//        uploader = nil
         
         SeriesTag.allCases
             .map { csvFileName(for: $0) }
@@ -160,6 +166,18 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
+            
+            // init(for payload: Data, named name: String)
+            
+            guard let performer = PerformUpload(
+                from: zipOutputURL,
+                named: zipFileName) else {
+                return
+            }
+            performStruct = performer
+            performer.doIt()
+            
+            /*
             let upl = try! ResultsUploader(
                 fromLocalURL: zipOutputURL,
                 completion: { success in
@@ -168,6 +186,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             })
             uploader = upl
             upl.proceed()
+             */
         }
     }
     
@@ -185,13 +204,15 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             ASKeys.isFirstRunComplete = true
         }
         else { }
+        
+        // FIXME: tear-down doesn't much care about success.
+        
         // The following is the state PhaseSrotage
         // should be in to accept data from a new
         // session. They are not public
         // notifications of success.
         areAllPhasesComplete = false
         completionDictionary = [:]
-        uploader = nil
         
         SeriesTag.allCases
             .map { csvFileName(for: $0) }
@@ -215,4 +236,36 @@ extension PhaseStorage {
                 try closure(k, v)
             }
         }
+}
+
+// MARK: - Completion notification
+extension PhaseStorage {
+    func setUpCompletionHandler() {
+        uploadCompleteTag =
+        NotificationCenter.default
+            .addObserver(
+                forName: UploadNotification,
+                object: nil, queue: .main)
+        { [self] notice in
+            // TODO: Check for leaks.
+            guard (notice.object as? Data) != nil,
+                  let userInfo = notice.userInfo,
+                  let response = userInfo["response"] as? HTTPURLResponse
+            else {
+                fatalError("Notifcation without Data:")
+            }
+            
+            
+            // Tear down the intermediates, depending
+            // on the outcome of the upload.
+            let status = response.statusCode
+            let goodStatus = (200..<300).contains(status)
+            
+            self.tearDownFromUpload(
+                havingSucceeded: goodStatus)
+            // FIXME: tear-down doesn't much care about success.
+            // It deletes files and resets progress
+            // properties regardless.
+        }
+    }
 }
