@@ -187,7 +187,6 @@
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
-		1F3BD02929392E3700442A63 /* ResultsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsUploader.swift; sourceTree = "<group>"; };
 		1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometryBuffer.swift; sourceTree = "<group>"; };
 		1F415DEC295F938A00F49E82 /* Better Step.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Better Step.entitlements"; sourceTree = "<group>"; };
 		1F51BC7F297230F700BE418A /* VolumePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumePageView.swift; sourceTree = "<group>"; };
@@ -619,7 +618,6 @@
 			children = (
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
-				1F3BD02929392E3700442A63 /* ResultsUploader.swift */,
 				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
 				1F891BBB29538F30006C09DF /* StateReversion.swift */,
 				1F6456F7294D29FA0064DADA /* TestXYZT.json */,
