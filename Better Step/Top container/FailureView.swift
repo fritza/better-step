@@ -32,7 +32,7 @@ struct ConclusionView: View, ReportingPhase {
             Spacer()
             Text("Tap ") +
             Text("Submit").fontWeight(.semibold).foregroundColor(.blue) +
-            Text(" to send a report.")
+            Text(" to send a report.\n(bug: the cose as-is sends the file when the last task is complete. (It's gone already.\nThe Submit button still presents the Activty (mail, etc.) sheet to double-check.")
             Spacer()
             Button("Submit") {
                 shouldShowActivity = true
