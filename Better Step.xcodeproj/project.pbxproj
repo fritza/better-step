@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
+		1F0D9354298DB6DF00B5194B /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D934E298DB6DF00B5194B /* SessionDelegate.swift */; };
+		1F0D9355298DB6DF00B5194B /* UPLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D934F298DB6DF00B5194B /* UPLData.swift */; };
+		1F0D9356298DB6DF00B5194B /* UploadCreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9350298DB6DF00B5194B /* UploadCreds.swift */; };
+		1F0D9357298DB6DF00B5194B /* PerformUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9351298DB6DF00B5194B /* PerformUpload.swift */; };
+		1F0D9358298DB6DF00B5194B /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9352298DB6DF00B5194B /* error-support.swift */; };
+		1F0D9359298DB6DF00B5194B /* UploadTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */; };
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
 		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */; };
@@ -40,12 +46,6 @@
 		1F665866296F72EA00EE75FE /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
 		1F66586C2971C47400EE75FE /* ComposeExerciseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */; };
-		1F7598D5298DAB5D0088016C /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598CF298DAB5C0088016C /* SessionDelegate.swift */; };
-		1F7598D6298DAB5D0088016C /* UploadTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598D0298DAB5C0088016C /* UploadTaskDelegate.swift */; };
-		1F7598D7298DAB5D0088016C /* UPLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598D1298DAB5C0088016C /* UPLData.swift */; };
-		1F7598D8298DAB5D0088016C /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598D2298DAB5C0088016C /* error-support.swift */; };
-		1F7598D9298DAB5D0088016C /* PerformUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598D3298DAB5C0088016C /* PerformUpload.swift */; };
-		1F7598DA298DAB5D0088016C /* UploadCreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7598D4298DAB5D0088016C /* UploadCreds.swift */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -152,6 +152,12 @@
 		1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Better StepUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITests.swift; sourceTree = "<group>"; };
 		1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Better_StepUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1F0D934E298DB6DF00B5194B /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
+		1F0D934F298DB6DF00B5194B /* UPLData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPLData.swift; sourceTree = "<group>"; };
+		1F0D9350298DB6DF00B5194B /* UploadCreds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCreds.swift; sourceTree = "<group>"; };
+		1F0D9351298DB6DF00B5194B /* PerformUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformUpload.swift; sourceTree = "<group>"; };
+		1F0D9352298DB6DF00B5194B /* error-support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "error-support.swift"; sourceTree = "<group>"; };
+		1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskDelegate.swift; sourceTree = "<group>"; };
 		1F1641F7281B018A00E4E2FA /* DASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarViewModifiers.swift; sourceTree = "<group>"; };
 		1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingContainerView.swift; sourceTree = "<group>"; };
@@ -211,12 +217,6 @@
 		1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeExerciseData.swift; sourceTree = "<group>"; };
 		1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseExerciseView.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
-		1F7598CF298DAB5C0088016C /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = "Better Step/Uploading/SessionDelegate.swift"; sourceTree = SOURCE_ROOT; };
-		1F7598D0298DAB5C0088016C /* UploadTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadTaskDelegate.swift; path = "Better Step/Uploading/UploadTaskDelegate.swift"; sourceTree = SOURCE_ROOT; };
-		1F7598D1298DAB5C0088016C /* UPLData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPLData.swift; path = "Better Step/Uploading/UPLData.swift"; sourceTree = SOURCE_ROOT; };
-		1F7598D2298DAB5C0088016C /* error-support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "error-support.swift"; path = "Better Step/Uploading/error-support.swift"; sourceTree = SOURCE_ROOT; };
-		1F7598D3298DAB5C0088016C /* PerformUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformUpload.swift; sourceTree = "<group>"; };
-		1F7598D4298DAB5D0088016C /* UploadCreds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadCreds.swift; path = "Better Step/Uploading/UploadCreds.swift"; sourceTree = SOURCE_ROOT; };
 		1F76873D298C636500255D0D /* STestUploading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STestUploading.h; sourceTree = "<group>"; };
 		1F76873E298C636500255D0D /* STestUploading.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = STestUploading.docc; sourceTree = "<group>"; };
 		1F76874B298C636600255D0D /* STestUploadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STestUploadingTests.swift; sourceTree = "<group>"; };
@@ -349,13 +349,13 @@
 		1F0B6750276FA6C900011A7E /* Better Step */ = {
 			isa = PBXGroup;
 			children = (
+				1F0D9341298DB58C00B5194B /* ZIP Upload */,
 				1F66586A2971C44300EE75FE /* Debug Exercises */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1FB684E827F225EC00612924 /* ASKeys.swift */,
 				1F0B6755276FA6CA00011A7E /* Assets.xcassets */,
 				1F415DEC295F938A00F49E82 /* Better Step.entitlements */,
-				1F7598CE298DAB110088016C /* Uploading */,
 				1F0B6751276FA6C900011A7E /* Better_StepApp.swift */,
 				1F6836C628E21A150016B5ED /* Better-Step-Info.plist */,
 				1FF3544E27920A3B000894B8 /* config-mini.plist */,
@@ -401,6 +401,19 @@
 				1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */,
 			);
 			path = "Better StepUITests";
+			sourceTree = "<group>";
+		};
+		1F0D9341298DB58C00B5194B /* ZIP Upload */ = {
+			isa = PBXGroup;
+			children = (
+				1F0D9352298DB6DF00B5194B /* error-support.swift */,
+				1F0D9351298DB6DF00B5194B /* PerformUpload.swift */,
+				1F0D934E298DB6DF00B5194B /* SessionDelegate.swift */,
+				1F0D934F298DB6DF00B5194B /* UPLData.swift */,
+				1F0D9350298DB6DF00B5194B /* UploadCreds.swift */,
+				1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */,
+			);
+			path = "ZIP Upload";
 			sourceTree = "<group>";
 		};
 		1F1C4DFD28D3BD6700547C7A /* Resources */ = {
@@ -471,19 +484,6 @@
 				1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */,
 			);
 			path = "Debug Exercises";
-			sourceTree = "<group>";
-		};
-		1F7598CE298DAB110088016C /* Uploading */ = {
-			isa = PBXGroup;
-			children = (
-				1F7598D2298DAB5C0088016C /* error-support.swift */,
-				1F7598D3298DAB5C0088016C /* PerformUpload.swift */,
-				1F7598CF298DAB5C0088016C /* SessionDelegate.swift */,
-				1F7598D1298DAB5C0088016C /* UPLData.swift */,
-				1F7598D4298DAB5D0088016C /* UploadCreds.swift */,
-				1F7598D0298DAB5C0088016C /* UploadTaskDelegate.swift */,
-			);
-			path = Uploading;
 			sourceTree = "<group>";
 		};
 		1F76873C298C636500255D0D /* STestUploading */ = {
@@ -939,19 +939,21 @@
 				1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */,
 				1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */,
 				1FA2821828DBBB270038353E /* MinSecAndFraction.swift in Sources */,
+				1F0D9356298DB6DF00B5194B /* UploadCreds.swift in Sources */,
 				1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */,
 				1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */,
 				1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */,
 				1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */,
 				1FA281E028DBBB270038353E /* FailureView.swift in Sources */,
+				1F0D9358298DB6DF00B5194B /* error-support.swift in Sources */,
 				1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */,
 				1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */,
 				1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */,
 				1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */,
+				1F0D9355298DB6DF00B5194B /* UPLData.swift in Sources */,
 				1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */,
 				1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */,
 				1FA2821028DBBB270038353E /* MinSecFormatter.swift in Sources */,
-				1F7598DA298DAB5D0088016C /* UploadCreds.swift in Sources */,
 				1F59876529063A5E00B004CA /* SurveyContainerView+content.swift in Sources */,
 				1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */,
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
@@ -971,18 +973,18 @@
 				1FA2821F28DBBB270038353E /* AVFAudio+extensions.swift in Sources */,
 				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
 				1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */,
-				1F7598D5298DAB5D0088016C /* SessionDelegate.swift in Sources */,
+				1F0D9354298DB6DF00B5194B /* SessionDelegate.swift in Sources */,
 				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
 				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,
-				1F7598D9298DAB5D0088016C /* PerformUpload.swift in Sources */,
 				1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */,
 				1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */,
 				1FA281F028DBBB270038353E /* MorseHaptic.swift in Sources */,
 				1FA2821728DBBB270038353E /* ReportView.swift in Sources */,
-				1F7598D6298DAB5D0088016C /* UploadTaskDelegate.swift in Sources */,
 				1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */,
+				1F0D9357298DB6DF00B5194B /* PerformUpload.swift in Sources */,
 				1FA2822128DBBB270038353E /* SurveyContainerView.swift in Sources */,
 				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
+				1F0D9359298DB6DF00B5194B /* UploadTaskDelegate.swift in Sources */,
 				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
 				1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */,
 				1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */,
@@ -990,13 +992,11 @@
 				1FC7477D28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift in Sources */,
 				1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */,
 				1FA281F828DBBB270038353E /* DigitalTimerView.swift in Sources */,
-				1F7598D7298DAB5D0088016C /* UPLData.swift in Sources */,
 				1FA2821528DBBB270038353E /* UsabilityView.swift in Sources */,
 				1FA281F928DBBB270038353E /* DASIQuestionView.swift in Sources */,
 				1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
-				1F7598D8298DAB5D0088016C /* error-support.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */,

@@ -117,7 +117,6 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     
     var zipFileName: String {
         assert(SubjectID.id != SubjectID.unSet)
-        #warning("TODO: Why no _ between subID and YMD?")
         let userNameComponent = SubjectID.id
         let retval = "\(userNameComponent)_\(stickyYMDTag)"
         + ".zip"
