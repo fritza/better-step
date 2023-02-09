@@ -216,15 +216,6 @@
 		1F66586B2971C47400EE75FE /* ComposeExerciseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeExerciseData.swift; sourceTree = "<group>"; };
 		1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseExerciseView.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
-		1F76873D298C636500255D0D /* STestUploading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STestUploading.h; sourceTree = "<group>"; };
-		1F76873E298C636500255D0D /* STestUploading.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = STestUploading.docc; sourceTree = "<group>"; };
-		1F76874B298C636600255D0D /* STestUploadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STestUploadingTests.swift; sourceTree = "<group>"; };
-		1F768759298C64B100255D0D /* PerformUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformUpload.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/PerformUpload.swift; sourceTree = "<group>"; };
-		1F76875A298C64B100255D0D /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/SessionDelegate.swift; sourceTree = "<group>"; };
-		1F76875B298C64B200255D0D /* UploadTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadTaskDelegate.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UploadTaskDelegate.swift; sourceTree = "<group>"; };
-		1F76875C298C64B200255D0D /* UPLData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UPLData.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UPLData.swift; sourceTree = "<group>"; };
-		1F76875D298C64B200255D0D /* UploadCreds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadCreds.swift; path = ../../../DataTaskMinimal/DataTaskMinimal/UploadCreds.swift; sourceTree = "<group>"; };
-		1F76875E298C64B200255D0D /* error-support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "error-support.swift"; path = "../../../DataTaskMinimal/DataTaskMinimal/error-support.swift"; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
@@ -327,8 +318,6 @@
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
 				1FA281CF28DBBA160038353E /* Better Step */,
 				1F66584A296E29F400EE75FE /* Exercise ZIP */,
-				1F76873C298C636500255D0D /* STestUploading */,
-				1F76874A298C636600255D0D /* STestUploadingTests */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 			);
@@ -483,29 +472,6 @@
 				1F66586D2971CFF200EE75FE /* ReleaseExerciseView.swift */,
 			);
 			path = "Debug Exercises";
-			sourceTree = "<group>";
-		};
-		1F76873C298C636500255D0D /* STestUploading */ = {
-			isa = PBXGroup;
-			children = (
-				1F76873D298C636500255D0D /* STestUploading.h */,
-				1F76875E298C64B200255D0D /* error-support.swift */,
-				1F768759298C64B100255D0D /* PerformUpload.swift */,
-				1F76875A298C64B100255D0D /* SessionDelegate.swift */,
-				1F76875C298C64B200255D0D /* UPLData.swift */,
-				1F76875D298C64B200255D0D /* UploadCreds.swift */,
-				1F76875B298C64B200255D0D /* UploadTaskDelegate.swift */,
-				1F76873E298C636500255D0D /* STestUploading.docc */,
-			);
-			path = STestUploading;
-			sourceTree = "<group>";
-		};
-		1F76874A298C636600255D0D /* STestUploadingTests */ = {
-			isa = PBXGroup;
-			children = (
-				1F76874B298C636600255D0D /* STestUploadingTests.swift */,
-			);
-			path = STestUploadingTests;
 			sourceTree = "<group>";
 		};
 		1F8A337F27E119A30093C896 /* App Stages */ = {
@@ -1069,7 +1035,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG BETA_API";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG API_DEV";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1128,7 +1094,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "FOR_BETTER_ST BETA_API";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "FOR_BETTER_ST API_DEV";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
