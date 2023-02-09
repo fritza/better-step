@@ -7,18 +7,6 @@
 
 import Foundation
 
-let _yyyy_mm_dd: DateFormatter = {
-    let retval = DateFormatter()
-    retval.dateFormat = "yyyy-MM-dd"
-    return retval
-}()
-
-extension Date {
-    public var ymd: String {
-        _yyyy_mm_dd.string(from: self)
-    }
-}
-
 /// Names phases corresponding 1:1 with the reported data streams.
 ///
 /// These name
