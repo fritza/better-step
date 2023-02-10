@@ -401,7 +401,8 @@
 				1F0D9350298DB6DF00B5194B /* UploadCreds.swift */,
 				1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */,
 			);
-			path = "ZIP Upload";
+			name = "ZIP Upload";
+			path = Uploading;
 			sourceTree = "<group>";
 		};
 		1F1C4DFD28D3BD6700547C7A /* Resources */ = {
