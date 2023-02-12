@@ -8,9 +8,7 @@
 import SwiftUI
 import Combine
 import HealthKit
-
-// onboarding, walking, dasi, usability, conclusion / failed
-
+// import stupload
 
 // MARK: - TopContainerView
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
@@ -18,6 +16,10 @@ import HealthKit
 ///
 struct TopContainerView: View, MassDiscardable {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
+    
+    @ObservedObject fileprivate var observableStatus = UploadState()
+    @State fileprivate var notificationTags: [NSObjectProtocol]  = []
+
     
     @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
@@ -63,6 +65,7 @@ struct TopContainerView: View, MassDiscardable {
         // TODO: store and reload the current phase ID.
         currentPhase = TopPhases.entry.followingPhase
         self.reversionHandler = self.reversionHandler ?? installDiscardable()
+        setUpCompletionNotifications()
     }
     
     @State private var shouldChallengeHaste_1: Bool = false
@@ -253,6 +256,54 @@ struct TopContainerView: View, MassDiscardable {
     }
     
 }
+
+extension TopContainerView {
+    fileprivate var completionNoticesSet: Bool {
+        notificationTags.count < 2
+    }
+    
+    private func setUpCompletionNotifications() {
+        // TODO: Migrate this into UploadCompletionNotification.swift
+        // Prepare to receive upload-complete notifications
+        
+        // NOTE: If you put up new notifications, be sure to amend `.completionNoticesSet`.
+        guard !completionNoticesSet else { return }
+        
+        let goodTag =
+        NotificationCenter.default
+            .addObserver(
+                forName: UploadNotification,
+                object: nil, queue: .main)
+        { [self] notice in
+            // TODO: Check for leaks.
+            guard let data = notice.object as? Data,
+                  let userInfo = notice.userInfo,
+                  let response = userInfo["response"] as? HTTPURLResponse
+            else {
+                fatalError("Notifcation without Data:")
+            }
+            // TODO: Do something for successful upload.
+            //            The warning about unused capture of self is about not having a followup yet.
+//            setUploadResult(data: data, response: response)
+        }
+        notificationTags.append(goodTag)
+        
+        let badTag =
+        NotificationCenter.default
+            .addObserver(forName: UploadErrorNotification,
+                         object: nil, queue: .main) { [self] notice in
+                guard let error = notice.object as? Error else {
+                    assertionFailure("Should be able to cast notification object to error")
+                    return
+                }
+                self.observableStatus.setFromError(error)
+                // TODO: Should the notification carry the Foundation.Error only?
+            }
+        notificationTags.append(badTag)
+    }
+}
+
+
 // MARK: - Preview
 struct TopContainerView_Previews: PreviewProvider {
     static var previews: some View {

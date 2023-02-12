@@ -19,6 +19,7 @@
 
 import Foundation
 import SwiftUI
+import STUploading
 
 /// Maintain the data associated with completed phases of the workflow.
 ///
@@ -54,7 +55,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
-        performStruct = nil
+        self.performStruct = nil
     }
     
     lazy var archiver: ZIPArchiver = {

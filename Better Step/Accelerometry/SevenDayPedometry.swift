@@ -8,6 +8,7 @@
 import Foundation
 import HealthKit
 import Algorithms
+import STUploading
 
 // MARK: - StepsOnDate
 /// Aggregation of a `Date` and a step count.
