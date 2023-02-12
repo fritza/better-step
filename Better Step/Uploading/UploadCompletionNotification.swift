@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 /// Holder for various constants (URLs/paths, username, password).
 ///
 /// These are conditioned on the stage of development and the corresponding configurations for hosts, credentials, etc.
@@ -77,3 +78,4 @@ public enum UploadCreds {
     
     public static let method            = "POST"
 }
+*/

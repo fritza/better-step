@@ -8,7 +8,7 @@
 import Foundation
 import HealthKit
 import Algorithms
-
+import UIKit
 
 // MARK: - StepsOnDate
 /// Aggregation of a `Date` and a step count.
@@ -51,7 +51,21 @@ final class PedometryFromHealthKit: ReportingPhase {
     
     // MARK: Statics
     static let gregorian = Calendar(identifier: .gregorian)
-    static let store = HKHealthStore()
+    
+    static let store: HKHealthStore = {
+        // Compiler had insisted that the initializer had to be unwrapped,
+        // but when that was done, it insisted that it must not be:
+        /*
+         ... SevenDayPedometry.swift:58:15: error: initializer for conditional binding must have Optional type, not 'HKHealthStore'
+         guard let retval = HKHealthStore() else {
+         ^            ~~~~~~~~~~~~~~~
+         */
+        // Surprising: HKHealthStore inherits NSObject.init(), which can in principle return nil.
+        // You have to unwrap it. I hadn't run into this before.
+        // "import UIKit" seems to have taken care of it. Also surprising.
+        let retval = HKHealthStore()
+        return retval
+    }()
     static let hkStepsType = HKSampleType.quantityType(forIdentifier: .stepCount)!
     
     static func securePermission(completed: @escaping (Result<Bool, Error>) -> Void) {
@@ -64,8 +78,8 @@ final class PedometryFromHealthKit: ReportingPhase {
                 read: perms) { approved, error in
                 if let error {
 #if DEBUG
-print("\(#function):\(#line): auth error =", error)
-                    #endif
+                    print("\(#function):\(#line): auth error =", error)
+#endif
                     completed(Result.failure(error))
                     return
                 }

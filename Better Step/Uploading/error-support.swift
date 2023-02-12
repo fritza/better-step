@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /// Constructor for simple `Error`s carrying URL strings or freehand `String`s, or neither, in `userInfo`
 public enum SimpleErrors: Error {
@@ -78,13 +79,13 @@ extension String {
 
 
 let _yyyy_mm_dd: DateFormatter = {
-    let retval = DateFormatter()!
+    let retval = DateFormatter()
     retval.dateFormat = "yyyy-MM-dd_hh:mm"
     return retval
 }()
 
 let _yyyy_mm_dd_hm_ss: DateFormatter = {
-    let retval = DateFormatter()!
+    let retval = DateFormatter()
     retval.dateFormat = "yyyy-MM-dd_hh:mm:ss"
     return retval
 }()
