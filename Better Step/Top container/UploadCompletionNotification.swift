@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import STUploading
+
 
 /// `Notification` of a successful upload. `object` is the `Data` that was uploaded.
 public let UploadNotification      = Notification.Name("UploadNotification"     )
