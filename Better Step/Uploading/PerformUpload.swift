@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import STUploading
 
 public struct PerformUpload {
     

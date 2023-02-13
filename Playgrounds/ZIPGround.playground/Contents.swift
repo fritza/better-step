@@ -1,54 +1,30 @@
-import SwiftUI
-//import Better_Step
-//import ZIPFoundation
-
-/*
-struct TField: View {
-    @Binding var string: String
-    
-    init(_ str: Binding<String>) {
-        _string = str
-    }
-    
-    var body: some View {
-        VStack {
-            Text("Content = \(string)")
-            Text("For rent")
-        }
-    }
-}
+import Foundation
 
 
-struct StringShower: View {
-    @State var result: String
-    
-    var body: some View {
-        VStack {
-//            Text("Result = \(result)")
-            Divider()
-            TField($result)
-        }
+
+let p_yyyy_mm_dd: DateFormatter = {
+    let retval = DateFormatter()
+    retval.dateFormat = "yyyy-MM-dd"
+    return retval
+}()
+
+let p_yyyy_mm_dd_hm_ss: DateFormatter = {
+    let retval = DateFormatter()
+    retval.dateFormat = "yyyy-MM-dd_hh:mm:ss"
+    return retval
+}()
+
+
+extension Date {
+    public var ymd: String {
+        p_yyyy_mm_dd.string(from: self)
     }
-}
-*/
-struct BoneSimple: View {
-    @State var editable: String = "S"
-    var body: some View {
-        VStack {
-            Text(editable)
-            Text("For rent. Again.")
-        }
+    public var ymd_hms: String {
+        p_yyyy_mm_dd_hm_ss.string(from: self)
     }
 }
 
-//let theView = StringShower(result: "initial")
-//    .frame(width: 340, height: 340)
-
-let theView = BoneSimple(editable: "BoneString")
-    .frame(width: 340, height: 340)
+Date().ymd
+Date().ymd_hms
 
 
-import PlaygroundSupport
-PlaygroundPage.current.needsIndefiniteExecution = true
-
-PlaygroundPage.current.setLiveView(theView)

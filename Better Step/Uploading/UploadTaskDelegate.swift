@@ -1,5 +1,4 @@
 import Foundation
-import STUploading
 
 // MARK: - UploadTaskDelegate
 public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
