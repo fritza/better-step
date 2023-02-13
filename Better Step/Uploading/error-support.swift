@@ -79,13 +79,13 @@ extension String {
 
 
 let _yyyy_mm_dd: DateFormatter = {
-    let retval = DateFormatter()!
+    let retval = DateFormatter()
     retval.dateFormat = "yyyy-MM-dd"
     return retval
 }()
 
 let _yyyy_mm_dd_hm_ss: DateFormatter = {
-    let retval = DateFormatter()!
+    let retval = DateFormatter()
     retval.dateFormat = "yyyy-MM-dd_hh:mm:ss"
     return retval
 }()

@@ -56,6 +56,8 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
         self.performStruct = nil
+        
+        setUpCompletionHandler()
     }
     
     lazy var archiver: ZIPArchiver = {
@@ -199,18 +201,11 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     {
         if success {
             // If this session went end-to-end
-            // then at least one has completed.
-            // Record first run completed.
+            // then anything more is after-first.
             ASKeys.isFirstRunComplete = true
         }
-        else { }
-        
-        // FIXME: tear-down doesn't much care about success.
-        
-        // The following is the state PhaseSrotage
-        // should be in to accept data from a new
-        // session. They are not public
-        // notifications of success.
+                
+        // Unwund progress left over from this session.
         areAllPhasesComplete = false
         completionDictionary = [:]
         
