@@ -31,7 +31,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     var uploadCompleteTag: NSObjectProtocol?
     
     var reversionHandler: AnyObject?
-//    var archiver: ZIPArchiver
+
     let stickyYMDTag: String // "yyyy-mm-dd"
         
     typealias CompDict = [SeriesTag:Data]
@@ -60,31 +60,56 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         setUpCompletionHandler()
     }
     
-    lazy var archiver: ZIPArchiver = {
-        let retval = try! ZIPArchiver(destinationURL: zipOutputURL)
-        return retval
-    }()
+    // Archiver maintenance
+    private var _archiver: ZIPArchiver? = nil
+    func clearArchiver() { _archiver = nil }
     
-    /// ``MassDiscardable`` adoption
-    func handleReversion(notice: Notification) {
-        areAllPhasesComplete = false
-        completionDictionary = [:]
-//        uploader = nil
-        
-        SeriesTag.allCases
+    @discardableResult
+    func setArchiver(at url: URL) throws -> ZIPArchiver {
+        let value = try ZIPArchiver(destinationURL: url)
+        _archiver = value
+        return value
+    }
+    
+    var archiver: ZIPArchiver {
+        guard let retval = _archiver else {
+            fatalError("Attempt to retrieve archiver before it was created.")
+        }
+        return retval
+    }
+    
+//    lazy var archiver: ZIPArchiver = {
+//        let retval = try! ZIPArchiver(destinationURL: zipOutputURL)
+//        return retval
+//    }()
+    
+    
+    private func deleteAllFiles() throws {
+        try SeriesTag.allCases
             .map { csvFileName(for: $0) }
             .map { documentsDirectory.appending(component: $0 )  }
             .forEach { url in
-                try? FileManager.default
+                try FileManager.default
                     .deleteIfPresent(url)
             }
         // Delete all product files.
-        _ = try? FileManager.default
+        _ = try FileManager.default
             .deleteIfPresent(zipOutputURL)
+    }
+    
+    /// ``MassDiscardable`` adoption
+    ///
+    /// Called when a `RevertAllNotice` is broadcaset (such as when the user taps a "Gear" button (not available in the release app) to tear down _all_ application state.
+    func handleReversion(notice: Notification) {
+        areAllPhasesComplete = false
+        completionDictionary = [:]
+        
+        try! deleteAllFiles()
         
         // This is TOTAL reversion,
         // forget the subject, forget completion.
         ASKeys.isFirstRunComplete = false
+        clearArchiver()
     }
     
     // MARK: Completion check
@@ -104,6 +129,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     lazy var zipOutputURL: URL = {
         return documentsDirectory
             .appendingPathComponent(zipFileName)
+        #warning("Lazy vars don't reset.")
     }()
     
     func csvFileName(for phase: SeriesTag) -> String {
@@ -162,15 +188,18 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         }
         
         // Add the datum for this tag.
-        // TODO: Change this into a Set<SeriesTag>.
         completionDictionary[tag] = data
         
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
-            
             // init(for payload: Data, named name: String)
             
+            /*
+             THIS MAY OR MAY NOT BE THE PLACE WHERE WE CAN INITIALIZE A FRESH ARCHIVER.
+             */
+            
+            try! setArchiver(at: zipOutputURL)
             guard let performer = PerformUpload(
                 from: zipOutputURL,
                 named: zipFileName) else {
@@ -178,21 +207,12 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             }
             performStruct = performer
             performer.doIt()
-            
-            /*
-            let upl = try! ResultsUploader(
-                fromLocalURL: zipOutputURL,
-                completion: { success in
-                self.tearDownFromUpload(
-                    havingSucceeded: success)
-            })
-            uploader = upl
-            upl.proceed()
-             */
         }
     }
     
     /// Upon completion of the upload, tear down the archive file and the accumulated-data state
+    ///
+    /// Caleld when an upload completes, and the PhaseStorage instance must be reset to accept a new session.
     /// - Parameter success: whether the upload succeeded.
     /// - warning: releases the uploader from a callback out of the uploader. This might not go well.
     /// - note: At some point  `success` will matter,
@@ -208,17 +228,8 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // Unwund progress left over from this session.
         areAllPhasesComplete = false
         completionDictionary = [:]
-        
-        SeriesTag.allCases
-            .map { csvFileName(for: $0) }
-            .map { documentsDirectory.appending(component: $0 )  }
-            .forEach { url in
-                try? FileManager.default
-                    .deleteIfPresent(url)
-            }
-        
-      _ = try? FileManager.default
-            .deleteIfPresent(zipOutputURL)
+        try? deleteAllFiles()
+        clearArchiver()
     }
 }
 
