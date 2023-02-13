@@ -78,17 +78,6 @@
                ReferencedContainer = "container:Better Step.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F768743298C636500255D0D"
-               BuildableName = "STestUploadingTests.xctest"
-               BlueprintName = "STestUploadingTests"
-               ReferencedContainer = "container:Better Step.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
