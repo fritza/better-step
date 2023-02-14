@@ -48,9 +48,7 @@ struct ReleaseExerciseView: View {
         .onReceive(PhaseStorage.shared.$archiveHasBeenWritten) {
             newValue in
             if newValue {
-                let archiveData = PhaseStorage.shared.archiver.archivedData
-                
-                archiveProgress = .success(archiveData?.count ?? 0)
+                archiveProgress = .success(PhaseStorage.shared.count)
                 showActivitySheet = true
             }
             else {

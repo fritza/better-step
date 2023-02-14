@@ -98,9 +98,11 @@ class ZIPArchiver: MassDiscardable {
     }
         
     // MARK: - Output
-    var archivedData: Data? {
+    private var archivedData: Data? {
         archiver.data
     }
+    
+    var count: Int { archivedData?.count ?? 0 }
     
     /// Save the acciumulated archive data into `self.outputURL`.
     /// - throws: `AppPhaseErrors.cantGetArchiveData` if no output data is available; various Foundation errors via `FileManager`.

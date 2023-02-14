@@ -52,8 +52,6 @@
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
 		1F9A28AA28F9D7F80099F5D8 /* YesNoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */; };
-		1FA281D528DBBA170038353E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D428DBBA170038353E /* Assets.xcassets */; };
-		1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA281D728DBBA170038353E /* Preview Assets.xcassets */; };
 		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
 		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FA281E028DBBB270038353E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
@@ -114,6 +112,7 @@
 		1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */; };
 		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
+		1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCEEE8294CD4ED00A4D86F /* ApplicationGreetingView.swift */; };
 		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
 		1FC7477328E787AD00817041 /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
@@ -217,8 +216,6 @@
 		1F8A338027E122130093C896 /* DASIUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIUserResponse.swift; sourceTree = "<group>"; };
 		1F9A28A928F9D7F80099F5D8 /* YesNoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButtonView.swift; sourceTree = "<group>"; };
 		1FA281CE28DBBA160038353E /* Better Step.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Step.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FA281D428DBBA170038353E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1FA281D728DBBA170038353E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyContainerView.swift; sourceTree = "<group>"; };
 		1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoStack.swift; sourceTree = "<group>"; };
 		1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
@@ -307,7 +304,6 @@
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
-				1FA281CF28DBBA160038353E /* Better Step */,
 				1F66584A296E29F400EE75FE /* Exercise ZIP */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
@@ -474,23 +470,6 @@
 				1FDE828A27EA463B00CD8368 /* DASI */,
 			);
 			path = "App Stages";
-			sourceTree = "<group>";
-		};
-		1FA281CF28DBBA160038353E /* Better Step */ = {
-			isa = PBXGroup;
-			children = (
-				1FA281D428DBBA170038353E /* Assets.xcassets */,
-				1FA281D628DBBA170038353E /* Preview Content */,
-			);
-			path = "Better Step";
-			sourceTree = "<group>";
-		};
-		1FA281D628DBBA170038353E /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1FA281D728DBBA170038353E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1FB2F53728D133B600593692 /* Time */ = {
@@ -829,6 +808,7 @@
 				1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */,
 				1FA2822C28DBBB940038353E /* usability-intro.json in Resources */,
 				1FC7477328E787AD00817041 /* N.ahap in Resources */,
+				1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */,
 				1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */,
 				1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */,
 				1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */,
@@ -837,10 +817,8 @@
 				1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */,
 				1FC7477428E787AD00817041 /* AAA.ahap in Resources */,
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
-				1FA281D828DBBA170038353E /* Preview Assets.xcassets in Resources */,
 				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
 				1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */,
-				1FA281D528DBBA170038353E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

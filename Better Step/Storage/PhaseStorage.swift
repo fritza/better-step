@@ -28,12 +28,13 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
 {
     static let shared = PhaseStorage()
     
-    var uploadCompleteTag: NSObjectProtocol?
-    
+    private var uploadCompleteTag: NSObjectProtocol?
     var reversionHandler: AnyObject?
 
-    let stickyYMDTag: String // "yyyy-mm-dd"
+    /// The year/month/day as of the creation of this `PhaseStorage`.
+    private let stickyYMDTag: String // "yyyy-mm-dd"
         
+    /// Key-value pairs mapping a completed ``SeriesTag`` to its data.
     typealias CompDict = [SeriesTag:Data]
     /// A dictionary that maps phases to the data they generate.
     ///
@@ -59,31 +60,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         
         setUpCompletionHandler()
     }
-    
-    // Archiver maintenance
-    private var _archiver: ZIPArchiver? = nil
-    func clearArchiver() { _archiver = nil }
-    
-    @discardableResult
-    func setArchiver(at url: URL) throws -> ZIPArchiver {
-        let value = try ZIPArchiver(destinationURL: url)
-        _archiver = value
-        return value
-    }
-    
-    var archiver: ZIPArchiver {
-        guard let retval = _archiver else {
-            fatalError("Attempt to retrieve archiver before it was created.")
-        }
-        return retval
-    }
-    
-//    lazy var archiver: ZIPArchiver = {
-//        let retval = try! ZIPArchiver(destinationURL: zipOutputURL)
-//        return retval
-//    }()
-    
-    
+        
     private func deleteAllFiles() throws {
         try SeriesTag.allCases
             .map { csvFileName(for: $0) }
@@ -109,28 +86,31 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // This is TOTAL reversion,
         // forget the subject, forget completion.
         ASKeys.isFirstRunComplete = false
-        clearArchiver()
     }
     
     // MARK: Completion check
-    var keysToBeFinished: Set<CompDict.Key> {
+    private var keysToBeFinished: Set<CompDict.Key> {
         ASKeys.isFirstRunComplete ?
         SeriesTag.neededForLaterRuns :
         SeriesTag.neededForFirstRun
     }
     
-    var documentsDirectory: URL {
+    private var documentsDirectory: URL {
         try! FileManager.default
             .url(for: .documentDirectory,
                  in: .userDomainMask,
                  appropriateFor: nil, create: true)
     }
     
+    /// The URL to receive the compressed ZIP archive.
+    /// - warning: This file must not exist when its ``ZIPArchiver`` is initialized.
     lazy var zipOutputURL: URL = {
         return documentsDirectory
             .appendingPathComponent(zipFileName)
     }()
     
+    /// The name of a `.csv` file to receive the data from a phase.
+    private
     func csvFileName(for phase: SeriesTag) -> String {
         // The csv form is:
         // phase_subject_yyyy-mm-dd.csv
@@ -142,6 +122,8 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         + ".csv"
     }
     
+    /// The name of the `.zip` archive to be constructed from the `.csv` files.
+    private
     var zipFileName: String {
         assert(SubjectID.id != SubjectID.unSet)
         let userNameComponent = SubjectID.id
@@ -163,6 +145,30 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     
     // MARK: - Completion reports
     
+    /// For each data in `completionDictioinary`, write it into a `ZIPArchiver`
+    fileprivate func createArchive() throws {
+        var okayTag: SeriesTag? = nil
+        var latestFileLength = 0
+        do {
+            // Get any existing file out of the way.
+            try FileManager.default.deleteIfPresent(zipOutputURL)
+            // Add all phase/data pairs to a fresh ``ZIPArchiver``.
+            var archiver = try! ZIPArchiver(destinationURL: zipOutputURL)
+            try forEachPhase { tag, data in
+                latestFileLength = data.count
+                okayTag = tag
+                try archiver.add(data, named: self.csvFileName(for: tag))
+            }
+            // Note: The ZIPArchive has no life outside this block.
+        }
+        catch {
+            let failingTagName = okayTag?.rawValue ?? "<other>"
+            print("\(#fileID):\(#line): Can’t add", latestFileLength, "bytes for", failingTagName)
+            print("\t", error)
+            throw error
+        }
+    }
+    
     /// Report to the ``PhaseStorage`` that a phase has completed with data for output.
     ///
     /// ``PhaseStorage`` retaine all plase-data pairs until all the phases needed for this session are complete. The results are then passed to ``CSVArchiver``.
@@ -176,41 +182,27 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             return
         }
         
-        do {
-            try archiver.add(data, named: csvFileName(for: tag))
-            // TODO: Watchdog will likely kill this.
-        }
-        catch {
-            print("\(#fileID):\(#line): Can’t add", data.count, "bytes for", tag.rawValue)
-            print("\t", error)
-            throw error
-        }
-        
-        // Add the datum for this tag.
+        // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
         
-        // If all required tags are accounted for,
-        // send it all to CSVArchiver.
+        // If all required tags are accounted for, send it all to `CSVArchiver`.
         if checkCompletion() {
-            
-            // init(for payload: Data, named name: String)
-            
-            /*
-             THIS MAY OR MAY NOT BE THE PLACE WHERE WE CAN INITIALIZE A FRESH ARCHIVER.
-             */
-            
-            try! setArchiver(at: zipOutputURL)
+            // Insert .csv for all phases into an archiver.
+            try! createArchive()
+
+            // Set up the upload with the URL for the archive.
             guard let performer = PerformUpload(
                 from: zipOutputURL,
                 named: zipFileName) else {
                 return
             }
             performStruct = performer
+            // Perform the upload.
             performer.doIt()
         }
     }
     
-    /// Upon completion of the upload, tear down the archive file and the accumulated-data state
+    /// Upon completion of the upload, tear down the accumulated-data state
     ///
     /// Caleld when an upload completes, and the PhaseStorage instance must be reset to accept a new session.
     /// - Parameter success: whether the upload succeeded.
@@ -229,14 +221,13 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         areAllPhasesComplete = false
         completionDictionary = [:]
         try? deleteAllFiles()
-        clearArchiver()
     }
 }
 
 extension PhaseStorage {
     /// Pass each phase-data pair to a closure
     /// - Parameter closure: A closure that accepts a `SeriesTag` and a `Data`.
-    func forEachPhase(
+    private func forEachPhase(
         closure: @escaping ((SeriesTag, Data) throws -> Void)) rethrows {
             for (k, v) in completionDictionary {
                 try closure(k, v)
@@ -269,19 +260,8 @@ extension PhaseStorage {
             
             self.tearDownFromUpload(
                 havingSucceeded: goodStatus)
-            // FIXME: tear-down doesn't much care about success.
-            // It deletes files and resets progress
-            // properties regardless.
+            // tear-down doesn't much care about success.
+            // It deletes files and resets progress properties regardless.
         }
     }
 }
-
-/*
- Let's put some discipline on these lazy Archive-related properties.
- 
- ZIPArchive:
-    There was a deadlock: Couldn't finish without initializing the `archiver` property.
-    Couldn't initialize `archiver` in the property declaration, because it needs the destination URL, which needed zipOutputURL, which so far is lazy, as it depends on .zipFileName and documentsDirectory.
- 
- The problem with a lazy archiver is that lazy properties delay initialization, but set the value _only once._ This means that you could try nilling-out the archiver property, or leave it in a (probably) used-up condition, but either way, whatever is stored in `archiver` is invalid.
- */
