@@ -129,7 +129,6 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     lazy var zipOutputURL: URL = {
         return documentsDirectory
             .appendingPathComponent(zipFileName)
-        #warning("Lazy vars don't reset.")
     }()
     
     func csvFileName(for phase: SeriesTag) -> String {
@@ -193,6 +192,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // If all required tags are accounted for,
         // send it all to CSVArchiver.
         if checkCompletion() {
+            
             // init(for payload: Data, named name: String)
             
             /*
@@ -275,3 +275,13 @@ extension PhaseStorage {
         }
     }
 }
+
+/*
+ Let's put some discipline on these lazy Archive-related properties.
+ 
+ ZIPArchive:
+    There was a deadlock: Couldn't finish without initializing the `archiver` property.
+    Couldn't initialize `archiver` in the property declaration, because it needs the destination URL, which needed zipOutputURL, which so far is lazy, as it depends on .zipFileName and documentsDirectory.
+ 
+ The problem with a lazy archiver is that lazy properties delay initialization, but set the value _only once._ This means that you could try nilling-out the archiver property, or leave it in a (probably) used-up condition, but either way, whatever is stored in `archiver` is invalid.
+ */

@@ -15,7 +15,7 @@ import ActivityKit
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
-    
+
     @State var shouldShowActivity = false
     @State var activityController: ActivityUIController!
 
@@ -137,11 +137,11 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                     }
             }
             .reversionAlert(on: $showAlert)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    ReversionButton(toBeSet: $showAlert)
-//                }
-//            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReversionButton(toBeSet: $showAlert)
+                }
+            }
             .navigationBarTitle("Recovery")
         }
         .alert("Not complete", isPresented: $shouldAlertDisclaimer, actions: {},
@@ -162,7 +162,7 @@ struct FailureView_Previews: PreviewProvider {
 
 struct ConclusionView_Previews: PreviewProvider {
     static var previews: some View {
-        
+
         NavigationView {
             ConclusionView {
                 _ in
