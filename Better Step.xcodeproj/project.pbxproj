@@ -25,7 +25,6 @@
 		1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE228D288DA00547C7A /* ToolbarViewModifiers.swift */; };
 		1F5D7CAC2999B88200FFB414 /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9352298DB6DF00B5194B /* error-support.swift */; };
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
-		1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
 		1F66584C296E29F400EE75FE /* Exercise_ZIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66584B296E29F400EE75FE /* Exercise_ZIPApp.swift */; };
 		1F66584E296E29F500EE75FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66584D296E29F400EE75FE /* ContentView.swift */; };
@@ -922,7 +921,6 @@
 				1FA2820D28DBBB270038353E /* FileManager+extensions.swift in Sources */,
 				1FA281F328DBBB270038353E /* UsabilityQuestions.swift in Sources */,
 				1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */,
-				1F6456F6294CFA3E0064DADA /* ActivityUIController.swift in Sources */,
 				1FA2821928DBBB270038353E /* InterstitialInfo.swift in Sources */,
 				1F6998372999A67A00A0AC80 /* UPLData.swift in Sources */,
 				1FC7477D28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift in Sources */,

@@ -15,10 +15,8 @@ import ActivityKit
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
-
     @State var shouldShowActivity = false
-    @State var activityController: ActivityUIController!
-
+    
     init(_ closure: @escaping ClosureType) {
         completion = closure
     }
@@ -38,13 +36,6 @@ struct ConclusionView: View, ReportingPhase {
                 shouldShowActivity = true
                 ASKeys.lastCompletionDate = Date()
             }
-            .sheet(isPresented: $shouldShowActivity,
-                   onDismiss: {
-                self.completion(.success(()))
-            }, content: {
-                ActivityUIController(url: PhaseStorage.shared.zipOutputURL)
-                    .presentationDetents([.medium])
-            })
             Spacer()
         }.font(.title2)
             .reversionAlert(on: $showResetAlert)

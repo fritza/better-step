@@ -154,22 +154,6 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
         self.answers = result
     }
 
-/*
-    /// Set all responses in the `shared` `DASIResponseList` to .unknown. This is data _only,_ without regard for storage (e.g. the report file.
-    static func clearResponses() {
-        BSTAppStageState.shared.dasiResponses.clearResponses()
-    }
-
-    static func clearAllDASI() async throws {
-        clearResponses()
-        try await BSTAppStageState.shared.dasiFile?.clearReportFile()
-    }
-    func teardownFromSubjectID() async throws -> DASIResponseList? {
-        clearResponses()
-        return self
-    }
-     */
-
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
@@ -180,32 +164,5 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
         let arrayOfAnswers = answers.map(\.csvLine)
         assert(SubjectID.id != SubjectID.unSet)
         return "\(SeriesTag.dasi.rawValue),\(SubjectID.id)," + arrayOfAnswers.csvLine
-
-//        let okayResponseValues: Set<AnswerState> = [.no, .yes]
-//        let usableResponses = answers
-//            .filter {
-//                okayResponseValues.contains($0.response)
-//            }
-//        // Now it's an array of "y", "n", etc.
-//        // TODO: Consider whether < answers.count is an error.
-//        guard let firstUsable = usableResponses.first
-//        else { return nil }
-//
-//        let firstTimestamp = firstUsable.timestamp.iso
-//
-//        let numberedResponses = usableResponses
-//            .sorted(by: { $0.id < $1.id })
-//            .map {
-//                String(describing: $0.response)
-//            }
-//
-//        let components: [String] = [numberedResponses].recordsPrefixed(tag: .dasi)
-//        return components
-//        [SubjectID.id] + [firstTimestamp] + numberedResponses
-
-//        assert(components.count == 2+DASIQuestion.count,
-//               "Expected \(2+DASIQuestion.count) response items, got \(components.count)")
-
-//        return components.joined(separator: ",")
     }
 }
