@@ -34,7 +34,7 @@ struct ConclusionView: View, ReportingPhase {
             Spacer()
             Button("Submit") {
                 shouldShowActivity = true
-                ASKeys.lastCompletionDate = Date()
+                ASKeys.lastCompletionValue = Date()
             }
             Spacer()
         }.font(.title2)
