@@ -7,45 +7,42 @@
 
 import Foundation
 
-/*
-
- StateReversion / MassDiscardable
-
- Rationale
- 
- Previous iterations relied on a very fine-grained family of destroy-this, destroy-that, zip-saving begun/succeeded/cancelled…
- 
- For reversion to the unused, state, al; you need is a siren saying everything has to be reset.
- */
-
 public let RevertAllNotice = Notification.Name(rawValue: "RevertAllNotice")
-
-
-enum Reversion {
-    
-    static func postReversion() {
-        NotificationCenter.default
-            .post(name: RevertAllNotice, object: nil)
-    }
-}
 
 // Is there some protocol I can make to regularize registration and handling of the RevertAllNotice notification?
 
-protocol MassDiscardable {
+/// Adopters respond to a `Notification` calling for total reversion of app state.
+///
+/// “Total reversion” means ensuring that all state — file, memory, `UserDefaults`, UI — is as though the app had never been run. This exposes the onboarding and survey phases that are awailable only upon first run.
+///
+/// The expected trigger for total reversion is a trailing nav-bar button (atw SF Symbol “gear”).
+/// - note: Neither the control not the process is to be exposed to subject users in production. It is solely for beta testing: Otherwise a tester would be able to exercise first run only by deleting and reinstalling the app.
+protocol MassDiscardable: NSObject {
+    /// The closure adopters must call to report completion of their part of the process.
+    typealias ReversionCompleted = (SeriesTag, Bool) -> Void
+    
+    /// Storage for the adopting object's notification handler so it doesn't get released.
+    ///
+    /// Adopter must declare the storage; ``installDiscardable()`` initializes it.
     var reversionHandler: AnyObject? { get set }
-    // Really? No get?
     
     func handleReversion(notice: Notification)
+//    var  reversionComplete: ReversionCompleted { get set }
 }
 
 extension MassDiscardable {
     // I REALLY hope there are no dependencies among reversions
+    /// The receiver for the app-wide `RevertAllNotice` The completion action calls the adopter's `handleReversion(notice:)` function.
+    /// - returns: The `NotificationCenter` token for the handler code.
+    /// - note: “install” is probably a misnomer. It is the caller that registers the completion handle.
+    @discardableResult
     func installDiscardable() -> AnyObject? {
-        //        reversionHandler =
-        return NotificationCenter.default
+        // FIXME: Is this obsolete?
+        let handle = NotificationCenter.default
             .addObserver(forName: RevertAllNotice,
                          object: nil, queue: nil,
                          using: handleReversion(notice:))
+        return handle
     }
 }
 
