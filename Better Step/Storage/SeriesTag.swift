@@ -8,10 +8,10 @@
 import Foundation
 
 
-/// Names phases corresponding 1:1 with the reported data streams.
+/// Names phases corresponding 1:1 with active user phases, plus a couple of special cases for nullity and the 7-day step record.
 ///
-/// These name
-public enum SeriesTag: String, Hashable, CaseIterable {
+/// These are for recording user-active progress in `UserDefaults` _only._  Ordering against `sevenDayRecord` or `none` is _undefined_.
+public enum SeriesTag: String, Hashable, CaseIterable, Comparable {
     // Possibly CustomStringConvertible.
     // Possibly CaseIterable.
 
@@ -20,8 +20,39 @@ public enum SeriesTag: String, Hashable, CaseIterable {
     case dasi           = "dasi"
     case usability      = "use"
 
+    case none           = "n/a"
     case sevenDayRecord = "sevenDay"
-
+    
+    /// Whether one tag sorts before another,
+    /// This is for memorializing the last-completed
+    /// user-action phase, set by ``PhaseStorage``..
+    public static func < (lhs: SeriesTag, rhs: SeriesTag) -> Bool {
+        // Equal is not <
+        guard lhs != rhs else { return false }
+        
+        switch (lhs, rhs) {
+            // .none and .sevenDayRecord are always ≤, and == is eliminated.
+        case (.none, _), (.sevenDayRecord, _) :
+            return true
+        case (_, .none), (_, .sevenDayRecord) :
+            return false
+            
+            // Only active phases remain.
+            // firstWalk < every non-equal alternative.
+            // every non-equal alternative is < usability
+        case (.firstWalk, _), (_, .usability):
+            return true
+            
+            // They are both in second/dasi.
+            // If lhs is the lower, it's <
+        case (.secondWalk, .dasi) : return true
+        case (.dasi, .secondWalk) : return false
+            
+            // All combinations are supposed to have been handled.
+        default: fatalError("unhandled comparison between \(lhs.rawValue) and \(rhs.rawValue)")
+        }
+    }
+    
     /// The data-reporting streams to be performed on first run
     public static let neededForFirstRun: Set<SeriesTag> = [
         .firstWalk, .secondWalk,

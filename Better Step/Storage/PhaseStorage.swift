@@ -26,6 +26,8 @@ import SwiftUI
 /// Watch completion of all necessary stages by observing `.isComplete`.
 public final class PhaseStorage: ObservableObject, MassDiscardable
 {
+    @AppStorage(ASKeys.phaseProgress.rawValue) var lastSeenUserPhase: SeriesTag = .none
+    
     static let shared = PhaseStorage()
     
     private var uploadCompleteTag: NSObjectProtocol?
@@ -97,7 +99,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     func handleReversion(notice: Notification) {
         areAllPhasesComplete = false
         completionDictionary = [:]
-        
+        lastSeenUserPhase = .none
         try! deleteAllFiles()
         
         // This is TOTAL reversion,
@@ -201,6 +203,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         
         // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
+        lastSeenUserPhase = tag
         
         // If all required tags are accounted for, send it all to `CSVArchiver`.
         if checkCompletion() {
