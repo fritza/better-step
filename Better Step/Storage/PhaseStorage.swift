@@ -61,17 +61,34 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         setUpCompletionHandler()
     }
         
+    /// Delete every `.csv` and `.zip` in the documents directory.
+    ///
+    /// The expected use is for state reversion (``MassDiscardable``). Testing simply for the extensions may be overbroad, consider a more precise name match.
+    /// - note: Added to remove external dependencies (such as ``SubjectID``)
+    /// - throws: Whatever `FileManager` would throw in listing and deleting directory contents.
     private func deleteAllFiles() throws {
-        try SeriesTag.allCases
-            .map { csvFileName(for: $0) }
-            .map { documentsDirectory.appending(component: $0 )  }
-            .forEach { url in
-                try FileManager.default
-                    .deleteIfPresent(url)
+        let fm = FileManager.default
+        let targetExtensions: Set = [".csv", ".zip"]
+        let dirURL = documentsDirectory
+        
+        // Verify that the documents directory exists and is not empty.
+        guard fm.directoryExists(atURL: dirURL),
+              let fileNames = try? fm.contentsOfDirectory(at: dirURL),
+              !fileNames.isEmpty
+        else { return }
+        
+        // Pass every file that has the `csv` or `zip` extension
+        let urls = fileNames.filter { name in
+            for ext in targetExtensions {
+                if name.hasSuffix(ext) { return true }
             }
-        // Delete all product files.
-        _ = try FileManager.default
-            .deleteIfPresent(zipOutputURL)
+            return false
+        }
+        // Convert the file name to a URL
+            .map { dirURL.appending(component: $0, directoryHint: .notDirectory)
+            }
+        // Delete what's at the URL.
+        try fm.deleteObjects(at: urls)
     }
     
     /// ``MassDiscardable`` adoption
