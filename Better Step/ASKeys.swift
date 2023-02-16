@@ -55,17 +55,11 @@ enum ASKeys: String {
         let boolKeys: [ASKeys] = [
             .unsafeCompletedFirstRun,
         ]
-        for key in boolKeys {
-            ud.setValue(false, forKey: key.rawValue)
-        }
-        
+        boolKeys.forEach { ud.set(false, forKey: $0.rawValue) }
         let nillableKeys: [ASKeys] = [
-            .tempUsabilityIntsCSV,
-            .temporaryDASIResults,
+            .tempUsabilityIntsCSV, .temporaryDASIResults,
         ]
-        for key in nillableKeys {
-            key.removeDefault()
-        }
+        nillableKeys.forEach { $0.removeDefault() }
         
         Self.spoilLast7DReport()
         
@@ -75,7 +69,6 @@ enum ASKeys: String {
         // will be un-set, but it can't hurt.
         ud.setValue(SubjectID.unSet,
                     forKey: Self.subjectID.rawValue)
-        
         isFirstRunComplete = false
     }
     

@@ -7,6 +7,15 @@
 
 import Foundation
 
+/*
+ What I'd like to see
+ There's a lot of dependency in reversion on SubjectID.id.
+ 
+ 
+ */
+
+
+
 public let RevertAllNotice = Notification.Name(rawValue: "RevertAllNotice")
 
 // Is there some protocol I can make to regularize registration and handling of the RevertAllNotice notification?
@@ -17,7 +26,7 @@ public let RevertAllNotice = Notification.Name(rawValue: "RevertAllNotice")
 ///
 /// The expected trigger for total reversion is a trailing nav-bar button (atw SF Symbol “gear”).
 /// - note: Neither the control not the process is to be exposed to subject users in production. It is solely for beta testing: Otherwise a tester would be able to exercise first run only by deleting and reinstalling the app.
-protocol MassDiscardable: NSObject {
+protocol MassDiscardable {
     /// The closure adopters must call to report completion of their part of the process.
     typealias ReversionCompleted = (SeriesTag, Bool) -> Void
     
