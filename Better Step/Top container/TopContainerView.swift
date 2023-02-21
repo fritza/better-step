@@ -17,8 +17,6 @@ struct TopContainerView: View, MassDiscardable {
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     
     @ObservedObject fileprivate var observableStatus = UploadState()
-    @State fileprivate var notificationTags: [NSObjectProtocol]  = []
-
     
     @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
@@ -35,6 +33,8 @@ struct TopContainerView: View, MassDiscardable {
     }
     
     @State var showNoPermission = false
+    
+    private var cancellables: Set<AnyCancellable> = []
     
     func collect7DayPedometry() {
         PedometryFromHealthKit.securePermission { resultBoolError in
@@ -258,47 +258,46 @@ struct TopContainerView: View, MassDiscardable {
 
 extension TopContainerView {
     fileprivate var completionNoticesSet: Bool {
-        notificationTags.count < 2
+        !cancellables.isEmpty
     }
     
-    private func setUpCompletionNotifications() {
+    private mutating func setUpCompletionNotifications() {
         // TODO: Migrate this into UploadCompletionNotification.swift
         // Prepare to receive upload-complete notifications
         
         // NOTE: If you put up new notifications, be sure to amend `.completionNoticesSet`.
         guard !completionNoticesSet else { return }
         
-        let goodTag =
-        NotificationCenter.default
-            .addObserver(
-                forName: UploadNotification,
-                object: nil, queue: .main)
-        { [self] notice in
-            // TODO: Check for leaks.
-            guard let data = notice.object as? Data,
-                  let userInfo = notice.userInfo,
-                  let response = userInfo["response"] as? HTTPURLResponse
-            else {
-                fatalError("Notifcation without Data:")
-            }
-            // TODO: Do something for successful upload.
-            //            The warning about unused capture of self is about not having a followup yet.
-//            setUploadResult(data: data, response: response)
-        }
-        notificationTags.append(goodTag)
-        
-        let badTag =
-        NotificationCenter.default
-            .addObserver(forName: UploadErrorNotification,
-                         object: nil, queue: .main) { [self] notice in
-                guard let error = notice.object as? Error else {
-                    assertionFailure("Should be able to cast notification object to error")
-                    return
+        NotificationCenter.default.publisher(for: UploadNotification)
+            .map { notice -> (Data, HTTPURLResponse) in
+                guard let data = notice.object as? Data,
+                      let userInfo = notice.userInfo,
+                      let response = userInfo["response"] as? HTTPURLResponse
+                else {
+                    fatalError("error: \(#fileID):\(#line): could not extract upload-completion ")
                 }
-                self.observableStatus.setFromError(error)
-                // TODO: Should the notification carry the Foundation.Error only?
+                return (data, response)
             }
-        notificationTags.append(badTag)
+            .sink { (data, response) in
+                print("success: \(#fileID):\(#line):")
+                print("  --", response.cliffNotes() ?? "n/a")
+            }
+            .store(in: &cancellables)
+        
+        NotificationCenter.default
+            .publisher(for: UploadErrorNotification)
+            .map { notice -> Error in
+                guard let retval = notice.object as? Error else {
+                    return SimpleErrors.strError("Logic error: \(#fileID):\(#line) got a nonsense error.")
+                }
+                return retval
+            }
+            .sink { err in
+                print("Okay, now I have an error:",
+                      err)
+                print("What now?")
+            }
+            .store(in: &cancellables)
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /*
  FIXME: Interrupting before all surveys are done
@@ -22,10 +23,10 @@ import Foundation
 /// - warning: Always use `unset` (atw an empty `String`) to indicate the absence of any known `SubjectID`.
 struct SubjectID {
     init() {
-        // FIXME: No idea how and where to receive deletion calls for unsafe SubjectID deletion.
-        if SubjectID.notificationTicket == nil {
-            Self.handleUserIDNotice()
+        if Self.cancellables.isEmpty {
+            Self.setUpCombine()
         }
+        // FIXME: No idea how and where to receive deletion calls for unsafe SubjectID deletion.
     }
     /// The `String` value indicating no valid contents.
     static let unSet = ""
@@ -33,14 +34,12 @@ struct SubjectID {
     static var id: String {
         get {
             if let fromStore = UserDefaults.standard
-                .string(forKey: ASKeys.subjectID.rawValue)
-            {
+                .string(forKey: ASKeys.subjectID.rawValue) {
                 return fromStore
             }
             else {
                 UserDefaults.standard
                     .set(Self.unSet, forKey: ASKeys.subjectID.rawValue)
-//                    .set(Self.unSet, forkey)
                 return Self.unSet
             }
         }
@@ -68,32 +67,15 @@ struct SubjectID {
     static var validated: String {
         return validate(string: id)
     }
-
-    // MARK:  Notifications
-    private static var notificationTicket: NSObjectProtocol?
-    = {
-        let dCenter = NotificationCenter.default
-        let noticeID = Destroy.unsafeSubjectID.notificationID
-        let noticeString = noticeID.rawValue
-        let retval = dCenter.addObserver(
-            forName: Destroy.unsafeSubjectID.notificationID,
-            object: nil, queue: .current) {
-                _ in
-                SubjectID.id = Self.unSet
+    
+    private static var cancellables: Set<AnyCancellable> = []
+    private static func setUpCombine() {
+        // Clear the SubjectID.
+        let NCD = NotificationCenter.default
+        NCD.publisher(for: ResetSubjectIDNotice)
+            .sink { _ in
+                SubjectID.id = SubjectID.unSet
             }
-        return retval
-    }()
-
-    /// Set up a `Notification` handler for `Destroy.unsafeSubjectID`, deleting the subject ID string _and only that,_ from `UserDefaults`.
-    static func handleUserIDNotice() {
-        let dCenter = NotificationCenter.default
-        let noticeID = Destroy.unsafeSubjectID.notificationID
-//        let noticeString = noticeID.rawValue
-        notificationTicket = dCenter.addObserver(
-            forName: Destroy.unsafeSubjectID.notificationID,
-            object: nil, queue: .current) {
-                _ in
-                SubjectID.id = Self.unSet
-            }
+            .store(in: &cancellables)
     }
 }

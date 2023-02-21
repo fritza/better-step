@@ -5,18 +5,6 @@
 //  Created by Fritz Anderson on 12/12/22.
 //
 
-/*
- Yet another archive-structure class (I want all clients to share state) _ought_ to be unnecessary at this stage of the project.
- 
- However, it has only now become clear how to integrate the files-as-Data into Archive files with common code; and to share a consistent date, series, and subject ID; plus file names.
- */
-
-/*
- Who should do the file names?
- Can we see if we can leave CSVArchiver alone for that?
- */
-
-
 import Foundation
 import SwiftUI
 

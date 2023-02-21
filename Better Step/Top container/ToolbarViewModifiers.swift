@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 
-let ForceAppReversion = Notification.Name("ForceAppReversion")
-
 // Determine whether to have a top-down ForceAppReversion
 // ("App, reset!" -> "Walk, reset", ...)
 // or a bottom-up, per-task reversion (static Destroy OptionSet
@@ -52,11 +50,10 @@ struct ReversionAlert: ViewModifier {
                     
                     SubjectID.id = SubjectID.unSet
                     
-                    
-                    Destroy.all.post()
-                    NotificationCenter.default
-                        .post(name: ForceAppReversion,
+                    let NCD = NotificationCenter.default
+                    NCD.post(name: ForceAppReversion,
                               object: nil)
+                    NCD.post(name: ResetSubjectIDNotice, object: nil)
                 }
                 Button("Cancel", role: .cancel) {
                 }

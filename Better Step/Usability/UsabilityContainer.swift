@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 /*
  2022-10-26 10:24:45.053459-0500 Better Step[96717:948341] [SwiftUI] Accessing State's value outside of being installed on a View. This will result in a constant Binding of the initial value and will not update.
  */
@@ -32,6 +32,7 @@ struct UsabilityContainer: View, ReportingPhase {
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     /// Return CSV value for reporting success.
     var tempCSV: String = ""
+    static private var cancellables: [AnyCancellable] = []
 
     /// Top-level-in-usability phase `intro`, `questions`, (`report`), `closing`
     @State var currentState: UsabilityState    
@@ -42,7 +43,6 @@ struct UsabilityContainer: View, ReportingPhase {
 
     /// Holder for the block that handles Destroy.usability.
     private var notificationHandler: NSObjectProtocol?
-
 
     init(state: UsabilityState = .intro,
          result: @escaping ClosureType) {
@@ -142,20 +142,21 @@ struct UsabilityContainer: View, ReportingPhase {
 }
 
 extension UsabilityContainer {
-    func registerDataDeletion() -> NSObjectProtocol {
+    func registerDataDeletion() {
         let dCenter = NotificationCenter.default
-
+        
         // TODO: Should I set hasCompletedSurveys if the walk is negated?
-        let catcher = dCenter
-            .addObserver(
-                forName: Destroy.usability.notificationID,
-                object: nil,
-                queue: .current)
-        { _ in
-            // WARNING: TEMPORARY, using AppStorage for the completed survey.
-            tempCSV = ""
-        }
-        return catcher
+        
+        let goodUpload = NotificationCenter.default
+            .publisher(for: UploadNotification)
+        let badUpload = NotificationCenter.default
+            .publisher(for: UploadErrorNotification)
+        
+        goodUpload.merge(with: badUpload)
+            .sink { _ in
+                tempCSV = ""
+            }
+            .store(in: &Self.cancellables)
     }
 }
 
