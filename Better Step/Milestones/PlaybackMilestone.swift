@@ -6,8 +6,6 @@
 //
 
 import Foundation
-#if ALLOW_AVAUDIO
-
 import AVFoundation
 
 fileprivate enum PlaybackConstants {
@@ -118,4 +116,3 @@ fileprivate final class AudioPlaybackDelegate: NSObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
     }
 }
-#endif

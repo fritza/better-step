@@ -8,6 +8,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 import CoreMotion
+import Combine
 
 // FIXME: Handle cancellation.
 
@@ -115,40 +116,19 @@ struct WalkingContainerView: View, ReportingPhase {
         self.state = .interstitial_1
         self.completion = reporter
 
-#if ALLOW_AVAUDIO
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
-#endif
-        notificationHandlers = registerDataDeletion()
     }
 
+    private var cancellables: [AnyCancellable] = []
+    mutating func setUpCombine() {
+        anyDataReleasePublisher
+            .sink { _ in
+                AudioMilestone.shared.stop()
+            }
+            .store(in: &cancellables)
+    }
     var notificationHandlers: NSObjectProtocol?
-
-    func registerDataDeletion() -> NSObjectProtocol {
-        let dCenter = NotificationCenter.default
-
-        // TODO: Should I set hasCompletedSurveys if the walk is negated?
-        let catcher = dCenter
-            .addObserver(
-                forName: Destroy.walk.notificationID,
-                object: nil,
-                queue: .current)
-        { _ in
-#if ALLOW_AVAUDIO
-            // Stop the playback
-            AudioMilestone.shared.stop()
-#endif
-
-            // Delete what's at the output URL,
-            // which should amount to everything,
-            // .csv, .zip ...
-//            CSVArchiver.clearSharedArchiver()
-            
-            // No need to propagate the deletion;
-            // It's a notification.
-        }
-        return catcher
-    }
 
     var body: some View {
         VStack {
