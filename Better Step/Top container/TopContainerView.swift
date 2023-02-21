@@ -79,7 +79,7 @@ struct TopContainerView: View, MassDiscardable {
                 switch self.currentPhase {
                     // MARK: - Onboarding
                 case .onboarding:
-#warning("Haste alert doesn’t show")
+#warning("Haste (same-day retry) alert doesn’t show")
                     // Why no audio A...N on first run?
                     // Sounds like a confflict w/ spoken?
                     

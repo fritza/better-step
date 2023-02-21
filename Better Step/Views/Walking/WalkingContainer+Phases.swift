@@ -19,6 +19,7 @@ extension WalkingContainerView {
     /// A `NavigationLink` for initial instructions (`interstitial_1`)
     @ViewBuilder
     func interstitial_1View() -> some View {
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (interstitial_1)",
             tag: WalkingState.interstitial_1, selection: $state) {
@@ -43,6 +44,7 @@ extension WalkingContainerView {
     @ViewBuilder
     private func volumeView(_ current: WalkingState,
                     next: WalkingState) -> some View {        
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink("SHOULDN'T SEE link for generic volume_nView", tag: current,
                        selection: $state) {
             VolumePageView {
@@ -75,6 +77,7 @@ extension WalkingContainerView {
     /// A `NavigationLink` for the first pre-walk countdown (`countdown_1`)
     @ViewBuilder
     func countdown_1View() -> some View {
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (countdown_1)",
             tag: WalkingState.countdown_1, selection: $state) {
@@ -113,6 +116,7 @@ extension WalkingContainerView {
     ///   - nextPhaseBad: The tag for the walk phase if the walk proceded was cancelled..
     /// - Returns: The `View` that displays the walk timer.
     func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
             tag: ownPhase, selection: $state)
@@ -163,6 +167,7 @@ extension WalkingContainerView {
     /// A `NavigationLink` for the interstitial view between the two walk sequences (`interstitial_2`)
     @ViewBuilder
     func interstitial_2View() -> some View    {
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (interstitial_2)",
             tag: WalkingState.interstitial_2, selection: $state) {
@@ -178,7 +183,8 @@ extension WalkingContainerView {
     /// A `NavigationLink` for the second, sweep-second, pre-walk countdown (`countdown_2`)
     @ViewBuilder
     func countdown_2View() -> some View {
-        NavigationLink(
+        // Ignore NavigationLink initialzer deprecation.
+       NavigationLink(
             "SHOULDN'T SEE (countdown_2)",
             tag: WalkingState.countdown_2, selection: $state) {
                 SweepSecondView(duration: CountdownConstants.sweepDuration) {
@@ -214,6 +220,7 @@ extension WalkingContainerView {
     @ViewBuilder
     func ending_interstitialView() -> some View {
         // REGULAR farewell to the user.
+        // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {

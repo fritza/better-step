@@ -26,7 +26,7 @@ Notification.Name("TotalResetNotification")
 
 /// A single `Publisher` for upload completion, good or (internally) bad.
 public let uploadCompletedPublisher = {
-    #warning("The “internal” error condition should inform the user and suggest courses of action.")
+    #warning("Inform user of “internal” error and suggest remedy.")
     
     let goodUpload = NotificationCenter.default
         .publisher(for: UploadNotification)

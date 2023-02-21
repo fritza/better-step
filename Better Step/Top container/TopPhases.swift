@@ -66,9 +66,9 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 
     /// Inistantiates a known `TopPhases` from its name. Fails if there is no phase by that name.
     init?(name: String) {
-        guard let answer = Self.TPAndString
-            .first(where: { $0.value == name} )
-        else { return nil }
+        guard Self.TPAndString.map(\.value).contains(name) else {
+            return nil
+        }
         self.init(rawValue: name)
     }
 

@@ -166,7 +166,7 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
             // Get any existing file out of the way.
             try FileManager.default.deleteIfPresent(zipOutputURL)
             // Add all phase/data pairs to a fresh ``ZIPArchiver``.
-            var archiver = try! ZIPArchiver(destinationURL: zipOutputURL)
+            let archiver = try! ZIPArchiver(destinationURL: zipOutputURL)
             try forEachPhase { tag, data in
                 latestFileLength = data.count
                 okayTag = tag

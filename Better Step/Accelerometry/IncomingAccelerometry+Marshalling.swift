@@ -38,7 +38,6 @@ extension IncomingAccelerometry {
     ///
     /// - Returns: A single `String`, each line being the marshalling of the `CMAccelerometerData` records
     private func allTaggedCSV(tag: SeriesTag) -> String {
-        #warning("Replace with [CSVRepresentable].recordsPrefixed")
         let records = taggedRecords(tag: tag)
         let retval  = records
             .joined(separator: "\r\n")
