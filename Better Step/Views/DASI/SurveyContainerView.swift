@@ -30,17 +30,21 @@ struct SurveyContainerView: View, ReportingPhase {
     @StateObject    var responses = DASIResponseList()
     @AppStorage(ASKeys.temporaryDASIResults.rawValue) var tempCSV: String = ""
 
-    var notificationHandler: NSObjectProtocol?
+//    var notificationHandler: NSObjectProtocol?
+    // I DON'T THINK THIS LAYER NEED DO ANYTHING WITH
+    // DATA DESTRUCTION. Any that still has to be done is
+    // done in PhaseStorage.
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
-        notificationHandler = registerDataDeletion()
+//        notificationHandler = registerDataDeletion()
     }
 
     
 
     // MARK: - Destruction
 
+/*
     func registerDataDeletion()
     -> NSObjectProtocol {
 
@@ -59,7 +63,7 @@ struct SurveyContainerView: View, ReportingPhase {
                 }
         return catcher
     }
-
+*/
 
 
     // FIXME: YUCK! if this doesn't easily work…

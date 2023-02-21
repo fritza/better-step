@@ -41,14 +41,11 @@ struct UsabilityContainer: View, ReportingPhase {
     /// See ``reversionAlert(on:)`` for the `ViewModifier`.
     @State var shouldDisplayReversionAlert = false
 
-    /// Holder for the block that handles Destroy.usability.
-    private var notificationHandler: NSObjectProtocol?
-
     init(state: UsabilityState = .intro,
          result: @escaping ClosureType) {
         self.completion = result
         self.currentState = state
-        notificationHandler = registerDataDeletion()
+        setUpCombine()
     }
     
     @State var multipleChoices: [Int] = []
@@ -142,20 +139,9 @@ struct UsabilityContainer: View, ReportingPhase {
 }
 
 extension UsabilityContainer {
-    func registerDataDeletion() {
-        let dCenter = NotificationCenter.default
-        
-        // TODO: Should I set hasCompletedSurveys if the walk is negated?
-        
-        let goodUpload = NotificationCenter.default
-            .publisher(for: UploadNotification)
-        let badUpload = NotificationCenter.default
-            .publisher(for: UploadErrorNotification)
-        
-        goodUpload.merge(with: badUpload)
-            .sink { _ in
-                tempCSV = ""
-            }
+    func setUpCombine() {
+        uploadCompletedPublisher
+            .sink { _ in tempCSV = "" }
             .store(in: &Self.cancellables)
     }
 }

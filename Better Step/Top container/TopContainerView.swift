@@ -284,20 +284,9 @@ extension TopContainerView {
             }
             .store(in: &cancellables)
         
-        NotificationCenter.default
-            .publisher(for: UploadErrorNotification)
-            .map { notice -> Error in
-                guard let retval = notice.object as? Error else {
-                    return SimpleErrors.strError("Logic error: \(#fileID):\(#line) got a nonsense error.")
-                }
-                return retval
-            }
-            .sink { err in
-                print("Okay, now I have an error:",
-                      err)
-                print("What now?")
-            }
-            .store(in: &cancellables)
+        // Removed an observer of UploadErrorNotification.
+        // There should be some way to alert the user
+        // to errors, but that's not ready yet.
     }
 }
 

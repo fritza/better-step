@@ -65,7 +65,7 @@ public struct PerformUpload {
     /// * Forms the payload multipart in ``multipartData(fileName:content:boundary:)``
     /// * Spawns a `Task` to perform the asynchronoous upload.
     ///
-    /// Completion of the upload will trigger an `UploadNotification` notification.
+    /// Completion of the upload will trigger an `UploadNotification` or `UploadErrorNotification` notification.
     public func doIt() {
         // URLRequest including the boundary string.
         let boundary = "Boundary-\(UUID().uuidString)"

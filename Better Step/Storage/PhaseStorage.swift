@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import Combine
 
 /// Maintain the data associated with completed phases of the workflow.
 ///
@@ -23,6 +23,11 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
 
     /// The year/month/day as of the creation of this `PhaseStorage`.
     private let stickyYMDTag: String // "yyyy-mm-dd"
+    
+    /// The subject ID as of the creation of this `PhaseStorage`.
+    private let stickySubjectID: String
+    
+    private var cancellables: Set<AnyCancellable> = []
         
     /// Key-value pairs mapping a completed ``SeriesTag`` to its data.
     typealias CompDict = [SeriesTag:Data]
@@ -43,12 +48,13 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
     public init() {
         assert(SubjectID.id != SubjectID.unSet)
         stickyYMDTag = Date().ymd
+        stickySubjectID = SubjectID.id
         self.areAllPhasesComplete = false
         self.reversionHandler = installDiscardable()
         completionDictionary = [:]
         self.performStruct = nil
         
-        setUpCompletionHandler()
+        setUpCombine()
     }
         
     /// Delete every `.csv` and `.zip` in the documents directory.
@@ -123,17 +129,17 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         // phase_subject_yyyy-mm-dd.csv
         // The zip form is:
         // subject_yyyy-mm-dd.zip
-        assert(SubjectID.id != SubjectID.unSet)
+        assert(stickySubjectID != SubjectID.unSet)
 
-        return "\(phase.rawValue)_\(SubjectID.id)_\(stickyYMDTag)"
+        return "\(phase.rawValue)_\(stickySubjectID)_\(stickyYMDTag)"
         + ".csv"
     }
     
     /// The name of the `.zip` archive to be constructed from the `.csv` files.
     private
     var zipFileName: String {
-        assert(SubjectID.id != SubjectID.unSet)
-        let userNameComponent = SubjectID.id
+        assert(stickySubjectID != SubjectID.unSet)
+        let userNameComponent = stickySubjectID
         let retval = "\(userNameComponent)_\(stickyYMDTag)"
         + ".zip"
         return retval
@@ -210,26 +216,6 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         }
     }
     
-    /// Upon completion of the upload, tear down the accumulated-data state
-    ///
-    /// Caleld when an upload completes, and the PhaseStorage instance must be reset to accept a new session.
-    /// - Parameter success: whether the upload succeeded.
-    /// - warning: releases the uploader from a callback out of the uploader. This might not go well.
-    /// - note: At some point  `success` will matter,
-    ///     but this hasn't been thought-out yet.
-    func tearDownFromUpload(havingSucceeded success: Bool = true)
-    {
-        if success {
-            // If this session went end-to-end
-            // then anything more is after-first.
-            ASKeys.isFirstRunComplete = true
-        }
-                
-        // Unwund progress left over from this session.
-        areAllPhasesComplete = false
-        completionDictionary = [:]
-        try? deleteAllFiles()
-    }
 }
 
 extension PhaseStorage {
@@ -245,31 +231,51 @@ extension PhaseStorage {
 
 // MARK: - Completion notification
 extension PhaseStorage {
-    func setUpCompletionHandler() {
-        uploadCompleteTag =
-        NotificationCenter.default
-            .addObserver(
-                forName: UploadNotification,
-                object: nil, queue: .main)
-        { [self] notice in
-            // TODO: Check for leaks.
-            guard (notice.object as? Data) != nil,
-                  let userInfo = notice.userInfo,
-                  let response = userInfo["response"] as? HTTPURLResponse
-            else {
-                fatalError("Notifcation without Data:")
+    
+    /// Monitor a `UserDefaults` publisher.
+    ///
+    /// **`UploadNotification`**: The upload completed without (internal) error. Examine the status code for
+    /// transaction success or failure, and resets state
+    /// accordingly.
+    ///
+    /// Extracts the `Response`, checks the status code and sinks whether the transaction went through without any level of error:
+    ///
+    /// * set all phases completed to false as to the next session.
+    /// * completion dictionary empty to receive new data
+    /// * all incidental files removed.
+    /// * If good, note that the first run is complete.
+    ///
+    /// - bug: Handles the (system) error case by `fatalError()`
+    func setUpCombine() {
+        // FIXME: Percolate the error up to user-visible alert
+        //             See `#warning` in `UploadCompletionNotification.swift`.
+        anyDataReleasePublisher
+            .map { (notice: Notification) -> HTTPURLResponse in
+                guard (notice.object as? Data) != nil,
+                      let userInfo = notice.userInfo,
+                      let response = userInfo["response"] as? HTTPURLResponse
+                else {
+                    fatalError("Notifcation without Data:")
+                }
+                return response
             }
-            
-            
-            // Tear down the intermediates, depending
-            // on the outcome of the upload.
-            let status = response.statusCode
-            let goodStatus = (200..<300).contains(status)
-            
-            self.tearDownFromUpload(
-                havingSucceeded: goodStatus)
-            // tear-down doesn't much care about success.
-            // It deletes files and resets progress properties regardless.
-        }
+            .map { (response: HTTPURLResponse) -> Bool in
+                let status = response.statusCode
+                let goodStatus = (200..<300).contains(status)
+                return goodStatus
+            }
+            .sink { good in
+                if good {
+                    // If this session went end-to-end
+                    // then anything more is after-first.
+                    ASKeys.isFirstRunComplete = true
+                }
+                self.areAllPhasesComplete = false
+                self.completionDictionary = [:]
+                try? self.deleteAllFiles()
+                
+                // Somebody ought to post an error alert.
+            }
+            .store(in: &cancellables)
     }
 }
