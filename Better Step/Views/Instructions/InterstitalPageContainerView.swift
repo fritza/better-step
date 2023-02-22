@@ -40,7 +40,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
             ForEach(listing) {
                 item in
                 InterstitialPageView(info: item) {
-                    if item.id < listing.count {
+                    if item.id < listing.endIndex {
                         selectedPage += 1
                     }
                     else {
@@ -57,6 +57,14 @@ struct InterstitalPageContainerView: View, ReportingPhase {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ReversionButton(toBeSet: $showReversionAlert)
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("< Back") {
+                    if selectedPage > listing.startIndex {
+                        selectedPage -= 1
+                    }
+                }
+                .disabled(selectedPage <= listing.startIndex)
+            }
         }
         .reversionAlert(on: $showReversionAlert)
     }
@@ -69,7 +77,6 @@ struct InterstitalPageTabView_Previews: PreviewProvider {
             InterstitalPageContainerView(
                 listing: try! InterstitialList(
                     baseName:
-//                        "walk-intro"
                     "second-walk-intro"
                 ),
                 selection: 1,  callback: {_ in})

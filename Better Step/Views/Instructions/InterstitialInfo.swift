@@ -161,6 +161,12 @@ struct InterstitialList: Codable, CustomStringConvertible {
         return retval
     }
 
+    var indexRange: ClosedRange<Int> {
+        let lower = interstitials.map(\.id).min()!
+        let upper = interstitials.map(\.id).max()!
+        return lower...upper
+    }
+    
     /// Load the list of `InterstitialInfo` from a (base)named `Bundle` file.
     ///
     /// Elements in the file will not specify IDs; they identify by their order in the `json` file. This initializer assigns each an `id`  of file order + 1.
