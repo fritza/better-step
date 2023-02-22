@@ -20,11 +20,15 @@ enum UsabilityState: Int, CaseIterable {
     case closing
 }
 
-
+// MARK: - UsabilityContainer
 /// A  sequence of open-intertitial → questions → close-interstitial phases. Each solicits a `1...7` rating.
 ///
 /// Its ``SuccessValue`` as a ``ReportingPhase`` is `(scores: String, specifics: String)`, a CSV line of responses to the 1–7 ratings.
+/// - note: This view contains ``UsabilityView``, ``WalkUsabilityForm``, and ``UsabilityInterstitialView``. It is ultimately contained in a `NavigationView` in ``TopContainerView``.
+
 struct UsabilityContainer: View, ReportingPhase {
+    // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
+    
 // FIXME: The second, "specifics" SuccessValue isn't used.
 
     typealias SuccessValue = String
@@ -74,12 +78,6 @@ struct UsabilityContainer: View, ReportingPhase {
                         fatalError()
                     }
                     
-                    /*
-                     tempCSV = array.csvLine
-                     if array.allSatisfy({ $0 != 0 }) {
-                     currentState = .closing
-                     }
-                     */
                     multipleChoices = array
                     currentState = .surveyForm
                 }

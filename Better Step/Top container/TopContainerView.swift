@@ -74,6 +74,7 @@ struct TopContainerView: View
         NavigationView {
             VStack {
                 switch self.currentPhase {
+                    
                     // MARK: - Onboarding
                 case .onboarding:
 #warning("Haste (same-day retry) alert doesn’t show")
@@ -136,6 +137,7 @@ struct TopContainerView: View
                         collect7DayPedometry()
                     }
                     
+                    // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                 case .greeting:
                     ApplicationGreetingView {_ in
                         self.currentPhase = .walking
@@ -146,8 +148,7 @@ struct TopContainerView: View
                     
                     // MARK: - Walking
                 case .walking:
-                    // NO. the container view is able
-                    // to collect more than one completion.
+                    // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     WalkingContainerView() {
                         _ in
                         let whatFollows = currentPhase.followingPhase
@@ -156,6 +157,7 @@ struct TopContainerView: View
                     
                     // MARK: - Usability
                 case .usability:
+                    // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     UsabilityContainer { result in
                         switch result {
                         case .success(_):

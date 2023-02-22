@@ -10,6 +10,8 @@ import SwiftUI
 /// Presented at the beginning of the workflow if no ``SubjectID`` for the user is known.
 ///
 /// Its ``SuccessValue`` as a ``ReportingPhase`` is `String`.
+/// - note: This view is ultimately contained in a `NavigationView` in ``TopContainerView``
+
 /// - note: There was some idea of having the onboard/return in a single `View` with lots of conditionals. This is insane. See ``ApplicationGreetingView`` instead.
 struct ApplicationOnboardView: View, ReportingPhase {
     @Namespace var appOnboardSpace

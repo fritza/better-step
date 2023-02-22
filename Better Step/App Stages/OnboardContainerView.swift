@@ -11,6 +11,8 @@ import SwiftUI
 /// Workflow container for onboarding views.
 ///
 /// Its ``SuccessValue`` as a ``ReportingPhase`` is `String`.
+/// - note: This view contains ``ApplicationOnboardView``
+///     It is ultimately contained in a `NavigationView` in ``TopContainerView``
 struct OnboardContainerView: View, ReportingPhase {
     @State private var correctTask: Int?
     @State private var shouldWarnOfReversion: Bool = false
@@ -49,29 +51,28 @@ You’ll be repeating the timed walks you did last time. There will be no need t
         case greetingHandoff
     }
     @State var workingString = SubjectID.id
-
+    
     var body: some View {
-//        NavigationView {
-            ApplicationOnboardView(string: $workingString) {
-                string in
-                // Success result is a String with the proposed subject ID.
-                // The received ID.
-
-                if let finished = try? string.get() {
-                    // Propagate Onboerd View's (upstream)
-                    // result to TopContainerView (downstream)
-                    // which will set SubjectID.id
-                    completion(.success(finished))
-                }
-                // FIXME: what happens upon failure?
+        ApplicationOnboardView(string: $workingString) {
+            string in
+            // Success result is a String with the proposed subject ID.
+            // The received ID.
+            
+            if let finished = try? string.get() {
+                // Propagate Onboerd View's (upstream)
+                // result to TopContainerView (downstream)
+                // which will set SubjectID.id
+                completion(.success(finished))
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReversionButton(toBeSet: $shouldWarnOfReversion)
-                }
+            // FIXME: what happens upon failure?
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ReversionButton(toBeSet: $shouldWarnOfReversion)
             }
-            .reversionAlert(on: $shouldWarnOfReversion)
-            .padding()
+        }
+        .reversionAlert(on: $shouldWarnOfReversion)
+        .padding()
     }
 }
 

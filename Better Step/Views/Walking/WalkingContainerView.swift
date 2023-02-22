@@ -89,26 +89,16 @@ let csvUTTString = "public.comma-separated-values-text"
 ///
 ///  As implemented, each NavigationLink is created by its own `@ViewBuilder` so the `body` property need only list them by name.
 ///  - note: `demo_summaryView()` is presented only if the `INCLUDE_WALK_TERMINAL` compilation flag is set.
+///
+///  - note: `WalkingContainerVuew` is embeded in the `NavigationView` within ``TopContainerView``. It _contains_ any of the views in `WalkingContainerView+Phases.swuft`
 
-
+// MARK: - WalkingContainerView
 struct WalkingContainerView: View, ReportingPhase {
     typealias SuccessValue = SeriesTag
     var completion: ClosureType
 
-    /*
-     ((Result<SuccessValue, Error>) -> Void)!
-     */
     @EnvironmentObject var motionManager: MotionManager
     @State var state: WalkingState?
-//    {
-//        didSet {
-//            print("Walking State goes from",
-//                  oldValue?.rawValue ?? "<N/A>",
-//                  "to",
-//                  state?.rawValue ?? "<N/A>"
-//            )
-//        }
-//    }
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
 
@@ -130,7 +120,9 @@ struct WalkingContainerView: View, ReportingPhase {
     }
     var notificationHandlers: NSObjectProtocol?
 
+    // MARK: body
     var body: some View {
+        // NOTE: This stack is contained in a `NavigationView` within ``TopContainerView``.
         VStack {
             interstitial_1View()
             // the volume view OUGHT to come BEFORE the final view in the sequence (the final view refers specifically to proceeding with the walk).

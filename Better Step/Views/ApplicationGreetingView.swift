@@ -9,7 +9,10 @@ import SwiftUI
 
 private var forPreview = false
 
+// MARK: - ApplicationGreetingView
 /// Initial display for runs that already have SubjectIDs
+/// - note: This view is contained in a `NavigationView` within ``TopContainerView``. It _wraps_ ``GenericInstructionView``
+
 struct ApplicationGreetingView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
