@@ -23,7 +23,6 @@ You’ll be repeating the timed walks you did last time. There will be no need t
 Tap “Continue” to proceed.
 """
     init(_ closure: @escaping ClosureType) {
-        assert(forPreview || (SubjectID.id != SubjectID.unSet))
         self.completion = closure
     }
     
