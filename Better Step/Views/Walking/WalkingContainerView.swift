@@ -122,7 +122,7 @@ struct WalkingContainerView: View, ReportingPhase {
 
     private var cancellables: [AnyCancellable] = []
     mutating func setUpCombine() {
-        anyDataReleasePublisher
+        revertAllNotification
             .sink { _ in
                 AudioMilestone.shared.stop()
             }

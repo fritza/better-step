@@ -13,7 +13,8 @@ import HealthKit
 /// `NavigationView` that uses invisible `NavigationItem`s for sequencing among phases.
 ///
 ///
-struct TopContainerView: View, MassDiscardable {
+struct TopContainerView: View
+{
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     
     @ObservedObject fileprivate var observableStatus = UploadState()
@@ -24,14 +25,6 @@ struct TopContainerView: View, MassDiscardable {
     @State var currentPhase: TopPhases
     
     // TODO: Should this be an ObservedObject?
-    var reversionHandler: AnyObject?
-    func handleReversion(notice: Notification) {
-        ASKeys.revertPhaseDefaults()
-        currentPhase = .entry
-        TopPhases.resetToFirst()
-        // I think it's okay _not_ to clear the reversionHandler
-    }
-    
     @State var showNoPermission = false
     
     private var cancellables: Set<AnyCancellable> = []
@@ -61,9 +54,13 @@ struct TopContainerView: View, MassDiscardable {
     }
     
     init() {
+        if SubjectID.id == SubjectID.unSet {
+            NotificationCenter.default
+                .post(name: TotalResetNotification, object: nil)
+        }
+        
         // TODO: store and reload the current phase ID.
         currentPhase = TopPhases.entry.followingPhase
-        self.reversionHandler = self.reversionHandler ?? installDiscardable()
         setUpCompletionNotifications()
     }
     

@@ -140,7 +140,7 @@ struct UsabilityContainer: View, ReportingPhase {
 
 extension UsabilityContainer {
     func setUpCombine() {
-        uploadCompletedPublisher
+        revertAllNotification
             .sink { _ in tempCSV = "" }
             .store(in: &Self.cancellables)
     }
@@ -153,6 +153,6 @@ struct UsabilityContainer_Previews: PreviewProvider {
             UsabilityContainer() { _ in }
         }
         .previewDevice(.init(stringLiteral: "iPhone 12"))
-        .previewDevice(.init(stringLiteral: "iPhone SE (3rd generation)"))
+        .previewDevice(.init(stringLiteral: "iPhone Xs"))
     }
 }

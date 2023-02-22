@@ -86,7 +86,8 @@ enum Lifecycle: Equatable {
 
 // MARK: - MotionManager
 /// Wrapper around `CMMotionManager` with convenient start / stop / `AsyncSequence` for accelerometry,
-final class MotionManager: ObservableObject, MassDiscardable {
+final class MotionManager: ObservableObject
+{
     /// Access to the singleton ``MotionManager``.
     ///
     /// - bug: A single instance can't be restarted for a new walk. Add a way to replace `Self.shared`.
@@ -120,7 +121,6 @@ final class MotionManager: ObservableObject, MassDiscardable {
 //    typealias CMDataStream = AsyncStream<CMAccelerometerData>
     typealias CMDataStream = AsyncStream<XYZT>
     var asyncBuffer: IncomingAccelerometry
-    var reversionHandler: AnyObject?
 
     // MARK: - Initialization and start
 //    init(phase: SeriesTag)
@@ -134,7 +134,6 @@ final class MotionManager: ObservableObject, MassDiscardable {
         deviceState = DeviceState(cmManager)
         accState = AccelerometerState(cmManager)
         asyncBuffer = IncomingAccelerometry()
-        reversionHandler = installDiscardable()
     }
     
     func handleReversion(notice: Notification) {

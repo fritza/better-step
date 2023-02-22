@@ -49,6 +49,20 @@ public let anyDataReleasePublisher = {
                             resetPhases)
 }()
 
+public let revertAllNotification = {
+    let goodUpload = NotificationCenter.default
+        .publisher(for: UploadNotification)
+    let badUpload = NotificationCenter.default
+        .publisher(for: UploadErrorNotification)
+    let resetPhases = NotificationCenter.default
+        .publisher(for: ResetSessionNotification)
+    let totalPhase = NotificationCenter.default
+        .publisher(for: TotalResetNotification)
+    return goodUpload.merge(with: badUpload,
+                            resetPhases,
+                            totalPhase)
+}()
+
 /// Adopter of `LocalizedError` to wrap a generic `Error` into one that can populate an alert
 struct LocalizedUploadError: LocalizedError {
     /// The `Error` the `LocalizedUploadError` stands for

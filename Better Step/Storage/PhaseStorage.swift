@@ -12,15 +12,13 @@ import Combine
 /// Maintain the data associated with completed phases of the workflow.
 ///
 /// Watch completion of all necessary stages by observing `.isComplete`.
-public final class PhaseStorage: ObservableObject, MassDiscardable
+public final class PhaseStorage: ObservableObject
 {
     @AppStorage(ASKeys.phaseProgress.rawValue) var lastSeenUserPhase: SeriesTag = .none
     
     static let shared = PhaseStorage()
     
     private var uploadCompleteTag: NSObjectProtocol?
-    var reversionHandler: AnyObject?
-
     /// The year/month/day as of the creation of this `PhaseStorage`.
     private let stickyYMDTag: String // "yyyy-mm-dd"
     
@@ -50,7 +48,6 @@ public final class PhaseStorage: ObservableObject, MassDiscardable
         stickyYMDTag = Date().ymd
         stickySubjectID = SubjectID.id
         self.areAllPhasesComplete = false
-        self.reversionHandler = installDiscardable()
         completionDictionary = [:]
         self.performStruct = nil
         
@@ -249,7 +246,7 @@ extension PhaseStorage {
     func setUpCombine() {
         // FIXME: Percolate the error up to user-visible alert
         //             See `#warning` in `UploadCompletionNotification.swift`.
-        anyDataReleasePublisher
+        revertAllNotification
             .map { (notice: Notification) -> HTTPURLResponse in
                 guard (notice.object as? Data) != nil,
                       let userInfo = notice.userInfo,

@@ -24,7 +24,8 @@ import ZIPFoundation
  try arch.saveArchive()
 ```
  */
-class ZIPArchiver: MassDiscardable {
+class ZIPArchiver // : MassDiscardable
+{
     // MARK: - Initialization
     /// The `ZIPFoundation.Archive` to build onto
     private var archiver: Archive
@@ -61,12 +62,10 @@ class ZIPArchiver: MassDiscardable {
     }
     
     // MARK: - MassDiscardable
-    var reversionHandler: AnyObject?
-
     /// ``MassDiscardable`` adoption
-    func handleReversion(notice: Notification) {
-        archiver = Archive(accessMode: .create)!
-    }
+//    func handleReversion(notice: Notification) {
+//        archiver = Archive(accessMode: .create)!
+//    }
 
     
     // MARK: - Insertion

@@ -17,7 +17,6 @@
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F3543D22996D0BE003DD1D0 /* UploadCompletionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */; };
 		1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
-		1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F891BBB29538F30006C09DF /* StateReversion.swift */; };
 		1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */; };
 		1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51BC7F297230F700BE418A /* VolumePageView.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
@@ -892,7 +891,6 @@
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
-				1F373C1C2953B9E100126C9C /* StateReversion.swift in Sources */,
 				1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */,
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
