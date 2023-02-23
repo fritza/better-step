@@ -17,9 +17,9 @@ import SwiftUI
 struct InterstitialPageView: View, Identifiable {
     let item: InterstitialInfo
     let proceedCallback: () -> Void
-
+    
     let id: Int
-
+    
     /// Initialize the view given the content information and a button-action closure
     /// - Parameters:
     ///   - info: An ``InterstitialInfo`` specifying text and symbol content.
@@ -30,7 +30,7 @@ struct InterstitialPageView: View, Identifiable {
         self.proceedCallback = callback
         id = info.id
     }
-
+    
     // MARK: - body
     var body: some View {
         VStack {
@@ -41,36 +41,44 @@ struct InterstitialPageView: View, Identifiable {
             Spacer(minLength: 30)
             // MARK: SF Symbol
             Image(systemName: item.systemImage ?? "bolt.slash.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.accentColor)
+                .scaledAndTinted()
                 .frame(height: 200)
             Spacer()
-            Text(item.introBelow)
-                .font(.body)
-                .minimumScaleFactor(0.75)
-            Spacer()
-
+            if let introBelow = item.introBelow {
+                Text(introBelow)
+                    .font(.title3)
+                    .minimumScaleFactor(0.75)
+                Spacer()
+            }
+            
             // MARK: The action button
-            Button(item.proceedTitle,
-                   action: proceedCallback)
-            Spacer()
+            if let proceedTitle = item.proceedTitle {
+                Button(proceedTitle,
+                       action: proceedCallback)
+                Spacer()
+            }
         }
         .padding()
-        .navigationTitle(item.pageTitle)
+        //        .navigationTitle(item.pageTitle)
     }
 }
 
 // MARK: - Preview
 struct InterstitialPageView_Previews: PreviewProvider {
-    static let sampleIInfo = InterstitialInfo(id: 3, introAbove: "This is the instructional text.\nIt may be very long.", introBelow: "", proceedTitle: "Continue", pageTitle: "Exercise with a longer top.", systemImage: "figure.walk")
-
+    static let sampleIInfo = InterstitialInfo(
+        id: 3,
+        pageTitle: "Exercise with a longer top.",
+        introAbove: "This is the instructional text.\nIt may be very long.",
+        systemImage: "figure.walk",
+        introBelow: "Tap “Comtinue” when you are done.",
+        proceedTitle: "Continue")
+    
     static var previews: some View {
         NavigationView {
-        InterstitialPageView(
-            info: sampleIInfo,
-        proceedCallback: { print("beep") })
-        .padding()
+            InterstitialPageView(
+                info: sampleIInfo,
+                proceedCallback: { print("beep") })
+            .padding()
         }
     }
 }

@@ -91,6 +91,9 @@ struct ApplicationOnboardView: View, ReportingPhase {
     var body: some View {
             // TODO: Copied directly from InterstitialPageView
             VStack {
+                #warning("Port GenericContainer view")
+                // ... as much as possible, having the
+                // text field breaks the GCV model.
                 // MARK: Instructional text
                 Text(item.introAbove.addControlCharacters)
                     .font(.body)
@@ -98,11 +101,8 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 Spacer(minLength: 30)
                 // MARK: SF Symbol
                 Image(systemName: item.systemImage ?? "bolt.slash.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.accentColor)
-                    .frame(height: 120)
-//                    .symbolRenderingMode(.hierarchical)
+                    .scaledAndTinted()
+                    .frame(height: 200)
 
                 Spacer()
                 Text(item.introBelow.addControlCharacters)
@@ -110,6 +110,8 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .minimumScaleFactor(0.75)
                 Spacer()
 
+                Divider()
+                
                 TaggedField(string: $targetString)
                 .onSubmit {
                     guard !targetString.isEmpty else { return }

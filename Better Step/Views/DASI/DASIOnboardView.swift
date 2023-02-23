@@ -32,10 +32,12 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
             Spacer()
             GenericInstructionView(
                 titleText: "Activity Survey",
-                bodyText: Self.instructions,
+                upperText: Self.instructions,
                 sfBadgeName: "checkmark.square",
+                lowerText: Self.instructions,
                 proceedTitle: "Continue",
                 proceedEnabled: true) {
+#warning("Configire DASIOnboard with .json")
                     completion(.success(()))
 //                    self.pager.pagerState = .question
                 }

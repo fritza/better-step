@@ -27,28 +27,44 @@ import Foundation
 struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertible {
     /// Ths ID for this page, automatically assigned, and **one-based**.
     public let id: Int
+
+    public let pageTitle: String?
     /// The introductory text for the page, above the icon.
-    public let introAbove: String
+    public let introAbove: String?
     /// The introductory text for the page, below the icon.
-    public let introBelow: String
-    // FIXME: Shouldn't have just one text area.
-    /// The label on the regular "proceed" `Button` at bottom.
-    public let proceedTitle: String
-    public let pageTitle: String
+
     /// The SF Symbols name for the image to display in the middle of the page.
+    /// - note: At most one of `systemImage` and `assetImage` may be `nil`.
     public let systemImage: String?
+    /// The asset name for the image to display in the middle of the page.
+    /// - note: At most one of `systemImage` and `assetImage` may be `nil`.
+    public let assetImage : String?
+    
+    /// The text to be shown below the icon.
+    public let introBelow: String?
+    /// The label on the regular "proceed" `Button` at bottom.
+    public let proceedTitle: String?
+    
 
     /// Element-wise initialization.
     ///
     /// `InterstitialInfo` should have no public initializers, but this one has to be exposed for previewing.
     internal init(id: Int,
-                  introAbove: String, introBelow: String, proceedTitle: String, pageTitle: String, systemImage: String?) {
+                  pageTitle: String? = nil,
+                  introAbove: String? = nil,
+                  
+                  systemImage: String? = nil,
+                  assetImage : String? = nil,
+                  
+                  introBelow: String? = nil,
+                  proceedTitle: String? = nil) {
         self.id = id
         self.introAbove = introAbove
-        self.introBelow = introBelow
-        self.proceedTitle = proceedTitle
-        self.pageTitle = pageTitle
         self.systemImage = systemImage
+        self.assetImage = assetImage
+        self.introBelow = introBelow
+        self.pageTitle = pageTitle
+        self.proceedTitle = proceedTitle
     }
 
     /// Initialize an `InterstitialInfo` from its `Decodable` content, plus an `Int` ID supplied by ``InterstitialList``.
@@ -61,15 +77,19 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
                      id: Int) {
         self.init(
             id: id,
-            introAbove: stub.introAbove.addControlCharacters,
-            introBelow: stub.introBelow.addControlCharacters,
-            proceedTitle: stub.proceedTitle,
             pageTitle: stub.pageTitle,
-            systemImage: stub.systemImage)
+            introAbove: stub.introAbove?.addControlCharacters,
+            
+            systemImage: stub.systemImage,
+            assetImage: stub.assetImage,
+            
+            introBelow: stub.introBelow?.addControlCharacters,
+            proceedTitle: stub.proceedTitle
+        )
     }
 
     var description: String {
-        "IntersitialInfo id \(id) “\(pageTitle)”"
+        "IntersitialInfo id \(id) “\(pageTitle ?? "<n/a>")"
     }
 }
 
@@ -90,21 +110,30 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
 ///
 /// See ``InterstitialInfo`` for details on the properties.
 struct TaskInterstitialDecodable: Codable {
-    let introAbove: String
-    let introBelow: String
-    // TODO: Should proceedTitle ever be nil?
-    let proceedTitle: String
-    let pageTitle: String
+    let pageTitle: String?
+    let introAbove: String?
+    
     let systemImage: String?
+    let assetImage: String?
+    
+    let introBelow: String?
+    // TODO: Should proceedTitle ever be nil?
+    let proceedTitle: String?
 
     // TODO: See if this is ever needed.
     var unescaped: TaskInterstitialDecodable {
+        let aboveString = self.introAbove?.addControlCharacters
+        let belowString = self.introBelow?.addControlCharacters
+        
         return TaskInterstitialDecodable(
-            introAbove: self.introAbove.addControlCharacters,
-            introBelow: self.introBelow.addControlCharacters,
-                                         proceedTitle: proceedTitle,
-                                         pageTitle: pageTitle,
-                                         systemImage: systemImage)
+            pageTitle: self.pageTitle,
+            introAbove: aboveString,
+
+            systemImage: systemImage,
+            assetImage: assetImage,
+
+            introBelow: belowString,
+            proceedTitle: proceedTitle)
     }
 }
 

@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+extension Image {
+    func scaledAndTinted() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .foregroundColor(.accentColor)
+            .symbolRenderingMode(.hierarchical)
+    }
+}
+
 // TODO: Remove UsabilityInterstitialView.
 
 // FIXME: All the interstitial views are getting redundant.
@@ -93,7 +102,7 @@ private let continueTitle = "Continue"
 struct UsabilityInterstitialView_Previews: PreviewProvider {
     /*
      let titleText: String
-     let bodyText: String
+     let lowerText: String
      let systemImageName: String
      let continueTitle: String
      */

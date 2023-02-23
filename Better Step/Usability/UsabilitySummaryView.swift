@@ -68,7 +68,7 @@ struct UsabilitySummaryView: View, ReportingPhase {
     @ViewBuilder func questionRowView(question: UsabilityQuestion) -> some View {
         HStack(alignment: .top) {
             Text("\(question.id.description)")
-                .font(.title2).monospacedDigit()
+                .font(.title3).monospacedDigit()
                 .frame(width: 32, alignment: .trailing)
 
             responseViewForQuestion(id: question.id, edge: 24.0)
