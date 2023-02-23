@@ -28,13 +28,13 @@ struct OnboardContainerView: View, ReportingPhase {
         self.completion = completion
         finishedInterstitialInfo = InterstitialInfo(
             id: 0,
+            pageTitle: "Welcome Back",
             introAbove: """
 You’ll be repeating the timed walks you did last time. There will be no need to repeat the surveys you completed the first time you used [OUR APP].
 """,
+            systemImage: "figure.walk",
             introBelow: "...",
-            proceedTitle: "Continue",
-            pageTitle: "Welcome Back",
-            systemImage: "figure.walk"
+            proceedTitle: "Continue"
         )
 
         if SubjectID.id == SubjectID.unSet {

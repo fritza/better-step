@@ -53,7 +53,6 @@
 		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
 		1FA281E028DBBB270038353E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09EE3128DB745900CFBE4B /* FailureView.swift */; };
 		1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */; };
-		1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
 		1FA281E528DBBB270038353E /* ASKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E827F225EC00612924 /* ASKeys.swift */; };
 		1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065327A4724500477379 /* DASICompleteView.swift */; };
 		1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684E527F225A300612924 /* SubjectID.swift */; };
@@ -67,7 +66,6 @@
 		1FA281FC28DBBB270038353E /* DASIOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */; };
 		1FA281FD28DBBB270038353E /* CoreMotion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */; };
 		1FA281FE28DBBB270038353E /* SubsecondHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */; };
-		1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA2820528DBBB270038353E /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
 		1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
@@ -119,6 +117,8 @@
 		1FC7477D28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */; };
 		1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477E28EDE90F00817041 /* ZIPProgress.swift */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
+		1FDEAB8529A80AE6008A6919 /* InterstitalPageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */; };
+		1FDEAB8629A80C5C008A6919 /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
 		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -888,6 +888,7 @@
 				1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */,
 				1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */,
 				1FA281FB28DBBB270038353E /* SweepSecondView.swift in Sources */,
+				1FDEAB8629A80C5C008A6919 /* GenericInstructionView.swift in Sources */,
 				1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */,
 				1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */,
 				1FA281EB28DBBB270038353E /* SubjectID.swift in Sources */,
@@ -895,7 +896,6 @@
 				1FC7477928EB59F300817041 /* CoreMotion+async.swift in Sources */,
 				1FA281E528DBBB270038353E /* ASKeys.swift in Sources */,
 				1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */,
-				1FA281E228DBBB270038353E /* InterstitalPageContainerView.swift in Sources */,
 				1F6998342999A67A00A0AC80 /* UploadCreds.swift in Sources */,
 				1FA2821428DBBB270038353E /* DASIQuestions.swift in Sources */,
 				1F3543D22996D0BE003DD1D0 /* UploadCompletionNotification.swift in Sources */,
@@ -919,7 +919,6 @@
 				1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */,
 				1FA2822028DBBB270038353E /* InterstitialPageView.swift in Sources */,
 				1F6998362999A67A00A0AC80 /* SessionDelegate.swift in Sources */,
-				1FA2820028DBBB270038353E /* GenericInstructionView.swift in Sources */,
 				1FA2820C28DBBB270038353E /* CoreMotion.swift in Sources */,
 				1FA281E128DBBB270038353E /* PlaybackMilestone.swift in Sources */,
 				1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */,
@@ -927,6 +926,7 @@
 				1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */,
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
 				1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */,
+				1FDEAB8529A80AE6008A6919 /* InterstitalPageContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,7 +1234,6 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1275,7 +1274,6 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

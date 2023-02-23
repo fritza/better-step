@@ -37,7 +37,7 @@ struct ConclusionView: View, ReportingPhase {
                 ASKeys.lastCompletionValue = Date()
             }
             Spacer()
-        }.font(.title2)
+        }.font(.title3)
             .reversionAlert(on: $showResetAlert)
             .navigationTitle("Completed")
     }
@@ -121,8 +121,8 @@ Because this session was cancelled, the app must go back to the stage \(insertio
             VStack {
                 Spacer()
                 GenericInstructionView(
-                    bodyText: self.explanation,
                     sfBadgeName: "arrow.turn.left.down",
+                    lowerText: self.explanation,
                     proceedTitle: "Revert") {
                         shouldAlertDisclaimer = true
                     }

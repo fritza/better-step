@@ -62,8 +62,8 @@ struct UsabilityContainer: View, ReportingPhase {
             case .intro:
                 GenericInstructionView(
                     titleText: "Usability",
-                    bodyText: usabilityInCopy,
                     sfBadgeName: "person.crop.circle.badge.questionmark",
+                    lowerText: usabilityInCopy,
                     proceedTitle: "Continue",
                     proceedEnabled: true) {
                         currentState = .questions

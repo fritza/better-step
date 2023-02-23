@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+// MARK: - Rendering
+
+enum Rendering {
+    static let bodyFont = Font.title2
+    static let textMinScale: CGFloat = 0.5
+    
+    enum SizeLimit {
+        case height(CGFloat)
+        case width( CGFloat)
+    }
+    
+    static let fontDimension: CGFloat = 200
+    static let iconLimit = SizeLimit.height(fontDimension)
+}
+
+
 // MARK: - InterstitialPageView
 
 // TODO: Replace GenericInstructionView with this.
@@ -17,9 +33,9 @@ import SwiftUI
 struct InterstitialPageView: View, Identifiable {
     let item: InterstitialInfo
     let proceedCallback: () -> Void
-
+    
     let id: Int
-
+    
     /// Initialize the view given the content information and a button-action closure
     /// - Parameters:
     ///   - info: An ``InterstitialInfo`` specifying text and symbol content.
@@ -30,47 +46,64 @@ struct InterstitialPageView: View, Identifiable {
         self.proceedCallback = callback
         id = info.id
     }
-
+    
     // MARK: - body
     var body: some View {
         VStack {
+            if let pageTitle = item.pageTitle {
+                Text(pageTitle)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .tag("title_text")
+                Spacer()
+            }
             // MARK: Instructional text
-            Text(item.introAbove)
-                .font(.body)
-                .minimumScaleFactor(0.75)
-            Spacer(minLength: 30)
+            if let introAbove = item.introAbove {
+                Text(introAbove)
+                    .font(Rendering.bodyFont)
+                    .minimumScaleFactor(Rendering.textMinScale)
+                Spacer(minLength: 30)
+            }
             // MARK: SF Symbol
             Image(systemName: item.systemImage ?? "bolt.slash.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.accentColor)
+                .scaledAndTinted()
                 .frame(height: 200)
             Spacer()
-            Text(item.introBelow)
-                .font(.body)
-                .minimumScaleFactor(0.75)
-            Spacer()
-
+            if let introBelow = item.introBelow {
+                Text(introBelow)
+                    .font(.title3)
+                    .minimumScaleFactor(0.75)
+                Spacer()
+            }
+            
             // MARK: The action button
-            Button(item.proceedTitle,
-                   action: proceedCallback)
-            Spacer()
+            if let proceedTitle = item.proceedTitle {
+                Button(proceedTitle,
+                       action: proceedCallback)
+                Spacer()
+            }
         }
         .padding()
-        .navigationTitle(item.pageTitle)
+        //        .navigationTitle(item.pageTitle)
     }
 }
 
 // MARK: - Preview
 struct InterstitialPageView_Previews: PreviewProvider {
-    static let sampleIInfo = InterstitialInfo(id: 3, introAbove: "This is the instructional text.\nIt may be very long.", introBelow: "", proceedTitle: "Continue", pageTitle: "Exercise with a longer top.", systemImage: "figure.walk")
-
+    static let sampleIInfo = InterstitialInfo(
+        id: 1,
+        pageTitle: "Walk Exercises",
+        introAbove: "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
+        systemImage: "figure.walk",
+        introBelow: "Tap “Comtinue” when you are done.",
+        proceedTitle: "Continue")
+    
     static var previews: some View {
         NavigationView {
-        InterstitialPageView(
-            info: sampleIInfo,
-        proceedCallback: { print("beep") })
-        .padding()
+            InterstitialPageView(
+                info: sampleIInfo,
+                proceedCallback: { print("beep") })
+            .padding()
         }
     }
 }

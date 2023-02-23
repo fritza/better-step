@@ -16,16 +16,20 @@ struct VolumePageView: View, ReportingPhase {
     }
     
     var body: some View {
-        VStack {
+//        VStack {
             VStack {
+                Text("Turn up the volume")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+
                 Spacer()
                 Text("To help you complete your walk, you will hear spoken intructions on when to start, and when your walk is done")
-//                Spacer()
+                    .font(.title3)
                 Image("loudness")
-                    .resizable()
-                    .scaledToFit()
+                    .scaledAndTinted()
                     .frame(width: 360)
                 Text("Make sure the mute switch is in the un-mute (up) position, and the volume is all the way high.")
+                    .font(.title3)
                 Spacer()
                 Button("Start") {
                     let returnValue = ResultValue.success(())
@@ -33,9 +37,11 @@ struct VolumePageView: View, ReportingPhase {
                 }
                 .fontWeight(.bold)
             }.font(.body)
-        }
+//        }
         .padding()
-        .navigationTitle("Turn up the volume")
+        
+//        .navigationTitle("Turn up the volume")
+//#warning("Remove nav title, insert Text as with GenericInterstitial")
     }
 }
 

@@ -14,11 +14,13 @@ import Combine
 
 // MARK: - WalkingState
 /// Names tasks _within the walk phase,_ as distinct from ``SeriesTag``, which identifies reportable data series.
-public enum WalkingState: String, CaseIterable // , BSTAppStages
+public enum WalkingState: String, CaseIterable, CustomStringConvertible
 {
     case interstitial_1, volume_1, countdown_1, walk_1
     case interstitial_2, volume_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
+    
+    public var description: String { self.rawValue }
 
     /// The reporting phase corresponding to this `WalkingState`.
     ///
@@ -98,7 +100,13 @@ struct WalkingContainerView: View, ReportingPhase {
     var completion: ClosureType
 
     @EnvironmentObject var motionManager: MotionManager
-    @State var state: WalkingState?
+    @State var state: WalkingState? {
+        didSet {
+            print(#function, "changing from",
+                  oldValue ?? "n/a", "to",
+                  state ?? "n/a")
+        }
+    }
     @State private var shouldShowActivity = false
     @State private var walkingData = Data()
 

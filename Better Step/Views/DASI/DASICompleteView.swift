@@ -62,10 +62,12 @@ struct DASICompleteView: View, ReportingPhase {
 
     var body: some View {
         VStack {
+            #warning("Configire DASIComplete with .json")
             GenericInstructionView(
                 titleText: nil,
-                bodyText: instructions, // + completionText,
+                upperText: instructions, // + completionText,
                 sfBadgeName: "checkmark.square",
+                lowerText: "",
                 proceedTitle: "Continue",
                 proceedEnabled: dasiResponses.isReadyToPublish
             ) {

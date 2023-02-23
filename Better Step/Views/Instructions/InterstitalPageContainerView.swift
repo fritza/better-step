@@ -40,7 +40,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
             ForEach(listing) {
                 item in
                 InterstitialPageView(info: item) {
-                    if item.id < listing.endIndex {
+                    if item.id < listing.collectionEndIndex {
                         selectedPage += 1
                     }
                     else {
