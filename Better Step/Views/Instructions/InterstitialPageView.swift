@@ -34,11 +34,20 @@ struct InterstitialPageView: View, Identifiable {
     // MARK: - body
     var body: some View {
         VStack {
+            if let pageTitle = item.pageTitle {
+                Text("IPageView: " + pageTitle)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .tag("title_text")
+                Spacer()
+            }
             // MARK: Instructional text
-            Text(item.introAbove)
-                .font(.body)
-                .minimumScaleFactor(0.75)
-            Spacer(minLength: 30)
+            if let introAbove = item.introAbove {
+                Text(introAbove)
+                    .font(Rendering.bodyFont)
+                    .minimumScaleFactor(Rendering.textMinScale)
+                Spacer(minLength: 30)
+            }
             // MARK: SF Symbol
             Image(systemName: item.systemImage ?? "bolt.slash.fill")
                 .scaledAndTinted()

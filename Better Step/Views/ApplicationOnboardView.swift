@@ -95,9 +95,9 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 // ... as much as possible, having the
                 // text field breaks the GCV model.
                 // MARK: Instructional text
-                Text(item.introAbove.addControlCharacters)
-                    .font(.body)
-                    .minimumScaleFactor(0.75)
+                Text((item.introAbove ?? "Can't Happen").addControlCharacters)
+                    .font(Rendering.bodyFont)
+                    .minimumScaleFactor(Rendering.textMinScale)
                 Spacer(minLength: 30)
                 // MARK: SF Symbol
                 Image(systemName: item.systemImage ?? "bolt.slash.fill")
@@ -105,9 +105,9 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .frame(height: 200)
 
                 Spacer()
-                Text(item.introBelow.addControlCharacters)
-                    .font(.body)
-                    .minimumScaleFactor(0.75)
+                Text((item.introBelow ?? "Can't Happen").addControlCharacters)
+                    .font(Rendering.bodyFont)
+                    .minimumScaleFactor(Rendering.textMinScale)
                 Spacer()
 
                 Divider()

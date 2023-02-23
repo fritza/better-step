@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-fileprivate enum Rendering {
+enum Rendering {
     static let bodyFont = Font.title2
     static let textMinScale: CGFloat = 0.5
     

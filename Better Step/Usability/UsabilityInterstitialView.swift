@@ -41,9 +41,7 @@ struct UsabilityInterstitialView: View, ReportingPhase {
             HStack {
                 Spacer()
                 Image(systemName: systemImageName)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.accentColor)
+                    .scaledAndTinted()
                     .frame(width: 200)
 //                    .symbolRenderingMode(.hierarchical)
                 Spacer()
