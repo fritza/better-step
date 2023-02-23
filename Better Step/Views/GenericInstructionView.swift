@@ -84,41 +84,45 @@ struct GenericInstructionView: View {
         HStack {
             Spacer()
             VStack {
-                //                    Spacer()
-                // Conditionally: The titls
-                if let tText = titleText {
-                    Text("InstructionView: " + tText)
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                        .tag("title_text")
-                }
-                Spacer()
-                if let upperText {
-                    Text(upperText)
-                        .font(Rendering.bodyFont)
-                        .minimumScaleFactor(Rendering.textMinScale)
-                        .frame(alignment: .leading)
-                    // TODO: Force short text displays to ,leading
-                        .tag("upper_text")
+                ScrollView {
+                    //                    Spacer()
+                    // Conditionally: The titls
+                    if let tText = titleText {
+                        Text("iv" + tText)
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            .tag("title_text")
+                    }
                     Spacer()
+                    if let upperText {
+                        Text(upperText)
+                            .font(Rendering.bodyFont)
+                            .minimumScaleFactor(Rendering.textMinScale)
+                            .frame(alignment: .leading)
+                        // TODO: Force short text displays to ,leading
+                            .tag("upper_text")
+                        Spacer()
+                    }
+                    // The SF badge image, if any, to display
+                    if let sfBadgeName {
+                        Image(systemName: sfBadgeName)
+                            .scaledAndTinted()
+                            .frame(
+                                height: Rendering.fontDimension)
+                            .tag("image")
+                    }
+                    Spacer()
+                    // The extended text with the instructional content.
+                    if let lowerText {
+                        Text(lowerText)
+                            .font(Rendering.bodyFont)
+                        //                        .padding()
+                            .minimumScaleFactor(Rendering.textMinScale)
+                            .tag("lower_text")
+                    }
+                    
                 }
-                // The SF badge image, if any, to display
-                if let sfBadgeName {
-                    Image(systemName: sfBadgeName)
-                        .scaledAndTinted()
-                        .frame(
-                            height: Rendering.fontDimension)
-                        .tag("image")
-                }
-                Spacer()
-                // The extended text with the instructional content.
-                if let lowerText {
-                    Text(lowerText)
-                        .font(Rendering.bodyFont)
-//                        .padding()
-                        .minimumScaleFactor(Rendering.textMinScale)
-                        .tag("lower_text")
-                }
+                
                 Spacer()
                 // Conditinally, the dismissal button
                 if let proceedTitle {

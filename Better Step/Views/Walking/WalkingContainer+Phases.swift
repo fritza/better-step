@@ -43,7 +43,7 @@ extension WalkingContainerView {
     ///     - next:    The stage to follow this one.
     @ViewBuilder
     private func volumeView(_ current: WalkingState,
-                    next: WalkingState) -> some View {        
+                            next: WalkingState) -> some View {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink("SHOULDN'T SEE link for generic volume_nView", tag: current,
                        selection: $state) {

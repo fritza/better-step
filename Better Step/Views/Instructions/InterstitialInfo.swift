@@ -233,5 +233,6 @@ struct InterstitialList: Codable, CustomStringConvertible {
 extension InterstitialList: RandomAccessCollection {
     var startIndex: Int { 1 }
     var endIndex: Int { interstitials.count + 1 }
+    var collectionEndIndex: Int { interstitials.count }
     subscript(index: Int) -> Element { interstitials[index-1] }
 }

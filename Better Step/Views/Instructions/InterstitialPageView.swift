@@ -75,9 +75,9 @@ struct InterstitialPageView: View, Identifiable {
 // MARK: - Preview
 struct InterstitialPageView_Previews: PreviewProvider {
     static let sampleIInfo = InterstitialInfo(
-        id: 3,
-        pageTitle: "Exercise with a longer top.",
-        introAbove: "This is the instructional text.\nIt may be very long.",
+        id: 1,
+        pageTitle: "Walk Exercises",
+        introAbove: "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
         systemImage: "figure.walk",
         introBelow: "Tap “Comtinue” when you are done.",
         proceedTitle: "Continue")
