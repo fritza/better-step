@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-enum Rendering {
-    static let bodyFont = Font.title2
-    static let textMinScale: CGFloat = 0.5
-    
-    enum SizeLimit {
-        case height(CGFloat)
-        case width( CGFloat)
-    }
-    
-    static let fontDimension: CGFloat = 200
-    static let iconLimit = SizeLimit.height(fontDimension)
-}
-
 // TODO: Yield to InterstitialPageView
 //       which has introAbove and introBelow
 #warning("Replace with InterstitialPageView")
@@ -81,61 +68,57 @@ struct GenericInstructionView: View {
     }
     
     var body: some View {
-        HStack {
-            Spacer()
-            VStack {
-                ScrollView {
-                    //                    Spacer()
-                    // Conditionally: The titls
-                    if let tText = titleText {
-                        Text("iv" + tText)
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                            .tag("title_text")
-                    }
+        VStack {
+            if let titleText {
+                Text(titleText)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .tag("title_text")
+            }
+            Spacer(minLength: 96)
+            ScrollView {
+                // Conditionally: The titls
+                if let upperText {
                     Spacer()
-                    if let upperText {
-                        Text(upperText)
-                            .font(Rendering.bodyFont)
-                            .minimumScaleFactor(Rendering.textMinScale)
-                            .frame(alignment: .leading)
-                        // TODO: Force short text displays to ,leading
-                            .tag("upper_text")
-                        Spacer()
-                    }
-                    // The SF badge image, if any, to display
-                    if let sfBadgeName {
-                        Image(systemName: sfBadgeName)
-                            .scaledAndTinted()
-                            .frame(
-                                height: Rendering.fontDimension)
-                            .tag("image")
-                    }
-                    Spacer()
-                    // The extended text with the instructional content.
-                    if let lowerText {
-                        Text(lowerText)
-                            .font(Rendering.bodyFont)
-                        //                        .padding()
-                            .minimumScaleFactor(Rendering.textMinScale)
-                            .tag("lower_text")
-                    }
-                    
+                    Text(upperText)
+                        .font(Rendering.bodyFont)
+                        .minimumScaleFactor(Rendering.textMinScale)
+                        .frame(alignment: .leading)
+                    // TODO: Force short text displays to ,leading
+                        .tag("upper_text")
+                    Spacer(minLength: 32)
                 }
-                
-                Spacer()
-                // Conditinally, the dismissal button
-                if let proceedTitle {
-                    Button(proceedTitle) {
-                        proceedClosure?()
-                    }
-                    .disabled(!proceedEnabled)
-                    .tag("continue")
+                // The SF badge image, if any, to display
+                if let sfBadgeName {
+                    Image(systemName: sfBadgeName)
+                        .scaledAndTinted()
+                        .frame(
+                            height: Rendering.fontDimension)
+                        .tag("image")
+                    Spacer(minLength: 32)
                 }
+                // The extended text with the instructional content.
+                if let lowerText {
+                    Text(lowerText)
+                        .font(Rendering.bodyFont)
+                    //                        .padding()
+                        .minimumScaleFactor(Rendering.textMinScale)
+                        .tag("lower_text")
+                }
+                Spacer(minLength: 24)
+            }
+            
+            // Conditinally, the dismissal button
+            if let proceedTitle {
+                Button(proceedTitle) {
+                    proceedClosure?()
+                }
+                .disabled(!proceedEnabled)
+                .tag("continue")
             }
             Spacer()
         }
-        //        .padding()
+        .padding()
     }
 }
 

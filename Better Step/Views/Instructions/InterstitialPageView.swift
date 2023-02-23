@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+// MARK: - Rendering
+
+enum Rendering {
+    static let bodyFont = Font.title2
+    static let textMinScale: CGFloat = 0.5
+    
+    enum SizeLimit {
+        case height(CGFloat)
+        case width( CGFloat)
+    }
+    
+    static let fontDimension: CGFloat = 200
+    static let iconLimit = SizeLimit.height(fontDimension)
+}
+
+
 // MARK: - InterstitialPageView
 
 // TODO: Replace GenericInstructionView with this.
@@ -35,7 +51,7 @@ struct InterstitialPageView: View, Identifiable {
     var body: some View {
         VStack {
             if let pageTitle = item.pageTitle {
-                Text("IPageView: " + pageTitle)
+                Text(pageTitle)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .tag("title_text")
