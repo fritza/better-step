@@ -112,6 +112,8 @@ enum ASKeys: String {
         return lastCompletion == todayYMD
     }
     
+    // FIXME: Is this supposed to invalidate the whole history?
+    //            Appears so; it sets the first run to false(?!)
     static func spoilLast7DReport() {
         UserDefaults.standard
             .setValue(0, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
@@ -130,6 +132,33 @@ enum ASKeys: String {
                 .setValue(interval, forKey: ASKeys._7DayKey.rawValue)
         }
     }
+}
+
+extension ASKeys {
+    static func idAndFirstRunAreConsistent(
+        _ file: String = #fileID,
+        _ line: Int = #line) -> Bool
+    {
+        let ud = UserDefaults.standard
+        
+        guard let storedSubjectID = ud
+            .string(forKey: ASKeys.subjectID.rawValue) else {
+            print("Uninitialized Subject ID: \(file):\(line)")
+            return false
+        }
+        
+        let didCompleteFirst = ud
+            .bool(forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
+        
+        // If there's no subject, can't have finished.
+        if storedSubjectID == SubjectID.unSet
+            && didCompleteFirst {
+            print("Unset Subject ID, but “completed” first: \(file):\(line)")
+            return false
+        }
+        return true
+    }
+
 }
 
 /**

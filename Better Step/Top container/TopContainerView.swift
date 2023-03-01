@@ -280,6 +280,8 @@ extension TopContainerView {
             .sink { (data, response) in
                 print("success: \(#fileID):\(#line):")
                 print("  --", response.cliffNotes() ?? "n/a")
+                
+                assert(ASKeys.idAndFirstRunAreConsistent())
             }
             .store(in: &cancellables)
         
