@@ -232,6 +232,10 @@ extension PhaseStorage {
     ///
     /// - bug: Handles the (system) error case by `fatalError()`
     func setUpCombine() {
+        
+        #warning("separate the upload good/bad EVENTS from the reversion COMMANDs.")
+        
+        
         // FIXME: Percolate the error up to user-visible alert
         //             See `#warning` in `UploadCompletionNotification.swift`.
         revertAllNotification

@@ -69,8 +69,10 @@ struct SubjectID {
         return string.canonicalID ?? SubjectID.unSet
     }
     
+    /// Regular expression that accepts Subject IDs or strings reasonably close.
     static let validIDPattern = /([SMTWRFA])-?(\d\d\d\d)/
         .ignoresCase()
+    // TODO: Account for leading and trailing spaces, possibly other dividers like . or ⎵
 }
 
 extension String {
