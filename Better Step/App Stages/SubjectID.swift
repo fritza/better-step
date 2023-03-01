@@ -62,23 +62,39 @@ struct SubjectID {
         SubjectID.id != SubjectID.unSet
     }
 
-    /// Validate a `String` as suitable for use as a `SubjectID`
+    /// Render a `String` as suitable for use as a `SubjectID`, if possible.
     /// - Parameter string: The `String` to validate
     /// - Returns: `string`, trimmed of  leading and trailing whitespace. If the result is empty, return `.unset`
     static func validate(string: String) -> String {
-        let desiredCharacters = CharacterSet.whitespacesAndNewlines.inverted
-        let scanner = Scanner(string: id)
-        let trimmed = scanner.scanCharacters(from: desiredCharacters)
-
-        if let trimmed, !trimmed.isEmpty {
-            return trimmed
-        }
-        else { return SubjectID.unSet }
+        return string.canonicalID ?? SubjectID.unSet
     }
+    
+    static let validIDPattern = /([SMTWRFA])-?(\d\d\d\d)/
+        .ignoresCase()
+}
 
-    /// The ID value, passed through the static validate(string:) function.
-    /// The result is "validated" in the sense that it has been stripped of whitespace — _made_ valid.
-    static var validated: String {
-        return validate(string: id)
+extension String {
+    var canonicalID: String? {
+        // "m-1234"
+        guard let match = try? SubjectID.validIDPattern
+            .wholeMatch(in: self) else {
+            return nil
+        }
+        let bothMatches = match.output
+        // (.0: "m-1234", .1: "m", .2: "1234")
+        let letterMatch = String(bothMatches.1).uppercased()
+        // "M"
+        let numberMatch = String(bothMatches.2)
+        // "1234"
+        let joined = letterMatch+numberMatch
+        // "M1234"
+        
+        let otherJoined =
+        String(bothMatches.1).uppercased()
+        +
+        String(bothMatches.2)
+        assert(joined == otherJoined)
+        
+        return joined
     }
 }

@@ -37,12 +37,10 @@ You’ll be repeating the timed walks you did last time. There will be no need t
             proceedTitle: "Continue"
         )
 
-        if SubjectID.id == SubjectID.unSet {
-            correctTask = OnboardTasks.firstGreeting.rawValue
-        }
-        else {
-            correctTask = OnboardTasks.laterGreeting.rawValue
-        }
+        let initialTask: OnboardTasks =  SubjectID.isSet
+        ?   .laterGreeting
+        :   .firstGreeting
+        correctTask = initialTask.rawValue
     }
 
     enum OnboardTasks: Int {
