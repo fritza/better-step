@@ -286,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				1F0D9341298DB58C00B5194B /* ZIP Upload */,
-				1F66586A2971C44300EE75FE /* Debug Exercises */,
 				1FF354492791FCD1000894B8 /* Accelerometry */,
 				1F8A337F27E119A30093C896 /* App Stages */,
 				1FB684E827F225EC00612924 /* ASKeys.swift */,
@@ -387,13 +386,6 @@
 				1FC7476F28E7694E00817041 /* NNN.ahap */,
 			);
 			path = Milestones;
-			sourceTree = "<group>";
-		};
-		1F66586A2971C44300EE75FE /* Debug Exercises */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Debug Exercises";
 			sourceTree = "<group>";
 		};
 		1F8A337F27E119A30093C896 /* App Stages */ = {

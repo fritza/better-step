@@ -37,7 +37,7 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
                 lowerText: Self.instructions,
                 proceedTitle: "Continue",
                 proceedEnabled: true) {
-#warning("Configire DASIOnboard with .json")
+#warning("Configure DASIOnboard with .json")
                     completion(.success(()))
 //                    self.pager.pagerState = .question
                 }

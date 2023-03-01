@@ -24,18 +24,7 @@ Notification.Name("ResetSessionNotification")
 public let TotalResetNotification =
 Notification.Name("TotalResetNotification")
 
-/// A single `Publisher` for upload completion, good or (internally) bad.
-public let uploadCompletedPublisher = {
-    #warning("Inform user of “internal” error and suggest remedy.")
-    
-    let goodUpload = NotificationCenter.default
-        .publisher(for: UploadNotification)
-    let badUpload = NotificationCenter.default
-        .publisher(for: UploadErrorNotification)
-    
-    return goodUpload.merge(with: badUpload)
-}()
-
+/*
 /// A single `Publisher` for all occasions to remove
 /// session data other than `SubjectID`. That would usually be done after completion (good or bad) of a session.
 public let anyDataReleasePublisher = {
@@ -48,6 +37,7 @@ public let anyDataReleasePublisher = {
     return goodUpload.merge(with: badUpload,
                             resetPhases)
 }()
+ */
 
 public let revertAllNotification = {
     let goodUpload = NotificationCenter.default
