@@ -179,7 +179,6 @@
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
 		1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayPedometry.swift; sourceTree = "<group>"; };
-		1F891BBB29538F30006C09DF /* StateReversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateReversion.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
 		1F8A065327A4724500477379 /* DASICompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASICompleteView.swift; sourceTree = "<group>"; };
 		1F8A065727A4841400477379 /* ApplicationOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOnboardView.swift; sourceTree = "<group>"; };
@@ -485,7 +484,6 @@
 				1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */,
 				1F88683029479FF700085EC7 /* PhaseStorage.swift */,
 				1F2B8AA9294A54F500075248 /* SeriesTag.swift */,
-				1F891BBB29538F30006C09DF /* StateReversion.swift */,
 				1F6456F7294D29FA0064DADA /* TestXYZT.json */,
 				1F56E73529439626001708F3 /* TimedXYZ.swift */,
 				1FF354402790A99E000894B8 /* XYZ.swift */,
