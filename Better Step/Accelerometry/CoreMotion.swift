@@ -135,15 +135,6 @@ final class MotionManager: ObservableObject
         accState = AccelerometerState(cmManager)
         asyncBuffer = IncomingAccelerometry()
     }
-    
-    func handleReversion(notice: Notification) {
-        halt()
-        Self.census = 0
-        lastTimeStamp = -TimeInterval.infinity
-        Task {
-            await asyncBuffer.clear()
-        }
-    }
 
     var accelerometryAvailable: Bool {
         accState.available

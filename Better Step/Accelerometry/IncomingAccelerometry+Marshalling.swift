@@ -9,7 +9,7 @@ import Foundation
 
 extension IncomingAccelerometry {
     private func marshalledRecords(tag: SeriesTag) -> [String] {
-        assert(SubjectID.id != SubjectID.unSet)
+        assert(SubjectID.isSet)
         let common = "\(tag.rawValue),\(SubjectID.id),"
         
         #if false

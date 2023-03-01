@@ -13,8 +13,12 @@ import Combine
         Treats subsequent runs as beyond-first, and doesn't open the surveys.
  */
 
-
-
+/// Subscribers are informed when the subject ID is changed to `.unSet` by way of `SessionID.clearID()`
+///
+/// _No other pathway emits this notification._ Mere assignment into `.id` or direct manipulation of the user default, won't post. This lets you avoid getting into a loop of set+notify , notify+set+notify...
+///
+/// `SubjectID` _only_ posts `ResetSubjectIDNotice`, never subscribes.
+let ResetSubjectIDNotice = Notification.Name("reset SubjectID")
 
 /// A unique identifier, assigned by the study, for the user and her data. It does _not_ adopt `Identifiable`.
 ///
@@ -23,10 +27,6 @@ import Combine
 /// - warning: Always use `unset` (atw an empty `String`) to indicate the absence of any known `SubjectID`.
 struct SubjectID {
     init() {
-        if Self.cancellables.isEmpty {
-            Self.setUpCombine()
-        }
-        // FIXME: No idea how and where to receive deletion calls for unsafe SubjectID deletion.
     }
     /// The `String` value indicating no valid contents.
     static let unSet = ""
@@ -47,6 +47,20 @@ struct SubjectID {
             UserDefaults.standard.set(newValue, forKey: ASKeys.subjectID.rawValue)
         }
     }
+    
+    /// Set the global `SubjectID` to a no-real-value state (`.unSet`).
+    ///
+    /// Posts `ResetSubjectIDNotice`.
+    static func clearID() {
+        Self.id = SubjectID.unSet
+        NotificationCenter.default
+            .post(name: ResetSubjectIDNotice, object: nil)
+    }
+    
+    /// Whether this `SubjectID` carries a subject ID and not `.unSet`.
+    static var isSet: Bool {
+        SubjectID.id != SubjectID.unSet
+    }
 
     /// Validate a `String` as suitable for use as a `SubjectID`
     /// - Parameter string: The `String` to validate
@@ -66,16 +80,5 @@ struct SubjectID {
     /// The result is "validated" in the sense that it has been stripped of whitespace — _made_ valid.
     static var validated: String {
         return validate(string: id)
-    }
-    
-    private static var cancellables: Set<AnyCancellable> = []
-    private static func setUpCombine() {
-        // Clear the SubjectID.
-        let NCD = NotificationCenter.default
-        NCD.publisher(for: ResetSubjectIDNotice)
-            .sink { _ in
-                SubjectID.id = SubjectID.unSet
-            }
-            .store(in: &cancellables)
     }
 }

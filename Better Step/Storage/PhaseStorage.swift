@@ -44,7 +44,7 @@ public final class PhaseStorage: ObservableObject
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
     public init() {
-        assert(SubjectID.id != SubjectID.unSet)
+        assert(SubjectID.isSet)
         stickyYMDTag = Date().ymd
         stickySubjectID = SubjectID.id
         self.areAllPhasesComplete = false
@@ -83,21 +83,7 @@ public final class PhaseStorage: ObservableObject
         // Delete what's at the URL.
         try fm.deleteObjects(at: urls)
     }
-    
-    /// ``MassDiscardable`` adoption
-    ///
-    /// Called when a `RevertAllNotice` is broadcaset (such as when the user taps a "Gear" button (not available in the release app) to tear down _all_ application state.
-    func handleReversion(notice: Notification) {
-        areAllPhasesComplete = false
-        completionDictionary = [:]
-        lastSeenUserPhase = .none
-        try! deleteAllFiles()
         
-        // This is TOTAL reversion,
-        // forget the subject, forget completion.
-        ASKeys.isFirstRunComplete = false
-    }
-    
     // MARK: Completion check
     private var keysToBeFinished: Set<CompDict.Key> {
         ASKeys.isFirstRunComplete ?
@@ -127,6 +113,7 @@ public final class PhaseStorage: ObservableObject
         // The zip form is:
         // subject_yyyy-mm-dd.zip
         assert(stickySubjectID != SubjectID.unSet)
+        // lhs is _not_ SubjectID.id, and must be compared directly.
 
         return "\(phase.rawValue)_\(stickySubjectID)_\(stickyYMDTag)"
         + ".csv"
@@ -136,6 +123,7 @@ public final class PhaseStorage: ObservableObject
     private
     var zipFileName: String {
         assert(stickySubjectID != SubjectID.unSet)
+        // lhs is _not_ SubjectID.id, and must be compared directly.
         let userNameComponent = stickySubjectID
         let retval = "\(userNameComponent)_\(stickyYMDTag)"
         + ".zip"

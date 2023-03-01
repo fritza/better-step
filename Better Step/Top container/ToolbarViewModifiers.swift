@@ -8,6 +8,8 @@
 import SwiftUI
 import Combine
 
+let ForceAppReversion = Notification.Name("Drop all data")
+
 // Determine whether to have a top-down ForceAppReversion
 // ("App, reset!" -> "Walk, reset", ...)
 // or a bottom-up, per-task reversion (static Destroy OptionSet
@@ -41,20 +43,24 @@ struct ReversionAlert: ViewModifier {
         _shouldShow = show
     }
 
+    /// Post `Notifications` for clearing all data, including ``SubjectID``
+    private func clearToFirstRun() {
+        // Clear SubjectID thus triggering ``ResetSubjectIDNotice``
+        SubjectID.clearID()
+        // Go ahead with the reversion,
+        NotificationCenter.default
+            .post(name: ForceAppReversion,
+                     object: nil)
+    }
+    
     func body(content: Content) -> some View {
         content
             .alert("Starting Over",
                    isPresented:  $shouldShow
             ) {
-                Button("First Run" , role: .destructive) {
-                    
-                    SubjectID.id = SubjectID.unSet
-                    
-                    let NCD = NotificationCenter.default
-                    NCD.post(name: ForceAppReversion,
-                              object: nil)
-                    NCD.post(name: ResetSubjectIDNotice, object: nil)
-                }
+                Button("First Run" ,
+                       role: .destructive,
+                       action: clearToFirstRun)
                 Button("Cancel", role: .cancel) {
                 }
             }

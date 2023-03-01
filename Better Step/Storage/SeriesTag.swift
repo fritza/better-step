@@ -65,7 +65,7 @@ public enum SeriesTag: String, Hashable, CaseIterable, Comparable {
 
     /// The base name for the `.csv` records file from the subject ID, date, and this phase's prefix code.
     public func dataFileBasename(date: Date = Date()) -> String {
-        assert(SubjectID.id != SubjectID.unSet)
+        assert(SubjectID.isSet)
         return "\(SubjectID.id)_\(date.ymd)_\(self.rawValue)"
     }
 

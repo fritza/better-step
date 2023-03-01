@@ -90,7 +90,6 @@
 		1FA2824028DBBC800038353E /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA2823F28DBBC800038353E /* RealModule */; };
 		1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676C276FA6CA00011A7E /* Better_StepUITests.swift */; };
 		1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
-		1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */; };
 		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
 		1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
@@ -190,7 +189,6 @@
 		1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DASIQuestionView.swift; sourceTree = "<group>"; };
 		1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIOnboardView.swift; sourceTree = "<group>"; };
 		1FA3B8C727D7C4170058F1AF /* DASIStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIStages.swift; sourceTree = "<group>"; };
-		1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDestruction.swift; sourceTree = "<group>"; };
 		1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingPhase.swift; sourceTree = "<group>"; };
 		1FB2F53828D133E700593692 /* MinSecAndFraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinSecAndFraction.swift; sourceTree = "<group>"; };
 		1FB2F54128D22FB600593692 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 			children = (
 				1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */,
 				1FB684FC27F274CF00612924 /* CoreMotion+extensions.swift */,
-				1FA8A9992901AA2D002E4A7F /* DataDestruction.swift */,
 				1FD4568A279F208400B5429A /* FileManager+extensions.swift */,
 				1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */,
 				1FF3545027921204000894B8 /* Formatting+Extensions.swift */,
@@ -768,7 +765,6 @@
 				1FA2820528DBBB270038353E /* XYZ.swift in Sources */,
 				1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */,
 				1FA281EC28DBBB270038353E /* DASIStages.swift in Sources */,
-				1FA8A99A2901AA2D002E4A7F /* DataDestruction.swift in Sources */,
 				1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */,
 				1F5AFF0D290B3B7D008936C6 /* ToolbarViewModifiers.swift in Sources */,
 				1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */,

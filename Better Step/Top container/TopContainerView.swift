@@ -54,7 +54,9 @@ struct TopContainerView: View
     }
     
     init() {
-        if SubjectID.id == SubjectID.unSet {
+        if !SubjectID.isSet {
+            // We got here without a Subject ID.
+            // Bring everything else to no-data condition.
             NotificationCenter.default
                 .post(name: TotalResetNotification, object: nil)
         }

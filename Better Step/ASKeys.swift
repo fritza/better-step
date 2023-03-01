@@ -61,14 +61,13 @@ enum ASKeys: String {
         nillableKeys.forEach { $0.removeDefault() }
         
         Self.spoilLast7DReport()
-        
-//        ud.set("", forKey: ASKeys.phaseProgress.rawValue)
-        
+                
         // This won't be the only place that SubjectID
         // will be un-set, but it can't hurt.
-        ud.setValue(SubjectID.unSet,
-                    forKey: Self.subjectID.rawValue)
+        SubjectID.clearID()
         isFirstRunComplete = false
+        
+        assert(ASKeys.idAndFirstRunAreConsistent())
     }
     
     /// Whether the user has completed all phases of the workflow.
@@ -151,6 +150,7 @@ extension ASKeys {
             .bool(forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
         
         // If there's no subject, can't have finished.
+        // Primitive access to `.unSet` is intended.
         if storedSubjectID == SubjectID.unSet
             && didCompleteFirst {
             print("Unset Subject ID, but “completed” first: \(file):\(line)")
