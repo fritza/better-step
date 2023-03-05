@@ -35,6 +35,26 @@ public enum WalkingState: String, CaseIterable, CustomStringConvertible
     }
 }
 
+struct WalkStates: Hashable, CustomStringConvertible {
+    let current, good, bad: WalkingState
+    
+    init(_ current: WalkingState,
+         good: WalkingState,
+         bad: WalkingState = .interstitial_1) {
+        (self.current, self.good, self.bad) =
+        (current, good, bad)
+    }
+    
+    var description: String {
+        "WalkState “\(current.rawValue)”: good \(good.rawValue), bad \(bad.rawValue)"
+    }
+    
+    func sameState(as other: WalkStates) -> Bool {
+        current == other.current
+    }
+}
+
+
 /*
  The right but hard way to handle walk-data completion is an observable WalkingContainerResult. EnvObj, singleton, whatever.
 

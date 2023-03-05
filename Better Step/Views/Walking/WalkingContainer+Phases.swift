@@ -22,7 +22,8 @@ extension WalkingContainerView {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (interstitial_1)",
-            tag: WalkingState.interstitial_1, selection: $state) {
+            tag: WalkingState.interstitial_1,
+            selection: $state) {
                 InterstitalPageContainerView(
                     listing: instructionContentList,
                     selection: 1) {_ in
@@ -42,18 +43,14 @@ extension WalkingContainerView {
     ///     - current: The stage in the walk order for this display.
     ///     - next:    The stage to follow this one.
     @ViewBuilder
-    private func volumeView(_ current: WalkingState,
-                            next: WalkingState) -> some View {
+    private func volumeView(_ states: WalkStates) -> some View {
         // Ignore NavigationLink initialzer deprecation.
-        NavigationLink("SHOULDN'T SEE link for generic volume_nView", tag: current,
+        NavigationLink("SHOULDN'T SEE link for generic volume_nView",
+                       tag: states.current,
                        selection: $state) {
             VolumePageView {
                 _ in
-                self.state = next
-                // First attempt, allow the screen to go
-                // dark.
-                // UIApplication.shared
-                //    .isIdleTimerDisabled = true
+                self.state = states.good
             }
             .padding()
             .navigationBarBackButtonHidden(true)
@@ -64,13 +61,13 @@ extension WalkingContainerView {
     /// Display the raise-volume pge the _first_ time.
     @ViewBuilder
     func volume_1View() -> some View {
-        volumeView(.volume_1, next: .countdown_1)
+        volumeView(.init(.volume_1, good: .countdown_2))
     }
     
     /// Display the raise-volume pge the _second_ time.
     @ViewBuilder
     func volume_2View() -> some View {
-        volumeView(.volume_2, next: .countdown_2)
+        volumeView(.init(.volume_2, good: .countdown_2))
     }
 
     // MARK: - Countdowns
@@ -81,31 +78,20 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (countdown_1)",
             tag: WalkingState.countdown_1, selection: $state) {
-
-                // FIXME: Have the ssv report .completed as .success.
-                SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    result in
-                    guard case let .failure(err) = result,
-                          let timerError = err as? Timekeeper.Status else {
-                        preconditionFailure("“sucess” Can't Happen. It's a void")
-                    }
-                    switch timerError {
-                    case .completed:
-                        state = .walk_1
-                    case .cancelled:
-                        state = .interstitial_1
-                    default:
-                        preconditionFailure("error \(timerError) Can't Happen.")
-                        // state = .walk_1
-
-                    }
+                SweepSecondView(duration: CountdownConstants.sweepDuration
+                ) { result in
+                    collectFromCountdown(
+                        result: result,
+                        context: .init(.countdown_1,
+                                       good: .walk_1)
+                    )
                 }
-                // TODO: Compare countdown_2View() modifiers
-            }.padding()
-            .navigationBarBackButtonHidden(true)
-        // ^ these two modifiers were 1 "}" up,
+                .padding()
+                .navigationBarBackButtonHidden(true)
+            }
             .hidden()
     }
+    // ^ these two modifiers were 1 "}" up,
 
     // MARK: - Walks 1 and 2
     @ViewBuilder
@@ -115,53 +101,45 @@ extension WalkingContainerView {
     ///   - nextPhaseGood: The tag for the walk phase if the walk proceded to the end.
     ///   - nextPhaseBad: The tag for the walk phase if the walk proceded was cancelled..
     /// - Returns: The `View` that displays the walk timer.
-    func walk_N_View(ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState) -> some View {
+    func walk_N_View(
+        _ states: WalkStates
+//        ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState
+    ) -> some View {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
-            "SHOULDN'T SEE (walk_N, \(ownPhase.rawValue))",
-            tag: ownPhase, selection: $state)
+            "SHOULDN'T SEE (walk_N, \(states.current.rawValue))",
+            tag: states.current, selection: $state)
         {
+#if OMIT_WALKING
+            Group {
+                Text("Replacing the Digital view (\(states.current.rawValue))")
+                Button("Continue") { state = states.good }
+            }
+            .padding()
+            .navigationBarBackButtonHidden(true)
+#else
             DigitalTimerView(
-                duration: CountdownConstants
-                    .walkDuration,
+                duration: CountdownConstants.walkDuration,
                 walkingState: ownPhase) {
-                    result  in
-                    UIApplication.shared.isIdleTimerDisabled = false
-
-                    switch result {
-                    case .failure(_):   // Should be AppPhaseErrors.walkingPhaseProbablyKilled
-                        state = nextPhaseBad
-
-                    case .success(let asyncBuffer):
-                        Task {
-                            let resultData =
-                            // Very odd. Isn't there another way to pack up data?
-                            await asyncBuffer
-                                .allAsTaggedData(
-                                    tag: ownPhase.seriesTag!
-                                )
-
-                           try! PhaseStorage.shared
-                                .series(ownPhase.seriesTag!, completedWith: resultData)
-                        }
-                        state = nextPhaseGood
-                    }
-                    // NOTE: state = nextPhaseGood had been here, outside the switch. This is more readable, and I hope still correct.
-                }.padding()
+                    result  in collectFromWalk(
+                        result: result, ownPhase: ownPhase,
+                        nextPhaseGood: nextPhaseGood,
+                        nextPhaseBad: nextPhaseBad)
+                }
+                .padding()
                 .navigationBarBackButtonHidden(true)
+#endif
         }
-            .hidden()
+        .hidden()
     }
 
     
     /// A `NavigationLink` for the first timed walk (`walk_1`, success → `.interstitial_2`, cancellation: → `.interstitial_1` )
     ///
     /// Implemented in terms of `walk_N_View`
-    @ViewBuilder
     func walk_1View() -> some View {
-        walk_N_View(ownPhase     : .walk_1,
-                    nextPhaseGood: .interstitial_2,
-                    nextPhaseBad : .interstitial_1)
+       return walk_N_View(.init(.walk_1,
+                                good: .interstitial_2))
     }
 
     /// A `NavigationLink` for the interstitial view between the two walk sequences (`interstitial_2`)
@@ -170,12 +148,14 @@ extension WalkingContainerView {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (interstitial_2)",
-            tag: WalkingState.interstitial_2, selection: $state) {
+            tag: WalkingState.interstitial_2,
+            selection: $state) {
                 InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) { _ in
                     UIApplication.shared.isIdleTimerDisabled = true
                     self.state = .volume_2
-                }.padding()
-                    .navigationBarBackButtonHidden(true)
+                }
+                .padding()
+                .navigationBarBackButtonHidden(true)
             }
             .hidden()
     }
@@ -184,38 +164,32 @@ extension WalkingContainerView {
     @ViewBuilder
     func countdown_2View() -> some View {
         // Ignore NavigationLink initialzer deprecation.
-       NavigationLink(
+        NavigationLink(
             "SHOULDN'T SEE (countdown_2)",
             tag: WalkingState.countdown_2, selection: $state) {
-                SweepSecondView(duration: CountdownConstants.sweepDuration) {
-                    result in
-                    guard case let .failure(err) = result,
-                          let timerError = err as? Timekeeper.Status else {
-                        preconditionFailure("“sucess” Can't Happen. It's a void")
-                    }
-                    switch timerError {
-                    case .completed:
-                        state = .walk_2
-                    case .cancelled:
-                        state = .interstitial_1
-                    default:
-                        preconditionFailure("error \(timerError) Can't Happen.")// state = .walk_1
-                    }
-                }.padding()
-                    .navigationBarBackButtonHidden(true)
+                SweepSecondView(duration: CountdownConstants.sweepDuration
+                ) { result in
+                    collectFromCountdown(
+                        result: result,
+                        context: .init(.countdown_1,
+                                       good: .walk_2)
+                    )
+                }
+                .padding()
+                .navigationBarBackButtonHidden(true)
             }
             .hidden()
     }
-
+    
     /// A `NavigationLink` for the second timed walk (`walk_2`)
     ///
     /// Implemented in terms of `walk_N_View, ` success → `.ending_interstitial`, cancellation: → `.interstitial_1` )
     func walk_2View() -> some View {
-        walk_N_View(ownPhase     : .walk_2,
-                    nextPhaseGood: .ending_interstitial,
-                    nextPhaseBad : .interstitial_1)
+        return walk_N_View(
+            .init(.walk_2, good: .ending_interstitial)
+        )
     }
-
+    
     /// A `NavigationLink` for the closing screen (`ending_interstitial`)
     @ViewBuilder
     func ending_interstitialView() -> some View {
@@ -244,5 +218,50 @@ extension WalkingContainerView {
     }
 }
 
-
-
+// MARK: - Countdowns
+extension WalkingContainerView {
+    
+    func collectFromCountdown(result: SweepSecondView.ResultValue,
+                            context: WalkStates)
+    {
+        guard case let .failure(err) = result,
+              let timerError = err as? Timekeeper.Status else {
+            preconditionFailure("\(#fileID):\(#line):  “sucess” Can't Happen. It's a void")
+        }
+        
+        switch timerError {
+        case .completed: state = context.good
+        case .cancelled: state = context.bad
+        default:
+            preconditionFailure("error \(timerError) Can't Happen.")
+        }
+    }
+    
+    func collectFromWalk(result: DigitalTimerView.ResultValue,
+                              ownPhase: WalkingState,
+                              nextPhaseGood: WalkingState,
+                              nextPhaseBad: WalkingState) {
+        // ATW, DigitalTimerView.ResultValue is IncomingAccelerometry
+        UIApplication.shared.isIdleTimerDisabled = false
+        
+        switch result {
+        case .failure(_):
+            // AppPhaseErrors.walkingPhaseProbablyKilled?
+            state = nextPhaseBad
+            
+        case .success(let asyncBuffer):
+            Task {
+                let resultData =
+                // Very odd. Isn't there another way to pack up data?
+                await asyncBuffer
+                    .allAsTaggedData(
+                        tag: ownPhase.seriesTag!
+                    )
+                
+                try! PhaseStorage.shared
+                    .series(ownPhase.seriesTag!, completedWith: resultData)
+            }
+            state = nextPhaseGood
+        }
+    }
+}

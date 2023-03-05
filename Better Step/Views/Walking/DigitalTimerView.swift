@@ -76,21 +76,6 @@ struct DigitalTimerView: View, ReportingPhase {
 
     /// Respond to timer-ended events by posting `success`/`failure` through `completion()`, and setting `isIdleTimerDisabled` to `false`.
     fileprivate func timerStateDidChange(_ stat: Timekeeper.Status) {
-
-        /*
-         // This code cuts the walk_N task immediately after
-         // zero seconds.
-         #if DEBUG
-         completion(.success(self.motionManager.asyncBuffer))
-         #else
-
-         ... through past the switch
-         #endif
-         */
-        
-// For debugging, terminate the count immediately
-//        completion(.success(self.motionManager.asyncBuffer))
-
         switch stat {
         case .cancelled      :
             completion(
