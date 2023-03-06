@@ -109,6 +109,10 @@
 		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
+		1FF77A8629B659CF00BE33DF /* ToyInstructionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */; };
+		1FF77A8829B659CF00BE33DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF77A8729B659CF00BE33DF /* ContentView.swift */; };
+		1FF77A8A29B659D000BE33DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF77A8929B659D000BE33DF /* Assets.xcassets */; };
+		1FF77A8D29B659D000BE33DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF77A8C29B659D000BE33DF /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +224,11 @@
 		1FF3544E27920A3B000894B8 /* config-mini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "config-mini.plist"; sourceTree = "<group>"; };
 		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
+		1FF77A8329B659CF00BE33DF /* ToyInstructions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToyInstructions.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToyInstructionsApp.swift; sourceTree = "<group>"; };
+		1FF77A8729B659CF00BE33DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1FF77A8929B659D000BE33DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1FF77A8C29B659D000BE33DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -253,6 +262,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FF77A8029B659CF00BE33DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -264,6 +280,7 @@
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
+				1FF77A8429B659CF00BE33DF /* ToyInstructions */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 			);
@@ -275,6 +292,7 @@
 				1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */,
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
 				1FA281CE28DBBA160038353E /* Better Step.app */,
+				1FF77A8329B659CF00BE33DF /* ToyInstructions.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -518,6 +536,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1FF77A8429B659CF00BE33DF /* ToyInstructions */ = {
+			isa = PBXGroup;
+			children = (
+				1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */,
+				1FF77A8729B659CF00BE33DF /* ContentView.swift */,
+				1FF77A8929B659D000BE33DF /* Assets.xcassets */,
+				1FF77A8B29B659D000BE33DF /* Preview Content */,
+			);
+			path = ToyInstructions;
+			sourceTree = "<group>";
+		};
+		1FF77A8B29B659D000BE33DF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1FF77A8C29B659D000BE33DF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		1FFB30DE277BE4FA0099AE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +657,23 @@
 			productReference = 1FA281CE28DBBA160038353E /* Better Step.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1FF77A8229B659CF00BE33DF /* ToyInstructions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FF77A9029B659D000BE33DF /* Build configuration list for PBXNativeTarget "ToyInstructions" */;
+			buildPhases = (
+				1FF77A7F29B659CF00BE33DF /* Sources */,
+				1FF77A8029B659CF00BE33DF /* Frameworks */,
+				1FF77A8129B659CF00BE33DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToyInstructions;
+			productName = ToyInstructions;
+			productReference = 1FF77A8329B659CF00BE33DF /* ToyInstructions.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -640,6 +694,9 @@
 					};
 					1FA281CD28DBBA160038353E = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					1FF77A8229B659CF00BE33DF = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -666,6 +723,7 @@
 				1FA281CD28DBBA160038353E /* Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
+				1FF77A8229B659CF00BE33DF /* ToyInstructions */,
 			);
 		};
 /* End PBXProject section */
@@ -706,6 +764,15 @@
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
 				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
 				1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FF77A8129B659CF00BE33DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FF77A8D29B659D000BE33DF /* Preview Assets.xcassets in Resources */,
+				1FF77A8A29B659D000BE33DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +875,15 @@
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
 				1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */,
 				1FDEAB8529A80AE6008A6919 /* InterstitalPageContainerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FF77A7F29B659CF00BE33DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FF77A8829B659CF00BE33DF /* ContentView.swift in Sources */,
+				1FF77A8629B659CF00BE33DF /* ToyInstructionsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1097,6 +1173,69 @@
 			};
 			name = Release;
 		};
+		1FF77A8E29B659D000BE33DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToyInstructions/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wt9t.ToyInstructions;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1FF77A8F29B659D000BE33DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToyInstructions/Preview Content\"";
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wt9t.ToyInstructions;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1132,6 +1271,15 @@
 			buildConfigurations = (
 				1FA281DA28DBBA170038353E /* Debug */,
 				1FA281DB28DBBA170038353E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1FF77A9029B659D000BE33DF /* Build configuration list for PBXNativeTarget "ToyInstructions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FF77A8E29B659D000BE33DF /* Debug */,
+				1FF77A8F29B659D000BE33DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
