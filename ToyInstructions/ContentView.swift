@@ -7,20 +7,33 @@
 
 import SwiftUI
 
+
+
+/// This is the container (tab) view.
 struct ContentView: View {
+    // Not yet in use
+    let baseName: String = ""
+    let pages: [OnePage]
+    init(jsArrayString: String) {
+        pages = try! OnePage.from(
+            jsonArray: jsArrayString)
+    }
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            ForEach(pages) {
+                page in
+                
+            }
+            TabView {
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(jsArrayString: both)
     }
 }

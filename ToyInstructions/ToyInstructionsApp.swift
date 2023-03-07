@@ -11,7 +11,8 @@ import SwiftUI
 struct ToyInstructionsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            try! CardGalleryView(pageArrayJSON: both)
+//            ContentView(jsArrayString: both)
         }
     }
 }
