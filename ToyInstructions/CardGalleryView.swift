@@ -53,7 +53,7 @@ struct CardGalleryView: View {
             
             TabView(selection: $selectedPageIndex) {
                 ForEach(pageSpecs) { spec in
-                    CardView(pageParaams: spec) {
+                    CardView(pageParams: spec) {
                         let nextIndex = selectedPageIndex + 1
                         print("Selected:", selectedPageIndex)
                         print("next (if any):", nextIndex)
@@ -123,17 +123,4 @@ struct CardGalleryView_Previews: PreviewProvider {
     static var previews: some View {
         try! CardGalleryView(pageArrayJSON: both)
     }
-}
-
-/// A `View`, one among many conforming, in an array of `[any PageDisplayed]`.  A Gallery view (e.g. CardGalleryView) would step through these so you can display JSON-populated views or volume images.
-/// - note:``VolumePageView`` _could_ be specified by a structured JSON object.
-/* Nope. Do the data first:*/
-
-
-protocol PageDisplayable: Identifiable {
-    // ID is already known.
-    // ... can you do it with something not far off of the info cards?
-    
-    
-    
 }

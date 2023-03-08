@@ -59,7 +59,7 @@ struct CardView_Previews: PreviewProvider {
     
     static var previews: some View {
 //        NavigationView {
-            CardView(pageParaams: oneOnePage) {
+        CardView(pageParams: oneOnePage) {
                 print("beep")
             }
                 .toolbar {

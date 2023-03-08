@@ -8,23 +8,22 @@
 import Foundation
 import CoreMotion
 
-/// Adoprers present `x`, `y`, `z`, and t as flat properties, and can translate themselves into the minimal ``XYZT`` value.
+// MARK: - TimedXYZRepresentable
+/// Adoprers can type-erase themselves to a value representing only  `x`, `y`, `z`, and `t` coordinates.
+///
+/// **See also** ``XYZT``
 public
-protocol TimedXYZRepresentable: XYZ
-//& Timestamped
-// I wish I could guarantee a `t` property
-// without accepting "timestamp", which is
-// what `Timestamped` requires.
-// Probably there are generics, or close-cousin
-// protocols. I'll try not to think about it.
-& CSVRepresentable {
+protocol TimedXYZRepresentable: XYZ & CSVRepresentable {
     /// Reduce the space and time vector to the minimal ``XYZT`` value.
     var asXYZT: XYZT { get }
 }
 
-/// Minimal instantiation of space and time coordinates.
+// MARK: - XYZT
+/// Minimal value type for space and time coordinates.
 ///
-/// Per compliance with ``TimedXYZRepresentable``, and through that ``CSVRepresentable``, it implements ``asXYZT`` and ``csvLine``.
+/// Consider a type `S where S:Sequence, S.Element: TimedXYZRepresentable`. `Element` might be a reference type. `XYZT` is a value that erases everything but the cordinates.
+///
+/// **Conforms** to `TimedXYZRepresentable`, etc.
 public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Hashable {
     public let x, y, z, t: Double
     public var asXYZT: XYZT { return self }
@@ -32,11 +31,14 @@ public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Has
         "\(t.pointFour),\(x.pointFive),\(y.pointFive),\(z.pointFive)"
     }
     
-   public var description: String {
+    public var description: String {
         "XYZT: t: \(t.pointFour), x: \(x.pointFive), y: \(y.pointFive), z: \(z.pointFive)"
     }
-    
-    #if DEBUG
+}
+
+// MARK: - Mock instances
+extension XYZT {
+#if DEBUG
     static func sampleData() throws -> [XYZT]? {
         guard let url = Bundle.main
             .url(forResource: "TestXYZT", withExtension: "json")
@@ -49,5 +51,5 @@ public struct XYZT: TimedXYZRepresentable, CustomStringConvertible, Codable, Has
         
         return xyztArray
     }
-    #endif
+#endif
 }
