@@ -11,13 +11,6 @@ import SwiftUI
 
 private let decoder = JSONDecoder()
 
-struct IdentifiableAny<T: GalleryCardSpec>: Identifiable {
-    var content: T
-    var id: T.ID { content.id }
-    
-    init(_ toWrap: T) { content = toWrap }
-}
-
 
 
 // MARK: - GalleryCardSpec

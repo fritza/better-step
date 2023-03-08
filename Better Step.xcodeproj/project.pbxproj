@@ -33,6 +33,7 @@
 		1F5D7CAC2999B88200FFB414 /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9352298DB6DF00B5194B /* error-support.swift */; };
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
+		1F65EEA429B94E9000223642 /* BruteViewCrumbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65EEA329B94E9000223642 /* BruteViewCrumbs.swift */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
 		1F6998322999A67A00A0AC80 /* UploadTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */; };
 		1F6998332999A67A00A0AC80 /* PerformUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9351298DB6DF00B5194B /* PerformUpload.swift */; };
@@ -193,6 +194,7 @@
 		1F60E70328DA720500EC2593 /* MorseHaptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseHaptic.swift; sourceTree = "<group>"; };
 		1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUIController.swift; sourceTree = "<group>"; };
 		1F6456F7294D29FA0064DADA /* TestXYZT.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestXYZT.json; sourceTree = SOURCE_ROOT; };
+		1F65EEA329B94E9000223642 /* BruteViewCrumbs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteViewCrumbs.swift; sourceTree = "<group>"; };
 		1F66586729709D4900EE75FE /* ZIPArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPArchiver.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 				1F408A5429B65D67009F2535 /* CardView.swift */,
 				1FF77A8729B659CF00BE33DF /* ContentView.swift */,
 				1F408A6429B7EEAF009F2535 /* CrossProtoGallery.swift */,
+				1F65EEA329B94E9000223642 /* BruteViewCrumbs.swift */,
 				1F408A6029B7E28F009F2535 /* GalleryCardProtocols.swift */,
 				1F408A6229B7E87D009F2535 /* CrossProtoVolume.swift */,
 				1F408A5D29B7D3A9009F2535 /* FancyPagingView.swift */,
@@ -912,6 +915,7 @@
 				1FF77A8829B659CF00BE33DF /* ContentView.swift in Sources */,
 				1FF77A8629B659CF00BE33DF /* ToyInstructionsApp.swift in Sources */,
 				1F408A5329B65D2F009F2535 /* OnePage.swift in Sources */,
+				1F65EEA429B94E9000223642 /* BruteViewCrumbs.swift in Sources */,
 				1F408A6329B7E87D009F2535 /* CrossProtoVolume.swift in Sources */,
 				1F408A5529B65D67009F2535 /* CardView.swift in Sources */,
 				1F408A5A29B69DAD009F2535 /* VolumeAsCardView.swift in Sources */,

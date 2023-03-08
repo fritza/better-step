@@ -38,7 +38,7 @@ let both = #"""
 // MARK: - OnePage (spec)
 /// `A Codable`  representation of the contents of a ``CardView``.
 ///
-/// There a number of `static` functions for deriving ``OnePage`` singletons and `Array`s from JSON.
+/// There are a number of `static` functions for deriving ``OnePage`` singletons and `Array`s from JSON.
 public struct OnePage: Identifiable
 //, Comparable
 , Hashable, Codable {

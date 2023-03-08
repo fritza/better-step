@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+struct IdentifiableAny: Identifiable {
+    typealias ID = UUID
+    var content: any GalleryCardSpec
+    var id: ID { content.id }
+    
+    init(_ toWrap: some GalleryCardSpec) { content = toWrap }
+}
+
 struct CrossProtoGallery: View {
     let pageSpecs: [any GalleryCardSpec]
+    let wrappedSpecs: [IdentifiableAny]
+    
     @State private var selectedPageIndex: Int = 0
     
     // Have an init that will initialize by…
@@ -23,9 +33,9 @@ struct CrossProtoGallery: View {
         // I hope that doesn't commit me to all runs
         // being the same static type (what I want is
         // to accumulate
-        
-//        let consolidated = specs.flatMap { $0 }
         pageSpecs = specs
+        wrappedSpecs = pageSpecs
+                .map { IdentifiableAny($0) }
     }
     
 //    @ViewBuilder
@@ -43,24 +53,32 @@ struct CrossProtoGallery: View {
     where T: GalleryCardSpec, U == T.CardView
     {
         let r =
-        type(of: spec).CardView
-            .init(pageParams: spec, action: { print("something") })
+        type(of: spec).CardView(pageParams: spec, action: { print("something") })
         return r!
         //       try! spec.createView {
         //            print("BANG?!")
         //        } as! U
     }
     
-    
+    func wrappedCardView(_ wrapped: IdentifiableAny) -> some GalleryCardView {
+        return cardView(from: wrapped.content)
+//        let type = type(of: wrapped.content) // .self
+//        let vType = type.CardView
+//
+//        let v: GalleryCardView =
+//        type(of: wrapped.content)
+//            .CardView(pageParams: wrapped.content,
+//                  action: { print("something") })
+//        return v
+    }
     
     var body: some View {
         VStack {
             HStack { Text("Left"); Spacer(); Text("Right") }
             Divider()
             TabView(selection: $selectedPageIndex) {
-                
-                ForEach(self.pageSpecs) { s in
-                    cardView(from: s)
+                ForEach(self.wrappedSpecs) { s in
+                    cardView(from: s.content)
                 }
                 
                 
