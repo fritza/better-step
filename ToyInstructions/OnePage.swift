@@ -6,7 +6,15 @@
 //
 
 import Foundation
-import SwiftUI
+
+let justFirst = #"""
+ {
+ "id": 0, "title": "Start!",
+ "sysImage": "hand.wave",
+ "topContent": "This space for rent.",
+ "bottomContent": "… but we're happy to see you anyway. Please look around and don't forget to sample the shrimp."
+ }
+ """#
 
 let both = #"""
  [
@@ -26,77 +34,39 @@ let both = #"""
  ]
  """#
 
-protocol GalleryCardSpec: Identifiable, Hashable, Decodable {
-    associatedtype CardView: GalleryCardView where CardView.Spec == Self
-    // I OON'T CARE whether the spec looks back at the card it creater.
-    // Am I right?
-//    var card: CardView { get }
 
-    mutating func createView() throws -> CardView
-    
-    // RELY on the initializer for the adopting type to set id.
-    // static func fromJSON(_ json: String) throws -> Self
-}
-
-extension GalleryCardSpec {
-    mutating func createView(buttonAction: @escaping () -> Void) throws -> CardView {
-        // This is all the card viesw needed so far.
-        // Can future adopters need more parameters, or
-        // do more in this func? Can I rely on never needing
-        // protocol-witness dispatch?
-        let optView  = CardView(pageParams: self, action: buttonAction)
-        precondition(optView != nil, "Shouldn't fail GalleryCardSpec -> createView()")
-        return optView!
-    }    
-    
-    public static func fromJSON(_ json: String) throws -> Self {
-        guard let rData = json.data(using: .utf8) else {
-            throw NSError(domain: "OnePageDomain", code: 1)
-        }
-        let retval = try decoder.decode(Self.self, from: rData)
-        return retval
-    }
-    
-    public static func from(jsonArray: String) throws -> [Self] {
-        guard let data = jsonArray.data(using: .utf8) else {
-            throw NSError(domain: "OnePageDomain",
-                          code: 1)
-        }
-        let decoded = try decoder.decode([Self].self, from: data)
-        return decoded
-    }
-}
-
-// FIXME: Remove "import SwiftUI" after moving this out.
-protocol GalleryCardView: View {
-    associatedtype Spec: GalleryCardSpec where Spec.CardView == Self
-    
-    var buttonAction: () -> Void { get }
-    var parameters: Spec { get }
-    init?(pageParams: Spec, action: @escaping () -> Void)
-}
-
-
+// MARK: - OnePage (spec)
 /// `A Codable`  representation of the contents of a ``CardView``.
 ///
 /// There a number of `static` functions for deriving ``OnePage`` singletons and `Array`s from JSON.
-public struct OnePage: Identifiable, Comparable, Hashable, Codable {
+public struct OnePage: Identifiable
+//, Comparable
+, Hashable, Codable {
     public let title: String
     public let topContent: String
     public let sysImage: String
     public let bottomContent: String
     
-    public let id: Int
+    enum CodingKeys: CodingKey {
+        case title
+        case topContent
+        case sysImage
+        case bottomContent
+    }
+    
+    public let id = UUID()
         
     public init(id: Int,  title: String,
                  top: String, image: String,
                  bottom: String) {
-        (self.id, self.title, self.topContent, bottomContent) =
-        (id, title, top, bottom)
+//        (self.id,
+         (self.title, self.topContent, bottomContent) =
+//        (id,
+         (title, top, bottom)
         sysImage = image
     }
     
-    public static func < (lhs: Self, rhs: Self) -> Bool { lhs.id < rhs.id }
+//    public static func < (lhs: Self, rhs: Self) -> Bool { lhs.id < rhs.id }
 }
 
 private let decoder = JSONDecoder()
