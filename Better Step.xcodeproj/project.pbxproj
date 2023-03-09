@@ -21,9 +21,7 @@
 		1F408A5529B65D67009F2535 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5429B65D67009F2535 /* CardView.swift */; };
 		1F408A5729B67A6E009F2535 /* CardGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5629B67A6E009F2535 /* CardGalleryView.swift */; };
 		1F408A5A29B69DAD009F2535 /* VolumeAsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5929B69DAC009F2535 /* VolumeAsCardView.swift */; };
-		1F408A6129B7E28F009F2535 /* GalleryCardProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A6029B7E28F009F2535 /* GalleryCardProtocols.swift */; };
 		1F408A6329B7E87D009F2535 /* CrossProtoVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A6229B7E87D009F2535 /* CrossProtoVolume.swift */; };
-		1F408A6529B7EEAF009F2535 /* CrossProtoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A6429B7EEAF009F2535 /* CrossProtoGallery.swift */; };
 		1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */; };
 		1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51BC7F297230F700BE418A /* VolumePageView.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
@@ -556,6 +554,7 @@
 		1FF77A8429B659CF00BE33DF /* ToyInstructions */ = {
 			isa = PBXGroup;
 			children = (
+				1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */,
 				1FF77A8929B659D000BE33DF /* Assets.xcassets */,
 				1F408A5629B67A6E009F2535 /* CardGalleryView.swift */,
 				1F408A5429B65D67009F2535 /* CardView.swift */,
@@ -566,7 +565,6 @@
 				1F408A6229B7E87D009F2535 /* CrossProtoVolume.swift */,
 				1F408A5229B65D2F009F2535 /* InstructionPageSpec.swift */,
 				1FF77A8B29B659D000BE33DF /* Preview Content */,
-				1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */,
 				1F408A5929B69DAC009F2535 /* VolumeAsCardView.swift */,
 			);
 			path = ToyInstructions;
@@ -915,8 +913,6 @@
 				1F408A6329B7E87D009F2535 /* CrossProtoVolume.swift in Sources */,
 				1F408A5529B65D67009F2535 /* CardView.swift in Sources */,
 				1F408A5A29B69DAD009F2535 /* VolumeAsCardView.swift in Sources */,
-				1F408A6129B7E28F009F2535 /* GalleryCardProtocols.swift in Sources */,
-				1F408A6529B7EEAF009F2535 /* CrossProtoGallery.swift in Sources */,
 				1F408A5729B67A6E009F2535 /* CardGalleryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,23 +7,9 @@
 
 import SwiftUI
 
-protocol CardItemView: View {
-    
-}
-
-
-
 struct CardGalleryView: View {
     let pageSpecs: [InstructionPageSpec]
     @State private var selectedPageIndex: Int = 0
-    
-    /*
-     The TabView (I bet) uses the OneCard ID, which had been 1 greater than the 0-based index. But the advance/retreat funcs assume zero-based.
-     
-     
-     */
-    
-    
     
     init(pages: [InstructionPageSpec]) {
         precondition(pages.count > 0, "Attempt to initilize a gallery with no items.")

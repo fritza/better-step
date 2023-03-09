@@ -24,9 +24,23 @@ enum CardViewSpecies {
         Self.volume(spec)
     }
     
+    /// Create an array of  `.volume`s  conforming to an array of configurations.
+    static func newVolumes<S>(_ sequence: S) -> [Self]
+    where S: Sequence, S.Element == VolumeSpec
+    {
+        return sequence.map { Self.newVolume(spec: $0) }
+    }
+
     /// Create an `.instruction` that carries the provided configuration
     static func newInstruction(spec: InstructionPageSpec) -> Self {
         Self.instruction(spec)
+    }
+    
+    /// Create an array of  `.instruction`s  conforming to an array of configurations.
+    static func newInstructions<S>(_ sequence: S) -> [Self]
+    where S: Sequence, S.Element == InstructionPageSpec
+    {
+        return sequence.map { Self.newInstruction(spec: $0) }
     }
     
     // MARK: View

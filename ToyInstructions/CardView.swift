@@ -17,7 +17,7 @@ import SwiftUI
 
 struct CardView: View {
     let pageConfig: InstructionPageSpec
-    let pageIndex: Int
+    let pageIndex: UUID
     let buttonAction: () -> Void
     
     init?(pageParams: InstructionPageSpec,
