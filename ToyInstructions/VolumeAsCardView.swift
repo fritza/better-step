@@ -80,6 +80,11 @@ struct VolumeSpec: Identifiable, Hashable, Decodable {
 
 struct VolumeAsCardView: View {
     let contents: VolumeSpec
+    let backClosure: () -> Void
+    init(pageSpec: VolumeSpec, buttonAction: @escaping () -> Void) {
+        contents = pageSpec
+        backClosure = buttonAction
+    }
     
     var body: some View {
         VStack {
@@ -103,9 +108,7 @@ struct VolumeAsCardView: View {
             Text(contents.lowerText)
                 .font(.title3)
             Spacer()
-            Button(contents.ctActionLabel) {
-
-            }
+            Button(contents.ctActionLabel, action: backClosure)
             .fontWeight(.bold)
         }
         .font(.body)

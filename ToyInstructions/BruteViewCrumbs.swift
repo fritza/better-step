@@ -47,4 +47,37 @@ enum CardViewSpecies {
     }
 }
 
+extension CardViewSpecies: Identifiable, Hashable {
+    // MARK: Identifiable
+    var id: UUID {
+        switch self {
+        case .volume(let spec):
+            return spec.id
+        case .instruction(let spec):
+            return spec.id
+        }
+    }
+    
+    // MARK: Hashable
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.volume, .instruction), (.instruction, .volume):
+            return false
+            
+        case (.volume(let l), .volume(let r)):
+            return l == r
+            
+        case (.instruction(let l), .instruction(let r)):
+            return l == r
+        }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .volume(let spec): hasher.combine(spec)
+        case .instruction(let spec): hasher.combine(spec)
+        }
+    }
+}
+
 
