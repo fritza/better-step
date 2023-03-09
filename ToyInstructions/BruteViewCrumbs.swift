@@ -8,56 +8,41 @@
 import Foundation
 import SwiftUI
 
-private var _instructionSpecs: [InstructionPageSpec]! = nil
-func setUpInstructionSpecs(jsonArray: String) {
-    guard _instructionSpecs == nil else { return }
-    _instructionSpecs = try! InstructionPageSpec
-        .from(jsonArray: jsonArray)
-}
+// MARK: - CardViewSpecies
 
-
-
-enum CardViews {
-    case volume
-    case instructions(index0: Int)
-    #warning("Should not be the index, should be a particular OnePage.")
+/// Each case stands for one of the view types that might be presented to the gallery container.
+///
+/// The associated values are the configuration parameters for those cases.
+enum CardViewSpecies {
+    // MARK: View types
+    case volume(VolumeSpec)
+    case instruction(InstructionPageSpec)
     
-    // HOW DO WE INITIALIZE THE SPECS ARRAY?
-    // SPECIFICALLY, READING THE JSON FILES.
-    // ALSO, THERE'S MORE THAN ONE  ROSTER OF
-    // CONTENT (each interstitial)
-    
-    //    THIS DESIGN ISN'T DONE YET.
-    
-    static var _instructionSpecs: [InstructionPageSpec]! = nil
-    static func setUpInstructionSpecs(jsonArray: String) {
-        guard _instructionSpecs == nil else { return }
-        _instructionSpecs = try! InstructionPageSpec
-            .from(jsonArray: jsonArray)
+    // MARK: Construction
+    /// Create a `.volume` that carries the provided configuration
+    static func newVolume(spec: VolumeSpec) -> Self {
+        Self.volume(spec)
     }
     
-    static subscript(zeroIndex: Int) -> InstructionPageSpec {
-        // RELYING ON INSTRUCTIONSPECS BEING FILLED
-        -_instructionSpecs[zeroIndex]
+    /// Create an `.instruction` that carries the provided configuration
+    static func newInstruction(spec: InstructionPageSpec) -> Self {
+        Self.instruction(spec)
     }
     
-    static let pageSpecs = try! JSONDecoder()
-        .decode([InstructionPageSpec].self, from: <#T##Data#>)
-    
+    // MARK: View
+    /// The `View` that displays a particular case.
+    /// - parameter backButtonClosure: The closure to be called when the user taps the "Next" button.
+    /// - returns: The `View` created from `self`'s associated value.
     @ViewBuilder
-    func body(given spec: any GalleryCardSpec) -> some View {
+    func makeView(backButtonClosure: @escaping () -> Void) -> some View {
         switch self {
-        case .volume:
-            try! VolumeAsCardView(
-                contents: VolumeSpec.from(
-                    baseName: "Volume"))
+        case .instruction(let spec):
+            CardView(pageParams: spec,
+                     buttonAction: backButtonClosure)!
             
-        case .instructions(index0: let page):
-            CardView(pageParams: Self.instructionSpecs[page],
-                     buttonAction: {
-                print("BEEP! from", "\(#fileID):\(#line)")
-            }
-            )
+        case .volume(let spec):
+            VolumeAsCardView(pageSpec: spec,
+                             buttonAction: backButtonClosure)
         }
     }
 }
