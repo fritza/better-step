@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-private var _instructionSpecs: [OnePage]! = nil
+private var _instructionSpecs: [InstructionPageSpec]! = nil
 func setUpInstructionSpecs(jsonArray: String) {
     guard _instructionSpecs == nil else { return }
-    _instructionSpecs = try! OnePage
+    _instructionSpecs = try! InstructionPageSpec
         .from(jsonArray: jsonArray)
 }
 
@@ -29,20 +29,20 @@ enum CardViews {
     
     //    THIS DESIGN ISN'T DONE YET.
     
-    static var _instructionSpecs: [OnePage]! = nil
+    static var _instructionSpecs: [InstructionPageSpec]! = nil
     static func setUpInstructionSpecs(jsonArray: String) {
         guard _instructionSpecs == nil else { return }
-        _instructionSpecs = try! OnePage
+        _instructionSpecs = try! InstructionPageSpec
             .from(jsonArray: jsonArray)
     }
     
-    static subscript(zeroIndex: Int) -> OnePage {
+    static subscript(zeroIndex: Int) -> InstructionPageSpec {
         // RELYING ON INSTRUCTIONSPECS BEING FILLED
         -_instructionSpecs[zeroIndex]
     }
     
     static let pageSpecs = try! JSONDecoder()
-        .decode([OnePage].self, from: <#T##Data#>)
+        .decode([InstructionPageSpec].self, from: <#T##Data#>)
     
     @ViewBuilder
     func body(given spec: any GalleryCardSpec) -> some View {

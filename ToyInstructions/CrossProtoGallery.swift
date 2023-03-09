@@ -90,38 +90,6 @@ struct CrossProtoGallery: View {
             .tabViewStyle(.page(indexDisplayMode: .always))
         }
     }
-//
-//            TabView(selection: $selectedPageIndex) {
-//                ForEach(pageSpecs, id:\.id) {
-//                    spec in
-//                    Text(verbatim: "Spec title = ")
-//                }
-//            }
-//            .tabViewStyle(.page(indexDisplayMode: .always))
-//        }
-//        .toolbar
-//        {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button("Back") { print() }
-//            }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button("Next") { print(); }
-//            }
-//        }
-//
-        //                    let prevIndex = selectedPageIndex - 1
-        //                        if prevIndex > 0 {
-        //                            selectedPageIndex = prevIndex
-        //                        }
-        //                        let nextIndex = selectedPageIndex + 1
-        //                        if nextIndex >= pageSpecs.count {
-        //                            selectedPageIndex = nextIndex
-        //                        }
-        //                    }
-        //            }
-        //        .toolbar(.visible, for: .navigationBar)
-//    }
-
 
 
     

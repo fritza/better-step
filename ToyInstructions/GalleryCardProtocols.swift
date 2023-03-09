@@ -12,7 +12,6 @@ import SwiftUI
 private let decoder = JSONDecoder()
 
 
-
 // MARK: - GalleryCardSpec
 protocol GalleryCardSpec: Identifiable, Hashable, Decodable where ID == UUID {
     associatedtype CardView: GalleryCardView where CardView.Spec == Self
@@ -28,7 +27,7 @@ extension GalleryCardSpec {
         hasher.combine(id)
     }
     
-    func createView(buttonAction: @escaping () -> Void) throws -> some GalleryCardView {
+    func createView(buttonAction: @escaping () -> Void) throws -> some CardView {
         let optView  = CardView(pageParams: self, action: buttonAction)
         precondition(optView != nil, "Shouldn't fail GalleryCardSpec -> createView()")
         return optView!

@@ -14,7 +14,7 @@ protocol CardItemView: View {
 
 
 struct CardGalleryView: View {
-    let pageSpecs: [OnePage]
+    let pageSpecs: [InstructionPageSpec]
     @State private var selectedPageIndex: Int = 0
     
     /*
@@ -25,14 +25,14 @@ struct CardGalleryView: View {
     
     
     
-    init(pages: [OnePage]) {
+    init(pages: [InstructionPageSpec]) {
         precondition(pages.count > 0, "Attempt to initilize a gallery with no items.")
         pageSpecs = pages
         selectedPageIndex = 0
     }
     
     init(pageArrayJSON: String) throws {
-        let pages = try OnePage.from(jsonArray: pageArrayJSON)
+        let pages = try InstructionPageSpec.from(jsonArray: pageArrayJSON)
         self.init(pages: pages)
     }
     

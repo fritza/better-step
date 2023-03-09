@@ -1,5 +1,5 @@
 //
-//  OnePage.swift
+//  InstructionPageSpec.swift
 //  ToyInstructions
 //
 //  Created by Fritz Anderson on 3/6/23.
@@ -35,11 +35,11 @@ let both = #"""
  """#
 
 
-// MARK: - OnePage (spec)
+// MARK: - InstructionPageSpec (spec)
 /// `A Codable`  representation of the contents of a ``CardView``.
 ///
-/// There are a number of `static` functions for deriving ``OnePage`` singletons and `Array`s from JSON.
-public struct OnePage: Identifiable
+/// There are a number of `static` functions for deriving ``InstructionPageSpec`` singletons and `Array`s from JSON.
+public struct InstructionPageSpec: Identifiable
 //, Comparable
 , Hashable, Codable {
     public let title: String
@@ -71,25 +71,25 @@ public struct OnePage: Identifiable
 
 private let decoder = JSONDecoder()
 
-extension OnePage {
-    public static func fromJSON(_ json: String) throws -> OnePage {
+extension InstructionPageSpec {
+    public static func fromJSON(_ json: String) throws -> InstructionPageSpec {
         guard let rData = json.data(using: .utf8) else {
             throw NSError(domain: "OnePageDomain", code: 1)
         }
-        let retval = try decoder.decode(OnePage.self, from: rData)
+        let retval = try decoder.decode(InstructionPageSpec.self, from: rData)
         return retval
     }
     
-    public static func from(jsonArray: String) throws -> [OnePage] {
+    public static func from(jsonArray: String) throws -> [InstructionPageSpec] {
         guard let data = jsonArray.data(using: .utf8) else {
             throw NSError(domain: "OnePageDomain",
                           code: 1)
         }
-        let decoded = try decoder.decode([OnePage].self, from: data)
+        let decoded = try decoder.decode([InstructionPageSpec].self, from: data)
         return decoded
     }
     
-    public static func fromJSON(_ json: [String]) throws -> [OnePage] {
+    public static func fromJSON(_ json: [String]) throws -> [InstructionPageSpec] {
         let answer =
         try json
             .map { jString in
@@ -100,7 +100,7 @@ extension OnePage {
                 return rData
             }
             .map { data in
-                return try decoder.decode(OnePage.self, from: data)
+                return try decoder.decode(InstructionPageSpec.self, from: data)
             }
         return answer
     }

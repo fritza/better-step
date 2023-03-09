@@ -16,11 +16,11 @@ import SwiftUI
  */
 
 struct CardView: View {
-    let pageConfig: OnePage
+    let pageConfig: InstructionPageSpec
     let pageIndex: Int
     let buttonAction: () -> Void
     
-    init?(pageParams: OnePage,
+    init?(pageParams: InstructionPageSpec,
           buttonAction: @escaping () -> Void) {
         pageConfig = pageParams
         pageIndex = pageParams.id
@@ -53,8 +53,8 @@ struct CardView: View {
  */
 
 struct CardView_Previews: PreviewProvider {
-    static let oneOnePage: OnePage = {
-        OnePage(id: 1, title: "Preview", top: "This card illustrates text at the top…", image: "globe", bottom: "… and bottom")
+    static let oneOnePage: InstructionPageSpec = {
+        InstructionPageSpec(id: 1, title: "Preview", top: "This card illustrates text at the top…", image: "globe", bottom: "… and bottom")
     }()
     
     static var previews: some View {

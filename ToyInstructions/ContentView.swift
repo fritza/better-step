@@ -13,9 +13,9 @@ import SwiftUI
 struct ContentView: View {
     // Not yet in use
     let baseName: String = ""
-    let pages: [OnePage]
+    let pages: [InstructionPageSpec]
     init(jsArrayString: String) {
-        pages = try! OnePage.from(
+        pages = try! InstructionPageSpec.from(
             jsonArray: jsArrayString)
     }
     
