@@ -39,9 +39,7 @@ let both = #"""
 /// `A Codable`  representation of the contents of a ``CardView``.
 ///
 /// There are a number of `static` functions for deriving ``InstructionPageSpec`` singletons and `Array`s from JSON.
-public struct InstructionPageSpec: Identifiable
-//, Comparable
-, Hashable, Codable {
+public final class InstructionPageSpec: Identifiable, Hashable, Codable {
     public let title: String
     public let topContent: String
     public let sysImage: String
@@ -55,6 +53,14 @@ public struct InstructionPageSpec: Identifiable
     }
     
     public let id = UUID()
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    public static func == (
+        lhs: InstructionPageSpec,
+        rhs: InstructionPageSpec) -> Bool
+    { lhs.id == rhs.id }
+    
         
     public init(id: Int,  title: String,
                  top: String, image: String,
@@ -65,8 +71,6 @@ public struct InstructionPageSpec: Identifiable
          (title, top, bottom)
         sysImage = image
     }
-    
-//    public static func < (lhs: Self, rhs: Self) -> Bool { lhs.id < rhs.id }
 }
 
 private let decoder = JSONDecoder()

@@ -15,16 +15,17 @@ import SwiftUI
 
  */
 
-struct CardView: View {
+struct CardView: View, Identifiable {
+    var id: UUID { pageConfig.id }
     let pageConfig: InstructionPageSpec
-    let pageIndex: UUID
     let buttonAction: () -> Void
     
-    init?(pageParams: InstructionPageSpec,
-          buttonAction: @escaping () -> Void) {
+    init(pageParams: InstructionPageSpec,
+         buttonAction: @escaping () -> Void) {
         pageConfig = pageParams
-        pageIndex = pageParams.id
         self.buttonAction = buttonAction
+        
+        print(#function, "EXIT")
     }
     
     var body: some View {
@@ -44,7 +45,9 @@ struct CardView: View {
             Spacer()
             Text(pageConfig.bottomContent)
             Spacer()
-            Button("Next", action: buttonAction)
+            Button("Next", action: {
+                buttonAction()
+            })
         }
     }
 }

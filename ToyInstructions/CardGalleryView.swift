@@ -9,13 +9,47 @@ import SwiftUI
 
 struct CardGalleryView: View {
     let pageSpecs: [InstructionPageSpec]
-    @State private var selectedPageIndex: Int = 0
     
+//    @State var selectedPageID: UUID!
+//    {
+//        didSet {
+//            print("selected ID was\n", oldValue?.uuidString ?? "n/a",
+//                  "now\n",
+//                  selectedPageID?.uuidString ?? "N/A")
+//            print()
+//        }
+//    }
+    
+    @State var selectedIndex = 0 {
+        didSet {
+            print("∆ index from", oldValue, "to", selectedIndex) }
+    }
+    
+    var firstPageID   : UUID {
+        pageSpecs[0].id
+    }
+    var lastPageID    : UUID {
+        pageSpecs.last!.id
+    }
+
     init(pages: [InstructionPageSpec]) {
         precondition(pages.count > 0, "Attempt to initilize a gallery with no items.")
         pageSpecs = pages
-        selectedPageIndex = 0
+//        selectedPageID = pages[0].id
+        
+        let titles = Set( pageSpecs.map(\.title) )
+        assert(titles.count == pageSpecs.count)
     }
+    /*
+    func indexFor(id: UUID) -> Int? {
+        pageSpecs.firstIndex(where: {
+            $0.id == selectedPageID})
+    }
+    
+    func idForPage(indexed i: Int) -> UUID {
+        pageSpecs[i].id
+    }
+     */
     
     init(pageArrayJSON: String) throws {
         let pages = try InstructionPageSpec.from(jsonArray: pageArrayJSON)
@@ -27,81 +61,83 @@ struct CardGalleryView: View {
             HStack {
                 Button(action: {
                     retreat()
-//                    if selectedPageIndex > 0 { selectedPageIndex -= 1 }
                 })  {
                     Text("< Back").font(.title3)
                 }
-                .disabled(selectedPageIndex <= 0)
+                .disabled(selectedIndex <= 0)
                 Spacer()
             }.padding()
             
-           Divider()
+            Divider()
             
-            TabView(selection: $selectedPageIndex) {
-                ForEach(pageSpecs) { spec in
-                    CardView(pageParams: spec) {
-                        let nextIndex = selectedPageIndex + 1
-                        print("Selected:", selectedPageIndex)
-                        print("next (if any):", nextIndex)
-                        print(pageSpecs.count, "pages.")
-                        if nextIndex < (pageSpecs.count) {
-                            selectedPageIndex = nextIndex
-                        }
+            TabView(selection: $selectedIndex
+                    //                        $selectedPageID
+            ) {
+                ForEach(pageSpecs, id: \.id) { spec in
+                    CardView(pageParams: spec, buttonAction: { advance() }
+                    )
+                    .tabItem {
+                        Text(spec.title)
                     }
+                    .tag(spec.id)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .toolbar
             {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Back") {
-                        let prevIndex = selectedPageIndex - 1
-                        if prevIndex > 0 {
-                            selectedPageIndex = prevIndex
-                        }
-                    }
+                    Button("Back", action: {
+                            retreat()
+                    })
+                    .disabled(selectedIndex <= 0)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Next") {
-                        let nextIndex = selectedPageIndex + 1
-                        if nextIndex >= pageSpecs.count {
-                            selectedPageIndex = nextIndex
-                        }
-                    }
+                    Button("Next", action: {
+                        advance()
+                    })
+                    .disabled(selectedIndex >= (pageSpecs.count - 1))
                 }
             }
         }
         .toolbar(.visible, for: .navigationBar)
+        .onAppear {
+            assert(!pageSpecs.isEmpty)
+//            selectedPageID = pageSpecs[0].id
+        }
     }
         
     @discardableResult
     func advance() -> Bool {
-        let nextIndex = selectedPageIndex + 1
-
-        print("Selected:", selectedPageIndex)
-        print("next (if any):", nextIndex)
-        print(pageSpecs.count, "pages.")
-
-        if nextIndex < (pageSpecs.count) {
-            selectedPageIndex = nextIndex
-            return true
+//        guard selectedPageID != lastPageID else { return false }
+//        guard let currentIndex = pageSpecs.firstIndex(where: {
+//            $0.id == selectedPageID})
+//        else { fatalError() }
+        
+        let nextIndex = selectedIndex + 1
+        guard nextIndex < pageSpecs.count else {
+            return false
         }
-        return false
+//        let nextCard = pageSpecs[nextIndex]
+//        selectedPageID = nextCard.id
+        selectedIndex = nextIndex
+        return true
     }
     
     @discardableResult
     func retreat() -> Bool {
-        let prevIndex = selectedPageIndex - 1
-        
-        print("Selected:", selectedPageIndex)
-        print("previous (if any):", prevIndex)
-        print(pageSpecs.count, "pages.")
-        
-        if prevIndex >= 0 {
-            selectedPageIndex = prevIndex
-            return true
+        let prevIndex = selectedIndex - 1
+        guard prevIndex >= 0 else {
+            return false
         }
-        return false
+//        guard selectedPageID != firstPageID else { return false }
+//        guard
+//        let currentIndex = pageSpecs.firstIndex(where: {
+//            $0.id == selectedPageID
+//        }) else { fatalError() }
+//        selectedPageID = nextCard.id
+//        let nextCard = pageSpecs[prevIndex]
+        selectedIndex = prevIndex
+        return true
     }
 }
 
