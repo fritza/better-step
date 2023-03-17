@@ -8,12 +8,6 @@
 import SwiftUI
 
 // MARK: - DigitalTimerView
-private let digitalNarrative = """
-“Cancel” will stop the count, and ought to bounce to the introduction to walking, but this has not been rigorously tested.
-"""
-
-// FIXME: Add an Error that describes cancellation.
-
 /**
  ## Topics
 
@@ -47,7 +41,7 @@ struct DigitalTimerView: View, ReportingPhase {
     @StateObject private var timer = Timekeeper(Self.timeKeeperSpec)
     @State private var minSecString: String?
 
-    @State private var showReversionAlert = false
+//    @State private var showReversionAlert = false
 
     var walkingState: WalkingState
 
@@ -120,7 +114,7 @@ struct DigitalTimerView: View, ReportingPhase {
 //                ReversionButton(toBeSet: $showReversionAlert)
 //            }
 //        }
-        .reversionAlert(on: $showReversionAlert)
+//        .reversionAlert(on: $showReversionAlert)
         .task {
             // warning: The result is discardable.
             // You should have harvested the data result already.

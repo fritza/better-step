@@ -69,26 +69,3 @@ struct ReversionAlert: ViewModifier {
     }   // message/alert
     }   // view
 }       // struct
-
-extension View {
-    func reversionAlert(on status: Binding<Bool>) -> some View {
-        modifier(ReversionAlert(status))
-    }
-}
-
-
-struct ReversionButton: View {
-    @Binding var toToggle: Bool
-    init(toBeSet: Binding<Bool>) {
-        _toToggle = toBeSet
-    }
-
-    var body: some View {
-        Button() {
-            toToggle = true
-        }
-    label: {
-        Label("configure", systemImage: "gear")
-    }
-    }
-}

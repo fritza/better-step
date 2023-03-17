@@ -17,8 +17,6 @@ struct InterstitalPageContainerView: View, ReportingPhase {
 
     @State private var showEndOfList = false
     @State private var selectedPage: Int
-    @State private var showReversionAlert = false
-
 
     private let listing: InterstitialList
 
@@ -66,7 +64,6 @@ struct InterstitalPageContainerView: View, ReportingPhase {
                 .disabled(selectedPage <= listing.startIndex)
             }
         }
-        .reversionAlert(on: $showReversionAlert)
     }
 }
 

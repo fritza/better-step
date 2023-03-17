@@ -19,7 +19,6 @@ struct TopContainerView: View
     
     @ObservedObject fileprivate var observableStatus = UploadState()
     
-    @State var showReversionAlert: Bool = false
     @State var reversionNoticeHandler: NSObjectProtocol!
     // TODO: Put up an alert when pedometry is not authorized.
     @State var currentPhase: TopPhases
@@ -236,16 +235,9 @@ struct TopContainerView: View
             }       // VStack
                     // MARK: - onAppear {}
             .onAppear {
-                showReversionAlert = false
                 // Alert if this is a fresh run on the same calendar day.
                 shouldChallengeHaste_1 = ASKeys.tooEarlyToRepeat
-                
-                // Report the 7-day summary
-                // SeriesTag.sevenDayRecord
-                
-                
             }       // NavigationView modified
-            .reversionAlert(on: $showReversionAlert)
             .environmentObject(WalkInfoResult())
         } // end VStack
         .alert("No Daily Records",

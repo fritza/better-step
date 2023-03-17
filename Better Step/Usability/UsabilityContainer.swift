@@ -43,7 +43,6 @@ struct UsabilityContainer: View, ReportingPhase {
     /// Whether the "reversion" (back to beginning with no subject) dialog should be shown.
     ///
     /// See ``reversionAlert(on:)`` for the `ViewModifier`.
-    @State var shouldDisplayReversionAlert = false
 
     init(state: UsabilityState = .intro,
          result: @escaping ClosureType) {
@@ -116,12 +115,6 @@ struct UsabilityContainer: View, ReportingPhase {
                     }
             }       // switch?
         }           // VStack
-        .reversionAlert(on: $shouldDisplayReversionAlert)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                ReversionButton(toBeSet: $shouldDisplayReversionAlert)
-//            }
-//        }   // toolbar
         .navigationBarBackButtonHidden(true)
 }       // body
 

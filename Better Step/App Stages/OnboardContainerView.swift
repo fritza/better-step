@@ -15,7 +15,6 @@ import SwiftUI
 ///     It is ultimately contained in a `NavigationView` in ``TopContainerView``
 struct OnboardContainerView: View, ReportingPhase {
     @State private var correctTask: Int?
-    @State private var shouldWarnOfReversion: Bool = false
     var finishedInterstitialInfo: InterstitialInfo
 
     typealias SuccessValue = String
@@ -64,12 +63,6 @@ You’ll be repeating the timed walks you did last time. There will be no need t
             }
             // FIXME: what happens upon failure?
         }
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                ReversionButton(toBeSet: $shouldWarnOfReversion)
-//            }
-//        }
-        .reversionAlert(on: $shouldWarnOfReversion)
         .padding()
     }
 }

@@ -55,6 +55,7 @@ struct InterCarousel: View {
         }
         .navigationBarBackButtonHidden()
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .padding()
     }
     
     /// If `selectedIndex+1` would be in bounds, add one to `selectedIndex` and return `true`. Otherwise do nothing and return `false`.

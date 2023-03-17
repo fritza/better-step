@@ -33,11 +33,9 @@ struct DASIQuestionView: View, ReportingPhase {
     // make it view-persistent out of an abundance.
     @State var answerList: DASIResponseList
     @State var pageNumber: Int = 1
-    @State var showReversionAlert = false
 
     init(answerList: DASIResponseList,
          _ completion: @escaping ClosureType) {
-//        self.answerState = .unknown
         self.answerList = answerList
         self.completion = completion
     }
@@ -105,7 +103,6 @@ struct DASIQuestionView: View, ReportingPhase {
                 .disabled(pageNumber >= DASIStages.maxIdentifier)
             }
         }
-        .reversionAlert(on: $showReversionAlert)
         .navigationTitle("Question \(pageNumber):")
     }
 }

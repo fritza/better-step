@@ -21,7 +21,7 @@ struct ConclusionView: View, ReportingPhase {
         completion = closure
     }
 
-    @State var showResetAlert = false
+//    @State var showResetAlert = false
 
     var body: some View {
         VStack {
@@ -59,12 +59,6 @@ struct FailureView: View, ReportingPhase {
 ]
 
     let fallbackPhase: TopPhases
-//    @State var showRewindAlert = false
-    @State var shouldAlertDisclaimer = false
-
-    // TODO: Is this the place to name the next step?
-
-    @State var showAlert = false
 
     typealias SuccessValue = Void
     let completion: ClosureType
@@ -127,17 +121,8 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                         shouldAlertDisclaimer = true
                     }
             }
-            .reversionAlert(on: $showAlert)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    ReversionButton(toBeSet: $showAlert)
-//                }
-//            }
             .navigationBarTitle("Recovery")
         }
-        .alert("Not complete", isPresented: $shouldAlertDisclaimer, actions: {},
-               message: {Text ("Revert-from-error isn't finished. Tap the gear button to wind back to the start\n\nBe sure to tell Fritz Anderson (fritza@uchicago.edu) exactly what led you here.")})
-        .reversionAlert(on: $showAlert)
         .padding()
     }
 }
