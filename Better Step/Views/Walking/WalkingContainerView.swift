@@ -16,8 +16,8 @@ import Combine
 /// Names tasks _within the walk phase,_ as distinct from ``SeriesTag``, which identifies reportable data series.
 public enum WalkingState: String, CaseIterable, CustomStringConvertible
 {
-    case interstitial_1, volume_1, countdown_1, walk_1
-    case interstitial_2, volume_2, countdown_2, walk_2
+    case interstitial_1, /* volume_1, */ countdown_1, walk_1
+    case interstitial_2, /* volume_2, */ countdown_2, walk_2
     case ending_interstitial, demo_summary
     
     public var description: String { self.rawValue }
@@ -153,13 +153,10 @@ struct WalkingContainerView: View, ReportingPhase {
         // NOTE: This stack is contained in a `NavigationView` within ``TopContainerView``.
         VStack {
             interstitial_1View()
-            // the volume view OUGHT to come BEFORE the final view in the sequence (the final view refers specifically to proceeding with the walk).
-            volume_1View()
             countdown_1View()
             walk_1View()
             
             interstitial_2View()
-            volume_2View()
             countdown_2View()
             walk_2View()
             

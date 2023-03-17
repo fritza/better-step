@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 
+private let walkingInstructionInfo     = try! CardContent.contentArray(from: ["walk-intro"         ])
+private let mid_instructionCardInfo = try! CardContent.contentArray(from: ["second-walk-intro"  ])
+private let end_walkingCardInfo     = try! CardContent.contentArray(from: ["usability-intro"    ])
 
-private let instructionContentList     = try! InterstitialList(baseName: "walk-intro"       )
-private let mid_instructionContentList = try! InterstitialList(baseName: "second-walk-intro")
-private let end_walkingContentList     = try! InterstitialList(baseName: "usability-intro"  )
+
 
 // MARK: - Walking stages
 extension WalkingContainerView {
@@ -25,57 +26,14 @@ extension WalkingContainerView {
             tag: WalkingState.interstitial_1,
             selection: $state) {
                 
-                
-                
-                
-                InterstitalPageContainerView(
-                    listing: instructionContentList,
-                    selection: 1) {_ in
-                        self.state = .volume_1
-                        UIApplication.shared.isIdleTimerDisabled = true
-                    }
-                    .padding()
-                    .navigationBarBackButtonHidden(true)
-                
-                
-                
-                
+                InterCarousel(content: walkingInstructionInfo) {
+                    self.state = .countdown_1
+                    UIApplication.shared.isIdleTimerDisabled = true
+                }
+                .padding()
+                .navigationBarBackButtonHidden(true)
             }
             .hidden()
-    }
-    
-    // MARK: - Volume warning
-    
-    /// Common code for displaying the raise-volume page.
-    /// - parameters:
-    ///     - current: The stage in the walk order for this display.
-    ///     - next:    The stage to follow this one.
-    @ViewBuilder
-    private func volumeView(_ states: WalkStates) -> some View {
-        // Ignore NavigationLink initialzer deprecation.
-        NavigationLink("SHOULDN'T SEE link for generic volume_nView",
-                       tag: states.current,
-                       selection: $state) {
-            VolumePageView {
-                _ in
-                self.state = states.good
-            }
-            .padding()
-            .navigationBarBackButtonHidden(true)
-        }
-                       .hidden()
-    }
-    
-    /// Display the raise-volume pge the _first_ time.
-    @ViewBuilder
-    func volume_1View() -> some View {
-        volumeView(.init(.volume_1, good: .countdown_1))
-    }
-    
-    /// Display the raise-volume pge the _second_ time.
-    @ViewBuilder
-    func volume_2View() -> some View {
-        volumeView(.init(.volume_2, good: .countdown_2))
     }
 
     // MARK: - Countdowns
@@ -85,18 +43,20 @@ extension WalkingContainerView {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (countdown_1)",
-            tag: WalkingState.countdown_1, selection: $state) {
-                SweepSecondView(duration: CountdownConstants.sweepDuration
-                ) { result in
-                    collectFromCountdown(
-                        result: result,
-                        context: .init(.countdown_1,
-                                       good: .walk_1)
-                    )
-                }
-                .padding()
-                .navigationBarBackButtonHidden(true)
+            tag: WalkingState.countdown_1, selection: $state)
+        {
+            SweepSecondView(duration: CountdownConstants.sweepDuration
+            ) { result in
+                collectFromCountdown(
+                    result: result,
+                    context: .init(
+                        .countdown_1,
+                        good: .walk_1)
+                )
             }
+            .padding()
+            .navigationBarBackButtonHidden(true)
+        }
             .hidden()
     }
     // ^ these two modifiers were 1 "}" up,
@@ -158,9 +118,10 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (interstitial_2)",
             tag: WalkingState.interstitial_2,
             selection: $state) {
-                InterstitalPageContainerView(listing: mid_instructionContentList, selection: 1) { _ in
+                InterCarousel(content: mid_instructionCardInfo) {
                     UIApplication.shared.isIdleTimerDisabled = true
-                    self.state = .volume_2
+                    self.state = .countdown_2
+
                 }
                 .padding()
                 .navigationBarBackButtonHidden(true)
@@ -174,18 +135,25 @@ extension WalkingContainerView {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (countdown_2)",
-            tag: WalkingState.countdown_2, selection: $state) {
-                SweepSecondView(duration: CountdownConstants.sweepDuration
-                ) { result in
-                    collectFromCountdown(
-                        result: result,
-                        context: .init(.countdown_1,
-                                       good: .walk_2)
-                    )
-                }
-                .padding()
-                .navigationBarBackButtonHidden(true)
+            tag: WalkingState.countdown_2,
+            selection: $state)
+        {
+            SweepSecondView(
+                duration:
+                    CountdownConstants.sweepDuration
+            )
+            { result in
+                collectFromCountdown(
+                    result: result,
+                    context: .init(
+                        .countdown_1,
+                        good: .walk_2,
+                        bad : .interstitial_2)
+                )
             }
+            .padding()
+            .navigationBarBackButtonHidden(true)
+        }
             .hidden()
     }
     
@@ -206,21 +174,29 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {
-                InterstitalPageContainerView(
-                    // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
-                    listing: end_walkingContentList, selection: 1) { result in
-
-                        let passedVal: Result<SuccessValue, Error>
-                        switch result {
-                        case .success(_)        :
-                            passedVal = .success(.sevenDayRecord)
-                        case .failure(let error):
-                            passedVal = .failure(error)
-                        }
-
-                        completion(passedVal)
-                    }
-            }.padding() // completion closure for end_walkingList
+                
+                InterCarousel(content: end_walkingCardInfo) {
+                    completion(.success(.sevenDayRecord))
+                }
+                
+//
+//                InterstitalPageContainerView(
+//                    // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
+//                    listing: end_walkingContentList, selection: 1)
+//                { result in
+//
+//                    let passedVal: Result<SuccessValue, Error>
+//                    switch result {
+//                    case .success(_)        :
+//                        passedVal = .success(.sevenDayRecord)
+//                    case .failure(let error):
+//                        passedVal = .failure(error)
+//                    }
+//
+//                    completion(passedVal)
+//                }
+            }   // completion closure for end_walkingList
+            .padding()
             .navigationBarBackButtonHidden(true)
             .hidden()
     }
