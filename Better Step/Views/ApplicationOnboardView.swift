@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+#warning("loading a 2-card JSON for a 1-card context.")
+
+
 /// Presented at the beginning of the workflow if no ``SubjectID`` for the user is known.
 ///
 /// Its ``SuccessValue`` as a ``ReportingPhase`` is `String`.

@@ -17,11 +17,6 @@
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
 		1F3543D22996D0BE003DD1D0 /* UploadCompletionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */; };
 		1F373C1B2953B8CC00126C9C /* PhaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88683029479FF700085EC7 /* PhaseStorage.swift */; };
-		1F408A5329B65D2F009F2535 /* InstructionPageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5229B65D2F009F2535 /* InstructionPageSpec.swift */; };
-		1F408A5529B65D67009F2535 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5429B65D67009F2535 /* CardView.swift */; };
-		1F408A5729B67A6E009F2535 /* CardGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5629B67A6E009F2535 /* CardGalleryView.swift */; };
-		1F408A5A29B69DAD009F2535 /* VolumeAsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A5929B69DAC009F2535 /* VolumeAsCardView.swift */; };
-		1F408A6329B7E87D009F2535 /* CrossProtoVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F408A6229B7E87D009F2535 /* CrossProtoVolume.swift */; };
 		1F415DEB295F841F00F49E82 /* PedometryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */; };
 		1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51BC7F297230F700BE418A /* VolumePageView.swift */; };
 		1F56E67428F0C94E00746FF9 /* FloatEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E67328F0C94E00746FF9 /* FloatEquatable.swift */; };
@@ -30,7 +25,6 @@
 		1F5D7CAC2999B88200FFB414 /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9352298DB6DF00B5194B /* error-support.swift */; };
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
-		1F65EEA429B94E9000223642 /* BruteViewCrumbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65EEA329B94E9000223642 /* BruteViewCrumbs.swift */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
 		1F6998322999A67A00A0AC80 /* UploadTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */; };
 		1F6998332999A67A00A0AC80 /* PerformUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9351298DB6DF00B5194B /* PerformUpload.swift */; };
@@ -115,11 +109,6 @@
 		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
-		1FF77A8629B659CF00BE33DF /* ToyInstructionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */; };
-		1FF77A8829B659CF00BE33DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF77A8729B659CF00BE33DF /* ContentView.swift */; };
-		1FF77A8A29B659D000BE33DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF77A8929B659D000BE33DF /* Assets.xcassets */; };
-		1FF77A8D29B659D000BE33DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF77A8C29B659D000BE33DF /* Preview Assets.xcassets */; };
-		1FF77A9129B65A5700BE33DF /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,7 +228,6 @@
 		1FF3544E27920A3B000894B8 /* config-mini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "config-mini.plist"; sourceTree = "<group>"; };
 		1FF3545027921204000894B8 /* Formatting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatting+Extensions.swift"; sourceTree = "<group>"; };
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
-		1FF77A8329B659CF00BE33DF /* ToyInstructions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToyInstructions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF77A8529B659CF00BE33DF /* ToyInstructionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToyInstructionsApp.swift; sourceTree = "<group>"; };
 		1FF77A8729B659CF00BE33DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FF77A8929B659D000BE33DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -277,13 +265,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1FF77A8029B659CF00BE33DF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -307,7 +288,6 @@
 				1F0B675E276FA6CA00011A7E /* Better StepTests.xctest */,
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
 				1FA281CE28DBBA160038353E /* Better Step.app */,
-				1FF77A8329B659CF00BE33DF /* ToyInstructions.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -426,6 +406,13 @@
 				1FDE828A27EA463B00CD8368 /* DASI */,
 			);
 			path = "App Stages";
+			sourceTree = "<group>";
+		};
+		1F9A48A929C4F9AF00B956C9 /* Reformed Cards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Reformed Cards";
 			sourceTree = "<group>";
 		};
 		1FB2F53728D133B600593692 /* Time */ = {
@@ -582,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD0EAC429AFBD18003D9E7A /* SubjectIDFormatter.swift */,
+				1F9A48A929C4F9AF00B956C9 /* Reformed Cards */,
 				1FDBB3F9281C494F00D0A7E9 /* Instructions */,
 				1FFB310B27879BC80099AE5E /* Walking */,
 				1FF11B3A279A173D00E319ED /* DASI */,
@@ -680,24 +668,6 @@
 			productReference = 1FA281CE28DBBA160038353E /* Better Step.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1FF77A8229B659CF00BE33DF /* ToyInstructions */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1FF77A9029B659D000BE33DF /* Build configuration list for PBXNativeTarget "ToyInstructions" */;
-			buildPhases = (
-				1FF77A7F29B659CF00BE33DF /* Sources */,
-				1FF77A8029B659CF00BE33DF /* Frameworks */,
-				1FF77A8129B659CF00BE33DF /* Resources */,
-				1F9A48A729C4CB5900B956C9 /* JSON chexk */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ToyInstructions;
-			productName = ToyInstructions;
-			productReference = 1FF77A8329B659CF00BE33DF /* ToyInstructions.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -718,9 +688,6 @@
 					};
 					1FA281CD28DBBA160038353E = {
 						CreatedOnToolsVersion = 14.0;
-					};
-					1FF77A8229B659CF00BE33DF = {
-						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -747,7 +714,6 @@
 				1FA281CD28DBBA160038353E /* Better Step */,
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
-				1FF77A8229B659CF00BE33DF /* ToyInstructions */,
 			);
 		};
 /* End PBXProject section */
@@ -791,39 +757,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1FF77A8129B659CF00BE33DF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF77A8D29B659D000BE33DF /* Preview Assets.xcassets in Resources */,
-				1FF77A9129B65A5700BE33DF /* walk-intro.json in Resources */,
-				1FF77A8A29B659D000BE33DF /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1F9A48A729C4CB5900B956C9 /* JSON chexk */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "JSON chexk";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/bin/find \"${SRCROOT}\" -type f -name '*.json' -print0 | xargs -0 jsonlint -q\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F0B675A276FA6CA00011A7E /* Sources */ = {
@@ -922,21 +856,6 @@
 				1FC7477F28EDE90F00817041 /* ZIPProgress.swift in Sources */,
 				1F51BC80297230F700BE418A /* VolumePageView.swift in Sources */,
 				1FDEAB8529A80AE6008A6919 /* InterstitalPageContainerView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1FF77A7F29B659CF00BE33DF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF77A8829B659CF00BE33DF /* ContentView.swift in Sources */,
-				1FF77A8629B659CF00BE33DF /* ToyInstructionsApp.swift in Sources */,
-				1F408A5329B65D2F009F2535 /* InstructionPageSpec.swift in Sources */,
-				1F65EEA429B94E9000223642 /* BruteViewCrumbs.swift in Sources */,
-				1F408A6329B7E87D009F2535 /* CrossProtoVolume.swift in Sources */,
-				1F408A5529B65D67009F2535 /* CardView.swift in Sources */,
-				1F408A5A29B69DAD009F2535 /* VolumeAsCardView.swift in Sources */,
-				1F408A5729B67A6E009F2535 /* CardGalleryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,69 +1145,6 @@
 			};
 			name = Release;
 		};
-		1FF77A8E29B659D000BE33DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToyInstructions/Preview Content\"";
-				DEVELOPMENT_TEAM = J2E8MMY7GM;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wt9t.ToyInstructions;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1FF77A8F29B659D000BE33DF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToyInstructions/Preview Content\"";
-				DEVELOPMENT_TEAM = J2E8MMY7GM;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wt9t.ToyInstructions;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1324,15 +1180,6 @@
 			buildConfigurations = (
 				1FA281DA28DBBA170038353E /* Debug */,
 				1FA281DB28DBBA170038353E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1FF77A9029B659D000BE33DF /* Build configuration list for PBXNativeTarget "ToyInstructions" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1FF77A8E29B659D000BE33DF /* Debug */,
-				1FF77A8F29B659D000BE33DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

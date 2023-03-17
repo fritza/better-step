@@ -69,7 +69,7 @@ public final class InstructionPageSpec: Identifiable, Hashable, Codable {
                  top: String, image: String,
                  bottom: String) {
 //        (self.id,
-         (self.title, self.topContent, bottomContent) =
+        (self.title, self.topContent, self.bottomContent) =
 //        (id,
          (title, top, bottom)
         sysImage = image

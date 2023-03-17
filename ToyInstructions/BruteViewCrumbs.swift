@@ -52,7 +52,7 @@ enum CardViewSpecies {
         switch self {
         case .instruction(let spec):
             CardView(pageParams: spec,
-                     buttonAction: backButtonClosure)!
+                     buttonAction: backButtonClosure)
             
         case .volume(let spec):
             VolumeAsCardView(pageSpec: spec,
