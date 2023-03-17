@@ -12,7 +12,7 @@ import SwiftUI
 /// Page-style `TabView` displaying a selected set of interstitial cards, a sequence of single views within a phase of the app.
 ///
 /// Uses a ``CardContent`` array to generate the cards.
-/// Generated for the paging `TabView` in ``ContentView``
+/// Generated for the paging `TabView` in ``TempInterstitialHost``
 
 struct InterCarousel: View {
     /// Content specifications of the cards to display.

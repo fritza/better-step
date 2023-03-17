@@ -12,7 +12,7 @@ struct ToyInstructionsApp: App {
     var body: some Scene {
         WindowGroup {
             try! CardGalleryView(pageArrayJSON: both)
-//            ContentView(jsArrayString: both)
+//            TempInterstitialHost(jsArrayString: both)
         }
     }
 }

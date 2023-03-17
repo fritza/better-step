@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TempInterstitialHost.swift
 //  Gallery
 //
 //  Created by Fritz Anderson on 3/14/23.
@@ -7,13 +7,20 @@
 
 import SwiftUI
 
+
+/*
+ Carry over from the "Gallery" project for reference.
+ Won't be used in production,
+ */
+
+
 let jsonNames = [
     "onboard-intro", "Volume", "second-walk-intro",
     "usability-intro", "walk-intro",
     ]
 
 /// A `List` displaying the base names of the ``CardContent`` JSON files, which describe a series of ``SimplestCard``. Tapping one reveals an ``InterCarousel`` to browse the rendered content for one file.
-struct ContentView: View {
+struct TempInterstitialHost: View {
     @State private var selectedItem : String?
     @State private var navStack     : [[CardContent]] = []
     let interstitialComplete        : () -> Void
@@ -55,7 +62,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView() {
+        TempInterstitialHost() {
             print(#function, "content exhausted.")
         }
     }
