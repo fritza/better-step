@@ -26,7 +26,7 @@ enum Rendering {
 // MARK: - InterstitialPageView
 
 // TODO: Replace GenericInstructionView with this.
-//       which DOES NOT have introAbove and introBelow
+//       which DOES NOT have contentAbove and contentBelow
 
 
 /// A `View` that presents a single page derived from ``InterstitialInfo``:  text, SF Symbols name, Action button; plus a callback when the action button is tapped.
@@ -58,8 +58,8 @@ struct InterstitialPageView: View, Identifiable {
                 Spacer()
             }
             // MARK: Instructional text
-            if let introAbove = item.introAbove {
-                Text(introAbove)
+            if let contentAbove = item.contentAbove {
+                Text(contentAbove)
                     .font(Rendering.bodyFont)
                     .minimumScaleFactor(Rendering.textMinScale)
                 Spacer(minLength: 30)
@@ -69,8 +69,8 @@ struct InterstitialPageView: View, Identifiable {
                 .scaledAndTinted()
                 .frame(height: 200)
             Spacer()
-            if let introBelow = item.introBelow {
-                Text(introBelow)
+            if let contentBelow = item.contentBelow {
+                Text(contentBelow)
                     .font(.title3)
                     .minimumScaleFactor(0.75)
                 Spacer()
@@ -93,9 +93,9 @@ struct InterstitialPageView_Previews: PreviewProvider {
     static let sampleIInfo = InterstitialInfo(
         id: 1,
         pageTitle: "Walk Exercises",
-        introAbove: "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
+        contentAbove: "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
         systemImage: "figure.walk",
-        introBelow: "Tap “Comtinue” when you are done.",
+        contentBelow: "Tap “Comtinue” when you are done.",
         proceedTitle: "Continue")
     
     static var previews: some View {

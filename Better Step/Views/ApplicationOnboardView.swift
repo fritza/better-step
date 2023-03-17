@@ -59,6 +59,9 @@ struct ApplicationOnboardView: View, ReportingPhase {
             }
             else {
                 do {
+                    
+                    #warning("loading a 2-card JSON for a 1-card context.")
+                    
                     guard let url = Bundle.main.url(forResource: "onboard-intro", withExtension: "json") else {
                         throw FileStorageErrors.cantFindURL(#function)
                     }
@@ -95,7 +98,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
                 // ... as much as possible, having the
                 // text field breaks the GCV model.
                 // MARK: Instructional text
-                Text((item.introAbove ?? "Can't Happen").addControlCharacters)
+                Text((item.contentAbove ?? "Can't Happen").addControlCharacters)
                     .font(Rendering.bodyFont)
                     .minimumScaleFactor(Rendering.textMinScale)
                 Spacer(minLength: 30)
@@ -105,7 +108,7 @@ struct ApplicationOnboardView: View, ReportingPhase {
                     .frame(height: 200)
 
                 Spacer()
-                Text((item.introBelow ?? "Can't Happen").addControlCharacters)
+                Text((item.contentBelow ?? "Can't Happen").addControlCharacters)
                     .font(Rendering.bodyFont)
                     .minimumScaleFactor(Rendering.textMinScale)
                 Spacer()

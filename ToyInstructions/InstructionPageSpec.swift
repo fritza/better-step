@@ -41,9 +41,12 @@ let both = #"""
 /// There are a number of `static` functions for deriving ``InstructionPageSpec`` singletons and `Array`s from JSON.
 public final class InstructionPageSpec: Identifiable, Hashable, Codable {
     public let title: String
-    public let topContent: String
-    public let sysImage: String
-    public let bottomContent: String
+    public let contentAbove: String
+    
+    public let imageAssetName: String?
+    public let sysImage      : String?
+    
+    public let contentBelow: String
     
     enum CodingKeys: CodingKey {
         case title

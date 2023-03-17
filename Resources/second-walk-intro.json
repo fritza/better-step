@@ -1,16 +1,23 @@
 [
-	{
-		"pageTitle": "Regular Walk Complete!",
-		"introAbove": "If you need to rest, take a break.",
-        "introBelow":   "When you're ready to continue, tab the button labeled “Continue.”",
-		"systemImage": "pause.circle",
-		"proceedTitle": "Continue"
-	},
-	{
-		"pageTitle": "Fast Pace Walk",
-		"introAbove": "Next, walk for two minutes as quickly as you safely can.",
-        "introBelow":   "||As before,||^• Tap the Continue button for a countdown.|^• Keep the phone in hand or side pocket.|^• Start walking at the signal.||When time is up, the app will sound a horn.",
-		"systemImage": "chevron.forward",
-		"proceedTitle": "Important"
-	}
+    {
+        "pageTitle": "Regular Walk Complete!",
+        "contentAbove": "If you need to rest, take a break.",
+        "contentBelow":   "When you're ready to continue, tab the button labeled “Continue.”",
+        "systemImage": "pause.circle",
+        "proceedTitle": "Continue"
+    },
+    {
+        "pageTitle": "Fast Pace Walk",
+        "contentAbove": "Next, walk for two minutes as quickly as you safely can.",
+        "contentBelow":   "||As before,||^• Tap the Continue button for a countdown.|^• Keep the phone in hand or side pocket.|^• Start walking at the signal.||When time is up, the app will sound a horn.",
+        "systemImage": "chevron.forward",
+        "proceedTitle": "Continue"
+    },
+    {
+        "pageTitle"         : "Turn up the volume",
+        "contentAbove"     : "To help you complete your walk, you will hear spoken intructions on when to start, and when your walk is done",
+        "imageAssetName": "loudness",
+        "contentBelow"     : "Make sure the mute switch is in the un-mute (up) position, and the volume is all the way high.",
+        "proceedTitle" : "Ready"
+    }
 ]

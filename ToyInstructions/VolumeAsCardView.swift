@@ -118,6 +118,15 @@ struct VolumeAsCardView: View {
 
 struct VolumeAsCardView_Previews: PreviewProvider {
     static var previews: some View {
-      try! VolumeAsCardView(contents: VolumeSpec.from(string: sampleVolumeSpec))
+        try! VolumeAsCardView(
+            pageSpec: VolumeSpec
+                .from(
+                    string: sampleVolumeSpec
+                )
+            ,
+            buttonAction: {
+                print(#fileID, #line, "no spec")
+            }
+        )
     }
 }

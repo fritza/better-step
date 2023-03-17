@@ -21,11 +21,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            ForEach(pages) {
-                page in
-                
-            }
             TabView {
+                ForEach(pages) {
+                    page in
+                    
+                }
             }
             .padding()
         }

@@ -1,51 +1,58 @@
 [
     {
         "pageTitle": "Walk Exercises",
-        "introBelow": "",
-        "introAbove": "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
+        "contentBelow": "",
+        "contentAbove": "You will now be asked to perform two walks of two minutes each.||• The first at a normal walking pace|• The second as fast as you can safely walk",
         "systemImage": "figure.walk",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "Important Reminders",
-        "introBelow": "You should NOT wear slippers.||Use a walking aid (such as a cane or walker) if you need one.",
-        "introAbove": "Wear the shoes you normally wear when you walk.",
+        "contentBelow": "You should NOT wear slippers.||Use a walking aid (such as a cane or walker) if you need one.",
+        "contentAbove": "Wear the shoes you normally wear when you walk.",
         "systemImage": "figure.walk",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "Where you Should Walk",
-        "introBelow": "Make sure the path is clear.",
-        "introAbove": "Find a long room or hallway (about 30 feet).",
+        "contentBelow": "Make sure the path is clear.",
+        "contentAbove": "Find a long room or hallway (about 30 feet).",
         "systemImage": "arrow.up.arrow.down.circle",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "Walk Back and Forth",
-        "introBelow": "",
-        "introAbove": "Walk back and forth along your walking path.",
+        "contentBelow": "",
+        "contentAbove": "Walk back and forth along your walking path.",
         "systemImage": "arrow.triangle.capsulepath",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "You can Start Over",
-        "introBelow": "",
-        "introAbove": "Tap the Cancel button if you need to start over.",
+        "contentBelow": "",
+        "contentAbove": "Tap the Cancel button if you need to start over.",
         "systemImage": "arrow.counterclockwise",
         "proceedTitle": "Next"
     },
     {
         "pageTitle": "STOP if:",
-        "introBelow": "",
-        "introAbove": "STOP walking if you have chest pain or difficulty breathing.",
+        "contentBelow": "",
+        "contentAbove": "STOP walking if you have chest pain or difficulty breathing.",
         "systemImage": "exclamationmark.octagon.fill",
         "proceedTitle": "Next"
     },
     {
+        "pageTitle"         : "Turn up the volume",
+        "contentAbove"     : "To help you complete your walk, you will hear spoken intructions on when to start, and when your walk is done",
+        "imageAssetName": "loudness",
+        "contentBelow"     : "Make sure the mute switch is in the un-mute (up) position, and the volume is all the way high.",
+        "proceedTitle" : "Next"
+    },
+    {
         "pageTitle": "Usual Pace — Get Ready",
-        "introBelow": "Put the phone in your front pants pocket, or carry it in your hand.||Walk at your usual pace for 2 minutes; the phone will alert you when time is up.",
-        "introAbove": "When you are ready, tap Start. You will hear a countdown and a starting horn.",
+        "contentBelow": "Put the phone in your front pants pocket, or carry it in your hand.||Walk at your usual pace for 2 minutes; the phone will alert you when time is up.",
+        "contentAbove": "When you are ready, tap Start. You will hear a countdown and a starting horn.",
         "systemImage": "chevron.forward.2",
-        "proceedTitle": "Next"
+        "proceedTitle": "Proceed"
     }
 ]

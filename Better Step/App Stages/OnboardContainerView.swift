@@ -29,11 +29,11 @@ struct OnboardContainerView: View, ReportingPhase {
         finishedInterstitialInfo = InterstitialInfo(
             id: 0,
             pageTitle: "Welcome Back",
-            introAbove: """
+            contentAbove: """
 You’ll be repeating the timed walks you did last time. There will be no need to repeat the surveys you completed the first time you used [OUR APP].
 """,
             systemImage: "figure.walk",
-            introBelow: "...",
+            contentBelow: "...",
             proceedTitle: "Continue"
         )
 

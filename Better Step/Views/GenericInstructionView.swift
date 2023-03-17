@@ -8,7 +8,7 @@
 import SwiftUI
 
 // TODO: Yield to InterstitialPageView
-//       which has introAbove and introBelow
+//       which has contentAbove and contentBelow
 #warning("Replace with InterstitialPageView")
 
 /// Display a screen containing instructions before and oafter performing an active task in the same phase.

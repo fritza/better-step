@@ -30,7 +30,7 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
 
     public let pageTitle: String?
     /// The introductory text for the page, above the icon.
-    public let introAbove: String?
+    public let contentAbove: String?
     /// The introductory text for the page, below the icon.
 
     /// The SF Symbols name for the image to display in the middle of the page.
@@ -41,7 +41,7 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
     public let assetImage : String?
     
     /// The text to be shown below the icon.
-    public let introBelow: String?
+    public let contentBelow: String?
     /// The label on the regular "proceed" `Button` at bottom.
     public let proceedTitle: String?
     
@@ -51,18 +51,18 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
     /// `InterstitialInfo` should have no public initializers, but this one has to be exposed for previewing.
     internal init(id: Int,
                   pageTitle: String? = nil,
-                  introAbove: String? = nil,
+                  contentAbove: String? = nil,
                   
                   systemImage: String? = nil,
                   assetImage : String? = nil,
                   
-                  introBelow: String? = nil,
+                  contentBelow: String? = nil,
                   proceedTitle: String? = nil) {
         self.id = id
-        self.introAbove = introAbove
+        self.contentAbove = contentAbove
         self.systemImage = systemImage
         self.assetImage = assetImage
-        self.introBelow = introBelow
+        self.contentBelow = contentBelow
         self.pageTitle = pageTitle
         self.proceedTitle = proceedTitle
     }
@@ -78,12 +78,12 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
         self.init(
             id: id,
             pageTitle: stub.pageTitle,
-            introAbove: stub.introAbove?.addControlCharacters,
+            contentAbove: stub.contentAbove?.addControlCharacters,
             
             systemImage: stub.systemImage,
             assetImage: stub.assetImage,
             
-            introBelow: stub.introBelow?.addControlCharacters,
+            contentBelow: stub.contentBelow?.addControlCharacters,
             proceedTitle: stub.proceedTitle
         )
     }
@@ -111,28 +111,28 @@ struct InterstitialInfo: Codable, Hashable, Identifiable, CustomStringConvertibl
 /// See ``InterstitialInfo`` for details on the properties.
 struct TaskInterstitialDecodable: Codable {
     let pageTitle: String?
-    let introAbove: String?
+    let contentAbove: String?
     
     let systemImage: String?
     let assetImage: String?
     
-    let introBelow: String?
+    let contentBelow: String?
     // TODO: Should proceedTitle ever be nil?
     let proceedTitle: String?
 
     // TODO: See if this is ever needed.
     var unescaped: TaskInterstitialDecodable {
-        let aboveString = self.introAbove?.addControlCharacters
-        let belowString = self.introBelow?.addControlCharacters
+        let aboveString = self.contentAbove?.addControlCharacters
+        let belowString = self.contentBelow?.addControlCharacters
         
         return TaskInterstitialDecodable(
             pageTitle: self.pageTitle,
-            introAbove: aboveString,
+            contentAbove: aboveString,
 
             systemImage: systemImage,
             assetImage: assetImage,
 
-            introBelow: belowString,
+            contentBelow: belowString,
             proceedTitle: proceedTitle)
     }
 }
