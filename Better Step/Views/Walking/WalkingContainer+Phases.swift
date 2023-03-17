@@ -69,7 +69,7 @@ extension WalkingContainerView {
     /// Display the raise-volume pge the _first_ time.
     @ViewBuilder
     func volume_1View() -> some View {
-        volumeView(.init(.volume_1, good: .countdown_2))
+        volumeView(.init(.volume_1, good: .countdown_1))
     }
     
     /// Display the raise-volume pge the _second_ time.
