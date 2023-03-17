@@ -240,6 +240,13 @@ struct TopContainerView: View
             }       // NavigationView modified
             .environmentObject(WalkInfoResult())
         } // end VStack
+#if BETA_API
+        .overlay(alignment: .bottomLeading, content: {
+            Circle()
+                .foregroundColor(.red)
+                .frame(width: 30, height: 30)
+        })
+#endif
         .alert("No Daily Records",
                isPresented: $showNoPermission, actions: { },
                message: {

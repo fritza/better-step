@@ -38,7 +38,6 @@ struct ConclusionView: View, ReportingPhase {
             }
             Spacer()
         }.font(.title3)
-            .reversionAlert(on: $showResetAlert)
             .navigationTitle("Completed")
     }
 }
@@ -116,9 +115,11 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                 Spacer()
                 GenericInstructionView(
                     sfBadgeName: "arrow.turn.left.down",
-                    lowerText: self.explanation,
-                    proceedTitle: "Revert") {
-                        shouldAlertDisclaimer = true
+                    lowerText: "This view, which is to handle completion of session due to irremediable error, will be replaced soon.",
+                    proceedTitle: "OK") {
+                        completion(.failure(
+                            self.error ??
+                            NSError(domain: "FailureViewDomain", code: 0)))
                     }
             }
             .navigationBarTitle("Recovery")
