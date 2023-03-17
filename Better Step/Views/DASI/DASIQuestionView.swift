@@ -98,7 +98,7 @@ struct DASIQuestionView: View, ReportingPhase {
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                gearBarItem()
-                ReversionButton(toBeSet: $showReversionAlert)
+//                ReversionButton(toBeSet: $showReversionAlert)
                 Button("Next →") {
                     pageNumber += 1
                 }

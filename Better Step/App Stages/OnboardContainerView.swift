@@ -64,11 +64,11 @@ You’ll be repeating the timed walks you did last time. There will be no need t
             }
             // FIXME: what happens upon failure?
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(toBeSet: $shouldWarnOfReversion)
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ReversionButton(toBeSet: $shouldWarnOfReversion)
+//            }
+//        }
         .reversionAlert(on: $shouldWarnOfReversion)
         .padding()
     }

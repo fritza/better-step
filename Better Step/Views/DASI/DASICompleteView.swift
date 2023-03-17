@@ -86,10 +86,9 @@ struct DASICompleteView: View, ReportingPhase {
                     completion(.success(dasiResponses))
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(toBeSet: $shouldShowReversion)
-// FIXME: Use the view modifier
-            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ReversionButton(toBeSet: $shouldShowReversion)
+//            }
         }
     }
 }

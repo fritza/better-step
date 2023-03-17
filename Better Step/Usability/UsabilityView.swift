@@ -171,7 +171,7 @@ struct UsabilityView: View, ReportingPhase {
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 
-                ReversionButton(toBeSet: $showResetAlert)
+//                ReversionButton(toBeSet: $showResetAlert)
                 Button("Next →") {
                     responses[questionIndex] = currentSelection
                     completion( .success(responses) )

@@ -117,11 +117,11 @@ struct UsabilityContainer: View, ReportingPhase {
             }       // switch?
         }           // VStack
         .reversionAlert(on: $shouldDisplayReversionAlert)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(toBeSet: $shouldDisplayReversionAlert)
-            }
-        }   // toolbar
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ReversionButton(toBeSet: $shouldDisplayReversionAlert)
+//            }
+//        }   // toolbar
         .navigationBarBackButtonHidden(true)
 }       // body
 

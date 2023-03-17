@@ -54,9 +54,9 @@ struct InterstitalPageContainerView: View, ReportingPhase {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(toBeSet: $showReversionAlert)
-            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ReversionButton(toBeSet: $showReversionAlert)
+//            }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("< Back") {
                     if selectedPage > listing.startIndex {

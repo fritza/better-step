@@ -148,11 +148,11 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
                     print(#function, ":", #line, "- attempt to play countdown audio failed:", error.localizedDescription)
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReversionButton(toBeSet: $showReversionAlert)
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    ReversionButton(toBeSet: $showReversionAlert)
+//                }
+//            }
             .reversionAlert(on: $showReversionAlert)
             .navigationTitle("Start in…")
         }

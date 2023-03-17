@@ -128,11 +128,11 @@ Because this session was cancelled, the app must go back to the stage \(insertio
                     }
             }
             .reversionAlert(on: $showAlert)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReversionButton(toBeSet: $showAlert)
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    ReversionButton(toBeSet: $showAlert)
+//                }
+//            }
             .navigationBarTitle("Recovery")
         }
         .alert("Not complete", isPresented: $shouldAlertDisclaimer, actions: {},

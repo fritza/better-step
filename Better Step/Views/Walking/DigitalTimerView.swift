@@ -115,11 +115,11 @@ struct DigitalTimerView: View, ReportingPhase {
             }
             .padding()
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ReversionButton(toBeSet: $showReversionAlert)
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ReversionButton(toBeSet: $showReversionAlert)
+//            }
+//        }
         .reversionAlert(on: $showReversionAlert)
         .task {
             // warning: The result is discardable.
