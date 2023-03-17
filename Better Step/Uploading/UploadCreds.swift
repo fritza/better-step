@@ -22,14 +22,12 @@ public enum UploadCreds {
     /// **Host** address of the server (`String`)
     static let hostString       = "https://steptestfilesdev.uchicago.edu"
 
-    /// The fill URL path to the uploads directory.
-    ///
-    /// Stop being fancy with building up from the host name.
+    /// The full URL path to the uploads directory.
     static let fullUploadString = "https://steptestfilesdev.uchicago.edu/api/upload"
 
-    /// UTTP  Basic iuser name (`String`)
+    /// HTTP  Basic iuser name (`String`)
     static let userID           = "iosuser"
-    /// UTTP  Basic password (`String`)
+    /// HTTP  Basic password (`String`)
     static let password         = "sliD3gtorydra"
 #elseif BETA_API
     // Use for TestFlight
@@ -38,14 +36,11 @@ public enum UploadCreds {
     /// **Host** address of the server (`String`)
     static let hostString       = "https://steptestfilesstage.uchicago.edu"
 
-    /// The fill URL path to the uploads directory.
-    ///
-    /// Stop being fancy with building up from the host name.
+    /// The full URL path to the uploads directory.
     static let fullUploadString = "https://steptestfilesstage.uchicago.edu/api/upload"
-
-    /// UTTP  Basic iuser name (`String`)
+    /// HTTP  Basic iuser name (`String`)
     static let userID           = "iosuser"
-    /// UTTP  Basic password (`String`)
+    /// HTTP  Basic password (`String`)
     static let password         = "sliD3gtorydra"
 #else
     // Public-release (production server)
@@ -53,13 +48,11 @@ public enum UploadCreds {
     static let lastPassName     = "Step Test Files API (PROD)"
     /// **Host** address of the server (`String`)
     static let hostString       = "https://steptestfiles.uchicago.edu"
-    /// The fill URL path to the uploads directory.
-    ///
-    /// Stop being fancy with building up from the host name.
+    /// The full URL path to the uploads directory.
     static let fullUploadString = "https://steptestfiles.uchicago.edu/api/upload"
-    /// UTTP  Basic iuser name (`String`)
+    /// HTTP  Basic iuser name (`String`)
     static let userID           = "iosuser"
-    /// UTTP  Basic password (`String`)
+    /// HTTP  Basic password (`String`)
     static let password         = "wayB3aundanar"
 #endif
 

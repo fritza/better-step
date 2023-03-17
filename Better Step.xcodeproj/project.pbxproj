@@ -687,6 +687,7 @@
 				1FF77A7F29B659CF00BE33DF /* Sources */,
 				1FF77A8029B659CF00BE33DF /* Frameworks */,
 				1FF77A8129B659CF00BE33DF /* Resources */,
+				1F9A48A729C4CB5900B956C9 /* JSON chexk */,
 			);
 			buildRules = (
 			);
@@ -801,6 +802,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F9A48A729C4CB5900B956C9 /* JSON chexk */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "JSON chexk";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/find \"${SRCROOT}\" -type f -name '*.json' -print0 | xargs -0 jsonlint -q\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F0B675A276FA6CA00011A7E /* Sources */ = {
