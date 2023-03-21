@@ -29,8 +29,6 @@ enum UsabilityState: Int, CaseIterable {
 struct UsabilityContainer: View, ReportingPhase {
     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
     
-// FIXME: The second, "specifics" SuccessValue isn't used.
-
     typealias SuccessValue = String
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
@@ -53,12 +51,17 @@ struct UsabilityContainer: View, ReportingPhase {
     
     @State var multipleChoices: [Int] = []
     @State var fullUsabilityCSV = ""
+    
+    let firstContent = CardContent(pageTitle: "Usability"
+                                   , contentBelow: usabilityInCopy,
+                                   contentAbove: "", systemImage: "person.crop.circle.badge.questionmark", imageFileName: nil, proceedTitle: "Continue")
 
     var body: some View {
         VStack {
             switch currentState {
                 // MARK: - Intro
             case .intro:
+                /*
                 GenericInstructionView(
                     titleText: "Usability",
                     sfBadgeName: "person.crop.circle.badge.questionmark",
@@ -67,10 +70,25 @@ struct UsabilityContainer: View, ReportingPhase {
                     proceedEnabled: true) {
                         currentState = .questions
                     }
+                 */
+                SimplestCard(content: firstContent) {
+                    currentState = .questions
+                }
+                .padding()
                 
                 // MARK: - Questions
             case .questions :
                 // resultValue is Result<[Int], Never>
+
+
+
+
+                // FIXME: <Back crashes UsabilityView.
+                // In the preview of the UsabilityContainer
+
+                
+                
+                
                 UsabilityView(questionIndex: 0) { resultValue in
                     guard let array = try? resultValue.get() else {
                         print("UsabilityView should not fail.")

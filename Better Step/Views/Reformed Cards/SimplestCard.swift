@@ -48,6 +48,8 @@ struct SimplestCard: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(.accentColor)
+            .symbolRenderingMode(.hierarchical)
+
             .frame(height: height)
     }
     

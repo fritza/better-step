@@ -59,6 +59,14 @@ struct UsabilityView: View, ReportingPhase {
     var completionValue: SuccessValue { responses }
 
 
+    
+    
+    // FIXME: <Back crashes UsabilityView.
+    // In the preview of the UsabilityContainer
+
+    
+    
+    
     init(questionIndex: Int, selectedAnswer: Int = 0,
          completion: @escaping ClosureType) {
         ( self.currentSelection, self.questionIndex, self.completion ) =
