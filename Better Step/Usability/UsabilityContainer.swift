@@ -80,14 +80,8 @@ struct UsabilityContainer: View, ReportingPhase {
             case .questions :
                 // resultValue is Result<[Int], Never>
 
-
-
-
                 // FIXME: <Back crashes UsabilityView.
                 // In the preview of the UsabilityContainer
-
-                
-                
                 
                 UsabilityView(questionIndex: 0) { resultValue in
                     guard let array = try? resultValue.get() else {

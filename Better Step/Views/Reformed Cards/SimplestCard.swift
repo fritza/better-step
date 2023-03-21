@@ -53,19 +53,29 @@ struct SimplestCard: View {
             .frame(height: height)
     }
     
+    @ViewBuilder
+    func interiorContent() -> some View {
+        VStack {
+            Spacer()
+            Text(cContent.contentAbove.addControlCharacters)
+
+            Spacer(minLength: 40)
+            displayImage(asset : cContent.imageAssetName,
+                         symbol: cContent.systemImage   )
+            Spacer(minLength: 40)
+            Text(
+                cContent.contentBelow.addControlCharacters
+            )
+        }
+    }
+    
     var body: some View {
         VStack {
-                Text(cContent.pageTitle)
-                    .font(.largeTitle)
-                Spacer(minLength: 48)
+            Text(cContent.pageTitle)
+                .font(.largeTitle)
+            Spacer(minLength: 48)
             ScrollView {
-                Text(cContent.contentAbove.addControlCharacters)
-                
-                Spacer(minLength: 40)
-                displayImage(asset : cContent.imageAssetName,
-                             symbol: cContent.systemImage   )
-                Spacer(minLength: 40)
-                Text(cContent.contentBelow.addControlCharacters)
+                interiorContent()
             }
             Spacer()
             Button(cContent.proceedTitle) {
@@ -86,9 +96,9 @@ struct SimplestCard_Previews: PreviewProvider {
         catch {
             let rescue = CardContent(
                 pageTitle: "Error",
-                contentBelow: "below",
+                contentBelow: "Why, I want to know, is this lower text not rendering?",
                 contentAbove: error.localizedDescription,
-                systemImage: "figure.stride",
+                systemImage: "figure.walk",
                 imageFileName: nil,
                 proceedTitle: "Continue")
             return rescue
