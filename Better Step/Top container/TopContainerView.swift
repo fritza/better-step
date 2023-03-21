@@ -65,8 +65,8 @@ struct TopContainerView: View
         setUpCompletionNotifications()
     }
     
-    @State private var shouldChallengeHaste_1: Bool = false
-    @State private var shouldChallengeHaste_2: Bool = false
+//    @State private var shouldChallengeHaste_1: Bool = false
+//    @State private var shouldChallengeHaste_2: Bool = false
 
     // TODO: Make .navigationTitle consistent
     
@@ -78,7 +78,6 @@ struct TopContainerView: View
                     
                     // MARK: - Onboarding
                 case .onboarding:
-#warning("Haste (same-day retry) alert doesn’t show")
                     // Why no audio A...N on first run?
                     // Sounds like a confflict w/ spoken?
                     
@@ -102,37 +101,37 @@ struct TopContainerView: View
                     // is a second run in a single calendar day.
                     
                     // MARK: - Warn of overwrite
-                    .alert("Repeating a Session",
-                           isPresented:  $shouldChallengeHaste_1
-                    ) {
-                        Button("Repeat" , role: .destructive) {
-                            shouldChallengeHaste_2 = true
-                        }
-                        Button("Keep", role: .cancel) {
-                        }
-                    }
-                message: {
-                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\n\nAre you sure you want to do that?")
-                }   // message/alert
-
-
-                    // MARK: - Double-check overwrite
-                .alert("Making Sure…",
-                       isPresented:  $shouldChallengeHaste_2
-                ) {
-                    Button("Yes, Repeat" , role: .destructive) {
-                        shouldChallengeHaste_2 = true
-                    }
-                    Button("Cancel", role: .cancel) {
-                    }
-                }
-                message: {
-                    Text("Are you comfortable with replacing today’s session with another one? This cannot be undone")
-                    // FIXME: - This will override the first-completed flag.
-                }   // haste_2 message/alert
-
-                    // ===================================================
-                    
+//                    .alert("Repeating a Session",
+//                           isPresented:  $shouldChallengeHaste_1
+//                    ) {
+//                        Button("Repeat" , role: .destructive) {
+//                            shouldChallengeHaste_2 = true
+//                        }
+//                        Button("Keep", role: .cancel) {
+//                        }
+//                    }
+//                message: {
+//                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\n\nAre you sure you want to do that?")
+//                }   // message/alert
+//
+//
+//                    // MARK: - Double-check overwrite
+//                .alert("Making Sure…",
+//                       isPresented:  $shouldChallengeHaste_2
+//                ) {
+//                    Button("Yes, Repeat" , role: .destructive) {
+//                        shouldChallengeHaste_2 = true
+//                    }
+//                    Button("Cancel", role: .cancel) {
+//                    }
+//                }
+//                message: {
+//                    Text("Are you comfortable with replacing today’s session with another one? This cannot be undone")
+//                    // FIXME: - This will override the first-completed flag.
+//                }   // haste_2 message/alert
+//
+//                    // ===================================================
+//
                     
                     .onDisappear {
                         collect7DayPedometry()
@@ -236,7 +235,7 @@ struct TopContainerView: View
                     // MARK: - onAppear {}
             .onAppear {
                 // Alert if this is a fresh run on the same calendar day.
-                shouldChallengeHaste_1 = ASKeys.tooEarlyToRepeat
+//                shouldChallengeHaste_1 = ASKeys.tooEarlyToRepeat
             }       // NavigationView modified
             .environmentObject(WalkInfoResult())
         } // end VStack
