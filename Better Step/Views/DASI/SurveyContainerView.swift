@@ -98,7 +98,6 @@ struct SurveyContainerView_Previews: PreviewProvider {
                 print("Result:", result)
             })
         }
-//        .environmentObject(DASIPageSelection(.landing))
         .environmentObject(DASIResponseList())
     }
 }

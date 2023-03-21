@@ -20,7 +20,6 @@ In this part of the assessment, you will be asked \(DASIQuestion.count) question
 Answer “Yes” or “No” to each. You will be able to move backward and forward through the questions, but you must respond to all for this exercise to be complete.
 """
 
-//    @EnvironmentObject var pager: DASIPageSelection
     init(completion: @escaping ClosureType) {
         self.completion = completion
     }
@@ -52,6 +51,5 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
     struct DASIOnboardView_Previews: PreviewProvider {
         static var previews: some View {
             DASIOnboardView(completion: { _ in })
-//                .environmentObject(DASIPageSelection(.landing))
         }
     }
