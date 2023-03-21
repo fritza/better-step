@@ -12,14 +12,12 @@ import Combine
 /// Maintain the data associated with completed phases of the workflow.
 ///
 /// Watch completion of all necessary stages by observing `.isComplete`.
-public final class PhaseStorage: ObservableObject
+final class PhaseStorage: ObservableObject
 {
     @AppStorage(ASKeys.phaseProgress.rawValue) var lastSeenUserPhase: SeriesTag = .none
     
     static let shared = PhaseStorage()
-    
-    private var uploadCompleteTag: NSObjectProtocol?
-    /// The year/month/day as of the creation of this `PhaseStorage`.
+        /// The year/month/day as of the creation of this `PhaseStorage`.
     private let stickyYMDTag: String // "yyyy-mm-dd"
     
     /// The subject ID as of the creation of this `PhaseStorage`.
@@ -34,23 +32,13 @@ public final class PhaseStorage: ObservableObject
     /// `checkCompletion` compares the key set with the phases reported complete, to trigger saving the data.
     @Published private(set) var completionDictionary  : CompDict = [:]
     
-    /// Whether data for all phases of this run (first or later) has been acquired. It is expected that client code will watch this and write all the files out when it's all done.
-    private var areAllPhasesComplete : Bool
-    
-//    private var uploader: ResultsUploader?
-    // FIXME: Is there a reason to persist the PerformUpload?
-    private var performStruct: PerformUpload?
-        
     /// Initialize a `PhaseStorage` and a ``ZIPArchiver`` for it to write into
     /// - Parameter zipURL: The fully-qualified `file:` URL for the _destination ZIP file._
-    public init() {
+    init() {
         assert(SubjectID.isSet)
         stickyYMDTag = Date().ymd
         stickySubjectID = SubjectID.id
-        self.areAllPhasesComplete = false
         completionDictionary = [:]
-        self.performStruct = nil
-        
         setUpCombine()
     }
         
@@ -137,7 +125,6 @@ public final class PhaseStorage: ObservableObject
         let finishedKeys = Set(completionDictionary.keys)
         // appear in the list of what should be finished?
         let completed = keysToBeFinished.isSubset(of: finishedKeys)
-        areAllPhasesComplete = completed
         return completed
     }
     
@@ -173,7 +160,7 @@ public final class PhaseStorage: ObservableObject
     /// - Parameters:
     ///   - tag: The  ``SeriesTag`` for the completed phase.
     ///   - data: The `Data` collected for that phase.
-    public func series(_ tag: SeriesTag, completedWith data: Data) throws {
+    func series(_ tag: SeriesTag, completedWith data: Data) throws {
         // No report for a phase should come in that isn't part of this session.
         guard keysToBeFinished.contains(tag) else {
             assertionFailure("Strange key upon completion: \(tag.rawValue)")
@@ -182,8 +169,6 @@ public final class PhaseStorage: ObservableObject
         
         // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
-        lastSeenUserPhase = tag
-        
         // If all required tags are accounted for, send it all to `CSVArchiver`.
         if checkCompletion() {
             // Insert .csv for all phases into an archiver.
@@ -195,7 +180,6 @@ public final class PhaseStorage: ObservableObject
                 named: zipFileName) else {
                 return
             }
-            performStruct = performer
             // Perform the upload.
             performer.doIt()
         }
@@ -259,7 +243,6 @@ extension PhaseStorage {
                     // then anything more is after-first.
                     ASKeys.isFirstRunComplete = true
                 }
-                self.areAllPhasesComplete = false
                 self.completionDictionary = [:]
                 try? self.deleteAllFiles()
                 

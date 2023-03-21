@@ -50,12 +50,12 @@ The `String` returned by `csvDASIRecords` can be converted to `Data`, and writte
 /// Errors that may arise from converting DASI responses to a CSV file.
 /// - warning: Largely unused.
 enum DASIReportErrors: Error {
-    case wrongDataType(UTType)
-    case notRegularFile
-    case noReadableReport
-    case missingDASIHeader(String)
-    case wrongNumberOfResponseElements(Int, Int)
-    case outputHandleNotInitialized
+//    case wrongDataType(UTType)
+//    case notRegularFile
+//    case noReadableReport
+//    case missingDASIHeader(String)
+//    case wrongNumberOfResponseElements(Int, Int)
+//    case outputHandleNotInitialized
 
     case couldntCreateDASIFile
 }
@@ -65,7 +65,7 @@ enum DASIReportErrors: Error {
 ///
 /// Observable.
 final class DASIResponseList: ObservableObject, CSVRepresentable {
-    public private(set) var answers: [DASIUserResponse]
+    /* private(set) */ var answers: [DASIUserResponse]
 
     /// Create `DASIResponses, filling all items in with `.unlnown`.
     init() {
@@ -112,15 +112,6 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
             // Timestamp updates in withResponse(_:)
         }
 
-    /// Census of the `DASIUserResponse`s in the `answers` array that match the indicated response type.
-    /// - Parameter kind: The `AnswerState` of interest.
-    /// - Returns: A `Set` of the `answers` that match the reply type
-    func responses(of kind: AnswerState) -> Set<DASIUserResponse> {
-        let desired = answers
-            .filter { $0.response == kind }
-        return Set(desired)
-    }
-
     /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
     /// - note: The survey is not resdy to commit before this array is empty.
     var unknownResponseIDs: [Int] {
@@ -133,31 +124,11 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
     /// Whether the DASI report is complete, there being no `unknown` responses
     var isReadyToPublish: Bool { self.unknownResponseIDs.isEmpty }
 
-    /// Set the response to one question, identified by (1-based) `id` to `.unknown`.
-    /// - Parameter id: The question to withdraw.
-    func resetQuestion(id: Int) {
-        guard let answerIndex = answerIndex(forID: id) else {
-            assertionFailure("\(#function) - out-of-bounds answer ID \(id)")
-            return
-        }
-        let newValue = answers[answerIndex]
-            .withResponse(.unknown)
-        answers[answerIndex] = newValue
-    }
-
-    /// Set all responses to `.unknown`
-    func clearResponses() {
-        let result = answers.map {
-            $0.withResponse(.unknown)
-            // Timestamp updates in init()
-        }
-        self.answers = result
-    }
-
+    
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
-    public var csvLine: String {
+    var csvLine: String {
         let completedAnswers = answers.filter { $0.response != .unknown }
         precondition(completedAnswers.count == answers.count,
         "Got here with missing answers")

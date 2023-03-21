@@ -64,7 +64,7 @@ enum AnswerState: String, Codable, Equatable, CustomStringConvertible, CSVRepres
         }
     }
 
-    public var csvLine: String {
+    var csvLine: String {
         self.description
     }
 }

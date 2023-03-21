@@ -14,9 +14,6 @@ import SwiftUI
 /// - note: This view contains ``ApplicationOnboardView``
 ///     It is ultimately contained in a `NavigationView` in ``TopContainerView``
 struct OnboardContainerView: View, ReportingPhase {
-    @State private var correctTask: Int?
-    var finishedInterstitialInfo: InterstitialInfo
-
     typealias SuccessValue = String
     let completion: ClosureType
     // SuccessValue contains the discovered SubjectID.
@@ -25,21 +22,9 @@ struct OnboardContainerView: View, ReportingPhase {
 
     init(completion: @escaping ClosureType) {
         self.completion = completion
-        finishedInterstitialInfo = InterstitialInfo(
-            id: 0,
-            pageTitle: "Welcome Back",
-            contentAbove: """
-You’ll be repeating the timed walks you did last time. There will be no need to repeat the surveys you completed the first time you used [OUR APP].
-""",
-            systemImage: "figure.walk",
-            contentBelow: "...",
-            proceedTitle: "Continue"
-        )
-
         let initialTask: OnboardTasks =  SubjectID.isSet
         ?   .laterGreeting
         :   .firstGreeting
-        correctTask = initialTask.rawValue
     }
 
     enum OnboardTasks: Int {

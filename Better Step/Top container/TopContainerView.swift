@@ -15,13 +15,8 @@ import HealthKit
 ///
 struct TopContainerView: View
 {
-    @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
-    
-    @ObservedObject fileprivate var observableStatus = UploadState()
-    
-    @State var reversionNoticeHandler: NSObjectProtocol!
-    // TODO: Put up an alert when pedometry is not authorized.
     @State var currentPhase: TopPhases
+    @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     
     // TODO: Should this be an ObservedObject?
     @State var showNoPermission = false

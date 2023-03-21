@@ -95,21 +95,5 @@ class ZIPArchiver // : MassDiscardable
             throw AppPhaseErrors.cantInsertDataFile(fileName: fileName)
         }
     }
-        
-    // MARK: - Output
-    private var archivedData: Data? {
-        archiver.data
-    }
-    
-    var count: Int { archivedData?.count ?? 0 }
-    
-    /// Save the acciumulated archive data into `self.outputURL`.
-    /// - throws: `AppPhaseErrors.cantGetArchiveData` if no output data is available; various Foundation errors via `FileManager`.
-//    func saveArchive() throws {
-//        guard let data = archivedData else { throw AppPhaseErrors.cantGetArchiveData }
-//        try FileManager.default
-//            .deleteAndCreate(at: outputURL,
-//                             contents: data)
-//    }
 }
 

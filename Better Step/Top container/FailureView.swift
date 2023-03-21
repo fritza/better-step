@@ -15,7 +15,6 @@ import ActivityKit
 struct ConclusionView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
-    @State var shouldShowActivity = false
     
     init(_ closure: @escaping ClosureType) {
         completion = closure
@@ -33,7 +32,6 @@ struct ConclusionView: View, ReportingPhase {
             Text(" to send a report.\n(bug: the cose as-is sends the file when the last task is complete. (It's gone already.\nThe Submit button still presents the Activty (mail, etc.) sheet to double-check.")
             Spacer()
             Button("Submit") {
-                shouldShowActivity = true
                 ASKeys.lastCompletionValue = Date()
             }
             Spacer()
@@ -57,57 +55,15 @@ struct FailureView: View, ReportingPhase {
         .dasi       : "activity survey"
 ]
 
-    let fallbackPhase: TopPhases
-
     typealias SuccessValue = Void
     let completion: ClosureType
     // Warning: Completion closure is never called.")
 
     let error: Error?
     init(failing: TopPhases, error: Error? = nil, closure: @escaping ClosureType) {
-        self.fallbackPhase = failing
         completion = closure
         self.error = error
     }
-
-    var formattedBodyText: String {
-        var insertion = ""
-        if let phaseName = Self.phasesAndNames.first(where: {
-            pair in
-            pair.key == fallbackPhase
-        })?.value {
-            insertion = "(\(phaseName)) "
-        }
-
-        if let error {
-            return """
-The app could not recover from an error in the stage \(insertion)that couldn't collect its data:
-
-\(error.localizedDescription)
-"""
-        }
-        else {
-            return """
-Because this session was cancelled, the app must go back to a stage (\(insertion)) for you to try again.
-
-If you want to retry from the start, tap the ⚙️ button.
-"""
-        }
-    }
-
-    var explanation: String {
-        var insertion = ""
-        if let phaseName = Self.phasesAndNames.first(where: {
-            pair in
-            pair.key == fallbackPhase
-        })?.value {
-            insertion = "(\(phaseName)) "
-        }
-        return """
-Because this session was cancelled, the app must go back to the stage \(insertion)that couldn't collect its data. Tap “Revert” to rewind to that point.
-"""
-    }
-    // arrow.turn.left.down
 
     var body: some View {
         NavigationView {

@@ -11,8 +11,6 @@ import Combine
 // MARK: - App struct
 @main
 struct Better_StepApp: App {
-    @State var shouldWarnOfReversion : Bool = false
-
     var body: some Scene {
         WindowGroup {
             TopContainerView()

@@ -9,19 +9,19 @@ import Foundation
 
 
 /// `Notification` of a successful upload. `object` is the `Data` that was uploaded.
-public let UploadNotification      = Notification.Name("UploadNotification"     )
+/* public */ let UploadNotification      = Notification.Name("UploadNotification"     )
 /// `Notification` of a failed upload (in the sense of an application error, not a server-side status. `object` is the system `Error`.
-public let UploadErrorNotification = Notification.Name("UploadErrorNotification")
+/* public */ let UploadErrorNotification = Notification.Name("UploadErrorNotification")
 /// Remove all data but `SubjectID`, as when the app is to ready itself for another session.
 ///
 /// This might not be as useful as one might think.
 /// Resetting for a new session, in the case of `PhaseStorage`,
 /// additionally has to judge whether first-run flag should
 /// be set after a successful upload.
-public let ResetSessionNotification =
+/* public */ let ResetSessionNotification =
 Notification.Name("ResetSessionNotification")
 /// Remove all data _including_ `SubjectID`, as when a tester wants to revert the app to pristine condition.
-public let TotalResetNotification =
+/* public */ let TotalResetNotification =
 Notification.Name("TotalResetNotification")
 
 /*
@@ -39,7 +39,7 @@ public let anyDataReleasePublisher = {
 }()
  */
 
-public let revertAllNotification = {
+/* public */ let revertAllNotification = {
     let goodUpload = NotificationCenter.default
         .publisher(for: UploadNotification)
     let badUpload = NotificationCenter.default
@@ -65,6 +65,7 @@ struct LocalizedUploadError: LocalizedError {
     }
 }
 
+/*
 /// Observable status helper standing for the latest `Error` state and a  flag for disclosing an error alert.
 final class UploadState: ObservableObject {
     @Published var status: Result<Data, Error>
@@ -89,3 +90,4 @@ final class UploadState: ObservableObject {
         error  = nil
     }
 }
+*/

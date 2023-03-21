@@ -28,11 +28,7 @@ public actor IncomingAccelerometry {
     
     private var buffer = Deque<XYZT>(
         minimumCapacity: numericCast(CMTimeInterval.minBufferCapacity))
-    /// How many data points have been collected but not consumed.
-    var count: Int {
-        buffer.count
-    }
-    
+
     // MARK: Store/recall
     /// Append a data point to the buffer.
     /// - Parameter accData: The data to append to the buffer.
@@ -40,19 +36,7 @@ public actor IncomingAccelerometry {
     func receive(_ accData: TimedXYZRepresentable) {
         buffer.append(accData.asXYZT)
     }
-    
-    /// If a `CMAccelerometerData` is available, remove it and yield it to the caller; otherwise wait.
-    /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
-    /// - Returns: The oldest  `CMAccelerometerData` in the queue
-    /// - throws: `Task` cancellation errors.
-    func pop() async throws -> XYZT? {
-        while buffer.isEmpty {
-            try Task.checkCancellation()
-            try await Task.sleep(nanoseconds: CountdownConstants.nanoSleep)
-        }
-        return buffer.popFirst()
-    }
-    
+        
     /// Remove all data in the queue and return it as an array.
     /// - note: `CMAccelerometerData` is the acceleration forces, _plus_ a timestamp.
     /// - Returns: An array of `CMAccelerometerData`
@@ -69,9 +53,5 @@ public actor IncomingAccelerometry {
         let number = buffer.count
         let content = buffer[..<number]
         return Array(content)
-    }
-    
-    func clear() async {
-        buffer.removeAll()
     }
 }

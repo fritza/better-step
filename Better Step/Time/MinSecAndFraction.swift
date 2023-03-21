@@ -15,11 +15,11 @@ infix operator ≈≈ :  ComparisonPrecedence
 struct MinSecAndFraction: Hashable, Comparable,
                           RoughlyEquatable {
     /// The integer-minute component of the moment. Strictly `0 ... 59`.
-    public let minute  : Int
+    let minute  : Int
     /// The integer-second component of the moment. Strictly `0 ... 59`.
-    public let second  : Int
+    let second  : Int
     ///  The fraction-of-second component of the moment. Strictly `0.0 ..< 1.0`
-    public let fraction: TimeInterval
+    let fraction: TimeInterval
 
     /// Create a `MinSecAndFraction` from its components.
     /// - Parameters:
@@ -34,7 +34,7 @@ struct MinSecAndFraction: Hashable, Comparable,
 
     /// Create a `MinSecAndFraction` from a time interval relative to an arbitrary epoch.
     /// - Parameter interval: The `TimeInterval` away from the epoch.
-    public init(interval: TimeInterval) {
+    init(interval: TimeInterval) {
         let intInterval = Int(trunc(interval))
         self.init(minute: intInterval / 60,
                   second: intInterval % 60,
@@ -42,24 +42,24 @@ struct MinSecAndFraction: Hashable, Comparable,
     }
 
     /// Whether all components are zero. Prefer this to comparison to `.zero`.
-    public var isZero: Bool {
+    var isZero: Bool {
         minute == 0 && second == 0 && fraction == 0.0
     }
 
     /// Whether thie represented interval is at or before the epoch.
-    public var isPositive: Bool {
+    var isPositive: Bool {
         minute >=  0 || second >= 0 || fraction > 0.0
     }
 
     /// `Comparable` confirmance. Usual warnings about float values not equating well.
-    public static func < (lhs: MinSecAndFraction, rhs: MinSecAndFraction) -> Bool {
+    static func < (lhs: MinSecAndFraction, rhs: MinSecAndFraction) -> Bool {
         return lhs.minute < rhs.minute ||
         lhs.second < rhs.second ||
         lhs.fraction < rhs.fraction
     }
 
     /// `RoughlyEquatable` confirmance. Usual warnings about float values not equating well.
-    static public func ≈≈ (
+    static func ≈≈ (
         lhs: MinSecAndFraction,
         rhs: MinSecAndFraction) -> Bool {
             let eqMinute: Bool = lhs.minute == rhs.minute
@@ -94,21 +94,4 @@ extension MinSecAndFraction: CustomStringConvertible {
         "\(self.minute.twoZeros):\(self.second.twoZeros)"
     }
 
-    /// The interval written out as it would be spoken. "Minutes" and "seconds" are pluralized as needed; omitted if zero; the return value is `zero` if all components are zero.
-    public var spoken: String {
-        if self.isZero { return "zero" }
-        var partial = ""
-        if self.minute > 0 {
-            let unitM = (self.minute > 1) ? "minutes" : "minute"
-            partial = "\(self.minute) \(unitM)"
-        }
-
-        guard self.second != 0 else { return partial }
-
-        if self.second > 0 {
-            let unitS = (self.second > 1) ? "seconds" : "second"
-            partial += " \(self.second) \(unitS)"
-        }
-        return partial
-    }
 }

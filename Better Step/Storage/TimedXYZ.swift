@@ -12,7 +12,6 @@ import CoreMotion
 /// Adoprers can type-erase themselves to a value representing only  `x`, `y`, `z`, and `t` coordinates.
 ///
 /// **See also** ``XYZT``
-public
 protocol TimedXYZRepresentable: XYZ & CSVRepresentable {
     /// Reduce the space and time vector to the minimal ``XYZT`` value.
     var asXYZT: XYZT { get }

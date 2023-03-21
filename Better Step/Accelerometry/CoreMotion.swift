@@ -14,8 +14,6 @@ import SwiftUI
 
 enum CMTimeInterval {
 ////    static let hz                : UInt64 = 120
-//    static let hzInterval        : Double = 1.0/Double(hz)
-//    static let nanoSleep         : UInt64 = UInt64(hzInterval * Double(NSEC_PER_SEC))
     // TODO: Consider putting the interval in a UserDefault.
 
     static let secondsInBuffer   : UInt64 = 2
@@ -35,8 +33,8 @@ protocol Availability {
 }
 
 /// Availability (has any Core Motion and active status for the device
-struct DeviceState: Availability {
-    private var cmManager: CMMotionManager
+struct DeviceState {
+/*    private var cmManager: CMMotionManager
 
     init(_ manager: CMMotionManager) {
         self.cmManager = manager
@@ -47,24 +45,24 @@ struct DeviceState: Availability {
     }
     var active   : Bool  {
         cmManager.isDeviceMotionActive
-        }
+        } */
 }
 
 /// Availability (has accelerometers) and active status (collecting) for the inertial platform
-struct AccelerometerState: Availability {
-    private var cmManager: CMMotionManager
+struct AccelerometerState {
+/*    private var cmManager: CMMotionManager
     init(_ manager: CMMotionManager) {
         self.cmManager = manager
     }
-
-    /// Whether the device is capable of accelerometry
+*/
+/*    /// Whether the device is capable of accelerometry
     var available: Bool {
         cmManager.isAccelerometerAvailable
         }
     /// Whether the device is recording accelerometry.
     var active   : Bool  {
         cmManager.isAccelerometerActive
-        }
+        } */
 }
 
 // MARK: - Top-level queue status
@@ -123,7 +121,6 @@ final class MotionManager: ObservableObject
     var asyncBuffer: IncomingAccelerometry
 
     // MARK: - Initialization and start
-//    init(phase: SeriesTag)
     init()
     {
         // temp to avoid configuration through self
@@ -131,17 +128,9 @@ final class MotionManager: ObservableObject
         cmManager.accelerometerUpdateInterval = CountdownConstants.hzInterval
         cmMotionManager = cmManager
 
-        deviceState = DeviceState(cmManager)
-        accState = AccelerometerState(cmManager)
+        deviceState = DeviceState()
+        accState = AccelerometerState()
         asyncBuffer = IncomingAccelerometry()
-    }
-
-    var accelerometryAvailable: Bool {
-        accState.available
-    }
-
-    var accelerometryActive: Bool {
-        accState.active
     }
 
     @Published var lifecycle = Lifecycle.idle
@@ -174,10 +163,5 @@ final class MotionManager: ObservableObject
         Task {
             await self.asyncBuffer.receive(newElement)
         }
-    }
-
-    func halt() {
-        cmMotionManager.stopAccelerometerUpdates()
-        lifecycle = .idle
     }
 }

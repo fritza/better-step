@@ -44,14 +44,10 @@ enum DASIStages {
 
     static let minIdentifier   = startIndex + 1
     static let maxIdentifier   = endIndex
-    static let identifierRange = (minIdentifier...maxIdentifier)
-
     static let minPresenting   = DASIStages.presenting(
         questionID: minIdentifier)
     static let maxPresenting   = DASIStages.presenting(
         questionID: maxIdentifier)
-    static let presentingRange = (minPresenting ... maxPresenting)
-
 
     // MARK: cases
     /// The pre-survey view
@@ -60,17 +56,6 @@ enum DASIStages {
     case presenting(questionID: Int)
     /// The end-of-survey view.
     case completion
-
-    // MARK: Question state
-    /// If `self` is `.presenting(questionID:)` return the ID for the question being presented. If not, return `nil`.
-    var questionIdentifier: Int? {
-        if case let .presenting(questionID: ident) = self {
-            return ident
-        }
-        else {
-            return nil
-        }
-    }
 
     // MARK: Arithmetic
 

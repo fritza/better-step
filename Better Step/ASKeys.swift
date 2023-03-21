@@ -35,41 +35,6 @@ enum ASKeys: String {
     /// - warning: This is to be used _only_ for the backing store in `UserDefaults`. Live code shouldl rely on ``lastCompletionValue``  instead.
     case lastCompletedDate
     
-    func negate() {
-        let ud = UserDefaults.standard
-        ud.set(false, forKey: self.rawValue)
-    }
-    
-    
-    /// Remove a value from `UserDefaults`.
-    func removeDefault() {
-        let ud = UserDefaults.standard
-        ud.removeObject(forKey: self.rawValue)
-    }
-    
-    /// Remove, `false`, or reset all the `ASKeys`
-    static func revertPhaseDefaults() {
-        let ud = UserDefaults.standard
-
-        let boolKeys: [ASKeys] = [
-            .unsafeCompletedFirstRun,
-        ]
-        boolKeys.forEach { ud.set(false, forKey: $0.rawValue) }
-        let nillableKeys: [ASKeys] = [
-            .tempUsabilityIntsCSV, .temporaryDASIResults,
-        ]
-        nillableKeys.forEach { $0.removeDefault() }
-        
-        Self.spoilLast7DReport()
-                
-        // This won't be the only place that SubjectID
-        // will be un-set, but it can't hurt.
-        SubjectID.clearID()
-        isFirstRunComplete = false
-        
-        assert(ASKeys.idAndFirstRunAreConsistent())
-    }
-    
     /// Whether the user has completed all phases of the workflow.
     ///
     /// Usually, client code should rely on `@AppStorage` instead, but that's not available from static functions such as ``TopPhases.resetToFirst()``.
@@ -105,31 +70,11 @@ enum ASKeys: String {
         }
     }
     
-    static var tooEarlyToRepeat: Bool {
-        let lastCompletion: String = lastCompletionValue.ymd
-        let todayYMD      : String = Date().ymd
-        return lastCompletion == todayYMD
-    }
-    
     // FIXME: Is this supposed to invalidate the whole history?
     //            Appears so; it sets the first run to false(?!)
     static func spoilLast7DReport() {
         UserDefaults.standard
             .setValue(0, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
-    }
-    
-    static var dateOfLast7DReport: Date {
-        get {
-            let stored = UserDefaults.standard
-                .double(forKey: ASKeys._7DayKey.rawValue)
-            return (stored == 0.0) ? Date.distantPast
-            : Date(timeIntervalSinceReferenceDate: stored)
-        }
-        set {
-            let interval = newValue.timeIntervalSinceReferenceDate
-            UserDefaults.standard
-                .setValue(interval, forKey: ASKeys._7DayKey.rawValue)
-        }
     }
 }
 
@@ -158,7 +103,6 @@ extension ASKeys {
         }
         return true
     }
-
 }
 
 /**
