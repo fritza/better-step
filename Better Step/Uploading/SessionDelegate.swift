@@ -33,7 +33,7 @@ public final class UpSessionDelegate: NSObject, URLSessionDelegate {
     /// Singleton `URLSession` for uploads.
     ///
     /// Carries the `UpSessionDelegate` delegate, without polluting `URLSession.shared` for other clients.
-    public static let session: URLSession = {
+    static let session: URLSession = {
         return instantiateSession()
     }()
     

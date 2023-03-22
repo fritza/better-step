@@ -69,10 +69,7 @@ extension WalkingContainerView {
     ///   - nextPhaseGood: The tag for the walk phase if the walk proceded to the end.
     ///   - nextPhaseBad: The tag for the walk phase if the walk proceded was cancelled..
     /// - Returns: The `View` that displays the walk timer.
-    func walk_N_View(
-        _ states: WalkStates
-//        ownPhase: WalkingState, nextPhaseGood: WalkingState, nextPhaseBad: WalkingState
-    ) -> some View {
+    func walk_N_View( _ states: WalkStates) -> some View {
         // Ignore NavigationLink initialzer deprecation.
         NavigationLink(
             "SHOULDN'T SEE (walk_N, \(states.current.rawValue))",
@@ -88,11 +85,11 @@ extension WalkingContainerView {
 #else
             DigitalTimerView(
                 duration: CountdownConstants.walkDuration,
-                walkingState: ownPhase) {
+                walkingState: states.current) {
                     result  in collectFromWalk(
-                        result: result, ownPhase: ownPhase,
-                        nextPhaseGood: nextPhaseGood,
-                        nextPhaseBad: nextPhaseBad)
+                        result: result, ownPhase: states.current,
+                        nextPhaseGood: states.good,
+                        nextPhaseBad: states.bad)
                 }
                 .padding()
                 .navigationBarBackButtonHidden(true)
@@ -178,23 +175,6 @@ extension WalkingContainerView {
                 InterCarousel(content: end_walkingCardInfo) {
                     completion(.success(.sevenDayRecord))
                 }
-                
-//
-//                InterstitalPageContainerView(
-//                    // Not walk-demo, the ending interstitial goodbye is the end. (Loops around.)
-//                    listing: end_walkingContentList, selection: 1)
-//                { result in
-//
-//                    let passedVal: Result<SuccessValue, Error>
-//                    switch result {
-//                    case .success(_)        :
-//                        passedVal = .success(.sevenDayRecord)
-//                    case .failure(let error):
-//                        passedVal = .failure(error)
-//                    }
-//
-//                    completion(passedVal)
-//                }
             }   // completion closure for end_walkingList
             .padding()
             .navigationBarBackButtonHidden(true)

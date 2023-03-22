@@ -109,12 +109,6 @@ struct DigitalTimerView: View, ReportingPhase {
             }
             .padding()
         }
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                ReversionButton(toBeSet: $showReversionAlert)
-//            }
-//        }
-//        .reversionAlert(on: $showReversionAlert)
         .task {
             // warning: The result is discardable.
             // You should have harvested the data result already.

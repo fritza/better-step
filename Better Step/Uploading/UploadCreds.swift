@@ -14,7 +14,7 @@ import Foundation
 ///  * `BETA_API`: Releasable to statkeholders for testing.
 ///  * _\<none\>_ - Production use, no data except for clinical use.
 /// - bug: Constants have accumulated and been abandoned throughout a weeks-long development process. Review these.
-public enum UploadCreds {
+enum UploadCreds {
 #if API_DEV
     // Use for internal test and development
     /// The LastPass name for the credentials

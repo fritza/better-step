@@ -73,7 +73,7 @@ struct SimplestCard: View {
         VStack {
             Text(cContent.pageTitle)
                 .font(.largeTitle)
-            Spacer(minLength: 48)
+            Spacer(minLength: 12)
             ScrollView {
                 interiorContent()
             }
@@ -82,7 +82,7 @@ struct SimplestCard: View {
                 buttonTapped()
             }
         }
-        .padding()
+//        .padding()
     }
 }
 
@@ -91,7 +91,7 @@ struct SimplestCard_Previews: PreviewProvider {
         do {
             let retval = try CardContent
                 .createContents(from: "walk-intro")
-            return retval.first!
+            return retval[5]
         }
         catch {
             let rescue = CardContent(

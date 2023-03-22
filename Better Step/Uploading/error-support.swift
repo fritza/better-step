@@ -2,16 +2,16 @@ import Foundation
 import UIKit
 
 /// Constructor for simple `Error`s carrying URL strings or freehand `String`s, or neither, in `userInfo`
-public enum SimpleErrors: Error {
+enum SimpleErrors: Error {
     ///
     case strError(String)
     case urlError(URL)
     case nosError
     
-    public init(_ datum: String) { self = .strError(datum) }
-    public init(_ datum: URL) { self = .urlError(datum) }
-    public init() { self = .nosError }
-    public static let domain = "SimpleErrors"
+    init(_ datum: String) { self = .strError(datum) }
+    init(_ datum: URL) { self = .urlError(datum) }
+    init() { self = .nosError }
+    static let domain = "SimpleErrors"
     
     /// An `NSError` (erased to `Error`) reporting a condition identified in `userInfo` as "`condition`"
     public var error: Error {

@@ -33,15 +33,15 @@ struct UsabilityContainer: View, ReportingPhase {
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     /// Return CSV value for reporting success.
-    var tempCSV: String = ""
+    var tempCSV: String = "" // Maybe it's unused but I'm reluctant to let the related sink go empty.
     static private var cancellables: [AnyCancellable] = []
-
+    
     /// Top-level-in-usability phase `intro`, `questions`, (`report`), `closing`
-    @State var currentState: UsabilityState    
+    @State var currentState: UsabilityState
     /// Whether the "reversion" (back to beginning with no subject) dialog should be shown.
     ///
     /// See ``reversionAlert(on:)`` for the `ViewModifier`.
-
+    
     init(state: UsabilityState = .intro,
          result: @escaping ClosureType) {
         self.completion = result
@@ -55,21 +55,21 @@ struct UsabilityContainer: View, ReportingPhase {
     let firstContent = CardContent(pageTitle: "Usability"
                                    , contentBelow: usabilityInCopy,
                                    contentAbove: "", systemImage: "person.crop.circle.badge.questionmark", imageFileName: nil, proceedTitle: "Continue")
-
+    
     var body: some View {
         VStack {
             switch currentState {
                 // MARK: - Intro
             case .intro:
                 /*
-                GenericInstructionView(
-                    titleText: "Usability",
-                    sfBadgeName: "person.crop.circle.badge.questionmark",
-                    lowerText: usabilityInCopy,
-                    proceedTitle: "Continue",
-                    proceedEnabled: true) {
-                        currentState = .questions
-                    }
+                 GenericInstructionView(
+                 titleText: "Usability",
+                 sfBadgeName: "person.crop.circle.badge.questionmark",
+                 lowerText: usabilityInCopy,
+                 proceedTitle: "Continue",
+                 proceedEnabled: true) {
+                 currentState = .questions
+                 }
                  */
                 SimplestCard(content: firstContent) {
                     currentState = .questions
@@ -79,7 +79,7 @@ struct UsabilityContainer: View, ReportingPhase {
                 // MARK: - Questions
             case .questions :
                 // resultValue is Result<[Int], Never>
-
+                
                 // FIXME: <Back crashes UsabilityView.
                 // In the preview of the UsabilityContainer
                 
@@ -128,15 +128,7 @@ struct UsabilityContainer: View, ReportingPhase {
             }       // switch?
         }           // VStack
         .navigationBarBackButtonHidden(true)
-}       // body
-
-    // MARK: - Links to phase views
-    private var responses = [Int](repeating: 0,
-                                  count: UsabilityQuestion.count)
-    public var csvLine: String {
-        assert(SubjectID.isSet)
-        return "\(SeriesTag.usability.rawValue),\(SubjectID.id),\(responses.csvLine)"
-    }
+    }       // body
 }
 
 extension UsabilityContainer {

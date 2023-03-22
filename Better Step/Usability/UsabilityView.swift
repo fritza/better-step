@@ -188,12 +188,6 @@ struct UsabilityView: View, ReportingPhase {
 }
 
     struct UsabilityView_Previews: PreviewProvider {
-        static let question = UsabilityQuestion(id: 3, text: "Was this easy to use?")
-        static let longQuestion = UsabilityQuestion(id: 4, text: "Compared to the hopes and dreams of your life, has this walking exercise been a help?")
-
-        @State static var selectedAnswer = 3
-        static var otherSelectedAnswer = 0
-
         static var previews: some View {
             NavigationView {
 

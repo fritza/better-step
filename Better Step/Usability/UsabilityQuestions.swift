@@ -16,16 +16,8 @@ struct UsabilityQuestion: Decodable, Identifiable {
     private static let baseFileName = "USurveyQuestions"
 
     /// Bounds of question index (zero-based)
-    static let startIndex = 0
     static var endIndex: Int { allQuestions.count }
-    static private(set) var indexRange = 0..<endIndex
-
-    static let startID = 1
-    static var endID: Int { endIndex + 1 }
-    static private(set) var idRange = 0..<endID
     static var count = allQuestions.count
-
-    
 
     // I'm not going to get in trouble by referencing the indices
     // before allQuestions loads, am I?

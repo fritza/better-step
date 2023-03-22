@@ -4,7 +4,7 @@ import Foundation
 public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
     
     /// Shorthand for the callback method for receiving an authentication challenge.
-    public typealias ChallengeCallback = (URLSession.AuthChallengeDisposition,
+   public typealias ChallengeCallback = (URLSession.AuthChallengeDisposition,
                                           URLCredential?) -> Void
     
     // MARK: - credential

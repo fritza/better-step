@@ -41,7 +41,7 @@ func trailData(boundary: String) -> Data {
     return trailData
 }
 
-public func multipartData(fileName: String,
+func multipartData(fileName: String,
                           content data: Data,
                           boundary: String) throws -> Data {
     //    boundary is in the form "Boundary-{uuid string}}"

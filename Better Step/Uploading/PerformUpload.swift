@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PerformUpload {
+struct PerformUpload {
     
     typealias URLCallback = (Data?, URLResponse?, Error?) -> Void
     
@@ -18,21 +18,18 @@ public struct PerformUpload {
     /// - parameters:
     ///   - payload: The data to upload
     ///   - name:  The remote file name
-    public init(for payload: Data, named name: String) {
+    init(for payload: Data, named name: String) {
         self.payload  = payload
         self.fileName = name
-        self.payloadURL = nil
     }
-    
-    let payloadURL: URL?
-    
+        
     /// Create a manager for formatting and uploading data from a `URL`, into a server file with the given name
     /// - parameters:
     ///   - zipURL: A `URL` for a file containing data to upload.
     ///   - name:  The remote file name
     /// - returns: `nil` if the `Data` load fails or is empty.
     /// - bug: The initializer should throw.
-    public init?(from zipURL: URL, named name: String) {
+    init?(from zipURL: URL, named name: String) {
         do {
             let data = try Data(contentsOf: zipURL)
             if data.isEmpty { throw SimpleErrors.urlError(zipURL) }
@@ -66,7 +63,7 @@ public struct PerformUpload {
     /// * Spawns a `Task` to perform the asynchronoous upload.
     ///
     /// Completion of the upload will trigger an `UploadNotification` or `UploadErrorNotification` notification.
-    public func doIt() {
+    func doIt() {
         // URLRequest including the boundary string.
         let boundary = "Boundary-\(UUID().uuidString)"
         let request = createRequest(boundaryString: boundary)

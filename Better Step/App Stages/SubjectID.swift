@@ -70,12 +70,31 @@ struct SubjectID {
     }
     
     /// Regular expression that accepts Subject IDs or strings reasonably close.
-    static let validIDPattern = /([SMTWRFA])-?(\d\d\d\d)/
+    static let validIDPattern = /\s*([MTWRF])-?([1-9]\d\d\d)\s*/
         .ignoresCase()
+    
     // TODO: Account for leading and trailing spaces, possibly other dividers like . or ⎵
 }
 
 extension String {
+    var asValidSubjectID: String? {
+        let pattern = /\s*([MTWRF])-?([1-9]\d\d\d)\s*/
+            .ignoresCase()
+        
+        guard let match = try? pattern
+            .wholeMatch(in: self) else {
+            return nil
+        }
+        
+        let bothMatches = match.output
+        // (.0: "m-1234", .1: "m", .2: "1234")
+        let letterMatch = String(bothMatches.1).uppercased()
+        // "M"
+        let numberMatch = String(bothMatches.2)
+        // "1234"
+        return letterMatch + numberMatch
+    }
+    
     var canonicalID: String? {
         // "m-1234"
         guard let match = try? SubjectID.validIDPattern
