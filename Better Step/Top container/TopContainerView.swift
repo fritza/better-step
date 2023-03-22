@@ -95,38 +95,6 @@ struct TopContainerView: View
                     // See the .onAppear below for the check for whether this
                     // is a second run in a single calendar day.
                     
-                    // MARK: - Warn of overwrite
-//                    .alert("Repeating a Session",
-//                           isPresented:  $shouldChallengeHaste_1
-//                    ) {
-//                        Button("Repeat" , role: .destructive) {
-//                            shouldChallengeHaste_2 = true
-//                        }
-//                        Button("Keep", role: .cancel) {
-//                        }
-//                    }
-//                message: {
-//                    Text("You’ve performed a session already today. Repeating on the same day will overwrite the earlier session.\n\nAre you sure you want to do that?")
-//                }   // message/alert
-//
-//
-//                    // MARK: - Double-check overwrite
-//                .alert("Making Sure…",
-//                       isPresented:  $shouldChallengeHaste_2
-//                ) {
-//                    Button("Yes, Repeat" , role: .destructive) {
-//                        shouldChallengeHaste_2 = true
-//                    }
-//                    Button("Cancel", role: .cancel) {
-//                    }
-//                }
-//                message: {
-//                    Text("Are you comfortable with replacing today’s session with another one? This cannot be undone")
-//                    // FIXME: - This will override the first-completed flag.
-//                }   // haste_2 message/alert
-//
-//                    // ===================================================
-//
                     
                     .onDisappear {
                         collect7DayPedometry()
