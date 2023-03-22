@@ -100,6 +100,9 @@ struct SweepSecondView: View, ReportingPhase {
     var body: some View {
         GeometryReader { proxy in
             VStack {
+                Spacer()
+                Text("Start in…").font(.largeTitle)
+                    .multilineTextAlignment(.leading)
                 clockFace(fitting: proxy.size)
                     .frame(width:  proxy.size.short * 0.95,
                            height: proxy.size.short * 0.95,
@@ -115,6 +118,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
 //                    label: (isRunning) ? "Reset" : "Start",
 //                    running: $isRunning)
             }
+            .toolbar(.hidden)
             .padding()
 
             // MARK: Clock status

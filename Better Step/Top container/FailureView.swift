@@ -36,7 +36,10 @@ struct ConclusionView: View, ReportingPhase {
             }
             Spacer()
         }.font(.title3)
+            .padding()
             .navigationTitle("Completed")
+        // FIXME: Don't use Navigation bar.
+        // Duplicate the feel of the interstitials (if you can't simply use one).
     }
 }
 

@@ -126,8 +126,6 @@ struct UsabilityView: View, ReportingPhase {
     @State var idIsEnlarged = false
     static let unitScale = 1.0
     static let bigScale  = 1.25
-    @State var boldfaced: Bool = false
-
 
     // MARK: - body
     var body: some View {
@@ -143,14 +141,13 @@ struct UsabilityView: View, ReportingPhase {
                     .font(.title2)
             }
             .minimumScaleFactor(0.5)
-            .padding()
             Divider()
 
             ratingsStack()
             Spacer()
         }
+        .padding()
         .multilineTextAlignment(.leading)
-//        .animation(.easeOut, value: questionIndex)
         .onDisappear() {
             completion(.success(
                 responses

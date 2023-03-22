@@ -88,6 +88,10 @@ struct DigitalTimerView: View, ReportingPhase {
     var body: some View {
         GeometryReader { proxy in
             VStack {
+                Text((walkingState == .walk_1) ?
+                     "Normal Walk" : "Fast Walk")
+                    .font(.largeTitle)
+
                 // Instructions
                 Spacer()
 
@@ -144,10 +148,11 @@ struct DigitalTimerView: View, ReportingPhase {
             // Is this handler really the best place?
             // or onDisappear?
         })
-        .navigationTitle(
-            (walkingState == .walk_1) ?
-            "Normal Walk" : "Fast Walk"
-        )
+        .toolbar(.hidden)
+//        .navigationTitle(
+//            (walkingState == .walk_1) ?
+//            "Normal Walk" : "Fast Walk"
+//        )
     }
 }
 

@@ -214,7 +214,6 @@ struct TopContainerView: View
                         self.currentPhase = .entry.followingPhase
                     }
                     .navigationTitle("FAILED")
-                    .padding()
                     
                     // MARK: - no such phase
                 default:

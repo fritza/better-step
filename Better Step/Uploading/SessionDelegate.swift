@@ -15,7 +15,7 @@ public final class UpSessionDelegate: NSObject, URLSessionDelegate {
     ///  that takes completion closures.
     ///
     ///  I assume that includes the async APIs.
-    public static let backgroundConfigID = "com.drdrlabs.betterstep.upload"
+//    public static let backgroundConfigID = "com.drdrlabs.betterstep.upload"
     
     /// Create a `URLSession` for uploads. Used only by `UpSessionDelegate.session`.
     ///
