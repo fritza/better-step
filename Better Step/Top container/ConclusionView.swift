@@ -1,5 +1,5 @@
 //
-//  FailureView.swift
+//  ConclusionView.swift
 //  Better Step
 //
 //  Created by Fritz Anderson on 9/21/22.
@@ -42,6 +42,19 @@ struct ConclusionView: View, ReportingPhase {
         // Duplicate the feel of the interstitials (if you can't simply use one).
     }
 }
+
+struct ConclusionView_Previews: PreviewProvider {
+    static var previews: some View {
+
+        NavigationView {
+            ConclusionView {
+                _ in
+            }
+        }
+    }
+}
+
+#if SHOWS_FAILURE_VIEW
 
 // MARK: - Failure View
 
@@ -96,13 +109,4 @@ struct FailureView_Previews: PreviewProvider {
     }
 }
 
-struct ConclusionView_Previews: PreviewProvider {
-    static var previews: some View {
-
-        NavigationView {
-            ConclusionView {
-                _ in
-            }
-        }
-    }
-}
+#endif

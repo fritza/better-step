@@ -84,7 +84,9 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
     static let dasi       = TopPhases(rawValue: "DASI"        )
     static let usability  = TopPhases(rawValue: "usability"   )
     static let conclusion = TopPhases(rawValue: "conclusion"  )
+    #if SHOWS_FAILURE_VIEW
     static let failed     = TopPhases(rawValue: "failed"      )
+    #endif
 
     /// `String` reoresentations of phases by name.
     fileprivate static let TPAndString: KeyValuePairs<TopPhases, String> = [
@@ -97,8 +99,10 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
         dasi       : "DASI"      ,
         usability  : "usability" ,
         conclusion : "conclusion",
-        failed     : "failed"    ,
     ]
+#if SHOWS_FAILURE_VIEW
+    //        failed     : "failed"    ,
+#endif
 }
 
 // MARK: - Sequencing

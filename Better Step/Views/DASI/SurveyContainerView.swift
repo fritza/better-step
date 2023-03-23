@@ -40,36 +40,6 @@ struct SurveyContainerView: View, ReportingPhase {
 //        notificationHandler = registerDataDeletion()
     }
 
-    
-
-    // MARK: - Destruction
-
-/*
-    func registerDataDeletion()
-    -> NSObjectProtocol {
-
-        // FIXME: Substitute wiping the file.
-        //        How in general do you wipe out stage files?
-        
-        let dCenter = NotificationCenter.default
-
-        // TODO: Should I set hasCompletedSurveys if the walk is negated?
-        let catcher = dCenter
-            .addObserver(
-                forName: Destroy.DASI.notificationID,
-                object: nil,
-                queue: .current) {
-                    _ in tempCSV = ""
-                }
-        return catcher
-    }
-*/
-
-
-    // FIXME: YUCK! if this doesn't easily work…
-    // Oh gosh — what would I have to do to make it a navigable view like the top level?
-    // Given that there are no optional branches, maybe there is simply no need.
-
     var body: some View {
         switch dasiPhaseState! {
         case .landing:
@@ -79,8 +49,6 @@ struct SurveyContainerView: View, ReportingPhase {
             questionPageView()
 
         case .completed:
-            // FIXME: Consider storing the DASI response here.
-            // instead of the top container.
             completionPageView()
             // Completion calls my response closure
 

@@ -121,7 +121,13 @@ struct TopContainerView: View
                     // MARK: - Usability
                 case .usability:
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
-                    UsabilityContainer { result in
+                    UsabilityContainer {
+                        _ in
+                        currentPhase = currentPhase.followingPhase
+                        latestPhase = TopPhases.usability.rawValue
+                    }
+#if SHOWS_FAILURE_VIEW
+                    { result in
                         switch result {
                         case .success(_):
                             // SuccessValue is
@@ -130,17 +136,26 @@ struct TopContainerView: View
                             latestPhase = TopPhases.usability.rawValue
                             // FIXME: Add the usability form
                             //        to the usability container.
-                            
+
                         case .failure:
                             // TODO: Maybe pass the error into the failure view?
                             self.currentPhase = .failed
                         } // switch on callback result
                     }  // UsabilityContainer
+#endif
                     
                     // MARK: - DASI
                 case .dasi:
                     SurveyContainerView {
                         responseResult in
+                        TopPhases.latestPhase = TopPhases.usability.rawValue
+                        self.currentPhase = currentPhase.followingPhase
+                        let dasiResponse = try! responseResult.get()
+                        let csvd = dasiResponse.csvData
+
+                        try! PhaseStorage.shared
+                            .series(.dasi, completedWith: csvd)
+                        #if SHOWS_FAILURE_VIEW
                         do {
                             // FIXME: Consider storing the DASI response here.
                             // IS stored (in UserDefaults)
@@ -161,6 +176,7 @@ struct TopContainerView: View
                             self.currentPhase = .failed
                             // TODO: Maybe pass the error into the failure view?
                         }
+                        #endif
                     }
                     
                     // MARK: - Conclusion (success)
@@ -175,6 +191,9 @@ struct TopContainerView: View
                     .navigationTitle("Finished")
                     //                .reversionToolbar($showRewindAlert)
                     //
+
+
+                    #if SHOWS_FAILURE_VIEW
                     // MARK: - Conclusion (failed)
                 case .failed:
                     FailureView(failing: TopPhases.walking) { _ in
@@ -182,6 +201,8 @@ struct TopContainerView: View
                         self.currentPhase = .entry.followingPhase
                     }
                     .navigationTitle("FAILED")
+                    #endif
+
                     
                     // MARK: - no such phase
                 default:
