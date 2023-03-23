@@ -61,16 +61,6 @@ struct UsabilityContainer: View, ReportingPhase {
             switch currentState {
                 // MARK: - Intro
             case .intro:
-                /*
-                 GenericInstructionView(
-                 titleText: "Usability",
-                 sfBadgeName: "person.crop.circle.badge.questionmark",
-                 lowerText: usabilityInCopy,
-                 proceedTitle: "Continue",
-                 proceedEnabled: true) {
-                 currentState = .questions
-                 }
-                 */
                 SimplestCard(content: firstContent) {
                     currentState = .questions
                 }

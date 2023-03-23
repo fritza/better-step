@@ -73,11 +73,6 @@ struct TopContainerView: View
                     
                     // MARK: - Onboarding
                 case .onboarding:
-                    // Why no audio A...N on first run?
-                    // Sounds like a confflict w/ spoken?
-                    
-                    // OnboardContainerView suceeds with String.
-                    // That's theThat's the entered Subject ID.
                     OnboardContainerView {
                         result in
                         do {
@@ -91,11 +86,7 @@ struct TopContainerView: View
                             fatalError("Can't fail out of an onboarding view")
                         }
                     }
-                    // .onAppear to set shouldChallengeHaste_1:
-                    // See the .onAppear below for the check for whether this
-                    // is a second run in a single calendar day.
-                    
-                    
+
                     .onDisappear {
                         collect7DayPedometry()
                     }
@@ -182,18 +173,15 @@ struct TopContainerView: View
                     // MARK: - Conclusion (success)
                 case .conclusion:
                     // ConclusionView records the last-completed date.
-                    ConclusionView { _ in
+                    ConclusionView(jsonBaseName: "conclusion") { _ in
                         // Just to make sure:
                         ASKeys.isFirstRunComplete = true
                         self.currentPhase = .entry.followingPhase
                         latestPhase = TopPhases.conclusion.rawValue
-                    }
-                    .navigationTitle("Finished")
-                    //                .reversionToolbar($showRewindAlert)
-                    //
 
-
-                    #if SHOWS_FAILURE_VIEW
+                    }                    
+                    
+#if SHOWS_FAILURE_VIEW
                     // MARK: - Conclusion (failed)
                 case .failed:
                     FailureView(failing: TopPhases.walking) { _ in
@@ -201,7 +189,7 @@ struct TopContainerView: View
                         self.currentPhase = .entry.followingPhase
                     }
                     .navigationTitle("FAILED")
-                    #endif
+#endif
 
                     
                     // MARK: - no such phase

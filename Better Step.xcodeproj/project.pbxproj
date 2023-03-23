@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
+		1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06629CCCF9B001AD9F4 /* conclusion.json */; };
 		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */; };
 		1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */; };
@@ -150,6 +151,7 @@
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoResult.swift; sourceTree = "<group>"; };
 		1F1D8C0B2996EB1B00E7C4ED /* libstupload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstupload.a; path = "Better Step/Uploading/libstupload.a"; sourceTree = "<group>"; };
+		1F21D06629CCCF9B001AD9F4 /* conclusion.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = conclusion.json; sourceTree = "<group>"; };
 		1F22BF42295A4D2B00FB5B81 /* ZIPGround.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ZIPGround.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F2B8AA9294A54F500075248 /* SeriesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesTag.swift; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				1F09EE3128DB745900CFBE4B /* ConclusionView.swift */,
+				1F21D06629CCCF9B001AD9F4 /* conclusion.json */,
 				1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */,
 				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
@@ -705,6 +708,7 @@
 			files = (
 				1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */,
 				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
+				1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */,
 				1FC7477228E787AD00817041 /* A.ahap in Resources */,
 				1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */,
 				1FA2822C28DBBB940038353E /* usability-intro.json in Resources */,

@@ -82,7 +82,6 @@ struct SimplestCard: View {
                 buttonTapped()
             }
         }
-//        .padding()
     }
 }
 
