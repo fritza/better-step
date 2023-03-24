@@ -1,0 +1,6 @@
+project: Better Step.xcodeproj
+retain_objc_accessible: true
+schemes:
+- Better Step
+targets:
+- Better Step
