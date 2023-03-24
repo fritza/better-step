@@ -107,6 +107,10 @@ struct TopContainerView: View
                         _ in
                         let whatFollows = currentPhase.followingPhase
                         currentPhase = whatFollows
+
+                        precondition(
+                            PhaseStorage.shared.allPhasesAreComplete,
+                            "Reached \(currentPhase.rawValue) before all data-gathering phases are done")
                     }
                     
                     // MARK: - Usability
@@ -173,7 +177,36 @@ struct TopContainerView: View
                     // MARK: - Conclusion (success)
                 case .conclusion:
                     // ConclusionView records the last-completed date.
-                    ConclusionView(jsonBaseName: "conclusion") { _ in
+                    let pss = PhaseStorage.shared
+                    ConclusionView(jsonBaseName: "conclusion") { result in
+                        do {
+                            guard let handoff = try? result.get(),
+                                  handoff == .both else {
+                                assertionFailure(
+                                    "\(#fileID):\(#line) - didn't expect a ConclusionView "
+                                )
+                                return
+                            }
+                            // TODO: In future, handoff may also be sending or finish
+                            //      but still not .neither
+
+                            print("Note:", #function, "- \(#fileID):\(#line) - archive write-and-send has been mover here from PhaseStorage.")
+
+                            pss.assertAllComplete()
+                            try pss.createArchive()
+                            guard let performer = PerformUpload(
+                                from: pss.zipOutputURL,
+                                named: pss.zipFileName) else {
+
+                                fatalError("\(#fileID):\(#line): PerformUpload not created (\(pss.zipOutputURL.path), ](pss.zipFileName)).")
+                            }
+                            // Perform the upload.
+                            performer.doIt()
+                        }
+                        catch {
+                            fatalError("\(#fileID):\(#line): ZIPArchive not created (\(pss.zipOutputURL.path), ](pss.zipFileName)).")
+                        }
+
                         // Just to make sure:
                         ASKeys.isFirstRunComplete = true
                         self.currentPhase = .entry.followingPhase
@@ -199,8 +232,6 @@ struct TopContainerView: View
                     EmptyPhase { _ in
                         self.currentPhase = .entry.followingPhase
                     }
-                    // I sish I could have:
-                    //    currentPhase = .entry.followingPhase
                 }   // Switch on currentPhase
             }       // VStack
                     // MARK: - onAppear {}

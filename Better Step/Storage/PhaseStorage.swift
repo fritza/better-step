@@ -108,7 +108,6 @@ final class PhaseStorage: ObservableObject
     }
     
     /// The name of the `.zip` archive to be constructed from the `.csv` files.
-    private
     var zipFileName: String {
         assert(stickySubjectID != SubjectID.unSet)
         // lhs is _not_ SubjectID.id, and must be compared directly.
@@ -118,6 +117,13 @@ final class PhaseStorage: ObservableObject
         return retval
     }
 
+    var allPhasesAreComplete: Bool {
+        // Do all of what I've finished...
+        let finishedKeys = Set(completionDictionary.keys)
+        // ... appear in the list of what should be finished?
+        let completed = keysToBeFinished.isSubset(of: finishedKeys)
+        return completed
+    }
     
     /// Determine whether all data needed for first or subsequent sessions has arrived. Set the observable `isComplete` accordingly.
     private func checkCompletion() -> Bool {
@@ -131,8 +137,8 @@ final class PhaseStorage: ObservableObject
     // MARK: - Completion reports
     
     /// For each data in `completionDictioinary`, write it into a `ZIPArchiver`
-    fileprivate func createArchive() throws {
-        var okayTag: SeriesTag? = nil
+    func createArchive() throws {
+        var okayTag: SeriesTag? = nil   // Set in do, read in catch.
         var latestFileLength = 0
         do {
             // Get any existing file out of the way.
@@ -170,18 +176,33 @@ final class PhaseStorage: ObservableObject
         // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
         // If all required tags are accounted for, send it all to `CSVArchiver`.
-        if checkCompletion() {
-            // Insert .csv for all phases into an archiver.
-            try! createArchive()
 
-            // Set up the upload with the URL for the archive.
-            guard let performer = PerformUpload(
-                from: zipOutputURL,
-                named: zipFileName) else {
-                return
-            }
-            // Perform the upload.
-            performer.doIt()
+        let old = checkCompletion()
+        let new = allPhasesAreComplete
+        assert(old == new)
+
+        print("Note:", #function, "- \(#fileID):\(#line) - archive write-and-send are no longer performed here. See TopContainerView, completion from ConclusionView.")
+        /*
+         if allPhasesAreComplete {
+         // Insert .csv for all phases into an archiver.
+         try! createArchive()
+
+         // Set up the upload with the URL for the archive.
+         guard let performer = PerformUpload(
+         from: zipOutputURL,
+         named: zipFileName) else {
+         return
+         }
+         // Perform the upload.
+         performer.doIt()
+         }
+         */
+
+    }
+
+    func assertAllComplete(fileName: String = #fileID, line: Int = #line) {
+        guard allPhasesAreComplete else {
+            fatalError("\(fileName):\(line): Should not get here if phases are not all complete.")
         }
     }
     
