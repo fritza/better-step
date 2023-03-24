@@ -16,9 +16,14 @@ enum HowWalked: String, Hashable {
     case straightLine, backAndForth
 }
 
-enum EffortWalked: String, Hashable, CaseIterable {
+enum EffortWalked: String, Hashable, CaseIterable, Identifiable {
     case light, somewhat, hard
     case veryHard = "Very Hard"
+
+    var label: String {
+        self.rawValue.capitalized
+    }
+    var id: String { rawValue }
 }
 
 class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertible {    
@@ -27,17 +32,32 @@ class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertibl
     //    @Published var distance           : Int
     //    @Published var lengthOfCourse     : Int?
     @Published var `where`            : WhereWalked
+    //{        didSet { print("WIR: where changed from \(oldValue) to \(`where`)")
+//        }
+//    }
     @Published var howWalked          : HowWalked
+    //{        didSet { print("WIR: howWalked changed from \(oldValue) to \(howWalked)")
+//        }
+//    }
     @Published var effort             : EffortWalked
+    //{        didSet { print("WIR: effort changed from \(oldValue) to \(effort)")
+//        }
+//    }
     @Published var fearOfFalling      : Bool
+    //{        didSet { print("WIR: fearOfFalling changed from \(oldValue) to \(fearOfFalling)")
+//        }
+//    }
     
     var csvLine: String {
+
+        print("CSVLINE: Effort =", effort.rawValue)
+
         let values = [`where`.rawValue,
-//                      String(distance),
                       howWalked.rawValue,
-//                      String(lengthOfCourse ?? 0),
                       effort.rawValue,
                       fearOfFalling ? "Y" : "N"
+//                      String(lengthOfCourse ?? 0),
+//                      String(distance),
         ]
         let retval = values.csvLine
         return retval
@@ -45,16 +65,21 @@ class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertibl
     
     init() {
        self.`where`        = .atHome
-//       self.distance       = 100
        self.howWalked      = .straightLine
-//       self.lengthOfCourse = 30
-       self.effort         = .somewhat
+       self.effort         = .light
        self.fearOfFalling  = false
-   }
+    }
+
+        //       self.distance       = 100
+        //       self.lengthOfCourse = 30
 
     var description: String {
         var retval = "WalkInfoResult("
-        print(self.where, self.howWalked, // self.distance,
+        print("where: \(self.where)",
+              "how: \(self.howWalked)",
+              "fear: \(self.fearOfFalling)",
+              "effort: \(self.effort)",
+              // self.distance,
               separator: ", ",
               terminator: "",
               to: &retval)

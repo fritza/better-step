@@ -10,7 +10,7 @@ import SwiftUI
 
 private let walkingInstructionInfo     = try! CardContent.contentArray(from: ["walk-intro"         ])
 private let mid_instructionCardInfo = try! CardContent.contentArray(from: ["second-walk-intro"  ])
-private let end_walkingCardInfo     = try! CardContent.contentArray(from: ["usability-intro"    ])
+private let end_walkingCardInfo     = try! CardContent.contentArray(from: ["walks-complete"     ])
 
 
 
@@ -171,7 +171,6 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {
-                
                 InterCarousel(content: end_walkingCardInfo) {
                     completion(.success(.sevenDayRecord))
                 }

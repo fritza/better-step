@@ -17,7 +17,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
     typealias SuccessValue = String
     let completion: ClosureType
 
-    @EnvironmentObject var walkingData: WalkInfoResult
+    @StateObject var walkingData: WalkInfoResult = WalkInfoResult()
 
     init(_ reporting: @escaping ClosureType) {
         completion = reporting
@@ -27,38 +27,11 @@ struct WalkUsabilityForm: View, ReportingPhase {
     @ViewBuilder private var howYouDidSection: some View {
         Section("How you did") {
             VStack(alignment: .leading, spacing: 16) {
-//                howFarWalkedStack
                 howMuchEffortStack
                 mightFallStack
             }
         }
     }
-
-    #if false
-    @ViewBuilder private var howFarWalkedStack: some View {
-        VStack(alignment: .leading) {
-            Group {
-                Text("About ") +
-                Text("how far did you walk").fontWeight(.heavy) +
-                Text(", in feet?")
-            }
-                .lineLimit(2)
-                .minimumScaleFactor(0.75)
-            HStack {
-                Spacer()
-                TextField("feet", value: $walkingData.distance, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .keyboardType(.numberPad)
-                    .frame(width: 80)
-                // "Left"-justify the field contents.
-                    .multilineTextAlignment(.trailing)
-                // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
-                //       ATW, the modifier works, but be resigned to that stopping (one hopes
-                //       without breakage).
-            }
-        }
-    }
-    #endif
 
     @ViewBuilder private var howMuchEffortStack: some View {
         VStack(alignment: .leading) {
@@ -66,8 +39,8 @@ struct WalkUsabilityForm: View, ReportingPhase {
             Text(" was your body working?")
 
             Picker("", selection: $walkingData.effort) {
-                ForEach(EffortWalked.allCases, id: \.rawValue) { effort in
-                    Text(effort.rawValue.capitalized)
+                ForEach(EffortWalked.allCases) { effort in
+                    Text(effort.label)
                         .tag(effort)
                 }
             }
@@ -124,38 +97,6 @@ struct WalkUsabilityForm: View, ReportingPhase {
         }
     }
 
-    #if false
-    // Removed per drubin email 3 Jan 2023 deprecating
-    // the text fields as too error-prone
-    // MARK: - Length of course
-    @ViewBuilder private var lengthOfCourseStack: some View {
-        VStack(alignment: .leading) {
-            Group {
-                Text("About ") +
-                Text("how long was the area")
-                    .fontWeight(.heavy) +
-                Text(" you walked in, in feet?")
-            }
-            .minimumScaleFactor(0.75)
-            .lineLimit(2)
-
-            HStack {
-                Spacer()
-                TextField("feet", value: $walkingData.lengthOfCourse, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .keyboardType(.numberPad)
-                    .frame(width: 80)
-                // "Left"-justify the field contents.
-                    .multilineTextAlignment(.trailing)
-                // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
-                //       ATW, the modifier works, but be resigned to that stopping (one hopes
-                //       without breakage).
-            }
-
-        }
-    }
-    #endif
-
     // MARK: - Linear or circuit
     @ViewBuilder private var backAndForthStack: some View {
         VStack(alignment: .leading) {
@@ -189,6 +130,8 @@ struct WalkUsabilityForm: View, ReportingPhase {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
+                        print("After usability form DONE:", walkingData)
+                        print("After usability form DONE:", "“\(walkingData.csvLine)”")
                         completion(.success(walkingData.csvLine))
                     }
                 }
@@ -203,9 +146,72 @@ struct WalkUsabilityForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             WalkUsabilityForm {
-                _ in print("POP!")
+                result in
+                let result = try! result.get()
+                print("result is now", result)
             }
-            .environmentObject(WalkInfoResult())
         }
     }
 }
+
+
+/*
+#if false
+// Removed per drubin email 3 Jan 2023 deprecating
+// the text fields as too error-prone
+// MARK: - Length of course
+@ViewBuilder private var lengthOfCourseStack: some View {
+    VStack(alignment: .leading) {
+        Group {
+            Text("About ") +
+            Text("how long was the area")
+                .fontWeight(.heavy) +
+            Text(" you walked in, in feet?")
+        }
+        .minimumScaleFactor(0.75)
+        .lineLimit(2)
+
+        HStack {
+            Spacer()
+            TextField("feet", value: $walkingData.lengthOfCourse, format: .number)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.numberPad)
+                .frame(width: 80)
+            // "Left"-justify the field contents.
+                .multilineTextAlignment(.trailing)
+            // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
+            //       ATW, the modifier works, but be resigned to that stopping (one hopes
+            //       without breakage).
+        }
+
+    }
+}
+#endif
+
+ #if false
+ @ViewBuilder private var howFarWalkedStack: some View {
+ VStack(alignment: .leading) {
+ Group {
+ Text("About ") +
+ Text("how far did you walk").fontWeight(.heavy) +
+ Text(", in feet?")
+ }
+ .lineLimit(2)
+ .minimumScaleFactor(0.75)
+ HStack {
+ Spacer()
+ TextField("feet", value: $walkingData.distance, format: .number)
+ .textFieldStyle(.roundedBorder)
+ .keyboardType(.numberPad)
+ .frame(width: 80)
+ // "Left"-justify the field contents.
+ .multilineTextAlignment(.trailing)
+ // Note: "multilineTextAlignment" is documented as alignment for multiline Text.
+ //       ATW, the modifier works, but be resigned to that stopping (one hopes
+ //       without breakage).
+ }
+ }
+ }
+ #endif
+
+*/

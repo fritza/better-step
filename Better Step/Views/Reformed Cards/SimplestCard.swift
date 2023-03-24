@@ -72,7 +72,7 @@ struct SimplestCard: View {
     var body: some View {
         VStack {
             Text(cContent.pageTitle)
-                .font(.largeTitle)
+                .font(.largeTitle).padding()
             Spacer(minLength: 12)
             ScrollView {
                 interiorContent()

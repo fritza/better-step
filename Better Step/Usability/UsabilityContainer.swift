@@ -29,7 +29,7 @@ enum UsabilityState: Int, CaseIterable {
 struct UsabilityContainer: View, ReportingPhase {
     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
     
-    typealias SuccessValue = String
+    typealias SuccessValue = Void
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     /// Return CSV value for reporting success.
@@ -61,11 +61,13 @@ struct UsabilityContainer: View, ReportingPhase {
             switch currentState {
                 // MARK: - Intro
             case .intro:
-                SimplestCard(content: firstContent) {
+                UsabilityInterstitialView(cardPhase: .entry) {
+                    result in
+                    let phase = try! result.get()
+                    assert(phase == .entry)
                     currentState = .questions
                 }
-                .padding()
-                
+
                 // MARK: - Questions
             case .questions :
                 // resultValue is Result<[Int], Never>
@@ -101,24 +103,20 @@ struct UsabilityContainer: View, ReportingPhase {
                 
                 // MARK: - Closing
             case .closing   :
-                // TODO: Remove UsabilityInterstitialView.
-                UsabilityInterstitialView(
-                    titleText: "Completed",
-                    bodyText: usabilityOutCopy,
-                    systemImageName: "checkmark.circle",
-                    continueTitle: "Continue") {
-                        _ in
-                        // Incoming us just an ()
-                        completion(
-                            .success(fullUsabilityCSV)
-                        )
-                        let data = fullUsabilityCSV.data(using: .utf8)
-                        try! PhaseStorage.shared.series(.usability, completedWith: data!)
-                    }
-            }       // switch?
-        }           // VStack
-        .navigationBarBackButtonHidden(true)
-    }       // body
+                UsabilityInterstitialView(cardPhase: .ending) {
+                    result in
+                    let phase = try! result.get()
+                    assert(phase == .ending)
+                    let data = fullUsabilityCSV.data(using: .utf8)
+                    try! PhaseStorage.shared.series(.usability, completedWith: data!)
+                    completion(
+                        .success( () )
+                    )
+                }
+            }           // switch
+
+        }
+    }      // body
 }
 
 extension UsabilityContainer {

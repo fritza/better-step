@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+private let entryContent     = try! CardContent.contentArray(from: ["usability-intro"         ])
+private let endingContent    = try! CardContent.contentArray(from: ["usability-ending"        ])
+
+
 extension Image {
     func scaledAndTinted() -> some View {
         self.resizable()
@@ -26,17 +30,45 @@ extension Image {
 ///
 /// Its ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
 struct UsabilityInterstitialView: View, ReportingPhase {
-    typealias SuccessValue = Void
-    
-    @State var showNotIntegratedAlert = false
-    
-    // TODO: Turn these into a Decodable struct.
-    let titleText: String
-    let bodyText: String
-    let systemImageName: String
-    let continueTitle: String
+    enum UsabilityInterstitials { case entry, ending
+        var content: [CardContent] {
+            switch self {
+            case .ending: return endingContent
+            case .entry:  return entryContent
+            }
+        }
+    }
+
+    typealias SuccessValue = UsabilityInterstitials
     let completion: ClosureType // Void value type.
-    
+    let cardSpecs: [CardContent]
+    let whichPhase: UsabilityInterstitials
+
+    init(cardPhase: UsabilityInterstitials,
+         completion: @escaping ClosureType) {
+        self.whichPhase = cardPhase
+        cardSpecs = cardPhase.content
+        self.completion = completion
+    }
+
+    var body: some View {
+        InterCarousel(content: cardSpecs) {
+            completion(
+                .success(whichPhase)
+            )
+        }
+        .padding()
+    }
+
+
+    @State var showNotIntegratelert = false
+
+    // TODO: Turn these into a Decodable struct.
+    /*
+     let titleText: String
+     let bodyText: String
+     let systemImageName: String
+     let continueTitle: String
     var body: some View {
         VStack {
             Text(titleText).font(.largeTitle)
@@ -76,6 +108,8 @@ struct UsabilityInterstitialView: View, ReportingPhase {
         .padding()
         .toolbar(.hidden)
     }
+*/
+
 }
 
 private let viewTitle = "Usability"
@@ -95,14 +129,23 @@ Use the Back button if you want to review your answers. You will not be able to 
 
 private let systemImageName = "person.crop.circle.badge.questionmark"
 struct UsabilityInterstitialView_Previews: PreviewProvider {
-    /*
-     let titleText: String
-     let lowerText: String
-     let systemImageName: String
-     let continueTitle: String
-     */
     static var previews: some View {
         NavigationView {
+            UsabilityInterstitialView(cardPhase: .entry, completion: {
+                result in
+                let endpoint = try! result.get()
+                print(#function, "Would pass up to container:", endpoint)
+            })
+        }
+
+        NavigationView {
+            UsabilityInterstitialView(cardPhase: .ending, completion: {
+                result in
+                let endpoint = try! result.get()
+                print(#function, "Would pass up to container:", endpoint)
+            })
+        }
+            /*
             ZStack {
                 UsabilityInterstitialView(
                     titleText: viewTitle,
@@ -113,6 +156,6 @@ struct UsabilityInterstitialView_Previews: PreviewProvider {
                         print(str)
                     }
             }
-        }
+             */
     }
 }

@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+let dasiOnboardContent = try! CardContent.contentArray(from: ["dasi-intro"])
+
+
 /// The first user-visible display in the DASI phase.
 ///
 /// The ``SuccessValue`` as a ``ReportingPhase`` is `Void`.
@@ -27,23 +30,13 @@ Answer “Yes” or “No” to each. You will be able to move backward and for
     // TODO: Add the forward/back bar.
 
     var body: some View {
+
         VStack {
-            Spacer()
-            GenericInstructionView(
-                titleText: "Activity Survey",
-                upperText: Self.instructions,
-                sfBadgeName: "checkmark.square",
-                lowerText: Self.instructions,
-                proceedTitle: "Continue",
-                proceedEnabled: true) {
-#warning("Configure DASIOnboard with .json")
-                    completion(.success(()))
-//                    self.pager.pagerState = .question
-                }
-                .padding()
-                .navigationBarHidden(true)
-        }
-        .onAppear{
+            InterCarousel(content: dasiOnboardContent, reportEnded: {
+                completion(.success(()))
+                // Advance to the DASI questions.
+            })
+            .padding()
         }
     }
 }

@@ -10,6 +10,10 @@
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
 		1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06629CCCF9B001AD9F4 /* conclusion.json */; };
+		1F21D06929CE24D1001AD9F4 /* dasi-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06829CE24D1001AD9F4 /* dasi-intro.json */; };
+		1F21D06B29CE28D7001AD9F4 /* dasi-complete.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06A29CE28D7001AD9F4 /* dasi-complete.json */; };
+		1F21D06D29CE38AF001AD9F4 /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06C29CE38AF001AD9F4 /* usability-intro.json */; };
+		1F21D06F29CE39B4001AD9F4 /* usability-ending.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06E29CE39B4001AD9F4 /* usability-ending.json */; };
 		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */; };
 		1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */; };
@@ -79,7 +83,7 @@
 		1FA2822428DBBB270038353E /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */; };
 		1FA2822928DBBB620038353E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */; };
 		1FA2822B28DBBB940038353E /* walk-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0028D3BD6700547C7A /* walk-intro.json */; };
-		1FA2822C28DBBB940038353E /* usability-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* usability-intro.json */; };
+		1FA2822C28DBBB940038353E /* walks-complete.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* walks-complete.json */; };
 		1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
 		1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0428D3BEA400547C7A /* onboard-intro.json */; };
 		1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F2432DF27FE11D9008A5418 /* DASIQuestions.json */; };
@@ -137,7 +141,7 @@
 		1F1C4DED28D3A27300547C7A /* InterstitalPageContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitalPageContainerView.swift; sourceTree = "<group>"; };
 		1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialPageView.swift; sourceTree = "<group>"; };
 		1F1C4DF328D3A2CC00547C7A /* DigitalTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
-		1F1C4DFE28D3BD6700547C7A /* usability-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "usability-intro.json"; sourceTree = "<group>"; };
+		1F1C4DFE28D3BD6700547C7A /* walks-complete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "walks-complete.json"; sourceTree = "<group>"; };
 		1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "second-walk-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0028D3BD6700547C7A /* walk-intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "walk-intro.json"; sourceTree = "<group>"; };
 		1F1C4E0428D3BEA400547C7A /* onboard-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "onboard-intro.json"; sourceTree = "<group>"; };
@@ -152,6 +156,10 @@
 		1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoResult.swift; sourceTree = "<group>"; };
 		1F1D8C0B2996EB1B00E7C4ED /* libstupload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstupload.a; path = "Better Step/Uploading/libstupload.a"; sourceTree = "<group>"; };
 		1F21D06629CCCF9B001AD9F4 /* conclusion.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = conclusion.json; sourceTree = "<group>"; };
+		1F21D06829CE24D1001AD9F4 /* dasi-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dasi-intro.json"; sourceTree = "<group>"; };
+		1F21D06A29CE28D7001AD9F4 /* dasi-complete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dasi-complete.json"; sourceTree = "<group>"; };
+		1F21D06C29CE38AF001AD9F4 /* usability-intro.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "usability-intro.json"; sourceTree = "<group>"; };
+		1F21D06E29CE39B4001AD9F4 /* usability-ending.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "usability-ending.json"; sourceTree = "<group>"; };
 		1F22BF42295A4D2B00FB5B81 /* ZIPGround.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ZIPGround.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F2B8AA9294A54F500075248 /* SeriesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesTag.swift; sourceTree = "<group>"; };
@@ -361,7 +369,7 @@
 				1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */,
 				1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */,
 				1F1C4E0428D3BEA400547C7A /* onboard-intro.json */,
-				1F1C4DFE28D3BD6700547C7A /* usability-intro.json */,
+				1F1C4DFE28D3BD6700547C7A /* walks-complete.json */,
 				1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */,
 				1F1C4E0028D3BD6700547C7A /* walk-intro.json */,
 			);
@@ -444,6 +452,8 @@
 				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
 				1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */,
 				1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */,
+				1F21D06C29CE38AF001AD9F4 /* usability-intro.json */,
+				1F21D06E29CE39B4001AD9F4 /* usability-ending.json */,
 				1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */,
 				1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */,
 			);
@@ -468,6 +478,7 @@
 				1FD45690279F40B600B5429A /* DASIResponseList.swift */,
 				1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */,
 				1F2432DF27FE11D9008A5418 /* DASIQuestions.json */,
+				1F21D06829CE24D1001AD9F4 /* dasi-intro.json */,
 			);
 			path = DASI;
 			sourceTree = "<group>";
@@ -476,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA3B8C527D6C0250058F1AF /* DASIOnboardView.swift */,
+				1F21D06A29CE28D7001AD9F4 /* dasi-complete.json */,
 				1FA3B8BF27D69C440058F1AF /* DASIQuestionView.swift */,
 				1F8A065327A4724500477379 /* DASICompleteView.swift */,
 				1FA3B8B727D699DB0058F1AF /* SurveyContainerView.swift */,
@@ -710,8 +722,9 @@
 				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
 				1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */,
 				1FC7477228E787AD00817041 /* A.ahap in Resources */,
+				1F21D06D29CE38AF001AD9F4 /* usability-intro.json in Resources */,
 				1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */,
-				1FA2822C28DBBB940038353E /* usability-intro.json in Resources */,
+				1FA2822C28DBBB940038353E /* walks-complete.json in Resources */,
 				1FC7477328E787AD00817041 /* N.ahap in Resources */,
 				1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */,
 				1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */,
@@ -722,8 +735,11 @@
 				1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */,
 				1FC7477428E787AD00817041 /* AAA.ahap in Resources */,
 				1FA2822F28DBBB940038353E /* DASIQuestions.json in Resources */,
+				1F21D06F29CE39B4001AD9F4 /* usability-ending.json in Resources */,
 				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
+				1F21D06B29CE28D7001AD9F4 /* dasi-complete.json in Resources */,
 				1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */,
+				1F21D06929CE24D1001AD9F4 /* dasi-intro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,7 +37,6 @@ struct SurveyContainerView: View, ReportingPhase {
 
     init(_ closure: @escaping ClosureType) {
         completion = closure
-//        notificationHandler = registerDataDeletion()
     }
 
     var body: some View {
