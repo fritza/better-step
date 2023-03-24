@@ -49,18 +49,16 @@ class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertibl
 //    }
     
     var csvLine: String {
-
-        print("CSVLINE: Effort =", effort.rawValue)
-
         let values = [`where`.rawValue,
                       howWalked.rawValue,
                       effort.rawValue,
                       fearOfFalling ? "Y" : "N"
-//                      String(lengthOfCourse ?? 0),
-//                      String(distance),
         ]
         let retval = values.csvLine
         return retval
+
+        //   String(lengthOfCourse ?? 0),
+        //   String(distance),
     }
     
     init() {
