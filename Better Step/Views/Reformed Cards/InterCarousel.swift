@@ -19,9 +19,7 @@ struct InterCarousel: View {
     let cardContent: [CardContent]
     /// Index of displayed card. Should never be `nil`, but `TabView` insists.
     @State var selectionIndex = 0
-    @State var shouldDisableBack: Bool = true
-    
-    let reportReachedEnd: () -> Void
+    let reportEndOfCarousel: () -> Void
     
     /// Prepare the view to display a series of cards.
     init(content: [CardContent],
@@ -29,8 +27,7 @@ struct InterCarousel: View {
         assert(!content.isEmpty)
         self.cardContent = content
         self.selectionIndex = 0
-        self.shouldDisableBack = true
-        self.reportReachedEnd = reportEnded
+        self.reportEndOfCarousel = reportEnded
     }
     
     // MARK: body
@@ -44,7 +41,7 @@ struct InterCarousel: View {
                 ForEach(cardContent) { content in
                     SimplestCard(content: content) {
                         if !incrementingIndexInBounds() {
-                            reportReachedEnd()
+                            reportEndOfCarousel()
                         }
                     }
                     .tabItem {

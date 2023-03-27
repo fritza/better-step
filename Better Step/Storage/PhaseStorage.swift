@@ -180,9 +180,8 @@ final class PhaseStorage: ObservableObject
         let old = checkCompletion()
         let new = allPhasesAreComplete
         assert(old == new)
-
-        print("Note:", #function, "- \(#fileID):\(#line) - archive write-and-send are no longer performed here. See TopContainerView, completion from ConclusionView.")
         /*
+         // archive write-and-send are no longer performed here
          if allPhasesAreComplete {
          // Insert .csv for all phases into an archiver.
          try! createArchive()

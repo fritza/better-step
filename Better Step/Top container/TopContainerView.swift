@@ -15,7 +15,11 @@ import HealthKit
 ///
 struct TopContainerView: View
 {
-    @State var currentPhase: TopPhases
+    @State var currentPhase: TopPhases {
+        didSet {
+            print("current phase from", oldValue, "---", currentPhase)
+        }
+    }
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     
     // TODO: Should this be an ObservedObject?
@@ -108,9 +112,9 @@ struct TopContainerView: View
                         let whatFollows = currentPhase.followingPhase
                         currentPhase = whatFollows
 
-                        precondition(
-                            PhaseStorage.shared.allPhasesAreComplete,
-                            "Reached \(currentPhase.rawValue) before all data-gathering phases are done")
+//                        precondition(
+//                            PhaseStorage.shared.allPhasesAreComplete,
+//                            "Reached \(currentPhase.rawValue) before all data-gathering phases are done")
                     }
                     
                     // MARK: - Usability
@@ -129,11 +133,8 @@ struct TopContainerView: View
                             // (scores: String, specifics: String)
                             currentPhase = currentPhase.followingPhase
                             latestPhase = TopPhases.usability.rawValue
-                            // FIXME: Add the usability form
-                            //        to the usability container.
 
                         case .failure:
-                            // TODO: Maybe pass the error into the failure view?
                             self.currentPhase = .failed
                         } // switch on callback result
                     }  // UsabilityContainer

@@ -170,6 +170,24 @@ struct CardContent: Decodable, Identifiable, Hashable {
     }
 }
 
+extension CardContent: CustomStringConvertible {
+    var description: String {
+        var retval = "CardContent(id: "
+        print(id, ", ",
+              "title: “", pageTitle, "“ ",
+              "above: “", contentAbove.prefix(20), "“ ",
+              "below: “", contentBelow.prefix(20), "“ ",
+              "proceed: “", proceedTitle, "“ ",
+              "system: “", systemImage ?? "n/a", "“",
+              "asset: “", imageAssetName ?? "n/a", "“)",
+
+              separator: "",
+              terminator: "", to: &retval)
+
+        return retval
+    }
+}
+
 extension Array where Element == CardContent {
     /// Set the `id`s in an array of ``CardContent`` to consecutive integers.
     /// - returns: A new `Array` with the same contents as `self` but for the re-initialized `id`s
@@ -212,5 +230,4 @@ extension Array where Element == CardContent {
     var cardsAreValid: Bool {
         hasCorrectIDs && areDistinct
     }
-    
 }

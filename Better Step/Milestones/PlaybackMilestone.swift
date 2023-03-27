@@ -94,7 +94,7 @@ final class AudioMilestone
     /// - throws: ``Errors.avCantStart`` if `AVAudioPlayer/play()` returns `false`.
     func play() throws {
         guard let player else { throw Errors.avCantStart }
-        player.currentTime = 0.0
+        player.currentTime = 0.5
         player.play()
     }
 

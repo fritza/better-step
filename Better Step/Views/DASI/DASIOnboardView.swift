@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-let dasiOnboardContent = try! CardContent.contentArray(from: ["dasi-intro"])
+let dasiOnboardContent: [CardContent] = {
+    let retval = try! CardContent
+        .contentArray(from: ["dasi-intro"])
+    print(retval)
+    assert(retval.areDistinct)
+    return retval
+}()
 
 
 /// The first user-visible display in the DASI phase.

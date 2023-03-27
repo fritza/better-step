@@ -35,7 +35,9 @@ struct SurveyContainerView: View, ReportingPhase {
     // DATA DESTRUCTION. Any that still has to be done is
     // done in PhaseStorage.
 
-    init(_ closure: @escaping ClosureType) {
+    init(phase: DASIState = .landing,
+         closure: @escaping ClosureType) {
+        dasiPhaseState = phase
         completion = closure
     }
 
@@ -60,11 +62,28 @@ struct SurveyContainerView: View, ReportingPhase {
 struct SurveyContainerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SurveyContainerView({
+            SurveyContainerView(closure: {
                 result in
                 print("Result:", result)
             })
         }
+        NavigationView {
+            SurveyContainerView(
+                phase: .question,
+                closure: {
+                    result in
+                    print("Result:", result)
+                })
+        }
+        NavigationView {
+            SurveyContainerView(
+                phase: .completed,
+                closure: {
+                    result in
+                    print("Result:", result)
+                })
+        }
+
         .environmentObject(DASIResponseList())
     }
 }
