@@ -132,15 +132,7 @@ struct DigitalTimerView: View, ReportingPhase {
             timer.start()
         }
         .onDisappear() {
-            do {
-                try MorseHaptic.nnn?.play()
-            }
-            catch {
-                print("DigitalTimerView:\(#line) error on write/haptic: \(error)")
-                assertionFailure()
-            }
-            // Is this handler really the best place?
-            // or onReceive of timer.$status?
+                try! MorseHaptic.nnn?.play()
         }
         .onChange(of: timer.status, perform: { stat in
             // FIXME: Why call into timerStateDidChange?

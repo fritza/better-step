@@ -88,9 +88,7 @@ struct DASIQuestionView: View, ReportingPhase {
                             .success((.landing, answerList))
                         )
                     }
-                    else {
-                        pageNumber -= 1
-                    }
+                    else { pageNumber -= 1 }
                 }
             }
 

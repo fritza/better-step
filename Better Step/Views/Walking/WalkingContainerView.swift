@@ -163,12 +163,6 @@ struct WalkingContainerView: View, ReportingPhase {
             ending_interstitialView()
             // the volume view OUGHT to come BEFORE the final view in the sequence (the final view refers specifically to proceeding with the walk).
         }   // VStack
-
-        // NEW: appear/disappear prevent/permit sleep.
-        .onAppear {
-        }
-        .onDisappear {
-        }
     } // body
 }
 
