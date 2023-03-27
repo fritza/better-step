@@ -172,7 +172,8 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {
                 InterCarousel(content: end_walkingCardInfo) {
-                    completion(.success(.sevenDayRecord))
+                    // Fixed:: - change success to walking phase
+                    completion(.success(.secondWalk))
                 }
             }   // completion closure for end_walkingList
             .padding()
