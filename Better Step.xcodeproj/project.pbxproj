@@ -64,7 +64,6 @@
 		1FA2820328DBBB270038353E /* YesNoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA3B8B927D69BFC0058F1AF /* YesNoStack.swift */; };
 		1FA2820528DBBB270038353E /* XYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF354402790A99E000894B8 /* XYZ.swift */; };
 		1FA2820628DBBB270038353E /* ApplicationOnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A065727A4841400477379 /* ApplicationOnboardView.swift */; };
-		1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */; };
 		1FA2820828DBBB270038353E /* WalkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */; };
 		1FA2820928DBBB270038353E /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2F54128D22FB600593692 /* TopContainerView.swift */; };
 		1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AF27628D8DCEB00ED01AE /* OnboardContainerView.swift */; };
@@ -150,7 +149,6 @@
 		1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityQuestions.swift; sourceTree = "<group>"; };
 		1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityInterstitialView.swift; sourceTree = "<group>"; };
 		1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityView.swift; sourceTree = "<group>"; };
-		1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilitySummaryView.swift; sourceTree = "<group>"; };
 		1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityContainer.swift; sourceTree = "<group>"; };
 		1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = USurveyQuestions.json; sourceTree = "<group>"; };
 		1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkInfoResult.swift; sourceTree = "<group>"; };
@@ -449,7 +447,6 @@
 				1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */,
 				1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */,
 				1F1C4E0D28D4D76800547C7A /* UsabilityQuestions.swift */,
-				1F1C4E1028D4D76800547C7A /* UsabilitySummaryView.swift */,
 				1F1C4E0F28D4D76800547C7A /* UsabilityView.swift */,
 				1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */,
 				1F21D06C29CE38AF001AD9F4 /* usability-intro.json */,
@@ -789,7 +786,6 @@
 				1F9A48B429C4FBD500B956C9 /* CardErrorCodes.swift in Sources */,
 				1FA281E028DBBB270038353E /* ConclusionView.swift in Sources */,
 				1FA2820B28DBBB270038353E /* OnboardContainerView.swift in Sources */,
-				1FA2820728DBBB270038353E /* UsabilitySummaryView.swift in Sources */,
 				1FA17C0129CA310F0082FB53 /* UploadCompletionNotification.swift in Sources */,
 				1FA281E928DBBB270038353E /* DASICompleteView.swift in Sources */,
 				1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */,

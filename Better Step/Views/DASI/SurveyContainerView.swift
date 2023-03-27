@@ -42,19 +42,29 @@ struct SurveyContainerView: View, ReportingPhase {
     }
 
     var body: some View {
-        switch dasiPhaseState! {
-        case .landing:
-            landingPageView()
+        VStack {
+            switch dasiPhaseState! {
+            case .landing:
+                landingPageView()
 
-        case .question:
-            questionPageView()
+            case .question:
+                questionPageView()
 
-        case .completed:
-            completionPageView()
-            // Completion calls my response closure
+            case .completed:
+                completionPageView()
+                // Completion calls my response closure
 
-        case .NONE:
-            fatalError("Unassigned phase in \(#function)")
+            case .NONE:
+                fatalError("Unassigned phase in \(#function)")
+            }
+        }
+        .onAppear {
+            print("Survey", #function, "APPEAR")
+            print()
+        }
+        .onDisappear {
+            print("Survey", #function, "DISAPPEAR")
+            print()
         }
     }
 }

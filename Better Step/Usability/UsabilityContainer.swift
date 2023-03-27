@@ -13,9 +13,6 @@ import Combine
 
 enum UsabilityState: Int, CaseIterable {
     case intro, questions
-#if INCLUDE_USABILITY_SUMMARY
-    case report
-#endif
     case surveyForm
     case closing
 }

@@ -11,14 +11,7 @@ extension IncomingAccelerometry {
     private func marshalledRecords(tag: SeriesTag) -> [String] {
         assert(SubjectID.isSet)
         let common = "\(tag.rawValue),\(SubjectID.id),"
-        
-        #if false
-        guard let all = try? XYZT.sampleData() else {
-            preconditionFailure("Failed to load/decode “TestXYZT.json”")
-        }
-        #else
         let all = self.all()
-        #endif
         // firstRecord = CMAccelerometerData
         let retval = all.map(\.csvLine)
             .map { common + $0 }

@@ -124,16 +124,7 @@ final class PhaseStorage: ObservableObject
         let completed = keysToBeFinished.isSubset(of: finishedKeys)
         return completed
     }
-    
-    /// Determine whether all data needed for first or subsequent sessions has arrived. Set the observable `isComplete` accordingly.
-    private func checkCompletion() -> Bool {
-        // Do all of what I've finished...
-        let finishedKeys = Set(completionDictionary.keys)
-        // appear in the list of what should be finished?
-        let completed = keysToBeFinished.isSubset(of: finishedKeys)
-        return completed
-    }
-    
+
     // MARK: - Completion reports
     
     /// For each data in `completionDictioinary`, write it into a `ZIPArchiver`
@@ -175,28 +166,19 @@ final class PhaseStorage: ObservableObject
         
         // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
-        // If all required tags are accounted for, send it all to `CSVArchiver`.
 
-        let old = checkCompletion()
-        let new = allPhasesAreComplete
-        assert(old == new)
+
         /*
-         // archive write-and-send are no longer performed here
-         if allPhasesAreComplete {
-         // Insert .csv for all phases into an archiver.
-         try! createArchive()
+         PREVIOUSLY, if all required tags are accounted for,
+         this function would compose the archive, and in turn
+         upload it.
 
-         // Set up the upload with the URL for the archive.
-         guard let performer = PerformUpload(
-         from: zipOutputURL,
-         named: zipFileName) else {
-         return
-         }
-         // Perform the upload.
-         performer.doIt()
-         }
+         Now the Top Container triggers archiving and upload
+         when the user taps Proceed (~) in the .conclusion view.
+
+         See commits before noon 27-Mar-2023 for stale and commented
+         -out code.
          */
-
     }
 
     func assertAllComplete(fileName: String = #fileID, line: Int = #line) {
