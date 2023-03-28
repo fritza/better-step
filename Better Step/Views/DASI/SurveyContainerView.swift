@@ -58,14 +58,7 @@ struct SurveyContainerView: View, ReportingPhase {
                 fatalError("Unassigned phase in \(#function)")
             }
         }
-        .onAppear {
-            print("Survey", #function, "APPEAR")
-            print()
-        }
-        .onDisappear {
-            print("Survey", #function, "DISAPPEAR")
-            print()
-        }
+        .environmentObject(responses)
     }
 }
 
@@ -94,6 +87,6 @@ struct SurveyContainerView_Previews: PreviewProvider {
                 })
         }
 
-        .environmentObject(DASIResponseList())
+//        .environmentObject(DASIResponseList())
     }
 }

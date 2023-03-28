@@ -30,13 +30,18 @@ fileprivate let endIncompleteText = """
 struct DASICompleteView: View, ReportingPhase {
     typealias SuccessValue = DASIResponseList
 
+    /// `NSError` domain for trying to report with incomplete responses.
+    /// the error's `code` is the DASI question (intended to be
+    /// the first missing response) to be displayed
+    static let pageBackErrorDomain = "DASI.pageBack"
+
     let completion: ClosureType
-    let dasiResponses: DASIResponseList
+    @EnvironmentObject var dasiResponses: DASIResponseList
     init(responses: DASIResponseList,
          _ completion: @escaping ClosureType
          ) {
         self.completion = completion
-        self.dasiResponses = responses
+//        self.dasiResponses = responses
     }
 
     var body: some View {
@@ -55,5 +60,6 @@ struct DASICompleteView_Previews: PreviewProvider {
                 _ in
             }
         }
+        .environmentObject(DASIResponseList())
     }
 }

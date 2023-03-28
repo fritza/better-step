@@ -31,12 +31,12 @@ struct DASIQuestionView: View, ReportingPhase {
 
     // answerList is by-reference, but
     // make it view-persistent out of an abundance.
-    @State var answerList: DASIResponseList
+    @EnvironmentObject var answerList: DASIResponseList
     @State var pageNumber: Int = 1
+    @State var showIncompletion = false
 
-    init(answerList: DASIResponseList,
-         _ completion: @escaping ClosureType) {
-        self.answerList = answerList
+    init(startingAtID id: Int = 1, completion: @escaping ClosureType) {
+        self.pageNumber = id
         self.completion = completion
     }
 
@@ -64,18 +64,56 @@ struct DASIQuestionView: View, ReportingPhase {
                             id: pageNumber,
                             with: answer)
                     if pageNumber >= DASIStages.maxIdentifier {
+                        guard answerList.isReadyToPublish else {
+                            showIncompletion = true
+                            return
+                        }
+//                        print("Answers:", answerList.csvLine)
+                        print("Answers:", "(csv)")
                         completion(
                             .success((.completed, answerList))
                         )
                     }
                     else {
                         pageNumber += 1
+                        print("page number advanced to", pageNumber)
                     }
                 }
             )
             .frame(height: 130)
             .padding()
         }
+
+/*
+ WANTED:
+ Now that omitted quiestions can jump you back from the end,
+ it would be convenient to offer to (jump to the end?) (jump to the conclusion?)
+    ... once you've remedied the incompletion.
+ Probably you post an alert with "Proceed" to take you to the conclusion.
+ There HAS to be a way to suppress the completion-proceed alert after the first offer.
+ You don't want to pop that up every time you re-enter a page.
+
+ How about posting it upon getting a yes/no answer that clears the fault.
+ BUT: You can't congratulate and present a proceed button if the one incompletion is upon a regular question 12. It Proceeds when you give your answer
+
+ In existing code (I believe) you try to exit the question series when Q12 is answered.
+    If all are completed, proceed to conclusion.
+    If not, the "Incomplete" alert and you're jumped back.
+
+ But now you want to be in a BOLO state where the Question View checks for completion at every response
+    When that's reached, you offer Proceed (jump to conclusion) or Review (stop showing the alert ever again and allow the user to work further on the answers.
+ */
+
+
+        .alert("Incomplete", isPresented: $showIncompletion) {
+            Button("Go") {
+                let firstMissingIndex = answerList.unknownResponseIDs.first!
+                pageNumber = firstMissingIndex
+            }
+        } message: {
+            Text("Not all questions have been answered. Do back to questions \(answerList.formatUnansweredIDs ?? "program error, sorry)")")
+        }
+
 
         .animation(.easeInOut, value: pageNumber)
 
@@ -93,10 +131,10 @@ struct DASIQuestionView: View, ReportingPhase {
             }
 
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                gearBarItem()
-//                ReversionButton(toBeSet: $showReversionAlert)
                 Button("Next →") {
-                    pageNumber += 1
+                    if pageNumber < DASIStages.maxIdentifier {
+                        pageNumber += 1
+                    }
                 }
                 .disabled(pageNumber >= DASIStages.maxIdentifier)
             }
@@ -105,14 +143,24 @@ struct DASIQuestionView: View, ReportingPhase {
     }
 }
 
-    struct DASIQuestionView_Previews: PreviewProvider {
-        static var previews: some View {
-            NavigationView {
-                DASIQuestionView(answerList: DASIResponseList()) {_ in
-                    print("Question done")
-                }
+struct DASIQuestionView_Previews: PreviewProvider {
+    static let responseList = DASIResponseList()
+    static var previews: some View {
+        NavigationView {
+            DASIQuestionView() {_ in
+                print(responseList.csvLine)
+//                print("Question 1 drawn")
             }
+            .environmentObject(responseList)
+        }
+        NavigationView {
+            DASIQuestionView(startingAtID: 3) {_ in
+                print(responseList.csvLine)
+//                print("Question 3 drawn")
+            }
+            .environmentObject(responseList)
         }
     }
+}
 
 
