@@ -160,3 +160,21 @@ extension String {
         )
     }
 }
+
+
+extension Array where Element: CustomStringConvertible {
+    var colloquially: String?
+    {
+        guard !self.isEmpty else { return nil }
+
+        switch self.count {
+        case 1: return String(self.first!.description)
+        case 2: return "\(self[0].description) and \(self[1].description)"
+        default:
+            let head = self.dropLast()
+            let initial = head.reduce("") { $0 + "\($1.description), " }
+            return initial + "and \(self.last!.description)"
+        }
+    }
+}
+

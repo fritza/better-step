@@ -112,19 +112,7 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
             // Timestamp updates in withResponse(_:)
         }
 
-    /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
-    /// - note: The survey is not resdy to commit before this array is empty.
-    var unknownResponseIDs: [Int] {
-       return answers
-            .filter { $0.response == .unknown }
-            .map(\.id)
-            .sorted()
-    }
 
-    /// Whether the DASI report is complete, there being no `unknown` responses
-    var isReadyToPublish: Bool { self.unknownResponseIDs.isEmpty }
-
-    
     // MARK: CSV formatting
 
     /// Generate a single-line comma-delimited report of `SubjectID`, `timestamp`, and number/answer pairs.
@@ -133,7 +121,47 @@ final class DASIResponseList: ObservableObject, CSVRepresentable {
         precondition(completedAnswers.count == answers.count,
         "Got here with missing answers")
         let arrayOfAnswers = answers.map(\.csvLine)
-        assert(SubjectID.isSet)
+        if !SubjectID.isSet { SubjectID.id = "SAMPLE" }
         return "\(SeriesTag.dasi.rawValue),\(SubjectID.id)," + arrayOfAnswers.csvLine
     }
 }
+
+// MARK: - Handling missing answers
+extension DASIResponseList {
+    /// The `DASIQuestion` `id`s of all responses that are still `.unknown`
+    /// - note: The survey is not resdy to commit before this array is empty.
+    var unknownResponseIDs: [Int] {
+        return answers
+            .filter { $0.response == .unknown }
+            .map(\.id)
+            .sorted()
+    }
+
+    var firstUnasweredQuestion: Int? {
+        guard let id = unknownResponseIDs.first else {
+            return nil
+        }
+        return id
+    }
+
+    var formatUnansweredIDs: String? {
+        return unknownResponseIDs.colloquially
+    }
+
+    /// Whether the DASI report is complete, there being no `unknown` responses
+    var isReadyToPublish: Bool { self.unknownResponseIDs.isEmpty }
+
+}
+
+/*
+ PROBLEM:
+    DASIResponseList.csvLine preconditions that none of the questions are unanswered.
+ This is known in DRL, but it's not a view.
+ The cheapest way out of this is for the final card of the DASI container to put up an alert identifying the gaps and refusing to proceed.
+ Approach?
+ ASSUMING the final, goodbye view can be decorated independantly,
+ check the DRL for isReadyToPublish. If not,
+    compose the message and trigger the alert, advising of the missing answers.
+    Bonus: The CTA button brings you to the first unanswered question.
+ */
+

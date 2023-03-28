@@ -45,19 +45,6 @@ extension SurveyContainerView {
         .navigationBarBackButtonHidden(true)
     }
 
-/*
- var nextSteps: String {
-     if allItemsAnswered {
-         return "\nTap “Continue” to complete your report."
-     }
-     else {
-         return "\nUse the “← Back” button to review your answers."
-     }
- }
- The calling
- */
-
-
     // MARK: - Questions
     @ViewBuilder
     func questionPageView() -> some View {
