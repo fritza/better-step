@@ -17,8 +17,17 @@ struct Better_StepApp: App {
     var body: some Scene {
         WindowGroup {
             TopContainerView()
-//            InterCarousel(content: contentArray) {
-//                print("exhausted contents")
+
+//            NavigationView {
+//                SurveyContainerView { result in
+//                    do {
+//                        let list = try result.get()
+//                        print("Survey returned:", list.csvLine)
+//                    }
+//                    catch {
+//                        print("Survey returned error", error)
+//                    }
+//                }
 //            }
         }
     }
