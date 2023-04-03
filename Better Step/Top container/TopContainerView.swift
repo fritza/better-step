@@ -23,7 +23,7 @@ struct TopContainerView: View
     @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
     
     // TODO: Should this be an ObservedObject?
-    @State var showNoPermission = false
+//    @State var showNoPermission = false
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -45,7 +45,7 @@ struct TopContainerView: View
                 
             case .success:
                 print("\(#function):\(#line): refused")
-                showNoPermission = true
+//                showNoPermission = true
                 // TODO: Put up an alert explaining why this is Bad.
             }
         }
@@ -185,23 +185,9 @@ struct TopContainerView: View
             }       // VStack
                     // MARK: - onAppear {}
             .onAppear {
-                // Alert if this is a fresh run on the same calendar day.
-//                shouldChallengeHaste_1 = ASKeys.tooEarlyToRepeat
             }       // NavigationView modified
             .environmentObject(WalkInfoResult())
         } // end VStack
-#if BETA_API
-        .overlay(alignment: .bottomLeading, content: {
-            Circle()
-                .foregroundColor(.red)
-                .frame(width: 30, height: 30)
-        })
-#endif
-        .alert("No Daily Records",
-               isPresented: $showNoPermission, actions: { },
-               message: {
-            Text("Without your permission, [OUR APP] cannot report your seven-day step counts.\n\nTo allow these reports, enable them in\n\nSettings > Privacy & Securoty > Health\nor\nHealth > Browse > Activity > Steps")
-        })        
     }
     
 }

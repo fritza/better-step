@@ -55,8 +55,6 @@ struct OnboardContainerView: View, ReportingPhase {
 struct OnboardContainerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Text("Subject ID: '\(SubjectID.id)'")
-                .font(.caption).foregroundColor(.red)
             OnboardContainerView() {
                 _ in print("nothing to do")
             }

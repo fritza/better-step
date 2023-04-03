@@ -103,8 +103,8 @@ struct ApplicationOnboardView: View, ReportingPhase {
             
             Spacer()
             Text((item.contentBelow ?? "Can't Happen").addControlCharacters)
-                .font(Rendering.bodyFont)
                 .minimumScaleFactor(Rendering.textMinScale)
+                .font(.callout)
             Spacer()
             
             Divider()

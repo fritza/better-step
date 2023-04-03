@@ -1,8 +1,8 @@
 [
     {
         "pageTitle": "Welcome.",
-        "contentAbove": "We deeply appreciate…",
-        "contentBelow": "First, we need to match you to the information you'll send. You were given a Subject ID. Please enter it here:",
+        "contentAbove": "We deeply appreciate your participation in our study.||Enter the ID you were given when you joined:",
+        "contentBelow": "This application is solely for the use of informed and consenting subjects in this IRB-moderated app.",
         "systemImage": "hand.wave",
         "proceedTitle": "Done"
     },
