@@ -33,6 +33,9 @@
 		1F6998342999A67A00A0AC80 /* UploadCreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9350298DB6DF00B5194B /* UploadCreds.swift */; };
 		1F6998362999A67A00A0AC80 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D934E298DB6DF00B5194B /* SessionDelegate.swift */; };
 		1F6998372999A67A00A0AC80 /* UPLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D934F298DB6DF00B5194B /* UPLData.swift */; };
+		1F6E239A29DB39CE0007CB14 /* LaunchScreen WT.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */; };
+		1F6E239D29DB3CF80007CB14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
+		1F6E239E29DB3D0A0007CB14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
@@ -99,7 +102,6 @@
 		1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
 		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
-		1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1FAC47F629D61AAD009813CF /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1FAC47F729D61AAD009813CF /* IncomingAccelerometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */; };
 		1FAC47F829D61AAD009813CF /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
@@ -188,7 +190,6 @@
 		1FAC484D29D61AAD009813CF /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1FAC484E29D61AAD009813CF /* walks-complete.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4DFE28D3BD6700547C7A /* walks-complete.json */; };
 		1FAC484F29D61AAD009813CF /* N.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476C28E7694E00817041 /* N.ahap */; };
-		1FAC485029D61AAD009813CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1FAC485129D61AAD009813CF /* USurveyQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1428D4D76900547C7A /* USurveyQuestions.json */; };
 		1FAC485229D61AAD009813CF /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1FAC485329D61AAD009813CF /* Countdowns.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */; };
@@ -284,6 +285,7 @@
 		1F6456F7294D29FA0064DADA /* TestXYZT.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestXYZT.json; sourceTree = SOURCE_ROOT; };
 		1F66586729709D4900EE75FE /* ZIPArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPArchiver.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
+		1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen WT.storyboard"; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
 		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */,
+				1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */,
 				1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */,
 				1F1C4E0428D3BEA400547C7A /* onboard-intro.json */,
 				1F1C4DFE28D3BD6700547C7A /* walks-complete.json */,
@@ -864,13 +867,13 @@
 			files = (
 				1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */,
 				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
+				1F6E239E29DB3D0A0007CB14 /* Assets.xcassets in Resources */,
 				1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */,
 				1FC7477228E787AD00817041 /* A.ahap in Resources */,
 				1F21D06D29CE38AF001AD9F4 /* usability-intro.json in Resources */,
 				1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */,
 				1FA2822C28DBBB940038353E /* walks-complete.json in Resources */,
 				1FC7477328E787AD00817041 /* N.ahap in Resources */,
-				1FAC0893299C2F9200772455 /* Assets.xcassets in Resources */,
 				1FA2822D28DBBB940038353E /* USurveyQuestions.json in Resources */,
 				1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */,
 				1FA2823228DBBC070038353E /* Countdowns.m4a in Resources */,
@@ -893,13 +896,14 @@
 			files = (
 				1FAC484829D61AAD009813CF /* onboard-intro.json in Resources */,
 				1FAC484929D61AAD009813CF /* walk-intro.json in Resources */,
+				1F6E239A29DB39CE0007CB14 /* LaunchScreen WT.storyboard in Resources */,
 				1FAC484A29D61AAD009813CF /* conclusion.json in Resources */,
+				1F6E239D29DB3CF80007CB14 /* Assets.xcassets in Resources */,
 				1FAC484B29D61AAD009813CF /* A.ahap in Resources */,
 				1FAC484C29D61AAD009813CF /* usability-intro.json in Resources */,
 				1FAC484D29D61AAD009813CF /* AAAbeep.ahap in Resources */,
 				1FAC484E29D61AAD009813CF /* walks-complete.json in Resources */,
 				1FAC484F29D61AAD009813CF /* N.ahap in Resources */,
-				1FAC485029D61AAD009813CF /* Assets.xcassets in Resources */,
 				1FAC485129D61AAD009813CF /* USurveyQuestions.json in Resources */,
 				1FAC485229D61AAD009813CF /* NNNbeep.ahap in Resources */,
 				1FAC485329D61AAD009813CF /* Countdowns.m4a in Resources */,
@@ -1326,6 +1330,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -1366,6 +1371,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -1388,7 +1394,7 @@
 		1FAC485F29D61AAD009813CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon WT";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
@@ -1408,7 +1414,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen WT.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -1431,7 +1437,7 @@
 		1FAC486029D61AAD009813CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon WT";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
@@ -1450,7 +1456,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "Please allow this app to measure your activity by sampling your motions.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen WT.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
