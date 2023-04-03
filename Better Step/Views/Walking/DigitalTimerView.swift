@@ -132,7 +132,8 @@ struct DigitalTimerView: View, ReportingPhase {
             timer.start()
         }
         .onDisappear() {
-                try! MorseHaptic.nnn?.play()
+            #warning("Opt-try is a patch, figure out why haptic failed.")
+                try? MorseHaptic.nnn?.play()
         }
         .onChange(of: timer.status, perform: { stat in
             // FIXME: Why call into timerStateDidChange?
