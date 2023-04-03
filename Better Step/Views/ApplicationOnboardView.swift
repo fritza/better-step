@@ -88,7 +88,6 @@ struct ApplicationOnboardView: View, ReportingPhase {
         VStack {
             Text("Welcome").font(.largeTitle)
             Spacer()
-#warning("Port GenericContainer view")
             // ... as much as possible, having the
             // text field breaks the GCV model.
             // MARK: Instructional text

@@ -70,7 +70,7 @@ struct DASIQuestionView: View, ReportingPhase {
                         // all purposes, including Q12.
                         showCompletion = true
                     }
-                    else if (pageNumber + 1) >= DASIStages.maxIdentifier && !answerList.isReadyToPublish {
+                    else if (pageNumber + 1) > DASIStages.maxIdentifier && !answerList.isReadyToPublish {
                         showIncompletion = true
                     }
                     else {

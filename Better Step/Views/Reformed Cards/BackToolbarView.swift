@@ -30,6 +30,7 @@ struct BackToolbarView: View {
             }
             Divider()
         }
+        .toolbar(.hidden, for: .navigationBar)
         .padding()
     }
 }
@@ -42,18 +43,21 @@ struct BackToolbarView_Previews: PreviewProvider {
         "Body": .body
         ]
     static var previews: some View {
-        VStack {
-            BackToolbarView(disabled: true) {
-                print("Get back")
-            }
-            Button("< Back") { }
-            Spacer()
-            List(nameFont, id: \.0) { kvPair in
-                LabeledContent(kvPair.0) {
-                    Text("Some Text")
-                        .font(kvPair.1)
+        NavigationView {
+            VStack {
+                BackToolbarView(disabled: true) {
+                    print("Get back")
                 }
+                Button("< Back") { }
+                Spacer()
+                //            List(nameFont, id: \.0) { kvPair in
+                //                LabeledContent(kvPair.0) {
+                //                    Text("Some Text")
+                //                        .font(kvPair.1)
+                //                }
+                //            }
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }

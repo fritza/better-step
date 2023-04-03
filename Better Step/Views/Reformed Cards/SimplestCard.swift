@@ -86,11 +86,16 @@ struct SimplestCard: View {
 }
 
 struct SimplestCard_Previews: PreviewProvider {
+    static func contents(from json: String) throws -> CardContent {
+        let retval = try CardContent
+            .createContents(from: json)
+        return retval.first!
+    }
     static var content: CardContent = {
         do {
             let retval = try CardContent
                 .createContents(from: "walk-intro")
-            return retval[5]
+            return retval[6]
         }
         catch {
             let rescue = CardContent(

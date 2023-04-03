@@ -16,8 +16,8 @@ import Combine
 /// Names tasks _within the walk phase,_ as distinct from ``SeriesTag``, which identifies reportable data series.
 public enum WalkingState: String, CaseIterable, CustomStringConvertible
 {
-    case interstitial_1, /* volume_1, */ countdown_1, walk_1
-    case interstitial_2, /* volume_2, */ countdown_2, walk_2
+    case interstitial_1, countdown_1, walk_1
+    case interstitial_2, countdown_2, walk_2
     case ending_interstitial, demo_summary
     
     public var description: String { self.rawValue }
