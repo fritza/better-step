@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-// TODO: Yield to InterstitialPageView
-//       which has contentAbove and contentBelow
-#warning("Replace with InterstitialPageView")
+// FIXME: ApplicationGreetingView is the only remaining client.
+//        Remove the dependency and delete the struct.
 
 /// Display a screen containing instructions before and oafter performing an active task in the same phase.
 ///

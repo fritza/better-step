@@ -87,7 +87,7 @@ struct DASIQuestionView: View, ReportingPhase {
                 pageNumber = firstMissingIndex
             }
         } message: {
-            Text("Not all questions have been answered. Do back to questions \(answerList.formatUnansweredIDs ?? "program error, sorry)")")
+            Text("Not all questions have been answered. Go back to questions \(answerList.formatUnansweredIDs ?? "program error, sorry)")")
         }
 
         .alert("Finished!", isPresented: $showCompletion) {
