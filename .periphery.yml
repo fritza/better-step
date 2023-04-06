@@ -1,6 +1,7 @@
 project: Better Step.xcodeproj
 retain_objc_accessible: true
+retain_public: true
 schemes:
-- Better Step
+- Walk Test
 targets:
-- Better Step
+- Walk Test
