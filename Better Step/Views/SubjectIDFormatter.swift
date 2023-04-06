@@ -24,7 +24,7 @@ import Foundation
 ///  `Formatter`s are usually `<T> ↔︎ String`, but in this case it's one-way between two strings: `String → String?`
 /// - todo: Parameterize the regular expression that does the recognizing.
 final class SubjectIDFormatter: Formatter {
-    static let regex = /([SMTWRFA])-?(\d\d\d\d)/
+    static let regex = /([SMTWHFA])-?(\d\d\d\d)/
         .ignoresCase()
     
     /// Render an input `String` as an optional.
