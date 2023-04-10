@@ -49,7 +49,6 @@
 		1F9A48B029C4FB9900B956C9 /* InterCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48AF29C4FB9900B956C9 /* InterCarousel.swift */; };
 		1F9A48B229C4FBA900B956C9 /* BackToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48B129C4FBA900B956C9 /* BackToolbarView.swift */; };
 		1F9A48B429C4FBD500B956C9 /* CardErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48B329C4FBD500B956C9 /* CardErrorCodes.swift */; };
-		1F9C14E829E0CD9600612A19 /* ExtPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F9C14E729E0CD9600612A19 /* ExtPackage */; };
 		1FA17C0129CA310F0082FB53 /* UploadCompletionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */; };
 		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
 		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
@@ -367,7 +366,6 @@
 				1FA2823628DBBC3F0038353E /* DequeModule in Frameworks */,
 				1FA2823828DBBC3F0038353E /* OrderedCollections in Frameworks */,
 				1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */,
-				1F9C14E829E0CD9600612A19 /* ExtPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +762,6 @@
 				1FA2823B28DBBC3F0038353E /* ActivityView */,
 				1FA2823D28DBBC3F0038353E /* ZIPFoundation */,
 				1FA2823F28DBBC800038353E /* RealModule */,
-				1F9C14E729E0CD9600612A19 /* ExtPackage */,
 			);
 			productName = "Better Step";
 			productReference = 1FA281CE28DBBA160038353E /* Better Step.app */;
@@ -834,7 +831,6 @@
 				1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */,
 				1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -1557,14 +1553,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/fritza/USE--BST-Clone/Extensions/ExtPackage";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		1FAC47EA29D61AAD009813CF /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -1624,11 +1612,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1F9C14E729E0CD9600612A19 /* ExtPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */;
-			productName = ExtPackage;
-		};
 		1FA2823328DBBC3F0038353E /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;
