@@ -22,11 +22,6 @@ import SwiftUI
  - `WalkingState` is an example of naming sub-tasks within a phase. `WalkingState` includes `countdown_1`, `walk_1`, `interstitial_2`, and so on.  `TopPhases`, which `TopContainerView` uses to name the top-level sequence of phases within the app  is a special case.
  */
 struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {    
-    // MARK: AppStorage
-
-    /// The last-ciompleted phase for state restoration. **Belongs at top.**
-    @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
-    
         /// `CustomStringConvertible` adoption.
     var description: String {
         guard let retval = Self.TPAndString
@@ -35,6 +30,9 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
         return retval.value
     }
 
+    // MARK: AppStorage
+
+    @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
 /*
  I have this terrible problem that I don't know how to address
 
@@ -43,7 +41,8 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
 
  The question is what the most-advanced phase is.
  That's the initial state.
- */
+    /// The last-ciompleted phase for state restoration. **Belongs at top.**
+
 /// Restore the completion state (current phase, DASI complete, usability complete) to initial.
 ///
 /// Called only in repsonse to a total reversion.
@@ -53,10 +52,11 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
         ASKeys.isFirstRunComplete = false
 //        completedFirstRun = false
 //        collectedDASI = false
-        
+
 //        collectedUsability = false
 //        firstUse = true
     }
+ */
 
     // Not an OptionSet, but we'll live.
 

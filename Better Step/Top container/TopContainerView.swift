@@ -15,12 +15,12 @@ import HealthKit
 ///
 struct TopContainerView: View
 {
-    @State var currentPhase: TopPhases {
+    @State private var currentPhase: TopPhases {
         didSet {
             print("current phase from", oldValue, "---", currentPhase)
         }
     }
-    @AppStorage(ASKeys.phaseProgress.rawValue) var latestPhase: String = ""
+    @AppStorage(ASKeys.phaseProgress.rawValue) private var latestPhase: String = ""
     
     // TODO: Should this be an ObservedObject?
 //    @State var showNoPermission = false

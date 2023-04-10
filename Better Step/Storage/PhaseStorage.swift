@@ -15,8 +15,6 @@ import Combine
 /// Watch completion of all necessary stages by observing `.isComplete`.
 final class PhaseStorage: ObservableObject
 {
-    @AppStorage(ASKeys.phaseProgress.rawValue) var lastSeenUserPhase: SeriesTag = .none
-    
     static let shared = PhaseStorage()
         /// The year/month/day as of the creation of this `PhaseStorage`.
     private let stickyYMDTag: String // "yyyy-mm-dd"

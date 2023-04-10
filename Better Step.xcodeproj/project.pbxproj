@@ -322,7 +322,6 @@
 		1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IncomingAccelerometry+Marshalling.swift"; sourceTree = "<group>"; };
 		1FD0EAC429AFBD18003D9E7A /* SubjectIDFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectIDFormatter.swift; sourceTree = "<group>"; };
 		1FD26E5429DF797E0061AD68 /* InterstitalPageContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitalPageContainerView.swift; sourceTree = "<group>"; };
-		1FD26E5729DF7A5D0061AD68 /* Instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Instructions; sourceTree = "<group>"; };
 		1FD4568A279F208400B5429A /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
@@ -584,7 +583,6 @@
 			isa = PBXGroup;
 			children = (
 				1FD26E5429DF797E0061AD68 /* InterstitalPageContainerView.swift */,
-				1FD26E5729DF7A5D0061AD68 /* Instructions */,
 				1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */,
 				1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */,
 			);
