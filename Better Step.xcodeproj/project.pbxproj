@@ -27,6 +27,7 @@
 		1F5D7CAC2999B88200FFB414 /* error-support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D9352298DB6DF00B5194B /* error-support.swift */; };
 		1F60712C29E479CE0080257F /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
 		1F60712D29E479D00080257F /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4568A279F208400B5429A /* FileManager+extensions.swift */; };
+		1F60712F29E490B00080257F /* AppPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60712E29E490B00080257F /* AppPhases.swift */; };
 		1F6456F4294CF6910064DADA /* TimedXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F56E73529439626001708F3 /* TimedXYZ.swift */; };
 		1F6456F8294D29FA0064DADA /* TestXYZT.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F6456F7294D29FA0064DADA /* TestXYZT.json */; };
 		1F66586829709D4900EE75FE /* ZIPArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66586729709D4900EE75FE /* ZIPArchiver.swift */; };
@@ -38,7 +39,7 @@
 		1F6E239A29DB39CE0007CB14 /* LaunchScreen WT.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */; };
 		1F6E239D29DB3CF80007CB14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
 		1F6E239E29DB3D0A0007CB14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0B6755276FA6CA00011A7E /* Assets.xcassets */; };
-		1F87E1A32919979C000908AE /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
+		1F776F8629E4B1BE00C6C1A1 /* AppPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60712E29E490B00080257F /* AppPhases.swift */; };
 		1F8868332947A2EE00085EC7 /* SevenDayPedometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */; };
 		1F891BB82950E9B3006C09DF /* Better_StepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6751276FA6C900011A7E /* Better_StepApp.swift */; };
 		1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B676E276FA6CA00011A7E /* Better_StepUITestsLaunchTests.swift */; };
@@ -102,7 +103,6 @@
 		1FA61F1A2909D393000D4824 /* UsabilityInterstitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0E28D4D76800547C7A /* UsabilityInterstitialView.swift */; };
 		1FA9EA1A2911C1CD00498D01 /* ReportingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */; };
 		1FA9EA1F29144C4A00498D01 /* UsabilityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E1128D4D76900547C7A /* UsabilityContainer.swift */; };
-		1FAC47F629D61AAD009813CF /* TopPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87E1A22919979C000908AE /* TopPhases.swift */; };
 		1FAC47F729D61AAD009813CF /* IncomingAccelerometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7477628EB55F500817041 /* IncomingAccelerometry.swift */; };
 		1FAC47F829D61AAD009813CF /* Numeric+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB684F927F252BA00612924 /* Numeric+extensions.swift */; };
 		1FAC47F929D61AAD009813CF /* DASIUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A338027E122130093C896 /* DASIUserResponse.swift */; };
@@ -274,6 +274,7 @@
 		1F56E73529439626001708F3 /* TimedXYZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedXYZ.swift; sourceTree = "<group>"; };
 		1F59876429063A5E00B004CA /* SurveyContainerView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyContainerView+content.swift"; sourceTree = "<group>"; };
 		1F5CE52728DBA8EE000BF284 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Better Step/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		1F60712E29E490B00080257F /* AppPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPhases.swift; sourceTree = "<group>"; };
 		1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInstructionView.swift; sourceTree = "<group>"; };
 		1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Countdowns.m4a; sourceTree = "<group>"; };
 		1F60E70128DA71F700EC2593 /* PlaybackMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMilestone.swift; sourceTree = "<group>"; };
@@ -558,6 +559,7 @@
 				1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */,
 				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
+				1F60712E29E490B00080257F /* AppPhases.swift */,
 				1F87E1A22919979C000908AE /* TopPhases.swift */,
 			);
 			path = "Top container";
@@ -947,10 +949,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F87E1A32919979C000908AE /* TopPhases.swift in Sources */,
 				1FC7477728EB55F500817041 /* IncomingAccelerometry.swift in Sources */,
 				1FA2820F28DBBB270038353E /* Numeric+extensions.swift in Sources */,
 				1FA281F428DBBB270038353E /* DASIUserResponse.swift in Sources */,
+				1F60712F29E490B00080257F /* AppPhases.swift in Sources */,
 				1FA2821D28DBBB270038353E /* DASIResponseList.swift in Sources */,
 				1F5D7CAC2999B88200FFB414 /* error-support.swift in Sources */,
 				1F9A48AC29C4FB2400B956C9 /* CardContent.swift in Sources */,
@@ -1026,10 +1028,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FAC47F629D61AAD009813CF /* TopPhases.swift in Sources */,
 				1FAC47F729D61AAD009813CF /* IncomingAccelerometry.swift in Sources */,
 				1FAC47F829D61AAD009813CF /* Numeric+extensions.swift in Sources */,
 				1FAC47F929D61AAD009813CF /* DASIUserResponse.swift in Sources */,
+				1F776F8629E4B1BE00C6C1A1 /* AppPhases.swift in Sources */,
 				1FAC47FA29D61AAD009813CF /* DASIResponseList.swift in Sources */,
 				1FAC47FB29D61AAD009813CF /* error-support.swift in Sources */,
 				1FAC47FC29D61AAD009813CF /* CardContent.swift in Sources */,

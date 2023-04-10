@@ -15,13 +15,6 @@ import HealthKit
 ///
 struct TopContainerView: View
 {
-    @State private var currentPhase: TopPhases {
-        didSet {
-            print("current phase from", oldValue, "---", currentPhase)
-        }
-    }
-    @AppStorage(ASKeys.phaseProgress.rawValue) private var latestPhase: String = ""
-    
     // TODO: Should this be an ObservedObject?
 //    @State var showNoPermission = false
     
@@ -58,23 +51,45 @@ struct TopContainerView: View
             NotificationCenter.default
                 .post(name: TotalResetNotification, object: nil)
         }
-        
+
         // TODO: store and reload the current phase ID.
-        currentPhase = TopPhases.entry.followingPhase
+        AppPhases.reset()
+        displayedPhase = AppPhases.advance()
+
         setUpCompletionNotifications()
+    }
+
+    // I don't have a State for displaying the phase
+    @State private var displayedPhase: AppPhases {
+        didSet {
+            print("Setting displayedPhase from", oldValue, "to", displayedPhase)
+        }
     }
     
 //    @State private var shouldChallengeHaste_1: Bool = false
 //    @State private var shouldChallengeHaste_2: Bool = false
 
     // TODO: Make .navigationTitle consistent
-    
+
+    /// Handle the ``AppPhases.entry`` phase by incremennting the current-phase counter, then returning an `EmptyView`.
+    func entryNonView(completion: @escaping () -> Void) -> some View {
+        return Text("Should not be visible")
+            .onAppear {
+                completion()
+            }
+    }
+
     // I provide the NavigationView
     var body: some View {
         NavigationView {
             VStack {
-                switch self.currentPhase {
-                    
+                switch displayedPhase {
+                case .entry:
+
+                    entryNonView() {
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                    }
+
                     // MARK: - Onboarding
                 case .onboarding:
                     OnboardContainerView {
@@ -83,8 +98,7 @@ struct TopContainerView: View
                             // Absorb OnboardContainerView's (upstream)
                             // SET SubjectID.id (Terminal).
                             SubjectID.id = try result.get()
-                            self.currentPhase = self.currentPhase.followingPhase
-                            latestPhase = TopPhases.onboarding.rawValue
+                            displayedPhase = AppPhases.advance(settingFirstRun: true)
                         }
                         catch {
                             fatalError("Can't fail out of an onboarding view")
@@ -96,9 +110,10 @@ struct TopContainerView: View
                     }
                     
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
+                    // MARK: - Greeting
                 case .greeting:
                     ApplicationGreetingView {_ in
-                        self.currentPhase = .walking
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
                     }
                     .onDisappear {
                         collect7DayPedometry()
@@ -109,7 +124,7 @@ struct TopContainerView: View
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     WalkingContainerView() {
                         _ in
-                        currentPhase = currentPhase.followingPhase
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
                     }
                     
                     // MARK: - Usability
@@ -117,21 +132,19 @@ struct TopContainerView: View
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     UsabilityContainer {
                         _ in
-                        currentPhase = currentPhase.followingPhase
-                        latestPhase = TopPhases.usability.rawValue
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
                     }
 
                     // MARK: - DASI
                 case .dasi:
                     SurveyContainerView {
                         responseResult in
-                        TopPhases.latestPhase = TopPhases.usability.rawValue
-                        self.currentPhase = currentPhase.followingPhase
                         let dasiResponse = try! responseResult.get()
                         let csvd = dasiResponse.csvData
 
                         try! PhaseStorage.shared
                             .series(.dasi, completedWith: csvd)
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
                     }
                     
                     // MARK: - Conclusion (success)
@@ -167,13 +180,14 @@ struct TopContainerView: View
                             fatalError("\(#fileID):\(#line): ZIPArchive not created (\(pss.zipOutputURL.path), ](pss.zipFileName)).")
                         }
 
-                        // Just to make sure:
-                        ASKeys.isFirstRunComplete = true
-                        self.currentPhase = .entry.followingPhase
-                        latestPhase = TopPhases.conclusion.rawValue
-
+                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        // advances from .conclusion
+                        // sets the global/Defaults to .entry
+                        // The switch in body responds to .entry
+                        // by immediately selecting its successor.
                     }                    
-                    
+
+                    /*
                     // MARK: - no such phase
                 default:
                     // This includes .entry.
@@ -181,6 +195,7 @@ struct TopContainerView: View
                     EmptyPhase { _ in
                         self.currentPhase = .entry.followingPhase
                     }
+                    */
                 }   // Switch on currentPhase
             }       // VStack
                     // MARK: - onAppear {}

@@ -138,7 +138,6 @@ struct WalkUsabilityForm: View, ReportingPhase {
             }
             .background(.thinMaterial)
         }
-        .navigationTitle("Your Walks")
     }
 }
 
