@@ -33,30 +33,6 @@ struct TopPhases: RawRepresentable, Equatable, CustomStringConvertible {
     // MARK: AppStorage
 
     @AppStorage(ASKeys.phaseProgress.rawValue) static var latestPhase: String = ""
-/*
- I have this terrible problem that I don't know how to address
-
- "I've never used this before; where do I start?"
- "This is the second time out. Where do I start?"
-
- The question is what the most-advanced phase is.
- That's the initial state.
-    /// The last-ciompleted phase for state restoration. **Belongs at top.**
-
-/// Restore the completion state (current phase, DASI complete, usability complete) to initial.
-///
-/// Called only in repsonse to a total reversion.
-    static func resetToFirst() {
-        latestPhase = TopPhases.entry.rawValue
-        // Static func can't access @AppStorage.
-        ASKeys.isFirstRunComplete = false
-//        completedFirstRun = false
-//        collectedDASI = false
-
-//        collectedUsability = false
-//        firstUse = true
-    }
- */
 
     // Not an OptionSet, but we'll live.
 
