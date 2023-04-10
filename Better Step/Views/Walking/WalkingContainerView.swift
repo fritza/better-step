@@ -49,9 +49,9 @@ struct WalkStates: Hashable, CustomStringConvertible {
         "WalkState “\(current.rawValue)”: good \(good.rawValue), bad \(bad.rawValue)"
     }
     
-    func sameState(as other: WalkStates) -> Bool {
-        current == other.current
-    }
+//    func sameState(as other: WalkStates) -> Bool {
+//        current == other.current
+//    }
 }
 
 
@@ -60,12 +60,12 @@ struct WalkStates: Hashable, CustomStringConvertible {
 
  The wrong but easy way is to make them global.
  */
-var walkResult_1: Data?
-var walkResult_2: Data?
+//var walkResult_1: Data?
+//var walkResult_2: Data?
 
 
-let csvUTT       = UTType.commaSeparatedText
-let csvUTTString = "public.comma-separated-values-text"
+//let csvUTT       = UTType.commaSeparatedText
+//let csvUTTString = "public.comma-separated-values-text"
 
 /*
  /// Adopters promise to present a `completion` closure for the `WalkingContainerView` to designate the next page.
@@ -103,7 +103,6 @@ let csvUTTString = "public.comma-separated-values-text"
 /// **Theory**
 ///
 /// The view is a succession of `NavigationLink`s, presented one at a time, whose destinations are the various interstitial, countdown, and data collection `View`s :
-/// * ``InterstitalPageContainerView``
 /// * ``DigitalTimerView``
 /// *  ``SweepSecondView``
 ///
@@ -119,7 +118,7 @@ struct WalkingContainerView: View, ReportingPhase {
     typealias SuccessValue = SeriesTag
     var completion: ClosureType
 
-    @EnvironmentObject var motionManager: MotionManager
+//    @EnvironmentObject var motionManager: MotionManager
     @State var state: WalkingState? {
         didSet {
             print(#function, "changing from",
@@ -127,8 +126,8 @@ struct WalkingContainerView: View, ReportingPhase {
                   state ?? "n/a")
         }
     }
-    @State private var shouldShowActivity = false
-    @State private var walkingData = Data()
+//    @State private var shouldShowActivity = false
+//    @State private var walkingData = Data()
 
     init(reporter: @escaping ClosureType) {
         self.state = .interstitial_1
@@ -137,16 +136,16 @@ struct WalkingContainerView: View, ReportingPhase {
         // The idea is to get AVAudioPlayer to preheat:
         _ = AudioMilestone.shared
     }
-
-    private var cancellables: [AnyCancellable] = []
-    mutating func setUpCombine() {
-        revertAllNotification
-            .sink { _ in
-                AudioMilestone.shared.stop()
-            }
-            .store(in: &cancellables)
-    }
-    var notificationHandlers: NSObjectProtocol?
+//
+//    private var cancellables: [AnyCancellable] = []
+//    mutating func setUpCombine() {
+//        revertAllNotification
+//            .sink { _ in
+//                AudioMilestone.shared.stop()
+//            }
+//            .store(in: &cancellables)
+//    }
+//    var notificationHandlers: NSObjectProtocol?
 
     // MARK: body
     var body: some View {

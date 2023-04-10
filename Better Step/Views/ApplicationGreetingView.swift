@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-private var forPreview = false
 
 // MARK: - ApplicationGreetingView
 /// Initial display for runs that already have SubjectIDs

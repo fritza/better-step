@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "extpackage",
+      "kind" : "localSourceControl",
+      "location" : "/Users/fritza/USE--BST-Clone/Extensions/ExtPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c26af407aeea7b9b1140f402444d64270543d9ec"
+      }
+    },
+    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",

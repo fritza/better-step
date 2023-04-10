@@ -24,20 +24,12 @@ struct GenericInstructionView: View {
     /// The content of the `Text` to be displayed after the image and before the button.
     let lowerText: String?
     
-    // TODO:    Can both SF Symbol and asset names be nil?
-    //                It would make sense if no image is to be presented.
     /// The name of the SF Symbol image to display in the middle of the screen.
     ///
     /// If `nil`, do not display the symbol image.
     /// - warning: One and only one of `sfBadgeName` and ``assetName`` must be non-nil.
     let sfBadgeName: String?
-    
-    /// The name of the image asset  to be displayed full-screen.
-    ///
-    /// If `nil`, do not display the asset image.
-    /// - warning: One and only one of ``sfBadgeName`` and `assetName` must be non-nil.
-    let assetName: String?
-    
+
     /// The label for the Proceed/Continue button at the bottom of the page.
     /// - note: If no button title is given, the button will not be displayed.
     var proceedTitle: String?
@@ -62,7 +54,7 @@ struct GenericInstructionView: View {
         self.proceedClosure = proceedClosure
         self.proceedEnabled = proceedEnabled
         
-        self.assetName = nil
+//        self.assetName = nil
         
     }
     

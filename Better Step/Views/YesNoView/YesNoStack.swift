@@ -43,13 +43,13 @@ struct YesNoStack: View, ReportingPhase {
     }
 }
 
-private final class YNUState: ObservableObject {
-    @State var answer: AnswerState = .no
-}
+//private final class YNUState: ObservableObject {
+//    @State var answer: AnswerState = .no
+//}
 
 struct YesNoStack_Previews: PreviewProvider {
 //    @StateObject fileprivate static var ynuState = YNUState()
-    fileprivate static let ynuState = YNUState()
+//    fileprivate static let ynuState = YNUState()
     @State private static var yesCount      : Int = 0
     @State private static var noCount       : Int = 0
     @State private static var illegalCount  : Int = 0

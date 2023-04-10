@@ -30,11 +30,6 @@ struct SurveyContainerView: View, ReportingPhase {
     @StateObject    var responses = DASIResponseList()
     @AppStorage(ASKeys.temporaryDASIResults.rawValue) var tempCSV: String = ""
 
-//    var notificationHandler: NSObjectProtocol?
-    // I DON'T THINK THIS LAYER NEED DO ANYTHING WITH
-    // DATA DESTRUCTION. Any that still has to be done is
-    // done in PhaseStorage.
-
     init(phase: DASIState = .landing,
          closure: @escaping ClosureType) {
         dasiPhaseState = phase

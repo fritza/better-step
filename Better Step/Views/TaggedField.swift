@@ -12,19 +12,7 @@ import SwiftUI
 /// The `String` result is observed by a `Binding`. Client code might use a `Formatter` to decide whether to accept the contents of the field.
 struct TaggedField: View {
     @Binding var stringInProgress: String
-    @State var showComment: Bool = false
-
-    // ShowInstructions lags the subject string by one.
-    // I think this has to do with _both_ updating the
-    // backing string _and_ rendering conditioned on the
-    // (existing pre-change?) value.
-    @State var showInstructions: Bool = true
-    var canSubmitText: Bool {
-        return stringInProgress.trimmed?.isAlphanumeric ?? false
-    }
-
-    init(string: Binding<String>,
-         validation: Formatter? = nil) {
+    init(string: Binding<String>) {
         self._stringInProgress = string
     }
 

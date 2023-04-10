@@ -36,12 +36,6 @@ struct BackToolbarView: View {
 }
 
 struct BackToolbarView_Previews: PreviewProvider {
-    static let nameFont: KeyValuePairs<String, Font> = [
-        "Large Title": .largeTitle,
-        "Title": .title, "Title 2": .title2, "Title 3": .title3,
-        "Headline": .headline,
-        "Body": .body
-        ]
     static var previews: some View {
         NavigationView {
             VStack {
@@ -50,14 +44,9 @@ struct BackToolbarView_Previews: PreviewProvider {
                 }
                 Button("< Back") { }
                 Spacer()
-                //            List(nameFont, id: \.0) { kvPair in
-                //                LabeledContent(kvPair.0) {
-                //                    Text("Some Text")
-                //                        .font(kvPair.1)
-                //                }
-                //            }
             }
         }
         .toolbar(.hidden, for: .navigationBar)
+        // I don' tknow why .hidden doesn't work in previews.
     }
 }

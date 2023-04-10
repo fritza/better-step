@@ -23,11 +23,6 @@ struct DASIOnboardView: View, ReportingPhase {
     typealias SuccessValue = ()
     let completion: ClosureType
 
-    static let instructions = """
-In this part of the assessment, you will be asked \(DASIQuestion.count) questions about how well you do with various activities.
-
-Answer “Yes” or “No” to each. You will be able to move backward and forward through the questions, but you must respond to all for this exercise to be complete.
-"""
 
     init(completion: @escaping ClosureType) {
         self.completion = completion

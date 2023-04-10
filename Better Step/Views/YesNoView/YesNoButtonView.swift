@@ -35,21 +35,21 @@ struct YesNoButtonView: View, ReportingPhase {
         self.completion = completion
     }
 
-    let lightGray = Color(white: 0.875, opacity: 1.0)
+//    let lightGray = Color(white: 0.875, opacity: 1.0)
     @GestureState var buttonIsHeld: Bool = false
 
-    var buttonishGesture: some Gesture {
-        let retval = TapGesture(count: 1)
-            .updating($buttonIsHeld) { v, s, t in
-                s.toggle()
-            }
-            .onEnded { _ in
-                if buttonIsHeld {
-                    completion(.success(()))
-                }
-            }
-        return retval
-    }
+//    var buttonishGesture: some Gesture {
+//        let retval = TapGesture(count: 1)
+//            .updating($buttonIsHeld) { v, s, t in
+//                s.toggle()
+//            }
+//            .onEnded { _ in
+//                if buttonIsHeld {
+//                    completion(.success(()))
+//                }
+//            }
+//        return retval
+//    }
 
     var body: some View {
         ZStack(alignment: .center, content: {

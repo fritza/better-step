@@ -47,13 +47,12 @@ struct SweepSecondView: View, ReportingPhase {
     /// - Parameters:
     ///   - duration: `TimeInterval` (in seconds to count down from
     ///   - onCompletion: Closure to notify the client that the countdown has run out.
-    init(duration: TimeInterval,
+    init(
          onCompletion: @escaping ClosureType,
          function: String = #function,
          fileID: String = #file,
          line: Int = #line
     ) {
-//        wholeSeconds = Int(duration)
         self.completion = onCompletion
     }
 
@@ -159,7 +158,7 @@ Remember to UNMUTE YOUR PHONE and turn up the audio!
 struct SweepSecondView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SweepSecondView(duration: CountdownConstants.sweepDuration) {
+            SweepSecondView() {
                 result in
                 switch result {
                 case .success:

@@ -25,13 +25,9 @@ public struct MinSecFormatter {
         case secondsOverflow
     }
 
-    /// Selector for formatting strategy: If `true`, intervals will be formatted as `mm:ss`; otherwise `s+`.
-    let showMinutes: Bool
-
     /// Create a formatter taking an `Int` time interval and yielding `a String` representing it as either a minutes-seconds pair, or simply the digits of the interval.
     /// - Parameter showMinutes: Time intervals will be represented as minutes and seconds if `true`.
     public init(showMinutes: Bool = true) {
-        self.showMinutes = showMinutes
         self.formatStrategy =
         showMinutes ?
         Self.withMinutesStrategy : Self.justSecondsStrategy

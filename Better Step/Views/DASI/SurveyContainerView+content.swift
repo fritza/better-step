@@ -40,7 +40,6 @@ extension SurveyContainerView {
             case .failure(let error):
                 let nsError = error as NSError
                 if nsError.domain == DASICompleteView.pageBackErrorDomain {
-                    let page = nsError.code
                     dasiPhaseState = .question
                 }
                 else {

@@ -15,7 +15,7 @@ struct InterstitalPageContainerView: View, ReportingPhase {
     typealias SuccessValue = Void
     let completion: ClosureType
 
-    @State private var showEndOfList = false
+//    @State private var showEndOfList = false
     @State private var selectedPage: Int
 
     private let listing: InterstitialList

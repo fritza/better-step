@@ -45,8 +45,7 @@ extension WalkingContainerView {
             "SHOULDN'T SEE (countdown_1)",
             tag: WalkingState.countdown_1, selection: $state)
         {
-            SweepSecondView(duration: CountdownConstants.sweepDuration
-            ) { result in
+            SweepSecondView() { result in
                 collectFromCountdown(
                     result: result,
                     context: .init(
@@ -135,10 +134,7 @@ extension WalkingContainerView {
             tag: WalkingState.countdown_2,
             selection: $state)
         {
-            SweepSecondView(
-                duration:
-                    CountdownConstants.sweepDuration
-            )
+            SweepSecondView()
             { result in
                 collectFromCountdown(
                     result: result,

@@ -12,14 +12,14 @@ import SwiftUI
 enum Rendering {
     static let bodyFont = Font.title2
     static let textMinScale: CGFloat = 0.5
-    
-    enum SizeLimit {
-        case height(CGFloat)
-        case width( CGFloat)
-    }
+//    
+//    enum SizeLimit {
+//        case height(CGFloat)
+//        case width( CGFloat)
+//    }
     
     static let fontDimension: CGFloat = 200
-    static let iconLimit = SizeLimit.height(fontDimension)
+//    static let iconLimit = SizeLimit.height(fontDimension)
 }
 
 

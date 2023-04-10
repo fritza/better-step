@@ -184,11 +184,11 @@ struct InterstitialList: Codable, CustomStringConvertible {
     /// - note: This is an _ID,_ not the collection index used for subscripting.
     /// - parameter target: The ID to search for.
     /// - returns: `InterstitialInfo` for the element with that ID, or `nil` if there is none.
-    func item(forID target: Int) -> InterstitialInfo? {
-        let retval = interstitials
-            .first(where: { $0.id == target } )
-        return retval
-    }
+//    func item(forID target: Int) -> InterstitialInfo? {
+//        let retval = interstitials
+//            .first(where: { $0.id == target } )
+//        return retval
+//    }
 
     var indexRange: ClosedRange<Int> {
         let lower = interstitials.map(\.id).min()!
