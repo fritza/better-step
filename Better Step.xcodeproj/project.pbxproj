@@ -325,7 +325,6 @@
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen WT.storyboard"; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
-		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
 		1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayPedometry.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
@@ -610,7 +609,6 @@
 				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F60712E29E490B00080257F /* AppPhases.swift */,
-				1F87E1A22919979C000908AE /* TopPhases.swift */,
 			);
 			path = "Top container";
 			sourceTree = "<group>";
