@@ -49,7 +49,6 @@
 		1F9A48B029C4FB9900B956C9 /* InterCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48AF29C4FB9900B956C9 /* InterCarousel.swift */; };
 		1F9A48B229C4FBA900B956C9 /* BackToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48B129C4FBA900B956C9 /* BackToolbarView.swift */; };
 		1F9A48B429C4FBD500B956C9 /* CardErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A48B329C4FBD500B956C9 /* CardErrorCodes.swift */; };
-		1F9C14E829E0CD9600612A19 /* ExtPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F9C14E729E0CD9600612A19 /* ExtPackage */; };
 		1FA17C0129CA310F0082FB53 /* UploadCompletionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3543D12996D0BE003DD1D0 /* UploadCompletionNotification.swift */; };
 		1FA281DC28DBBB270038353E /* TaggedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4E0728D3DB0500547C7A /* TaggedField.swift */; };
 		1FA281DF28DBBB270038353E /* Formatting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3545027921204000894B8 /* Formatting+Extensions.swift */; };
@@ -217,7 +216,47 @@
 		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
+		1FFFBE9B29E5C61100FA530D /* Walk_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFBE9A29E5C61100FA530D /* Walk_TestTests.swift */; };
+		1FFFBEA129E5C64F00FA530D /* FormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6567B629E5BEC0004E1B0C /* FormattingTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F6567B829E5C365004E1B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FAC47E829D61AAD009813CF;
+			remoteInfo = "Walk Test";
+		};
+		1F6567BA29E5C375004E1B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FAC47E829D61AAD009813CF;
+			remoteInfo = "Walk Test";
+		};
+		1FFFBE9029E5C5B400FA530D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FA281CD28DBBA160038353E;
+			remoteInfo = "Better Step";
+		};
+		1FFFBE9229E5C5BA00FA530D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FA281CD28DBBA160038353E;
+			remoteInfo = "Better Step";
+		};
+		1FFFBE9C29E5C61100FA530D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FAC47E829D61AAD009813CF;
+			remoteInfo = "Walk Test";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1F09EE3128DB745900CFBE4B /* ConclusionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionView.swift; sourceTree = "<group>"; };
@@ -281,11 +320,11 @@
 		1F60E70328DA720500EC2593 /* MorseHaptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseHaptic.swift; sourceTree = "<group>"; };
 		1F6456F5294CFA3E0064DADA /* ActivityUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUIController.swift; sourceTree = "<group>"; };
 		1F6456F7294D29FA0064DADA /* TestXYZT.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestXYZT.json; sourceTree = SOURCE_ROOT; };
+		1F6567B629E5BEC0004E1B0C /* FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingTests.swift; sourceTree = "<group>"; };
 		1F66586729709D4900EE75FE /* ZIPArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPArchiver.swift; sourceTree = "<group>"; };
 		1F6836C628E21A150016B5ED /* Better-Step-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Better-Step-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1F6E239929DB39CE0007CB14 /* LaunchScreen WT.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen WT.storyboard"; sourceTree = "<group>"; };
 		1F769EB127FF93F200A3CAE3 /* STBar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = STBar.jpeg; sourceTree = "<group>"; };
-		1F87E1A22919979C000908AE /* TopPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPhases.swift; sourceTree = "<group>"; };
 		1F88683029479FF700085EC7 /* PhaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseStorage.swift; sourceTree = "<group>"; };
 		1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayPedometry.swift; sourceTree = "<group>"; };
 		1F8A064A27A3401700477379 /* DASIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseTests.swift; sourceTree = "<group>"; };
@@ -339,6 +378,8 @@
 		1FF3545227977302000894B8 /* AccelerometerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerItemTests.swift; path = "Better StepTests/AccelerometerItemTests.swift"; sourceTree = SOURCE_ROOT; };
 		1FFB30E0277BE5230099AE5E /* DASIQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIQuestions.swift; sourceTree = "<group>"; };
 		1FFB31092787997E0099AE5E /* MinSecFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSecFormatter.swift; sourceTree = "<group>"; };
+		1FFFBE9829E5C61100FA530D /* Walk TestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Walk TestTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FFFBE9A29E5C61100FA530D /* Walk_TestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walk_TestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,7 +408,6 @@
 				1FA2823628DBBC3F0038353E /* DequeModule in Frameworks */,
 				1FA2823828DBBC3F0038353E /* OrderedCollections in Frameworks */,
 				1FA2823E28DBBC3F0038353E /* ZIPFoundation in Frameworks */,
-				1F9C14E829E0CD9600612A19 /* ExtPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +425,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FFFBE9529E5C61100FA530D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -396,6 +443,7 @@
 				1F1C4DFD28D3BD6700547C7A /* Resources */,
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
+				1FFFBE9929E5C61100FA530D /* Walk TestTests */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 				1FAC486229D61AAD009813CF /* Better Step copy-Info.plist */,
@@ -409,6 +457,7 @@
 				1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */,
 				1FA281CE28DBBA160038353E /* Better Step.app */,
 				1FAC486129D61AAD009813CF /* Walk Test.app */,
+				1FFFBE9829E5C61100FA530D /* Walk TestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -560,7 +609,6 @@
 				1FA9EA192911C1CD00498D01 /* ReportingPhase.swift */,
 				1FB2F54128D22FB600593692 /* TopContainerView.swift */,
 				1F60712E29E490B00080257F /* AppPhases.swift */,
-				1F87E1A22919979C000908AE /* TopPhases.swift */,
 			);
 			path = "Top container";
 			sourceTree = "<group>";
@@ -706,6 +754,15 @@
 			path = Walking;
 			sourceTree = "<group>";
 		};
+		1FFFBE9929E5C61100FA530D /* Walk TestTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F6567B629E5BEC0004E1B0C /* FormattingTests.swift */,
+				1FFFBE9A29E5C61100FA530D /* Walk_TestTests.swift */,
+			);
+			path = "Walk TestTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -720,6 +777,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1F6567B929E5C365004E1B0C /* PBXTargetDependency */,
+				1FFFBE9329E5C5BA00FA530D /* PBXTargetDependency */,
 			);
 			name = "Better StepTests";
 			productName = "Better StepTests";
@@ -737,6 +796,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1F6567BB29E5C375004E1B0C /* PBXTargetDependency */,
+				1FFFBE9129E5C5B400FA530D /* PBXTargetDependency */,
 			);
 			name = "Better StepUITests";
 			productName = "Better StepUITests";
@@ -764,7 +825,6 @@
 				1FA2823B28DBBC3F0038353E /* ActivityView */,
 				1FA2823D28DBBC3F0038353E /* ZIPFoundation */,
 				1FA2823F28DBBC800038353E /* RealModule */,
-				1F9C14E729E0CD9600612A19 /* ExtPackage */,
 			);
 			productName = "Better Step";
 			productReference = 1FA281CE28DBBA160038353E /* Better Step.app */;
@@ -796,6 +856,24 @@
 			productReference = 1FAC486129D61AAD009813CF /* Walk Test.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1FFFBE9729E5C61100FA530D /* Walk TestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FFFBE9E29E5C61100FA530D /* Build configuration list for PBXNativeTarget "Walk TestTests" */;
+			buildPhases = (
+				1FFFBE9429E5C61100FA530D /* Sources */,
+				1FFFBE9529E5C61100FA530D /* Frameworks */,
+				1FFFBE9629E5C61100FA530D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1FFFBE9D29E5C61100FA530D /* PBXTargetDependency */,
+			);
+			name = "Walk TestTests";
+			productName = "Walk TestTests";
+			productReference = 1FFFBE9829E5C61100FA530D /* Walk TestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -803,19 +881,23 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					1F0B675D276FA6CA00011A7E = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 1F0B674D276FA6C900011A7E;
+						TestTargetID = 1FA281CD28DBBA160038353E;
 					};
 					1F0B6767276FA6CA00011A7E = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 1F0B674D276FA6C900011A7E;
+						TestTargetID = 1FA281CD28DBBA160038353E;
 					};
 					1FA281CD28DBBA160038353E = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					1FFFBE9729E5C61100FA530D = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 1FAC47E829D61AAD009813CF;
 					};
 				};
 			};
@@ -834,7 +916,6 @@
 				1F1BD8D327D1450300568ADF /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				1FDE826227E3D7F700CD8368 /* XCRemoteSwiftPackageReference "ActivityView" */,
 				1F3B49E928DA37B700133765 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */,
 			);
 			productRefGroup = 1F0B674F276FA6C900011A7E /* Products */;
 			projectDirPath = "";
@@ -844,6 +925,7 @@
 				1F0B675D276FA6CA00011A7E /* Better StepTests */,
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
 				1FAC47E829D61AAD009813CF /* Walk Test */,
+				1FFFBE9729E5C61100FA530D /* Walk TestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -919,6 +1001,13 @@
 				1FAC485B29D61AAD009813CF /* dasi-complete.json in Resources */,
 				1FAC485C29D61AAD009813CF /* SevenDaysMockup.csv in Resources */,
 				1FAC485D29D61AAD009813CF /* dasi-intro.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FFFBE9629E5C61100FA530D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,7 +1192,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FFFBE9429E5C61100FA530D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FFFBEA129E5C64F00FA530D /* FormattingTests.swift in Sources */,
+				1FFFBE9B29E5C61100FA530D /* Walk_TestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F6567B929E5C365004E1B0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FAC47E829D61AAD009813CF /* Walk Test */;
+			targetProxy = 1F6567B829E5C365004E1B0C /* PBXContainerItemProxy */;
+		};
+		1F6567BB29E5C375004E1B0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FAC47E829D61AAD009813CF /* Walk Test */;
+			targetProxy = 1F6567BA29E5C375004E1B0C /* PBXContainerItemProxy */;
+		};
+		1FFFBE9129E5C5B400FA530D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FA281CD28DBBA160038353E /* Better Step */;
+			targetProxy = 1FFFBE9029E5C5B400FA530D /* PBXContainerItemProxy */;
+		};
+		1FFFBE9329E5C5BA00FA530D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FA281CD28DBBA160038353E /* Better Step */;
+			targetProxy = 1FFFBE9229E5C5BA00FA530D /* PBXContainerItemProxy */;
+		};
+		1FFFBE9D29E5C61100FA530D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FAC47E829D61AAD009813CF /* Walk Test */;
+			targetProxy = 1FFFBE9C29E5C61100FA530D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1F0B6770276FA6CA00011A7E /* Debug */ = {
@@ -1242,14 +1368,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-StepTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Better Step.app/Better Step";
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Better Step.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Better Step";
 			};
 			name = Debug;
 		};
@@ -1262,13 +1392,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-StepTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Better Step.app/Better Step";
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Better Step.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Better Step";
 			};
 			name = Release;
 		};
@@ -1280,12 +1414,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-StepUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "Better Step";
 			};
 			name = Debug;
@@ -1298,12 +1436,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J2E8MMY7GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wt9t.Better-StepUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "Better Step";
 			};
 			name = Release;
@@ -1482,6 +1624,44 @@
 			};
 			name = Release;
 		};
+		1FFFBE9F29E5C61100FA530D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.drmobile.Walk-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Walk Test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Walk Test";
+			};
+			name = Debug;
+		};
+		1FFFBEA029E5C61100FA530D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.drmobile.Walk-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Walk Test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Walk Test";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1530,6 +1710,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		1FFFBE9E29E5C61100FA530D /* Build configuration list for PBXNativeTarget "Walk TestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FFFBE9F29E5C61100FA530D /* Debug */,
+				1FFFBEA029E5C61100FA530D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1555,14 +1744,6 @@
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/fritza/USE--BST-Clone/Extensions/ExtPackage";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		1FAC47EA29D61AAD009813CF /* XCRemoteSwiftPackageReference "swift-collections" */ = {
@@ -1624,11 +1805,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1F9C14E729E0CD9600612A19 /* ExtPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1F9C14E629E0CD9600612A19 /* XCRemoteSwiftPackageReference "ExtPackage" */;
-			productName = ExtPackage;
-		};
 		1FA2823328DBBC3F0038353E /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF354422790D1F5000894B8 /* XCRemoteSwiftPackageReference "swift-collections" */;

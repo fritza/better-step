@@ -1,26 +1,19 @@
 //
-//  DASIReportTests.swift
+//  FormattingTests.swift
 //  Better StepTests
 //
-//  Created by Fritz Anderson on 1/25/22.
+//  Created by Fritz Anderson on 4/11/23.
 //
 
 import XCTest
 @testable import Walk_Test
 
-let primedJSON = """
-[
- { id: 1; response: "yes", timestamp: "2022-01-25T13:28:37Z" }
-]
-"""
+private let doubleStringPairs: [(Double, String)] = [
+    (0.0, "0.00000"), (-1.0, "-1.00000"), (123.45, "123.45000"),
+    (-123.45, "-123.45000")
+    ]
 
-/*
- let id: QuestionID
- var response: AnswerState
- var timestamp: Date
- */
-
-class DASIReportTests: XCTestCase {
+final class FormattingTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -29,6 +22,22 @@ class DASIReportTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+
+    func testForwardFormatting() {
+        for (number, formatted) in doubleStringPairs {
+            let asFormatted = number.pointFive
+            XCTAssertEqual(asFormatted, formatted, "Mismatch in rendering of \(number)")
+        }
+    }
+
+//    func testCoffectFormat() {
+//        for (_, formatted) in doubleStringPairs {
+//            var match: Regex.Match? = nil
+//            XCTAssertNoThrow(match = try /-?\d+\.\d{5}/.wholeMatch(in: formatted),
+//            "Matching for \(formatted) threw")
+//            XCTAssertNotNil(match, "No match for \(formatted)")
+//        }
+//    }
 
     func testExample() throws {
         // This is an example of a functional test case.
