@@ -85,9 +85,8 @@ struct TopContainerView: View
             VStack {
                 switch displayedPhase {
                 case .entry:
-
                     entryNonView() {
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        displayedPhase = AppPhases.advance()
                     }
 
                     // MARK: - Onboarding
@@ -98,7 +97,7 @@ struct TopContainerView: View
                             // Absorb OnboardContainerView's (upstream)
                             // SET SubjectID.id (Terminal).
                             SubjectID.id = try result.get()
-                            displayedPhase = AppPhases.advance(settingFirstRun: true)
+                            displayedPhase = AppPhases.advance()
                         }
                         catch {
                             fatalError("Can't fail out of an onboarding view")
@@ -113,7 +112,7 @@ struct TopContainerView: View
                     // MARK: - Greeting
                 case .greeting:
                     ApplicationGreetingView {_ in
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        displayedPhase = AppPhases.advance()
                     }
                     .onDisappear {
                         collect7DayPedometry()
@@ -124,7 +123,7 @@ struct TopContainerView: View
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     WalkingContainerView() {
                         _ in
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        displayedPhase = AppPhases.advance()
                     }
                     
                     // MARK: - Usability
@@ -132,7 +131,7 @@ struct TopContainerView: View
                     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
                     UsabilityContainer {
                         _ in
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        displayedPhase = AppPhases.advance()
                     }
 
                     // MARK: - DASI
@@ -144,48 +143,46 @@ struct TopContainerView: View
 
                         try! PhaseStorage.shared
                             .series(.dasi, completedWith: csvd)
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
+                        displayedPhase = AppPhases.advance()
                     }
                     
                     // MARK: - Conclusion (success)
                 case .conclusion:
                     // ConclusionView records the last-completed date.
                     let pss = PhaseStorage.shared
-                    ConclusionView(jsonBaseName: "conclusion") { result in
+                    ConclusionView(jsonBaseName: "conclusion") { _ in
                         do {
-                            guard let handoff = try? result.get(),
-                                  handoff == .both else {
-                                assertionFailure(
-                                    "\(#fileID):\(#line) - didn't expect a ConclusionView "
-                                )
-                                return
-                            }
-                            // TODO: In future, handoff may also be sending or finish
-                            //      but still not .neither
-
+#if DEBUG
                             print("Note:", #function, "- \(#fileID):\(#line) - archive write-and-send has been mover here from PhaseStorage.")
-
+#endif
+                            // Fatal if not completed.
+                            // It's true I don't see a recovery, but
+                            // FIXME: Recover from completion and send errors.
                             pss.assertAllComplete()
                             try pss.createArchive()
                             guard let performer = PerformUpload(
                                 from: pss.zipOutputURL,
                                 named: pss.zipFileName) else {
 
-                                fatalError("\(#fileID):\(#line): PerformUpload not created (\(pss.zipOutputURL.path), ](pss.zipFileName)).")
+                                fatalError(
+                                    """
+\(#fileID):\(#line): PerformUpload not created (\(pss.zipOutputURL.path), \(pss.zipFileName)).
+"""
+                                )
                             }
                             // Perform the upload.
                             performer.doIt()
+                            ASKeys.isFirstRunComplete = true
+                            displayedPhase = AppPhases.advance()
                         }
                         catch {
-                            fatalError("\(#fileID):\(#line): ZIPArchive not created (\(pss.zipOutputURL.path), ](pss.zipFileName)).")
+                            // FIXME: A professional app would do something (or nothing) about upload error.
+                            fatalError("""
+                                \(#fileID):\(#line): ZIPArchive not created (\(pss.zipOutputURL.path), \(pss.zipFileName)).
+                                """
+                            )
                         }
-
-                        displayedPhase = AppPhases.advance(settingFirstRun: true)
-                        // advances from .conclusion
-                        // sets the global/Defaults to .entry
-                        // The switch in body responds to .entry
-                        // by immediately selecting its successor.
-                    }                    
+                    }
 
                     /*
                     // MARK: - no such phase

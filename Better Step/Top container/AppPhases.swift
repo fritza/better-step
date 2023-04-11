@@ -57,7 +57,8 @@ enum AppPhases: String, CaseIterable {
         case .conclusion:               return .entry
         case .usability:                return .conclusion
 
-        case .entry: return ASKeys.isFirstRunComplete ?
+        case .entry:
+            return ASKeys.isFirstRunComplete ?
                 .greeting : .onboarding
         case .walking:
             return ASKeys.isFirstRunComplete ?
@@ -76,16 +77,11 @@ enum AppPhases: String, CaseIterable {
     /// Advance static/`AppStorage`  value of the phase, adjusted for whether this is first-run.
     /// - note: Unlike ``next``, this function _does_ have side-effects (current phaes, optionally ``ASKeys.isFirstRunComplete``.
     /// - Parameter settingFirstRun: if `true`, and the resulting next phase is `.entry`, set  ``ASKeys.isFirstRunComplete``
-    /// - Returns: The resulting ``AppPhases``.
+    /// - Returns: The resulting ``AppPhases``, for the information of the caller (`current` is already updated.).
     @discardableResult
-    static func advance(settingFirstRun: Bool = false) -> AppPhases {
+    static func advance() -> AppPhases {
         let nextValue = current.next
         current = nextValue
-
-        if settingFirstRun {
-            ASKeys.isFirstRunComplete = nextValue == .entry
-        }
-
         #if DEBUG
         print(#function, "Advancing to", nextValue)
         #endif

@@ -64,6 +64,10 @@ struct PerformUpload {
     ///
     /// Completion of the upload will trigger an `UploadNotification` or `UploadErrorNotification` notification.
     func doIt() {
+        // FIXME: Detect and try to recover from errors.
+        // A professional app would do something
+        // to retry.
+
         // URLRequest including the boundary string.
         let boundary = "Boundary-\(UUID().uuidString)"
         let request = createRequest(boundaryString: boundary)
