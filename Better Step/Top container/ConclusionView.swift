@@ -26,50 +26,27 @@ import ActivityKit
 /// Its reporting closure yields a ``Handoff``, which has cases for just-submit and just-loop back, which are not yet used.
 
 struct ConclusionView: View, ReportingPhase {
-    /// Characterizes the ``ReportingPhase`` callback,
-    /// incicating whether the "completion" is proceed-to-sending,
-    /// or proceed-to-first-phase, or both.
-    ///
-    /// ATW, only one value (`.both`) is used. If
-    struct Handoff: RawRepresentable, OptionSet {
-        let rawValue: Int
-        init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
-
-        static let toSending        = Handoff(rawValue: 1)  /// User has authorized sending.
-        static let toFinish         = Handoff(rawValue: 2) /// After sending, user has authorized loopback to initial phase.
-        static let both: Handoff    = [.toFinish, .toSending]
-        static let neither: Handoff = []
-    }
-
-    typealias SuccessValue = Handoff
+    typealias SuccessValue = Void
     let completion: ClosureType
     let cardContent: CardContent
 
-    @State private var currentState: Handoff
+//    @State private var currentState: Handoff
     
-    init(jsonBaseName: String, state: Handoff = .neither,
+    init(jsonBaseName: String,
+//         state: Handoff = .neither,
          _ closure: @escaping ClosureType) {
         let contentRecord = try! CardContent.contentArray(from: jsonBaseName)
         self.cardContent = contentRecord.first!
-        currentState = state
+//        currentState = state
         completion = closure
     }
 
     var body: some View {
-
-#warning("DON'T SUBMIT, DON'T NOTE COMPLETION")
-        // until the completion closure below;
-        // or put the completion shores in the container's
-        // closure.
-
-
         VStack {
             Spacer()
             SimplestCard(content: cardContent, tapped: {
                 completion(
-                    .success(.both)
+                    .success(())
                 )
             })
             .padding()
