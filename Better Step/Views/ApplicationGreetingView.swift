@@ -18,7 +18,7 @@ struct ApplicationGreetingView: View, ReportingPhase {
     
     #warning("put greeting view content into a .json")
     static let upperText = """
-You’ll be repeating the timed walks you did last time. There will be no need to repeat the surveys you completed the first time you used [OUR APP].
+You’ll be repeating the timed walks you did last time. There will be no need to repeat the surveys you completed the first time you used Walk Test.
 """
     static let title = "Welcome Back!"
     static let systemImageName = "figure.walk"
