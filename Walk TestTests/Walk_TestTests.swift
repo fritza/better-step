@@ -1,26 +1,13 @@
 //
-//  DASIReportTests.swift
-//  Better StepTests
+//  Walk_TestTests.swift
+//  Walk TestTests
 //
-//  Created by Fritz Anderson on 1/25/22.
+//  Created by Fritz Anderson on 4/11/23.
 //
 
 import XCTest
-@testable import Walk_Test
 
-let primedJSON = """
-[
- { id: 1; response: "yes", timestamp: "2022-01-25T13:28:37Z" }
-]
-"""
-
-/*
- let id: QuestionID
- var response: AnswerState
- var timestamp: Date
- */
-
-class DASIReportTests: XCTestCase {
+final class Walk_TestTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -40,7 +27,7 @@ class DASIReportTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
