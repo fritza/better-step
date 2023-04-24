@@ -213,6 +213,7 @@
 		1FD26E5B29DF7AAD0061AD68 /* InterstitialInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */; };
 		1FD5139928DCF8AC00418F38 /* DASIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A064A27A3401700477379 /* DASIResponseTests.swift */; };
 		1FDEAB8629A80C5C008A6919 /* GenericInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F60B09D276FB6E20026D28B /* GenericInstructionView.swift */; };
+		1FE04E5129F6D0D1006DE3D2 /* AppPhasesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE04E5029F6D0D1006DE3D2 /* AppPhasesTests.swift */; };
 		1FE86BF62941092D00BAF811 /* WalkUsabilityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */; };
 		1FF1331327A0BE78004D6647 /* DASIReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331227A0BE78004D6647 /* DASIReportTests.swift */; };
 		1FF1331627A1D0DF004D6647 /* FMExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1331427A1D049004D6647 /* FMExtensionsTests.swift */; };
@@ -366,6 +367,7 @@
 		1FD4568C279F217700B5429A /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 		1FD45690279F40B600B5429A /* DASIResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DASIResponseList.swift; sourceTree = "<group>"; };
 		1FD458742996E767002178D6 /* libstupload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstupload.a; path = ../../../libstupload.a; sourceTree = "<group>"; };
+		1FE04E5029F6D0D1006DE3D2 /* AppPhasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPhasesTests.swift; sourceTree = "<group>"; };
 		1FE86BF52941092D00BAF811 /* WalkUsabilityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkUsabilityForm.swift; sourceTree = "<group>"; };
 		1FEA9ED6279A23B3004F3B83 /* SubsecondHandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsecondHandView.swift; sourceTree = "<group>"; };
 		1FF11B3B279A184A00E319ED /* SweepSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweepSecondView.swift; sourceTree = "<group>"; };
@@ -758,6 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				1F6567B629E5BEC0004E1B0C /* FormattingTests.swift */,
+				1FE04E5029F6D0D1006DE3D2 /* AppPhasesTests.swift */,
 				1FFFBE9A29E5C61100FA530D /* Walk_TestTests.swift */,
 			);
 			path = "Walk TestTests";
@@ -1196,6 +1199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE04E5129F6D0D1006DE3D2 /* AppPhasesTests.swift in Sources */,
 				1FFFBEA129E5C64F00FA530D /* FormattingTests.swift in Sources */,
 				1FFFBE9B29E5C61100FA530D /* Walk_TestTests.swift in Sources */,
 			);
@@ -1567,7 +1571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.drdrmobile.walk-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1611,7 +1615,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.drdrmobile.walk-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

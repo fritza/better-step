@@ -68,6 +68,7 @@ enum AppPhases: String, CaseIterable {
 
     // MARK: Life cycle: reset/advance
     /// Reset the `UserDefaults` ``AppPhases`` to `.entry`.
+    /// **This method is destructive.**
     /// - Returns: The resulting phase (`.entry`(
     @discardableResult
     static func reset() -> AppPhases {
@@ -76,7 +77,6 @@ enum AppPhases: String, CaseIterable {
 
     /// Advance static/`AppStorage`  value of the phase, adjusted for whether this is first-run.
     /// - note: Unlike ``next``, this function _does_ have side-effects (current phaes, optionally ``ASKeys.isFirstRunComplete``.
-    /// - Parameter settingFirstRun: if `true`, and the resulting next phase is `.entry`, set  ``ASKeys.isFirstRunComplete``
     /// - Returns: The resulting ``AppPhases``, for the information of the caller (`current` is already updated.).
     @discardableResult
     static func advance() -> AppPhases {
