@@ -16,7 +16,29 @@ struct Better_StepApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TopContainerView()
+/*
+            switch IsolationModes.isolation {
+            case .dasi:
+                SurveyContainerView { result in
+                    guard let report = try? result.get() else {
+                        IsolationModes.stringResult = nil
+                        return
+                    }
+                    IsolationModes.stringResult = report.csvLine
+                }
+
+            case .usability:
+                UsabilityContainer { stringResult in
+                    guard let report = try? stringResult.get() else {
+                        IsolationModes.stringResult = nil
+                        return
+                    }
+                    IsolationModes.stringResult = report
+                }
+            default:
+ */
+                TopContainerView()
+//            }
         }
     }
 }

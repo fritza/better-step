@@ -7,9 +7,35 @@
 
 import Foundation
 
+enum IsolationModes: String {
+    static var stringResult: String? = nil
+
+    case noIsolation
+
+    case usability
+    case dasi
+
+    static let isolationModeKey = "WTViewIsolation"
+    static var isolation: IsolationModes {
+        get {
+            guard let string =  UserDefaults.standard
+                .string(forKey: isolationModeKey),
+                  let retval = IsolationModes(rawValue: string) else {
+                return .noIsolation
+            }
+            return retval
+        }
+        set {
+            UserDefaults.standard
+                .setValue(newValue.rawValue, forKey: Self.isolationModeKey)
+        }
+    }
+}
 
 // MARK: - @AppStorage
 enum ASKeys: String {
+    /// `Bool`, whether to curtail time-consuming behaviors (like clocks) for UI tests.
+    case truncateForTesting
     
     // If false, present the surveys.
     // "Unsafe" because all clients should use ASKeys.isFirstRunComplete instead.
@@ -48,6 +74,19 @@ enum ASKeys: String {
                 .setValue(newValue, forKey: ASKeys.unsafeCompletedFirstRun.rawValue)
         }
     }
+
+    static var isTruncated: Bool {
+        get {
+            UserDefaults.standard
+                .bool(forKey: ASKeys.truncateForTesting.rawValue)
+        }
+        set {
+            UserDefaults.standard
+                .setValue(newValue, forKey: ASKeys.truncateForTesting.rawValue)
+        }
+    }
+
+
     
     // MARK: - Completion date
 

@@ -26,7 +26,7 @@ enum UsabilityState: Int, CaseIterable {
 struct UsabilityContainer: View, ReportingPhase {
     // NOTE: This element is contained in a `NavigationView` within ``TopContainerView``.
     
-    typealias SuccessValue = Void
+    typealias SuccessValue = String
     let completion: ClosureType
     @AppStorage(ASKeys.tempUsabilityIntsCSV.rawValue)
     /// Return CSV value for reporting success.
@@ -104,10 +104,14 @@ struct UsabilityContainer: View, ReportingPhase {
                     result in
                     let phase = try! result.get()
                     assert(phase == .ending)
-                    let data = fullUsabilityCSV.data(using: .utf8)
-                    try! PhaseStorage.shared.series(.usability, completedWith: data!)
+
+                    if IsolationModes.isolation != .usability {
+                        let data = fullUsabilityCSV.data(using: .utf8)
+                        try! PhaseStorage.shared.series(.usability, completedWith: data!)
+                    }
+
                     completion(
-                        .success( () )
+                        .success( fullUsabilityCSV )
                     )
                 }
             }           // switch
