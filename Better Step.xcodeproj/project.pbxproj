@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1F0B6763276FA6CA00011A7E /* Better_StepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B6762276FA6CA00011A7E /* Better_StepTests.swift */; };
+		1F17877529F73CC600AD8B74 /* Walk_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17877429F73CC600AD8B74 /* Walk_TestUITests.swift */; };
+		1F17877729F73CC600AD8B74 /* Walk_TestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17877629F73CC600AD8B74 /* Walk_TestUITestsLaunchTests.swift */; };
+		1F17877E29F73D1700AD8B74 /* UsabilityFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17877D29F73D1700AD8B74 /* UsabilityFormTests.swift */; };
+		1F17878029F88AF300AD8B74 /* walks-complete-no-survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F17877F29F88AF300AD8B74 /* walks-complete-no-survey.json */; };
+		1F17878129F88AF300AD8B74 /* walks-complete-no-survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F17877F29F88AF300AD8B74 /* walks-complete-no-survey.json */; };
 		1F1C79D7293E82290037B7AE /* WalkInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C79D6293E82290037B7AE /* WalkInfoResult.swift */; };
 		1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06629CCCF9B001AD9F4 /* conclusion.json */; };
 		1F21D06929CE24D1001AD9F4 /* dasi-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06829CE24D1001AD9F4 /* dasi-intro.json */; };
@@ -222,6 +227,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1F17877829F73CC600AD8B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FAC47E829D61AAD009813CF;
+			remoteInfo = "Walk Test";
+		};
 		1F6567B829E5C365004E1B0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F0B6746276FA6C900011A7E /* Project object */;
@@ -277,6 +289,11 @@
 		1F0D9352298DB6DF00B5194B /* error-support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "error-support.swift"; sourceTree = "<group>"; };
 		1F0D9353298DB6DF00B5194B /* UploadTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskDelegate.swift; sourceTree = "<group>"; };
 		1F1641F7281B018A00E4E2FA /* DASIQuestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
+		1F17877229F73CC600AD8B74 /* Walk TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Walk TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F17877429F73CC600AD8B74 /* Walk_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walk_TestUITests.swift; sourceTree = "<group>"; };
+		1F17877629F73CC600AD8B74 /* Walk_TestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walk_TestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1F17877D29F73D1700AD8B74 /* UsabilityFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsabilityFormTests.swift; sourceTree = "<group>"; };
+		1F17877F29F88AF300AD8B74 /* walks-complete-no-survey.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "walks-complete-no-survey.json"; sourceTree = "<group>"; };
 		1F1C4DE828D39E3C00547C7A /* WalkingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingContainerView.swift; sourceTree = "<group>"; };
 		1F1C4DEA28D39E6900547C7A /* InterstitialInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialInfo.swift; sourceTree = "<group>"; };
 		1F1C4DEE28D3A27300547C7A /* InterstitialPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialPageView.swift; sourceTree = "<group>"; };
@@ -399,6 +416,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F17876F29F73CC600AD8B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FA281CB28DBBA160038353E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -446,6 +470,7 @@
 				1F0B6761276FA6CA00011A7E /* Better StepTests */,
 				1F0B676B276FA6CA00011A7E /* Better StepUITests */,
 				1FFFBE9929E5C61100FA530D /* Walk TestTests */,
+				1F17877329F73CC600AD8B74 /* Walk TestUITests */,
 				1F0B674F276FA6C900011A7E /* Products */,
 				1FF1B59627DA78C60017E90C /* Frameworks */,
 				1FAC486229D61AAD009813CF /* Better Step copy-Info.plist */,
@@ -460,6 +485,7 @@
 				1FA281CE28DBBA160038353E /* Better Step.app */,
 				1FAC486129D61AAD009813CF /* Walk Test.app */,
 				1FFFBE9829E5C61100FA530D /* Walk TestTests.xctest */,
+				1F17877229F73CC600AD8B74 /* Walk TestUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -534,6 +560,16 @@
 			path = Uploading;
 			sourceTree = "<group>";
 		};
+		1F17877329F73CC600AD8B74 /* Walk TestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1F17877429F73CC600AD8B74 /* Walk_TestUITests.swift */,
+				1F17877629F73CC600AD8B74 /* Walk_TestUITestsLaunchTests.swift */,
+				1F17877D29F73D1700AD8B74 /* UsabilityFormTests.swift */,
+			);
+			path = "Walk TestUITests";
+			sourceTree = "<group>";
+		};
 		1F1C4DFD28D3BD6700547C7A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,6 +578,7 @@
 				1F60E6FE28DA5CCA00EC2593 /* Countdowns.m4a */,
 				1F1C4E0428D3BEA400547C7A /* onboard-intro.json */,
 				1F1C4DFE28D3BD6700547C7A /* walks-complete.json */,
+				1F17877F29F88AF300AD8B74 /* walks-complete-no-survey.json */,
 				1F1C4DFF28D3BD6700547C7A /* second-walk-intro.json */,
 				1F1C4E0028D3BD6700547C7A /* walk-intro.json */,
 			);
@@ -807,6 +844,24 @@
 			productReference = 1F0B6768276FA6CA00011A7E /* Better StepUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1F17877129F73CC600AD8B74 /* Walk TestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F17877A29F73CC600AD8B74 /* Build configuration list for PBXNativeTarget "Walk TestUITests" */;
+			buildPhases = (
+				1F17876E29F73CC600AD8B74 /* Sources */,
+				1F17876F29F73CC600AD8B74 /* Frameworks */,
+				1F17877029F73CC600AD8B74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F17877929F73CC600AD8B74 /* PBXTargetDependency */,
+			);
+			name = "Walk TestUITests";
+			productName = "Walk TestUITests";
+			productReference = 1F17877229F73CC600AD8B74 /* Walk TestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1FA281CD28DBBA160038353E /* Better Step */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA281D928DBBA170038353E /* Build configuration list for PBXNativeTarget "Better Step" */;
@@ -895,6 +950,10 @@
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 1FA281CD28DBBA160038353E;
 					};
+					1F17877129F73CC600AD8B74 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 1FAC47E829D61AAD009813CF;
+					};
 					1FA281CD28DBBA160038353E = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -929,6 +988,7 @@
 				1F0B6767276FA6CA00011A7E /* Better StepUITests */,
 				1FAC47E829D61AAD009813CF /* Walk Test */,
 				1FFFBE9729E5C61100FA530D /* Walk TestTests */,
+				1F17877129F73CC600AD8B74 /* Walk TestUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -948,6 +1008,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F17877029F73CC600AD8B74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FA281CC28DBBA160038353E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -955,6 +1022,7 @@
 				1FA2822E28DBBB940038353E /* onboard-intro.json in Resources */,
 				1FA2822B28DBBB940038353E /* walk-intro.json in Resources */,
 				1F6E239E29DB3D0A0007CB14 /* Assets.xcassets in Resources */,
+				1F17878029F88AF300AD8B74 /* walks-complete-no-survey.json in Resources */,
 				1F21D06729CCCF9B001AD9F4 /* conclusion.json in Resources */,
 				1FC7477228E787AD00817041 /* A.ahap in Resources */,
 				1F21D06D29CE38AF001AD9F4 /* usability-intro.json in Resources */,
@@ -999,6 +1067,7 @@
 				1FAC485629D61AAD009813CF /* TestXYZT.json in Resources */,
 				1FAC485729D61AAD009813CF /* AAA.ahap in Resources */,
 				1FAC485829D61AAD009813CF /* DASIQuestions.json in Resources */,
+				1F17878129F88AF300AD8B74 /* walks-complete-no-survey.json in Resources */,
 				1FAC485929D61AAD009813CF /* usability-ending.json in Resources */,
 				1FAC485A29D61AAD009813CF /* NNN.ahap in Resources */,
 				1FAC485B29D61AAD009813CF /* dasi-complete.json in Resources */,
@@ -1034,6 +1103,16 @@
 			files = (
 				1F8A064D27A34EAC00477379 /* Better_StepUITestsLaunchTests.swift in Sources */,
 				1FA2824228DBBDD10038353E /* Better_StepUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F17876E29F73CC600AD8B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F17877E29F73D1700AD8B74 /* UsabilityFormTests.swift in Sources */,
+				1F17877529F73CC600AD8B74 /* Walk_TestUITests.swift in Sources */,
+				1F17877729F73CC600AD8B74 /* Walk_TestUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,6 +1287,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1F17877929F73CC600AD8B74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FAC47E829D61AAD009813CF /* Walk Test */;
+			targetProxy = 1F17877829F73CC600AD8B74 /* PBXContainerItemProxy */;
+		};
 		1F6567B929E5C365004E1B0C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1FAC47E829D61AAD009813CF /* Walk Test */;
@@ -1454,6 +1538,44 @@
 			};
 			name = Release;
 		};
+		1F17877B29F73CC600AD8B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.drmobile.Walk-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Walk Test";
+			};
+			name = Debug;
+		};
+		1F17877C29F73CC600AD8B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J2E8MMY7GM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.drmobile.Walk-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Walk Test";
+			};
+			name = Release;
+		};
 		1FA281DA28DBBA170038353E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1692,6 +1814,15 @@
 			buildConfigurations = (
 				1F0B6779276FA6CA00011A7E /* Debug */,
 				1F0B677A276FA6CA00011A7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F17877A29F73CC600AD8B74 /* Build configuration list for PBXNativeTarget "Walk TestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F17877B29F73CC600AD8B74 /* Debug */,
+				1F17877C29F73CC600AD8B74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

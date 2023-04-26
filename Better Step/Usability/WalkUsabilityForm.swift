@@ -44,6 +44,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
                         .tag(effort)
                 }
             }
+            .pickerStyle(.menu)
         }
     }
 
@@ -62,7 +63,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
                 Text("No")
                     .tag(false)
             }
-                   .pickerStyle(.segmented)
+//                   .pickerStyle(.segmented)
         }
     }
 
@@ -93,7 +94,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
                 Text("Away from home")
                     .tag(WhereWalked.awayFromHome)
             }
-                   .pickerStyle(.segmented)
+//                   .pickerStyle(.segmented)
         }
     }
 
@@ -114,9 +115,7 @@ struct WalkUsabilityForm: View, ReportingPhase {
                 Text("In a Straight Line")
                     .tag(HowWalked.straightLine)
             }
-                   .pickerStyle(.segmented)
         }
-
     }
 
 
@@ -126,7 +125,10 @@ struct WalkUsabilityForm: View, ReportingPhase {
             Form {
                 howYouDidSection
                 whereYouWalkedSection
+//                    .background(Color.purple)
             }
+            .formStyle(.grouped)
+//            .background(.thinMaterial)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
@@ -136,8 +138,8 @@ struct WalkUsabilityForm: View, ReportingPhase {
                     }
                 }
             }
-            .background(.thinMaterial)
         }
+        .pickerStyle(.segmented)
     }
 }
 
