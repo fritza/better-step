@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
-private let walkingInstructionInfo     = try! CardContent.contentArray(from: ["walk-intro"         ])
-private let mid_instructionCardInfo = try! CardContent.contentArray(from: ["second-walk-intro"  ])
-private let end_walkingCardInfo     = try! CardContent.contentArray(from: ["walks-complete"     ])
+private let walkingInstructionInfo      = try! CardContent.contentArray(from: ["walk-intro"                 ])
+private let mid_instructionCardInfo     = try! CardContent.contentArray(from: ["second-walk-intro"          ])
+private let endWalkingCard_With_DASI    = try! CardContent.contentArray(from: ["walks-complete"             ])
+private let endWalkingCard_NO_DASI      = try! CardContent.contentArray(from: ["walks-complete-no-survey"   ])
 
 
 
@@ -167,7 +168,8 @@ extension WalkingContainerView {
         NavigationLink(
             "SHOULDN'T SEE (ending_interstitial)",
             tag: WalkingState.ending_interstitial, selection: $state) {
-                InterCarousel(content: end_walkingCardInfo) {
+                InterCarousel(content: ASKeys.isFirstRunComplete ?  endWalkingCard_NO_DASI : endWalkingCard_With_DASI
+                ) {
                     // Fixed:: - change success to walking phase
                     completion(.success(.secondWalk))
                 }
