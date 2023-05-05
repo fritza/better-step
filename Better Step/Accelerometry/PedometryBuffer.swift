@@ -56,7 +56,7 @@ actor PedometryBuffer: ReportingPhase {
     }
     
     /// Add a ``StepsOnDate`` to the buffer contents. When the requisite number of days is recorded, sort the records, reduce them to CSV data, and return them (through ``publish``) to the client.
-    /// - Parameter datum: <#datum description#>
+    /// - Parameter datum: The ``StepsOnDate`` to append to `buffer`.
     func insert(datum: StepsOnDate) {
         buffer.append(datum)
         

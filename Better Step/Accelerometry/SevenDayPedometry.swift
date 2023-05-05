@@ -168,7 +168,7 @@ final class PedometryFromHealthKit: ReportingPhase {
     ///
     /// - If an error occurred, that is logged.
     /// - If no resulting statistics are found, log it and don't process this result.
-    /// - If the statistics don't yeid the sum, log and exit.
+    /// - If the statistics don't yield the sum, log and exit.
     ///
     /// Incoming records are converted to ``StepsOnDate`` and inserted into the ``PedometryBuffer`` actor “`buffer`.”
     private func hkQueryCompletion(query: HKStatisticsQuery, stats: HKStatistics?, error: Error?) {
