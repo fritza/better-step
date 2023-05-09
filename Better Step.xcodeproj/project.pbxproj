@@ -21,7 +21,6 @@
 		1F21D06F29CE39B4001AD9F4 /* usability-ending.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06E29CE39B4001AD9F4 /* usability-ending.json */; };
 		1F2B8AAA294A54F500075248 /* SeriesTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AA9294A54F500075248 /* SeriesTag.swift */; };
 		1F2B8AAC294A7A5400075248 /* WalkingContainer+Phases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */; };
-		1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */; };
 		1F2FA76428F7585E007B2D74 /* NNNbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */; };
 		1F2FA76528F7585E007B2D74 /* AAAbeep.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */; };
 		1F32980828F4C652003B9827 /* Timekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32980728F4C652003B9827 /* Timekeeper.swift */; };
@@ -201,7 +200,6 @@
 		1FAC485929D61AAD009813CF /* usability-ending.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06E29CE39B4001AD9F4 /* usability-ending.json */; };
 		1FAC485A29D61AAD009813CF /* NNN.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476F28E7694E00817041 /* NNN.ahap */; };
 		1FAC485B29D61AAD009813CF /* dasi-complete.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06A29CE28D7001AD9F4 /* dasi-complete.json */; };
-		1FAC485C29D61AAD009813CF /* SevenDaysMockup.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */; };
 		1FAC485D29D61AAD009813CF /* dasi-intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F21D06829CE24D1001AD9F4 /* dasi-intro.json */; };
 		1FBCEEE9294CD4ED00A4D86F /* ApplicationGreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCEEE8294CD4ED00A4D86F /* ApplicationGreetingView.swift */; };
 		1FC7477228E787AD00817041 /* A.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7476E28E7694E00817041 /* A.ahap */; };
@@ -320,7 +318,6 @@
 		1F2432DF27FE11D9008A5418 /* DASIQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DASIQuestions.json; sourceTree = "<group>"; };
 		1F2B8AA9294A54F500075248 /* SeriesTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesTag.swift; sourceTree = "<group>"; };
 		1F2B8AAB294A7A5400075248 /* WalkingContainer+Phases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalkingContainer+Phases.swift"; sourceTree = "<group>"; };
-		1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = SevenDaysMockup.csv; sourceTree = "<group>"; };
 		1F2FA76228F7585E007B2D74 /* NNNbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NNNbeep.ahap; sourceTree = "<group>"; };
 		1F2FA76328F7585E007B2D74 /* AAAbeep.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAbeep.ahap; sourceTree = "<group>"; };
 		1F32980728F4C652003B9827 /* Timekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timekeeper.swift; sourceTree = "<group>"; };
@@ -736,7 +733,6 @@
 				1FC7477C28ECBE4500817041 /* IncomingAccelerometry+Marshalling.swift */,
 				1F415DEA295F841F00F49E82 /* PedometryBuffer.swift */,
 				1F8868322947A2EE00085EC7 /* SevenDayPedometry.swift */,
-				1F2B8AAD294B688300075248 /* SevenDaysMockup.csv */,
 			);
 			path = Accelerometry;
 			sourceTree = "<group>";
@@ -1040,7 +1036,6 @@
 				1F21D06F29CE39B4001AD9F4 /* usability-ending.json in Resources */,
 				1FC7477528E787AD00817041 /* NNN.ahap in Resources */,
 				1F21D06B29CE28D7001AD9F4 /* dasi-complete.json in Resources */,
-				1F2B8AAE294B688300075248 /* SevenDaysMockup.csv in Resources */,
 				1F21D06929CE24D1001AD9F4 /* dasi-intro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1071,7 +1066,6 @@
 				1FAC485929D61AAD009813CF /* usability-ending.json in Resources */,
 				1FAC485A29D61AAD009813CF /* NNN.ahap in Resources */,
 				1FAC485B29D61AAD009813CF /* dasi-complete.json in Resources */,
-				1FAC485C29D61AAD009813CF /* SevenDaysMockup.csv in Resources */,
 				1FAC485D29D61AAD009813CF /* dasi-intro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1670,7 +1664,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 35;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
 				DEVELOPMENT_TEAM = A568SXPS8V;
@@ -1715,7 +1709,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Better Step/Better Step.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Better Step/Preview Content\"";
 				DEVELOPMENT_TEAM = A568SXPS8V;
 				ENABLE_PREVIEWS = YES;
