@@ -18,24 +18,24 @@ import Foundation
 /// Resetting for a new session, in the case of `PhaseStorage`,
 /// additionally has to judge whether first-run flag should
 /// be set after a successful upload.
-/* public */ let ResetSessionNotification =
-Notification.Name("ResetSessionNotification")
-/// Remove all data _including_ `SubjectID`, as when a tester wants to revert the app to pristine condition.
-/* public */ let TotalResetNotification =
-Notification.Name("TotalResetNotification")
+///* public */ let ResetSessionNotification =
+//Notification.Name("ResetSessionNotification")
+///// Remove all data _including_ `SubjectID`, as when a tester wants to revert the app to pristine condition.
+///* public */ let TotalResetNotification =
+//Notification.Name("TotalResetNotification")
 
 /* public */ let revertAllNotification = {
     let goodUpload = NotificationCenter.default
         .publisher(for: UploadNotification)
     let badUpload = NotificationCenter.default
         .publisher(for: UploadErrorNotification)
-    let resetPhases = NotificationCenter.default
-        .publisher(for: ResetSessionNotification)
-    let totalPhase = NotificationCenter.default
-        .publisher(for: TotalResetNotification)
-    return goodUpload.merge(with: badUpload,
-                            resetPhases,
-                            totalPhase)
+//    let resetPhases = NotificationCenter.default
+//        .publisher(for: ResetSessionNotification)
+//    let totalPhase = NotificationCenter.default
+//        .publisher(for: TotalResetNotification)
+//    return goodUpload.merge(with: badUpload,
+//                            resetPhases,
+//                            totalPhase)
 }()
 
 /// Adopter of `LocalizedError` to wrap a generic `Error` into one that can populate an alert

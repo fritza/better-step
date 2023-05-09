@@ -49,7 +49,7 @@ final class PhaseStorage: ObservableObject
         let fm = FileManager.default
         let targetExtensions: Set = [".csv", ".zip"]
         let dirURL = documentsDirectory
-        
+
         // Verify that the documents directory exists and is not empty.
         guard fm.directoryExists(atURL: dirURL),
               let fileNames = try? fm.contentsOfDirectory(at: dirURL),
@@ -119,13 +119,9 @@ final class PhaseStorage: ObservableObject
         // Do all of what I've finished...
         let finishedKeys = Set(completionDictionary.keys)
             .union([.sevenDayRecord])
-        // FIXME: unacceptable hack.
+        // FIXME: Unavailable pedometry?.
         // The problem is that when pedometry isn't available (not supported, in simulator, not permitted),
-        // the 7-day walk is not reported. Correct code would take note of the error/refusal and carry on without.
-        // This code waives the pedometry series completely.
-        // The data itself need not be a problem, because that's driven by .forEachPhase, which iterates over the data that is present. 
-
-        // ... appear in the list of what should be finished?
+        // the 7-day walk is not reported.
         let completed = keysToBeFinished.isSubset(of: finishedKeys)
         return completed
     }
@@ -141,6 +137,7 @@ final class PhaseStorage: ObservableObject
             try FileManager.default.deleteIfPresent(zipOutputURL)
             // Add all phase/data pairs to a fresh ``ZIPArchiver``.
             let archiver = try! ZIPArchiver(destinationURL: zipOutputURL)
+
             try forEachPhase { tag, data in
                 latestFileLength = data.count
                 okayTag = tag
@@ -158,7 +155,7 @@ final class PhaseStorage: ObservableObject
     
     /// Report to the ``PhaseStorage`` that a phase has completed with data for output.
     ///
-    /// ``PhaseStorage`` retaine all plase-data pairs until all the phases needed for this session are complete. The results are then passed to ``CSVArchiver``.
+    /// ``PhaseStorage`` retains all plase-data pairs until all the phases needed for this session are complete. The results are then passed to ``CSVArchiver``.
     /// - Parameters:
     ///   - tag: The  ``SeriesTag`` for the completed phase.
     ///   - data: The `Data` collected for that phase.
@@ -171,19 +168,6 @@ final class PhaseStorage: ObservableObject
         
         // Record the `.csv` file data under the phase that collected it.
         completionDictionary[tag] = data
-
-
-        /*
-         PREVIOUSLY, if all required tags are accounted for,
-         this function would compose the archive, and in turn
-         upload it.
-
-         Now the Top Container triggers archiving and upload
-         when the user taps Proceed (~) in the .conclusion view.
-
-         See commits before noon 27-Mar-2023 for stale and commented
-         -out code.
-         */
     }
 
     func assertAllComplete(fileName: String = #fileID, line: Int = #line) {
@@ -246,8 +230,8 @@ extension PhaseStorage {
                     // ... body, completion of the conclusion phase.
                     ASKeys.isFirstRunComplete = true
                 }
-                self.completionDictionary = [:]
                 try? self.deleteAllFiles()
+                self.completionDictionary = [:]
                 
                 // Somebody ought to post an error alert.
             }

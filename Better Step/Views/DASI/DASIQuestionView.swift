@@ -99,7 +99,7 @@ struct DASIQuestionView: View, ReportingPhase {
             }
         } message: {
             VStack {
-                Text("You’ve answered all the questions in the survey.\nYou can save all your answers, or continue reviewing your answers.")
+                Text("You’ve answered all the questions in the survey.\nYou can save all your answers, or go back and review your answers.")
             }
         }
 
