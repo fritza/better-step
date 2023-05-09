@@ -193,10 +193,6 @@ struct UsabilityView: View, ReportingPhase {
                         print("UsabilityView should not fail.")
                         fatalError()
                     }
-
-                    print("value for csv is",
-                          array.map({ "\($0)" }).joined(separator: ",")
-                    )
                 }
 
             }

@@ -36,17 +36,8 @@ class WalkInfoResult: ObservableObject, CSVRepresentable, CustomStringConvertibl
 //        }
 //    }
     @Published var howWalked          : HowWalked
-    //{        didSet { print("WIR: howWalked changed from \(oldValue) to \(howWalked)")
-//        }
-//    }
     @Published var effort             : EffortWalked
-    //{        didSet { print("WIR: effort changed from \(oldValue) to \(effort)")
-//        }
-//    }
     @Published var fearOfFalling      : Bool
-    //{        didSet { print("WIR: fearOfFalling changed from \(oldValue) to \(fearOfFalling)")
-//        }
-//    }
     
     var csvLine: String {
         let values = [`where`.rawValue,

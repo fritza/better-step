@@ -72,7 +72,6 @@ final class PedometryFromHealthKit: ReportingPhase {
                 }
                 
                 if approved {
-//                    print("\(#function):\(#line):", approved ? "approved" : "refused")
                     completed(Result.success(approved))
                     return
                 }
@@ -178,7 +177,6 @@ final class PedometryFromHealthKit: ReportingPhase {
         }
         // No result? Log and abandon the function.
         guard let stats else {
-//            print("\(#function):\(#line) - Can't retrieve data for one day.")
             // TODO: Improve the log by giving the day or date
             return
         }

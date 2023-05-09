@@ -29,6 +29,10 @@ import Foundation
         .publisher(for: UploadNotification)
     let badUpload = NotificationCenter.default
         .publisher(for: UploadErrorNotification)
+
+    return goodUpload.merge(with: badUpload)
+
+
 //    let resetPhases = NotificationCenter.default
 //        .publisher(for: ResetSessionNotification)
 //    let totalPhase = NotificationCenter.default

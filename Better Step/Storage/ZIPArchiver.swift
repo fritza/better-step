@@ -28,7 +28,7 @@ class ZIPArchiver // : MassDiscardable
 {
     // MARK: - Initialization
     /// The `ZIPFoundation.Archive` to build onto
-    private var archiver: Archive
+    internal var archiver: Archive
     private let outputURL: URL
     
     /// The directory to receive the csv and zip files.

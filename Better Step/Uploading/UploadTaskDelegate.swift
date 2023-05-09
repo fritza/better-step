@@ -57,8 +57,6 @@ public class UploadTaskDelegate: NSObject, URLSessionTaskDelegate {
     public func urlSession(_ session: URLSession,
                            task: URLSessionTask,
                            didCompleteWithError error: Error?) {
-        print("DidCompplete hit with task,", error ?? "no error")
-        
         if let error {
             print("Got an error. Client side:", error)
             if let htSession = task.response as? HTTPURLResponse {

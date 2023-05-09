@@ -48,8 +48,8 @@ struct TopContainerView: View
         if !SubjectID.isSet {
             // We got here without a Subject ID.
             // Bring everything else to no-data condition.
-            NotificationCenter.default
-                .post(name: TotalResetNotification, object: nil)
+//            NotificationCenter.default
+//                .post(name: TotalResetNotification, object: nil)
         }
 
         // TODO: store and reload the current phase ID.
@@ -152,9 +152,6 @@ struct TopContainerView: View
                     let pss = PhaseStorage.shared
                     ConclusionView(jsonBaseName: "conclusion") { _ in
                         do {
-#if DEBUG
-                            print("Note:", #function, "- \(#fileID):\(#line) - archive write-and-send has been mover here from PhaseStorage.")
-#endif
                             // Fatal if not completed.
                             // It's true I don't see a recovery, but
                             // FIXME: Recover from completion and send errors.

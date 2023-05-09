@@ -145,17 +145,5 @@ struct UsabilityInterstitialView_Previews: PreviewProvider {
                 print(#function, "Would pass up to container:", endpoint)
             })
         }
-            /*
-            ZStack {
-                UsabilityInterstitialView(
-                    titleText: viewTitle,
-                    bodyText: usabilityInCopy,
-                    systemImageName: systemImageName,
-                    continueTitle: "Continue") {
-                        str in
-                        print(str)
-                    }
-            }
-             */
     }
 }

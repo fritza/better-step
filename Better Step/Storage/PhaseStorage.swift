@@ -144,6 +144,21 @@ final class PhaseStorage: ObservableObject
                 try archiver.add(data, named: self.csvFileName(for: tag))
             }
             // Note: The ZIPArchive has no life outside this block.
+/*
+           for entry in archiver.archiver {
+               print(
+                   "\(#fileID):\(#line) ENTRY:",
+                     entry.path)
+           }
+
+           let destArch = archiver.archiver
+           print("Going to", destArch.url.absoluteString)
+           do {
+               let content = try Data(contentsOf: destArch.url)
+               print("total:", content.count)
+           }
+
+            */
         }
         catch {
             let failingTagName = okayTag?.rawValue ?? "<other>"
@@ -209,6 +224,7 @@ extension PhaseStorage {
     func setUpCombine() {
         revertAllNotification
             .map { (notice: Notification) -> HTTPURLResponse in
+
                 guard (notice.object as? Data) != nil,
                       let userInfo = notice.userInfo,
                       let response = userInfo["response"] as? HTTPURLResponse
